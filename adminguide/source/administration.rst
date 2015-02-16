@@ -129,6 +129,7 @@ History
 Summary table
 -------------
 
+.. _getting-things-monitored:
 
 Getting things monitored
 ========================

@@ -1,6 +1,8 @@
-**********
-Quickstart
-**********
+.. _quick-start:
+
+***********
+Quick start
+***********
 
 (clean system after install; setup minimal monitoring – CPU of FS)
 

@@ -1,0 +1,11 @@
+********
+Appendix
+********
+
+Glossary
+========
+
+.. glossary::
+   :sorted:
+
+   

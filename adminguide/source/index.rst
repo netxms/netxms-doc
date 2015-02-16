@@ -1,0 +1,20 @@
+##########################
+NetXMS Administrator Guide
+##########################
+
+.. warning::
+
+   This guide is a work in progress.
+
+.. toctree::
+   :maxdepth: 3
+   :glob:
+
+   preface
+   concepts
+   installation_and_upgrade
+   quickstart
+   administration
+   scripting
+   appendix
+   

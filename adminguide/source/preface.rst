@@ -6,8 +6,8 @@ Purpose of this document
 ========================
 
 Purpose of this document is to provide knowledge about NetXMS installation, 
-configuration and usage. It gives full description from the clean 
-installation till the advanced configuration. 
+configuration and usage. It provides all necessary information to successfully 
+operate NetXMS. 
 
 Document contain :ref:`quick-start` chapter, that describes default installation 
 and some simple metric configuration. Other monitoring options can be found 

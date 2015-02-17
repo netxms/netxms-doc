@@ -76,7 +76,7 @@ Terminology
     Representation of logical or physical entity. 
     
   Event
-    ?????
+    
     
   Object Browser
     :term:`View` where are seen all created :term:`objects<Object>` available 
@@ -90,70 +90,206 @@ Terminology
     (Create condition in infrastructure services)
     
   SNMP Trap
+    Simple Network Management Protocol Trap. More details in `Wikipedia 
+    <http://en.wikipedia.org/wiki/Simple_Network_Management_Protocol#Trap>`_.
+    
   Syslog
-  Audit
+    See there `Wikipedia 
+    <http://en.wikipedia.org/wiki/Syslog>`_.
+  
+  Audit entry
+    
+    
   Infrastructure services 
+  
+  
   Template
+    
+  
   Policy
+  
+  
   Network Map
+  
+  
   Dashboard
+  
+  
   Alarm
+  
+  
   Business Services
-  MAC
+  
+  
+  MAC address
+  Media Access Control address More details in `Wikipedia 
+    <http://en.wikipedia.org/wiki/MAC_address>`_.
+  
   VLAN
+  Virtual :term:`LAN`. More details in `Wikipedia 
+    <http://en.wikipedia.org/wiki/MAC_address>`_.
+  
   Object tool
+  
+  
   VPN
+  Virtual Private Network. More details in `Wikipedia 
+    <https://en.wikipedia.org/wiki/Virtual_private_network>`_.
+  
   LAN
-  Agent
-  Bridge
+  Local Area Network. More details in `Wikipedia 
+    <http://en.wikipedia.org/wiki/Local_area_network>`_.
+  
+  NetXMS Agent
+    NetXMS daemon that is installed on monitored :term:`Node` to 
+    provide additional monitoring options.  
+    
+  Monitoring Agent 
+    NetXMS or SNMP agent that provides information to :term:`NetXMS server`.
+  
   CDP
+  
+  
   Dot1x
+  
+  
   LLDP
+  
+  
   NDP
+  
+  
   Router
+  
+  
   SMCLP
+  
+  
   STP
+  
+  
   VRRP
+  
+  
   IfXTable
+  
+  
   ID
+    Unique :term:`Object` identifier. 
+  
   GUID
+  
+  
   Netxms Server
+  
+  
   Container
+  
+  
   Console
+  
+  
   Situations
+  
+  
   Package Manager
+  
+  
   Action
+  
+  
   Perspective
+  
+  
   Graph
+  
+  
   Event Processing Policy
+  
+  
   Cluster(In NetXMS perspective)
+  
+  
   Mobile Device(In NetXMS perspective)
+  
+  
   Rack(In NetXMS perspective)
+  
+  
   Passive discovery
+  
+  
   Active discovery
+  
   ARP
+  
+  
   Proxy
+  
+  
   UPS
+  
+  
   Subagent
+  
+  
   Zone
+  
+  
   Poll
+  
+  
   Threshold
+  
+  
   USM
+  
+  
   Filter
+  
+  
   Subnet
+  
+  
   Interface
+  
+  
   VPN Connector
+  
+  
   URL
+  
+  
   Data Transformation Script
+  
+  
   View
+  
+  
   Push parameter
+  
+  
   NXSL
+  
+  
   IP address 
+  
+  
   ICMP (Ping)
+  
+  
   Report
+  
+  
   LDAP
+  
+  
   RADIUS
+  
+  
   Crash Dump
+  
+  
   Data Collector
       
 

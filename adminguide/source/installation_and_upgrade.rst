@@ -1,3 +1,5 @@
+.. _installation-and-upgrade:
+
 ************************
 Installation and Upgrade
 ************************

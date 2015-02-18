@@ -32,14 +32,21 @@ Terminology
 ===========
 
 .. glossary::
+  :sorted:
 
   Alarm Browser
     View, which shows all active alarms in the system and provides tools to 
     interact with them.
+  
+  Audit entry
+    An important user actions that is written to audit log.
     
   Entire Network
     Automatically generated object hierarchy that contains all nodes and 
     IP subnets known to NetXMS.
+    
+  Event
+    
     
   GPL
     GNU General Public License.
@@ -59,7 +66,18 @@ Terminology
     View, which allows to navigate SNMP MIB tree.
     
   Node
-    Object that represents physical server.
+    Object that represents server or device, virtual or physical.
+  
+  Object
+    Representation of logical or physical entity.     
+    
+  Object Browser
+    :term:`View` where are seen all created :term:`objects<Object>` available 
+    for current user.
+  
+  Object Details
+    :term:`View` where is seen available information for currently selected 
+    :term:`Object` from :term:`Object Browser`
     
   SNMP
     Simple Network Management Protocol. More details in `Wikipedia 
@@ -71,20 +89,6 @@ Terminology
     
   View Stack
     Multiple views combined into single one, with tab navigation on top of it.
-  
-  Object
-    Representation of logical or physical entity. 
-    
-  Event
-    
-    
-  Object Browser
-    :term:`View` where are seen all created :term:`objects<Object>` available 
-    for current user.
-  
-  Object Details
-    :term:`View` where is seen available information for currently selected 
-    :term:`Object` from :term:`Object Browser`
     
   Condition
     (Create condition in infrastructure services)
@@ -96,8 +100,6 @@ Terminology
   Syslog
     See there `Wikipedia 
     <http://en.wikipedia.org/wiki/Syslog>`_.
-  
-  Audit entry
     
     
   Infrastructure services 
@@ -122,22 +124,22 @@ Terminology
   
   
   MAC address
-  Media Access Control address More details in `Wikipedia 
+    Media Access Control address More details in `Wikipedia 
     <http://en.wikipedia.org/wiki/MAC_address>`_.
   
   VLAN
-  Virtual :term:`LAN`. More details in `Wikipedia 
+    Virtual :term:`LAN`. More details in `Wikipedia 
     <http://en.wikipedia.org/wiki/MAC_address>`_.
   
   Object tool
   
   
   VPN
-  Virtual Private Network. More details in `Wikipedia 
+    Virtual Private Network. More details in `Wikipedia 
     <https://en.wikipedia.org/wiki/Virtual_private_network>`_.
   
   LAN
-  Local Area Network. More details in `Wikipedia 
+    Local Area Network. More details in `Wikipedia 
     <http://en.wikipedia.org/wiki/Local_area_network>`_.
   
   NetXMS Agent
@@ -145,12 +147,12 @@ Terminology
     provide additional monitoring options.  
     
   Monitoring Agent 
-    NetXMS or SNMP agent that provides information to :term:`NetXMS server`.
+    NetXMS or SNMP agent that provides information to :term:`NetXMS Server`.
   
   CDP
   
   
-  Dot1x
+  802.1x
   
   
   LLDP
@@ -190,7 +192,7 @@ Terminology
   
   
   Situations
-  
+    *Will be renamed*
   
   Package Manager
   

@@ -1,8 +1,5 @@
+_build
 .DS_Store
 *.swp
 *.pyc
 *.pyo
-
-/adminguide/source/extensions
-/conceptguide/source/extensions
-/developguide/source/extensions

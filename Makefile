@@ -1,22 +1,26 @@
 all:
-	@echo Select target: html or pdf
+	@echo Select target: html, pdf, man, clean
 
 html:
-	make -C adminguide html
-	make -C conceptguide html
-	make -C developguide html
+	make -C admin html
+	make -C concept html
+	make -C developer html
 
 pdf:
-	make -C adminguide latexpdf
-	make -C conceptguide latexpdf
-	make -C developguide latexpdf
+	make -C admin latexpdf
+	make -C concept latexpdf
+	make -C developer latexpdf
+
+gettext:
+	make -C admin gettext
+	make -C concept gettext
+	make -C developer gettext
 
 man:
-	make -C adminguide man
-	make -C conceptguide man
-	make -C developguide man
+	make -C manpages man
 
 clean:
-	make -C adminguide clean
-	make -C conceptguide clean
-	make -C developguide clean
+	make -C admin clean
+	make -C concept clean
+	make -C developer clean
+	make -C manpages clean

@@ -1,0 +1,28 @@
+#!/bin/sh
+
+if [ -z $1 ]; then
+  echo 'Usage: ./watch <admin | concept | developer | install>'
+  exit 1
+fi
+
+cd $1
+while true;
+do
+  notifywait .
+  make html &&
+  echo "
+    on run argv
+      tell application \"Safari\"
+      set windowList to every window
+      repeat with aWindow in windowList
+        set tabList to every tab of aWindow
+        repeat with atab in tabList
+          if (URL of atab contains \"netxms-doc\") then
+            tell atab to do javascript \"window.location.reload()\"
+          end if
+        end repeat
+      end repeat
+      end tell
+    end run
+  " | osascript
+done

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# -- Imports -------------------------------------------------------------------
 import sys
 import sphinx.builders.manpage
 import docutils.nodes
@@ -7,35 +6,38 @@ import os
 import glob
 from os.path import basename
 
-# -- General -------------------------------------------------------------------
-sphinx_version='1.0'
+# -- General configuration ------------------------------------------------
+print os.path.abspath('../_lib')
+sys.path.insert(0, os.path.abspath('../_lib'))
 
-print os.path.abspath('../../lib')
-sys.path.insert(0, os.path.abspath('../../lib'))
 extensions = [
+    'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.ifconfig',
-    'patched.sphinxcontrib.plantuml',
 ]
 
-templates_path = ['_templates']
+templates_path = ['../_templates']
+
 source_suffix = '.rst'
 master_doc = 'index'
 
-project = u'NetXMS'
-copyright = u'2014, SIA Raden Solutions'
+project_author = "Raden Solutions, SIA"
+copyright = u'2015, ' + project_author
 
-# The short X.Y version.
 version = '2.0'
-# The full version, including alpha/beta/rc tags.
 release = '2.0-M2'
+
+exclude_patterns = ['build']
 
 pygments_style = 'sphinx'
 
 #todo_include_todos=True # Should be enabled only for unreleased documents
 
-exclude_patterns = []
-# -- Options for HTML output ---------------------------------------------------
+locale_dirs = ['_locale']
+
+# -- Options for HTML output ----------------------------------------------
+html_short_title = "Home"
+
 html_theme = 'nature'
 #html_logo = '_images/logo.png'
 html_favicon = 'favicon.ico'
@@ -44,16 +46,32 @@ html_show_sourcelink = False
 html_show_sphinx = False
 #html_show_copyright = True
 
-# If true, an OpenSearch description file will be output, and all pages will
-# contain a <link> tag referring to it.  The value of this option must be the
-# base URL from which the finished HTML is served.
-#html_use_opensearch = ''
-
-# -- Options for LaTeX output --------------------------------------------------
+# -- Options for LaTeX output ---------------------------------------------
 latex_elements = {
     'papersize': 'a4paper',
     #'pointsize': '10pt',
 }
+
+#latex_elements = {
+#    'papersize': '',
+#    'fontpkg': '',
+#    'fncychap': '',
+#    'maketitle': '\\cover',
+#    'pointsize': '',
+#    'preamble': '',
+#    'releasename': "",
+#    'babel': '',
+#    'printindex': '',
+#    'fontenc': '',
+#    'inputenc': '',
+#    'classoptions': '',
+#    'utf8extra': '',
+#}
+#latex_additional_files = ["../netxms.sty" ]
+
+latex_show_pagerefs = False
+latex_domain_indices = False
+latex_use_modindex = False
 
 #latex_logo = '_images/logo.png'
 
@@ -61,9 +79,21 @@ latex_elements = {
 # not chapters.
 #latex_use_parts = False
 
+# If true, show page references after internal links.
+#latex_show_pagerefs = False
+
+# If true, show URL addresses after external links.
+#latex_show_urls = False
+
+# Documents to append as an appendix to all manuals.
+#latex_appendices = []
+
+# If false, no module index is generated.
+#latex_domain_indices = True
+
 # -- PlantUML settings ---------------------------------------------------------
 
-plantuml = '/usr/bin/java -Djava.awt.headless=true -jar ../lib/plantuml.jar'
+plantuml = '/usr/bin/java -Djava.awt.headless=true -jar ../_lib/plantuml.jar'
 plantuml_latex_output_format = 'pdf'
 
 # -- Custom code ---------------------------------------------------------------
@@ -82,3 +112,15 @@ def setup(app):
         extDirs = [d for d in extDirs if module.strip() not in d]
     for d in extDirs:
         exclude_patterns.append(d[7:]) # remove 'source/'
+
+# -- Options for Epub output ----------------------------------------------
+
+# Bibliographic Dublin Core info.
+epub_author = project_author
+epub_publisher = project_author
+epub_copyright = copyright
+
+epub_theme = 'epub'
+
+# A list of files that should not be packed into the epub file.
+epub_exclude_files = ['search.html']

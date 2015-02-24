@@ -14,6 +14,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.ifconfig',
+    'wikipedia',
 ]
 
 templates_path = ['../_templates']
@@ -31,9 +32,10 @@ exclude_patterns = ['build']
 
 pygments_style = 'sphinx'
 
-#todo_include_todos=True # Should be enabled only for unreleased documents
-
 locale_dirs = ['_locale']
+
+if version != release:
+    todo_include_todos=True
 
 # -- Options for HTML output ----------------------------------------------
 html_short_title = "Home"

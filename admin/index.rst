@@ -2,18 +2,29 @@
 NetXMS Administrator Guide
 ##########################
 
-.. warning::
-
-   This guide is a work in progress.
-
 .. toctree::
-   :maxdepth: 2
-   :numbered:
+   :maxdepth: 1
 
    preface
    concepts
    installation_and_upgrade
    quickstart
-   administration
+   agent-management
+   server-management
+   snmp
+   user-management
+   object-management
+   network-discovery
+   data-collection
+   event-processing
+   visualisation
+   common-tasks
+   topology
+   sla
+   remote-file-management
+   reporting
+   image-library
+   advanced
    scripting
    appendix
+   glossary

@@ -159,7 +159,7 @@ Glossary
     provide additional monitoring options.  
     
   Monitoring Agent 
-    NetXMS or SNMP agent that provides information to :term:`NetXMS Server`.
+    NetXMS or SNMP agent that provides information to NetXMS Server.
   
   CDP
     Cisco Discovery Protocol  is a Cisco proprietary protocol that runs between 
@@ -299,8 +299,7 @@ Glossary
      open an editor, or display properties for the active editor.
   
   Push parameter
-    :term:`Metric` that is sent to server from agent without agent request. Usual 
-    :term:`metrics <Metric>` are requested by server. 
+    :term:`Metric` that is sent to server from agent without server request.  
   
   NXSL
     NetXMS Scripting Language that is used inside of NetXMS to implement automatic data 

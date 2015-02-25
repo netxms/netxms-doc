@@ -36,27 +36,33 @@ Supported operating systems and databases
 
 NetXMS supports most popular operation systems. 
 
-Supported systems:
-  * Windows ( Windows 2003 or higher)
-  * Linux
-  * Solaris
-  * HP-UX
-  * AIX
-  * FreeBSD
-  * Novel
-  
-Databases that can be used for installation:
-  * Microsoft SQL Server
-  * MySQL
-  * DB2
-  * PostgreSQL  
-  * Oracle
-  * SQLite(it is highly recommended use this option only for test purpose)
+Supported operating systems for NetXMS server:
+   * Windows Server 2003, Windows Vista, Windows Server 2008,  Windows Server 2008R2, Windows 7, Windows 8, Windows 8.1, Windows Server 2012, Windows Server 2012R2
+   * RedHat Enterprise Linux, SUSE Linux, CentOS, Debian Linux, Ubuntu Linux
+   * FreeBSD, NetBSD, OpenBSD
+   * Solaris 10, 11
+   * HP-UX 11.23, 11.31
+   * AIX 5.3 +
+
+Supported DBMS engines for NetXMS server
+   * Microsoft SQL Server 2005, Windows Server 2003, Windows Vista, Windows Server 2008,  Windows Server 2008R2, Windows 7, Windows 8, Windows 8.1, Windows Server 2012, Windows Server 2012R2
+   * MySQL 5.0 +
+   * Oracle 11g, 12
+   * PostgreSQL 8+
+   * DB/2
+   * SQLite(it is highly recommended use this option only for test purpose)
+   
+Supported operating systems for NetXMS agent
+   * Windows XP, all from server
+   * Linux (all glibc2-based flavors)
+   * FreeBSD, NetBSD, OpenBSD
+   * Solaris
+   * HP-UX
+   * AIX
   
 
 Where to get support
 ====================
-
 
 Forum, Facebook/Twitter/G+
 --------------------------
@@ -72,6 +78,10 @@ The following typographical conventions are used in this manual.
 +----------------------------------+------------------------------------------+
 | Sample                           | Description                              |
 +==================================+==========================================+
+| :guilabel:`Button`               | Any GUI element: Button, Menu item       |
++----------------------------------+------------------------------------------+
+| `Another Guide`                  | Reference to external manual or man page |
++----------------------------------+------------------------------------------+
 | :kbd:`Control-M`                 | Keyboard shortcut                        |
 +----------------------------------+------------------------------------------+
 | :term:`DCI`                      | Term which could be found in glossary    |

@@ -1,0 +1,104 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Administrator Guide 2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-01 13:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../installation_and_upgrade.rst:5
+msgid "Installation and Upgrade"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:9 ../../installation_and_upgrade.rst:77
+msgid "Synopsis"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:13
+msgid "Planing"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:17
+msgid "Installing or upgrading on Debian or Ubuntu"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:21
+msgid "Adding our APT repository"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:25 ../../installation_and_upgrade.rst:49
+msgid "Installing packages"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:29 ../../installation_and_upgrade.rst:53
+msgid "Server"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:33 ../../installation_and_upgrade.rst:57
+msgid "Agent"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:37 ../../installation_and_upgrade.rst:61
+msgid "Management console"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:41
+msgid "Installing or upgrading on Red Hat, Fedora, CentOS or ScientificLinux"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:45
+msgid "Adding our YUM repository"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:65
+msgid "Generic installation, upgrade and downgrade using source tarball"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:69
+msgid "Centralised agent upgrade"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:73
+msgid "Cryptographic verification of installation files"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:81
+msgid "Importing the Phusion Software Signing key"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:85
+msgid "Verifying the Phusion Software Signing key"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:89
+msgid "Verifying the gem and tarball"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:93
+msgid "Verifying Git signatures"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:97
+msgid "Verifying DEB and RPM packages"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:101
+msgid "Revocation"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:105
+msgid "Customizing the compilation process"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:109
+msgid "Adding additional compiler or linker flags"
+msgstr ""
+
+#: ../../installation_and_upgrade.rst:111
+msgid "(e.g. fixing atomics)"
+msgstr ""

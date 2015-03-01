@@ -1,0 +1,29 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Administrator Guide 2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-01 13:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../agent-management.rst:3
+msgid "Agent management"
+msgstr ""
+
+#: ../../agent-management.rst:7
+msgid "Agent config"
+msgstr ""
+
+#: ../../agent-management.rst:9
+msgid ""
+"(policies, get config from server, main/additional config, what to chose)"
+msgstr ""
+
+#: ../../agent-management.rst:13
+msgid "Subagents"
+msgstr ""

@@ -1,0 +1,28 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Administrator Guide 2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-01 13:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../data-collection.rst:6
+msgid "Data collection"
+msgstr ""
+
+#: ../../data-collection.rst:10
+msgid "DCI configuration"
+msgstr ""
+
+#: ../../data-collection.rst:14
+msgid "Templates"
+msgstr ""
+
+#: ../../data-collection.rst:18
+msgid "Instance Discovery"
+msgstr ""

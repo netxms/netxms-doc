@@ -1,0 +1,48 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Administrator Guide 2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-01 13:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../appendix.rst:3
+msgid "Appendix"
+msgstr ""
+
+#: ../../appendix.rst:7
+msgid "Agent configuration file (nxagentd.conf)"
+msgstr ""
+
+#: ../../appendix.rst:10
+msgid "Server configuration file (netxmsd.conf)"
+msgstr ""
+
+#: ../../appendix.rst:14
+msgid "Server configuration parameters"
+msgstr ""
+
+#: ../../appendix.rst:0
+msgid "Todo"
+msgstr ""
+
+#: ../../appendix.rst:18
+msgid "Stored in database, can be changed in GUI or using nxdbmgr"
+msgstr ""
+
+#: ../../appendix.rst:21
+msgid "Bundled Subagents"
+msgstr ""
+
+#: ../../appendix.rst:25
+msgid "Command line tools"
+msgstr ""
+
+#: ../../appendix.rst:29
+msgid "List of supported metrics"
+msgstr ""

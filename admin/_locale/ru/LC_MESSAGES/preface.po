@@ -1,0 +1,234 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Administrator Guide 2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-01 13:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../preface.rst:3
+msgid "Preface"
+msgstr ""
+
+#: ../../preface.rst:7
+msgid "Purpose of this document"
+msgstr ""
+
+#: ../../preface.rst:9
+msgid ""
+"Purpose of this document is to provide knowledge about NetXMS installation, "
+"configuration and usage."
+msgstr ""
+
+#: ../../preface.rst:12
+msgid ""
+"Document contain :ref:`quick-start` chapter, that describes default "
+"installation and some simple metric configuration. :ref:`installation-and-"
+"upgrade` chapter contain more detailed information about NetXMS and its "
+"components installation and upgrade. To get familiar with main concepts of "
+"NetXMS use :ref:`concepts` chapter. :ref:`administration` is main chapter, "
+"that provides all necessary information to successfully operate NetXMS. List"
+" of built in monitoring options can be found there: :ref:`getting-things-"
+"monitored` chapter. There is also big chapter about :ref:`NXLS "
+"scripting<scripting>`"
+msgstr ""
+
+#: ../../preface.rst:21
+msgid ""
+"This document does not contain detailed description of NetXMS and it's "
+"architecture. To get this information please refer to Concept guide."
+msgstr ""
+
+#: ../../preface.rst:25
+msgid "What is NetXMS"
+msgstr ""
+
+#: ../../preface.rst:27
+msgid ""
+"NetXMS is an enterprise grade multi-platform modular open source network "
+"management and monitoring system. It provides comprehensive event "
+"management, performance monitoring, alerting, reporting and graphing for all"
+" layers of IT infrastructure — from network devices to business application "
+"layer. It is licensed under the GNU General Public License version 2 as "
+"published by the Free Software Foundation."
+msgstr ""
+
+#: ../../preface.rst:35
+msgid "Supported operating systems and databases"
+msgstr ""
+
+#: ../../preface.rst:37
+msgid "NetXMS supports most popular operation systems."
+msgstr ""
+
+#: ../../preface.rst:45
+msgid "Supported operating systems for NetXMS server:"
+msgstr ""
+
+#: ../../preface.rst:40
+msgid ""
+"Windows Server 2003, Windows Vista, Windows Server 2008,  Windows Server "
+"2008R2, Windows 7, Windows 8, Windows 8.1, Windows Server 2012, Windows "
+"Server 2012R2"
+msgstr ""
+
+#: ../../preface.rst:41
+msgid ""
+"RedHat Enterprise Linux, SUSE Linux, CentOS, Debian Linux, Ubuntu Linux"
+msgstr ""
+
+#: ../../preface.rst:42 ../../preface.rst:58
+msgid "FreeBSD, NetBSD, OpenBSD"
+msgstr ""
+
+#: ../../preface.rst:43
+msgid "Solaris 10, 11"
+msgstr ""
+
+#: ../../preface.rst:44
+msgid "HP-UX 11.23, 11.31"
+msgstr ""
+
+#: ../../preface.rst:45
+msgid "AIX 5.3 +"
+msgstr ""
+
+#: ../../preface.rst:53
+msgid "Supported DBMS engines for NetXMS server"
+msgstr ""
+
+#: ../../preface.rst:48
+msgid ""
+"Microsoft SQL Server 2005, Windows Server 2003, Windows Vista, Windows "
+"Server 2008,  Windows Server 2008R2, Windows 7, Windows 8, Windows 8.1, "
+"Windows Server 2012, Windows Server 2012R2"
+msgstr ""
+
+#: ../../preface.rst:49
+msgid "MySQL 5.0 +"
+msgstr ""
+
+#: ../../preface.rst:50
+msgid "Oracle 11g, 12"
+msgstr ""
+
+#: ../../preface.rst:51
+msgid "PostgreSQL 8+"
+msgstr ""
+
+#: ../../preface.rst:52
+msgid "DB/2"
+msgstr ""
+
+#: ../../preface.rst:53
+msgid "SQLite(it is highly recommended use this option only for test purpose)"
+msgstr ""
+
+#: ../../preface.rst:62
+msgid "Supported operating systems for NetXMS agent"
+msgstr ""
+
+#: ../../preface.rst:56
+msgid "Windows XP, all from server"
+msgstr ""
+
+#: ../../preface.rst:57
+msgid "Linux (all glibc2-based flavors)"
+msgstr ""
+
+#: ../../preface.rst:59
+msgid "Solaris"
+msgstr ""
+
+#: ../../preface.rst:60
+msgid "HP-UX"
+msgstr ""
+
+#: ../../preface.rst:61
+msgid "AIX"
+msgstr ""
+
+#: ../../preface.rst:65
+msgid "Where to get support"
+msgstr ""
+
+#: ../../preface.rst:68
+msgid "Forum, Facebook/Twitter/G+"
+msgstr ""
+
+#: ../../preface.rst:71
+msgid "Stay informed of new releases"
+msgstr ""
+
+#: ../../preface.rst:74
+msgid "Conventions"
+msgstr ""
+
+#: ../../preface.rst:76
+msgid "The following typographical conventions are used in this manual."
+msgstr ""
+
+#: ../../preface.rst:79
+msgid "Sample"
+msgstr ""
+
+#: ../../preface.rst:79
+msgid "Description"
+msgstr ""
+
+#: ../../preface.rst:81
+msgid ":guilabel:`Button`"
+msgstr ""
+
+#: ../../preface.rst:81
+msgid "Any GUI element: Button, Menu item"
+msgstr ""
+
+#: ../../preface.rst:83
+msgid "`Another Guide`"
+msgstr ""
+
+#: ../../preface.rst:83
+msgid "Reference to external manual or man page"
+msgstr ""
+
+#: ../../preface.rst:85
+msgid ":kbd:`Control-M`"
+msgstr ""
+
+#: ../../preface.rst:85
+msgid "Keyboard shortcut"
+msgstr ""
+
+#: ../../preface.rst:87
+msgid ":term:`DCI`"
+msgstr ""
+
+#: ../../preface.rst:87
+msgid "Term which could be found in glossary"
+msgstr ""
+
+#: ../../preface.rst:89
+msgid ":menuselection:`&File --> &Exit`"
+msgstr ""
+
+#: ../../preface.rst:89
+msgid ""
+"Menu selection path, you must click on :guilabel:`File`, then "
+":guilabel:`Exit`"
+msgstr ""
+
+#: ../../preface.rst:94
+msgid "Changelog"
+msgstr ""
+
+#: ../../preface.rst:96
+msgid ""
+"Only major changes are lister here. Complete change log is available at "
+"`<http://www.netxms.org/download/ChangeLog>`_."
+msgstr ""

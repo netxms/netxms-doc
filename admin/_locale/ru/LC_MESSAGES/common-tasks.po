@@ -1,0 +1,68 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Administrator Guide 2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-01 13:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../common-tasks.rst:3
+msgid "Common monitoring tasks (rename this chapter!)"
+msgstr ""
+
+#: ../../common-tasks.rst:7
+msgid "Operating System"
+msgstr ""
+
+#: ../../common-tasks.rst:11
+msgid "File meta information"
+msgstr ""
+
+#: ../../common-tasks.rst:0
+msgid "Todo"
+msgstr ""
+
+#: ../../common-tasks.rst:15
+msgid "size, mtime, hash"
+msgstr ""
+
+#: ../../common-tasks.rst:19
+msgid "Log monitoring"
+msgstr ""
+
+#: ../../common-tasks.rst:23
+msgid "Database monitoring"
+msgstr ""
+
+#: ../../common-tasks.rst:27
+msgid "Oracle"
+msgstr ""
+
+#: ../../common-tasks.rst:31
+msgid "DB2"
+msgstr ""
+
+#: ../../common-tasks.rst:35
+msgid "MongoDB"
+msgstr ""
+
+#: ../../common-tasks.rst:39
+msgid "Monitoring hardware (lm-sensors)"
+msgstr ""
+
+#: ../../common-tasks.rst:43
+msgid "UPS monitoring"
+msgstr ""
+
+#: ../../common-tasks.rst:47
+msgid "Cluster monitoring"
+msgstr ""
+
+#: ../../common-tasks.rst:51
+msgid "Monitoring mobile devices"
+msgstr ""

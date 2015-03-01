@@ -1,0 +1,60 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Administrator Guide 2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-01 13:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../quickstart.rst:6
+msgid "Quick start"
+msgstr ""
+
+#: ../../quickstart.rst:8
+msgid "(clean system after install; setup minimal monitoring – CPU of FS)"
+msgstr ""
+
+#: ../../quickstart.rst:11
+msgid "Basic agent configuration"
+msgstr ""
+
+#: ../../quickstart.rst:15
+msgid "Basic server tuning"
+msgstr ""
+
+#: ../../quickstart.rst:20
+msgid "Formula for number of pollers, etc."
+msgstr ""
+
+#: ../../quickstart.rst:24
+msgid "SMTP"
+msgstr ""
+
+#: ../../quickstart.rst:29
+msgid "SNMP Default community"
+msgstr ""
+
+#: ../../quickstart.rst:34
+msgid "Notification action"
+msgstr ""
+
+#: ../../quickstart.rst:38
+msgid "Passive discovery"
+msgstr ""
+
+#: ../../quickstart.rst:43
+msgid "Manually add node"
+msgstr ""
+
+#: ../../quickstart.rst:48
+msgid "Add DCI with two thresholds"
+msgstr ""
+
+#: ../../quickstart.rst:50
+msgid "(minor and major)"
+msgstr ""

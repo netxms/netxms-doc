@@ -1,0 +1,120 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Administrator Guide 2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-01 13:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../concepts.rst:5
+msgid "Concepts"
+msgstr ""
+
+#: ../../concepts.rst:8
+msgid "Architecture overview"
+msgstr ""
+
+#: ../../concepts.rst:10
+msgid ""
+"The system has three-tier architecture: the information is collected by "
+"monitoring agents (either our own high-performance agents or SNMP agents) "
+"and delivered to monitoring server for processing and storage. Network "
+"administrator can access collected data using cross-platform Management "
+"Console, Web Interface or Management Console for Android. Having been "
+"designed with flexibility and scalability in mind, NetXMS features a wide "
+"range of supported platforms, leaving you the freedom of choice of "
+"platform(s) for your network."
+msgstr ""
+
+#: ../../concepts.rst:20
+msgid "Server"
+msgstr ""
+
+#: ../../concepts.rst:22
+msgid "(modules, purpose, scalability - installation with few servers)"
+msgstr ""
+
+#: ../../concepts.rst:25
+msgid "Agent"
+msgstr ""
+
+#: ../../concepts.rst:27
+msgid "(subagent, proxy)"
+msgstr ""
+
+#: ../../concepts.rst:30
+msgid "Agentless installation"
+msgstr ""
+
+#: ../../concepts.rst:34 ../../concepts.rst:44
+msgid "Objects"
+msgstr ""
+
+#: ../../concepts.rst:36
+msgid "(short)"
+msgstr ""
+
+#: ../../concepts.rst:39
+msgid "Data flow"
+msgstr ""
+
+#: ../../concepts.rst:41
+msgid "(events, alarms, actions)"
+msgstr ""
+
+#: ../../concepts.rst:47
+msgid "Data Collection"
+msgstr ""
+
+#: ../../concepts.rst:50
+msgid "Data source types and transports"
+msgstr ""
+
+#: ../../concepts.rst:52
+msgid "(agent, snmp, push)"
+msgstr ""
+
+#: ../../concepts.rst:55
+msgid "Thresholds"
+msgstr ""
+
+#: ../../concepts.rst:60
+msgid "Data representation"
+msgstr ""
+
+#: ../../concepts.rst:62
+msgid "(graphs, dashboards, history table...)"
+msgstr ""
+
+#: ../../concepts.rst:65
+msgid "Event Processing"
+msgstr ""
+
+#: ../../concepts.rst:69
+msgid "Discovery"
+msgstr ""
+
+#: ../../concepts.rst:73
+msgid "Network discovery"
+msgstr ""
+
+#: ../../concepts.rst:76
+msgid "Service discovery"
+msgstr ""
+
+#: ../../concepts.rst:79
+msgid "(not implemented yet)"
+msgstr ""
+
+#: ../../concepts.rst:83
+msgid "Security"
+msgstr ""
+
+#: ../../concepts.rst:85
+msgid "(Password encryption, encrypted connections...)"
+msgstr ""

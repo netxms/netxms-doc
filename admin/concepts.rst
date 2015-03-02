@@ -377,7 +377,7 @@ lists possible sources and gives some simple description about them.
        be executed according to schedule to gent next value. 
 
 Collected data can be analyzed manually by viewing it with help of :guilabel:`History` table, graph,
-displayed on :quilabel:`Dashboard` or on :guilabel:`Network Map`. 
+displayed on :guilabel:`Dashboard` or on :guilabel:`Network Map`. 
 
 Other option to use collected data is to configure threshold. Each threshold is executed on a new 
 coming data and generates user predefined event if data meets threshold rules. Generated event will 

@@ -359,11 +359,13 @@ lists possible sources and gives some simple description about them.
    * - Internal
      - This type of source does not require any node configuration. It is collected by server.
    * - NetXMS Agent
-     -  
+     - This type of source required NetXMS agent installation on a node. This list can be 
+       supplemented with subagents. Metrics are requested by server.
    * - SNMP
-     - 
+     - This type of source requires :term:`SMNP` configuration on device and server.
    * - Push
-     - 
+     - This type of source requires installation of nxpush command line tool and script creation
+       that will run this tool in requested intervals and will provide to server metric data.
    * - SM-CLP
      - 
    * - Windows Performance counters
@@ -371,18 +373,15 @@ lists possible sources and gives some simple description about them.
    * - Check Point SNMP
      -  
    * - Script
-     -  
+     - This type of source requires creation of script in :guilabel:`Script Library` that will 
+       be executed according to schedule to gent next value. 
 
+Collected data can be analyzed manually by viewing it with help of :guilabel:`History` table, graph,
+displayed on :quilabel:`Dashboard` or on :guilabel:`Network Map`. 
 
-Thresholds
-----------
-
-
-
-Data representation
--------------------
-
-(graphs, dashboards, history table...)
+Other option to use collected data is to configure threshold. Each threshold is executed on a new 
+coming data and generates user predefined event if data meets threshold rules. Generated event will 
+be processed with other events. 
 
 
 Discovery
@@ -392,14 +391,39 @@ Discovery
 Network discovery
 -----------------
 
+NetXMS is capable of discovering your network automatically. Network discovery module can operate in 
+two modes - passive and active. In passive mode, information about new hosts and devices obtained from 
+ARP tables and routing tables of already known devices. NetXMS starts with it’s own ARP cache and 
+routing table. In active discovery mode, NetXMS server will send an ICMP echo requests to all IP 
+addresses in given range, and consider each responding address for adding to database. For each new 
+device found NetXMS server tries to gather additional information using SNMP and NetXMS agent, and then 
+adds it to database. By default NetXMS server will add all discovered devices to database, but you can 
+limit it by using discovery filters.
+
 Service discovery
 -----------------
 
-
-(not implemented yet)
+TBD (not implemented yet)
 
 
 Security 
 ========
 
-(Password encryption, encrypted connections...)
+There are described some concepts of NetXMS that are connected
+with data protection. 
+
+Messages between NetXMS agent and NetXMS server can be encrypted, 
+encryption between them can be forced by NetXMS configuration. There 
+can be also added :guilabel:`Shared Secret` that is checked on agent-server
+connection and in case server does not know secret of an agent, connection 
+will not be established. Another possibility to control access to the agent 
+is cosing the correct server access level in agent configuration properties. 
+
+When it is required to write password or :guilabel:`Shared Secret` in agent
+configuration file, there is possibility to encrypt it. All passwords can 
+be encrypted with help of nxencpasswd command line tool and added in configuration 
+in encrypted way. 
+
+FAQ
+===
+

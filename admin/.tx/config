@@ -1,0 +1,124 @@
+[main]
+host = https://www.transifex.com
+type = PO
+
+[netxms-admin-develop.advanced]
+file_filter = _locale/<lang>/LC_MESSAGES/advanced.po
+source_file = _build/locale/advanced.pot
+source_lang = en
+
+[netxms-admin-develop.agent-management]
+file_filter = _locale/<lang>/LC_MESSAGES/agent-management.po
+source_file = _build/locale/agent-management.pot
+source_lang = en
+
+[netxms-admin-develop.appendix]
+file_filter = _locale/<lang>/LC_MESSAGES/appendix.po
+source_file = _build/locale/appendix.pot
+source_lang = en
+
+[netxms-admin-develop.common-tasks]
+file_filter = _locale/<lang>/LC_MESSAGES/common-tasks.po
+source_file = _build/locale/common-tasks.pot
+source_lang = en
+
+[netxms-admin-develop.concepts]
+file_filter = _locale/<lang>/LC_MESSAGES/concepts.po
+source_file = _build/locale/concepts.pot
+source_lang = en
+
+[netxms-admin-develop.data-collection]
+file_filter = _locale/<lang>/LC_MESSAGES/data-collection.po
+source_file = _build/locale/data-collection.pot
+source_lang = en
+
+[netxms-admin-develop.event-processing]
+file_filter = _locale/<lang>/LC_MESSAGES/event-processing.po
+source_file = _build/locale/event-processing.pot
+source_lang = en
+
+[netxms-admin-develop.glossary]
+file_filter = _locale/<lang>/LC_MESSAGES/glossary.po
+source_file = _build/locale/glossary.pot
+source_lang = en
+
+[netxms-admin-develop.image-library]
+file_filter = _locale/<lang>/LC_MESSAGES/image-library.po
+source_file = _build/locale/image-library.pot
+source_lang = en
+
+[netxms-admin-develop.index]
+file_filter = _locale/<lang>/LC_MESSAGES/index.po
+source_file = _build/locale/index.pot
+source_lang = en
+
+[netxms-admin-develop.installation_and_upgrade]
+file_filter = _locale/<lang>/LC_MESSAGES/installation_and_upgrade.po
+source_file = _build/locale/installation_and_upgrade.pot
+source_lang = en
+
+[netxms-admin-develop.network-discovery]
+file_filter = _locale/<lang>/LC_MESSAGES/network-discovery.po
+source_file = _build/locale/network-discovery.pot
+source_lang = en
+
+[netxms-admin-develop.object-management]
+file_filter = _locale/<lang>/LC_MESSAGES/object-management.po
+source_file = _build/locale/object-management.pot
+source_lang = en
+
+[netxms-admin-develop.preface]
+file_filter = _locale/<lang>/LC_MESSAGES/preface.po
+source_file = _build/locale/preface.pot
+source_lang = en
+
+[netxms-admin-develop.quickstart]
+file_filter = _locale/<lang>/LC_MESSAGES/quickstart.po
+source_file = _build/locale/quickstart.pot
+source_lang = en
+
+[netxms-admin-develop.remote-file-management]
+file_filter = _locale/<lang>/LC_MESSAGES/remote-file-management.po
+source_file = _build/locale/remote-file-management.pot
+source_lang = en
+
+[netxms-admin-develop.reporting]
+file_filter = _locale/<lang>/LC_MESSAGES/reporting.po
+source_file = _build/locale/reporting.pot
+source_lang = en
+
+[netxms-admin-develop.scripting]
+file_filter = _locale/<lang>/LC_MESSAGES/scripting.po
+source_file = _build/locale/scripting.pot
+source_lang = en
+
+[netxms-admin-develop.server-management]
+file_filter = _locale/<lang>/LC_MESSAGES/server-management.po
+source_file = _build/locale/server-management.pot
+source_lang = en
+
+[netxms-admin-develop.sla]
+file_filter = _locale/<lang>/LC_MESSAGES/sla.po
+source_file = _build/locale/sla.pot
+source_lang = en
+
+[netxms-admin-develop.snmp]
+file_filter = _locale/<lang>/LC_MESSAGES/snmp.po
+source_file = _build/locale/snmp.pot
+source_lang = en
+
+[netxms-admin-develop.topology]
+file_filter = _locale/<lang>/LC_MESSAGES/topology.po
+source_file = _build/locale/topology.pot
+source_lang = en
+
+[netxms-admin-develop.user-management]
+file_filter = _locale/<lang>/LC_MESSAGES/user-management.po
+source_file = _build/locale/user-management.pot
+source_lang = en
+
+[netxms-admin-develop.visualisation]
+file_filter = _locale/<lang>/LC_MESSAGES/visualisation.po
+source_file = _build/locale/visualisation.pot
+source_lang = en
+

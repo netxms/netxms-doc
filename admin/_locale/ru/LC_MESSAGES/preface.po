@@ -1,30 +1,41 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015, Raden Solutions, SIA
+# This file is distributed under the same license as the Administrator Guide package.
 # 
+# Translators:
+# Alex Kirhenshtein <alex.kirhenshtein@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Administrator Guide 2.0\n"
+"Project-Id-Version: netxms-admin-develop\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-01 13:08+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2015-03-01 11:40+0000\n"
+"Last-Translator: Alex Kirhenshtein <alex.kirhenshtein@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/netxms-admin-develop/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+# 41eb33bd6162483b94cdb2be4cd38ad1
 #: ../../preface.rst:3
 msgid "Preface"
-msgstr ""
+msgstr "Предисловие"
 
+# 593c3a2667f54c1eb415ae6844261138
 #: ../../preface.rst:7
 msgid "Purpose of this document"
 msgstr ""
 
+# 7a4c6c99a11948a9a31508d24f95f56f
 #: ../../preface.rst:9
 msgid ""
 "Purpose of this document is to provide knowledge about NetXMS installation, "
 "configuration and usage."
 msgstr ""
 
+# 02c6c7901fa34176a79db7d9dad8cd27
 #: ../../preface.rst:12
 msgid ""
 "Document contain :ref:`quick-start` chapter, that describes default "
@@ -38,16 +49,19 @@ msgid ""
 "scripting<scripting>`"
 msgstr ""
 
+# 1b88b18c370c4d49bce904c5814a3ad3
 #: ../../preface.rst:21
 msgid ""
 "This document does not contain detailed description of NetXMS and it's "
 "architecture. To get this information please refer to Concept guide."
 msgstr ""
 
+# d12f827adc474a898334506d9f8eb6ee
 #: ../../preface.rst:25
 msgid "What is NetXMS"
 msgstr ""
 
+# 37e9e24fc30d42f18e4d7e2f218ae7d5
 #: ../../preface.rst:27
 msgid ""
 "NetXMS is an enterprise grade multi-platform modular open source network "
@@ -58,18 +72,22 @@ msgid ""
 "published by the Free Software Foundation."
 msgstr ""
 
+# e7b6102baa2348aab9545c3e27ed4f7f
 #: ../../preface.rst:35
 msgid "Supported operating systems and databases"
 msgstr ""
 
+# 589fae5bcaf541bb8695e322a8f2d8ed
 #: ../../preface.rst:37
 msgid "NetXMS supports most popular operation systems."
 msgstr ""
 
+# fc0ccf6fcb1645cf84c8e2c85906cb1b
 #: ../../preface.rst:45
 msgid "Supported operating systems for NetXMS server:"
 msgstr ""
 
+# fb1e5a84e72947b2b6fbc1b76ba29c09
 #: ../../preface.rst:40
 msgid ""
 "Windows Server 2003, Windows Vista, Windows Server 2008,  Windows Server "
@@ -77,31 +95,39 @@ msgid ""
 "Server 2012R2"
 msgstr ""
 
+# a87eac3a9cae4e398b06046b72468e5e
 #: ../../preface.rst:41
 msgid ""
 "RedHat Enterprise Linux, SUSE Linux, CentOS, Debian Linux, Ubuntu Linux"
 msgstr ""
 
+# c44597c603514301a810bd5ad7218ca6
+# ea02a20966bb47719151eb7fc81f51ef
 #: ../../preface.rst:42 ../../preface.rst:58
 msgid "FreeBSD, NetBSD, OpenBSD"
 msgstr ""
 
+# de39d8ca768740e298e6c770c0da4f6c
 #: ../../preface.rst:43
 msgid "Solaris 10, 11"
 msgstr ""
 
+# e66ba4c9dfd2481da098b99fb1ce9e50
 #: ../../preface.rst:44
 msgid "HP-UX 11.23, 11.31"
 msgstr ""
 
+# 53439490ef8f40ee83c1a8cbadf0a936
 #: ../../preface.rst:45
 msgid "AIX 5.3 +"
 msgstr ""
 
+# a37e25b3d7ef45c3ba6193ffb4e740b2
 #: ../../preface.rst:53
 msgid "Supported DBMS engines for NetXMS server"
 msgstr ""
 
+# b8e5aa88124d427aadbcdb06932da0a4
 #: ../../preface.rst:48
 msgid ""
 "Microsoft SQL Server 2005, Windows Server 2003, Windows Vista, Windows "
@@ -109,124 +135,154 @@ msgid ""
 "Windows Server 2012, Windows Server 2012R2"
 msgstr ""
 
+# 4510482058b94bde8785fe849d41403c
 #: ../../preface.rst:49
 msgid "MySQL 5.0 +"
 msgstr ""
 
+# d130215876a74755ac64e40e431cad62
 #: ../../preface.rst:50
 msgid "Oracle 11g, 12"
 msgstr ""
 
+# c9e4618da9954632856ed70e596b847c
 #: ../../preface.rst:51
 msgid "PostgreSQL 8+"
 msgstr ""
 
+# ea68c0b2825a405f8c42c4fb4bccae4d
 #: ../../preface.rst:52
 msgid "DB/2"
 msgstr ""
 
+# 1ba516d3a9d64d5e815e917094f12914
 #: ../../preface.rst:53
 msgid "SQLite(it is highly recommended use this option only for test purpose)"
 msgstr ""
 
+# f0efc5f9ae8947fe8599dbe26aaf38d6
 #: ../../preface.rst:62
 msgid "Supported operating systems for NetXMS agent"
 msgstr ""
 
+# 636840da5c454374a2ca6fc59f9ed85e
 #: ../../preface.rst:56
 msgid "Windows XP, all from server"
 msgstr ""
 
+# 296318f2065e4de1a1d98cf9ff038544
 #: ../../preface.rst:57
 msgid "Linux (all glibc2-based flavors)"
 msgstr ""
 
+# a9fbd08093dd4ee0b390c21561be997c
 #: ../../preface.rst:59
 msgid "Solaris"
 msgstr ""
 
+# c501daa190f54dbfa7905e3a138dcba1
 #: ../../preface.rst:60
 msgid "HP-UX"
 msgstr ""
 
+# 3a9b37d0d5aa48edbf52bd8b1ceb6066
 #: ../../preface.rst:61
 msgid "AIX"
 msgstr ""
 
+# 69cc5859438f40028e58f8f0e6a4c95f
 #: ../../preface.rst:65
 msgid "Where to get support"
 msgstr ""
 
+# e21573bea28a4ad7898e8600c3c96708
 #: ../../preface.rst:68
 msgid "Forum, Facebook/Twitter/G+"
 msgstr ""
 
+# 432dc01d289141d987f05d387e0b50a1
 #: ../../preface.rst:71
 msgid "Stay informed of new releases"
 msgstr ""
 
+# 8ed47eae3f6b41779120dd83849162e8
 #: ../../preface.rst:74
 msgid "Conventions"
 msgstr ""
 
+# 81c7774fde194850854434a932a9bb55
 #: ../../preface.rst:76
 msgid "The following typographical conventions are used in this manual."
 msgstr ""
 
+# ef3851d9561f40fa8ca7c3b228d20480
 #: ../../preface.rst:79
 msgid "Sample"
 msgstr ""
 
+# 3053acaefb6142faa535112aa2573dc3
 #: ../../preface.rst:79
 msgid "Description"
 msgstr ""
 
+# 1a08f94f785f4f4a8a6820083ed45eb3
 #: ../../preface.rst:81
 msgid ":guilabel:`Button`"
 msgstr ""
 
+# 0e261fd5f42b480dae90f9410afa86b0
 #: ../../preface.rst:81
 msgid "Any GUI element: Button, Menu item"
 msgstr ""
 
+# ba23aeeaba6440b2a5b6c021cd7ad367
 #: ../../preface.rst:83
 msgid "`Another Guide`"
 msgstr ""
 
+# e56c3e5be9194b7a871e86a65ddaf948
 #: ../../preface.rst:83
 msgid "Reference to external manual or man page"
 msgstr ""
 
+# 27f81f082eea4f3cbdb12e6258a0690e
 #: ../../preface.rst:85
 msgid ":kbd:`Control-M`"
 msgstr ""
 
+# 7aaa0d3152354379ae13bb99e0411c9c
 #: ../../preface.rst:85
 msgid "Keyboard shortcut"
 msgstr ""
 
+# a432cc8102404867800931d72b390b4e
 #: ../../preface.rst:87
 msgid ":term:`DCI`"
 msgstr ""
 
+# 9c01015b682646f791539d892d4b35a9
 #: ../../preface.rst:87
 msgid "Term which could be found in glossary"
 msgstr ""
 
+# 9837a1bfc5ed41ba92e1d0e5001e8378
 #: ../../preface.rst:89
 msgid ":menuselection:`&File --> &Exit`"
 msgstr ""
 
+# 31512ebe84d448bc859543c17b064eea
 #: ../../preface.rst:89
 msgid ""
 "Menu selection path, you must click on :guilabel:`File`, then "
 ":guilabel:`Exit`"
 msgstr ""
 
+# 1655c3380a034d08bbc4fffdc4f06bec
 #: ../../preface.rst:94
 msgid "Changelog"
 msgstr ""
 
+# 40e3075118f94bbc8001e85a2b6f86dc
 #: ../../preface.rst:96
 msgid ""
 "Only major changes are lister here. Complete change log is available at "

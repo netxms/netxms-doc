@@ -1,68 +1,88 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015, Raden Solutions, SIA
+# This file is distributed under the same license as the Administrator Guide package.
 # 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Administrator Guide 2.0\n"
+"Project-Id-Version: netxms-admin-develop\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-01 13:08+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-03-01 11:19+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/netxms-admin-develop/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+# 3123b6ab4e8544808c5adce0adb48806
 #: ../../common-tasks.rst:3
 msgid "Common monitoring tasks (rename this chapter!)"
 msgstr ""
 
+# 89052a8b540c4ea28b8de8644d4da2c9
 #: ../../common-tasks.rst:7
 msgid "Operating System"
 msgstr ""
 
+# 8e5052a77c444961802719de861013de
 #: ../../common-tasks.rst:11
 msgid "File meta information"
 msgstr ""
 
+# 4c456081c13f4c1ea72d24068add6e18
 #: ../../common-tasks.rst:0
 msgid "Todo"
 msgstr ""
 
+# f79d9d9690d5442098cf20375a0725d3
 #: ../../common-tasks.rst:15
 msgid "size, mtime, hash"
 msgstr ""
 
+# a6b80adccf6f4935aeda05cb4e20bb8c
 #: ../../common-tasks.rst:19
 msgid "Log monitoring"
 msgstr ""
 
+# 93e0fda528474d459d5463456c18efc8
 #: ../../common-tasks.rst:23
 msgid "Database monitoring"
 msgstr ""
 
+# b9db2a287d044697bd8e0eaf73d899bc
 #: ../../common-tasks.rst:27
 msgid "Oracle"
 msgstr ""
 
+# 575fc50686384e0ea207fa1bc391e76e
 #: ../../common-tasks.rst:31
 msgid "DB2"
 msgstr ""
 
+# dd5ce613a8f24d309f16e2e4cf0b27d8
 #: ../../common-tasks.rst:35
 msgid "MongoDB"
 msgstr ""
 
+# 7550476375b64353bc7dedb705d96f5d
 #: ../../common-tasks.rst:39
 msgid "Monitoring hardware (lm-sensors)"
 msgstr ""
 
+# 629a682416ef4633a88be933eadacc08
 #: ../../common-tasks.rst:43
 msgid "UPS monitoring"
 msgstr ""
 
+# 85d23002cb4648e8961eda7bab80c8ff
 #: ../../common-tasks.rst:47
 msgid "Cluster monitoring"
 msgstr ""
 
+# 0153f9320b4342adb5653d499ee33844
 #: ../../common-tasks.rst:51
 msgid "Monitoring mobile devices"
 msgstr ""

@@ -1,24 +1,33 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015, Raden Solutions, SIA
+# This file is distributed under the same license as the Administrator Guide package.
 # 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Administrator Guide 2.0\n"
+"Project-Id-Version: netxms-admin-develop\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-01 13:08+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-03-01 11:20+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/netxms-admin-develop/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+# c801517dcb0e442f99abe818d1526fc8
 #: ../../server-management.rst:3
 msgid "Server management"
 msgstr ""
 
+# fab10235392b4061bfbcd6b0ccae4e84
 #: ../../server-management.rst:7
 msgid "Configuration file"
 msgstr ""
 
+# cadd0fd0b9b442b09efdb91a9f6cc5b9
 #: ../../server-management.rst:11
 msgid "Configuration parameters"
 msgstr ""

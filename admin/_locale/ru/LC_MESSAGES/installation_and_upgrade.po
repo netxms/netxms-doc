@@ -1,104 +1,138 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015, Raden Solutions, SIA
+# This file is distributed under the same license as the Administrator Guide package.
 # 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Administrator Guide 2.0\n"
+"Project-Id-Version: netxms-admin-develop\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-01 13:08+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-03-01 11:19+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/netxms-admin-develop/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+# 047c4b4bfe494dbaae705be7a6c01af7
 #: ../../installation_and_upgrade.rst:5
 msgid "Installation and Upgrade"
 msgstr ""
 
+# d9e141eb9190462f9f257e4a9172bff0
+# b0ffe59bcc0b48cb8b93005b5cdbcbd9
 #: ../../installation_and_upgrade.rst:9 ../../installation_and_upgrade.rst:77
 msgid "Synopsis"
 msgstr ""
 
+# b07299852afb4458abf4e093113e93ce
 #: ../../installation_and_upgrade.rst:13
 msgid "Planing"
 msgstr ""
 
+# 7e4a1c25d5104b82871a0eb0ad037e33
 #: ../../installation_and_upgrade.rst:17
 msgid "Installing or upgrading on Debian or Ubuntu"
 msgstr ""
 
+# 9eca350935a94d549acb7de1813f135d
 #: ../../installation_and_upgrade.rst:21
 msgid "Adding our APT repository"
 msgstr ""
 
+# bfafe19a4d914150b17ad00244270b8a
+# e78dd4a1e22046bfa8892f5449a5d4d9
 #: ../../installation_and_upgrade.rst:25 ../../installation_and_upgrade.rst:49
 msgid "Installing packages"
 msgstr ""
 
+# b4922455c3c04d9e9a4a9339ee7bf41d
+# 7b5fcee7d8c34f21b970e9ec6e7aa7c0
 #: ../../installation_and_upgrade.rst:29 ../../installation_and_upgrade.rst:53
 msgid "Server"
 msgstr ""
 
+# ce919f21a4444f2bb92185f1ced6efb7
+# 31e1309063ab42b2978877cd9bbf60cc
 #: ../../installation_and_upgrade.rst:33 ../../installation_and_upgrade.rst:57
 msgid "Agent"
 msgstr ""
 
+# 58075cfc5fb945d7803c13d9cc49d9cd
+# 2994405dcf964c9f84846512577c6eba
 #: ../../installation_and_upgrade.rst:37 ../../installation_and_upgrade.rst:61
 msgid "Management console"
 msgstr ""
 
+# a534bf9c9eac44a394de8657ebebca13
 #: ../../installation_and_upgrade.rst:41
 msgid "Installing or upgrading on Red Hat, Fedora, CentOS or ScientificLinux"
 msgstr ""
 
+# 977d680e34984623a3ae392879e2729d
 #: ../../installation_and_upgrade.rst:45
 msgid "Adding our YUM repository"
 msgstr ""
 
+# 1d5fdb91a1a846a28a9f27cbfb15c008
 #: ../../installation_and_upgrade.rst:65
 msgid "Generic installation, upgrade and downgrade using source tarball"
 msgstr ""
 
+# 57ac92f176cd4d3cbc7168f12a2988d5
 #: ../../installation_and_upgrade.rst:69
 msgid "Centralised agent upgrade"
 msgstr ""
 
+# 434af36f65024aa29c2738ae361f1499
 #: ../../installation_and_upgrade.rst:73
 msgid "Cryptographic verification of installation files"
 msgstr ""
 
+# fa4a6ce46f13433abcdb88447fed3d9e
 #: ../../installation_and_upgrade.rst:81
 msgid "Importing the Phusion Software Signing key"
 msgstr ""
 
+# c0bffea4512b414ca06fbaa6010f0ea3
 #: ../../installation_and_upgrade.rst:85
 msgid "Verifying the Phusion Software Signing key"
 msgstr ""
 
+# 7cefc5c2be9647bcb79ece1ab4a6fd07
 #: ../../installation_and_upgrade.rst:89
 msgid "Verifying the gem and tarball"
 msgstr ""
 
+# 4791923225f742b597c2e41be296563c
 #: ../../installation_and_upgrade.rst:93
 msgid "Verifying Git signatures"
 msgstr ""
 
+# 579c29a07c8c40d6b65183144fe6c174
 #: ../../installation_and_upgrade.rst:97
 msgid "Verifying DEB and RPM packages"
 msgstr ""
 
+# f34be2dfd94e4347b4231c5fbfe87f82
 #: ../../installation_and_upgrade.rst:101
 msgid "Revocation"
 msgstr ""
 
+# 4cdcc5156416477d8d3f30b149f10b91
 #: ../../installation_and_upgrade.rst:105
 msgid "Customizing the compilation process"
 msgstr ""
 
+# b0ae9634a1ce4b2592d71b3d781ed8f4
 #: ../../installation_and_upgrade.rst:109
 msgid "Adding additional compiler or linker flags"
 msgstr ""
 
+# 2dc5bf5b03994a8ba4794d81d6047b30
 #: ../../installation_and_upgrade.rst:111
 msgid "(e.g. fixing atomics)"
 msgstr ""

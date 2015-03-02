@@ -1,24 +1,33 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015, Raden Solutions, SIA
+# This file is distributed under the same license as the Administrator Guide package.
 # 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Administrator Guide 2.0\n"
+"Project-Id-Version: netxms-admin-develop\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-01 13:08+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-03-01 11:19+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/netxms-admin-develop/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+# 15d567cbe4374e79b86e37396669cd8f
 #: ../../concepts.rst:5
 msgid "Concepts"
 msgstr ""
 
+# 25c2e8e378564c95a60840b1d4ef49b0
 #: ../../concepts.rst:8
 msgid "Architecture overview"
 msgstr ""
 
+# 306e1e6fca14494dbf1252d28f2bf0d5
 #: ../../concepts.rst:10
 msgid ""
 "The system has three-tier architecture: the information is collected by "
@@ -31,90 +40,113 @@ msgid ""
 "platform(s) for your network."
 msgstr ""
 
+# 3d8d5bf20004495a9025a539c593b732
 #: ../../concepts.rst:20
 msgid "Server"
 msgstr ""
 
+# f187b0348a404b0eba5518c91b760373
 #: ../../concepts.rst:22
 msgid "(modules, purpose, scalability - installation with few servers)"
 msgstr ""
 
+# a7903811b6df40948230265d72d2b6c7
 #: ../../concepts.rst:25
 msgid "Agent"
 msgstr ""
 
+# 3fd1148ef6d342678ff9f0fbe00974f6
 #: ../../concepts.rst:27
 msgid "(subagent, proxy)"
 msgstr ""
 
+# 4012869c16d949de845da9b0a4bc3222
 #: ../../concepts.rst:30
 msgid "Agentless installation"
 msgstr ""
 
+# bf92b150c1d5409e934a12e3e8537a46
+# 00a168417fc640e1a16273f9da1791a4
 #: ../../concepts.rst:34 ../../concepts.rst:44
 msgid "Objects"
 msgstr ""
 
+# 054382b1e5ab4b228903b36831735c03
 #: ../../concepts.rst:36
 msgid "(short)"
 msgstr ""
 
+# 7b44962381fd4d26a5fd0250e52e4bc7
 #: ../../concepts.rst:39
 msgid "Data flow"
 msgstr ""
 
+# 71fb4c66fc094639812bb40401f74b64
 #: ../../concepts.rst:41
 msgid "(events, alarms, actions)"
 msgstr ""
 
+# 14218e67ac234a2ca56e6b04c34e3502
 #: ../../concepts.rst:47
 msgid "Data Collection"
 msgstr ""
 
+# 4767ff2806624ab1a5cd03c8b1596eb9
 #: ../../concepts.rst:50
 msgid "Data source types and transports"
 msgstr ""
 
+# 239480f9e63e4c26b1594a794440f244
 #: ../../concepts.rst:52
 msgid "(agent, snmp, push)"
 msgstr ""
 
+# 7962076698064a47ba97e729a60edcfa
 #: ../../concepts.rst:55
 msgid "Thresholds"
 msgstr ""
 
+# d599b4ddfd2849dda0395b19781d7158
 #: ../../concepts.rst:60
 msgid "Data representation"
 msgstr ""
 
+# cba14ae59d084475855a8a7120eefe70
 #: ../../concepts.rst:62
 msgid "(graphs, dashboards, history table...)"
 msgstr ""
 
+# 00213603fecd4375940f33b9b80da9de
 #: ../../concepts.rst:65
 msgid "Event Processing"
 msgstr ""
 
+# d5cf624e411b4ad9a0df0b867379d22d
 #: ../../concepts.rst:69
 msgid "Discovery"
 msgstr ""
 
+# 7cff4a55dae44ed58fc64bf2cc094ab2
 #: ../../concepts.rst:73
 msgid "Network discovery"
 msgstr ""
 
+# 15b316d3c8e74651ad24ad09a5f92f99
 #: ../../concepts.rst:76
 msgid "Service discovery"
 msgstr ""
 
+# 67659866fd4b4870b8f9d24c16c0f135
 #: ../../concepts.rst:79
 msgid "(not implemented yet)"
 msgstr ""
 
+# 97fab114aded4422a8924729a3eec74f
 #: ../../concepts.rst:83
 msgid "Security"
 msgstr ""
 
+# 2b21e84b38b44d5fae190d44d8522e52
 #: ../../concepts.rst:85
 msgid "(Password encryption, encrypted connections...)"
 msgstr ""

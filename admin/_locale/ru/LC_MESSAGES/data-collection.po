@@ -1,28 +1,38 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015, Raden Solutions, SIA
+# This file is distributed under the same license as the Administrator Guide package.
 # 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Administrator Guide 2.0\n"
+"Project-Id-Version: netxms-admin-develop\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-01 13:08+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-03-01 11:19+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/netxms-admin-develop/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+# 0fa8da54f8fd463080b5ae9022b7f836
 #: ../../data-collection.rst:6
 msgid "Data collection"
 msgstr ""
 
+# 5db5e6ce37884e5fb9abcd59fe5666fd
 #: ../../data-collection.rst:10
 msgid "DCI configuration"
 msgstr ""
 
+# f26a71e0cc814711a15d699bb8d728c3
 #: ../../data-collection.rst:14
 msgid "Templates"
 msgstr ""
 
+# 79de7be49b8c49d4becbc219280dcdd9
 #: ../../data-collection.rst:18
 msgid "Instance Discovery"
 msgstr ""

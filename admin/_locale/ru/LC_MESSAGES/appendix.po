@@ -1,48 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015, Raden Solutions, SIA
+# This file is distributed under the same license as the Administrator Guide package.
 # 
+# Translators:
+# Alex Kirhenshtein <alex.kirhenshtein@gmail.com>, 2015
+# Pavel Tarasenko <pvt071@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Administrator Guide 2.0\n"
+"Project-Id-Version: netxms-admin-develop\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-01 13:08+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2015-03-02 15:24+0000\n"
+"Last-Translator: Alex Kirhenshtein <alex.kirhenshtein@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/netxms-admin-develop/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+# a21eb07d552f450f80c413ec99921668
 #: ../../appendix.rst:3
 msgid "Appendix"
-msgstr ""
+msgstr "Приложения"
 
+# 43f1365d88dd4704b15c24dc9b498a9f
 #: ../../appendix.rst:7
 msgid "Agent configuration file (nxagentd.conf)"
-msgstr ""
+msgstr "Файл конфигурации агента (nxagentd.conf)"
 
+# e0c3885351aa405f9efc384d1912e755
 #: ../../appendix.rst:10
 msgid "Server configuration file (netxmsd.conf)"
-msgstr ""
+msgstr "Файл конфигурации сервера (netxmsd.conf)"
 
+# 085afd773007449cb53f80d4e1c2404a
 #: ../../appendix.rst:14
 msgid "Server configuration parameters"
-msgstr ""
+msgstr "Параметры конфигурации сервера"
 
+# c88fa6b9073e4f0cbc8df99c30c59868
 #: ../../appendix.rst:0
 msgid "Todo"
-msgstr ""
+msgstr "Todo"
 
+# e0348d1045c440a090c38dd6de1bf82c
 #: ../../appendix.rst:18
 msgid "Stored in database, can be changed in GUI or using nxdbmgr"
-msgstr ""
+msgstr "Хранится в базе данных, может быть изменен в графическом интерфейсе или с помощью nxdbmgr"
 
+# 590fdd3a3dd94aeabde944dc04bb16f2
 #: ../../appendix.rst:21
 msgid "Bundled Subagents"
-msgstr ""
+msgstr "Субагенты входящие в комплект поставки"
 
+# 805f0920480b4a0c8e2ed1e8087d75ea
 #: ../../appendix.rst:25
 msgid "Command line tools"
-msgstr ""
+msgstr "Утилиты коммандной строки"
 
+# 9c139733d239413083e0243d9cef1d30
 #: ../../appendix.rst:29
 msgid "List of supported metrics"
-msgstr ""
+msgstr "Список поддерживаемых метрик"

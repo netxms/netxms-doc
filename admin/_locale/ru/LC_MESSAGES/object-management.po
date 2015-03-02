@@ -1,40 +1,53 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015, Raden Solutions, SIA
+# This file is distributed under the same license as the Administrator Guide package.
 # 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Administrator Guide 2.0\n"
+"Project-Id-Version: netxms-admin-develop\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-01 13:08+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-03-01 11:19+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/netxms-admin-develop/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+# 54dba4e333494adcba11744132d48db9
 #: ../../object-management.rst:6
 msgid "Object management"
 msgstr ""
 
+# 0b524d1fc59447de8c1def20f8314093
 #: ../../object-management.rst:10
 msgid "Object browser"
 msgstr ""
 
+# 71a9a2c8f2ae4a58b98a2c1c51f2e129
 #: ../../object-management.rst:14
 msgid "Add / remove objects"
 msgstr ""
 
+# d3062a9b925547f8b93bcf61590bacda
 #: ../../object-management.rst:18
 msgid "Containers – bind/unbind"
 msgstr ""
 
+# 459b92103c90469e994c887baa63e62c
 #: ../../object-management.rst:22
 msgid "Access control"
 msgstr ""
 
+# 417ebc0d9a744422a0b0c929d9604eb5
 #: ../../object-management.rst:26
 msgid "Object tools"
 msgstr ""
 
+# 5dee1883130b40b4a8d6729f8e686fd7
 #: ../../object-management.rst:30
 msgid "Custom attributes"
 msgstr ""

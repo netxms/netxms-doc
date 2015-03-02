@@ -1,29 +1,41 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015, Raden Solutions, SIA
+# This file is distributed under the same license as the Administrator Guide package.
 # 
+# Translators:
+# Alex Kirhenshtein <alex.kirhenshtein@gmail.com>, 2015
+# Pavel Tarasenko <pvt071@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Administrator Guide 2.0\n"
+"Project-Id-Version: netxms-admin-develop\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-01 13:08+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2015-03-02 14:34+0000\n"
+"Last-Translator: Alex Kirhenshtein <alex.kirhenshtein@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/netxms-admin-develop/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+# df23843390e5461aa62d71171f220e8f
 #: ../../agent-management.rst:3
 msgid "Agent management"
-msgstr ""
+msgstr "Управление агентами"
 
+# eb483fad6ba74af599d52123e01e2ae1
 #: ../../agent-management.rst:7
 msgid "Agent config"
-msgstr ""
+msgstr "Конфигурация агента"
 
+# 967cebd841564057a858e6500f24b054
 #: ../../agent-management.rst:9
 msgid ""
 "(policies, get config from server, main/additional config, what to chose)"
 msgstr ""
 
+# a03402f7eec04af3bbe2afbc240e42ae
 #: ../../agent-management.rst:13
 msgid "Subagents"
-msgstr ""
+msgstr "Субагенты"

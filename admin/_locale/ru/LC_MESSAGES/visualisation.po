@@ -1,36 +1,48 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015, Raden Solutions, SIA
+# This file is distributed under the same license as the Administrator Guide package.
 # 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Administrator Guide 2.0\n"
+"Project-Id-Version: netxms-admin-develop\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-01 13:08+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-03-01 11:21+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/netxms-admin-develop/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+# 99743d9fc4b1422f931c77d58c99fdb9
 #: ../../visualisation.rst:6
 msgid "Data and Network visualisation"
 msgstr ""
 
+# 1053b1d34d86472bb0cf948b073c47f9
 #: ../../visualisation.rst:10
 msgid "Network maps"
 msgstr ""
 
+# 6487261b073848f2be0e0fb70a11e855
 #: ../../visualisation.rst:14
 msgid "Dashboards"
 msgstr ""
 
+# be241d913c60456f8b643e5722e93304
 #: ../../visualisation.rst:18
 msgid "Graphs"
 msgstr ""
 
+# eaf740969821422aa3a7df25b3522f60
 #: ../../visualisation.rst:22
 msgid "History"
 msgstr ""
 
+# f9360cf641f54e9292da997d8b5eb939
 #: ../../visualisation.rst:26
 msgid "Summary table"
 msgstr ""

@@ -13,10 +13,10 @@ msgstr ""
 "PO-Revision-Date: 2015-03-02 15:24+0000\n"
 "Last-Translator: Alex Kirhenshtein <alex.kirhenshtein@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/netxms-admin-develop/language/ru/)\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 # a21eb07d552f450f80c413ec99921668
@@ -47,7 +47,9 @@ msgstr "Todo"
 # e0348d1045c440a090c38dd6de1bf82c
 #: ../../appendix.rst:18
 msgid "Stored in database, can be changed in GUI or using nxdbmgr"
-msgstr "Хранится в базе данных, может быть изменен в графическом интерфейсе или с помощью nxdbmgr"
+msgstr ""
+"Хранится в базе данных, может быть изменен в графическом интерфейсе или с "
+"помощью nxdbmgr"
 
 # 590fdd3a3dd94aeabde944dc04bb16f2
 #: ../../appendix.rst:21
@@ -55,11 +57,11 @@ msgid "Bundled Subagents"
 msgstr "Субагенты входящие в комплект поставки"
 
 # 805f0920480b4a0c8e2ed1e8087d75ea
-#: ../../appendix.rst:25
+#: ../../appendix.rst:26
 msgid "Command line tools"
 msgstr "Утилиты коммандной строки"
 
 # 9c139733d239413083e0243d9cef1d30
-#: ../../appendix.rst:29
+#: ../../appendix.rst:30
 msgid "List of supported metrics"
 msgstr "Список поддерживаемых метрик"

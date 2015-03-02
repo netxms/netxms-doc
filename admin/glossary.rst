@@ -32,7 +32,7 @@ Glossary
     :term:`Object` that can store other containers and :term:`nodes <Node>`.
 
   DCI
-    Acronym for :term:`Data Collection Item`
+    Abbreviation for :term:`Data Collection Item`
 
   Dashboard
     Manually generated :term:`Object` that can combine any available
@@ -48,7 +48,7 @@ Glossary
     subnets known to NetXMS.
 
   EPP
-    Acronym for :term:`Event Processing Policy`
+    Abbreviation for :term:`Event Processing Policy`
 
   Event
     TBD

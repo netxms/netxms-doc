@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: netxms-admin-develop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-01 13:08+0200\n"
-"PO-Revision-Date: 2015-03-01 11:19+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-03-02 18:25+0200\n"
+"PO-Revision-Date: 2015-03-02 16:26+0000\n"
+"Last-Translator: Alex Kirhenshtein <alex.kirhenshtein@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/netxms-admin-develop/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,136 +17,913 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-# 15d567cbe4374e79b86e37396669cd8f
+# 25ee67857d94438bb41b33b467ea98ae
 #: ../../concepts.rst:5
 msgid "Concepts"
 msgstr ""
 
-# 25c2e8e378564c95a60840b1d4ef49b0
+# ae4fc67aaa9f49bda78581094de70310
 #: ../../concepts.rst:8
 msgid "Architecture overview"
 msgstr ""
 
-# 306e1e6fca14494dbf1252d28f2bf0d5
+# c88f5bae08024077ad02e27de6660d8f
 #: ../../concepts.rst:10
 msgid ""
 "The system has three-tier architecture: the information is collected by "
 "monitoring agents (either our own high-performance agents or SNMP agents) "
 "and delivered to monitoring server for processing and storage. Network "
 "administrator can access collected data using cross-platform Management "
-"Console, Web Interface or Management Console for Android. Having been "
-"designed with flexibility and scalability in mind, NetXMS features a wide "
-"range of supported platforms, leaving you the freedom of choice of "
-"platform(s) for your network."
+"Console, Web Interface or Management Console for Android."
 msgstr ""
 
-# 3d8d5bf20004495a9025a539c593b732
-#: ../../concepts.rst:20
-msgid "Server"
+# 98775ad271f04b5d8d7a598dabc6ad16
+#: ../../concepts.rst:23
+msgid "Architecture scheme"
 msgstr ""
 
-# f187b0348a404b0eba5518c91b760373
-#: ../../concepts.rst:22
-msgid "(modules, purpose, scalability - installation with few servers)"
-msgstr ""
-
-# a7903811b6df40948230265d72d2b6c7
+# 7e0b487f04924dba80629b3afaf44d41
 #: ../../concepts.rst:25
-msgid "Agent"
+msgid ""
+"NetXMS server is daemon or service. It collects, process and stores data, "
+"does network discovery. Server is modular and can be extended with "
+"additional functionality. By it selves server can collect only some simple "
+"information about nodes or can use :term:`SNMP` agent to collect data from "
+"SNMP-capable devices."
 msgstr ""
 
-# 3fd1148ef6d342678ff9f0fbe00974f6
-#: ../../concepts.rst:27
-msgid "(subagent, proxy)"
+# 0d05ee76557b466381b16dc9416c3f1f
+#: ../../concepts.rst:31
+msgid ""
+"NetXMS server does not support horizontal scaling. For now it is possible "
+"only event exchange between servers."
 msgstr ""
 
-# 4012869c16d949de845da9b0a4bc3222
-#: ../../concepts.rst:30
-msgid "Agentless installation"
+# b0c19c5aa9554234b68d27463d8c784a
+#: ../../concepts.rst:34
+msgid ""
+"NetXMS agent is daemon or service that is installed on nodes to provide "
+"additional monitoring options and can be used like :term:`SNMP` agent or "
+"NetXMS agent proxy. Agent implements communication with server and work with"
+" configuration. Agent functionality is extended with subagents. There are "
+"default OS subagents and manually loaded like file manager, ping or others."
 msgstr ""
 
-# bf92b150c1d5409e934a12e3e8537a46
-# 00a168417fc640e1a16273f9da1791a4
-#: ../../concepts.rst:34 ../../concepts.rst:44
+# e43d683e60494512b5b14e99f3900b59
+#: ../../concepts.rst:40
+msgid ""
+"NetXMS also provides some command line tools like nxdbmgr(work with NetXMS "
+"database), nxencpasswd(password encryption) and others. Information about "
+"this tools can be found in :ref:`command_line_tools` chapter."
+msgstr ""
+
+# d212c24800644457b9747fddeac82069
+#: ../../concepts.rst:44
+msgid ""
+"In further chapters will be described main NetXMS objects and concepts."
+msgstr ""
+
+# cd5e7cf7e83f41818df7d2779190fcae
+#: ../../concepts.rst:47
 msgid "Objects"
 msgstr ""
 
-# 054382b1e5ab4b228903b36831735c03
-#: ../../concepts.rst:36
-msgid "(short)"
+# 981ed5718beb44efb036b8f0b247c998
+#: ../../concepts.rst:49
+msgid ""
+"All network infrastructure monitored by NetXMS inside monitoring system "
+"represented as a set of :term:`objects <Object>`. Each object represents one"
+" physical or logical entity (like host or network interface), or group of "
+"them. Objects are organized into hierarchical structure. Each object has "
+"it's own access rights. Access rights are applied hierarchically on all "
+"children of object. For example if it grant :guilabel:`Read` access right "
+"for user on a :guilabel:`Container`, than user have :guilabel:`Read` right "
+"on all objects that contains this :guilabel:`Container`. Every object has "
+"set of attributes; some of them are common (like :guilabel:`id` and "
+":guilabel:`name` or :guilabel:`status`),  while other depends on object "
+"class – for example, only :guilabel:`Node` objects have attribute "
+":guilabel:`SNMP community string`. There are default attributes and custom "
+"attributes defined either by user or integrated application via NetXMS API."
 msgstr ""
 
-# 7b44962381fd4d26a5fd0250e52e4bc7
-#: ../../concepts.rst:39
-msgid "Data flow"
+# 71ea474760a044ebb1260f8c707489f4
+#: ../../concepts.rst:64
+msgid ""
+"NetXMS has eight top level objects – ``Entire Network``, ``Service Root``, "
+"``Template Root``, ``Policy Root``, ``Network Map Root``, ``Dashboard "
+"Root``, ``Report Root``, and ``Business Service Root``. These objects served"
+" as an abstract root for appropriate object tree. All top level objects has "
+"only one editable attribute – name."
 msgstr ""
 
-# 71fb4c66fc094639812bb40401f74b64
-#: ../../concepts.rst:41
-msgid "(events, alarms, actions)"
+# 769958afaabe4992891adb62fac9d31d
+#: ../../concepts.rst:77
+msgid "Object Class"
 msgstr ""
 
-# 14218e67ac234a2ca56e6b04c34e3502
-#: ../../concepts.rst:47
-msgid "Data Collection"
+# 427e97b2e9ce4a72ace1eff7cedd473a
+# df35ec5232584726adce6b25006e7ecd
+# 4f68ebab4d434057b4599fcef26d69fa
+#: ../../concepts.rst:78 ../../concepts.rst:262 ../../concepts.rst:358
+msgid "Description"
 msgstr ""
 
-# 4767ff2806624ab1a5cd03c8b1596eb9
-#: ../../concepts.rst:50
-msgid "Data source types and transports"
+# 8688edfd6a7a48e1a5d1aa03bb741bc7
+#: ../../concepts.rst:79
+msgid "Valid Child Objects"
 msgstr ""
 
-# 239480f9e63e4c26b1594a794440f244
-#: ../../concepts.rst:52
-msgid "(agent, snmp, push)"
+# e0a3127412bb4a808ddb1fb507bbfbff
+#: ../../concepts.rst:80
+msgid "|ENTIRE_NETWORK| Entire Network"
 msgstr ""
 
-# 7962076698064a47ba97e729a60edcfa
-#: ../../concepts.rst:55
-msgid "Thresholds"
+# 17ec2c4e10634c1ca9ae72069911625a
+#: ../../concepts.rst:81
+msgid ""
+"Abstract object representing root of IP topology tree. All zone and subnet "
+"objects located under it. System can have only one object of this class."
 msgstr ""
 
-# d599b4ddfd2849dda0395b19781d7158
-#: ../../concepts.rst:60
-msgid "Data representation"
+# 50da03b24fcc459eb87b41996e8b5be4
+#: ../../concepts.rst:84
+msgid "|ZONE| Zone (if zoning enabled)"
 msgstr ""
 
-# cba14ae59d084475855a8a7120eefe70
-#: ../../concepts.rst:62
-msgid "(graphs, dashboards, history table...)"
+# 53951a8ebdf34d319caa3aee182b4f88
+#: ../../concepts.rst:85
+msgid "|SUBNET| Subnet (if zoning disabled)"
 msgstr ""
 
-# 00213603fecd4375940f33b9b80da9de
-#: ../../concepts.rst:65
+# 264731c95a664b59b1a7c0ecbd85ab36
+#: ../../concepts.rst:86
+msgid "|ZONE| Zone"
+msgstr ""
+
+# 7401b8dc30e342faa935b5e27120b8c4
+#: ../../concepts.rst:87
+msgid ""
+"Object representing group of (usually interconnected) IP networks without "
+"overlapping addresses. Contains appropriate subnet objects."
+msgstr ""
+
+# 6234ae9cc6324a648b95b90e3846b436
+# b7f332ce624f473f91dcf9c1006eaecb
+# ad84a7cf232a4d498ef510dbaf1db375
+# a41d6db0660f4f68ac3931475b85e3ea
+#: ../../concepts.rst:89 ../../concepts.rst:90 ../../concepts.rst:152
+#: ../../concepts.rst:163
+msgid "|SUBNET| Subnet"
+msgstr ""
+
+# 1a29e18b33b345a7ac082bdace3bac5f
+#: ../../concepts.rst:91
+msgid ""
+"Object representing IP subnet. Typically objects of this class created "
+"automatically by the system to reflect system's knowledge of IP topology. "
+"The system places Node objects inside an appropriate Subnet object based on "
+"an interface configuration. Subnet objects have only one editable attribute "
+"- :guilabel:`Name`."
+msgstr ""
+
+# 06ef245cbcb443eeb93c1e3cdc944c34
+# b0c35efd4caf43658141632bb840bb1c
+# a3b97f5841e94258a7362d9773e532a2
+# fdb572195c2e402abb7cedf8025999f2
+# 0415f607e0f84c729531eb38985572dd
+# 044cfc69d9b649b496ef04728cd9b3e7
+#: ../../concepts.rst:96 ../../concepts.rst:97 ../../concepts.rst:110
+#: ../../concepts.rst:151 ../../concepts.rst:162 ../../concepts.rst:180
+msgid "|NODE| Node"
+msgstr ""
+
+# b14479c831314252a9baec60bd20b6d2
+#: ../../concepts.rst:98
+msgid ""
+"Object representing physical host or network device(such as routers and "
+"switches). These objects can be created either manually by administrator or "
+"automatically during network discovery process. They have a lot of "
+"attributes controlling all aspects of interaction between NetXMS server and "
+"managed node. For example, the attributes specify what data must be "
+"collected, how node status must be checked, which protocol versions to use "
+"etc. Node objects contain one or more interface objects. The system creates "
+"interface objects automatically during configuration polls."
+msgstr ""
+
+# 3eaae072033846f18669409c3f3c1f62
+# 56205ec1b2d149798142190794abd4cd
+#: ../../concepts.rst:105 ../../concepts.rst:111
+msgid "|INTERFACE| Interface"
+msgstr ""
+
+# eaa956013baf40f5b37801ed88093db8
+# b1fd990fe3c04934a502351b0942fd17
+#: ../../concepts.rst:106 ../../concepts.rst:116
+msgid "|NETWORK_SERVICE| Network Service"
+msgstr ""
+
+# 9a414b54cc8b4f14a0dc996b1906b2b6
+# c64331da7ecf4c94b2a2195448356cc6
+#: ../../concepts.rst:107 ../../concepts.rst:134
+msgid "|VPN| VPN Connector"
+msgstr ""
+
+# 57a6a0e6164141f9b19bdf948d57bf3d
+# 5094347c97a84d45b60320513bb30f53
+# 6360c008bd1146b18749c68bb3b78736
+#: ../../concepts.rst:108 ../../concepts.rst:147 ../../concepts.rst:158
+msgid "|CLUSTER| Cluster"
+msgstr ""
+
+# 87d93621dd3c4e33acebec5a60dd5450
+#: ../../concepts.rst:109
+msgid "Object representing cluster consisted of two or more hosts."
+msgstr ""
+
+# fd5abc6609c04d9cad6148436edc5285
+#: ../../concepts.rst:112
+msgid ""
+"Interface objects represent network interfaces of managed computers and "
+"devices. These objects created automatically by the system during "
+"configuration polls or can be created manually by user."
+msgstr ""
+
+# 403fb5851784474997a44ba19b4c06d6
+#: ../../concepts.rst:117
+msgid ""
+"Object representing network service running on a node (like http or ssh), "
+"which is accessible online (via TCP IP). Network Service objects are always "
+"created manually. Currently, the system works with the following protocols -"
+" HTTP, POP3, SMTP, Telnet, SSH and Custom protocol type. For Custom "
+"protocol, a user should define the TCP port number and the system will be "
+"checking whether that port is available. For the predefined standard "
+"services the system will also check whether an appropriate response is "
+"returned. In case of SMTP, the system will send a test mail, in case of POP3"
+" – try to log in with a certain user, in case of HTTP – check whether the "
+"contents of a desired web page correspond to a certain given template. As "
+"soon as the Network Service object is created, it will be automatically "
+"included into the status poll. Each time when the status poll for the "
+"particular node is carried out, all Network Service objects are polled for a"
+" reply. If an object's reply corresponds to a certain condition, its status "
+"is set as NORMAL. If an object is not responding, its status will be hanged "
+"to CRITICAL. For more information on object statuses and object status "
+"estimation, please refer to Object Status chapter."
+msgstr ""
+
+# 92eda326807349e1965984b44898ae3a
+#: ../../concepts.rst:135
+msgid ""
+"Object representing VPN tunnel endpoint. Such objects can be created to add "
+"VPN tunnels to network topology known y NetXMS server. VPN Connector objects"
+" are created manually. In case if there is a VPN connection linking two "
+"different networks open between two firewalls that are added to the system "
+"as objects, a user can create a VPN Connector object on each of the firewall"
+" objects and link one to another. The network topology will now show that "
+"those two networks are connected and the system will take this condition "
+"into account during problem analysis and event correlation."
+msgstr ""
+
+# 376ce10d23de4e36ab4457733c002188
+#: ../../concepts.rst:144
+msgid "|SERVICE_ROOT| Service Root"
+msgstr ""
+
+# ac3853c9726e467191d39ec71c182f55
+#: ../../concepts.rst:145
+msgid ""
+"Abstract object representing root of your infrastructure service tree. "
+"System can have only one object of this class."
+msgstr ""
+
+# c75b901bb05545e8a96b2aa14a5ce4e4
+# a6b7271217af4f499c57927018ce1cd4
+# f9f11d7a640247e28e2db0f112e95b14
+#: ../../concepts.rst:148 ../../concepts.rst:159 ../../concepts.rst:164
+msgid "|CONDITION| Condition"
+msgstr ""
+
+# bf3ed7ffa2b94906bfdd9173d8a61c5d
+# 9947af05758d49bab161566d2f422ee9
+# 93470fe621204419b2c320387f0621b8
+#: ../../concepts.rst:149 ../../concepts.rst:153 ../../concepts.rst:160
+msgid "|CONTAINER| Container"
+msgstr ""
+
+# 357e0f0c63f74b5da3d3e1f901e35731
+# 2e9a3307f0cb48c994d134a8cde1d4f1
+# 378fbe4a6d0b452587d315109f13116d
+#: ../../concepts.rst:150 ../../concepts.rst:161 ../../concepts.rst:179
+msgid "|MOBILE_DEVICE| Mobile Device"
+msgstr ""
+
+# 6998ac10bd9c4d238c36d5889d3f3396
+#: ../../concepts.rst:154
+msgid ""
+"Grouping object which can contain nodes, subnets, clusters, conditions, or "
+"other containers. With help of container objects you can build object's tree"
+" which represents logical hierarchy of IT services in your organization."
+msgstr ""
+
+# 3290ea85df294eb19994aab8dc1129dd
+#: ../../concepts.rst:165
+msgid ""
+"Object representing complicated condition – like \"cpu on node1 is "
+"overloaded and node2 is down for more than 10 minutes\"."
+msgstr ""
+
+# df72482ec55f49f490b2084d1f584e0a
+#: ../../concepts.rst:168
+msgid "|TEMPLATE_ROOT| Template Root"
+msgstr ""
+
+# 0ae2e14e00074a16becc2d10d13da50b
+#: ../../concepts.rst:169
+msgid "Abstract object representing root of your template tree."
+msgstr ""
+
+# 72f218f57dd14cdfba3c232e6ad8c2a0
+# ff557b20b15544328e717357db9007f2
+# f1ae4cf168ad4784b379ee6016eb29fd
+#: ../../concepts.rst:170 ../../concepts.rst:174 ../../concepts.rst:176
+msgid "|TEMPLATE| Template"
+msgstr ""
+
+# c9e97a7ca4f340eaa5f19bf072ca4537
+# 50542895e61d4df9a2146b60ea2aa166
+# 00cee14ba25042b89438b728ef5e564b
+#: ../../concepts.rst:171 ../../concepts.rst:172 ../../concepts.rst:175
+msgid "|TEMPLATE_GROUP| Template Group"
+msgstr ""
+
+# 86f5de7bbf0241e9aea0b3da68d1bf76
+#: ../../concepts.rst:173
+msgid "Grouping object which can contain templates or other template groups."
+msgstr ""
+
+# 40dddd9408464a8c9d6fc6265b86b35f
+#: ../../concepts.rst:177
+msgid ""
+"Data collection template. See Data Collection section for more information "
+"about templates."
+msgstr ""
+
+# bc93a4f1c9e54001a654fa3ebec2be8f
+#: ../../concepts.rst:181
+msgid "|NETWORK_MAP_ROOT| Network Map Root"
+msgstr ""
+
+# 997be326044e44718a4b3272054b2cab
+#: ../../concepts.rst:182
+msgid "Abstract object representing root of your network map tree."
+msgstr ""
+
+# b0c9cd072f3c4fb6bf7da6a79ea7fdff
+# e868a8d626924354a995d28f1431c80c
+# 157a32b300e54d1a8ec8f36cdc120c21
+#: ../../concepts.rst:183 ../../concepts.rst:188 ../../concepts.rst:190
+msgid "|NETWORK_MAP| Network Map"
+msgstr ""
+
+# 6f2abccbda7546cf810ce64ed512eb1d
+# 44214445d59e4def87f90de036558edb
+# dcbc69fb1f104406a24e8ca45633d8fb
+#: ../../concepts.rst:184 ../../concepts.rst:185 ../../concepts.rst:189
+msgid "|NETWORK_MAP_GROUP| Network Map Group"
+msgstr ""
+
+# ae543e462bc1402890f81446a5a59cb9
+#: ../../concepts.rst:186
+msgid ""
+"Grouping object which can contain network maps or other network map groups."
+msgstr ""
+
+# ca9167bb05134e2f9ddfd612d6a87e60
+#: ../../concepts.rst:191
+msgid "Network map."
+msgstr ""
+
+# d627dab9c8674ffab55bad5eaa4a699a
+#: ../../concepts.rst:193
+msgid "|DASHBOARD_ROOT| Dashboard Root"
+msgstr ""
+
+# 7e1168cdeb9d4107871b6b37aef4252c
+#: ../../concepts.rst:194
+msgid "Abstract object representing root of your dashboard tree."
+msgstr ""
+
+# 5a70db731f5b43f0a829e5264aa677d3
+# 17cc2a71f7ff49c3bd2dec4630c65196
+# 860d42944d97425a95031dce2d841519
+#: ../../concepts.rst:195 ../../concepts.rst:196 ../../concepts.rst:198
+msgid "|DASHBOARD| Dashboard"
+msgstr ""
+
+# adc7368dafea4f628e995129a7432278
+#: ../../concepts.rst:197
+msgid "Dashboard. Can contain other dashboards."
+msgstr ""
+
+# 5b9f0a8e1113431eaaa5dcb0e6d87cb2
+#: ../../concepts.rst:199
+msgid "|BSERV_ROOT| Business Service Root"
+msgstr ""
+
+# 64ed0182551042c090b13c8120d8d886
+#: ../../concepts.rst:200
+msgid ""
+"Abstract object representing root of your business service tree. System can "
+"have only one object of this class."
+msgstr ""
+
+# b53f59e9f6864fcd9bd539117a197e4d
+# 59af88c46a8f4e4e97407d0da94c2caa
+# b7d8a387ed8b41139f3014665607db12
+#: ../../concepts.rst:202 ../../concepts.rst:203 ../../concepts.rst:206
+msgid "|BSERV| Business Service"
+msgstr ""
+
+# d005ce1db6164197b18f6725bd5d404c
+#: ../../concepts.rst:204
+msgid ""
+"Object representing single business service. Can contain other business "
+"services, node links, or service checks."
+msgstr ""
+
+# bb84497e4ca5478d907e96428eba9643
+# 3925f336442d4ab89e50e240d0cfa5df
+#: ../../concepts.rst:207 ../../concepts.rst:209
+msgid "|NODE_LINK| Node Link"
+msgstr ""
+
+# 3407ec88627047dbb74f792aa77b1e0a
+# ba54ac8f14e249ceb8d780780fce9578
+# fdc01ae1630f4746acb495427ee4d960
+#: ../../concepts.rst:208 ../../concepts.rst:212 ../../concepts.rst:213
+msgid "|SERVICE_CHECK| Service Check"
+msgstr ""
+
+# 50dbe4b422054c2bbbcd4aac464a09a4
+#: ../../concepts.rst:210
+msgid ""
+"Link between node object and business service. Used to simplify creation of "
+"node-related service checks."
+msgstr ""
+
+# 4362f5bfa09a486f982078f82a492545
+#: ../../concepts.rst:214
+msgid ""
+"Object used to check business service state. One business service can "
+"contain multiple checks."
+msgstr ""
+
+# a0aa9655e85445439165e5a9427662e9
+#: ../../concepts.rst:248
+msgid "Object status"
+msgstr ""
+
+# 615d2ba495824107aec0db335ce2e792
+#: ../../concepts.rst:250
+msgid ""
+"Each object has a status. Status of the object calculated based on polling "
+"results, status of underlying objects, associated alarms and status "
+":term:`DCIs<DCI>`. For some object classes, like Report or :term:`Template`,"
+" status is irrelevant. Status for such objects is always :guilabel:`Normal`."
+" Object's status can be one of the following:"
+msgstr ""
+
+# b1d9bf6738c64ee88add85076e2c3eb0
+#: ../../concepts.rst:260
+msgid "Nr."
+msgstr ""
+
+# 7a8720c6771b4d4a8f0fc71cd369c8ab
+# 9a0f5f416a7a4be4884cd79e9abf5d50
+#: ../../concepts.rst:261 ../../concepts.rst:333
+msgid "Status"
+msgstr ""
+
+# e98c0359cda84719864b87fdd678c741
+#: ../../concepts.rst:263
+msgid "0"
+msgstr ""
+
+# a239d11f7d304256852eea843432503e
+#: ../../concepts.rst:264
+msgid "|NORMAL| Normal"
+msgstr ""
+
+# 2a38b9939582494f88cce8c9ad47cf0f
+#: ../../concepts.rst:265
+msgid "Object is in normal state."
+msgstr ""
+
+# 147743d3821346b99da6a8123ceea57e
+#: ../../concepts.rst:266
+msgid "1"
+msgstr ""
+
+# e36e7ef713d44689958dba5947a0791b
+#: ../../concepts.rst:267
+msgid "|WARNING| Warning"
+msgstr ""
+
+# 7bcf2d5044b14945a8e035f3bbc9d628
+#: ../../concepts.rst:268
+msgid "Warning(s) exist for the object."
+msgstr ""
+
+# 58da14dcb2b7452a84af227ae75f8d6b
+#: ../../concepts.rst:269
+msgid "2"
+msgstr ""
+
+# d5cd944453cf4a059f9b78ca24a1ddc8
+#: ../../concepts.rst:270
+msgid "|MINOR| Minor"
+msgstr ""
+
+# 9d48f972588f48e5bce4f00e1516dfd2
+#: ../../concepts.rst:271
+msgid "Minor problem(s) exist for the object."
+msgstr ""
+
+# 94481b4a6e5543f19e81043e1a6aa098
+#: ../../concepts.rst:272
+msgid "3"
+msgstr ""
+
+# da44fb398962483fa5f64f7ba8bed1b9
+#: ../../concepts.rst:273
+msgid "|MAJOR| Major"
+msgstr ""
+
+# 3368f277dac9432485ff7a91cc9d74d1
+#: ../../concepts.rst:274
+msgid "Major problem(s) exist for the object."
+msgstr ""
+
+# b6e2f7a50fab4c368bdae0d3349161ed
+#: ../../concepts.rst:275
+msgid "4"
+msgstr ""
+
+# 033caa8e9eff446f907a79d0c125149d
+#: ../../concepts.rst:276
+msgid "|CRITICAL| Critical"
+msgstr ""
+
+# 70a184badf29495287bb1e2fbb6c5d03
+#: ../../concepts.rst:277
+msgid "Critical problem(s) exist for the object."
+msgstr ""
+
+# a90f91cf82ca4abb8456a4d28d481856
+#: ../../concepts.rst:278
+msgid "5"
+msgstr ""
+
+# c29f0e5dca94450f9e22aef77b1ae795
+#: ../../concepts.rst:279
+msgid "|UNKNOWN| Unknown"
+msgstr ""
+
+# d08128c8bf834849875407afaa87997f
+#: ../../concepts.rst:280
+msgid "Object's status is unknown to the management server."
+msgstr ""
+
+# d883a5c478f14727ac272f5f811781ac
+#: ../../concepts.rst:281
+msgid "6"
+msgstr ""
+
+# 5f48f64c3a5246f4ab9246c72bc6885b
+#: ../../concepts.rst:282
+msgid "|UNMANAGED| Unmanaged"
+msgstr ""
+
+# a1873cec6d3840ba9c7ef7e71bb4c3c6
+#: ../../concepts.rst:283
+msgid "Object is set to \"unmanaged\" state."
+msgstr ""
+
+# f09e9af238dc459283cf60004b2dd4af
+#: ../../concepts.rst:284
+msgid "7"
+msgstr ""
+
+# eef3f2d40f0442c7ab1321fdaa453c06
+#: ../../concepts.rst:285
+msgid "|DISABLED| Disabled"
+msgstr ""
+
+# b520d54212cf4f3aa1b62a54354a2e3d
+#: ../../concepts.rst:286
+msgid ""
+"Object is administratively disabled (only applicable to interface objects)."
+msgstr ""
+
+# e3e261378ee040a0b17c165067e018da
+#: ../../concepts.rst:287
+msgid "8"
+msgstr ""
+
+# 1c9d3a72b32e49a384ea91662eee9f10
+#: ../../concepts.rst:288
+msgid "|TESTING| Testing"
+msgstr ""
+
+# ff83b00a198a43ce86c2f1c1254c120d
+#: ../../concepts.rst:289
+msgid "Object is in testing state (only applicable to interface objects)."
+msgstr ""
+
+# 4b415cbc81d8453baa3b07ba3bef018f
+#: ../../concepts.rst:302
 msgid "Event Processing"
 msgstr ""
 
-# d5cf624e411b4ad9a0df0b867379d22d
-#: ../../concepts.rst:69
+# c52404871ef04d7f8be8b3191ce3c5cd
+#: ../../concepts.rst:304
+msgid ""
+"NetXMS is event based monitoring system. Events can come from different "
+"sources (polling processes (status, configuration, discovery, and data "
+"collection), :term:`SNMP` traps, and directly from external applications via"
+" client library.) and all are forwarded to NetXMS Event Queue. All events "
+"are processed by NetXMS Event Processor one-by-one, according to the "
+"processing rules defined in :term:`Event Processing Policy<EPP>`. As a "
+"result of event processing, preconfigured actions can be executed, and/or "
+"event can be shown up as :term:`alarm <Alarm>`."
+msgstr ""
+
+# efe3efd7dc8c4ebcac55e6245f92c915
+#: ../../concepts.rst:312
+msgid ""
+"Usually alarm represents something that needs attention of network "
+"administrators or network control center operators, for example low free "
+"disk space on a server. NetXMS provides one centralized location, the Alarm "
+"Browser, where the alarms are visible. It can be configured which events "
+"should be considered important enough to show up as alarm."
+msgstr ""
+
+# 51d7530352504cb3b624183b9a851238
+#: ../../concepts.rst:320
+msgid "Event flow inside the monitoring system"
+msgstr ""
+
+# 9e5fb693d2174c91aacf582e4ae92cd2
+#: ../../concepts.rst:323
+msgid "Polling"
+msgstr ""
+
+# 7900a68a47e243e4be4f2beb9dd5f5f9
+#: ../../concepts.rst:325
+msgid ""
+"For some type of objects NetXMS server start gathering status and "
+"configuration information as soon as they are added to the system. These "
+"object types are: nodes, conditions, clusters, business services. This "
+"process called *polling*. There are multiple polling types, usually "
+"performed with different intervals:"
+msgstr ""
+
+# 105a15c9b46d44d397c53930b1c3c550
+#: ../../concepts.rst:331
+msgid "Type"
+msgstr ""
+
+# fe028531d39a494c9a0045d67318709f
+#: ../../concepts.rst:331
+msgid "Purpose"
+msgstr ""
+
+# b25c009749d5403880386f9df5ae80e5
+#: ../../concepts.rst:333
+msgid "Determine current status of an object"
+msgstr ""
+
+# 4d6d5e5ae7604db58ea338a03f653fdc
+#: ../../concepts.rst:335
+msgid "Configuration"
+msgstr ""
+
+# 6af31665cb7c48f3a5c73fe3326cebc9
+#: ../../concepts.rst:335
+msgid ""
+"Determine current configuration of an object (list of interfaces, supported "
+"protocols, etc.)"
+msgstr ""
+
+# aa603e5461014e8c9dd7801fec1ba73e
+#: ../../concepts.rst:337
+msgid "Topology"
+msgstr ""
+
+# 6c933b542a814ac08ce0c96fdb3cc68d
+#: ../../concepts.rst:337
+msgid "Gather information related to network topology"
+msgstr ""
+
+# 83aa96525c4c4a469b05c8f940fa42c8
+# 74ef08631f2b4a92849542416c4b1923
+#: ../../concepts.rst:339 ../../concepts.rst:388
 msgid "Discovery"
 msgstr ""
 
-# 7cff4a55dae44ed58fc64bf2cc094ab2
-#: ../../concepts.rst:73
+# 542b90bc161b42feb8a6694ddacf9177
+#: ../../concepts.rst:339
+msgid "Find potential new nodes during network discovery cycles"
+msgstr ""
+
+# 5b5c52d82021408d8fc1c0ea04a173c9
+#: ../../concepts.rst:341
+msgid "Routing"
+msgstr ""
+
+# 689af696efff43dfae2cffb094e2bf41
+#: ../../concepts.rst:341
+msgid "Gather information about IP routing"
+msgstr ""
+
+# 1f07e74396a84e1a836070813d62f158
+#: ../../concepts.rst:345
+msgid "Data Collection"
+msgstr ""
+
+# 75b04aa9ff0c4be79f8d96856cb5762b
+#: ../../concepts.rst:347
+msgid ""
+"One of NetXMS important parts is Data Collection. Every :term:`Node` can "
+"have many :term:`metrics <Metric>`, like “CPU utilization”, “amount of free "
+"memory” or “disk space usage”. NetXMS server can collect these parameters, "
+"check them for threshold violations and store them in the database. "
+"Configuration for metric collection is called :term:`Data Collection Item "
+"<DCI>`. There can be different sources for metrics. Table bellow lists "
+"possible sources and gives some simple description about them."
+msgstr ""
+
+# 584238e652fe4230adf6fb7a3646b722
+#: ../../concepts.rst:357
+msgid "Source"
+msgstr ""
+
+# a81d939301b04938a6f314071e5ef86f
+#: ../../concepts.rst:359
+msgid "Internal"
+msgstr ""
+
+# c9d1b953e0eb456c977adfcc1b9d584e
+#: ../../concepts.rst:360
+msgid ""
+"This type of source does not require any node configuration. It is collected"
+" by server."
+msgstr ""
+
+# 50875bb834f848ceb6a82ccc3dd1770b
+#: ../../concepts.rst:361
+msgid "NetXMS Agent"
+msgstr ""
+
+# b59eae90e931400db6f5614f52e07901
+#: ../../concepts.rst:362
+msgid ""
+"This type of source required NetXMS agent installation on a node. This list "
+"can be supplemented with subagents. Metrics are requested by server."
+msgstr ""
+
+# aa68a068d4be4e8aac82f32478432a6d
+#: ../../concepts.rst:364
+msgid "SNMP"
+msgstr ""
+
+# 4a34e0ca60564d7ca23f97e7d178f092
+#: ../../concepts.rst:365
+msgid ""
+"This type of source requires :term:`SMNP` configuration on device and "
+"server."
+msgstr ""
+
+# db3c7212400644598f3a8448fd7e1cb7
+#: ../../concepts.rst:366
+msgid "Push"
+msgstr ""
+
+# 648c1cabbafd4b2993b0f75a84ab965a
+#: ../../concepts.rst:367
+msgid ""
+"This type of source requires installation of nxpush command line tool and "
+"script creation that will run this tool in requested intervals and will "
+"provide to server metric data."
+msgstr ""
+
+# 64eff59dd8734a5bb7c4a98d1475243e
+#: ../../concepts.rst:369
+msgid "SM-CLP"
+msgstr ""
+
+# e6d96b36ddbf4708a7489422a4e618eb
+#: ../../concepts.rst:371
+msgid "Windows Performance counters"
+msgstr ""
+
+# b2c64e64c6bc46a5a8b8fed64e9f8cf5
+#: ../../concepts.rst:373
+msgid "Check Point SNMP"
+msgstr ""
+
+# 889386c9b8f84492a6dfea619ead891c
+#: ../../concepts.rst:375
+msgid "Script"
+msgstr ""
+
+# 3b7d94f658ad49439057b6ffca304c7b
+#: ../../concepts.rst:376
+msgid ""
+"This type of source requires creation of script in :guilabel:`Script "
+"Library` that will be executed according to schedule to gent next value."
+msgstr ""
+
+# 95291ff3440a4976b2a4f3aabdb1f377
+#: ../../concepts.rst:379
+msgid ""
+"Collected data can be analyzed manually by viewing it with help of "
+":guilabel:`History` table, graph, displayed on :quilabel:`Dashboard` or on "
+":guilabel:`Network Map`."
+msgstr ""
+
+# 931a6dada5d0462d87b7e4d59928f9df
+#: ../../concepts.rst:382
+msgid ""
+"Other option to use collected data is to configure threshold. Each threshold"
+" is executed on a new coming data and generates user predefined event if "
+"data meets threshold rules. Generated event will be processed with other "
+"events."
+msgstr ""
+
+# 9f841c64e59041e7803d1878554b8733
+#: ../../concepts.rst:392
 msgid "Network discovery"
 msgstr ""
 
-# 15b316d3c8e74651ad24ad09a5f92f99
-#: ../../concepts.rst:76
+# e96fe4c4602d43c59c34b5c82f0778bc
+#: ../../concepts.rst:394
+msgid ""
+"NetXMS is capable of discovering your network automatically. Network "
+"discovery module can operate in two modes - passive and active. In passive "
+"mode, information about new hosts and devices obtained from ARP tables and "
+"routing tables of already known devices. NetXMS starts with it’s own ARP "
+"cache and routing table. In active discovery mode, NetXMS server will send "
+"an ICMP echo requests to all IP addresses in given range, and consider each "
+"responding address for adding to database. For each new device found NetXMS "
+"server tries to gather additional information using SNMP and NetXMS agent, "
+"and then adds it to database. By default NetXMS server will add all "
+"discovered devices to database, but you can limit it by using discovery "
+"filters."
+msgstr ""
+
+# e5d4a07c188347dfbd1a8c7c792a3e83
+#: ../../concepts.rst:404
 msgid "Service discovery"
 msgstr ""
 
-# 67659866fd4b4870b8f9d24c16c0f135
-#: ../../concepts.rst:79
-msgid "(not implemented yet)"
+# 78640762538040a692608f71e95a023c
+#: ../../concepts.rst:406
+msgid "TBD (not implemented yet)"
 msgstr ""
 
-# 97fab114aded4422a8924729a3eec74f
-#: ../../concepts.rst:83
+# 0a9330ab5b834602be3ef2ee3aa78e4e
+#: ../../concepts.rst:410
 msgid "Security"
 msgstr ""
 
-# 2b21e84b38b44d5fae190d44d8522e52
-#: ../../concepts.rst:85
-msgid "(Password encryption, encrypted connections...)"
+# 399ea966290e459fa21bf12b5af31a22
+#: ../../concepts.rst:412
+msgid ""
+"There are described some concepts of NetXMS that are connected with data "
+"protection."
+msgstr ""
+
+# 1d36ee323b1b4490967fbfaea207e76c
+#: ../../concepts.rst:415
+msgid ""
+"Messages between NetXMS agent and NetXMS server can be encrypted, encryption"
+" between them can be forced by NetXMS configuration. There can be also added"
+" :guilabel:`Shared Secret` that is checked on agent-server connection and in"
+" case server does not know secret of an agent, connection will not be "
+"established. Another possibility to control access to the agent is cosing "
+"the correct server access level in agent configuration properties."
+msgstr ""
+
+# bb58960205c3486b81e96daf733a38b7
+#: ../../concepts.rst:422
+msgid ""
+"When it is required to write password or :guilabel:`Shared Secret` in agent "
+"configuration file, there is possibility to encrypt it. All passwords can be"
+" encrypted with help of nxencpasswd command line tool and added in "
+"configuration in encrypted way."
+msgstr ""
+
+# ff79751b423043d0af06d784e3e348de
+#: ../../concepts.rst:428
+msgid "FAQ"
 msgstr ""

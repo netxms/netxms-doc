@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: netxms-admin-develop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-01 13:08+0200\n"
-"PO-Revision-Date: 2015-03-02 16:20+0000\n"
+"POT-Creation-Date: 2015-03-02 19:08+0200\n"
+"PO-Revision-Date: 2015-03-02 17:15+0000\n"
 "Last-Translator: Alex Kirhenshtein <alex.kirhenshtein@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/netxms-admin-develop/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -19,17 +19,17 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-# 504de5c14fe5438ea23b194af47358d2
+# b67e12e94cec418c80a618b125cef873
 #: ../../glossary.rst:3
 msgid "Glossary"
 msgstr "Глоссарий"
 
-# 067eff25b7ce4e938e9b6b80371bcdb9
+# 16ce0acdb65c470199820c67684934d4
 #: ../../glossary.rst:170
 msgid "802.1x"
 msgstr "802.1x"
 
-# 834086aabc95402ca79349b8afe9f30f
+# 415b65e28dcf4305bb9c6661f4b161be
 #: ../../glossary.rst:172
 msgid ""
 "IEEE 802.1X (also known as Dot1x) is an IEEE Standard for Port-based Network"
@@ -39,12 +39,12 @@ msgid ""
 "<IEEE 802.1X>`"
 msgstr ""
 
-# d5c3e2546fdc4dbab4ad83a9e86bff52
+# f8afe49a20e24cb984b60790503e30d4
 #: ../../glossary.rst:7
 msgid "Action"
 msgstr "Действие"
 
-# 36807349e9944de8b50b586000e38aa2
+# ad24a741c5e04cf493b52757719fa653
 #: ../../glossary.rst:9
 msgid ""
 "Configurable operation which can be executed by the system when "
@@ -53,12 +53,12 @@ msgid ""
 "OS commands and forwarding events to another instance of NetXMS server."
 msgstr ""
 
-# 626825c12052429489b19d1bc66364dd
+# 0b33c47dbd834298aa49dad7565c9498
 #: ../../glossary.rst:13
 msgid "Alarm"
 msgstr "Тревога"
 
-# 99bdde74e79f462fa526cc7ea480af56
+# c5d6ce6bf6d545868958cbcff2058155
 #: ../../glossary.rst:15
 msgid ""
 "Outstanding issue which require operator attention. Alarms are created by "
@@ -66,24 +66,24 @@ msgid ""
 " Policy`."
 msgstr ""
 
-# 7b82ba1912cf49749f5485b6fb71afbf
+# 943fd56544364f1faf55516bcd2e6a96
 #: ../../glossary.rst:18
 msgid "Alarm Browser"
 msgstr "Обозреватель тревог"
 
-# 0251ca4eaf534ee69012dbb86bb02954
+# a6ae643299dd4af8a004b20bab78be62
 #: ../../glossary.rst:20
 msgid ""
-"View in user interface, which shows all active alarms in the system and "
-"allow user to interact with them."
-msgstr ":term:`Панель` в интерфейсе пользователя, которая показывает все активные тревоги в системе и позволяет пользователю взаимодействовать с ними."
+":term:`View` in user interface, which shows all active alarms in the system "
+"and allow user to interact with them."
+msgstr ":term:`Панель`, которая показывает все активные тревоги в системе и позволяет пользователю взаимодействовать с ними."
 
-# 218c20e3b02e4dd8a034b332d6cc0f59
+# d663cc0dfed94879a422e24811ddf558
 #: ../../glossary.rst:177
 msgid "ARP"
 msgstr "ARP"
 
-# 75a109b6d54946b7b3f184ca35bbdcd2
+# 103626f6fbdc42bc98b818b39465f546
 #: ../../glossary.rst:179
 msgid ""
 "The Address Resolution Protocol (ARP) is a telecommunication protocol used "
@@ -92,12 +92,12 @@ msgid ""
 ":wikipedia:`Wikipedia <Address Resolution Protocol>`"
 msgstr ""
 
-# ecfbc2bf962246d086acc2d329109c5b
+# 783bef919a644bdcb34967abe7bee5fb
 #: ../../glossary.rst:22
 msgid "Business Service"
 msgstr "Бизнес-услуга"
 
-# d6c186141d204e8dab477fe941e1bbac
+# 21b7e4ca1d1b44808e9495cacc58b273
 #: ../../glossary.rst:24
 msgid ""
 "An IT Service that directly supports a Business Process, as opposed to an "
@@ -105,12 +105,12 @@ msgid ""
 "and is not usually visible to the Business."
 msgstr ""
 
-# 055e0f00d73949ababb3519f96fe1d59
+# ff9fc23028a04cd5a150e4faadb62ebb
 #: ../../glossary.rst:183
 msgid "CDP"
 msgstr "CDP"
 
-# 7327eed648c646869f4aff1692120b70
+# d74b1d22a36549f5ab98f5a958ee24dc
 #: ../../glossary.rst:185
 msgid ""
 "Cisco Discovery Protocol is a Cisco proprietary protocol that runs between "
@@ -120,33 +120,33 @@ msgid ""
 "in :wikipedia:`Wikipedia <Cisco Discovery Protocol>`."
 msgstr ""
 
-# 1c852038761041e59bc183e329cec6a3
+# 34c204615c1e4abfa46290d5842fc96f
 #: ../../glossary.rst:27
 msgid "Condition"
 msgstr "Условие"
 
-# a57916a9aed64f5e9481e43a62504e04
+# e8d9d71391514352bc14c44f1ee89098
 #: ../../glossary.rst:29
 msgid "(Create condition in infrastructure services)"
 msgstr "(Создать условие в сервисе инфрастуруктуры)"
 
-# 9e15787d5b834a968a343040bf097615
+# 73e246ba2d6245d297a9f20da08033a8
 #: ../../glossary.rst:30
 msgid "Container"
 msgstr "Контейнер"
 
-# 471b59c15ccf40339adf263f2b3d656a
+# c0d041b4f6914685b253b6c7a9b294f0
 #: ../../glossary.rst:32
 msgid ""
 ":term:`Object` that can store other containers and :term:`nodes <Node>`."
 msgstr ""
 
-# 788c3fa5cd32461f96c6e16b8f84ffd9
+# e4a7986e822a459e92a6932ed6c01a7f
 #: ../../glossary.rst:36
 msgid "Dashboard"
 msgstr "Панель"
 
-# a63bae7841754d5e80d1c445d4d392d7
+# 2be76d1776594030a30e4c597d8c080e
 #: ../../glossary.rst:38
 msgid ""
 "Manually generated :term:`Object` that can combine any available "
@@ -154,66 +154,66 @@ msgid ""
 "high-level views to see network or parts of it, and it's health."
 msgstr ""
 
-# 4892282c5bd1482ca5c0566a947fed58
+# 92a14e95b9284a33bc3bcb7d6ce7ae99
 #: ../../glossary.rst:42
 msgid "Data Collection Item"
 msgstr "Пункт сбора данных"
 
-# 8d5f1c946baa4aa89779483aea0f37ec
+# 97e80ba64c894705b8f701d848bba588
 #: ../../glossary.rst:44
 msgid "Configuration entity of a single :term:`Metric`."
 msgstr ""
 
-# 4181c7aaf4594ece8e4725df92dbef8d
+# f47face80cae4cae826747e61675af27
 #: ../../glossary.rst:33
 msgid "DCI"
 msgstr "DCI"
 
-# 91c4092dc0c7448a973cbe273d8ee13b
+# c3b0cb68922448df8468404a9c2cc2e8
 #: ../../glossary.rst:35
-msgid "Acronym for :term:`Data Collection Item`"
+msgid "Abbreviation for :term:`Data Collection Item`"
 msgstr ""
 
-# 2bdae12223f847e2b5ede552180f1ccd
+# 2a5aa0c6db9846bfa7734a737acae7f4
 #: ../../glossary.rst:45
 msgid "Entire Network"
 msgstr "Вся сеть"
 
-# c3fc2a43553e47bd8a7604b3dc50f60e
+# 99957a11f0f942738618e24a75fdf1e0
 #: ../../glossary.rst:47
 msgid ""
 "Automatically generated object hierarchy that contains all nodes and IP "
 "subnets known to NetXMS."
 msgstr "Автоматическая генерация иерархии объектов, содержащей все узлы и IP подсети, известные NetXMS"
 
-# 5c449000cc1340e3a58420540a690a97
+# 165445b518b84fa7a2c2ab4fd915a6eb
 #: ../../glossary.rst:49
 msgid "EPP"
 msgstr ""
 
-# bcfef0520ee241d59f7c0ffabbc023a1
+# c429d7b1ebc34d93b3d8b8e69f9bd2f2
 #: ../../glossary.rst:51
-msgid "Acronym for :term:`Event Processing Policy`"
-msgstr ""
+msgid "Abbreviation for :term:`Event Processing Policy`"
+msgstr "Аббревиатура для :term:`Политика обработки событий`"
 
-# 3b99bc0bf2c74d4c908bc13d076928c9
+# d2daafaebafa4a2298f957c8c7edefad
 #: ../../glossary.rst:52
 msgid "Event"
 msgstr "Событие"
 
-# 4a62f9ff7f2547b7a688427c000f695a
+# 27e7b94f20b44bc9a8b7848645985f57
 #: ../../glossary.rst:54
 msgid ""
 "TBD A change of state which has significance for the management of IT "
 "Service."
 msgstr ""
 
-# 50dd5807b2d94287a3a02a651168ecbb
+# fda2b21a33cf40cfadb4a0956fd8c317
 #: ../../glossary.rst:59
 msgid "Event Processing Policy"
 msgstr "Политика обработки событий"
 
-# cee280d89c7245c09a6dd303e7dbccb9
+# 0a0211eceff145948aca8ea274daf798
 #: ../../glossary.rst:61
 msgid ""
 "List of rules which defines system reaction on :term:`events <Event>`. All "
@@ -221,35 +221,35 @@ msgid ""
 "match is found – configured actions are executed."
 msgstr ""
 
-# f0ce44822296471fbb3ebe650e8a7ebd
+# 0ae9467189af43408c88a3e473abda72
 #: ../../glossary.rst:56
 msgid "Event Template"
 msgstr "Шаблон события"
 
-# 81535cb6cc4c4858a193893f8e0becbb
-# 337fe048f87c4f6e892860adc38496b0
+# 39395dca243a434da9ff502b16debe06
+# 3a1d32f7f8864c1ebfcd3a0aad0ec271
 #: ../../glossary.rst:58 ../../glossary.rst:75
 msgid "TBD"
 msgstr ""
 
-# 02a8062393f84c0aa3bb1a374bfd0987
+# e4fdd052cdcb4fa589187e103b040ef0
 #: ../../glossary.rst:190
 msgid "GPL"
 msgstr "GPL"
 
-# 556a8ebb06c041d78b9640ac4bd4267b
+# 3748459330594460b4efbeeba61861ff
 #: ../../glossary.rst:192
 msgid ""
 "GNU General Public License. `Full text of the License, version 2 "
 "<http://www.gnu.org/licenses/gpl-2.0.html>`"
 msgstr ""
 
-# 7acf5b3ac9e049cc97c6d490f5401d84
+# 534a5779ff094dbc97d2ea3b04e9189a
 #: ../../glossary.rst:194
 msgid "GUID"
 msgstr ""
 
-# 67743b1e27ad44edbb607158c8162bb4
+# be8e1f656dfa4c5c929d7291f03aa322
 #: ../../glossary.rst:196
 msgid ""
 "A Globally Unique Identifier is a unique reference number used as an "
@@ -257,12 +257,12 @@ msgid ""
 "<Globally unique identifier>`"
 msgstr ""
 
-# 53cacfcd38e24bdf8fd71a587c925947
+# c688e8f3a1fd459f98fed46ad24084e8
 #: ../../glossary.rst:199
 msgid "ICMP"
 msgstr "ICMP"
 
-# 5c36820311174fccab0cf4a62d1ad15e
+# cf40829f8eae41bba86f5ef91b358acd
 #: ../../glossary.rst:201
 msgid ""
 "The Internet Control Message Protocol (ICMP) is one of the main protocols of"
@@ -272,24 +272,24 @@ msgid ""
 " :wikipedia:`Wikipedia <Internet Control Message Protocol>`."
 msgstr ""
 
-# b9eab8db9425450bb039360f5d69826d
+# bed36c53017147fe92633a38df9cd7ee
 #: ../../glossary.rst:64
 msgid "Infrastructure services"
 msgstr "Службы инфраструктуры"
 
-# fd32950fc680444ca93099dd7d7547a7
+# 0887456f0ab8489ba163ef0e1a63d80c
 #: ../../glossary.rst:66
 msgid ""
 "System :term:`container <Container>` which can be used by Administrator to "
 "define logical structure of the network."
 msgstr ""
 
-# 819e589153ef4fdcbb8eb45c9b2ed64e
+# 2dc42d45b9d0475f960a9dd502f60d72
 #: ../../glossary.rst:206
 msgid "LAN"
 msgstr "ЛВС"
 
-# 36e77421c54c4d328a123eaddb2bb29a
+# 4c769fb84b8b450b9ec3e1df76b54512
 #: ../../glossary.rst:208
 msgid ""
 "A local area network (LAN) is a computer network that interconnects "
@@ -300,12 +300,12 @@ msgid ""
 "details in :wikipedia:`Wikipedia <Local area network>`."
 msgstr ""
 
-# 3b903b2495d949c39dac071c2c162b0f
+# acc24b0cd62d44758c61e2dab85ee7d1
 #: ../../glossary.rst:215
 msgid "LDAP"
 msgstr "LDAP"
 
-# 90701ee373ad4203879abd1ba27bf3f7
+# 228548b898ea4080ac7b61a2e8eeb90c
 #: ../../glossary.rst:217
 msgid ""
 "The Lightweight Directory Access Protocol (LDAP; /ˈɛldæp/) is an open, "
@@ -315,12 +315,12 @@ msgid ""
 "Directory Access Protocol>`"
 msgstr ""
 
-# 40e736ce5b5d435a94390a1fdf309b74
+# 28e17375f1164c5d8acd69e601c93dc1
 #: ../../glossary.rst:222
 msgid "LLDP"
 msgstr "LLDP"
 
-# a90c2957706643eeb5770a53e1698dd1
+# 5de20eadb897485cac178ca162590219
 #: ../../glossary.rst:224
 msgid ""
 "The Link Layer Discovery Protocol (LLDP) is a vendor-neutral link layer "
@@ -332,12 +332,12 @@ msgid ""
 ":wikipedia:`Wikipedia <Link Layer Discovery Protocol>`"
 msgstr ""
 
-# 9ed657e024664a3d8f93af9dbd50e1bb
+# 2ab32ab62839493689e8dd80c1651d29
 #: ../../glossary.rst:231
 msgid "MAC address"
 msgstr "MAC адрес"
 
-# 07f9444968f941c6aa5837da5fa75bea
+# de35abe56f4b476e86a55ba612f2d6fe
 #: ../../glossary.rst:233
 msgid ""
 "A media access control address (MAC address) is a unique identifier assigned"
@@ -348,12 +348,12 @@ msgid ""
 "More details in :wikipedia:`Wikipedia <MAC address>`."
 msgstr ""
 
-# aae87cbf6a864a1191ea374ca078fb9a
+# 91791579198e4f5eb8221111bf918707
 #: ../../glossary.rst:68
 msgid "Management Console"
 msgstr "Консоль управления"
 
-# 55f1a280f40c4f188a152c7ad3b97828
+# f19c49e92d004efe8332c05e73ba78c0
 #: ../../glossary.rst:70
 msgid ""
 "NetXMS user interface. Available in form of `rich client "
@@ -361,49 +361,49 @@ msgid ""
 "as web service."
 msgstr ""
 
-# b8ae7b15d9f643ad8993af2ab09ce05b
+# 34b555f50bd043518b1b167aa114fd94
 #: ../../glossary.rst:73
 msgid "Metric"
 msgstr "Метрика"
 
-# c15cc524ec44435da6117bd842a4b6ec
+# 9176c4093b1641519d10df6c0cbc89c2
 #: ../../glossary.rst:76
 msgid "MIB Explorer"
 msgstr "Проводник по MIB"
 
-# 7144bdcbeb7a48538c237d17e536423f
+# 054fabf0a4d543fb8f614c862754a29d
 #: ../../glossary.rst:78
 msgid ""
-"View in user interface, which allows to navigate SNMP MIB tree and run SNMP "
-"walk on :term:`nodes <Node>`."
+":term:`View` in user interface, which allows to navigate SNMP MIB tree and "
+"run SNMP walk on :term:`nodes <Node>`."
 msgstr ""
 
-# 143e20ff344b4f45af6edf3969780fd4
+# 672c381919c64a479e1996403887332a
 #: ../../glossary.rst:80
 msgid "Mobile Device Object"
 msgstr "Объект мобильного устройства"
 
-# 0d43ca4523374fd7b4a9e6b2ad2a86bb
+# cb32446033e84ef29bf7c315f0738166
 #: ../../glossary.rst:82
 msgid "Special type of :term:`Node` that represents monitored mobile device."
 msgstr ""
 
-# 2a459fdcfa434dfbbc540379b2299f65
+# d9e900d9dff74126a335eac1b395307c
 #: ../../glossary.rst:83
 msgid "Monitoring Agent"
 msgstr "Агент мониторинга"
 
-# 96d2b504f313451493b0a5eb8eaaf80f
+# 39adc626c2d54e01afdac347829e4f55
 #: ../../glossary.rst:85
 msgid "NetXMS or SNMP agent that provides information to NetXMS Server."
 msgstr "NetXMS или SNMP агент предоставляют информацию NetXMS серверу."
 
-# dbb10c49394c4747b38228d4e826e85b
+# b792e07fecde4f88825c699ac86570a9
 #: ../../glossary.rst:239
 msgid "NDP"
 msgstr ""
 
-# ced890e0356049369fa1bd856c26cac3
+# 5b6c3b8138f24696bdb3280598da7745
 #: ../../glossary.rst:241
 msgid ""
 "The Neighbor Discovery Protocol (NDP) is a protocol in the Internet protocol"
@@ -411,12 +411,12 @@ msgid ""
 ":wikipedia:`Wikipedia <Neighbor Discovery Protocol>`"
 msgstr ""
 
-# f9b0a7c75ada437398b1cbc845337af7
+# 781e6cb94a074656b6e32fa20c5374e6
 #: ../../glossary.rst:86
 msgid "Network Discovery"
 msgstr "Обнаружение сетевых ресурсов"
 
-# b42f629ced5c44d7b8df4866e8796296
+# b1b23200ba7248fe874f2eeb2ad36739
 #: ../../glossary.rst:88
 msgid ""
 "Network investigation in order to find new :term:`nodes <Node>`. There are 2"
@@ -427,106 +427,106 @@ msgid ""
 " each responding address for adding to database."
 msgstr ""
 
-# 10462aee1e9d48d6ab28d86aac573437
+# 0614299afbf848ab905c0db386f72ca3
 #: ../../glossary.rst:94
 msgid "Network Map"
 msgstr "Карта сети"
 
-# 46e32c0dabcc46e4bff79eaa80d2c9ea
+# dae8e87ec0f645d2b4be7df40372681f
 #: ../../glossary.rst:96
 msgid "Visual representaion of network topology."
 msgstr "Визуальное представление топологии сети"
 
-# e5725dd8e500450ab215f94208e2aff4
+# fa5c57ed62e24572a8d00fe1e394a13d
 #: ../../glossary.rst:97
 msgid "NetXMS Agent"
 msgstr "Агент NetXMS"
 
-# 434760102e6447b7a290d101f810f795
+# db65891aebcd4a4194ddc8a73af59b47
 #: ../../glossary.rst:99
 msgid ""
 "NetXMS daemon that is installed on monitored :term:`Node` to provide "
 "additional monitoring options."
 msgstr "NetXMS демон, который устанавливается на объект мониторинга  :term:`Node` , предоставляет дополнительные параметры мониторинга."
 
-# 8650afd550d6447aa8274cf4b5594827
+# 33f2a0668f31448a9451dabaabd195c2
 #: ../../glossary.rst:101
 msgid "Node"
 msgstr "Узел"
 
-# a6695665b8ac4747bfa720f695a39b0b
+# 7777e5dbb4744e1999a614a11bc99c0f
 #: ../../glossary.rst:103
 msgid ":term:`Object` that represents server or device."
 msgstr ":term:`Объект`  представляет собой сервер или устройство."
 
-# d32a4d60e61c4999b1cfa18c8b948ab1
+# 236c88114e05499eac05c0d500bc4e81
 #: ../../glossary.rst:104
 msgid "NXSL"
 msgstr "NXSL"
 
-# da8680523bcb4873858726ed95f5e8ff
+# a8e8f52e19c444e2b32115647167ab22
 #: ../../glossary.rst:106
 msgid "NetXMS Scripting Language."
 msgstr "Скриптовый язык NetXMS"
 
-# e885a8862f4747248c16f0e42c04dcc6
+# 14380f9282574ba3ae9c7348dc11a972
 #: ../../glossary.rst:107
 msgid "Object"
 msgstr "Объект"
 
-# e3178905d105418cbd7d9537f973a1ee
+# 853ae37c063d49b19112f7bd00bc52b4
 #: ../../glossary.rst:109
 msgid "Representation of logical or physical entity."
 msgstr "Представление логического или физического объекта."
 
-# c25d317f578249c8bc90f22cee76329c
+# 2a5e7105e6b34c45b32be000c3a5d43b
 #: ../../glossary.rst:110
 msgid "Object tool"
 msgstr "Инструменты объектов."
 
-# df078c01c16c4f2287e3b195c225d1b8
+# 23034ba92c2e4a12a651aebcea31919b
 #: ../../glossary.rst:112
 msgid "Configurable operation that can be executed on :term:`Node`."
 msgstr ""
 
-# a426ea56d4344b249bdec4ebff6a3b23
+# 78bf7ab1f27f4b33bf4bb7c9ca871e47
 #: ../../glossary.rst:113
 msgid "Package Manager"
 msgstr "Менеджер пакетов"
 
-# 9752b4eb56cf473c9773504951aae46d
+# a887b613e6b44864a8b47ec495022c1d
 #: ../../glossary.rst:115
-msgid "View that manages update packages for NetXMS agents."
-msgstr "Вид управления пакетами обновлений для агентов NetXMS"
+msgid ":term:`View` that manages update packages for NetXMS agents."
+msgstr ""
 
-# 0e47107a90b4486dbfbde05b7b1a1a74
+# e39e9c6d4e134a0e972495cf6cd9431f
 #: ../../glossary.rst:116
 msgid "Perspective"
 msgstr "Проекция"
 
-# ac1a1ac21c9a4f86abe2a01c1c6ca374
+# 75cedd26437b401fb69509fa815d8bea
 #: ../../glossary.rst:118
 msgid ""
 "A perspective defines the initial set and layout of views in the Eclipse "
 "Workbench window."
 msgstr ""
 
-# 0bdf4d3bf20d43e1aac76a2c7a33f4e0
+# 6c025bc1e87446cc9c077d8652f56051
 #: ../../glossary.rst:120
 msgid "Policy"
 msgstr "Политика"
 
-# 21eef7a915814be5aa4d2788eb9596c8
+# f16ab1dcf33543afaec43a99b97ca91f
 #: ../../glossary.rst:122
 msgid "Configuration parameter set that can be applied on a :term:`Node`."
 msgstr ""
 
-# 9586c7defa834c008a559a75c94f8a2f
+# 0331c4cea0764ae886c214e1edd00df9
 #: ../../glossary.rst:123
 msgid "Polling"
 msgstr "Опрос"
 
-# c844477edced42569b14b6e09a79e2b6
+# 8c54413190fd4f63b2bc961b02b91cf6
 #: ../../glossary.rst:125
 msgid ""
 "Polling is process of gathering information by server from nodes. This is "
@@ -535,12 +535,12 @@ msgid ""
 "Configuration, Topology, Discovery and Routing."
 msgstr ""
 
-# bcaafab03a984fabbf4aab02b6fe061f
+# 512221acf6bc44ee984dddd6ac360332
 #: ../../glossary.rst:129
 msgid "Proxy Agent"
 msgstr "Прокси агент"
 
-# 8db9003eec4a4e529e4172aa16575d49
+# 897dfa8956d14e148ec324b6a7c56053
 #: ../../glossary.rst:131
 msgid ""
 "NetXMS Agent capable of forwarding requests to :term:`nodes <Node>` which "
@@ -548,24 +548,24 @@ msgid ""
 "native agent protocol as well as SNMP."
 msgstr ""
 
-# 5a5f8d2dfa0641c5a01cb8f88b2cead3
+# 7b1e1dacefcb4e308fb3bb52e8836625
 #: ../../glossary.rst:134
 msgid "Push parameter"
 msgstr "Получить параметры"
 
-# e3e35a4193224d66aca1c11fe0878c32
+# c63725d34b5049418d935222c9cc75b2
 #: ../../glossary.rst:136
 msgid ""
 "Type of :term:`DCI`, where collected data is pushed into the server by the "
 "agent."
 msgstr ""
 
-# 9d265db3165d441ba7902ba3c9a52e25
+# eed2bd65dabb4b2abbeaefd212de6539
 #: ../../glossary.rst:244
 msgid "RADIUS"
 msgstr ""
 
-# 31ab6890b18841afb246bba38643a053
+# 8a44a858b50040bbb93d297d2e9aae86
 #: ../../glossary.rst:246
 msgid ""
 "Remote Authentication Dial In User Service (RADIUS) is a networking protocol"
@@ -574,22 +574,22 @@ msgid ""
 "details in :wikipedia:`Wikipedia <RADIUS>`"
 msgstr ""
 
-# 08b26356015c43e7ab7c5baf25ac175d
+# db9f73322be3478d8a45cf5ef2e73041
 #: ../../glossary.rst:250
 msgid "SMCLP"
 msgstr ""
 
-# d378223028e44f5ba60c01b5e0b1a455
+# d0f2a372feaf4d87905b2537fe37fe7a
 #: ../../glossary.rst:252
 msgid "Server Management Command Line Protocol"
 msgstr ""
 
-# e84e42f50a844bdd9c21620b24823f9d
+# 9bf0369d1b9e430b95b348e4f12a45cc
 #: ../../glossary.rst:253
 msgid "SNMP"
 msgstr "SNMP"
 
-# 08b4b7020f9b49b9ac463a126dc6b7ec
+# ef9c2c379eb442f88acbde39a234c312
 #: ../../glossary.rst:255
 msgid ""
 "Simple Network Management Protocol (SNMP) is an \"Internet-standard protocol"
@@ -604,12 +604,12 @@ msgid ""
 "Network Management Protocol>`."
 msgstr ""
 
-# 67f3ac6494a54a54a66c626ac5fd1e4a
+# 379ef11b28e94e32ba0026ccc9d0cb4f
 #: ../../glossary.rst:265
 msgid "SNMP Trap"
 msgstr "SNMP Trap"
 
-# d0f3735ec34c48e7b5755e98b3c3d863
+# 6261eb45de104c1ca0fa669edad668bd
 #: ../../glossary.rst:267
 msgid ""
 "Asynchronous notification from :term:`SNMP` agent to :term:`SNMP` manager. "
@@ -618,12 +618,12 @@ msgid ""
 ":wikipedia:`Wikipedia <Simple Network Management Protocol#Trap>`."
 msgstr ""
 
-# 233db730d7104ef0b8d1286297d767dc
+# b93ed0e732c94607997903266918bdc3
 #: ../../glossary.rst:271
 msgid "STP"
 msgstr ""
 
-# f0bcf6552cc34ca2920bcddca79083d5
+# 62973d4ca2d14286bd89bd2101b633a0
 #: ../../glossary.rst:273
 msgid ""
 "The Spanning Tree Protocol (STP) is a network protocol that ensures a loop-"
@@ -636,72 +636,72 @@ msgid ""
 ":wikipedia:`Wikipedia <Spanning Tree Protocol>`"
 msgstr ""
 
-# 7217a93ddc084be1aa8f0503499e68e3
+# adb47b8363264e13b59512fcf3ccc9ca
 #: ../../glossary.rst:138
 msgid "Subagent"
 msgstr "Субагент"
 
-# 9573281452a04309ac873044d8aa2085
+# 4fc0e01390b7418e92d377d234b0eebb
 #: ../../glossary.rst:140
 msgid ""
 "Extension module (shared library) which can be loaded into NetXMS agent to "
 "provide additional functionality."
 msgstr ""
 
-# b7d5bf912235458a9ba7015f19003e5a
+# 6134de427338488fbe24a6ddfd724409
 #: ../../glossary.rst:281
 msgid "Syslog"
 msgstr "Syslog"
 
-# fc2dfc33378c4315ad7d00e15a440ef4
+# e51ddbbbe3af4beda89810825f8e5922
 #: ../../glossary.rst:283
 msgid ""
 "Widely used standard for message logging. More details in "
 ":wikipedia:`Wikipedia <Syslog>`."
 msgstr ""
 
-# cc8f7b912e7a47a6a25082c3ca24c304
+# daeb66ef37524bd18d5fd894ed55bc23
 #: ../../glossary.rst:142
 msgid "Template"
 msgstr "Шаблон"
 
-# f915aaf1c0b34a5cb4daf4837db70080
+# 771bdf6cb70d479eb34d011d7630e9bf
 #: ../../glossary.rst:144
 msgid ""
 "A preset of one or more :term:`DCIs <DCI>` that can be applied on "
 ":term:`Node`."
 msgstr ""
 
-# 748d23325adf4c3a81bcede6b9ac20cd
+# 999d56a4d4164d3c856eacb936098c43
 #: ../../glossary.rst:146
 msgid "Threshold"
 msgstr "Пороговое значение"
 
-# 0904bf0d22ba4127b65f617163eeb0b3
+# 3f1eeaba113a43078c654ec69bcf8e98
 #: ../../glossary.rst:148
 msgid ""
 "Part of :term:`DCI` configuration, which define events to be generated when "
 "collected value is outside of expected range."
 msgstr ""
 
-# 14b661f1d2944aadbd2b74cba3bac0f8
+# c7eddf1d624842e58b3ab09e5d006e6c
 #: ../../glossary.rst:150
 msgid "Trim Stack"
 msgstr ""
 
-# 8a359ee8f8e14e4895abfa46199c0c7b
+# fef5ded7f2024e8db8ff4fa2be186b70
 #: ../../glossary.rst:152
 msgid ""
 ":term:`View Stack` in minimized state, represented as a set of buttons, one "
 "for each :term:`View` in the stack."
 msgstr ""
 
-# 276abe6f947c4c2aba7d18aab32947ad
+# 26ced83c6c7942e2bd752fe0b0707221
 #: ../../glossary.rst:285
 msgid "UPS"
 msgstr "ИБП"
 
-# eeadb72a7c0d452ab59df060f6f2db82
+# 0d427ec606e04a4ab73ad69f88bd05a1
 #: ../../glossary.rst:287
 msgid ""
 "An uninterruptible power supply, also uninterruptible power source, UPS or "
@@ -710,12 +710,12 @@ msgid ""
 "More details in :wikipedia:`Wikipedia <Uninterruptible Power Supply>`"
 msgstr ""
 
-# 3c42894099f841c2958292658eaa0edf
+# 56b2e358bbe54c769ea7452409539ca3
 #: ../../glossary.rst:291
 msgid "URL"
 msgstr ""
 
-# 9493037a2109462e92639b95d0a17c70
+# c296b62df0054315ae68df27a24714a8
 #: ../../glossary.rst:293
 msgid ""
 "A uniform resource locator (URL) is a reference to a resource that specifies"
@@ -724,36 +724,36 @@ msgid ""
 "locator>`"
 msgstr ""
 
-# a4a1b3cb297f4bbda2394411c869d323
+# 8c40c8cc220b4cbe85cb1197004b1f52
 #: ../../glossary.rst:154
 msgid "View"
 msgstr "Панель"
 
-# eec3f6a1912047bd98c8c5530d72a72e
+# fd4a4df5d4434a208cf9b8bd3efb8f35
 #: ../../glossary.rst:156
 msgid ""
 "In the Eclipse Platform a view is typically used to navigate a hierarchy of "
 "information, open an editor, or display properties for the active editor."
 msgstr ""
 
-# 4572a3b95cf04e55888606a9165087a8
+# 4ecba8debd05401aa237309924975de5
 #: ../../glossary.rst:159
 msgid "View Stack"
 msgstr "Группа :term:`панелей <Панель>`"
 
-# bcc450aaac69488eab938182970c943d
+# 5406a7b5779b4dea9483f7a416dd186d
 #: ../../glossary.rst:161
 msgid ""
 "Multiple :term:`views <View>` combined into single one, with tab navigation "
 "on top of it."
 msgstr ""
 
-# f9716287b65b434da17d77b4954448e3
+# 71a5eb1f8b4143b6967a88e5d03bf2d3
 #: ../../glossary.rst:297
 msgid "VLAN"
 msgstr "VLAN"
 
-# a2cb3ef1debf4c8bbaa820d37ff3da4b
+# 4afc8300f18e44639240fc0a4e7d6cd5
 #: ../../glossary.rst:299
 msgid ""
 "In computer networking, a single layer-2 network may be partitioned to "
@@ -763,12 +763,12 @@ msgid ""
 "More details in :wikipedia:`Wikipedia <Virtual LAN>`."
 msgstr ""
 
-# 9efae53c87eb46888ceafb9f53c7fcec
+# 7dcae617e80b4b7280e82289a31a4806
 #: ../../glossary.rst:304
 msgid "VPN"
 msgstr "VPN"
 
-# 14cb030bed9849ad82adeb10470f47a5
+# d26a08debc55418090a8545eaf965c10
 #: ../../glossary.rst:306
 msgid ""
 "A virtual private network (VPN) extends a private network across a public "
@@ -782,12 +782,12 @@ msgid ""
 "details in :wikipedia:`Wikipedia <Virtual private network>`."
 msgstr ""
 
-# e033211a63eb418e9ac13d126bdcb5bc
+# 03115a725f5743fb96cc791b420d6df0
 #: ../../glossary.rst:315
 msgid "VRRP"
 msgstr "VRRP"
 
-# d4f6b3a1218b4ceeb295e9b667187d60
+# 6ecb4dc2c7054fe492f98804dcb3866d
 #: ../../glossary.rst:317
 msgid ""
 "The Virtual Router Redundancy Protocol (VRRP) is a computer networking "
@@ -798,12 +798,12 @@ msgid ""
 "<Virtual Router Redundancy Protocol>`"
 msgstr ""
 
-# 38f57e48b5b94b4eb6278f37f9041b4f
+# 6cec9ab23a37421e9e9039f6d0f0eb1f
 #: ../../glossary.rst:163
 msgid "Zone"
 msgstr "Зона"
 
-# d4948cecf54b4b5393e3e6ac7ab812c1
+# 658ffa7548b748729091f9715e51e705
 #: ../../glossary.rst:165
 msgid ""
 "Zone in NetXMS is a group of IP subnets which form non-overlapping IP "

@@ -20,7 +20,7 @@ Server configuration parameters
 Bundled Subagents
 =================
 
-.. _command_line_tools::
+.. _command_line_tools:
 
 Command line tools
 ==================

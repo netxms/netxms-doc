@@ -14,10 +14,10 @@ administrator can access collected data using cross-platform Management
 Console, Web Interface or Management Console for Android. 
 
 .. only:: html
-  .. figure:: _images/architecture_scheme.png 
+  .. figure:: _images/architecture_scheme.png
 
 .. only:: latex
-  .. figure:: _images/architecture_scheme.png 
+  .. figure:: _images/architecture_scheme.png
      :scale: 60
 
 Architecture scheme
@@ -26,7 +26,7 @@ NetXMS server is daemon or service. It collects, process and stores data,
 does network discovery. Server is modular and can be extended with additional 
 functionality. By it selves server can collect only some simple 
 information about nodes or can use :term:`SNMP` agent to collect data from 
-SNMP-capable devices. 
+SNMP-capable devices. Server uses 4701 port to communicate with agents.
 
 NetXMS server does not support horizontal scaling. For now it is possible 
 only event exchange between servers. 
@@ -36,6 +36,7 @@ additional monitoring options and can be used like :term:`SNMP` agent or
 NetXMS agent proxy. Agent implements communication with server and work with 
 configuration. Agent functionality is extended with subagents. There are 
 default OS subagents and manually loaded like file manager, ping or others.
+Agent uses 4700 port to communicate with server.
 
 NetXMS also provides some command line tools like nxdbmgr(work with NetXMS 
 database), nxencpasswd(password encryption) and others. Information about this 
@@ -362,7 +363,7 @@ lists possible sources and gives some simple description about them.
      - This type of source required NetXMS agent installation on a node. This list can be 
        supplemented with subagents. Metrics are requested by server.
    * - SNMP
-     - This type of source requires :term:`SMNP` configuration on device and server.
+     - This type of source requires :term:`SNMP` configuration on device and server.
    * - Push
      - This type of source requires installation of nxpush command line tool and script creation
        that will run this tool in requested intervals and will provide to server metric data.

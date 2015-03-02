@@ -17,8 +17,8 @@ Glossary
     Processing Policy`.
 
   Alarm Browser
-    View in user interface, which shows all active alarms in the system and
-    allow user to interact with them.
+    :term:`View` in user interface, which shows all active alarms in the system
+    and allow user to interact with them.
 
   Business Service
     An IT Service that directly supports a Business Process, as opposed to an
@@ -75,8 +75,8 @@ Glossary
     TBD
 
   MIB Explorer
-    View in user interface, which allows to navigate SNMP MIB tree and run SNMP
-    walk on :term:`nodes <Node>`.
+    :term:`View` in user interface, which allows to navigate SNMP MIB tree and
+    run SNMP walk on :term:`nodes <Node>`.
 
   Mobile Device Object
     Special type of :term:`Node` that represents monitored mobile device.
@@ -112,7 +112,7 @@ Glossary
     Configurable operation that can be executed on :term:`Node`.
 
   Package Manager
-    View that manages update packages for NetXMS agents.
+    :term:`View` that manages update packages for NetXMS agents.
 
   Perspective
     A perspective defines the initial set and layout of views in the Eclipse

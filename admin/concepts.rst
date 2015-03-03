@@ -34,9 +34,18 @@ only event exchange between servers.
 NetXMS agent is daemon or service that is installed on nodes to provide
 additional monitoring options and can be used like :term:`SNMP` agent or 
 NetXMS agent proxy. Agent implements communication with server and work with 
-configuration. Agent functionality is extended with subagents. There are 
-default OS subagents and manually loaded like file manager, ping or others.
+configuration. Agent functionality is extended with subagents. 
+
+There are default OS subagents and manually loaded like file manager, 
+ping or others. There are different types of subagents. It can be just 
+a library that is loaded by NetXMS agent or it can be application that 
+uses NetXMS subagent library to provide required subagent interface. 
+Library type of subagents can be run as one process with agent or as a 
+separate process. It can be used when it is necessary to run them under 
+different user privileges. 
 Agent uses 4700 port to communicate with server.
+
+Subagent can be also run as a separate application. 
 
 NetXMS also provides some command line tools like nxdbmgr(work with NetXMS 
 database), nxencpasswd(password encryption) and others. Information about this 

@@ -6,8 +6,8 @@ Introduction
 ============
    
 NetXMS agent is daemon or service that runs on a :term:`node<Node>` to provide additional
-monitoring options.
-This is optional for installation, but it's installation gives next advantages:
+monitoring options. This is optional for installation, but it's installation gives next advantages:
+
    * Centralized configuration - you can change configuration of agent from management console; if needed, you can even store agent configs on NetXMS server
    * More secure: communications between NetXMS server and agent can be encrypted, additional authentication on agent can be configured
    * TCP instead of UDP is used for communications with agent - this can help in case of slow and poor quality links
@@ -15,7 +15,7 @@ This is optional for installation, but it's installation gives next advantages:
    * Proxy functionality: agent can be used as a proxy to reach agents on hosts not directly accessible by NetXMS server
    * :term:SNMP `proxy`: agent can be used as a proxy to reach remote SNMP devices
    * :term:`SNMP Trap` proxy: agent can be used as a proxy to get messages from remote SNMP device
-   * Extensible: you can add new parameters very easy using ExternalParamer configuration option or by writing your own subagents
+   * Extensible: you can add new parameters very easy using configuration option like ``ExternalParamer`` or by writing your own subagents
    * Easy upgrade - you can upgrade all agents at once from console
    * Provides file management possibilities on agent. 
 
@@ -25,8 +25,8 @@ Agent configuration files
 
 Agent have 2 types of configuration files: master configuration file and additional 
 configuration file(Agent Policies files). Only master configuration file is mandatory file. 
-Minimal configuration for master configuration file is server address. To afterwards apply all 
-other changes from server server address should be given as MasterServers.
+Minimal configuration for master configuration file is server address. To afterwards be able to
+apply all other changes from the server, address of it should be should be given as MasterServers.
 
 **After configuration file change agent should be restarted to apply new changes.** 
 
@@ -36,15 +36,17 @@ Master configuration file
 -------------------------
 File nxagentd.conf is a master configuration file for NetXMS agent. It contains all 
 information necessary for agent's operation. Default location for this file is 
-/etc/nxagentd.conf on UNIX systems and 'installation directory'\etc\nxagentd.conf' on Windows. The file can 
-contain one or more parameters in Parameter = Value form, each parameter should 
+:file:`/etc/nxagentd.conf` on UNIX systems and 
+:file:`'installation directory'\\etc\\nxagentd.conf'` on Windows. The file can 
+contain one or more parameters in *Parameter = Value* form, each parameter should 
 be on its own line. Comments can be inserted after "#" sign. This file can also 
 contain configuration for subagents. In this case, subagents’ parameters should 
 be placed in separate sections. Beginning of the section is indicated by "*" sign, 
-followed by a section name.
+followed by a section name or in section name in braces(example: "[sectionName]").
 
 If build configuration was done with --prefix='prefix' parameter, then configuration file will 
 be searched in the following order (UNIX):
+
    1. :file:`$NETXMS_HOME/etc/nxagentd.conf`
    2. :file:`'prefix'/etc/nxagentd.conf`
    3. :file:`/etc/nxagentd.conf`
@@ -52,17 +54,17 @@ be searched in the following order (UNIX):
    5. :file:`/usr/etc/nxagentd.conf`
    
 For Windows systems:
-   1. :file:`'installation directory'\etc\nxagentd.conf`
+
+   1. :file:`'installation directory'\\etc\\nxagentd.conf`
    
 For Windows location of NetXMS config can be change in registry. 
 
 
-If configuration file is placed in different location, then it's location and file name
-can be given to agent with -c parameter. 
+If configuration file is placed in different location or named in different way,
+then it's location and file name can be given to agent with -c parameter. 
 
 
 The file can contain the following parameters (in main section):
-
 
 .. list-table:: 
    :widths: 15 50 15
@@ -78,8 +80,8 @@ The file can contain the following parameters (in main section):
      - Same as Action, but on Windows platform agent will use shell to execute command instead of normal process creation. There is no difference between Action and ActionShellExec on UNIX platforms.
      - No defaults
    * - AppAgent
-     - 
-     - 
+     - The registered name of application with built in subagent library that can be as subagent by agent. 
+     - No defaults
    * - BackgroundLogWriter
      - Enable (yes) or disable (no) log writer as separate background thread. Has no effect if logging is done through syslog or Windows Event Log.
      - no
@@ -90,14 +92,14 @@ The file can contain the following parameters (in main section):
      - A list of management servers, which can execute actions on agent and change agent's config. Hosts listed in this parameter also have read access to the agent. Both IP addresses and DNS names can be used. Multiple servers can be specified in one line, separated by commas. If this parameter is used more than once, servers listed in all occurrences will have access to agent.
      - Empty list
    * - CreateCrashDumps
-     - Enable (yes) or disable (no) creation of agent's crash dumps. Only has effect on Windows platforms.
+     - Enable (yes) or disable (no) creation of agent's crash dumps. Windows only
      - no
    * - DataDirectory
      - 
      - 
    * - DailyLogFileSuffix
-     - 
-     - 
+     - Timestamp suffix that is used for rotation of log file. 
+     - %Y%m%d
    * - DebugLevel
      - Set agent debug logging level (0 - 9).  Value of 0 turns off debugging, 9 enables very detailed logging.  Can also be set with command line "-D<level>" option.
      - 0
@@ -129,8 +131,8 @@ The file can contain the following parameters (in main section):
    * - EnableSNMPProxy
      - Enable (yes) or disable (no) SNMP proxy functionality. 
      - no
-   * - EnableSNMPProxy
-     - Enable (yes) or disable (no) SNMP proxy functionality.  
+   * - EnableSNMPTrapProxy
+     - Enable (yes) or disable (no) SNMP Trap proxy functionality.  
      - no
    * - EnableSubagentAutoload
      - Enable (yes) or disable (no) loading of platform subagent(s).
@@ -139,34 +141,34 @@ The file can contain the following parameters (in main section):
      - Enable (yes) or disable (no) automatic agent restart in case of unexpected shutdown.
      - no
    * - ExecTimeout
-     - Timeout in milliseconds for external parameter execution.
+     - Timeout in milliseconds for external metric execution.
      - 2000
    * - ExternalMasterAgent
-     - 
-     -
+     - ID that is checked when external subagent connects to master agent. Should have same value as ``ExternalSubagent`` parameter in external subagent configuration file.  
+     - No defaults
    * - ExternalList
-     - Add list handled by external command. To add multiple parameters, you should use multiple ExternalList entries.
+     - Add list handled by external command. To add multiple parameters, you should use multiple``ExternalList`` entries.
      - No defaults
    * - ExternalParameter
-     - Add parameter handled by external command. To add multiple parameters, you should use multiple ExternalParameter entries. See the Agent Configuration section for detailed description of this parameter.
+     - Adds metric handled by external command. To add multiple parameters, you should use multiple ``ExternalParameter`` entries. 
      - No defaults
    * - ExternalParameterShellExec
      - 
-     -
+     - 
    * - ExternalParametersProvider
-     - 
-     -
+     - Adds list of metrics that are cashed by agent and returned to server per request. Metrics should be returned in *metric=value* format each pair in new line. 
+     - No defaults
    * - ExternalSubagent
-     - 
-     -
+     - ID of external subagent. Should be same as ``ExternalMasterAgent`` in master agent configuration file. 
+     - No defaults
    * - FileStore
      - Directory to be used for storing files uploaded by management server(s).
-     - /tmp on UNIX
+     - :file:`/tmp` on UINX
      
-       C:\\ on Windows
+       :file:`C:\\` on Windows
    * - FullCrashDumps
-     - 
-     -
+     - Enable (yes) or disable (no) full crash dump generation. Windows only
+     - no
    * - ListenAddress
      - IP address that the agent should listen on. If 0.0.0.0 or * is specified as listen address, agent will listen on all available IP addresses.
      - 0.0.0.0
@@ -236,14 +238,12 @@ The file can contain the following parameters (in main section):
    * - SubAgent
      - Subagent to load. To load multiple subagents, you should use multiple SubAgent parameters. Subagents will be loaded in the same order as they appear in configuration file.
      - No defaults
-   * - TimeOut
-     - 
-     - 
    * - WaitForProcess
      - If specified, an agent will pause initialization until given process starts.
      - No defaults
 
-
+..:note::
+All boolean parameters understand "Yes/No", "On/Off" and "True/False" values.
      
 Configuration file example:
 ::    
@@ -277,6 +277,7 @@ and updated manually. More information about Policies can be read there: :ref:`a
 
 If configuration of build was done with --prefix='prefix' parameter, then config will 
 be searched in next order(UNIX):
+
    1. :file:`$NETXMS_HOME/etc/nxagentd.conf.d`
    2. :file:`'prefix'/etc/nxagentd.conf.d`
    3. :file:`/etc/nxagentd.conf.d`
@@ -284,7 +285,8 @@ be searched in next order(UNIX):
    5. :file:`/usr/etc/nxagentd.conf.d`
    
 For Windows systems:
-   1. :file:`'installation directory'\etc\nxagentd.conf`
+
+   1. :file:`'installation directory'\\etc\\nxagentd.conf`
    
    
 .. _stored-agent-configurations-label:
@@ -328,11 +330,13 @@ Each config has a name, filter and config content.
  - Filter is check on config request to define witch configuration file to 
    give back. Filter is defined with help of :term:`NXSL`. To configuration are given 
    next parameters:
+   
     - $1 - IP address
     - $2 - platform
     - $3 - major version number
     - $4 - minor version number
     - $5 - release number
+    
  - Configuration file is a content of returned configuration file. 
 
 .. figure:: _images/agent_config_manager.png
@@ -343,8 +347,13 @@ Each config has a name, filter and config content.
 Agent Policies
 --------------
 
-Agent policies can be configured on server in Policies part. There can be used the same 
-parameters as in main configuration file in XML or 'key = value' format. 
+Agent policies can be configured on server in :guilabel:`Policies` part. There can be 
+used the same parameters as in main configuration file in XML or 'key = value' format. 
+
+To create policy in menu of container where should be created policy select 
+:guilabel:`Create agent policy(configuration file)` and give required object name and 
+press :guilabel:`OK`. Than in newly created object's properties add configuration 
+parameters in :guilabel:`Configuration File` tab. 
 
 In XML format general tag should be <config> and then can be added any agent or subagent 
 parameter as a tag. Example:
@@ -377,18 +386,27 @@ Example:
 After policy is created it should be installed on required nodes. Node and agent on it 
 should be up and running and all folder path to additional configuration files and 
 register should exist. Nodes should be manually restarted after policy was applied to 
-run it with new configuration. 
+run it with new configuration. To install policy in object menu select :guilabel:`Install...`,
+select :guilabel:`Install on nodes selected below`, select required nodes in object browser and 
+click :guilabel:`OK`.
 
 Installed policy configurations are stored as additional config files. List of applied 
 policies is stored in Windows registry on in registry file in UNIX. If policy is successfully 
-applied on a node it will be seen under this policy.
+applied on a :term:`node <Node>` it will be seen under this policy.
  
 
 Example:
 
       .. figure:: _images/applied_policy.png
 
-If Policies have changed it should be reapplied. Is is done with command ...
+If Policies have changed it should be reapplied manually. Is is done with command in 
+object menu :guilabel:`Install...`, then select :guilabel:`Install on all nodes where this 
+policy already installed` and click :guilabel:`OK`.
+
+Policy can be also uninstalled. To do this right click on policy object and select 
+:guilabel:`Uninstall...`, select node from witch this policy will be removed and click :guilabel:`OK`.
+In this case additional configuration file and registry recored connected to this policy are removed
+from node. In order to apply the changes it is required manually to restart agent. 
       
 Advantage of creating configuration in policies - if configuration for nodes is changed, 
 then it should be changed only once for all nodes on witch it is applied. 
@@ -422,10 +440,10 @@ Agent Policies:
     like(Target for PING subagent or Query for DBQUERY), then policy will merge lists of configs
 
 
-Agent registry
-==============   
-There are few ways of registering agent:
+Agent registration
+==================
 
+There are few ways to register agent:
    1. To enter it manually by creating a node
    2. Run the network discovery and enter the range of IP addresses.
    3. Register agent on management server "nxagentd -r <addr>",  where <addr> is the IP address of server. 
@@ -439,6 +457,7 @@ subagent is require just to add line in main agent configuration file.
 
 Subagents are used to extend agent functionality.
 There is list of available manually loaded subagents:
+
   * DB2
   * FileMGR
   * DBQuery

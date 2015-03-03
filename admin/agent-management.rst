@@ -451,12 +451,13 @@ There are few ways to register agent:
    
 Subagents
 =========
+Subagents are used to extend agent functionality. NetXMS subagent are libraries that are loaded by agent.
 By default all subagents are included in agent build. Subagent may be not included in build
 only if on time of the build there were no required libraries for subagent build. To enable 
-subagent is require just to add line in main agent configuration file. 
+subagent is require just to add line in main agent configuration file(example: "Subagent=dbquery.nsm").
+More about configuration and usage of subagents will be described in :ref:`getting-things-monitored` chapter.
 
-Subagents are used to extend agent functionality.
-There is list of available manually loaded subagents:
+There is list of available manually loaded NetXMS subagents:
 
   * DB2
   * FileMGR
@@ -475,3 +476,12 @@ There is list of available manually loaded subagents:
   * WMI
   * MongoDB
   
+Load of subagent as separate process
+------------------------------------
+
+Load of subagent as separate process can be used in case it is necessary to load agent and subagent 
+under different users. It can be done by adding ``ExternalSubagent`` parameter with unique ID that 
+will represent connection name between agent and subagent. Create second configuration file for this 
+subagent and add there ``ExternalMasterAgent`` parameter with same ID and run instance of :file:`nxagent` with 
+this config. Now external subagent will communicate with master agent using Named Pipe. Only master agent will 
+communicate with server. 

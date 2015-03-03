@@ -1,3 +1,5 @@
+.. _getting-things-monitored:
+
 ##############################################
 Common monitoring tasks (rename this chapter!)
 ##############################################

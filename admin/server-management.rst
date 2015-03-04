@@ -42,5 +42,9 @@ This variables are stored in database and can be changed using
 of :file:`nxdbmgr`(example: :code:`nxdbmgr set <name> <value>`).
 Detailed description of each configuration can be found there: :ref:`server_configuration_parameters`.
 
+
 Synchronization between servers
 ===============================
+
+NetXMS does not provide horizontal scalability for server. But there is option to exchange with 
+events between servers. Information about configuration can be found there: :ref:`forward_events`

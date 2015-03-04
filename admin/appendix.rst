@@ -2,6 +2,152 @@
 Appendix
 ########
 
+.. _sms-drivers:
+
+SMS Drivers
+===========
+NetXMS supports concept of SMS drivers to provide SMS sending functionality. Role of SMS driver 
+is to provide level of abstraction on top of different SMS sending mechanisms and uniform SMS 
+sending interface for server core. The following drivers are provided by default with NetXMS installation:
+
+.. list-table::
+   :widths: 25 75
+   :header-rows: 1
+
+   * - Driver
+     - Description
+   * - dummy.sms
+     - Dummy driver for debugging purposes. Do not send actual SMS and only logs them in server log file.
+   * - generic.sms
+     - Driver for serial or USB attached GSM modems with support for standard GSM AT command set.
+   * - kannel.sms
+     - Driver for Kannel SMS gateway (`<http://www.kannel.org>`_).
+   * - portech.sms
+     - Driver for Portech MV-372 and MV-374 GSM gateways (`<https://www.portech.com.tw/p3-product1_1.asp?Pid=14>`_).
+   * - websms.sms
+     - Driver for websms.ru service (`<https://websms.ru>`_).
+
+To load SMS driver set server configuration parameter :guilabel:`SMSDriver` to name of SMS driver module. On startup 
+SMS driver read it's configuration from server configuration parameter :guilabel:`SMSDrvConfig`. Meaning of that 
+parameter is driver dependent and described separately for each driver.
+
+Generic GSM modem driver
+------------------------
+
+Driver configuration is a string in format *port*:*speed*:*databits*:*parity*:*stopbits*:*mode* where meaning of each element is following:
+
+.. list-table::
+   :widths: 20 70 10
+   :header-rows: 1
+
+   * - Element
+     - Description
+     - Default
+   * - port 
+     - Port name (for example, /dev/ttyS0 on Linux or COM1: on Windows).
+     - COM1: on Windows, /dev/ttyS0 on UNIX
+   * - speed    
+     - Port speed in bits per second.   
+     - 9600
+   * - databits 
+     - Number of data bits per byte (7 or 8).   
+     - 8
+   * - parity   
+     - Parity (N for none, E for even, or O for odd).   
+     - N
+   * - stopbits 
+     - Number of stop bits (1 or 2).    
+     - 1
+   * - mode 
+     - SMS sending mode (P for PDU or T for TEXT).
+     - T
+
+All elements are optional and can be omitted.
+
+**NOTE:** Set mode to PDU if you plan to send SMS with non-Latin1 characters.
+
+Kannel SMS gateway driver
+-------------------------
+
+Driver configuration is a set of *key=value* pairs separated by semicolon. Possible key values are following:
+
+.. list-table::
+   :widths: 20 70 10
+   :header-rows: 1
+
+   * - Key
+     - Description
+     - Default
+   * - host
+     - Kannel gateway host name or IP address.
+     - 127.0.0.1
+   * - login
+     - Login name.
+     - user
+   * - password
+     - Password.
+     - password
+   * - port
+     - TCP port gateway is listening on.
+     - 13001
+
+All elements are optional and can be omitted.
+
+Portech GSM gateways driver
+---------------------------
+
+Driver configuration is a set of *key=value* pairs separated by semicolon. Possible key values are following:
+
+.. list-table::
+   :widths: 20 70 10
+   :header-rows: 1
+   
+   * - Key
+     - Description
+     - Default
+   * - host
+     - Gateway host name or IP address.
+     - 10.0.0.1
+   * - login
+     - Login name.
+     - admin
+   * - mode
+     - SMS sending mode (P for PDU or T for TEXT).
+     - P
+   * - password
+     - Password.
+     - admin
+   * - secondaryHost
+     - Secondary gateway host name or IP address (will be used if primary gateway is not responding).
+     -     
+
+All elements are optional and can be omitted.
+
+**NOTE:** Set mode to PDU if you plan to send SMS with non-Latin1 characters.
+
+websms.ru driver
+----------------
+
+Driver configuration is a set of *key=value* pairs separated by semicolon. Possible key values are following:
+
+.. list-table::
+   :widths: 20 70 10
+   :header-rows: 1
+   
+   * - Key
+     - Description
+     - Default
+   * - login
+     - Login name.
+     - user
+   * - password
+     - Password.
+     - password
+
+All elements are optional and can be omitted.
+
+
+
 .. _agent_configuration_file:
 
 Agent configuration file (nxagentd.conf)

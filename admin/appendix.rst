@@ -442,7 +442,714 @@ Server configuration file (netxmsd.conf)
 Server configuration parameters
 ===============================
 
-
+.. list-table:: 
+  :widths: 15 50 15 15
+  :header-rows: 1
+   
+  * - Parameter 
+    - Description 
+    - Default Value
+    - Require Restart
+  * - ActiveDiscoveryInterval
+    - Interval in seconds between active network discovery polls.
+    - 7200
+    - Yes
+  * - ActiveNetworkDiscovery
+    - Enable (1) or disable (0) active network discovery. 
+      ***This setting is change by Network Discovery GUI***
+    - 0
+    - Yes
+  * - AgentCommandTimeout
+    - Timeout in milliseconds for commands sent to agent. If agent did not respond to command within given number of seconds, command considered as failed.
+    - 2000
+    - Yes
+  * - AgentDefaultSharedSecret
+    - 
+    - 
+    - 
+  * - AgentUpgradeWaitTime
+    - Maximum wait time in seconds for agent restart after upgrade. If agent cannot be contacted after this time period, upgrade process is considered as failed.
+    - 600
+    - No
+  * - AlarmHistoryRetentionTime
+    - A number of days the server keeps an alarm history in the database.
+    - 180
+    - No
+  * - AlarmListDisplayLimit
+    - 
+    - 
+    - 
+  * - AllowDirectSMS
+    - Allow (1) or disallow (0) sending of SMS via NetXMS server using nxsms utility.
+    - 0
+    - No
+  * - AllowedCiphers
+    - A bitmask for encryption algorithms allowed in the server(sum the values to allow multiple algorithms at once): 
+        - 1 - AES256 
+        - 2 - Blowfish
+        - 4 - IDEA
+        - 8 - 3DES
+        - 16 - AES128  
+    - 31
+    - Yes
+  * - AllowTrapVarbindsConversion
+    - 
+    - 1
+    - Yes
+  * - AnonymousFileAccess
+    - 
+    - 0
+    - No
+  * - ApplyDCIFromTemplateToDisabledDCI
+    - Set to 1 to apply all DCIs from a template to the node, including disabled ones.
+    - 0
+    - Yes
+  * - AuditLogRetentionTime
+    - Retention time in days for the records in audit log. All records older than specified will be deleted by housekeeping process.
+    - 90
+    - No
+  * - BeaconHosts
+    - Comma-separated list of hosts to be used as beacons for checking NetXMS server network connectivity. Either DNS names or IP addresses can be used. This list is pinged by NetXMS server and if none of the hosts have responded, server considers that connection with network is lost and generates specific event.
+    - 
+    - Yes
+  * - BeaconPollingInterval
+    - Interval in milliseconds between beacon hosts polls.
+    - 1000
+    - Yes
+  * - BeaconTimeout
+    - Timeout in milliseconds to consider beacon host unreachable.
+    - 1000
+    - Yes
+  * - BlockInactiveUserAccounts
+    - 
+    - 0
+    - No
+  * - CapabilityExpirationTime
+    - 
+    - 604800
+    - No
+  * - CheckTrustedNodes
+    - Enable (1) or disable (0) checking of trusted nodes list for cross-node data collection (using Proxy Node DCI attribute).
+    - 1
+    - Yes
+  * - ClientListenerPort
+    - The server port for incoming client connections (such as management console).
+    - 4701
+    - Yes
+  * - ConditionPollingInterval
+    - Interval in seconds between polling (re-evaluating) of condition objects.
+    - 60
+    - Yes
+  * - ConfigurationPollingInterval
+    - Interval in seconds between configuration polls.
+    - 3600
+    - Yes
+  * - ConnectionPoolBaseSize
+    - A number of connections to the database created on the server startup.
+    - 5
+    - Yes
+  * - ConnectionPoolCooldownTime
+    - 
+    - 300
+    - Yes
+  * - ConnectionPoolMaxSize
+    - A maximum number of connections in the connection pool.
+    - 20
+    - Yes
+  * - DBLockInfo
+    - 
+    - 
+    - 
+  * - DBLockPID
+    - 
+    - 
+    - 
+  * - DBLockStatus
+    - 
+    - 
+    - 
+  * - DataDirectory
+    - Directory used by server to store additional data – MIB files, agent packages, etc. 
+      
+      .. deprecated:: 1.2-M1
+    - Windows: :file:`\\var` under installation directory;
+    
+      UNIX: :file:`/share/netxms` under installation prefix.
+    - Yes
+  * - DefaultCommunityString
+    - System-wide default SNMP community string.
+    - public
+    - No
+  * - DefaultConsoleDateFormat
+    - 
+    - 
+    - 
+  * - DefaultConsoleShortTimeFormat
+    - 
+    - 
+    - 
+  * - DefaultConsoleTimeFormat
+    - 
+    - 
+    - 
+  * - DefaultDciPollingInterval
+    - Default polling interval for newly created DCI (in seconds).
+    - 60
+    - No
+  * - DefaultDciRetentionTime
+    - Default retention time for newly created DCI (in days).
+    - 60
+    - No
+  * - DefaultEncryptionPolicy
+    - Set the default encryption policy for communications with agents: 0 - encryption disabled, 1 - allowed, 2 - preferred, 3 - required.
+    - 1
+    - Yes
+  * - DefaultMapBackgroundColor
+    - Default background color for new network map objects (as RGB value).
+    - 0xffffff
+    - No
+  * - DeleteAlarmsOfDeletedObject
+    - 
+    - 
+    - 
+  * - DeleteEmptySubnets
+    - Enable (1) or disable (0) automatic deletion of subnet objects without any nodes within. When enabled, empty subnets will be deleted by housekeeping process.
+    - 1
+    - Yes
+  * - DeleteEventsOfDeletedObject
+    - 
+    - 
+    - 
+  * - DeleteUnreachableNodesPeriod
+    - Delete nodes which were unreachable for a number of days specified by this parameter. If this parameter is set to 0 then unreachable nodes will never be deleted.
+    - 0
+    - Yes
+  * - DiscoveryFilter
+    - 
+    - 
+    - No
+  * - DiscoveryFilterFlags
+    - 3
+    - 
+    - No
+  * - DiscoveryPollingInterval
+    - Interval in seconds between passive network discovery polls.
+    - 900
+    - Yes
+  * - EnableAdminInterface
+    - 
+    - 1
+    - Yes
+  * - EnableAgentRegistration
+    - Enable (1) or disable (0) agents self-registration.
+    - 1
+    - No
+  * - EnableAuditLog
+    - Enable (1) or disable (0) audit log.
+    - 1
+    - Yes
+  * - EnableCheckPointSNMP 
+    - 
+    -  
+    - 
+  * - EnableEventStormDetection 
+    - 
+    - 0 
+    - Yes
+  * - EnableISCListener 
+    - Enable (1) or disable (0) Inter-Server Communications Listener. 
+    - 0 
+    - Yes
+  * - EnableObjectTransactions 
+    - 
+    -  
+    - 
+  * - EnableMultipleDBConnections 
+    - Enable (1) or disable (0) multiple database connections from the NetXMS server. This setting has no effect on SQLite databases. 
+    - 1 
+    - Yes
+  * - EnableNXSLContainerFunctions 
+    - Enable (1) or disable (0) server-side NXSL functions for container management (such as [[NXSL:CreateContainer|CreateContainer]], [[NXSL:RemoveContainer|RemoveContainer]], [[NXSL:BindObject|BindObject]], [[NXSL:UnbindObject|UnbindObject]]). 
+    - 0 
+    - Yes
+  * - EnableSNMPTraps 
+    - Enable (1) or disable (0) SNMP trap processing. A dedicated thread will be created if set to 1. 
+    - 1 
+    - Yes
+  * - EnableSyslogDaemon 
+    - Enable (1) or disable (0) receiving of syslog messages. 
+    - 0 
+    - Yes
+  * - EnableTimedAlarmAck 
+    - 
+    -  
+    - 
+  * - EnableXMPPConnector 
+    - 
+    -  
+    - 
+  * - EnableZoning 
+    - Enable (1) or disable (0) zoning support. 
+    - 0 
+    - Yes
+  * - EscapeLocalCommands
+    - 
+    - 
+    - 
+  * - EventLogRetentionTime 
+    - 
+    - 90 
+    - No
+  * - EventStormDuration 
+    - 
+    - 15 
+    - Yes
+  * - EventStormEventsPerSecond 
+    - 
+    - 100 
+    - Yes
+  * - ExtendedLogQueryAccessControl 
+    - Enable (1) or disable (0) extended access control in log queries. When enabled, server will check user's access to objects and only select those log records where user has read access to related object. Please note that enabling this option can cause slow and inefficient SQL queries depending on number of objects and actual access right assignment. 
+    - 0 
+    - No 
+  * - ExternalAuditFacility 
+    - Syslog facility to be used in audit log records sent to external server. 
+    - 13 
+    - Yes
+  * - ExternalAuditPort 
+    - UDP port of external syslog server to send audit records to. 
+    - 514 
+    - Yes
+  * - ExternalAuditServer 
+    - External syslog server to send audit records to. If set to ''none'', external audit logging is disabled. 
+    - none 
+    - Yes
+  * - ExternalAuditSeverity 
+    - Syslog severity to be used in audit log records sent to external server. 
+    - 5 
+    - Yes
+  * - ExternalAuditTag 
+    - Syslog tag to be used in audit log records sent to external server. 
+    - netxmsd-audit 
+    - Yes
+  * - FirstFreeObjectId
+    - 
+    - 
+    - 
+  * - FixedStatusValue 
+    - 
+    - 0 
+    - Yes
+  * - HelpDeskLink
+    - 
+    - 
+    - 
+  * - HouseKeepingInterval 
+    - Interval of housekeeper'a running (in seconds). Housekeeper deletes old log lines, old DCI data, cleans removed objects and does VACUUM for PostgreSQL. 
+    - 3600 
+    - Yes
+  * - IcmpPingSize 
+    - Size of ICMP packets (in bytes, excluding IP header size) used for status polls. 
+    - 46 
+    - Yes
+  * - IcmpPingTimeout 
+    - Timeout for ICMP ping used for status polls (in milliseconds). 
+    - 1500 
+    - Yes
+  * - InternalCA 
+    - Enable (1) or disable (0) internal certificate authority. 
+    - 0 
+    - Yes
+  * - IntruderLockoutThreshold 
+    - 
+    - 0 
+    - No
+  * - IntruderLockoutTime 
+    - 
+    - 30 
+    - No
+  * - JobHistoryRetentionTime 
+    - 
+    - 90 
+    - No
+  * - KeepAliveInterval 
+    - Interval in seconds between sending keep alive packets to connected clients.
+    - 60 
+    - Yes
+  * - LdapGroupClass
+    - 
+    - 
+    - 
+  * - LdapConnectionString
+    - 
+    - 
+    - 
+  * - LdapMappingDescription
+    - 
+    - 
+    - 
+  * - LdapMappingFullName
+    - 
+    - 
+    - 
+  * - LdapMappingName
+    - 
+    - 
+    - 
+  * - LdapPageSize
+    - 
+    - 
+    - 
+  * - LdapSearchBase
+    - 
+    - 
+    - 
+  * - LdapSearchFilter
+    - 
+    - 
+    - 
+  * - LdapSyncInterval
+    - 
+    - 
+    - 
+  * - LdapSyncUser
+    - 
+    - 
+    - 
+  * - LdapSyncUserPassword
+    - 
+    - 
+    - 
+  * - LdapUserClass
+    - 
+    - 
+    - 
+  * - LdapUserDeleteAction
+    - 
+    - 
+    - 
+  * - LockTimeout 
+    - ''Unused?'' 
+    - 60000 
+    - Yes
+  * - LogAllSNMPTraps 
+    - 
+    - 0 
+    - Yes
+  * - MailEncoding 
+    - Encoding for mails generated by NetXMS server. 
+    - iso-8859-1 
+    - No
+  * - MailBase64Subjects 
+    - Encode email subjects using base64. Encoding enabled if non-zero 
+    - 0 
+    - No
+  * - MaxActiveUploadJobs 
+    - 
+    - 10 
+    - Yes
+  * - MinPasswordLength 
+    - Default minimum password length for a NetXMS user. The default applied only if per-user setting is not defined. 
+    - 0 
+    - No
+  * - MinViewRefreshInterval
+    - 
+    - 
+    - 
+  * - MobileDeviceListenerPort 
+    - 
+    -  
+    - 
+  * - NumberOfBusinessServicePollers 
+    - A number of threads responsible for business service (SLA) monitoring. 
+    - 10 
+    - Yes
+  * - NumberOfConditionPollers 
+    - A number of threads responsible for condition polling. 
+    - 10 
+    - Yes
+  * - NumberOfConfigurationPollers 
+    - A number of threads responsible for configuration polling. 
+    - 10 
+    - Yes
+  * - NumberOfDatabaseWriters 
+    - The number of threads used to perform delayed writes to database. 
+    - 1 
+    - Yes
+  * - NumberOfDataCollectors 
+    - The number of threads used for data collection. 
+    - 25 
+    - Yes
+  * - NumberOfDiscoveryPollers 
+    - A number of threads responsible for network discovery polling. 
+    - 1 
+    - Yes
+  * - NumberOfRoutingTablePollers 
+    - The number of threads used for polling routing tables on monitored nodes. If you have a really large number of monitored nodes (more than 1000), or if you have decreased routing table update interval, you may need to increase this parameter. 
+    - 10 
+    - Yes
+  * - NumberOfStatusPollers 
+    - The number of threads used for status polling. Since accurate status polling is sensitive for normal system operation, it is highly recommended to have this parameter set to approximately 1/10 of the number of monitored nodes. 
+    - 25 
+    - Yes
+  * - NumberOfTopologyPollers 
+    - The number of threads used for collecting network topology information. 
+    - 10 
+    - Yes
+  * - NumberOfTopologyTablePollers
+    - 
+    - 
+    - 
+  * - NumberOfUpgradeThreads 
+    - The number of threads used to perform agent upgrades (i.e. maximum number of parallel upgrades). 
+    - 10 
+    - No
+  * - PasswordComplexity 
+    - Set of flags to enforce password complexity (see [[UM::User_Management#Password_Policy|Password Policy]] for more details). 
+    - 0 
+    - No
+  * - PasswordExpiration 
+    - Password expiration time in days. If set to 0, password expiration is disabled. 
+    - 0 
+    - No
+  * - PasswordHistoryLength 
+    - Number of previous passwords to keep. Users are not allowed to set password if it matches one from previous passwords list. 
+    - 0 
+    - No
+  * - PollCountForStatusChange 
+    - The number of consecutive unsuccessful polls required to declare interface as down. 
+    - 1 
+    - Yes
+  * - ProcessTrapsFromUnmanagedNodes 
+    - Enable (1) or disable (0) processing of SNMP traps received from node which is in unmanaged state. 
+    - 0 
+    - Yes
+  * - RADIUSNumRetries 
+    - The number of retries for RADIUS authentication. 
+    - 5 
+    - No
+  * - RADIUSPort 
+    - Port number used for connection to primary RADIUS server. 
+    - 1645 
+    - No
+  * - RADIUSSecondaryPort 
+    - Port number used for connection to secondary RADIUS server. 
+    - 1645 
+    - No
+  * - RADIUSSecondarySecret 
+    - Shared secret used for communication with secondary RADIUS server. 
+    - netxms 
+    - No
+  * - RADIUSSecondaryServer 
+    - Host name or IP address of secondary RADIUS server. 
+    - none 
+    - No
+  * - RADIUSSecret 
+    - Shared secret used for communication with primary RADIUS server. 
+    - netxms 
+    - No
+  * - RADIUSServer 
+    - Host name or IP address of primary RADIUS server. 
+    - none 
+    - No
+  * - RADIUSTimeout 
+    - Timeout in seconds for requests to RADIUS server 
+    - 3 
+    - No
+  * - ReceiveForwardedEvents 
+    - Enable (1) or disable (0) reception of events forwarded by another NetXMS server. Please note that for external event reception ISC listener should be enabled as well. 
+    - 0 
+    - No
+  * - ResolveDNSToIPOnStatusPoll
+    - 
+    - 
+    - 
+  * - ResolveNodeNames 
+    - 
+    - 1 
+    - No
+  * - RoutingTableUpdateInterval 
+    - Interval in seconds between reading routing table from node. 
+    - 300 
+    - Yes
+  * - RunNetworkDiscovery 
+    - Enable (1) or disable (0) automatic network discovery process.
+      ***This setting is change by Network Discovery GUI*** 
+    - 0 
+    - Yes
+  * - ServerID
+    - 
+    - 
+    - 
+  * - SMSDriver 
+    - Mobile phone driver to be used for sending SMS. 
+    - <none> 
+    - Yes
+  * - SMSDrvConfig 
+    - SMS driver parameters. For ''generic'' driver, it should be the name of COM port device. 
+    - 
+    - Yes
+  * - SMTPFromAddr 
+    - An address used for sending mail from. 
+    - netxms@localhost
+    - No
+  * - SMTPFromName 
+    - A name used for sending mail. 
+    - NetXMS Server 
+    - No
+  * - SMTPPort 
+    - TCP port for SMTP server. 
+    - 25 
+    - No
+  * - SMTPRetryCount 
+    - Number of retries for sending mail. 
+    - 1 
+    - No
+  * - SMTPServer 
+    - An SMTP server used for sending mail. 
+    - localhost 
+    - No
+  * - SNMPRequestTimeout 
+    - Timeout in milliseconds for SNMP requests sent by NetXMS server. 
+    - 2000 
+    - Yes
+  * - SNMPTrapLogRetentionTime
+    - 
+    - 
+    - 
+  * - SNMPTrapPort
+    - 
+    - 
+    - 
+  * - SlmPollingInterval 
+    - Interval in seconds between business service polls. 
+    - 60 
+    - Yes
+  * - StatusCalculationAlgorithm 
+    - 
+    - 1 
+    - Yes
+  * - StatusPollingInterval 
+    - Interval in seconds between status polls. 
+    - 60 
+    - Yes
+    - 
+  * - StatusPropagationAlgorithm
+    - Algorithm for status propagation (how object's status affects its child object statuses). Possible values are: 
+        - 0 - Default
+        - 1 - Unchanged
+        - 2 - Fixed
+        - 3 - Relative
+        - 4 - Translated
+    - 1
+    - Yes
+  * - StatusShift
+    - 
+    - 0
+    - Yes
+  * - StatusSingleThreshold
+    - 
+    - 75
+    - Yes
+  * - StatusThresholds
+    - 
+    - 503C2814
+    - Yes
+  * - StatusTranslation
+    - 
+    - 01020304
+    - Yes
+  * - StrictAlarmStatusFlow
+    - 
+    - 
+    - 
+  * - SyncInterval
+    - Interval in seconds between writing object changes to the database.
+    - 60
+    - Yes
+  * - SyncNodeNamesWithDNS
+    - Enable (1) or disable (0) synchronization of node names with DNS on each configuration poll.
+    - 0
+    - No
+  * - SyslogListenPort
+    - UDP port used by built-in syslog server.
+    - 514
+    - Yes
+  * - SyslogNodeMatchingPolicy
+    - Node matching policy for built-in syslog daemon. Possible values are:
+        - 0 - syslog message source IP address then hostname
+        - 1 - hostname then syslog message source IP address
+    - 0
+    - Yes
+  * - SyslogRetentionTime
+    - Retention time in days for records in syslog. All records older than specified will be deleted by housekeeping process.
+    - 90
+    - No
+  * - ThresholdRepeatInterval
+    - System-wide interval in seconds for resending threshold violation events. Value of 0 disables event resending.
+    - 0
+    - Yes
+  * - TileServerURL
+    - 
+    - http://tile.openstreetmap.org/
+    - No
+  * - TopologyDiscoveryRadius
+    - 
+    - 3
+    - No
+  * - TopologyExpirationTime
+    - 
+    - 900
+    - No
+  * - TopologyPollingInterval
+    - 
+    - 1800
+    - Yes
+  * - UseDNSNameForDiscoveredNodes
+    - Enable (1) or disable (0) use of DNS name instead of IP address as primary name for newly discovered nodes. If enabled, server will do back resolve of IP address, and then resolve obtained name back to IP address. Only if this IP address will match the original one, DNS name will be used.
+    - 0
+    - No
+  * - UseFQDNForNodeNames
+    - Enable (1) or disable (0) use of fully qualified domain names as primary names for newly discovered nodes.
+    - 1
+    - Yes
+  * - UseIfXTable
+    - Enable (1) or disable (0) use of SNMP ifXTable instead of ifTable for interface configuration polling.
+    - 1
+    - No
+  * - UseInterfaceAliases
+    - Control usage of interface aliases (or descriptions). Possible values are:
+        - 0 - Don’t use aliases;
+        - 1 - Use aliases instead of names, when possible;
+        - 2 - Concatenate alias and name to form interface object name.
+        - 3 - Concatenate name and alias to form interface object name.
+    - 0
+    - No
+  * - UseSNMPTrapsForDiscovery
+    - 
+    - 
+    - 
+  * - WindowsConsoleUpgradeURL
+    - URL pointing to the actual version of NetXMS Console for Windows. Console application will try to download new version from this URL, if it detects that upgrade is needed. You can use %version % macro inside the URL to insert actual server version.
+    - http://www.netxms.org/download/netxms-%version%.exe
+    - No
+  * - XMPPLogin
+    - 
+    - 
+    - 
+  * - XMPPPassword
+    - 
+    - 
+    - 
+  * - XMPPPort
+    - 
+    - 
+    - 
+  * - XMPPServer
+    - 
+    - 
+    - 
+    
 
 Bundled Subagents
 =================
@@ -452,7 +1159,238 @@ Bundled Subagents
 Command line tools
 ==================
 
+NetXMS provide some additional command line tools. Each tool serves its own purpose.
+
+DB Manager
+----------
+   
+This is tool used to make manipulations with NetXMS database. 
+  ::
+
+   Usage: nxdbmgr [<options>] <command>
+
+
+Valid commands are:
+
+.. list-table:: 
+   :widths: 50 150
+   
+   * - batch <file>
+     - Run SQL batch file
+   * - check
+     - Check database for errors
+   * - export <file>
+     - Export database to file
+   * - get <name> 
+     - Get value of server configuration variable
+   * - import <file> 
+     - Import database from file
+   * - init <file>
+     - Initialize database
+   * - migrate <source>
+     - Migrate database from given source
+   * - resetadmin
+     - Unlock user "admin" and reset password to default ("netxms")
+   * - set <name> <value>
+     - Set value of server configuration variable
+   * - unlock
+     - Forced database unlock
+   * - upgrade
+     - Upgrade database to new version
+   
+   
+Valid options are:
+
++---------------+--------------------------------------------------------------------+
+| -c <config>   |Use alternate configuration file. Default is {search}               |
++---------------+--------------------------------------------------------------------+ 
+| -d            |Check collected data (may take very long time).                     |  
++---------------+--------------------------------------------------------------------+
+| -D            |Migrate only collected data.                                        |
++---------------+--------------------------------------------------------------------+
+| -f            |Force repair - do not ask for confirmation.                         |
++---------------+--------------------------------------------------------------------+
+| -h            |Display help and exit.                                              |
++---------------+--------------------------------------------------------------------+
+| -I            |MySQL only - specify TYPE=InnoDB for new tables.                    |
++---------------+--------------------------------------------------------------------+
+| -M            |MySQL only - specify TYPE=MyISAM for new tables.                    |
++---------------+--------------------------------------------------------------------+
+| -N            |Do not replace existing configuration value ("set" command only).   |
++---------------+--------------------------------------------------------------------+  
+| -q            |Quiet mode (don't show startup banner).                             |
++---------------+--------------------------------------------------------------------+
+| -s            |Skip collected data during migration.                               |
++---------------+--------------------------------------------------------------------+
+| -t            |Enable trace mode (show executed SQL queries).                      |
++---------------+--------------------------------------------------------------------+ 
+| -v            |Display version and exit.                                           |
++---------------+--------------------------------------------------------------------+
+| -X            |Ignore SQL errors when upgrading (USE WITH CAUTION!!!)              |
++---------------+--------------------------------------------------------------------+
+   
+Database initialization
+~~~~~~~~~~~~~~~~~~~~~~~
+  ::
+
+   nxdbmgr init initialization.file
+
+Is used to initialize first time database. Database and user should already exist. 
+Credentials of connection are taken from server configuration file. 
+
+
+Database migration
+~~~~~~~~~~~~~~~~~~
+  ::
+ 
+   nxdbmgr migrate old.configuration.file
+
+Is used to migrate NetXMS database between different database management system from NetXMS 
+supported list. 
+
+While migration nxdbmgr should use new configuration file(with new DB credentials) and as 
+a parameter should be given the old configuration file. 
+
+In best practises of migration is to do database check with command "nxdbmgr check".
+
+
+nxaction
+--------
+   
+nxadm
+-----
+   
+   
+nxalarm 
+-------
+   
+nxap 
+----
+   
+   
+nxappget
+--------
+
+
+.. _nxapush-label:
+
+nxapush
+-------
+This tool has same usage as nxpush, but it sends data throught local agent. 
+
+When new version of NetXMS is released - version of server protocol is 
+changed. Change of version affects on server comunication with other tools 
+like nxpush. So after each server update nxpush tool also should be updated. 
+In case of usage nxapush - only agent should be updated as this tool uses agent
+protocol to send data. 
+   
+nxdevcfg
+--------
+
+
+.. _nxencpasswd-tools-label:
+   
+nxencpasswd  
+-----------
+
+This tool can be used to encrypt passwords stored 
+in server and agent configuration files. 
+
+nxevent  
+-------
+
+This tool can be used to push events to NetXMS server. 
+   
+nxget  
+-----
+
+This tool can be used to get agent :term:`Metric` from node. 
+   
+nxmibc  
+------
+
+   
+.. _nxpush-label:
+   
+nxpush
+------
+nxpush is a tool that allows to push DCI daca from command line.  
+
+There are different options how this tool can be used:
+ - with help of this tool data collected with different monitoring system 
+   can be pushed also to netxms
+ - can be used on nodes where agent can not be installed(not the case for nxapush)
+ - can be used on nodes behind NAT with no port forwarding option
+
+Usage: ./nxapush [OPTIONS] [@batch_file] [values]
+  
+Options:
+
++--------------+-----------------------------------------------+
+|-h            | Display this help message.                    |
++--------------+-----------------------------------------------+
+|-o <id>       |Push data on behalf of object with given id.   |
++--------------+-----------------------------------------------+
+|-q            |Suppress all messages.                         |
++--------------+-----------------------------------------------+
+|-v            |Enable verbose messages. Add twice for debug   |
++--------------+-----------------------------------------------+
+|-V            |Display version information.                   |
++--------------+-----------------------------------------------+
+
+Notes:
+  * Values should be given in the following format:
+    dci=value
+    where dci can be specified by it's name
+  * Name of batch file cannot contain character = (equality sign)
+
+Examples:
+  Push two values:
+  ::
+      nxapush PushParam1=1 PushParam2=4
+
+  Push values from file:
+  ::
+      nxapush @file
+
+Required server configurations are described there: :ref:`dci-push-parameters-label`
+   
+nxscript  
+--------
+   
+nxsms  
+-----
+   
+nxsnmpget  
+---------
+
+This tool can be used to get :term:`SNMP` :term:`Metric` from node. 
+   
+nxsnmpset 
+---------
+   
+nxsnmpwalk  
+----------
+   
+nxupload
+--------
+
+
 
 List of supported metrics
 =========================
 
+Metrics are divided by subagents. There are also preset automatically
+loaded OS subagents. 
+
+Linux
+-----
+
+Windows
+-------
+
+Unix
+----
+
+.. TODO::
+  Add other subagents.

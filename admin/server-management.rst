@@ -41,7 +41,7 @@ This variables are stored in database and can be changed using
 :menuselection:`Configuration-->Server Configuration` or with help 
 of :file:`nxdbmgr`(example: :code:`nxdbmgr set <name> <value>`).
 Detailed description of each configuration can be found there: :ref:`server_configuration_parameters`.
-
+Please note that changes to most of the settings will take effect only after server restart. 
 
 Synchronization between servers
 ===============================

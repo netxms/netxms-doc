@@ -1345,11 +1345,15 @@ Notes:
 
 Examples:
   Push two values:
-  ::
+
+  .. code-block:: shell
+
       nxapush PushParam1=1 PushParam2=4
 
   Push values from file:
-  ::
+
+  .. code-block:: shell
+
       nxapush @file
 
 Required server configurations are described there: :ref:`dci-push-parameters-label`

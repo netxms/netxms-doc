@@ -1033,7 +1033,6 @@ Server configuration parameters
     - Interval in seconds between status polls. 
     - 60 
     - Yes
-    - 
   * - StatusPropagationAlgorithm
     - Algorithm for status propagation (how object's status affects its child object statuses). Possible values are: 
         - 0 - Default

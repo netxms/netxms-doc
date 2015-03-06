@@ -48,3 +48,111 @@ Synchronization between servers
 
 NetXMS does not provide horizontal scalability for server. But there is option to exchange with 
 events between servers. Information about configuration can be found there: :ref:`forward_events`
+
+netxmsd commandline options
+===========================
+
+.. list-table:: 
+  :widths: 30 70
+  :header-rows: 1
+
+  * - Command 
+    - Description
+  * - -e
+    - Run database check on startup
+  * - -c <file>
+    - Set non-default configuration file
+      Default is {search}
+  * - -d
+    - Run as daemon/service
+  * - -D <level>
+    - Set debug level (valid levels are 0..9)
+  * - -h
+    - Display help and exit
+  * - -p <file>
+    - Specify pid file.
+  * - -q
+    - Disable interactive console
+  * - -v
+    - Display version and exit
+
+
+Server debug console
+====================
+
+Server debug console can be opened in Java console. It can be found in 
+:menuselection:`Tools -> Server Console`.
+
+It can be used to check debug messages or to execute one of server 
+commands like "ldap sync".
+
+.. figure:: _images/server_console.png
+   :scale: 65%
+
+Server commands
+---------------
+
+.. list-table:: 
+  :widths: 30 70
+  :header-rows: 1
+
+  * - Command 
+    - Description
+  * - debug [<level>|off]
+    - Set debug level (valid range is 0..9)
+  * - down 
+    - Shutdown NetXMS server
+  * - exec <script> [<params>]
+    - Executes NXSL script from script library
+  * - exit
+    - Exit from remote session
+  * - kill <session>
+    - Kill client session
+  * - get <variable>
+    - Get value of server configuration variable
+  * - help
+    - Display this help
+  * - ldapsync
+    - Synchronize ldap users with local user database
+  * - poll <type> <node>
+    - Initiate node poll
+  * - raise <exception>
+    - Raise exception
+  * - set <variable> <value>
+    - Set value of server configuration variable
+  * - show components <node>
+    - Show physical components of given node
+  * - show dbcp
+    - Show active sessions in database connection pool
+  * - show fdb <node>
+    - Show forwarding database for node
+  * - show flags
+    - Show internal server flags
+  * - show index <index> 
+    - Show internal index
+  * - show modules
+    - Show loaded server modules
+  * - show objects
+    - Dump network objects to screen
+  * - show pollers
+    - Show poller threads state information
+  * - show queues
+    - Show internal queues statistics
+  * - show routing-table <node>
+    - Show cached routing table for node
+  * - show sessions
+    - Show active client sessions
+  * - show stats
+    - Show server statistics
+  * - show topology <node>
+    - Collect and show link layer topology for node
+  * - show users
+    - Show users
+  * - show vlans <node>
+    - Show cached VLAN information for node
+  * - show watchdog
+    - Display watchdog information
+  * - trace <node1> <node2>
+    - Show network path trace between two nodes
+
+    

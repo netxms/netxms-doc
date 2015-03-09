@@ -9,10 +9,53 @@ Advanced topics
 Zones
 =====
 
+As NetXMS server keeps track of an IP topology, it is important to maintain the
+configuration in which IP addresses do not overlap and that two IP addresses
+from same subnet are really within one subnet. Sometimes, however, it is needed
+to monitor multiple sites with overlapping IP address ranges. To correctly
+handle such situation, zoning must be used. Zone in NetXMS is a group of IP
+subnets which form non-overlapping IP address space. There is always zone 0
+which contains subnets directly reachable by management server. For all other
+zones server assumes that subnets within that zones are not reachable directly,
+and proxy must be used.
+
+Enable Zoning
+-------------
+
+Zoning support is off by default. To turn it on you must set server's
+configuration variable ``EnableZoning`` to ``1`` and restart server. After
+restart, server will create default zone with ID ``0`` and put all existing
+subnets into that zone. Subnet tree will looks like this:
+
+.. figure:: _images/Zoning_enabled.png
+
+Setting communication options for zones
+---------------------------------------
+
+Server have to know proxy nodes to be able to communicate with nodes in remote
+zones. Default proxy settings for all nodes in the zone can be set on
+Communications page in zone object properties:
+
+.. figure:: _images/Zone_comm_settings.png
+
+On this page you can set default proxy node for NetXMS agents, SNMP, and ICMP.
+Note that proxy node must be in default zone and must have primary IP reachable
+by NetXMS server.
+
+
+Moving nodes between zones
+--------------------------
+
+To move existing node to another zone, select :guilabel:`Change zone` from
+nodes context menu, then select target zone in zone selection dialog that will
+appear. After move to another zone, server will immediately do configuration
+poll on the node.
+
+
 .. _helpdesk-integration:
 
 Integration with external HelpDesk
-==================================
+----------------------------------
 
 NetXMS provides possibility to create issues in external helpdesk system 
 directly from NetXMS management console, based on pending alarms. In this 

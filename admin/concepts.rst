@@ -53,6 +53,8 @@ tools can be found in :ref:`command_line_tools` chapter.
 
 In further chapters will be described main NetXMS objects and concepts. 
 
+.. _concept_object:
+
 Objects
 =======
 

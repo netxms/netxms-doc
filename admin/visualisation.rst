@@ -226,6 +226,239 @@ Examples:
 Dashboards
 ==========
 
+Dashboards are defined by administrator and allow to combine any available
+visualization components with data from multiple sources in order to create
+high-level views to see network (or parts of it) health at a glance. For
+example, below is a dashboard showing traffic information from core router, as
+well as CPU usage from vital nodes:
+
+.. figure:: _images/DashboardExample.png
+
+There are two ways to access dashboards:
+
+Open dashboard from Object Browser
+
+- Open dashboard from :guilabel:`Object Browser`
+- Switch to :guilabel:`Dashboard` perspective and select dashboard with
+  left-click
+
+Configuration
+-------------
+
+Dashboards is a special type of objects created in :guilabel:`Dashboards` tree.
+To create a new dashboard, right click on :guilabel:`Dashboards` root object or
+any other existing dashboard and select :guilabel:`Create dashboard`. To
+configure dashboard content, open object's properties and go to
+:guilabel:`Dashboard Elements:guilabel:` page. Here you can define number of
+columns and manage list of elements. Press :guilabel:`Add:guilabel:` to add new
+element. You will be prompted with element type selection dialog:
+
+.. figure:: _images/DashboardProperties.png
+
+When new element added, you can edit it by double-clicking on record in
+elements list, or by pressing :guilabel:`Edit` button. Each element have
+:guilabel:`Layout` property page which controls element's layout inside
+dashboard, and one or more element type specific pages to control element's
+appearance and displayed information. The following element types are
+available:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Type
+     - Description
+   * - Alarm Viewer
+     - List of alarms for given object subtree.
+   * - Availability Chart
+     - Pie chart showing availability percentage for given business service.
+   * - Bar Chart
+     - Bar chart.
+   * - Bar Chart for Table DCI
+     - Bar chart built from data collected via single table DCI.
+   * - Custom Widget
+     - Custom widget provided by third party console plugin.
+   * - Dashboard
+     - Another dashboard object (or multiple objects) rendered as element of
+       this dashboard.
+   * - Dial Chart
+     - Dial chart.
+   * - Geo Map
+     - Geographic map centered at given location.
+   * - Label
+     - Text label with configurable text and colors.
+   * - Line Chart
+     - Line chart.
+   * - Network Map
+     - Network map object rendered as dashboard element.
+   * - Pie Chart
+     - Pie chart.
+   * - Pie Chart for Table DCI
+     - Pie chart built from data collected via single table DCI.
+   * - Separator
+     - Separator, can be shown as line, box, or simply empty space.
+   * - Status Chart
+     - Bar chart which shows current status distribution for nodes under given
+       root.
+   * - Status Indicator
+     - Shows current status of selected object.
+   * - Tube Chart
+     - Tube chart.
+   * - Tube Chart for Table DCI
+     - Tube chart built from data collected via single table DCI.
+   * - Web Page
+     - Web page at given URL rendered within dashboard.
+
+
+Element Property Pages
+----------------------
+
+Chart
+~~~~~
+
+:guilabel:`Chart` page is available for all chart type elements: Bar Chart, Bar
+Chart for Table DCI, Dial Chart, Line Chart, Pie Chart, Pie Chart for Table
+DCI, Tube Chart, and Tube Chart for Table DCI. It defines basic properties of a
+chart.
+
+.. figure:: _images/ChartElementConfig.png
+
+Data Sources
+~~~~~~~~~~~~
+
+:guilabel:`Data sources` page is available for all DCI based elements: Bar
+Chart, Dial Chart, Line Chart, Pie Chart, and Tube Chart. Here you can define
+what DCIs should be used as data sources for the chart. Up to 16 DCIs can be
+added to single chart. You can configure multiple properties for each data
+source. To edit data source, either double click on appropriate item in the
+list, or press :guilabel:`Edit` button. Data source configuration dialog looks
+like following:
+
+.. figure:: _images/ChartDataSourceConfig.png
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Property
+     - Description
+   * - Data collection item
+     - DCI object to be used.
+   * - Display name
+     - Name for this data source to be used in chart's legend. If left empty,
+       DCI description will be used.
+   * - Color
+     - Allows you to define specific color for this data source or let system
+       to pick one automatically.
+   * - Area chart
+     - This option is valid only for line charts and toggles data source
+       display as filled area instead of line.
+   * - Show thresholds
+     - This option is valid only for line charts and toggles display of
+       configured thresholds.
+
+
+Layout
+~~~~~~
+
+.. figure:: _images/DashboardElementLayoutPage.png
+
+.. list-table::
+   :widths: 25 75
+   :header-rows: 1
+
+   * - Property
+     - Description
+   * - Horizontal alignment
+     - Horizontal alignment for this element. Possible values are
+       :guilabel:`FILL`, :guilabel:`CENTER`, :guilabel:`LEFT`, and
+       :guilabel:`RIGHT`.
+   * - Vertical alignment
+     - Vertical alignment for this element. Possible values are
+       :guilabel:`FILL`, :guilabel:`CENTER`, :guilabel:`TOP`, and
+       :guilabel:`BOTTOM`.
+   * - Horizontal span
+     - Specify how many grid cells this element will occupy horizontally.
+   * - Vertical span
+     - Specify how many grid cells this element will occupy vertically.
+   * - Width hint
+     - Hint for element's width in pixels. Default value of ``-1`` means that
+       layout manager will decide width for element.
+   * - Height hint
+     - Hint for element's height in pixels. Default value of ``-1`` means that
+       layout manager will decide width for element.
+
+See detailed information about layout in section :ref:`dashboards-layout`.
+
+Web Page
+~~~~~~~~
+
+:guilabel`Web Page` property page is available for web page type elements. Here
+you can define URL to be displayed and optional title. If title is not empty,
+it will be displayed above page content.
+
+
+.. _dashboards-layout:
+
+Understanding Element Layout
+----------------------------
+
+Dashboard uses grid concept to layout it's elements. Available space divided
+into rows and columns, and each element occupies one or more cells. Number of
+columns configured in dashboard object properties, and number of rows
+calculated automatically based on number of columns, number of elements, and
+number of cells occupied by each element. Elements are laid out in columns from
+left to right, and a new row is created when there are no space left for next
+element on current row. Each element has horizontal and vertical alignment
+properties. Default for both is :guilabel:`FILL`. Possible alignment values are
+following:
+
+
+.. list-table::
+   :widths: 25 75
+   :header-rows: 1
+
+   * - Value
+     - Description
+   * - FILL
+     - Make element to fill whole cell. Also causes to grab excess free space
+       available inside dashboard. If more than one element is trying to grab
+       the same space, then the excess space is shared evenly among the
+       grabbing elements.
+   * - CENTER
+     - Center element within cell.
+   * - LEFT/TOP
+     - Align element to left/top of the cell.
+   * - RIGHT/BOTTOM
+     - Align element to right/bottom of the cell.
+
+
+.. figure:: _images/DashboardComplexLayoutConfig.png
+
+   Complex layout configuration
+
+This configuration will be rendered into this layout:
+
+.. image:: _images/DashboardComplexLayoutExample.png
+   :scale: 70
+
+
+Dashboard Rotation
+------------------
+
+To create configuration when console displays multiple dashboards one by one in
+a loop, follow these steps:
+
+- Create all dashboards you want to show
+- Create additional dashboard object, with single element of type
+  :guilabel:`Dashboard` inside
+- Add all dashboards you want to show to dashboard list of that element and set
+  desired time between changing dashboards.
+
+.. figure:: _images/DashboardRotationConfig.png
+
+   Sample configuration of two dashboards displayed in a loop for 40 seconds each.
+
 
 Graphs
 ======

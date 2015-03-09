@@ -9,6 +9,7 @@ Advanced topics
 Zones
 =====
 
+.. _helpdesk-integration:
 
 Integration with external HelpDesk
 ==================================

@@ -76,6 +76,8 @@ netxmsd commandline options
   * - -v
     - Display version and exit
 
+    
+.. _server-debug-console:
 
 Server debug console
 ====================

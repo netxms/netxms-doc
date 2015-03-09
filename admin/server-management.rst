@@ -155,4 +155,9 @@ Server commands
   * - trace <node1> <node2>
     - Show network path trace between two nodes
 
-    
+Configuring self-monitoring
+===========================
+
+
+Database connection pool
+========================

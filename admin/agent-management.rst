@@ -267,7 +267,6 @@ There are few ways to register agent:
    1. To enter it manually by creating a node
    2. Run the network discovery and enter the range of IP addresses.
    3. Register agent on management server "nxagentd -r <addr>",  where <addr> is the IP address of server. 
-
    
 Subagents
 =========

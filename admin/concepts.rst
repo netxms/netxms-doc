@@ -331,6 +331,8 @@ important enough to show up as alarm.
 
    Event flow inside the monitoring system
 
+.. _concepts_polling:
+   
 Polling
 =======
 

@@ -28,6 +28,19 @@ subnets can be added to containers by using Bind operation, and removed by using
 Unbind operation.
 
 
+Automatic bind option
+---------------------
+
+For each container can be configured automatic binding rules. This can be in 
+:guilabel:`Automatic Bind Rules` tab of container properties. 
+
+..figure:: _images/automatic_bind_rules.png
+
+There can be defined if script should be used for automatic binding, if script
+should be used for node unbinding and can be written script it selves. 
+
+This script will be executed each configuration poll of each node. 
+
 Access control
 ==============
 

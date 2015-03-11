@@ -231,6 +231,44 @@ Steps to create ticket:
 Hooks (Pollers hooks)
 =====================
 
+NetXMS has 5 different poller types, sometimes it is required by user 
+to add some additional functionality while this polls. For this purpose 
+were created hooks. Hook is manually created script in 
+:guilabel:`Script Library` that is executed at the very end of the poll.
+More about poll types and purposes can be found :ref:`there <concepts_polling>` 
+and about script creation :ref:`there <scripting>`. 
+
+To be recognized as a hook script should have special name. It should be named 
+according to convention: Hook\:\:\ `Pool_name`. 
+
+Example: Hook\:\:ConfigurationPoll
+
+Full list of hooks and 
+
+  * - Hook name
+    - Description 
+    - Parameters
+  * - Hook\:\:StatusPoll
+    - Hook that is executed at the end of status poll
+    - $node
+  * - Hook\:\:ConfigurationPoll
+    - Hook that is executed at the end of configuration poll
+    - $node
+  * - Hook\:\:InstancePoll
+    - Hook that is executed after instance discovery poll.
+    - $node
+  * - Hook\:\:TopologyPoll
+    - Hook that is executed at the ens of topology poll
+    - $node
+  * - Hook\:\:AcceptNewNode
+    - Hook that is executed on a new node add. This script should return 1 if 
+      node should be added. In case if script returns nothing or something other 
+      than 1 - node will not be added. 
+    - $ipAddr, $ipNetMask, $macAddr, $zoneId
+
+Usually hooks are used for automatic actions that need to be done on node. 
+For example automatic remove change of expected state of interface depending 
+on some external parameters. 
 
 Troubleshooting
 ===============
@@ -313,3 +351,10 @@ Common issues:
    override OIDs used for detection, set node's custom attribute
    ``snmp.testoid`` to any OID supported by device.
 
+Automatic actions on a new node
+===============================
+
+On a new node creation is generated SYS_NODE_ADDED event. So any automatic 
+actions that should be done on a node can be done by creating :term:`EPP` rule
+on on this event, that will run script. In such way can be done node bind to 
+container, policy or template auto apply and other automatic actions. 

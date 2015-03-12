@@ -47,7 +47,8 @@ Synchronization between servers
 ===============================
 
 NetXMS does not provide horizontal scalability for server. But there is option to exchange with 
-events between servers. Information about configuration can be found there: :ref:`forward_events`
+events between servers. Information about configuration can be found there: :ref:`forward_events`.
+Event forward does not work with zones. 
 
 netxmsd commandline options
 ===========================

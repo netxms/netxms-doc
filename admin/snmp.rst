@@ -4,42 +4,97 @@
 SNMP
 ####
 
-
-MIB browser
-===========
-
-
-
-Drivers
-=======
-
-
-Setting default SNMP credentials
-================================
-
-
 MIB Explorer
 ============
 
 MIB browser shows all loaded MIB configurations, and allows to run :term:`SNMP` 
 walk on a selected node :term:`nodes <Node>`. Node can be selected in browser 
-by selecting :guilabel:`Set node object...` option in view menu. 
+by selecting :guilabel:`Set node object...` option in view menu or by opening 
+:guilabel:`MIB Explorer` from node menu. 
+
+.. figure:: _images/MIB_Explore.png
 
 To run walk user should select line of tree from were will be requested all data. 
-By walk will be requested all subtree OIDs. 
+By walk will be requested all OID subtree of selected item. 
 
 After walk is done it's results will shown in the table below.
 
-.. todo::
-  add immage and describe posibility to show line in mib configuration by value and
-  add dci by value
+.. figure:: _images/snmp_walk_result_menu.png
+
+There are next options available for results:
+  - Copy result line to clipboard
+  - Copy name of selected line to clipboard
+  - Copy type of selected line to clipboard
+  - Copy value of selected line to clipboard
+  - Export selected lines to CSV
+  - Show selection in MIB tree
+  - Create DCI form selected item 
+
+SNMP Trap Configuration
+=======================
+
+In this view is configured which event will be generated on exact trap OID and 
+which OID data will be used as event parameter data. 
+
+.. figure:: _image/snmp_trap_configuration.png
+
+In SNMP Trap mapping configuration window can be set next parameters:
+
+  - Description of mapping rule
+  - Trap OID or trap OID group with many subtree OIDs, matching OID will be given 
+    to event as $1 parameter
+  - Event that will be generated on selected Trap OID
+  - User Tag
+  - Parameters - OID values that will be passed to event as $2, $3, $4... parameters
+
+In parameter configuration(:guilabel:`Edit SNMP Trap Parameter Mapping`) can be 
+configured next things:
+
+  - Description of a parameter
+  - Select if parameter should be found by OID or by position in the message
+  - Option not to convert value to hex string
+
+.. figure:: _images/snmp_trap_mapping_configuration.png
+
+Drivers
+=======
+
+.. TODO:
+
+  Add chapter description
+
+
+Setting default SNMP credentials
+================================
+
+Default SNMP credentials can be set in :guilabel:`Network Discovery` section. It does not 
+matter if credentials are used for adding nodes manually, through network 
+discovery or with help of agent registration - in each case :guilabel:`Network Discovery` 
+configuration value will be checked. More about :guilabel:`Network Discovery` view 
+can be found :ref:`there<network-discovery>`.
+
 
 Using ifTable and ifXTable
 ==========================
 
+.. TODO:
+
+  Add chapter description
+
 Configure SNMP Proxy
 ====================
 
+If there is need to monitor nodes behind firewall using SNMP, there is option 
+to install on one of the nodes NetXMS agent, open all required ports for this node 
+and send SNMP request to other nodes in this subnet through installed agent. 
+
+Proxy configuration can be done wile creation of node of for already created node 
+can be change in :guilabel:`Communications` tab of node properties. To configure
+proxy node select node in object selector :guilabel:`SNMP Proxy`.
+
+.. figure:: _images/create_node.png
+
+.. figure:: _images/node_communications_tab.png
 
 Configure SNMP Trap Proxy
 =========================

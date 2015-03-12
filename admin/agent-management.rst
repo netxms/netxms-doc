@@ -305,3 +305,18 @@ will represent connection name between agent and subagent. Create second configu
 subagent and add there ``ExternalMasterAgent`` parameter with same ID and run instance of :file:`nxagentd` with 
 this config. Now external subagent will communicate with master agent using Named Pipe. Only master agent will 
 communicate with server. 
+
+Agent Proxy node configuration
+==============================
+
+In case it is required to monitor nodes behind firewall, it can be configured 
+access to one of subnet nodes and used this node as a proxy node for others. 
+
+Proxy node can be set while node creation or in :guilabel:`Communications` tab 
+of node properties. To configure proxy node select node in object selector 
+:guilabel:`NetXMS Agent Proxy`.
+
+.. figure:: _images/create_node.png
+
+.. figure:: _images/node_communications_tab.png
+

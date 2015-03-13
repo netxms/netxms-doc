@@ -26,7 +26,9 @@ NetXMS server is daemon or service. It collects, process and stores data,
 does network discovery. Server is modular and can be extended with additional 
 functionality. By it selves server can collect only some simple 
 information about nodes or can use :term:`SNMP` agent to collect data from 
-SNMP-capable devices. Server uses 4701 port to communicate with agents.
+SNMP-capable devices. NetXMS has special drivers for different types of SNMP 
+devices that collect data like VLANs, interfaces and other default collected 
+information. 
 
 NetXMS server does not support horizontal scaling. For now it is possible 
 only event exchange between servers. 
@@ -34,7 +36,8 @@ only event exchange between servers.
 NetXMS agent is daemon or service that is installed on nodes to provide
 additional monitoring options and can be used like :term:`SNMP` agent or 
 NetXMS agent proxy. Agent implements communication with server and work with 
-configuration. Agent functionality is extended with subagents. 
+configuration. Agent functionality is extended with subagents. Server uses 
+4701 port to communicate with agents.
 
 There are default OS subagents and manually loaded like file manager, 
 ping or others. There are different types of subagents. It can be just 

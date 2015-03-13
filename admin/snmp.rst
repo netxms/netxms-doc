@@ -46,7 +46,8 @@ In SNMP Trap mapping configuration window can be set next parameters:
   - Trap OID or trap OID group with many subtree OIDs, matching OID will be given 
     to event as $1 parameter
   - Event that will be generated on selected Trap OID
-  - User Tag
+  - User Tag is special event attribute, that can be got by %u macros or as attribute 
+    of event class. This attribute can be set there or by script. 
   - Parameters - OID values that will be passed to event as $2, $3, $4... parameters
 
 In parameter configuration(:guilabel:`Edit SNMP Trap Parameter Mapping`) can be 
@@ -54,7 +55,9 @@ configured next things:
 
   - Description of a parameter
   - Select if parameter should be found by OID or by position in the message
-  - Option not to convert value to hex string
+  - Option not to convert value to hex string. If string contains not readable 
+    symbols(symbol number less than space symbol number) it will be automatically 
+    converted to hex string, this option is required to prevent auto conversion. 
 
 .. figure:: _images/snmp_trap_mapping_configuration.png
 
@@ -74,7 +77,8 @@ Using ifTable and ifXTable
 There are 2 types of subtree that provides information about interfaces: old one 
 ifTable and new one ifXTable. Sometimes usage of new one creates error situations.
 In this situation ifXTable can be disabled. This can be done in Properties of 
-:term:`node <Node>` in :guilabel:`Polling`.
+:term:`node <Node>` in :guilabel:`Polling`. Or this configuration can be set 
+globally by changing ``UseIfXTable`` server configuration parameter.
 
 .. figure:: _images/node_polling_tab.png
 
@@ -93,6 +97,12 @@ proxy node select node in object selector :guilabel:`SNMP Proxy`.
 
 
 .. figure:: _images/node_communications_tab.png
+
+Agent configuration
+-------------------
+
+To enable SNMP proxy "EnableSNMPProxy" parameter should be set to "yes".
+
 
 Configure SNMP Trap Proxy
 =========================

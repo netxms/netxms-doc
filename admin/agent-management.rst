@@ -320,3 +320,7 @@ of node properties. To configure proxy node select node in object selector
 
 .. figure:: _images/node_communications_tab.png
 
+Agent configuration
+-------------------
+
+To enable NetXMS Agent proxy "EnableProxy" parameter should be set to "yes".

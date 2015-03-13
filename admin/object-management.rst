@@ -44,6 +44,8 @@ This script will be executed each configuration poll of each node.
 Access control
 ==============
 
+
+
 .. _object_tools:
 
 Object Tools
@@ -64,42 +66,245 @@ item of node menu.
 Internal
 --------
 
+Commands that are defined in :term:`Console`. The only command available for now is 
+:guilabel:`Wakeup node`. 
 
-Action
-------
+Agent Command
+-------------
 
+This tool will execute command on an agent node and will show it's output if 
+:guilabel:`Command generates output` option will be enabled. 
+
+.. figure:: _images/obj_tool_agent_command.png
+   :scale: 65%
+   
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+   
+   * - Field name
+     - Description
+   * - Name
+     - Name that will be shown in node menu. Submenu can be created with "->" notation. 
+   * - Description
+     - Description is shown in "Object Tools" view. Should be used to describe tool purpose.
+   * - Command
+     - Command name that should be executed on a agent node, this command should be defined in agent's config
+   * - Command generated output
+     - If this option is selected, then on command execution will be opened window with it's output. 
+   * - This tool requires confirmation before execution 
+     - If chosen, before execution of tool will be shown Yes/No pop-up with text from "Confirmation message" field.
+   * - Confirmation message
+     - Can be set the message that will be shown in confirmation pop-up. 
+   * - Show this tool in node commands
+     - If this option is selected, then this tool will be shown for applicable nodes 
+       on :guilabel:`Object Details` view as node command. 
+   * - Command name
+     - This will be shown as a name of the command.
+   * - Command short name
+     - Is used when usual name is too long for display.
+   * - Disable Object Tool
+     - If chosen, tool is not shown in node menu. 
 
 SNMP Table
 ----------
 
+:guilabel:`SNMP Table` is used to get SNMP table from node on which it is executed 
+and then show results in the table form. 
+
+.. figure:: _images/obj_tool_snmp_table.png
+   :scale: 65%
+   
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+   
+   * - Field name
+     - Description
+   * - Name
+     - Name that will be shown in node menu. Submenu can be created with "->" notation. 
+   * - Description
+     - Description is shown in "Object Tools" view. Should be used to describe tool purpose.
+   * - Title
+     - Title of view where table will be shown.
+   * - Use as index for second and subsequent columns OID suffix of first column
+     - This option defines that as suffix for columns OID's to match lines will be used suffix of columns OID
+   * - Use as index for second and subsequent columns Value of first column
+     - This option defines that as suffix for columns OID's to match lines will be used value of columns OID
+   * - This tool requires confirmation before execution 
+     - If chosen, before execution of tool will be shown Yes/No pop-up with text from "Confirmation message" field.
+   * - Confirmation message
+     - Can be set the message that will be shown in confirmation pop-up. 
+   * - Show this tool in node commands
+     - If this option is selected, then this tool will be shown for applicable nodes 
+       on :guilabel:`Object Details` view as node command. 
+   * - Command name
+     - This will be shown as a name of the command.
+   * - Command short name
+     - Is used when usual name is too long for display.
+   * - Disable Object Tool
+     - If chosen, tool is not shown in node menu. 
 
 Agent Table
 -----------
 
+:guilabel:`Agent Table` is used to get agent list from node on which it is executed 
+and then show results in the table form. 
+
+.. figure:: _images/obj_tool_agent_table.png
+   :scale: 65%
+   
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+   
+   * - Field name
+     - Description
+   * - Name
+     - Name that will be shown in node menu. Submenu can be created with "->" notation. 
+   * - Description
+     - Description is shown in "Object Tools" view. Should be used to describe tool purpose.
+   * - Title
+     - Title of view where table will be shown.
+   * - Parameter
+     - Name of list
+   * - Regular expression
+     - Regular expression that will parse each line of list to separate it on columns defined in :guilabel:`Columns` tab.
+   * - This tool requires confirmation before execution 
+     - If chosen, before execution of tool will be shown Yes/No pop-up with text from "Confirmation message" field.
+   * - Confirmation message
+     - Can be set the message that will be shown in confirmation pop-up. 
+   * - Show this tool in node commands
+     - If this option is selected, then this tool will be shown for applicable nodes 
+       on :guilabel:`Object Details` view as node command. 
+   * - Command name
+     - This will be shown as a name of the command.
+   * - Command short name
+     - Is used when usual name is too long for display.
+   * - Disable Object Tool
+     - If chosen, tool is not shown in node menu. 
 
 URL
 ---
 
+:guilabel:`URL` tool opens URL in web browser. 
+
+.. figure:: _images/obj_tool_url.png
+   :scale: 65%
+  
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+   
+   * - Field name
+     - Description
+   * - Name
+     - Name that will be shown in node menu. Submenu can be created with "->" notation. 
+   * - Description
+     - Description is shown in "Object Tools" view. Should be used to describe tool purpose.
+   * - URL
+     - URL that should be passed to browser to be opened.
+   * - This tool requires confirmation before execution 
+     - If chosen, before execution of tool will be shown Yes/No pop-up with text from "Confirmation message" field.
+   * - Confirmation message
+     - Can be set the message that will be shown in confirmation pop-up. 
+   * - Show this tool in node commands
+     - If this option is selected, then this tool will be shown for applicable nodes 
+       on :guilabel:`Object Details` view as node command. 
+   * - Command name
+     - This will be shown as a name of the command.
+   * - Command short name
+     - Is used when usual name is too long for display.
+   * - Disable Object Tool
+     - If chosen, tool is not shown in node menu. 
+     
 
 Local Command
 -------------
 
+:guilabel:`Local Command` tool will execute command on the local node and will show it's output if 
+:guilabel:`Command generates output` option will be enabled. 
+
+This tool type is not visible from Web Console as there is not possible 
+to execute command on web page receiver's machine. 
+
+.. figure:: _images/obj_tool_local_command.png
+   :scale: 65%
+   
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+   
+   * - Field name
+     - Description
+   * - Name
+     - Name that will be shown in node menu. Submenu can be created with "->" notation. 
+   * - Description
+     - Description is shown in "Object Tools" view. Should be used to describe tool purpose.
+   * - Command
+     - Command that should be executed on a local machine
+   * - Command generated output
+     - If this option is selected, then on command execution will be opened window with it's output. 
+   * - This tool requires confirmation before execution 
+     - If chosen, before execution of tool will be shown Yes/No pop-up with text from "Confirmation message" field.
+   * - Confirmation message
+     - Can be set the message that will be shown in confirmation pop-up. 
+   * - Show this tool in node commands
+     - If this option is selected, then this tool will be shown for applicable nodes 
+       on :guilabel:`Object Details` view as node command. 
+   * - Command name
+     - This will be shown as a name of the command.
+   * - Command short name
+     - Is used when usual name is too long for display.
+   * - Disable Object Tool
+     - If chosen, tool is not shown in node menu. 
 
 Server Command
 --------------
 
+:guilabel:`Server command` tool can be used to execute command on a server. 
 
+.. figure:: _images/obj_tool_server_command.png
+   :scale: 65%
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+ 
+   * - Field name
+     - Description
+   * - Name
+     - Name that will be shown in node menu. Submenu can be created with "->" notation. 
+   * - Description
+     - Description is shown in "Object Tools" view. Should be used to describe tool purpose.
+   * - Command
+     - Command that should be executed on a server
+   * - Command generated output
+     - ***Not yet implemented for server actions***
+   * - This tool requires confirmation before execution 
+     - If chosen, before execution of tool will be shown Yes/No pop-up with text from "Confirmation message" field.
+   * - Confirmation message
+     - Can be set the message that will be shown in confirmation pop-up. 
+   * - Show this tool in node commands
+     - If this option is selected, then this tool will be shown for applicable nodes 
+       on :guilabel:`Object Details` view as node command. 
+   * - Command name
+     - This will be shown as a name of the command.
+   * - Command short name
+     - Is used when usual name is too long for display.
+   * - Disable Object Tool
+     - If chosen, tool is not shown in node menu. 
+     
+   
 Download File
 -------------
 
-
-"Download file" tool can be used to monitor agent logs. This tool will retrieve 
+:guilabel:`Download file` tool can be used to monitor agent logs. This tool will retrieve 
 the content of the file from agent. 
 
-.. figure:: _images/get_agent_file_properties.png
+.. figure:: _images/obj_tool_get_file.png
    :scale: 65%
-   
-|   
+
    
 .. list-table::
    :widths: 30 70
@@ -108,11 +313,11 @@ the content of the file from agent.
    * - Field name
      - Description
    * - Name
-     - Name that will be shown in node menu.
+     - Name that will be shown in node menu. Submenu can be created with "->" notation.
    * - Description
      - Description is shown in "Object Tools" view. Should be used to describe tool purpose.
    * - Remote File Name
-     - Name of file that will be retrieved. In Windows systems should be with double back slash as a separator(C:\\\\log\\\\log.log).     
+     - Name of file that will be retrieved. In Windows systems should be with double back slash as a separator(C:\\\\log\\\\log.log). Can be used `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_ macros    
    * - Limit initial download size
      - Limits the size of download file. If is set not to 500 tool will retrieve last 500 bytes of requested file. If is set to 0,  then will retrieve full file.
    * - Follow file changes
@@ -121,8 +326,15 @@ the content of the file from agent.
      - If chosen, before execution of tool will be shown Yes/No pop-up with text from "Confirmation message" field.
    * - Confirmation message
      - Can be set the message that will be shown in confirmation pop-up. 
+   * - Show this tool in node commands
+     - If this option is selected, then this tool will be shown for applicable nodes 
+       on :guilabel:`Object Details` view as node command. 
+   * - Command name
+     - This will be shown as a name of the command.
+   * - Command short name
+     - Is used when usual name is too long for display.
    * - Disable Object Tool
-     - If chosen, tool it is not shown in node menu. 
+     - If chosen, tool is not shown in node menu. 
      
      
 Macro Substitution
@@ -166,6 +378,42 @@ If object tool called from alarm's pop-up menu the following additional macros a
 For any unknown macro name system will try to read custom attribute with given name (attribute search is case sensitive). If attribute with given name not found,
 empty string will be inserted.
 
+Filer
+-----
+
+Filters are used to chose on witch nodes to show object tool. 
+There are 5 types of filtering. Show object tool:
+
+  1. if agent available on a node
+  2. if node supports SNMP
+  3. if node SNMP OID matches with provided string
+  4. if nodes OS matches provided comma separated regular expression list
+  5. if provided :term:`template <Template>` name matches provided comma separated regular expression list
+
+.. figure:: _images/obj_tool_filter.png
+
+Access Control
+--------------
+
+In :guilabel:`Access Control` tab can be defined witch users or groups can 
+execute this action. If no list will be empty - only administrator will be able 
+to execute this action. 
+
+.. figure:: _images/obj_tool_access_control.png
+
+Columns
+-------
+
+:guilabel:`Columns` tab is used only for :guilabel:`Agent Table` and 
+:guilabel:`SNMP Table` object tool types. 
+
+For :guilabel:`SNMP Table` it describes name and type of matching OID from 
+response message. 
+
+
+.. figure:: _images/obj_tool_columns1.png
+
+.. figure:: _images/obj_tool_columns2.png
 
 
 

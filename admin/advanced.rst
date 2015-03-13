@@ -5,6 +5,7 @@
 Advanced topics
 ###############
 
+.. _zones:
 
 Zones
 =====

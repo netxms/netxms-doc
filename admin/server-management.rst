@@ -164,3 +164,12 @@ Configuring self-monitoring
 
 Database connection pool
 ========================
+
+ICMP proxy
+==========
+
+To used ICMP proxy Ping subagent should be loaded for ICMP proxy node. 
+
+This proxy is used to check node availability when :ref:`Zones <zones>` are used. 
+
+.. figure:: _images/node_communications_tab.png

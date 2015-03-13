@@ -44,7 +44,56 @@ This script will be executed each configuration poll of each node.
 Access control
 ==============
 
+Object access rights controls access to NetXMS objects. Permissions given to an
+object inherited by all child objects, unless specifically blocked by turning
+off :guilabel:`Inherit access rights from parent object(s)` option in object's
+access control properties. Permissions given at different levels of the object
+tree summarize to form effective user rights for the object.
 
+.. figure:: _images/object_acess_rights.png
+   :scale: 65%
+
+The following object access rights can be granted:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Access Right
+     - Description
+   * - Access control
+     - Modify access control list for this object. Please note that user with
+       this access right can grant any other access rights to own account.
+   * - Acknowledge alarms
+     - Acknowledge alarms with this object as source.
+   * - Control
+     - For node objects, execute object tools of type :guilabel:`Remote
+       Command`.
+   * - Create child objects
+     - Create child objects (or bind existing) under this object.
+   * - Create helpdesk tickets
+     - Create ticket in external helpdesk system 
+   * - Delete
+     - Delete this object.
+   * - Modify
+     - Modify object's properties (except access control).
+   * - Push data
+     - Push data for DCIs on this object.
+   * - Read
+     - View object in the tree and read it's information. For node objects,
+       read access allows to view collected DCI data.
+   * - Send events
+     - Send events on behalf of this object.
+   * - Terminate alarms
+     - Terminate alarms with this object as source.
+   * - View alarms
+     - View alarms with this object as source.
+   * - Download file
+     - Allow user to download files from this node(from paths defined by filemng subagent). This access right is check also when download or tail of file is done from object tools. 
+   * - Upload file
+     - Allow user to upload files to this node(from paths defined by filemng subagent)
+   * - Manage files
+     - Allow user to move, rename, delete files from this node(from paths defined by filemng subagent)
 
 .. _object_tools:
 
@@ -66,7 +115,7 @@ item of node menu.
 Internal
 --------
 
-Commands that are defined in :term:`Console`. The only command available for now is 
+Commands that are defined in :term:`Management Console`. The only command available for now is 
 :guilabel:`Wakeup node`. 
 
 Agent Command

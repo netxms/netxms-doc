@@ -12,7 +12,7 @@ walk on a selected node :term:`nodes <Node>`. Node can be selected in browser
 by selecting :guilabel:`Set node object...` option in view menu or by opening 
 :guilabel:`MIB Explorer` from node menu. 
 
-.. figure:: _images/MIB_Explore.png
+.. figure:: _images/MIB_Explorer.png
 
 To run walk user should select line of tree from were will be requested all data. 
 By walk will be requested all OID subtree of selected item. 
@@ -36,7 +36,9 @@ SNMP Trap Configuration
 In this view is configured which event will be generated on exact trap OID and 
 which OID data will be used as event parameter data. 
 
-.. figure:: _image/snmp_trap_configuration.png
+
+.. figure:: _images/snmp_trap_configuration.png
+
 
 In SNMP Trap mapping configuration window can be set next parameters:
 
@@ -56,14 +58,6 @@ configured next things:
 
 .. figure:: _images/snmp_trap_mapping_configuration.png
 
-Drivers
-=======
-
-.. TODO:
-
-  Add chapter description
-
-
 Setting default SNMP credentials
 ================================
 
@@ -77,9 +71,12 @@ can be found :ref:`there<network-discovery>`.
 Using ifTable and ifXTable
 ==========================
 
-.. TODO:
+There are 2 types of subtree that provides information about interfaces: old one 
+ifTable and new one ifXTable. Sometimes usage of new one creates error situations.
+In this situation ifXTable can be disabled. This can be done in Properties of 
+:term:`node <Node>` in :guilabel:`Polling`.
 
-  Add chapter description
+.. figure:: _images/node_polling_tab.png
 
 Configure SNMP Proxy
 ====================
@@ -93,6 +90,7 @@ can be change in :guilabel:`Communications` tab of node properties. To configure
 proxy node select node in object selector :guilabel:`SNMP Proxy`.
 
 .. figure:: _images/create_node.png
+
 
 .. figure:: _images/node_communications_tab.png
 
@@ -139,13 +137,13 @@ Compiling MIBs
  - Use nxmibc binary to create a new compiled MIB file from all MIBs in directory. 
    Add parameter -z for compressed output file.
    
-.. codeblock::
+.. code-block:: shell
 
   nxmibc -d /usr/share/netxms/mibs -o /usr/share/netxms/mibs/netxms.mib
   
 Parameters recognized by nxmibc:
 
-.. codeblock::
+.. code-block:: shell
 
   nxmibc [options] source1 ... sourceN
 

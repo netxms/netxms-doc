@@ -178,7 +178,11 @@ editable attribute – name.
        - |SUBNET| Subnet
    * - |CONDITION| Condition
      - Object representing complicated condition – like "cpu on node1 is
-       overloaded and node2 is down for more than 10 minutes".
+       overloaded and node2 is down for more than 10 minutes". Conditions may 
+       represent more complicated status checks because each condition can have 
+       a script attached. Interval for evaluation of condition status is 
+       configured in Server Configuration Variables as ConditionPollingInterval 
+       with default value 60 seconds.
      -
    * - |TEMPLATE_ROOT| Template Root
      - Abstract object representing root of your template tree.
@@ -440,7 +444,3 @@ When it is required to write password or :guilabel:`Shared Secret` in agent
 configuration file, there is possibility to encrypt it. All passwords can 
 be encrypted with help of nxencpasswd command line tool and added in configuration 
 in encrypted way. 
-
-FAQ
-===
-

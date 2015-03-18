@@ -5,28 +5,105 @@
 Object management
 #################
 
-For object type description refer to :ref:`concept_object` chapter. 
-
 Object browser
 ==============
 
-NetXMS has eight top level objects – Entire Network, Service Root, 
-Template Root, Policy Root, Network Map Root, Dashboard Root, Report Root, 
-and Business Service Root. These objects served as an abstract root for 
-appropriate object tree. All top level objects has only one editable 
-attribute – name.
+:guilabel:`Object browser` organize all existing :term:`objects <Object>` in 
+hierarchical structure. NetXMS has eight top level objects – Entire Network, 
+Service Root, Template Root, Policy Root, Network Map Root, Dashboard Root, 
+Report Root, and Business Service Root. These objects served as an abstract 
+root for appropriate object tree. All top level objects has only one editable 
+attribute – name. 
 
-Add / remove objects
-====================
+Overall description about objects can be found in concepts part: :ref:`concept_object`.
+
+Properties
+----------
+
+Object browser has next options:
+ - Show filter :kbd:`CTRL+F2`, that shows search line that has special syntaxes 
+   for search. Syntaxes description can be found there: :ref:`object_browser_filters`.
+ - Show status indicator :kbd:`CTRL+F3`
+ - Hide unmanaged objects
+ - Hide check templates. This option will not show :guilabel:`Business Services` 
+   templates. 
+
+ 
+.. _object_browser_filters:
+ 
+Filters
+-------
+
+Buy default search is done by node name. In this type of search can be used
+'*' and '?' symbols for pattern search. 
+
+But there are few prefix that can be used for other search options:
+ - '/' - will search in comments
+ - '>' - will search by IP address
+
+Objects
+=======
+
+Detailed information about objects, it's usage, parents and childes can be found in 
+concept chapter, :ref:`concept_object`. In this section will be described only actions and 
+properties that can be applied on different object classes. 
+
+Subnet
+------
+
+Except common properties subnets has :guilabel:`Map Appearance` and :guilabel:`Trusted Nodes` 
+tabs. :guilabel:`Map Appearance` tab defines images that will be used to display this 
+object on a :term:`Network Map`. :guilabel:`Trusted Nodes` is used to define object list that 
+have access to this object for the script. 
+
+Full subnet can be managed or unamanged. Management status will be applied to all subnet node. 
+f subnet is deleted and is the only parent of a node, then node also will be deleted with 
+the subnet. :guilabel:`Upload file` action will upload file from server to all nodes 
+that have agent and have access to upload directory. 
+
+Tools
+Execute server script
+Alarms
+802.1x port state
+
+Node
+----
+
+Except common properties node has :guilabel:`Communications` tab that is responsible 
+for communication options with this node(like host name, agent proxy and authentication, 
+SNMP proxy and authentication and ICMP proxy), :guilabel:`Polling` tab is responsible 
+for disabling pols for specific node, :guilabel:`Location` is used to configure location
+of the node, :guilabel:`Map Appearance` tab defines images that will be used to display this 
+object on a :term:`Network Map`.
+
+Usually interfaces for nodes are created automatically by Configuration poll results, 
+but they can be also created manually with help of command :guilabel:`Create interface...` 
+
+.. figure:: _images/create_interface.png
 
 
-Containers – bind/unbind
-========================
+Mobile Device
+-------------
+
+Condition
+---------
+
+Conditions may represent more complicated status checks because each condition can have a script attached. 
+Interval for evaluation of condition status is configured in Server Configuration Variables as 
+ConditionPollingInterval with default value 60 seconds. Input values for the condition script 
+can be set in object properties. Such values are accessible via $1, $2, ... variables inside the 
+script. If the script returns 0, an activation event with the defined severity is created. 
+If the script returns any other value, then a deactivation event is created.
+
+Container
+---------
+
+Bind/Unbind
+~~~~~~~~~~~
 
 Containers can be created in Infrastructure Services tree. Existing nodes and 
 subnets can be added to containers by using Bind operation, and removed by using 
 Unbind operation.
-
 
 Automatic bind option
 ---------------------
@@ -41,8 +118,67 @@ should be used for node unbinding and can be written script it selves.
 
 This script will be executed each configuration poll of each node. 
 
+Common object properties
+========================
+
+General
+-------
+
+Each object has :guilabel:`General` tab in properties. There can be checked object 
+class and ID, and changed object name. Each object has unique ID in the system. 
+Object can be accessed by this ID. 
+
+
+Custom attributes
+-----------------
+
+Every object can have custom attributes defined either by user or integrated application 
+via NetXMS API. Custom attributes distinguished by names (an attribute name can contain up 
+to 127 printable characters), and have string values of unlimited length. However, if you wish 
+to access custom attributes in :term:`NXSL` scripts as properties of node object, you should name them 
+conforming to NXSL identifier naming constraints. To create or change value of custom attribute 
+manually, right-click object in NetXMS console, and select :menuselection:`Properties --> Custom Attributes tab`.
+
+.. figure:: _images/object_custom_attributes.png
+
+
+
+Status calculation
+------------------
+
+Each object has it's own status calculation properties. By default status is calculated  
+based on polling results, status of underlying objects, associated alarms and 
+status :term:`DCIs<DCI>`. But there can be used different options of status calculation. 
+
+Status calculation has two configuration parts: status propagation and status calculation.
+
+.. figure:: _images/object_status_calculation.png
+
+For status propagation are available next options:
+  - Default
+  - Unchanged
+  - Fixed value: Normal, Warning, Minor, Major, Fixed
+  - Relative with offset
+  - Severity based
+  
+For status calculation are available next options:
+  - Default
+  - Most critical
+  - Single threshold (%)
+  - Multiple thresholds
+
+
+Comments
+--------
+
+Each object in :guilabel:`Object Tree` can have comment. Comment can be set in 
+Properties of the object. 
+
+.. figure:: _images/object_comments.png
+
+
 Access control
-==============
+--------------
 
 Object access rights controls access to NetXMS objects. Permissions given to an
 object inherited by all child objects, unless specifically blocked by turning
@@ -94,6 +230,19 @@ The following object access rights can be granted:
      - Allow user to upload files to this node(from paths defined by filemng subagent)
    * - Manage files
      - Allow user to move, rename, delete files from this node(from paths defined by filemng subagent)
+
+
+
+Object Details
+==============
+
+Object details view provides main information about object. Each object has 
+:guilabel:`Overview` tab that gisplays general information about object
+(like: ID, GUID, Class, and status of the object) and :guilabel:`Comments`. 
+
+Subnet
+------
+
 
 .. _object_tools:
 
@@ -404,6 +553,8 @@ The following macros recognized:
      - Primary IP address of selected node object.
    * - OBJECT_NAME
      - Name of selected node object.
+   * - `custom_attribute`
+     - User defined attribute 
 
 If object tool called from alarm's pop-up menu the following additional macros are available:
 
@@ -466,22 +617,4 @@ response message.
 
 
 
-Custom attributes
-=================
 
-Every object can have custom attributes defined either by user or integrated application 
-via NetXMS API. Custom attributes distinguished by names (an attribute name can contain up 
-to 127 printable characters), and have string values of unlimited length. However, if you wish 
-to access custom attributes in :term:`NXSL` scripts as properties of node object, you should name them 
-conforming to NXSL identifier naming constraints. To create or change value of custom attribute 
-manually, right-click object in NetXMS console, and select :menuselection:`Properties --> Custom Attributes tab`.
-
-Condition
-=========
-
-Conditions may represent more complicated status checks because each condition can have a script attached. 
-Interval for evaluation of condition status is configured in Server Configuration Variables as 
-ConditionPollingInterval with default value 60 seconds. Input values for the condition script 
-can be set in object properties. Such values are accessible via $1, $2, ... variables inside the 
-script. If the script returns 0, an activation event with the defined severity is created. 
-If the script returns any other value, then a deactivation event is created.

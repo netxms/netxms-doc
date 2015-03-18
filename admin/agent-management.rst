@@ -323,4 +323,5 @@ of node properties. To configure proxy node select node in object selector
 Agent configuration
 -------------------
 
-To enable NetXMS Agent proxy "EnableProxy" parameter should be set to "yes".
+To enable NetXMS Agent proxy "EnableProxy" agent configuration parameter should 
+be set to "yes".

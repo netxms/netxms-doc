@@ -10,8 +10,11 @@ Scripting library
 =================
 
 
-Script Library is used to store scripts that can be afterwards executed as macros, part of 
-other script or just from server console. 
+:guilabel:`Script Library` is used to store scripts that can be afterwards executed as macros, 
+part of other script or just from server console. Scripts can be added, deleted and modified in 
+in this view. 
+
+.. figure:: _images/script_librarry.png
 
 
 Usage
@@ -24,6 +27,17 @@ Scripts from Script Librarry can be accesed as:
   4. executed as post action for pols - then script name should start from "`Hook::`\ " and then 
      should be name of poll like "Hook::ConfigurationPoll".
 
+.. _execute_server_script:
+     
+Execute Server Script
+=====================
+
+This view allows to execute arbitrary script. Script can be manually created just before execution, 
+and afterwards saved, can be taken from the script library, can be used modified script form the 
+script library and afterwards saved or saved as. If this view is opened on a node, then in the 
+script is available ``$node`` variable with node object. 
+
+.. figure:: _images/execute_server_script.png
 
 NXSL
 ====

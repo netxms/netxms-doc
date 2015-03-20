@@ -84,7 +84,8 @@ In EPP properties there are following sections:
    * - Action --> Situations 
      - :ref:`event_corelation` **TODO** functionality will be changed to NXSL Pers. Store
    * - Action --> Server Actions 
-     - There is defined list of actions to be executed if condition is met.
+     - There is defined list of actions to be executed if condition is met. For action 
+       configuration refer to :ref:`actions` chapter.
 
 
 
@@ -280,6 +281,8 @@ This escalation process can have as many steps as it is required.
 Example 1:
   - TODO: create example of escalation with screenshot of EPP
 
+.. _actions:
+  
 Actions
 =======
 
@@ -296,8 +299,10 @@ run has permission to run this command.
 Execute command on remote node
 ------------------------------
 
-Executes provided command on agent node. Check that user under witch :file:`nxagentd` process 
-run has permission to run this command. 
+Executes provided command name defined in this nodes agent configuration file. To this 
+command can be given parameters in format: ``commandName param1 param2 param3...`` 
+Check that user under witch :file:`nxagentd` process run has permission to run this 
+command. 
 
 Send e-mail
 -----------

@@ -161,10 +161,15 @@ Agent configuration file (nxagentd.conf)
      - Description 
      - Default Value
    * - Action
-     - Define action, which can be later executed by management server. See the Agent Configuration section for detailed description of this parameter.
+     - Define action, which can be later executed by management server. To cation can 
+       be given parameters from the server. They can be accessed as ``$1``, ``$2``... 
+       variables.  
      - No defaults
    * - ActionShellExec
-     - Same as Action, but on Windows platform agent will use shell to execute command instead of normal process creation. There is no difference between Action and ActionShellExec on UNIX platforms.
+     - Same as Action, but on Windows platform agent will use shell to execute command 
+       instead of normal process creation. There is no difference between Action and 
+       ActionShellExec on UNIX platforms.To cation can be given parameters from the 
+       server. They can be accessed as ``$1``, ``$2``... variables. 
      - No defaults
    * - AppAgent
      - The registered name of application with built in subagent library that can be as subagent by agent. 

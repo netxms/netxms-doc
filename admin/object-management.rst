@@ -57,14 +57,19 @@ object on a :term:`Network Map`. :guilabel:`Trusted Nodes` is used to define obj
 have access to this object for the script. 
 
 Full subnet can be managed or unamanged. Management status will be applied to all subnet node. 
-f subnet is deleted and is the only parent of a node, then node also will be deleted with 
-the subnet. :guilabel:`Upload file` action will upload file from server to all nodes 
+If subnet is deleted and is the only parent of a node, then node also will be deleted with 
+the subnet. :guilabel:`Upload file` menu item will upload file from server to all nodes 
 that have agent and have access to upload directory. 
 
-Tools
-Execute server script
-Alarms
-802.1x port state
+Under :guilabel:`Tools` menu are available predefined object tools that will be 
+executed on each subnet node. More about object tool configuration can be found
+there: :ref:`object_tools`.
+
+:guilabel:`Execute server script` will open 
+:ref:`execute server script view <execute_server_script>`. Were arbitrary script can be executed. 
+:guilabel:`Alarms` menu item will open view with all subnet nodes' alarms. And 
+:guilabel:`802.1x port state` will open table with port authentication states, that can be 
+exported to CSV.
 
 Node
 ----
@@ -77,10 +82,76 @@ of the node, :guilabel:`Map Appearance` tab defines images that will be used to 
 object on a :term:`Network Map`.
 
 Usually interfaces for nodes are created automatically by Configuration poll results, 
-but they can be also created manually with help of command :guilabel:`Create interface...` 
+but they can be also created manually with help of menu item :guilabel:`Create interface...` 
+:guilabel:`This interface is a physical port` is used just for information purposes. 
 
 .. figure:: _images/create_interface.png
 
+Information about service monitoring and :guilabel:`Create network service...` menu item 
+can be found there: :ref:`service-monitoring`.
+
+When node is unmanaged/managed - all it's childes like interfaces and service monitoring 
+are also unmanaged/managed. In unmanaged state :term:`metrics <Metric>` are not 
+collected and no pols are scheduled. 
+
+Node can be deleted from NetXMS by :guilabel:`Delete` menu item. Node is not deleted synchronously, 
+but it is scheduled node deletion. While node deletion interfaces, 
+
+If zones are enabled, then zone can be changed using :guilabel:`Change zone...` item.  
+:guilabel:`File manager` will open agent file manager view. By default 
+this view will be empty, to configure it refer to :ref:`agent_file_managment` chapter.
+:guilabel:`Upload file` can be used to upload file from server to node. This action can be 
+applied simultaneously to all nodes. 
+
+:guilabel:`Take screenshot` for now halfway implemented functionality. For now screenshot can 
+be taken only from Windows machines. 
+
+Description of :guilabel:`Edit agent's configuration` functionality can be found in :ref:`edit_agent_configuration_remotly` 
+chapter. 
+
+Poll options:
+
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+   
+   * - Poll Name
+     - Description
+   * - Status 
+     - 
+   * - Configuration
+     - 
+   * - Configuration (full)
+     - 
+   * - Instance discovery 
+     - 
+   * - Instance names
+     - 
+   * - Topology
+     - 
+     
+Under :guilabel:`Tools` menu are available predefined object tools that will be 
+executed on selected node. More about object tool configuration can be found
+there: :ref:`object_tools`.
+
+:guilabel:`Execute server script` will open 
+:ref:`execute server script view <execute_server_script>`. Were arbitrary script 
+can be executed. Node can be accessed with ``$node`` variable. 
+
+:guilabel:`MIB Explorer`
+:guilabel:`Geolocation`
+:guilabel:`Software Inventory`
+:guilabel:`Service Dependency`
+:guilabel:`Alarms`
+
+:guilabel:`Find switch port`
+:guilabel:`802.1x port state`
+
+:guilabel:`Topology`
+
+:guilabel:`Last values`
+:guilabel:`Data Collection Configuration`
 
 Mobile Device
 -------------
@@ -98,15 +169,15 @@ If the script returns any other value, then a deactivation event is created.
 Container
 ---------
 
-Bind/Unbind
-~~~~~~~~~~~
-
 Containers can be created in Infrastructure Services tree. Existing nodes and 
 subnets can be added to containers by using Bind operation, and removed by using 
-Unbind operation.
+Unbind operation. New nodes, conditions, clusters, containers, mobile devices and racks can also 
+be created. They can be created using required menu item of container under witch this object should 
+appear. Containers and nodes inside them can be moved by :guilabel:`Move to another container` menu 
+item or using drag&drop. 
 
 Automatic bind option
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 For each container can be configured automatic binding rules. This can be in 
 :guilabel:`Automatic Bind Rules` tab of container properties. 
@@ -258,7 +329,8 @@ There are some predefined object tools:
 
 If object tool should be removed for some time it can be just disabled and then 
 enabled when required. When object tool is disabled it is not shown under "Tools"
-item of node menu. 
+item of node menu. There is also common option to set image for each object tool in 
+the tool properties. 
 
 
 Internal
@@ -287,7 +359,9 @@ This tool will execute command on an agent node and will show it's output if
    * - Description
      - Description is shown in "Object Tools" view. Should be used to describe tool purpose.
    * - Command
-     - Command name that should be executed on a agent node, this command should be defined in agent's config
+     - Command name that should be executed on a agent node, this command should be 
+       defined in agent's config. To this command can be given parameters in format:
+       ``commandName param1 param2 param3...``
    * - Command generated output
      - If this option is selected, then on command execution will be opened window with it's output. 
    * - This tool requires confirmation before execution 
@@ -578,8 +652,10 @@ If object tool called from alarm's pop-up menu the following additional macros a
 For any unknown macro name system will try to read custom attribute with given name (attribute search is case sensitive). If attribute with given name not found,
 empty string will be inserted.
 
+Properties
+----------
 Filer
------
+~~~~~
 
 Filters are used to chose on witch nodes to show object tool. 
 There are 5 types of filtering. Show object tool:
@@ -593,7 +669,7 @@ There are 5 types of filtering. Show object tool:
 .. figure:: _images/obj_tool_filter.png
 
 Access Control
---------------
+~~~~~~~~~~~~~~
 
 In :guilabel:`Access Control` tab can be defined witch users or groups can 
 execute this action. If no list will be empty - only administrator will be able 
@@ -602,7 +678,7 @@ to execute this action.
 .. figure:: _images/obj_tool_access_control.png
 
 Columns
--------
+~~~~~~~
 
 :guilabel:`Columns` tab is used only for :guilabel:`Agent Table` and 
 :guilabel:`SNMP Table` object tool types. 
@@ -615,6 +691,95 @@ response message.
 
 .. figure:: _images/obj_tool_columns2.png
 
+Predefined Object Tools
+=======================
+
+NetXMS is deviled with some predefined Object Tools. There is full list of them:
+
+.. list-table::
+   :widths: 35 25 70 30
+   :header-rows: 1
+ 
+   * - Name
+     - Type
+     - Description
+     - Filter
+   * - :menuselection:`&Connect-->Open &web browser`
+     - URL
+     - Open embedded web browser to node
+     - 
+   * - :menuselection:`&Connect->Open &web browser (HTTPS)`
+     - URL
+     - Open embedded web browser to node using HTTPS
+     - 
+   * - :menuselection:`&Info->&Agent->&Subagent list`
+     - Agent Table
+     - Show list of loaded subagents
+     - NetXMS agent should be available
+   * - :menuselection:`&Info->&Agent->Configured &ICMP targets`
+     - Agent Table
+     - Show list of actions supported by agent
+     - NetXMS agent should be available
+   * - :menuselection:`&Info->&Agent->Supported &actions`
+     - Agent Table
+     - Show list of actions supported by agent
+     - NetXMS agent should be available
+   * - :menuselection:`&Info->&Agent->Supported &lists`
+     - Agent Table
+     - Show list of lists supported by agent
+     - NetXMS agent should be available
+   * - :menuselection:`&Info->&Agent->Supported &parameters`
+     - Agent Table
+     - Show list of parameters supported by agent
+     - NetXMS agent should be available
+   * - :menuselection:`&Info->&Process list`
+     - Agent Table
+     - Show list of currently running processes
+     - NetXMS agent should be available
+   * - :menuselection:`&Info->&Routing table (SNMP)`
+     - SNMP Table
+     - Show IP routing table
+     - NetXMS should support SNMP
+   * - :menuselection:`&Info->&Switch forwarding database (FDB)`
+     - SNMP Table
+     - Show switch forwarding database
+     - NetXMS should support SNMP
+   * - :menuselection:`&Info->Active &user sessions`
+     - Agent Table
+     - Show list of active user sessions
+     - NetXMS agent should be available
+   * - :menuselection:`&Info->AR&P cache (Agent)`
+     - Agent Table
+     - Show ARP cache
+     - NetXMS agent should be available
+   * - :menuselection:`&Info->Topology table (CDP)`
+     - SNMP Table
+     - Show topology table (CDP)
+     - NetXMS should support SNMP
+   * - :menuselection:`&Info->Topology table (LLDP)`
+     - SNMP Table
+     - Show topology table (LLDP)
+     - NetXMS should support SNMP
+   * - :menuselection:`&Info->Topology table (Nortel)`
+     - SNMP Table
+     - Show topology table (Nortel protocol)
+     - NetXMS should support SNMP
+   * - :menuselection:`&Restart system`
+     - Action
+     - Restart target node via NetXMS agent
+     - NetXMS agent should be available
+   * - :menuselection:`&Shutdown system`
+     - Action
+     - Shutdown target node via NetXMS agent
+     - NetXMS agent should be available
+   * - :menuselection:`&Wakeup node`
+     - Internal
+     - Wakeup node using Wake-On-LAN magic packet
+     - 
+   * - :menuselection:`Restart &agent`
+     - Action
+     - Restart NetXMS agent on target node
+     - NetXMS agent should be available
 
 
 

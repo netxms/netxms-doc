@@ -132,19 +132,7 @@ editable attribute – name.
      - Object representing network service running on a node (like http or
        ssh), which is accessible online (via TCP IP). Network Service objects 
        are always created manually. Currently, the system works with the following 
-       protocols - HTTP, POP3, SMTP, Telnet, SSH and Custom protocol type. For Custom
-       protocol, a user should define the TCP port number and the system will be
-       checking whether that port is available. For the predefined standard services
-       the system will also check whether an appropriate response is returned. In case
-       of SMTP, the system will send a test mail, in case of POP3 – try to log in with
-       a certain user, in case of HTTP – check whether the contents of a desired web
-       page correspond to a certain given template. As soon as the Network Service
-       object is created, it will be automatically included into the status poll. Each
-       time when the status poll for the particular node is carried out, all Network
-       Service objects are polled for a reply. If an object's reply corresponds to a
-       certain condition, its status is set as NORMAL. If an object is not responding,
-       its status will be hanged to CRITICAL. For more information on object statuses
-       and object status estimation, please refer to Object Status chapter.
+       protocols - HTTP, POP3, SMTP, Telnet, SSH and Custom protocol type. 
      -
    * - |VPN| VPN Connector
      - Object representing VPN tunnel endpoint. Such objects can be created to

@@ -2,6 +2,8 @@
 Remote file management
 ######################
 
+.. _agent_file_managment:
+
 Agent file management
 =====================
 
@@ -18,9 +20,33 @@ Required Configuration
 Subagent configuration
 ~~~~~~~~~~~~~~~~~~~~~~
 
-To do any manipulations with files on a node it is required to load filemng subagent and 
-configure accessible paths. More about subagent configuration can be found there: :ref:`filemgr-subagent-label`.
+To do any manipulations with files on a node it is required to load filemng 
+subagent and configure accessible paths.  It provides 
+possibility to upload, download, delete, move and rename files. 
 
+All configuration parameters related to filemng subagent should be placed 
+into **\*filemgr** section of agent's configuration file. 
+The following configuration parameters are supported:
+
++----------------+---------+-------------------------------------------+----------------+
+| Parameter      | Format  | Description                               | Default value  |
++================+=========+===========================================+================+
+| RootFolder     | String  | The folder to witch will be given access. | no             |
++----------------+---------+-------------------------------------------+----------------+
+
+Agent's configuration file example:
+
+.. code-block:: cfg
+
+   MasterServers = netxms.demo
+   SubAgent = filemgr.nsm
+
+   [filemgr]
+   RootFolder = /home/zev
+   RootFolder = /home/zev/etc
+   RootFolder = /logs 
+
+   
 Access rights
 ~~~~~~~~~~~~~
 To view File Manager View it's enough to have "Read" access to node. 

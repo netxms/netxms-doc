@@ -114,6 +114,8 @@ For Windows systems:
 Agent configuration options from server
 =======================================
 
+.. _edit_agent_configuration_remotly:
+
 Edit configuration file remotely
 --------------------------------
 

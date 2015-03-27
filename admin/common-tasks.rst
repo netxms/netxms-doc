@@ -731,6 +731,7 @@ UPS monitoring
 Cluster monitoring
 ==================
 
+.. _monitoring-mobile-device:
 
 Monitoring mobile devices
 =========================

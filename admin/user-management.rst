@@ -464,7 +464,7 @@ Active Directory
    * - LdapUserDeleteAction
      - 1
    * - LdapMappingName
-     - cn
+     - sAMAccountName
    * - LdapMappingFullName
      - displayName
    * - LdapMappingDescription

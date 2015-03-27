@@ -32,6 +32,8 @@ It is also possibility to push data to server. If DCI source is set to
 :guilabel:`Push`, server just waits for new values instead of polling data
 source.
 
+.. _dci-configuration:
+
 DCI configuration
 =================
 
@@ -41,10 +43,14 @@ Basic configuration
 Data collection for a node can be configured using management console. To open
 data collection configuration window, right-click on node object in
 :guilabel:`Object Browser` or on a :guilabel:`Network Map`, and click
-:guilabel:`Data Collection`. You will see the list of configured data
+:guilabel:`Data Collection Configuration`. You will see the list of configured data
 collection items. From here, you can add new or change existing parameters to
 monitor. Right click on the item will open pop-up menu with all possible
 actions.
+
+.. todo: 
+Add description of each action in DCI object menu. Separate each field description 
+by property pages. 
 
 Each DCI have multiple attributes which affects the way data is collected.
 Detailed information about each attribute is given below.
@@ -114,7 +120,7 @@ Advanced Schedule
 If you turn on this flag, NetXMS server will use custom schedule for collecting
 DCI values instead of fixed intervals. This schedule can be configured on the
 :guilabel:`Schedule` page. Advanced schedule consists of one or more records;
-each representing desired data collection time in :term:`cron`-style format.
+each representing desired data collection time in cron-style format.
 Record has five fields, separated by spaces: minute, hour, day of month, month,
 and day of week.
 
@@ -256,7 +262,7 @@ execution is a final DCI value. Transformation script gets original value as
 first argument (available via special variable ``$1``), and also has two
 predefined global variables: ``$node`` (reference to current node object), and
 ``$dci`` (reference to current DCI object). For more information about NetXMS
-scripting language, please consult :ref:`nxsl` chapter in this manual.
+scripting language, please consult :ref:`scripting` chapter in this manual.
 
 .. _dci-push-parameters-label:
 
@@ -291,7 +297,13 @@ Table DCIs
 
 Table DCI collects and stores data in table format(multi row, column). 
 
+.. _last-values:
 
+Last DCI values View
+====================
+
+.. todo:
+Add description of this view with all menu items. 
 
 Thresholds
 ==========

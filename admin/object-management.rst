@@ -51,10 +51,14 @@ properties that can be applied on different object classes.
 Subnet
 ------
 
+Property pages:
+
 Except common properties subnets has :guilabel:`Map Appearance` and :guilabel:`Trusted Nodes` 
 tabs. :guilabel:`Map Appearance` tab defines images that will be used to display this 
 object on a :term:`Network Map`. :guilabel:`Trusted Nodes` is used to define object list that 
-have access to this object for the script. 
+have access to this object from the script. 
+
+Menu items:
 
 Full subnet can be managed or unamanged. Management status will be applied to all subnet node. 
 If subnet is deleted and is the only parent of a node, then node also will be deleted with 
@@ -74,12 +78,16 @@ exported to CSV.
 Node
 ----
 
+Property pages:
+
 Except common properties node has :guilabel:`Communications` tab that is responsible 
 for communication options with this node(like host name, agent proxy and authentication, 
 SNMP proxy and authentication and ICMP proxy), :guilabel:`Polling` tab is responsible 
 for disabling pols for specific node, :guilabel:`Location` is used to configure location
 of the node, :guilabel:`Map Appearance` tab defines images that will be used to display this 
 object on a :term:`Network Map`.
+
+Menu items:
 
 Usually interfaces for nodes are created automatically by Configuration poll results, 
 but they can be also created manually with help of menu item :guilabel:`Create interface...` 
@@ -95,7 +103,8 @@ are also unmanaged/managed. In unmanaged state :term:`metrics <Metric>` are not
 collected and no pols are scheduled. 
 
 Node can be deleted from NetXMS by :guilabel:`Delete` menu item. Node is not deleted synchronously, 
-but it is scheduled node deletion. While node deletion interfaces, 
+but it is scheduled node deletion. While node deletion all data bout this node is 
+also collected(like metrics).
 
 If zones are enabled, then zone can be changed using :guilabel:`Change zone...` item.  
 :guilabel:`File manager` will open agent file manager view. By default 
@@ -139,22 +148,72 @@ there: :ref:`object_tools`.
 :ref:`execute server script view <execute_server_script>`. Were arbitrary script 
 can be executed. Node can be accessed with ``$node`` variable. 
 
-:guilabel:`MIB Explorer`
-:guilabel:`Geolocation`
-:guilabel:`Software Inventory`
-:guilabel:`Service Dependency`
-:guilabel:`Alarms`
+:guilabel:`MIB Explorer` will open :ref:`MIB expolorer view<mib_expolorer>`. If 
+geolocation of the node is set, then with help of :guilabel:`Geolocation` item can be 
+opened map with shown on it object location. :guilabel:`Software Inventory` will show 
+full software list for nodes with Windows systems or Linux systems(that used rpn or deb 
+packages) and have NetXMS agent installed. :guilabel:`Service Dependency` will build 
+tree from this node with all container where this node is included. :guilabel:`Alarms` 
+will open alarm view with alarms only for this specific node. 
 
-:guilabel:`Find switch port`
-:guilabel:`802.1x port state`
+:guilabel:`Find switch port` will open view with log of searchs of switch port that 
+with witch this node is connected. Wile search we will check one by one interfaces 
+and will show first successful result. 
 
-:guilabel:`Topology`
+:guilabel:`802.1x port state` will open table with port authentication states, that can be 
+exported to CSV.
 
-:guilabel:`Last values`
-:guilabel:`Data Collection Configuration`
+:guilabel:`Topology` menu item contains all options of predefined network maps for this
+node and some other options:
+
+:guilabel:`Routing table` 
+:guilabel:`IP route from...` will build network map with route form selected node to 
+node that is selected form Object selector window. 
+:guilabel:`IP route to...` will build network map with route to selected node from 
+node that is selected form Object selector window. 
+:guilabel:`IP Neighbors` will show all IP neighbors of this node. 
+
+:guilabel:`Switch forwarding database(MAC address table)`
+:guilabel:`VLANs`
+:guilabel:`Layer 2 Topology`
+
+:guilabel:`Radio interface`
+:guilabel:`Wirless stations`
+
+:guilabel:`Last values` will open :ref:`Last Values view<last-values>`. 
+:guilabel:`Data Collection Configuration` will open 
+:ref:`Data Collection Configuration view<dci-configuration>`, that is used 
+to configure collected :term:`metrics <Metric>` from node. 
 
 Mobile Device
 -------------
+
+Mobile device objects are added manually. More information about required 
+configuration to monitor mobile devices can be found there: :ref:`monitoring-mobile-device`.
+
+Property pages:
+
+Mobile Device object has only default property page configuration. 
+
+Menu items:
+
+Each phone object can be managed/unmanaged and deleted. In umnanaged state 
+:term:`metrics <Metric>` of this device are not collected and no pols are scheduled. 
+When mobile object is deleted all it's data is also deleted. No history data will 
+be left. 
+
+:guilabel:`Execute server script` will open 
+:ref:`execute server script view <execute_server_script>`. Were arbitrary script can be executed. 
+:guilabel:`Geolocation History` will open view were will be shown history of displacement 
+of this device. From the menu can be selected the period to show on history map. 
+:guilabel:`Geolocation` will show last known location of this device. 
+:guilabel:`Alarms` menu item will open view with all subnet nodes' alarms.
+
+:guilabel:`Last values` will open :ref:`Last Values view<last-values>`. 
+:guilabel:`Data Collection Configuration` will open 
+:ref:`Data Collection Configuration view<dci-configuration>`, that is used 
+to configure collected :term:`metrics <Metric>` from node. 
+
 
 Condition
 ---------
@@ -166,6 +225,23 @@ can be set in object properties. Such values are accessible via $1, $2, ... vari
 script. If the script returns 0, an activation event with the defined severity is created. 
 If the script returns any other value, then a deactivation event is created.
 
+Besides default property pages condition has also:
+   - :guilabel:`Events and Status`, were can be set activation and deactivation events, 
+     shource of this objects and status of active and inactive condition.
+   - :guilabel:`Data`, were can be set DCI's that's data will be given to a script for 
+     condition status calculation. 
+   - :guilabel:`Script` tab is used to write script that will calculate if condition should 
+     be activated or deactivated.
+   - :guilabel:`Map Appearance` tab defines images that will be used to display this 
+      object on a :term:`Network Map`. 
+   - :guilabel:`Trusted Nodes` is used to define object list that 
+      have access to this object from the script. 
+     
+Menu items:
+
+Condition can be manged\unmanaged. If condition is unmanaged, evaluation of condition is 
+not run. Condition can be deleted. 
+
 Container
 ---------
 
@@ -176,10 +252,43 @@ be created. They can be created using required menu item of container under witc
 appear. Containers and nodes inside them can be moved by :guilabel:`Move to another container` menu 
 item or using drag&drop. 
 
+Besides default property pages condition has also:
+   - :guilabel:`Automatic bind` about this functionality can be found :ref:`there<automatic-bind>`
+   - :guilabel:`Location`  is used to configure location of the node
+   - :guilabel:`Map Appearance` tab defines images that will be used to display this 
+      object on a :term:`Network Map`. 
+   - :guilabel:`Trusted Nodes` is used to define object list that 
+      have access to this object from the script. 
+
+Menu items:
+
+There are special menu item for each object that can be created in container. Objects 
+like rack, container, mobile device, cluster are manually created objects. Node can be 
+manually created or found by network discovery. In case if it is required to add  
+already existing object to container use :guilabel:`Bind...` menu item. To remove node 
+from container, but do not delete it use :guilabel:`Unbind...` menu item. 
+
+Using :guilabel:`Manage`/:guilabel:`Unmanage` all nodes will be managed/unmanaged under 
+container. Container can be deleted. If deleted container was the only one parent of 
+the object, then this object will be also deleted. :guilabel:`Upload file...` will 
+upload file from server to all nodes under container, same as each tool under 
+:guilabel:`Tools` menu item will be executed on each node. 
+
+:guilabel:`Execute server script`   will open 
+:ref:`execute server script view <execute_server_script>`. Were arbitrary script can 
+be executed. :guilabel:`Geolocation` will show location of container on geographic map. 
+
+:guilabel:`Alarms` will open alarm view with all active alarms for all children of this 
+container. 
+:guilabel:`802.1x port state` will open table with port authentication states of all 
+devices that are under this container. This information can be exported to CSV.
+
+.. _automatic-bind:
+
 Automatic bind option
 ~~~~~~~~~~~~~~~~~~~~~
 
-For each container can be configured automatic binding rules. This can be in 
+For each container can be configured automatic binding rules. This can be done in 
 :guilabel:`Automatic Bind Rules` tab of container properties. 
 
 ..figure:: _images/automatic_bind_rules.png

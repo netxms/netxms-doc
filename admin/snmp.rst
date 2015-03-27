@@ -4,6 +4,8 @@
 SNMP
 ####
 
+.. _mib_expolorer:
+
 MIB Explorer
 ============
 

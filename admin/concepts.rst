@@ -350,6 +350,8 @@ types, usually performed with different intervals:
 | Routing       | Gather information about IP routing                                                          |
 +---------------+----------------------------------------------------------------------------------------------+
    
+.. _basic-concepts-dci:
+   
 Data Collection
 ===============
 

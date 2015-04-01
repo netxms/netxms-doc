@@ -327,3 +327,105 @@ Agent configuration
 
 To enable NetXMS Agent proxy "EnableProxy" agent configuration parameter should 
 be set to "yes".
+
+.. _agent-external-parameter:
+
+Agent External Metrics
+======================
+
+Other option to define new Metric that can be collected form node is to use 
+``ExternalParameter``/``ExternalParameterShellExec``, or ``ExternalList``, or 
+``ExternalParametersProvider`` configuration parameters to define command that will 
+be executed on a node and it's output will be provided as a Metric. In such way can 
+be added parameter and list metrics. 
+
+ExternalParameter/ExternalParameterShellExec
+--------------------------------------------
+
+``ExternalParameter`` defines name of the metric and command that is executed synchronously 
+when this metric is requested  by server. There can be provided parameters form DCI 
+configuration, that will be available like $1, $2, $3..., $9 variables. To accept 
+arguments metric name should contain "(*)" symbols after name. Only first line of 
+script output will be given as a result of execution(metric value).
+
+``ExternalParameterShellExec`` has same meaning as ``ExternalParameter`` with exception that 
+agent will use shell to execute specified command instead of system process exeution 
+API. This difference presented only on Windows system, on other systems 
+``ExternalParameter`` and ``ExternalParameterShellExec`` behaves identically.
+
+To add multiple parameters, you should use multiple 
+``ExternalParameter``/``ExternalParameterShellExec`` entries.
+
+As this commands are executed synchronously, long commands may cause timeout. In this 
+case ``ExecTimeout`` configuration parameter can be set to change external parameter 
+execution timeout or ``ExternalParametersProvider`` can be used. 
+
+.. code-block:: cfg
+
+  # Exaple
+
+  # Woithout DCI parameters
+  ExternalParameter=Name:command
+  ExternalParameterShellExec=Name:command
+
+  # With DCI parameters
+  ExternalParameter=Name(*):command $1 $2
+  ExternalParameterShellExec=Name(*):command $1 $2
+
+  #Real examples
+  ExternalParameter = Test:echo test
+  ExternalParameter = LineCount(*):cat $1 | wc -l
+  
+  
+ExternalList
+------------
+
+``ExternalList`` defines name of the list metric and command that is executed 
+synchronously when this metric is requested by server. There can be provided parameters 
+form DCI configuration, that will be available like $1, $2, $3..., $9 variables. To 
+accept arguments metric name should contain "(*)" symbols after name. Lines of list 
+are separated with new line. 
+
+.. code-block:: cfg
+
+  # Exaple
+
+  # Woithout DCI parameters
+  ExternalList=Name:command
+
+  # With DCI parameters
+  ExternalList=Name(*):command $1 $2
+
+  
+ExternalParametersProvider
+--------------------------
+
+``ExternalList`` defines command(script) and execution interval in seconds. Defined 
+script will be executed as per interval and agent will cache parameter list. When server 
+will request one of provided parameters it's value will be read from the agent cache. 
+Main purpose is to providing data from long-running processes, or return multiple 
+values at once. This approach can be also used for getting table database results in 
+parameter way(like columnName=value). 
+
+Script should print one or more "Parameter=Value" pairs to standard output. Multiple 
+pairs should be separated by new line. If parameter takes argument, it should be 
+included in "Parameter(...)".
+
+Example of the script:
+.. code-block:: shell
+  
+  #!/bin/sh
+ 
+  echo 'Parameter1=Value1'
+  echo 'Parameter2=Value2'
+  echo 'ParameterWithArgs(AAA)=Value3'
+  echo 'ParameterWithArgs(BBB)=Value4'
+  
+Example of agent configuration:
+.. code-block:: cfg
+  
+  #Exaple
+  ExternalParametersProvider=PATH_TO_PROVIDER_SCRIPT:POLL_TIME_IN_SECONDS
+  
+  #Example (run /tmp/test.sh every 5 seconds)
+  ExternalParametersProvider=/tmp/test.sh:5

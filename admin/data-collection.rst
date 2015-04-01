@@ -49,8 +49,8 @@ monitor. Right click on the item will open pop-up menu with all possible
 actions.
 
 .. todo: 
-Add description of each action in DCI object menu. Separate each field description 
-by property pages. 
+  Add description of each action in DCI object menu. Separate each field description 
+  by property pages. 
 
 Each DCI have multiple attributes which affects the way data is collected.
 Detailed information about each attribute is given below.
@@ -303,7 +303,7 @@ Last DCI values View
 ====================
 
 .. todo:
-Add description of this view with all menu items. 
+  Add description of this view with all menu items. 
 
 Thresholds
 ==========

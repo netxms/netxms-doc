@@ -251,7 +251,10 @@ Agent configuration file (nxagentd.conf)
      - Adds metric handled by external command. To add multiple parameters, you should use multiple ``ExternalParameter`` entries. 
      - No defaults
    * - ExternalParameterShellExec
-     - 
+     - ExternalParameterShellExec has same meaning as ExternalParameter with exception that 
+       agent will use shell to execute specified command instead of system process exeution 
+       API. This difference presented only on Windows system, on other systems 
+       ExternalParameter and ExternalParameterShellExec behaves identically.
      - 
    * - ExternalParametersProvider
      - Adds list of metrics that are cashed by agent and returned to server per request. Metrics should be returned in *metric=value* format each pair in new line. 
@@ -1383,7 +1386,7 @@ nxsnmpwalk
 nxupload
 --------
 
-
+.. _list-of-supported-metrics:
 
 List of supported metrics
 =========================

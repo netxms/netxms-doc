@@ -214,6 +214,21 @@ of this device. From the menu can be selected the period to show on history map.
 :ref:`Data Collection Configuration view<dci-configuration>`, that is used 
 to configure collected :term:`metrics <Metric>` from node. 
 
+Rack
+----
+
+Cluster
+-------
+
+Intrface
+--------
+
+Network Service
+---------------
+
+VPN Connector
+-------------
+
 
 Condition
 ---------

@@ -707,10 +707,284 @@ HTTP check example:
 Database monitoring
 ===================
 
-
+There are created few specialized monitoring subagents: Oracle, DB2, MongoDB. Further 
+will be described how to configure and use this subagents. Besides this there is 
+opportunity to monitor also other types of databases supported by NetXMS 
+server(:ref:`link to supported database list<supported-db-list>`) using database query 
+suabgent as this databases support receiving performance parameters using queries. 
+This subagent details are described in :ref:`dbquery` chapter. 
 
 Oracle
 ------
+
+NetXMS subagent for Oracle DBMS monitoring (further referred to as Oracle subagent) monitors 
+one or more instances of Oracle databases and reports various database-related parameters.
+
+All parameters available from Oracle subagent gathered or calculated once per minute thus it's 
+recommended to set DCI poll interval for these items to 60 seconds or more. All parameters are 
+obtained or derived from the data available in Oracle's data dictionary tables and views through 
+regular select queries. Oracle subagent does not monitor any of the metrics related to lower level 
+database layers, such as database processes. Monitoring of such parameters can be achieved through 
+the standard NetXMS functionality.
+
+Pre-requisites
+~~~~~~~~~~~~~~
+
+An Oracle user with the role **select_catalog_role** assigned.
+
+Required rights can be assigned to user with the following query:
+
+.. code-block:: sql
+   
+   grant select_catalog_role to user;
+
+Where *user* is the user configured in Oracle subagent for database access.
+
+
+Configuration file
+~~~~~~~~~~~~~~~~~~
+
+Oracle subagent can be configured using XML configuration file (usually created 
+as separate file in configuration include directory), or in simplified INI format,
+usually in main agent configuration file.
+
+XML configuration:
+
+You can specify multiple databases in the **oracle** section. Each database description 
+must be surrounded by database tags with the **id** attribute. It can be any unique integer 
+and instructs the Oracle subagent about the order in which database sections will be processed.
+
+Each database definition supports the following parameters:
+
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Parameter                              | Description                                                                                                |
++========================================+============================================================================================================+
+| Id                                     | Database identifier. It will be used to address this database in parameters.                               |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Name                                   | Database TNS name or connection string.                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Username                               | User name for connecting to database.                                                                      |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Password                               | Database user password.                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| EncryptedPassword                      | Database user password encrypted with nxencpasswd.                                                         |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+
+Sample Oracle subagent configuration file in XML format:
+
+.. code-block:: xml
+
+   <config>
+       <agent>
+           <subagent>oracle.nsm</subagent>
+       </agent>
+       <oracle>
+           <databases>
+               <database id="1">
+                   <id>DB1</id>
+                   <tnsname>TEST</tnsname>
+                   <username>NXMONITOR</username>
+                   <password>NXMONITOR</password>
+               </database>
+               <database id="2">
+                   <id>DB2</id>
+                   <tnsname>PROD</tnsname>
+                   <username>NETXMS</username>
+                   <password>PASSWORD</password>
+               </database>
+           </databases>
+       </oracle>
+   </config>
+
+INI configuration:
+
+You can specify only one database when using INI configuration format. If you need 
+to monitor multiple databases from same agent, you should use configuration file in XML format. 
+
+**ORACLE** section can contain the following parameters:
+
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Parameter                              | Description                                                                                                |
++========================================+============================================================================================================+
+| Id                                     | Database identifier. It will be used to address this database in parameters.                               |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Name                                   | Database TNS name or connection string.                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Username                               | User name for connecting to database.                                                                      |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Password                               | Database user password.                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| EncryptedPassword                      | Database user password encrypted with nxencpasswd.                                                         |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+
+Sample Oracle subagent configuration file in INI format:
+
+.. code-block:: cfg
+
+   *ORACLE
+   ID = DB1
+   TNSName = TEST
+   Username = NXMONITOR
+   Password = NXMONITOR
+
+Parameters
+~~~~~~~~~~
+
+When loaded, Oracle subagent adds the following parameters to agent (all parameters requires database ID as first argument):
+
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Parameter                                               | Description                                                                       |
++=========================================================+===================================================================================+
+| Oracle.CriticalStats.AutoArchivingOff(*dbid*)           | Archive logs enabled but auto archiving off (YES/NO)                              |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.CriticalStats.DatafilesNeedMediaRecovery(*dbid*) | Number of datafiles that need media recovery                                      |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.CriticalStats.DFOffCount(*dbid*)                 | Number of offline datafiles                                                       |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.CriticalStats.FailedJobs(*dbid*)                 | Number of failed jobs                                                             |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.CriticalStats.FullSegmentsCount(*dbid*)          | Number of segments that cannot extend                                             |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.CriticalStats.RBSegsNotOnlineCount(*dbid*)       | Number of rollback segments not online                                            |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.CriticalStats.TSOffCount(*dbid*)                 | Number of offline tablespaces                                                     |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Cursors.Count(*dbid*)                            | Current number of opened cursors system-wide                                      |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DataFile.AvgIoTime(*dbid*, *datafile*)           | Average time spent on single I/O operation for *datafile* in milliseconds         |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DataFile.Blocks(*dbid*, *datafile*)              | *datafile* size in blocks                                                         |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DataFile.BlockSize(*dbid*, *datafile*)           | *datafile* block size                                                             |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DataFile.Bytes(*dbid*, *datafile*)               | *datafile* size in bytes                                                          |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DataFile.FullName(*dbid*, *datafile*)            | *datafile* full name                                                              |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DataFile.MaxIoReadTime(*dbid*, *datafile*)       | Maximum time spent on a single read for *datafile* in milliseconds                |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DataFile.MaxIoWriteTime(*dbid*, *datafile*)      | Maximum time spent on a single write for *datafile* in milliseconds               |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DataFile.MinIoTime(*dbid*, *datafile*)           | Minimum time spent on a single I/O operation for *datafile* in milliseconds       |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DataFile.PhysicalReads(*dbid*, *datafile*)       | Total number of physical reads from *datafile*                                    |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DataFile.PhysicalWrites(*dbid*, *datafile*)      | Total number of physical writes to *datafile*                                     |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DataFile.ReadTime(*dbid*, *datafile*)            | Total read time for *datafile* in milliseconds                                    |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DataFile.Status(*dbid*, *datafile*)              | *datafile* status                                                                 |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DataFile.Tablespace(*dbid*, *datafile*)          | *datafile* tablespace                                                             |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DataFile.WriteTime(*dbid*, *datafile*)           | Total write time for *datafile* in milliseconds                                   |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DBInfo.CreateDate(*dbid*)                        | Database creation date                                                            |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DBInfo.IsReachable(*dbid*)                       | Database is reachable (YES/NO)                                                    |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DBInfo.LogMode(*dbid*)                           | Database log mode                                                                 |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DBInfo.Name(*dbid*)                              | Database name                                                                     |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DBInfo.OpenMode(*dbid*)                          | Database open mode                                                                |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.DBInfo.Version(*dbid*)                           | Database version                                                                  |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Dual.ExcessRows(*dbid*)                          | Excessive rows in DUAL table                                                      |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Instance.ArchiverStatus(*dbid*)                  | Archiver status                                                                   |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Instance.Status(*dbid*)                          | Database instance status                                                          |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Instance.ShutdownPending(*dbid*)                 | Is shutdown pending (YES/NO)                                                      |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Instance.Version(*dbid*)                         | DBMS Version                                                                      |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Objects.InvalidCount(*dbid*)                     | Number of invalid objects in DB                                                   |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Performance.CacheHitRatio(*dbid*)                | Data buffer cache hit ratio                                                       |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Performance.DictCacheHitRatio(*dbid*)            | Dictionary cache hit ratio                                                        |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Performance.DispatcherWorkload(*dbid*)           | Dispatcher workload (percentage)                                                  |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Performance.FreeSharedPool(*dbid*)               | Free space in shared pool (bytes)                                                 |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Performance.Locks(*dbid*)                        | Number of locks                                                                   |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Performance.LogicalReads(*dbid*)                 | Number of logical reads                                                           |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Performance.LibCacheHitRatio(*dbid*)             | Library cache hit ratio                                                           |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Performance.MemorySortRatio(*dbid*)              | PGA memory sort ratio                                                             |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Performance.PhysicalReads(*dbid*)                | Number of physical reads                                                          |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Performance.PhysicalWrites(*dbid*)               | Number of physical writes                                                         |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Performance.RollbackWaitRatio(*dbid*)            | Ratio of waits for requests to rollback segments                                  |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Sessions.Count(*dbid*)                           | Number of sessions opened                                                         |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Sessions.CountByProgram(*dbid*, *program*)       | Number of sessions opened by specific program                                     |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Sessions.CountBySchema(*dbid*, *schema*)         | Number of sessions opened with specific schema                                    |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.Sessions.CountByUser(*dbid*, *user*)             | Number of sessions opened with specific Oracle user                               |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.TableSpace.BlockSize(*dbid*, *tablespace*)       | *tablespace* block size                                                           |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.TableSpace.DataFiles(*dbid*, *tablespace*)       | Number of datafiles in *tablespace*                                               |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.TableSpace.FreeBytes(*dbid*, *tablespace*)       | Free bytes in *tablespace*                                                        |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.TableSpace.FreePct(*dbid*, *tablespace*)         | Free space percentage in *tablespace*                                             |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.TableSpace.Logging(*dbid*, *tablespace*)         | *tablespace* logging mode                                                         |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.TableSpace.Status(*dbid*, *tablespace*)          | *tablespace* status                                                               |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.TableSpace.TotalBytes(*dbid*, *tablespace*)      | Total size in bytes of *tablespace*                                               |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.TableSpace.Type(*dbid*, *tablespace*)            | *tablespace* type                                                                 |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.TableSpace.UsedBytes(*dbid*, *tablespace*)       | Used bytes in *tablespace*                                                        |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Oracle.TableSpace.UsedPct(*dbid*, *tablespace*)         | Used space percentage in *tablespace*                                             |
++---------------------------------------------------------+-----------------------------------------------------------------------------------+
+
+
+Lists
+~~~~~
+
+When loaded, Oracle subagent adds the following lists to agent:
+
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| List                                   | Description                                                                                                |
++========================================+============================================================================================================+
+| Oracle.DataFiles(*dbid*)               | All known datafiles in database identified by *dbid*.                                                      |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Oracle.DataTags(*dbid*)                | All data tags for database identified by *dbid*. Used only for internal diagnostics.                       |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Oracle.TableSpaces(*dbid*)             | All known tablespaces in database identified by *dbid*.                                                    |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+
+
+Tables
+~~~~~~
+
+When loaded, Oracle subagent adds the following tables to agent:
+
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Table                                  | Description                                                                                                |
++========================================+============================================================================================================+
+| Oracle.DataFiles(*dbid*)               | Datafiles in database identified by *dbid*.                                                                |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Oracle.Sessions(*dbid*)                | Open sessions in database identified by *dbid*.                                                            |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Oracle.TableSpaces(*dbid*)             | Tablespaces in database identified by *dbid*.                                                              |
++----------------------------------------+------------------------------------------------------------------------------------------------------------+
 
 
 DB2
@@ -719,6 +993,7 @@ DB2
 
 MongoDB
 -------
+
 
 Application monitoring
 ======================
@@ -730,13 +1005,16 @@ Platform subagents support process monitoring. Process metrics have "Process.*" 
 Metrics differ between different OS. Detailed description of each metric can be found 
 in :ref:`list-of-supported-metrics`.
 
+.. _dbquery:
+
 Application Database Monitoring
 -------------------------------
 
 For application database monitoring can be used database monitoring subagents or 
 database query subagents. Information about database monitoring subagents can be 
 found :ref:`there<database-monitoring>`. In this chapter will be described only 
-query subagents configuration. 
+DBQuery subagents usage and configuration. This subagent supports all databases that 
+are supported by NetXMS server :ref:`link to supported database list<supported-db-list>`. 
 
 This type of Metrics provide DBQuery subagent. This subagent has 2 types of Metrics:
 one that periodically executes SQL queries and returns results and error

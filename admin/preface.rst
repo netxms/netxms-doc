@@ -45,6 +45,8 @@ Supported operating systems for NetXMS server:
    * HP-UX 11.23, 11.31
    * AIX 5.3 +
 
+.. _supported-db-list:
+   
 Supported DBMS engines for NetXMS server
    * Microsoft SQL Server 2005, Windows Server 2003, Windows Vista, Windows Server 2008,  Windows Server 2008R2, Windows 7, Windows 8, Windows 8.1, Windows Server 2012, Windows Server 2012R2
    * MySQL 5.0 +

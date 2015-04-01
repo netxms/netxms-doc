@@ -994,6 +994,85 @@ DB2
 MongoDB
 -------
 
+.. versionadded:: 2.0-M3
+
+NetXMS subagent for MongoDB monitoring. Monitors one or more instances of MongoDB databases and 
+reports various database-related parameters. 
+
+All parameters available from MongoDB subagent gathered or calculated once per minute thus it's 
+recommended to set DCI poll interval for these items to 60 seconds or more. It is supposed that 
+by one agent will be monitored databases with same version. 
+
+Building mongodb subagent
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use "--with-mongodb=/path/to/mongoc driver" parameter to include MongoDB subagent in build. Was tested with 
+mongo-c-driver-1.1.0. 
+
+Agent Start
+~~~~~~~~~~~
+While start of subagent at least one database should be up and running. Otherwise subagent will not start. 
+On start subagent requests serverStatus to get list of possible DCI. This list may vary from version to version 
+of MongoDB.
+
+Configuration file
+~~~~~~~~~~~~~~~~~~
+
+.. todo:
+  Add description of configuration string for connection to database. 
+
+Parameters
+~~~~~~~~~~
+
+There are 2 types of parameters: serverStatus parameters, that are generated form response on a subagent start 
+and predefined for database status. 
+
+Description of serverStatus parameters can be found there: `serverStatus <http://docs.mongodb.org/manual/reference/command/serverStatus/>`_. 
+In this type of DCI should be given id of server from where parameter should be taken. 
+
+Description of database status parameters can be found there: `dbStats <http://docs.mongodb.org/master/reference/command/dbStats/>`_. 
+
+.. list-table:: 
+   :widths: 50 100
+   :header-rows: 1
+   
+   * - Parameter 
+     - Description 
+   * - MongoDB.collectionsNum(*id*,\ *databaseName*)
+     - Contains a count of the number of collections in that database.
+   * - MongoDB.objectsNum(*id*,\ *databaseName*)
+     - Contains a count of the number of objects (i.e. documents) in the database across all collections.
+   * - MongoDB.avgObjSize(*id*,\ *databaseName*)
+     - The average size of each document in bytes.
+   * - MongoDB.dataSize(*id*,\ *databaseName*)
+     - The total size in bytes of the data held in this database including the padding factor.
+   * - MongoDB.storageSize(*id*,\ *databaseName*)
+     - The total amount of space in bytes allocated to collections in this database for document storage.
+   * - MongoDB.numExtents(*id*,\ *databaseName*)
+     - Contains a count of the number of extents in the database across all collections.
+   * - MongoDB.indexesNum(*id*,\ *databaseName*)
+     - Contains a count of the total number of indexes across all collections in the database.
+   * - MongoDB.indexSize(*id*,\ *databaseName*)
+     - The total size in bytes of all indexes created on this database.
+   * - MongoDB.fileSize(*id*,\ *databaseName*)
+     - The total size in bytes of the data files that hold the database.
+   * - MongoDB.nsSizeMB(*id*,\ *databaseName*)
+     - The total size of the namespace files (i.e. that end with .ns) for this database.
+     
+     
+List
+~~~~
+
+.. list-table:: 
+   :widths: 50 100
+   :header-rows: 1
+   
+   * - Parameter 
+     - Description 
+   * - MongoDB.ListDatabases(*id*)
+     - Returns list of databases existing on this server
+
+
 
 Application monitoring
 ======================

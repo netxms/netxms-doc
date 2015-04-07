@@ -24,6 +24,7 @@ NetXMS Administrator Guide
    remote-file-management
    reporting
    image-library
+   mobile-console
    advanced
    scripting
    appendix

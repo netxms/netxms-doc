@@ -7,7 +7,8 @@ Purpose of this document
 ========================
 
 Purpose of this document is to provide knowledge about NetXMS installation, 
-configuration and usage. 
+configuration and usage. It contains all required information for installation 
+and operation managers. 
 
 Document contain :ref:`quick-start` chapter, that describes default installation 
 and some simple metric configuration. :ref:`installation-and-upgrade` chapter 
@@ -16,10 +17,17 @@ and upgrade. To get familiar with main concepts of NetXMS use :ref:`concepts`
 chapter. :ref:`administration` is main chapter, that provides all necessary 
 information to successfully operate NetXMS. List of built in monitoring 
 options can be found there: :ref:`getting-things-monitored` chapter. There 
-is also big chapter about :ref:`NXLS scripting<scripting>`
+is also big chapter about :ref:`NXLS scripting<scripting>`. 
 
-This document does not contain detailed description of NetXMS and it's 
-architecture. To get this information please refer to Concept guide. 
+Mostly this document describes work with Desktop and Web management consoles. Mostly 
+they have similar functionality so there is no separated descriptions of them. Web 
+based console have some limitation, this limitations will be described in a feature 
+text as a notes. There is separate part that describes 
+:ref:`Mobile NetXMS agent configuration GUI<monitoring-mobile-device>` and 
+:ref:`Mobile Console<mobile-console>`.
+
+This document does not contain detailed description of NetXMS architecture. 
+To get this information please refer to Concept guide. 
 
 What is NetXMS
 ==============
@@ -66,6 +74,9 @@ Supported operating systems for NetXMS agent
 
 Where to get support
 ====================
+
+.. todo::
+  Add that solutions and FAQ can be found on wiki. 
 
 Forum, Facebook/Twitter/G+
 --------------------------

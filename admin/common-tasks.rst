@@ -583,6 +583,9 @@ NetSVC for all curl supported protocols. As it can check not only availability, 
 also response. For unsupported protocols can be used Custom check of PortCheck 
 subagent.
 
+For HTTP services there is also option to use ECS subagent. This subagent has only 3 Metrics. Two 
+of them calculate hash and last one measure time. 
+
 
 PortCheck configuration
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -701,6 +704,32 @@ HTTP check example:
 .. note::
   If agent is build from sources, then libcurl-dev should be installed to 
   build netsvc subagent. 
+  
+ECS
+~~~
+
+This subagent works with HTTP only. It can be used to measure page load time and checking page 
+hash. Request timeout for this subageint is 30 seconds. 
+
+
+.. list-table:: 
+   :widths: 50 100
+   :header-rows: 1
+   
+   * - Parameter 
+     - Description 
+   * - ECS.HttpSHA1(\ *URL*\ )
+     - Calculates SHA1 hash of provided URL
+   * - ECS.HttpMD5(\ *URL*\ )
+     - Calculates MD5 hash of provided URL
+   * - ECS.HttpLoadTime(\ *URL*\ )
+     - Measure load time for provided URL
+
+.. code-block:: cfg
+
+  MasterServers = netxms.demo
+  Subagent = ecs.nsm
+  
 
 .. _database-monitoring:
 
@@ -1081,7 +1110,8 @@ DB2 section of the INI file. The syntax is as follows:
      -  
 
 The XML configuration file itself should look like this:
-.. code-block:: cfg
+
+.. code-block:: xml
 
   <config>
       <db2sub>

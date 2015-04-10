@@ -131,6 +131,8 @@ To correctly send response for SNMPv3, it should be also configured
 the proxy node for the sender node. It is done in sender node 
 properties in "Communications" tab, SNMP section. 
 
+.. _import-mib:
+
 Import MIB
 ==========
 

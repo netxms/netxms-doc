@@ -64,7 +64,7 @@ Supported DBMS engines for NetXMS server
    * SQLite(it is highly recommended use this option only for test purpose)
    
 Supported operating systems for NetXMS agent
-   * Windows XP, all from server
+   * Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008,  Windows Server 2008R2, Windows 7, Windows 8, Windows 8.1, Windows Server 2012, Windows Server 2012R2
    * Linux (all glibc2-based flavors)
    * FreeBSD, NetBSD, OpenBSD
    * Solaris

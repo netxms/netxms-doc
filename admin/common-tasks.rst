@@ -8,13 +8,50 @@ Common monitoring tasks (rename this chapter!)
 Operating System
 ================
 
+There are separate subagent for each operating system type. This subagent is loaded 
+automatically on agent start. They hide distinctions of similar function implementation 
+on different platforms. They provide functions to monitor processes, file system, 
+
+List of subagents:
+
+  * linux
+  * aix
+  * hpux
+  * winnt (Windows)
+  * sunos
+  * darwin (MacOS)
+  * freebsd
+  * netbsd
+  * openbsd
+  
+Full list of parameters and compatibility between different platforms available 
+:ref:`there <list-of-supported-metrics>`. In :ref:`os-dci-example` part will be shown 
+most common configuration examples. 
+
+
+Windows Specific
+----------------
+
+
+
+.. _os-dci-example:
+
+Example
+-------
 
 File meta information
 =====================
 
-.. todo::
+Monitoring of file system is implemented by OS subagents. Full description of this 
+functions can be found :ref:`there <list-of-supported-metrics>`. There is provided 
+option to get file hash, creation, last edit and other timestamps, file size and 
+number of files in the directory. In this sections will be shown only the most 
+commonly used configurations. 
 
-  size, mtime, hash
+Examples
+--------
+
+
 
 .. _log-monitoring:
   

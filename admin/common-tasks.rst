@@ -10,7 +10,8 @@ Operating System
 
 There are separate subagent for each operating system type. This subagent is loaded 
 automatically on agent start. They hide distinctions of similar function implementation 
-on different platforms. They provide functions to monitor processes, file system, 
+on different platforms. They provide options to monitor agent statistic, processes 
+statistic, file system, interface statistics, CPU, memory statistic. 
 
 List of subagents:
 
@@ -25,19 +26,50 @@ List of subagents:
   * openbsd
   
 Full list of parameters and compatibility between different platforms available 
-:ref:`there <list-of-supported-metrics>`. In :ref:`os-dci-example` part will be shown 
-most common configuration examples. 
-
-
-Windows Specific
-----------------
-
-
-
-.. _os-dci-example:
+:ref:`there <list-of-supported-metrics>`. In this section will be shown most common 
+metric configurations. 
 
 Example
 -------
+
+Process monitoring
+~~~~~~~~~~~~~~~~~~
+
+Service monitoring
+~~~~~~~~~~~~~~~~~~
+
+Disk free space monitoring
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Create DCI for FileSystem.FreePerc(*) metric to monitor space on /. 
+
+.. figure:: _images/os-metric-disk-free-space-example.png
+
+Create 2 thresholds. One will be created when free space is less than 15% and other one 
+when free space is less than 7%. Before threshold creation was created 3 events: 
+
+.. figure:: _images/os-metric-disk-free-space-example2.png
+
+  Events
+  
+.. figure:: _images/os-metric-disk-free-space-example3.png
+
+  Threshold 1
+  
+.. figure:: _images/os-metric-disk-free-space-example4.png
+
+  Threshold 2
+
+As in message of error is used Instance parameter, it should be set in 
+:guilabel:`Threshold` window. 
+  
+.. figure:: _images/os-metric-disk-free-space-example5.png
+
+  Both
+  
+CPU usage
+~~~~~~~~~
+
 
 File meta information
 =====================
@@ -1740,13 +1772,16 @@ The following configuration parameters are supported:
      - *name*:*dbid*:*interval*:*query*
      - Define new query. This parameter can be specified multiple times to define multiple queries. 
        Fields in query definition have the following meaning:
+       
         - *name*     Query name which will be used in parameters to retrieve collected data.
         - *dbid*     Database ID (defined by Database parameter)
         - *interval* Polling interval in seconds.
         - *query*    SQL query to be executed.
    * - ConfigurableQuery
      - *name*:*dbid*:*description*:*query*
-     - Define new query. This parameter can be specified multiple times to define multiple queries. Fields in query definition have the following meaning:
+     - Define new query. This parameter can be specified multiple times to define 
+       multiple queries. Fields in query definition have the following meaning:
+       
         - *name*        Query name which will be used in parameters to retrieve collected data.
         - *dbid*        Database ID (defined by Database parameter)
         - *description* Description that will be shown in agents parameter description.

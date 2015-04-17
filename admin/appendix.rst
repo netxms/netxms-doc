@@ -1983,7 +1983,7 @@ Status of remote shared resource as text
 
 
 Net.Resolver.AddressByName(*)
-----------------------------
+-----------------------------
 
 Data type: String
 
@@ -1993,7 +1993,7 @@ Resolver: address for interface name
 
 
 Net.Resolver.NameByAddress(*)
-----------------------------
+-----------------------------
 
 Data type: String
 
@@ -2072,6 +2072,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc
@@ -2086,7 +2087,7 @@ Total execution time for process
 
 
 Process.GDIObjects(*)
------------------
+---------------------
 
 Data type: Unsigned Integer 64-bit
 
@@ -2097,6 +2098,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc
@@ -2122,6 +2124,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc
@@ -2145,6 +2148,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc
@@ -2168,6 +2172,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc
@@ -2191,6 +2196,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc
@@ -2214,6 +2220,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc
@@ -2237,6 +2244,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc
@@ -2260,6 +2268,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc
@@ -2285,6 +2294,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc
@@ -2310,6 +2320,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc
@@ -2335,6 +2346,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc
@@ -2360,6 +2372,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc
@@ -2385,6 +2398,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc
@@ -2410,6 +2424,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc
@@ -2435,6 +2450,7 @@ Parameters:
   2. Function - is the function that is used to measure data in case if there are more 
      than one process with given name. By default it is used sum function. This 
      parameter can have this options:
+     
         - min - minimal value among all processes named proc
         - max - maximal value among all processes named proc
         - avg - average value for all processes named proc

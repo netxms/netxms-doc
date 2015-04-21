@@ -29,24 +29,53 @@ Full list of parameters and compatibility between different platforms available
 :ref:`there <list-of-supported-metrics>`. In this section will be shown most common 
 metric configurations. 
 
+
 Example
 -------
+
+In examples will be shown only DCI configuration with threshold. Generated event 
+processing options can be found in :ref:`event-processing` chapter. 
 
 Process monitoring
 ~~~~~~~~~~~~~~~~~~
 
-Service monitoring
-~~~~~~~~~~~~~~~~~~
+In this example will be configured monitoring of running "mysqld" process. And one 
+threshold: when process count is less then 1(process is not running).
+
+Create DCI for Process.Count(*) metric to monitor "mysqld" process count. 
+
+.. figure:: _images/os-metric-process-monitoring.png
+
+Create threshold. It will be triggered when process count is not equal to 1(process is 
+not running). As prerequisite it was created 2 events. 
+
+.. figure:: _images/os-metric-process-monitoring2.png
+
+  Events
+  
+.. figure:: _images/os-metric-process-monitoring3.png
+
+  Threshold 1
+
+As in message of error is used Instance parameter, it should be set in 
+:guilabel:`Threshold` window. 
+  
+.. figure:: _images/os-metric-process-monitoring4.png
+
 
 Disk free space monitoring
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In this example will be configured monitoring of free space in percents for / disk and 
+two thresholds: when disk space less then 15% and less then 7%. 
+
 
 Create DCI for FileSystem.FreePerc(*) metric to monitor space on /. 
 
 .. figure:: _images/os-metric-disk-free-space-example.png
 
-Create 2 thresholds. One will be created when free space is less than 15% and other one 
-when free space is less than 7%. Before threshold creation was created 3 events: 
+Create 2 thresholds. One will be triggered when free space is less than 15% and other 
+one when free space is less than 7%. Before threshold creation was created 3 events: 
 
 .. figure:: _images/os-metric-disk-free-space-example2.png
 
@@ -70,6 +99,23 @@ As in message of error is used Instance parameter, it should be set in
 CPU usage
 ~~~~~~~~~
 
+This example will show how to configure monitoring of CPU usage and create event when 
+CPU usage is more than 90% for more than 5 minutes. 
+
+Create DCI for System.CPU.LoadAvg metric.
+
+.. figure:: _images/os-metric-cpu-usage-example.png
+
+Create threshold that will create event in case if last 5 values are more than 90 
+(last 5 minutes CPU usage is more than 90%).
+
+.. figure:: _images/os-metric-cpu-usage-example2.png
+
+  Events
+  
+.. figure:: _images/os-metric-cpu-usage-example3.png
+
+  Threshold
 
 File meta information
 =====================
@@ -83,8 +129,56 @@ commonly used configurations.
 Examples
 --------
 
+In examples will be shown only DCI configuration with threshold. Generated event 
+processing options can be found in :ref:`event-processing` chapter. 
+
+Example 1
+~~~~~~~~~
+
+In this example will be shown how to check that specific folder exceed specified size. 
+
+Create DCI for File.Size(*) metric to monitor folder size. Required parameters: 
+/path,*,1.
+
+.. figure:: _images/file-meta-info-example.png
+
+In threshold it should be checked that last value is less than 2 GB. That mean 
+that returned value should be less than 2 000 000 000 bytes. 
+
+.. figure:: _images/file-meta-info-example2.png
+
+  Threshold
+
+Example 2
+~~~~~~~~~
+
+In this example will be configured monitoring that in exact folder exist files that 
+was modified less then half an hour ago. 
+
+Create DCI for File.Count(*) metric to monitor file count in folder /path, that match 
+any pattern, folder should be checked recursively, file match any size, files are 
+created less than 30 minutes ago. This conditions will be given to metric as this 
+parameters: path,*,1,0,-1800.
+
+.. figure:: _images/file-meta-info2-example.png
+
+In threshold it should be checked that at least one file meeting conditions exists. 
+That mean that file count should be more than 1. Prerequisite is to create 2 events. 
 
 
+.. figure:: _images/file-meta-info2-example2.png
+
+  Events
+
+.. figure:: _images/file-meta-info2-example3.png
+
+  Threshold
+
+As in message of error is used Instance parameter, it should be set in 
+:guilabel:`Threshold` window. 
+
+.. figure:: _images/file-meta-info2-example4.png
+  
 .. _log-monitoring:
   
 Log monitoring

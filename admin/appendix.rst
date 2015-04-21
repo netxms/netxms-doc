@@ -1590,8 +1590,12 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 Parameters: 
   1. Path is the only mandatory argument. It specifies base directory for search.
   2. Pattern - If pattern is given, only files whose names matched against it will be counted.
-  3. Recursive determines if agent should count files in subdirectories. To enable recursion, use values ``1`` or ``true``.
-
+  3. Recursive - determines if agent should count files in subdirectories. To enable recursion, use values ``1`` or ``true``.
+  4. Size filter. If parameter < 0, only files with size less than abs(value) will 
+     match. If parameter > 0, only files with size greater than value will match.
+  5. Age filter. If parameter < 0, only files created after now - abs(value) will 
+     match. If parameter > 0, only files created before now - value will match.
+  
 Number of files in directory
 
 
@@ -1645,6 +1649,10 @@ Parameters:
   1. Path is the only mandatory argument. It specifies either single file or base directory for calculation.
   2. If pattern is given, only files whose names matched against it will be counted.
   3. Recursive determines if agent should count files in subdirectories. To enable recursion, use values ``1`` or ``true``.
+  4. Size filter. If parameter < 0, only files with size less than abs(value) will 
+     match. If parameter > 0, only files with size greater than value will match.
+  5. Age filter. If parameter < 0, only files created after now - abs(value) will 
+     match. If parameter > 0, only files created before now - value will match.
 
 Size in bytes of single file or all files in given directory.
 

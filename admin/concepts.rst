@@ -14,9 +14,11 @@ administrator can access collected data using cross-platform Management
 Console, Web Interface or Management Console for Android. 
 
 .. only:: html
+
   .. figure:: _images/architecture_scheme.png
 
 .. only:: latex
+
   .. figure:: _images/architecture_scheme.png
      :scale: 60
 

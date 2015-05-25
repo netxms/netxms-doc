@@ -1194,17 +1194,18 @@ you first need to declare the XML file in the DB2 section of the INI configurati
 details are below.
 
 The configuration section in INI file looks like the following:
+
 .. code-block:: cfg
-  
-  SubAgent          = db2.nsm
- 
-  *DB2
-  DBName            = dbname
-  DBAlias           = dbalias
-  UserName          = dbuser
-  Password          = mypass123
-  QueryInterval     = 60
-  ReconnectInterval = 30
+   
+   SubAgent          = db2.nsm
+   
+   *DB2
+   DBName            = dbname
+   DBAlias           = dbalias
+   UserName          = dbuser
+   Password          = mypass123
+   QueryInterval     = 60
+   ReconnectInterval = 30
 
 Parameters:
 
@@ -1249,12 +1250,13 @@ XML configuration allows the monitoring of several database instances.
 
 To be able to use the XML configuration file, you first need to specify the file to use in the 
 DB2 section of the INI file. The syntax is as follows:
+
 .. code-block:: cfg
-
-  SubAgent          = db2.nsm
-
-  *DB2
-  ConfigFile        = /myhome/configs/db2.xml
+   
+   SubAgent          = db2.nsm
+   
+   *DB2
+   ConfigFile        = /myhome/configs/db2.xml
 
 .. note: 
   Note that all other entries in the DB2 will be ignored.
@@ -1275,27 +1277,27 @@ DB2 section of the INI file. The syntax is as follows:
 The XML configuration file itself should look like this:
 
 .. code-block:: xml
-
-  <config>
-      <db2sub>
-          <db2 id="1">
-              <dbname>dbname</dbname>
-              <dbalias>dbalias</dbalias>
-              <username>dbuser</username>
-              <password>mypass123</password>
-              <queryinterval>60</queryinterval>
-              <reconnectinterval>30</reconnectinterval>
-          </db2>
-          <db2 id="2">
-              <dbname>dbname1</dbname>
-              <dbalias>dbalias1</dbalias>
-              <username>dbuser1</username>
-              <password>mypass456</password>
-              <queryinterval>60</queryinterval>
-              <reconnectinterval>30</reconnectinterval>
-          </db2>
-      </db2sub>
-  </config>
+   
+   <config>
+       <db2sub>
+           <db2 id="1">
+               <dbname>dbname</dbname>
+               <dbalias>dbalias</dbalias>
+               <username>dbuser</username>
+               <password>mypass123</password>
+               <queryinterval>60</queryinterval>
+               <reconnectinterval>30</reconnectinterval>
+           </db2>
+           <db2 id="2">
+               <dbname>dbname1</dbname>
+               <dbalias>dbalias1</dbalias>
+               <username>dbuser1</username>
+               <password>mypass456</password>
+               <queryinterval>60</queryinterval>
+               <reconnectinterval>30</reconnectinterval>
+           </db2>
+       </db2sub>
+   </config>
   
 As you can see, the parameters are the same as the ones from the INI configuration. Each database 
 declaration must be placed in the ``db2sub`` tag and enclosed in the ``db2`` tag. The ``db2`` tag 
@@ -2036,16 +2038,17 @@ The following configuration parameters are supported:
 
 
 Configuration example:
+
 .. code-block:: cfg
    
    # This sample nxagentd.conf instructs agent to:
    #   1. load PING subagent
    #   2. Ping target 10.0.0.1 with default size (46 bytes) packets and 10.0.0.2 with 1000 bytes packets
    #   3. Timeout for ping set to 1 second and pings are sent 12 times per minute (each 5 seconds)
-
+   
    MasterServers = netxms.demo
    SubAgent = ping.nsm
-
+   
    *PING
    Timeout = 1000
    PacketRate = 12

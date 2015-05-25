@@ -214,7 +214,7 @@ Glossary
     network>`.
 
   LDAP
-    The Lightweight Directory Access Protocol (LDAP; /ˈɛldæp/) is an open,
+    The Lightweight Directory Access Protocol (LDAP) is an open,
     vendor-neutral, industry standard application protocol for accessing and
     maintaining distributed directory information services over an Internet
     Protocol (IP) network. More details in :wikipedia:`Wikipedia <Lightweight

@@ -335,8 +335,8 @@ Configuration
 
 It can be enabled:
   - globally - set configuration parameter :guilabel:`DefaultAgentCacheMode` to 1.
-  - on node level - change :guilabel:`Agent chase mode` :guilabel:`on` in node properties on :guilabel:`Polling` page
-  - on DCI level - change :guilabel:`Agent chase mode` :guilabel:`on in DCI properties on :guilabel:`General` page
+  - on node level - change :guilabel:`Agent cache mode` :guilabel:`on` in node properties on :guilabel:`Polling` page
+  - on DCI level - change :guilabel:`Agent cache mode` :guilabel:`on in DCI properties on :guilabel:`General` page
 
   
 .. _last-values:

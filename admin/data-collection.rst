@@ -327,6 +327,9 @@ description can be found there: :ref:`how_data_collection`.
 Agent side cache is configurable globally, on node level, and on DCI level. By 
 default it's off.
 
+.. versionadded:: 2.0-M5
+    Offline data collection. 
+
 Configuration
 -------------
 

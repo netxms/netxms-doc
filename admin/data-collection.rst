@@ -5,6 +5,8 @@
 Data collection
 ###############
 
+.. _how_data_collection:
+
 How data collection works
 =========================
 
@@ -29,8 +31,21 @@ figure below.
    Newly received parameter processing
 
 It is also possibility to push data to server. If DCI source is set to
-:guilabel:`Push`, server just waits for new values instead of polling data
-source.
+:guilabel:`Push`, server just waits for new values instead of polling himself
+data source.
+
+.. versionadded:: 2.0-M5
+    Offline data collection. 
+    
+By default DCI data is not collected while connection between server and agent is 
+broken as poll request could not get till agent. There is special configuration 
+that allows to collect data and store it on agent till connection with server is 
+restored and collected data is pushed to the server. This option is available for 
+metrics, table metrics and proxy SNMP metrics. Not implemented for proxy SNMP table 
+metrics. In case of this configuration agent stores DCI configuration locally and does 
+all metric collection and dispatch by himself. DCI configuration is synchronized on 
+connect, DCI configuration change or SNMP proxy server change. Information about 
+configuration options can be found there: :ref:`offline-data-collection`.
 
 .. _dci-configuration:
 
@@ -297,6 +312,30 @@ Table DCIs
 
 Table DCI collects and stores data in table format(multi row, column). 
 
+
+.. _offline-data-collection:
+
+Offline data collection
+=======================
+
+Offilne data collection allow metric data to be obtained while connection between 
+server and agent have been broken. This option is available for metrics, table 
+metrics and proxy SNMP metrics. Not implemented for proxy SNMP table metrics. 
+While break data is stored on agent, and on connect it is send to server. Detailed 
+description can be found there: :ref:`how_data_collection`.
+
+Agent side cache is configurable globally, on node level, and on DCI level. By 
+default it's off.
+
+Configuration
+-------------
+
+It can be enabled:
+  - globally - set configuration parameter :guilabel:`DefaultAgentCacheMode` to 1.
+  - on node level - change :guilabel:`Agent chase mode` :guilabel:`on` in node properties on :guilabel:`Polling` page
+  - on DCI level - change :guilabel:`Agent chase mode` :guilabel:`on in DCI properties on :guilabel:`General` page
+
+  
 .. _last-values:
 
 Last DCI values View

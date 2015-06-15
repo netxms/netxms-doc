@@ -430,7 +430,9 @@ encryption between them can be forced by NetXMS configuration. There
 can be also added :guilabel:`Shared Secret` that is checked on agent-server
 connection and in case server does not know secret of an agent, connection 
 will not be established. Another possibility to control access to the agent 
-is cosing the correct server access level in agent configuration properties. 
+is choosing the correct server access level in agent configuration properties
+(MasterServers, Servers, ControlServers). There can be set different access levels 
+for different servers. 
 
 When it is required to write password or :guilabel:`Shared Secret` in agent
 configuration file, there is possibility to encrypt it. All passwords can 

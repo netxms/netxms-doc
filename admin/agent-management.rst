@@ -77,16 +77,6 @@ Configuration file example:
    # Below is a configuration for winperf subagent, in separate section
    *WinPerf
    EnableDefaultCounters = yes
-
-   
-Notes
-~~~~~
-Additional notes abut configuration:
-
-There are 3 level of access for an agent. Depending on how server's IP address listen in nxagentd.conf, it will have different access level. It is preferred to use MasterServers. If server listed in:  
-   1. MasterServers - full access
-   2. ControlServers - can read data and execute predefined actions, but cannot change config nor install policies.
-   3. Servers - read only access
    
   
 Additional configuration files
@@ -269,7 +259,78 @@ There are few ways to register agent:
    1. To enter it manually by creating a node
    2. Run the network discovery and enter the range of IP addresses.
    3. Register agent on management server "nxagentd -r <addr>",  where <addr> is the IP address of server. 
-      To register agents using this option also ``EnableAgentRegistration`` parameter should be set to 1.
+      To register agents using this option also :guilabel:`EnableAgentRegistration` parameter should be set to 1.
+   
+Security
+========
+
+Agent <--> server message encryption 
+------------------------------------
+
+Server encryption policy is configured in :guilabel:`Server Configuration` view by 
+selecting one of 4 options for :guilabel:`DefaultEncryptionPolicy` parameter. Default 
+Policy is 1. 
+
+Policy types:
+
+  * 0 - Forbid encryption. Will communicate with agents only using plain text messages.
+    If agent force encryption(set :guilabel:`RequireEncryption` agent configuration 
+    parameter to :guilabel:`yes`), server will not connect with this agent. 
+  * 1 - Allow encryption. Will communicate with agents using plain text messages if for 
+    exact node is not defined encryption force by setting :guilabel:`RequireEncryption` 
+    agent configuration parameter to :guilabel:`yes` or by selecting 
+    :guilabel:`Force encryption` option in Communication properties of node object. 
+  * 2 - Encryption preferred. Will communicate with agent using encryption. In case if 
+    agent does not support encryption will communicate with it using plain text. 
+  * 3 - Encryption required. Will communicate with agent using encryption. In case if 
+    agent does not support encryption will not establish connection. 
+    
+.. figure:: _images/node_communications_tab.png
+    Force encryption option for node.
+  
+
+.. note::
+  Configuration will be simplified in next releases. 
+
+Server access levels
+--------------------
+
+Depending on how server's IP address(or domain) is added to in nxagentd.conf, it will 
+have different access level. It is preferred to use MasterServers. There are 3 levels 
+of access for an agent:  
+   1. MasterServers - full access
+   2. ControlServers - can read data and execute predefined actions, but cannot change 
+      config nor install policies.
+   3. Servers - read only access
+   
+In case if server IP is not listed in one of this parameters agent will not enable 
+connection with it. 
+
+Shared secret
+-------------
+
+Shared secret is another level of server verification. By default authentication is 
+disabled. 
+
+To enable :guilabel:`Shared Secret` verification on agent set :guilabel:`RequireAuthentication` 
+agent configuration parameter to :guilabel:`yes`. In :guilabel:`SharedSecret` agent 
+configuration parameter set password what should be used for authentication.
+
+If authentication for agent is enabled, then while connection agent requested shared 
+secret from the server. Server check if password was set for this specific node in 
+:guilabel:`Shared secret` field in communication properties of node. In case if there is 
+no shared secret server sends content of :gilabel:`AgentDefaultSharedSecret` server 
+configuration variable as shared secret. 
+
+In case shared secrets are not identical connection is not established. 
+
+Password encryption
+-------------------
+
+When it is required to write password or :guilabel:`Shared Secret` in agent
+configuration file, there is possibility to encrypt it. All passwords can 
+be encrypted with help of :ref:`nxencpasswd-tools-label` command line tool and added 
+in configuration file in encrypted way. 
    
 Subagents
 =========

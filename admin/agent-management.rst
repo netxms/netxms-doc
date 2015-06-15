@@ -322,6 +322,9 @@ secret from the server. Server check if password was set for this specific node 
 no shared secret server sends content of :gilabel:`AgentDefaultSharedSecret` server 
 configuration variable as shared secret. 
 
+.. figure:: _images/node_communications_tab.png
+    Shared secret field in node communication properties. 
+
 In case shared secrets are not identical connection is not established. 
 
 Password encryption

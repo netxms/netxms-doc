@@ -78,8 +78,14 @@ Where to get support
 .. todo::
   Add that solutions and FAQ can be found on wiki. 
 
-Forum, Facebook/Twitter/G+
---------------------------
+Forum, Facebook/Twitter/G+/IRC
+------------------------------
+
+Forum: :ref:`https://www.netxms.org/forum`
+Facebook: :ref:`https://www.facebook.com/netxms`
+Google+: :ref:`https://plus.google.com/u/0/s/netxms`
+Twitter: :ref:`https://twitter.com/netxms`
+IRC: #netxms on freenode. List of servers: :ref:`https://freenode.net/irc_servers.shtml`
 
 Stay informed of new releases
 -----------------------------

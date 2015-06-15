@@ -325,8 +325,9 @@ Send XMPP message
 -----------------
 
 Sends XMPP/Jabber message to one or more recipients. Multiple recipients can be separated by semicolons.
-equired server configuration parameters to send XMPP message: ``XMPPLogin``, ``XMPPPassword``,
-``XMPPPort``, ``XMPPServer``. For detailed description of parameters check :ref:`server_configuration_parameters`.
+equired server configuration parameters to send XMPP message: :guilabel:`XMPPLogin`, :guilabel:`XMPPPassword`,
+:guilabel:`XMPPPort`, :guilabel:`XMPPServer`, :guilabel:`EnableXMPPConnector`. For detailed description of 
+parameters check :ref:`server_configuration_parameters`.
 
 In message text can be used :ref:`event-processing-macros`.
 

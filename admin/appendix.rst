@@ -1598,6 +1598,23 @@ Parameters:
   
 Number of files in directory
 
+File.FolderCount(*)
+-------------------
+
+Data type: Unsigned Integer 
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD, NetWare
+
+Parameters: 
+  1. Path is the only mandatory argument. It specifies base directory for search.
+  2. Pattern - If pattern is given, only folders whose names matched against it will be counted.
+  3. Recursive - determines if agent should count folders in subdirectories. To enable recursion, use values ``1`` or ``true``.
+  4. Size filter. If parameter < 0, only folders with size less than abs(value) will 
+     match. If parameter > 0, only folders with size greater than value will match.
+  5. Age filter. If parameter < 0, only folders created after now - abs(value) will 
+     match. If parameter > 0, only folders created before now - value will match.
+  
+Number of folders in directory
 
 File.Hash.CRC32(*)
 ------------------

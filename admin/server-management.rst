@@ -17,7 +17,8 @@ each parameter should be on its own line. Comments can be inserted after "#" sig
 Detailed list of parameters can be found there: :ref:`server_configuration_file`.    
     
 Configuration file example:
-::  
+
+.. code-block:: cfg  
 
   #
   # Sample configuration file for NetXMS server

@@ -66,7 +66,8 @@ then it's location and file name can be given to agent with -c parameter.
 Detailed list of parameters can be found there: :ref:`agent_configuration_file`.
      
 Configuration file example:
-::    
+
+.. code-block:: cfg    
    
    #
    # Sample agent’s configuration file
@@ -170,7 +171,7 @@ parameters in :guilabel:`Configuration File` tab.
 In XML format general tag should be <config> and then can be added any agent or subagent 
 parameter as a tag. Example:
 
-::
+.. code-block:: xml
 
   <config>
     <agent>
@@ -286,6 +287,7 @@ Policy types:
     agent does not support encryption will not establish connection. 
     
 .. figure:: _images/node_communications_tab.png
+
     Force encryption option for node.
   
 
@@ -298,6 +300,7 @@ Server access levels
 Depending on how server's IP address(or domain) is added to in nxagentd.conf, it will 
 have different access level. It is preferred to use MasterServers. There are 3 levels 
 of access for an agent:  
+
    1. MasterServers - full access
    2. ControlServers - can read data and execute predefined actions, but cannot change 
       config nor install policies.
@@ -319,10 +322,11 @@ configuration parameter set password what should be used for authentication.
 If authentication for agent is enabled, then while connection agent requested shared 
 secret from the server. Server check if password was set for this specific node in 
 :guilabel:`Shared secret` field in communication properties of node. In case if there is 
-no shared secret server sends content of :gilabel:`AgentDefaultSharedSecret` server 
+no shared secret server sends content of :guilabel:`AgentDefaultSharedSecret` server 
 configuration variable as shared secret. 
 
 .. figure:: _images/node_communications_tab.png
+
     Shared secret field in node communication properties. 
 
 In case shared secrets are not identical connection is not established. 

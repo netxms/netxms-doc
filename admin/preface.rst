@@ -14,7 +14,7 @@ Document contain :ref:`quick-start` chapter, that describes default installation
 and some simple metric configuration. :ref:`installation-and-upgrade` chapter 
 contain more detailed information about NetXMS and its components installation 
 and upgrade. To get familiar with main concepts of NetXMS use :ref:`concepts` 
-chapter. :ref:`administration` is main chapter, that provides all necessary 
+chapter. :ref:`concepts` is main chapter, that provides all necessary 
 information to successfully operate NetXMS. List of built in monitoring 
 options can be found there: :ref:`getting-things-monitored` chapter. There 
 is also big chapter about :ref:`NXLS scripting<scripting>`. 
@@ -81,11 +81,13 @@ Where to get support
 Forum, Facebook/Twitter/G+/IRC
 ------------------------------
 
-Forum: :ref:`https://www.netxms.org/forum`
-Facebook: :ref:`https://www.facebook.com/netxms`
-Google+: :ref:`https://plus.google.com/u/0/s/netxms`
-Twitter: :ref:`https://twitter.com/netxms`
-IRC: #netxms on freenode. List of servers: :ref:`https://freenode.net/irc_servers.shtml`
+Links to NetXMS in social media:
+
+  * `Forum <https://www.netxms.org/forum>`_
+  * `Facebook <https://www.facebook.com/netxms>`_
+  * `Google+: <https://plus.google.com/u/0/s/netxms>`_
+  * `Twitter: <https://twitter.com/netxms>`_
+  * IRC: #netxms on freenode. `List of servers <https://freenode.net/irc_servers.shtml>`_
 
 Stay informed of new releases
 -----------------------------

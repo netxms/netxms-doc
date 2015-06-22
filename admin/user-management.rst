@@ -318,6 +318,7 @@ Next two fields in combinations:
    
    Certificate mapping data: if no mapping data set, then linking certificate CN = user name, otherwise CN = mapping data
 
+.. _ldap:
 
 Integration with LDAP
 =====================
@@ -361,10 +362,10 @@ LDAP synchronization parameters:
      -
    * - LdapUserDeleteAction ``*``
      - This parameter specifies what should be done while synchronization with deleted from LDAP user/group. 0 - if user should be just deleted from NetXMS DB. 1 - if it should be disabled. If it is chosen to disable user, then on LDAP sync user will be disabled and it's description will be change on "LDAP entry was deleted." Afterwards this user/group can be detached from LDAP and enabled if it is required or just deleted manually. 
-     - 0
+     - 1
    * - LdapMappingName ``*`` ``**``
      - There should be specified name of attribute that's value will be used as a user login name
-     - displayName 
+     - uid 
    * - LdapMappingFullName ``**``
      - There should be specified name of attribute that's value will be used as a user full name
      - displayName
@@ -380,6 +381,9 @@ LDAP synchronization parameters:
    * - LdapSyncInterval ``*``
      - This parameter is for setting synchronization interval in minutes between NetXMS server and LDAP server. If synchronization parameter is set to 0 - synchronization will not be done. 
      - 0
+   * - LdapPageSize ``*``
+     - Limit of records that can be returned in one search page. 
+     - 1000
 
 ``* Required fields``    
 ``** Could not be the same field``

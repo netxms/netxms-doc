@@ -472,9 +472,9 @@ Server configuration parameters
     - 2000
     - Yes
   * - AgentDefaultSharedSecret
-    - 
-    - 
-    - 
+    - String that will be used as a shared secret in case if agent will required authentication. 
+    - netxms
+    - No
   * - AgentUpgradeWaitTime
     - Maximum wait time in seconds for agent restart after upgrade. If agent cannot be contacted after this time period, upgrade process is considered as failed.
     - 600
@@ -484,9 +484,9 @@ Server configuration parameters
     - 180
     - No
   * - AlarmListDisplayLimit
-    - 
-    - 
-    - 
+    - Maximum alarm count that will be displayed on :guilabel:`Alarm Browser` page. Alarms that exceed this count will not be shown. 
+    - 4096
+    - No
   * - AllowDirectSMS
     - Allow (1) or disallow (0) sending of SMS via NetXMS server using nxsms utility.
     - 0
@@ -589,17 +589,17 @@ Server configuration parameters
     - public
     - No
   * - DefaultConsoleDateFormat
-    - 
-    - 
-    - 
+    - Default format to display date in console GUI. 
+    - dd.MM.yyyy
+    - No
   * - DefaultConsoleShortTimeFormat
-    - 
-    - 
-    - 
+    - Default format to display time in a short way in console GUI. 
+    - HH:mm
+    - No
   * - DefaultConsoleTimeFormat
-    - 
-    - 
-    - 
+    - Default format to display time in a long way in console GUI. 
+    - HH:mm:ss
+    - No
   * - DefaultDciPollingInterval
     - Default polling interval for newly created DCI (in seconds).
     - 60
@@ -617,32 +617,32 @@ Server configuration parameters
     - 0xffffff
     - No
   * - DeleteAlarmsOfDeletedObject
-    - 
-    - 
-    - 
+    - Parameter displays if alarms of deleted object should be also removed from database. 
+    - 1
+    - No
   * - DeleteEmptySubnets
     - Enable (1) or disable (0) automatic deletion of subnet objects without any nodes within. When enabled, empty subnets will be deleted by housekeeping process.
-    - 1
+    - 0
     - Yes
   * - DeleteEventsOfDeletedObject
-    - 
-    - 
-    - 
+    - Parameter displays if events of deleted object should be also removed from database.
+    - 1
+    - No
   * - DeleteUnreachableNodesPeriod
     - Delete nodes which were unreachable for a number of days specified by this parameter. If this parameter is set to 0 then unreachable nodes will never be deleted.
     - 0
     - Yes
   * - DiscoveryFilter
     - 
-    - 
+    - none
     - No
   * - DiscoveryFilterFlags
-    - 3
     - 
+    - 3
     - No
   * - DiscoveryPollingInterval
     - Interval in seconds between passive network discovery polls.
-    - 900
+    - 6400
     - Yes
   * - EnableAdminInterface
     - 
@@ -658,8 +658,8 @@ Server configuration parameters
     - Yes
   * - EnableCheckPointSNMP 
     - 
-    -  
-    - 
+    - 0
+    - No
   * - EnableEventStormDetection 
     - 
     - 0 
@@ -670,8 +670,8 @@ Server configuration parameters
     - Yes
   * - EnableObjectTransactions 
     - 
-    -  
-    - 
+    - 0
+    - Yes
   * - EnableMultipleDBConnections 
     - Enable (1) or disable (0) multiple database connections from the NetXMS server. This setting has no effect on SQLite databases. 
     - 1 
@@ -690,20 +690,20 @@ Server configuration parameters
     - Yes
   * - EnableTimedAlarmAck 
     - 
-    -  
-    - 
+    - 1 
+    - Yes
   * - EnableXMPPConnector 
-    - 
-    -  
-    - 
+    - This parameter displays if XMPP connector should be enabled on a server start. It is required to enable XMPP message sending.
+    - 0
+    - Yes
   * - EnableZoning 
     - Enable (1) or disable (0) zoning support. 
     - 0 
     - Yes
   * - EscapeLocalCommands
     - 
-    - 
-    - 
+    - 0
+    - No
   * - EventLogRetentionTime 
     - 
     - 90 
@@ -740,10 +740,6 @@ Server configuration parameters
     - Syslog tag to be used in audit log records sent to external server. 
     - netxmsd-audit 
     - Yes
-  * - FirstFreeObjectId
-    - 
-    - 
-    - 
   * - FixedStatusValue 
     - 
     - 0 
@@ -785,57 +781,62 @@ Server configuration parameters
     - 60 
     - Yes
   * - LdapGroupClass
+    - There is specified which object class represents group objects. If found entry will not be of a user ot group class, it will be just ignored.
     - 
-    - 
-    - 
+    - No
   * - LdapConnectionString
-    - 
-    - 
-    - 
+    - The LdapConnectionString configuration parameter may be a comma- or 
+      whitespace-separated list of URIs containing only the schema, the host, and the 
+      port fields. Apart from ldap, other (non-standard) recognized values of the 
+      schema field are ldaps (LDAP over TLS), ldapi (LDAP over IPC), and cldap 
+      (connectionless LDAP). If other fields are present, the behavior is undefined. 
+      Format: schema://host:port. For more information refer to :ref:`ldap` chapter. 
+    - ldap://localhost:389
+    - No
   * - LdapMappingDescription
+    - There should be specified name of attribute that’s value will be used as a user description
     - 
-    - 
-    - 
+    - No
   * - LdapMappingFullName
-    - 
-    - 
-    - 
+    - There should be specified name of attribute that’s value will be used as a user full name
+    - displayName
+    - No
   * - LdapMappingName
+    - There should be specified name of attribute that’s value will be used as a user login name
     - 
-    - 
-    - 
+    - No
   * - LdapPageSize
-    - 
-    - 
-    - 
+    - Limit of records that can be returned in one search page. 
+    - 1000
+    - No
   * - LdapSearchBase
+    - The LdapSearchBase configuration parameter is the DN of the entry at which to start the search.
     - 
-    - 
-    - 
+    - No
   * - LdapSearchFilter
+    - The LdapSearchFilter is a string representation of the filter to apply in the search.
     - 
-    - 
-    - 
+    - No
   * - LdapSyncInterval
-    - 
-    - 
-    - 
+    - This parameter is for setting synchronization interval in minutes between NetXMS server and LDAP server. If synchronization parameter is set to 0 - synchronization will not be done.
+    - 0
+    - No
   * - LdapSyncUser
+    - User login for LDAP synchronization
     - 
-    - 
-    - 
+    - No
   * - LdapSyncUserPassword
+    - User password for LDAP synchronization
     - 
-    - 
-    - 
+    - No
   * - LdapUserClass
+    - There is specified which object class represents user objects. If found entry will not be of a user ot group class, it will be just ignored.
     - 
-    - 
-    - 
+    - No
   * - LdapUserDeleteAction
-    - 
-    - 
-    - 
+    - This parameter specifies what should be done while synchronization with deleted from LDAP user/group. 0 - if user should be just deleted from NetXMS DB. 1 - if it should be disabled. If it is chosen to disable user, then on LDAP sync user will be disabled and it’s description will be change on “LDAP entry was deleted.” Afterwards this user/group can be detached from LDAP and enabled if it is required or just deleted manually.
+    - 1
+    - No
   * - LockTimeout 
     - ''Unused?'' 
     - 60000 
@@ -1050,9 +1051,9 @@ Server configuration parameters
     - 01020304
     - Yes
   * - StrictAlarmStatusFlow
-    - 
-    - 
-    - 
+    - This parameter describes if alarm status flow should be strict(alarm can be terminated only after it was resolved).
+    - 0
+    - No
   * - SyncInterval
     - Interval in seconds between writing object changes to the database.
     - 60
@@ -1116,29 +1117,29 @@ Server configuration parameters
     - 0
     - No
   * - UseSNMPTrapsForDiscovery
-    - 
-    - 
-    - 
+    - This parameter defines if trap information should be used for new node discovery.
+    - 1
+    - Yes
   * - WindowsConsoleUpgradeURL
     - URL pointing to the actual version of NetXMS Console for Windows. Console application will try to download new version from this URL, if it detects that upgrade is needed. You can use %version % macro inside the URL to insert actual server version.
     - http://www.netxms.org/download/netxms-%version%.exe
     - No
   * - XMPPLogin
-    - 
-    - 
-    - 
+    - Login name that will be used to authentication on XMPP server.
+    - netxms@localhost
+    - Yes
   * - XMPPPassword
-    - 
-    - 
-    - 
+    - Password that will be used to authentication on XMPP server.
+    - netxms
+    - Yes
   * - XMPPPort
-    - 
-    - 
-    - 
+    - XMPP connection port
+    - 5222
+    - Yes
   * - XMPPServer
-    - 
-    - 
-    - 
+    - XMPP connection server
+    - localhost
+    - Yes
     
 
 Bundled Subagents

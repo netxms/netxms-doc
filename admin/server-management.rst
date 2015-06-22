@@ -93,6 +93,21 @@ commands like "ldap sync".
 .. figure:: _images/server_console.png
    :scale: 65%
 
+Server commands can be executed also through XMPP. To execute server command 
+through XMPP should be fulfill next requirements:
+
+  1. Server connection with XMPP should be configured in server configuration variables: 
+     :guilabel:`XMPPLogin`, :guilabel:`XMPPPassword`, :guilabel:`XMPPPort`, 
+     :guilabel:`XMPPServer`, :guilabel:`EnableXMPPConnector`. 
+  2. XMPP user that will send commands should be connected with NetXMS user by pointing 
+     it's XMPP name in :guilabel:`XMPP ID` filed of General tab of NetXMS user 
+     properties. 
+  3. NetXMS user that will execute this commands should also have 
+     :guilabel:`Execute commands via XMPP` access right. 
+  
+Execution is done sending server command like a message to the user defined in 
+:guilabel:`XMPPLogin` server configuration variable. 
+   
 Server commands
 ---------------
 
@@ -158,6 +173,7 @@ Server commands
     - Display watchdog information
   * - trace <node1> <node2>
     - Show network path trace between two nodes
+    
 
 Configuring self-monitoring
 ===========================

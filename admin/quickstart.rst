@@ -9,6 +9,15 @@ In this section will be described basic configuration that should be done
 after server and agent clean install. Also will be shown monitoring configuration 
 for some common metrics like CPU of FS.
 
+Default Credentials
+===================
+
+Server login default credentials
+
+Login: admin
+
+Password: netxms
+
 Basic agent configuration
 =========================
 

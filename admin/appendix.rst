@@ -873,10 +873,6 @@ Server configuration parameters
     - The number of threads used to perform delayed writes to database. 
     - 1 
     - Yes
-  * - NumberOfDataCollectors 
-    - The number of threads used for data collection. 
-    - 25 
-    - Yes
   * - NumberOfTopologyPollers 
     - The number of threads used for collecting network topology information. 
     - 10 

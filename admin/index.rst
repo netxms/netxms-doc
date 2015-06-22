@@ -7,7 +7,8 @@ NetXMS Administrator Guide
 
    preface
    concepts
-   installation_and_upgrade
+   installation
+   upgrade
    quickstart
    agent-management
    server-management

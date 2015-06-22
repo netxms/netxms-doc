@@ -1,8 +1,8 @@
-.. _installation-and-upgrade:
+.. _upgrade:
 
-########################
-Installation and Upgrade
-########################
+#######
+Upgrade
+#######
 
 
 Synopsis
@@ -13,8 +13,8 @@ Planing
 =======
 
 
-Installing or upgrading on Debian or Ubuntu
-===========================================
+Upgrading on Debian or Ubuntu
+=============================
 
 
 Adding our APT repository
@@ -37,8 +37,8 @@ Management console
 ~~~~~~~~~~~~~~~~~~
 
 
-Installing or upgrading on Red Hat, Fedora, CentOS or ScientificLinux
-=====================================================================
+Upgrading on Red Hat, Fedora, CentOS or ScientificLinux
+=======================================================
 
 
 Adding our YUM repository
@@ -53,6 +53,30 @@ Server
 ~~~~~~
 
 
+Agent
+~~~~~
+
+
+Management console
+~~~~~~~~~~~~~~~~~~
+
+
+Upgrading on Windows
+====================
+
+
+Adding our YUM repository
+-------------------------
+
+
+Installing packages
+-------------------
+
+
+Server
+~~~~~~
+
+  
 Agent
 ~~~~~
 

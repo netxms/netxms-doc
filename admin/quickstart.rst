@@ -86,17 +86,27 @@ To edit a setting, double click on the row in the table or right-click and selec
 ================================ ==============================================
 Parameter                        Description
 ================================ ==============================================
-``NumberOfStatusPollers``        If you plan to monitor large number of hosts,
+``PollerThreadPoolMaxSize``      This parameter represents maximum thread pool 
+                                 size. From this pool will be taken threads for 
+                                 all types of polls: DCI collection, Status 
+                                 poll, Configuration poll, etc. In case of 
+                                 big load on a server number of threads will be 
+                                 increased till this size. When load come back 
+                                 to normal, number of threads will be 
+                                 automatically decreased to base size.
+                                 If you plan to monitor large number of hosts,
+                                 or collect large number of DCIs
+                                 increase this parameter from the default value
+                                 to approximately 1/5 of host count.
+``PollerThreadPoolBaseSize``     This parameter represents base thread pool 
+                                 size. From this pool will be taken threads for 
+                                 all types of polls: DCI collection, Status 
+                                 poll, Configuration poll, etc. This is minimal 
+                                 number of threads that will always run. 
+                                 If you plan to monitor large number of hosts,
+                                 or collect large number of DCIs
                                  increase this parameter from the default value
                                  to approximately 1/10 of host count.
-``NumberOfConfigurationPollers`` If you plan to monitor large number of hosts,
-                                 increase this parameter from the default value
-                                 to approximately 1/20 of host count.
-``NumberOfDataCollectors``       If you plan to monitor large number of hosts,
-                                 increase this parameter from the default value
-                                 to approximately 1/10 – 1/5 of host number.
-                                 Use larger value if you plan to gather many
-                                 DCIs from each host.
 ``EnableSyslogDaemon``           Set this parameter to 1 if you want to
                                  enable NetXMS built-in syslog server.
 ================================ ==============================================

@@ -868,18 +868,6 @@ Server configuration parameters
     - 
     -  
     - 
-  * - NumberOfBusinessServicePollers 
-    - A number of threads responsible for business service (SLA) monitoring. 
-    - 10 
-    - Yes
-  * - NumberOfConditionPollers 
-    - A number of threads responsible for condition polling. 
-    - 10 
-    - Yes
-  * - NumberOfConfigurationPollers 
-    - A number of threads responsible for configuration polling. 
-    - 10 
-    - Yes
   * - NumberOfDatabaseWriters 
     - The number of threads used to perform delayed writes to database. 
     - 1 
@@ -888,26 +876,10 @@ Server configuration parameters
     - The number of threads used for data collection. 
     - 25 
     - Yes
-  * - NumberOfDiscoveryPollers 
-    - A number of threads responsible for network discovery polling. 
-    - 1 
-    - Yes
-  * - NumberOfRoutingTablePollers 
-    - The number of threads used for polling routing tables on monitored nodes. If you have a really large number of monitored nodes (more than 1000), or if you have decreased routing table update interval, you may need to increase this parameter. 
-    - 10 
-    - Yes
-  * - NumberOfStatusPollers 
-    - The number of threads used for status polling. Since accurate status polling is sensitive for normal system operation, it is highly recommended to have this parameter set to approximately 1/10 of the number of monitored nodes. 
-    - 25 
-    - Yes
   * - NumberOfTopologyPollers 
     - The number of threads used for collecting network topology information. 
     - 10 
     - Yes
-  * - NumberOfTopologyTablePollers
-    - 
-    - 
-    - 
   * - NumberOfUpgradeThreads 
     - The number of threads used to perform agent upgrades (i.e. maximum number of parallel upgrades). 
     - 10 
@@ -927,6 +899,17 @@ Server configuration parameters
   * - PollCountForStatusChange 
     - The number of consecutive unsuccessful polls required to declare interface as down. 
     - 1 
+    - Yes
+  * - PollerThreadPoolBaseSize
+    - This parameter represents base thread pool size. From this pool will be taken threads for all types of polls: DCI collection, 
+      Status poll, Configuration poll, etc. This is minimal number of threads that will always run.
+    - 10
+    - Yes
+  * - PollerThreadPoolMaxSize
+    - This parameter represents maximum thread pool size till which pool can be increased. From this pool will be taken threads for 
+      all types of polls: DCI collection, Status poll, Configuration poll, etc. In case of big load on a server number of threads can be 
+      increased till this size. When load come back to normal, number of threads will be automatically decreased to base size.
+    - 250
     - Yes
   * - ProcessTrapsFromUnmanagedNodes 
     - Enable (1) or disable (0) processing of SNMP traps received from node which is in unmanaged state. 

@@ -525,3 +525,15 @@ following notations:
 +--------+--------------------------------+
 | ``\\`` | Backslash character            |
 +--------+--------------------------------+
+
+Event's parameter with given name
+---------------------------------
+
+  * %<dciId>
+  * %<dciName>
+  * %<dciDescription>
+  * %<thresholdValue>
+  * %<currentValue>
+  * %<instance>
+  * %<isRepeatedEvent>
+  

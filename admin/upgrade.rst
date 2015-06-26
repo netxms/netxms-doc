@@ -52,6 +52,45 @@ Installing packages
 Server
 ~~~~~~
 
+  1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need source archive (named netxms-VERSION.tar.gz, for example netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be used as a substitution for an actual version number.
+  2. Unpack the archive:
+
+    :command:`$ tar zxvf netxms-1.2.15.tar.gz`
+    
+  3. Change directory to netxms-version and run configure script:
+
+    :command:`$ cd netxms-1.2.15`
+    
+    :command:`$ sh ./configure --with-server --with-mysql`
+    
+    Be sure to include all options that were used at installation time.
+
+
+  4. Run make:
+
+    :command:`$ make`
+    
+  5. Stop NetXMS server. 
+  
+  6. Stop NetXMS agent. 
+  
+  7. Check database for possible inconsistencies:
+
+    :command:`$ nxdbmgr check`
+    
+    Proceed to the next step only if database checker does not report any errors!
+
+  8. Run make install:
+
+    :command:`$ make install`
+    
+  9. Upgrade database:
+
+    :command:`$ nxdbmgr upgrade`
+    
+  10. Start NetXMS agent.
+
+  11. Start NetXMS server.
 
 Agent
 ~~~~~
@@ -64,13 +103,8 @@ Management console
 Upgrading on Windows
 ====================
 
-
-Adding our YUM repository
--------------------------
-
-
-Installing packages
--------------------
+Upgrade
+-------
 
 
 Server

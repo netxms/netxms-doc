@@ -12,10 +12,84 @@ Synopsis
 Planing
 =======
 
+Operating system
+----------------
+
+Supported operating systems for NetXMS server:
+   * Windows Server 2003, Windows Vista, Windows Server 2008,  Windows Server 2008R2, Windows 7, Windows 8, Windows 8.1, Windows Server 2012, Windows Server 2012R2
+   * RedHat Enterprise Linux, SUSE Linux, CentOS, Debian Linux, Ubuntu Linux
+   * FreeBSD, NetBSD, OpenBSD
+   * Solaris 10, 11
+   * HP-UX 11.23, 11.31
+   * AIX 5.3 +
+   
+Supported operating systems for NetXMS agent:
+   * Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008,  Windows Server 2008R2, Windows 7, Windows 8, Windows 8.1, Windows Server 2012, Windows Server 2012R2
+   * Linux (all glibc2-based flavors)
+   * FreeBSD, NetBSD, OpenBSD
+   * Solaris
+   * HP-UX
+   * AIX
+
+If you wish to compile NetXMS server with encryption support on UNIX, you must have 
+OpenSSL package installed.
+   
+Server
+------
+
+Minimum requirements: Intel Pentium III 500 MHz, 256MB RAM, 100MB of free disk space.
+
+Recommended: Intel Pentium IV 1 GHz, 512MB RAM, 100MB of free disk space.
+
+Additional RAM may be required for large installations (1000+ nodes). For non-Intel 
+platforms, an equivalent hardware must be used.
+
+In free disk space requirements is taken into account only initial server size, without 
+Database and possible files that can be loaded to server(agent update packages, 
+pictures, etc).
+
+If you wish to compile NetXMS server with encryption support on UNIX, you must have 
+OpenSSL package installed.
+
+Database
+--------
+
+Supported DBMS engines for NetXMS server:
+   * Microsoft SQL Server 2005, Windows Server 2003, Windows Vista, Windows Server 2008,  Windows Server 2008R2, Windows 7, Windows 8, Windows 8.1, Windows Server 2012, Windows Server 2012R2
+   * MySQL 5.0 +
+   * Oracle 11g, 12
+   * PostgreSQL 8+
+   * DB/2
+   * SQLite(it is highly recommended use this option only for test purpose)
+
+Database size and load is very hard to predict, because it is dependent on a number of 
+monitored nodes and collected parameters. If you plan to install database engine on 
+the same machine as NetXMS server, increase your hardware requirements accordingly.
+
+Link to Excel file that allows roughly estimate the size that will be required for 
+database: http://git.netxms.org/public/netxms.git/blob/HEAD:/doc/misc/database_sizing.xlsx?js=1
+
+Agent
+-----
+
+
 
 Installing on Debian or Ubuntu
 ==============================
 
+We provide deb packages for Debian users at http://packages.netxms.org/, which is our 
+public APT repository. Packages are signed, so you'll need to install additional 
+encryption key for signature verification.
+
+.. note::
+
+  At the moment (23/3/15) we provide binary packages for Debian only, 
+  Ubuntu support will be shortly.
+  
+There are 2 options for server and agent installation on Debian/Ubuntu systems: 
+using APT repository or from source. There will be described instruction only for 
+APT repository. I installation using source tarball is described 
+:ref:`there <centos_install>`.
 
 Adding our APT repository
 -------------------------
@@ -36,10 +110,16 @@ Agent
 Management console
 ~~~~~~~~~~~~~~~~~~
 
+.. _centos_install:
 
 Installing on Red Hat, Fedora, CentOS or ScientificLinux
 ========================================================
 
+Agent and server for this systems can be installed only from source. 
+
+.. note::
+
+  YUM repository for this systems will be created soon. 
 
 Adding our YUM repository
 -------------------------
@@ -52,6 +132,117 @@ Installing packages
 Server
 ~~~~~~
 
+Installing server using source archive:
+
+  1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need source archive (named netxms-VERSION.tar.gz, for example netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be used as a substitution for an actual version number.
+  2. Unpack the archive: 
+  
+    :command:`tar zxvf netxms-1.2.15.tar.gz`
+    
+  3. Change directory to netxms-version and run configure script:
+  
+    :command:`cd netxms-1.2.15`
+    
+    :command:`sh ./configure --with-server --with-mysql --with-agent`    
+    
+    Important arguments:
+    
+    --prefix=DIRECTORY: installation prefix, all files go to the specified directory;
+    
+    --with-server: build server. Don't forget to add at least one DB Driver as well;
+    
+    --with-pgsql: build Postgres DB Driver (if you plan to use PostgreSQL as backend database);
+    
+    --with-mysql: build MySQL DB Driver (if you plan to use MySQL as backend database);
+    
+    --with-odbc: build ODBC DB driver (if you plan to connect to your backend database via ODBC; you will need UNIX ODBC package to do that);
+    
+    --with-sqlite: build SQLite DB driver (if you plan to use embedded SQLite database as backend database);
+    
+    --with-agent: build monitoring agent. It is strongly recommended to install agent on a server box;
+    
+    --disable-encryption: Disable encryption support.
+    
+    To learn more about possible configure parameters, run it with --help option.
+    
+  4. Run make and make install:
+  
+    :command:`make`
+    
+    :command:`make install`  
+    
+  5. Copy sample config files to desired locations:
+  
+    :command:`cp contrib/netxmsd.conf-dist /etc/netxmsd.conf`
+    
+    :command:`cp contrib/nxagentd.conf-dist /etc/nxagentd.conf`  
+    
+    By default, both server and agent will look for configuration files in /etc 
+    directory. If you wish to place configuration files in a different location, 
+    don't forget to use –c command line switch for agent and –config-file command-line 
+    switch for server to specify an alternate location.
+  
+  6. Check that database and user for it are created. :ref:`install_centos_database`
+  7. Modify server configuration file (default is /etc/netxmsd.conf). It should look 
+     the following way:
+     
+    .. code-block:: cfg
+    
+      DBDriver = mysql.ddr
+      DBServer = localhost
+      DBName = netxms
+      DBLogin = netxms
+      DBPassword = PaSsWd
+      LogFile = /var/log/netxmsd
+      LogFailedSQLQueries = yes
+        
+    More information about each configuration parameter can be found there: 
+    :ref:`server_configuration_parameters`.
+    
+  8. Modify agent's configuration file (/etc/nxagentd.conf). For detailed description 
+     of possible parameters, please consult NetXMS User's Manual. For the normal 
+     server's operation, you should add at least the following line to your agent's 
+     configuration file:
+  
+    .. code-block:: cfg
+      
+      MasterServers = 127.0.0.1, your_server_IP_address
+      
+  9. Initialise this database with nxdbmgr utility using sql-script in 
+     sql/dbinit_DBTYPE.sql. DBTYPE can be "mssql", "mysql", "pgsql", "oracle", or 
+     "sqlite".
+     
+     MySQL example:
+     
+    :command:`$ /usr/local/bin/nxdbmgr init /usr/local/share/netxms/sql/dbinit_mysql.sql`
+     
+  10. Run agent and server:
+  
+    :command:`$ /usr/local/bin/nxagentd -d`
+
+    :command:`$ /usr/local/bin/netxmsd -d`
+    
+.. _install_centos_database:    
+    
+Database
+~~~~~~~~
+
+Create Database and User with access rights to this database.
+
+Example for MySQL:
+
+.. code-block: sql
+
+  mysql -u root -p mysql
+  mysql> CREATE DATABASE netxms;
+  mysql> GRANT ALL ON netxms.* TO netxms@localhost IDENTIFIED BY 'PaSsWd';
+  mysql> \q
+
+`Example for Oracle 11g. <https://wiki.netxms.org/wiki/Oracle>`_
+
+
+Please note that database user you have created should have rights to create 
+new tables.
 
 Agent
 ~~~~~
@@ -64,13 +255,8 @@ Management console
 Installing on Windows
 =====================
 
-
-Adding our YUM repository
--------------------------
-
-
-Installing packages
--------------------
+Installing
+----------
 
 
 Server

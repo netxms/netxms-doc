@@ -4,11 +4,6 @@
 Installation
 ############
 
-
-Synopsis
-========
-
-
 Planing
 =======
 
@@ -55,7 +50,7 @@ Database
 --------
 
 Supported DBMS engines for NetXMS server:
-   * Microsoft SQL Server 2005, Windows Server 2003, Windows Vista, Windows Server 2008,  Windows Server 2008R2, Windows 7, Windows 8, Windows 8.1, Windows Server 2012, Windows Server 2012R2
+   * Microsoft SQL 
    * MySQL 5.0 +
    * Oracle 11g, 12
    * PostgreSQL 8+
@@ -72,7 +67,9 @@ database: http://git.netxms.org/public/netxms.git/blob/HEAD:/doc/misc/database_s
 Agent
 -----
 
+Minimum requirements: **TODO**
 
+Recommended: **TODO**
 
 Installing on Debian or Ubuntu
 ==============================
@@ -94,21 +91,94 @@ APT repository. I installation using source tarball is described
 Adding our APT repository
 -------------------------
 
+There are two options to add APT repository. Using recommended way of adding APT 
+repository you will not have errors in case if keys will be changed. 
+
+After repository is added run package update command:
+
+:command:`apt-get update`
+
+Recommended
+~~~~~~~~~~~
+
+Install netxms-release_1.0-1_all.deb package that contain description of NetXMS 
+repository (this package should support all Debian and Ubuntu systems):
+
+:command:`wget http://packages.netxms.org/netxms-release_1.0-1_all.deb`
+
+:command:`dpkg -i netxms-release_1.0-1_all.deb`
+
+Usual
+~~~~~
+
+Add the repository to your sources.list (change "wheezy" to correct distro name):
+
+:command:`deb http://packages.netxms.org/debian/ wheezy main`
+
+Fetch and install the GnuPG key:
+
+:command:`wget -q -O - http://packages.netxms.org/netxms.gpg | sudo apt-key add -`
 
 Installing packages
 -------------------
 
-
 Server
 ~~~~~~
 
+To install server use this command:
+
+:command:`apt-get install netxms-server`
+
+Server does not include server drivers. They should be installed with separate command:
+
+:command:`apt-get install DRIVER_NAME`
+
+Change *DRIVER_NAME* to driver name that you need:
+
+  * netxms-server-mysql -  MySQL driver
+  * netxms-server-odbc - DB/2 and Microsoft SQL drivers
+  * netxms-server-oracle - Oracle driver
+  * netxms-server-pgsql - PostgreSQL driver 
 
 Agent
 ~~~~~
 
+To install agent use this command:
+
+:command:`apt-get install netxms-agent`
 
 Management console
 ~~~~~~~~~~~~~~~~~~
+
+Desktop Management Console:
+
+ 1. Download the latest version from http://www.netxms.org/download. You will need 
+    Linux installer(named nxmc-VERSION-linux-gtk-x86.tar.gz or 
+    nxmc-VERSION-linux-gtk-x64.tar.gz, for example nxmc-1.2.17-linux-gtk-x64.tar.gz).
+ 2. Expand package to your preferred directory using command:
+ 
+    :command:`tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DIRECTORY`
+    
+ 3. Run nxmc file form extracted catalog. 
+ 
+Web Management Console:
+
+NetXMS web interface is java based and should be deployed into servlet container to 
+run. Tested containers: Tomcat7, Jetty7.
+
+  1. Install one of servlet containers that support servlet-api version 3. 
+
+  2. Download latest version of WAR file from Web Interface Binaries section 
+     http://www.netxms.org/download/ (named nxmc-VERSION.war, for example 
+     nxmc-1.2.17.war).
+     
+  3. Copy nxmc.war to webapps directory, in a few seconds it will be autodeployed and 
+     available at http://SERVER_IP:SERVER_PORT/nxmc/
+     
+     Tomcat default folder:  /var/lib/tomcat6/webapps
+     
+     Jetty default folder: $JETTY_HOME/webapps/
+
 
 .. _centos_install:
 
@@ -248,9 +318,37 @@ Agent
 ~~~~~
 
 
-Management console
+Management Console
 ~~~~~~~~~~~~~~~~~~
 
+Desktop Management Console:
+
+ 1. Download the latest version from http://www.netxms.org/download. You will need 
+    Linux installer(named nxmc-VERSION-linux-gtk-x86.tar.gz or 
+    nxmc-VERSION-linux-gtk-x64.tar.gz, for example nxmc-1.2.17-linux-gtk-x64.tar.gz).
+ 2. Expand package to your preferred directory using command:
+ 
+    :command:`tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DIRECTORY`
+    
+ 3. Run nxmc file form extracted catalog. 
+ 
+Web Management Console:
+
+NetXMS web interface is java based and should be deployed into servlet container to 
+run. Tested containers: Tomcat7, Jetty7.
+
+  1. Install one of servlet containers that support servlet-api version 3. 
+
+  2. Download latest version of WAR file from Web Interface Binaries section 
+     http://www.netxms.org/download/ (named nxmc-VERSION.war, for example 
+     nxmc-1.2.17.war).
+     
+  3. Copy nxmc.war to webapps directory, in a few seconds it will be autodeployed and 
+     available at http://SERVER_IP:SERVER_PORT/nxmc/
+     
+     Tomcat default folder:  /var/lib/tomcat6/webapps
+     
+     Jetty default folder: $JETTY_HOME/webapps/
 
 Installing on Windows
 =====================
@@ -360,6 +458,23 @@ Agent
 Management console
 ~~~~~~~~~~~~~~~~~~
 
+Desktop Management Console:
+
+ 1. Download the latest version from http://www.netxms.org/download. You will need 
+    Linux installer(named nxmc-VERSION-linux-gtk-x86.tar.gz or 
+    nxmc-VERSION-linux-gtk-x64.tar.gz, for example nxmc-1.2.17-linux-gtk-x64.tar.gz).
+ 2. Expand package to your preferred directory using command:
+ 
+    :command:`tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DIRECTORY`
+    
+ 3. Run nxmc.exe file form extracted catalog. 
+ 
+Web Management Console:
+
+**TODO**
+
+Install on Android
+==================
 
 Generic installation, upgrade and downgrade using source tarball
 ================================================================

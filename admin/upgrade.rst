@@ -4,15 +4,6 @@
 Upgrade
 #######
 
-
-Synopsis
-========
-
-
-Planing
-=======
-
-
 Upgrading on Debian or Ubuntu
 =============================
 

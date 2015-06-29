@@ -32,16 +32,21 @@ OpenSSL package installed.
 Server
 ------
 
-Minimum requirements: Intel Pentium III 500 MHz, 256MB RAM, 100MB of free disk space.
+Minimum requirements: Intel Pentium III 500 MHz, 256MB RAM, 256MB of free disk space.
 
-Recommended: Intel Pentium IV 1 GHz, 512MB RAM, 100MB of free disk space.
+.. note:: 
+  In free disk space requirements is taken into account only initial server size, 
+  without Database and possible files that can be loaded to server(agent update 
+  packages, pictures, etc).
+
+Recommended on ~1000 nodes: Intel Xeon Processor E5502, 4GB RAM, 8GB of free disk space.
+
+.. note:: 
+  In free disk space requirements is taken into account server size, 
+  without Database.
 
 Additional RAM may be required for large installations (1000+ nodes). For non-Intel 
 platforms, an equivalent hardware must be used.
-
-In free disk space requirements is taken into account only initial server size, without 
-Database and possible files that can be loaded to server(agent update packages, 
-pictures, etc).
 
 Database
 --------
@@ -64,10 +69,7 @@ database: http://git.netxms.org/public/netxms.git/blob/HEAD:/doc/misc/database_s
 Agent
 -----
 
-Minimum requirements: **TODO**
-
-Recommended: **TODO**
-
+Agent can run on any device where OS can run. 
 
 Installing on Debian or Ubuntu
 ==============================
@@ -84,7 +86,7 @@ encryption key for signature verification.
 There are 2 options for server and agent installation on Debian/Ubuntu systems: 
 using APT repository or from source. There will be described instruction only for 
 APT repository. I installation using source tarball is described 
-:ref:`there <centos_install>`.
+:ref:`there <install_from_tarball>`.
 
 Adding our APT repository
 -------------------------
@@ -185,17 +187,15 @@ Installing on Red Hat, Fedora, CentOS or ScientificLinux
 
 Agent and server for this systems can be installed only from source. 
 
+Adding our YUM repository
+-------------------------
+
 .. note::
 
   YUM repository for this systems will be created soon. 
 
-Adding our YUM repository
--------------------------
-
-
-Installing packages
--------------------
-
+Installing
+----------
 
 Server
 ~~~~~~
@@ -365,12 +365,10 @@ OpenSSL package installed.
     
     By default, agent will look for configuration files in /etc 
     directory. If you wish to place configuration files in a different location, 
-    don't forget to use –c command line switch for agent and –config-file command-line 
-    switch for server to specify an alternate location.
+    don't forget to use –c command line switch for agent.
     
-  6. Modify agent's configuration file (/etc/nxagentd.conf). For detailed description 
-     of possible parameters, please consult NetXMS User's Manual. For the normal 
-     server's operation, you should add at least the following line to your agent's 
+  6. Modify agent's configuration file (/etc/nxagentd.conf). For the normal 
+     agent's operation, you should add at least the following line to your agent's 
      configuration file:
   
     .. code-block:: cfg
@@ -556,14 +554,11 @@ Management console
 Desktop Management Console:
 
  1. Download the latest version from http://www.netxms.org/download. You will need 
-    Linux installer(named nxmc-VERSION-linux-gtk-x86.tar.gz or 
-    nxmc-VERSION-linux-gtk-x64.tar.gz, for example nxmc-1.2.17-linux-gtk-x64.tar.gz).
+    Linux installer(named nxmc-VERSION-win32-x86.zip or 
+    nxmc-VERSION-win32-x64.zip, for example nxmc-1.2.17-win32-x64.zip).
+ 2. Extract zip in preferred directory.
     
- 2. Expand package to your preferred directory using command:
- 
-    :command:`tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DIRECTORY`
-    
- 3. Run nxmc.exe file form extracted catalog. 
+ 3. Run nxmc file form extracted catalog. 
  
 Web Management Console:
 
@@ -620,6 +615,8 @@ required connection credentials: server address, port, user name, password.
   User that is used for connection should have :guilabel:`Login as mobile device` 
   user right.
 
+.. _install_from_tarball:
+  
 Generic installation, upgrade and downgrade using source tarball
 ================================================================
 

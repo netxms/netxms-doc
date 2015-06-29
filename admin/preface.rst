@@ -11,7 +11,7 @@ configuration and usage. It contains all required information for installation
 and operation managers. 
 
 Document contain :ref:`quick-start` chapter, that describes default installation 
-and some simple metric configuration. :ref:`installation-and-upgrade` chapter 
+and some simple metric configuration. :ref:`installation` and :ref:`upgrade` chapters 
 contain more detailed information about NetXMS and its components installation 
 and upgrade. To get familiar with main concepts of NetXMS use :ref:`concepts` 
 chapter. :ref:`concepts` is main chapter, that provides all necessary 

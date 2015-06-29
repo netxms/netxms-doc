@@ -43,9 +43,6 @@ In free disk space requirements is taken into account only initial server size, 
 Database and possible files that can be loaded to server(agent update packages, 
 pictures, etc).
 
-If you wish to compile NetXMS server with encryption support on UNIX, you must have 
-OpenSSL package installed.
-
 Database
 --------
 
@@ -70,6 +67,7 @@ Agent
 Minimum requirements: **TODO**
 
 Recommended: **TODO**
+
 
 Installing on Debian or Ubuntu
 ==============================
@@ -204,6 +202,10 @@ Server
 
 Installing server using source archive:
 
+If you wish to compile NetXMS server with encryption support on UNIX, you must have 
+OpenSSL package installed.
+
+
   1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need source archive (named netxms-VERSION.tar.gz, for example netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be used as a substitution for an actual version number.
   2. Unpack the archive: 
   
@@ -301,7 +303,7 @@ Create Database and User with access rights to this database.
 
 Example for MySQL:
 
-.. code-block: sql
+.. code-block:: sql
 
   mysql -u root -p mysql
   mysql> CREATE DATABASE netxms;
@@ -317,7 +319,71 @@ new tables.
 Agent
 ~~~~~
 
+Installing agent using source archive:
 
+If you wish to compile NetXMS agent with encryption support on UNIX, you must have 
+OpenSSL package installed.
+
+
+  1. Download the latest version from http://www.netxms.org/download, if you don't 
+     have it. You will need source archive (named netxms-VERSION.tar.gz, for example 
+     netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be 
+     used as a substitution for an actual version number.
+     
+  2. Unpack the archive: 
+  
+    :command:`tar zxvf netxms-1.2.15.tar.gz`
+    
+  3. Change directory to netxms-version and run configure script:
+  
+    :command:`cd netxms-1.2.15`
+    
+    :command:`sh ./configure --with-agent`    
+    
+    Important arguments:
+    
+    --prefix=DIRECTORY: installation prefix, all files go to the specified directory;
+    
+    --with-agent: build monitoring agent. It is strongly recommended to install agent on a server box;
+    
+    --disable-encryption: Disable encryption support.
+    
+    To learn more about possible configure parameters, run it with --help option. 
+    
+    By default all available subagents, that have required libraries are included in 
+    build. 
+    
+  4. Run make and make install:
+  
+    :command:`make`
+    
+    :command:`make install`  
+    
+  5. Copy sample config files to desired locations:
+    
+    :command:`cp contrib/nxagentd.conf-dist /etc/nxagentd.conf`  
+    
+    By default, agent will look for configuration files in /etc 
+    directory. If you wish to place configuration files in a different location, 
+    don't forget to use –c command line switch for agent and –config-file command-line 
+    switch for server to specify an alternate location.
+    
+  6. Modify agent's configuration file (/etc/nxagentd.conf). For detailed description 
+     of possible parameters, please consult NetXMS User's Manual. For the normal 
+     server's operation, you should add at least the following line to your agent's 
+     configuration file:
+  
+    .. code-block:: cfg
+      
+      MasterServers = your_server_IP_address
+      LogFile = log_file
+      
+      More configuration parameters can be found there: :ref:`agent_configuration_file`.
+      
+  10. Run agent:
+  
+    :command:`$ /usr/local/bin/nxagentd -d`
+    
 Management Console
 ~~~~~~~~~~~~~~~~~~
 
@@ -355,7 +421,6 @@ Installing on Windows
 
 Installing
 ----------
-
 
 Server
 ~~~~~~
@@ -454,7 +519,37 @@ Server
 Agent
 ~~~~~
 
+  1. Download the latest version from http://www.netxms.org/download, if you don't 
+     have it. You will need Windows Agent installer (named nxagent-VERSION.exe or 
+     nxagent-VERSION-x64.exe, for example nxagent-1.2.0.exe).
 
+  2. Run the installer package on target server. Installation wizard will be shown. 
+     Follow the prompts until the NetXMS Server window opens:
+
+     .. figure:: _images/win_agent_config.png
+
+
+     Enter IP address or host name of your NetXMS server. You can specify multiple 
+     management servers, separating them by commas. Press the Next button to continue.
+
+
+  3. Subagent Selection window will open:
+
+     .. figure:: _images/win_agent_subagents.png
+
+     In this window, you can select which subagents you wish to load. Each subagent extends agent's functionality, as described below:
+
+     Subagent    Description
+     ping.nsm    Adds possibility to send ICMP pings from monitored host. Ping round-trip times can be collected by management server.
+     portcheck.nsm   Adds possibility to check network services (like FTP or HTTP) from monitored host.
+     winperf.nsm Provides access to Windows performance counters. This subagent is required if you need to collect CPU utilization from monitored host.
+     wmi.nsm Provides access to WMI data.
+     ups.nsm Adds support for UPS monitoring. UPS can be attached to host via serial cable or USB.
+     For more information about subagents, please refer to :ref:`subagent_list`.
+
+
+  4. Follow the prompts to complete the installation.
+     
 Management console
 ~~~~~~~~~~~~~~~~~~
 
@@ -463,6 +558,7 @@ Desktop Management Console:
  1. Download the latest version from http://www.netxms.org/download. You will need 
     Linux installer(named nxmc-VERSION-linux-gtk-x86.tar.gz or 
     nxmc-VERSION-linux-gtk-x64.tar.gz, for example nxmc-1.2.17-linux-gtk-x64.tar.gz).
+    
  2. Expand package to your preferred directory using command:
  
     :command:`tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DIRECTORY`
@@ -471,15 +567,222 @@ Desktop Management Console:
  
 Web Management Console:
 
-**TODO**
+Windows have 2 options: to install manually servlet container and just download tar and 
+the second one is to use netxms-webui-VERSION.exe installer. Installer will install by 
+himself jetty and copy into required folder tar file. There will be described only 
+automated way of installation:
+
+  1. Download the latest version from http://www.netxms.org/download. You will need 
+     Windows installer netxms-webui-VERSION-x64.exe or netxms-webui-VERSION.exe 
+     (exmple: netxms-webui-1.2.17-x64.exe).
+  
+  2. Run the installer package on your server machine. Installation wizard will be 
+     shown. Follow the prompts. While installation it will be possible to change 
+     installation path and port. 
+     
+  3. After installation procedure is finished check that WEB GUI is available at 
+     http://SERVER_IP:SERVER_PORT/nxmc/
 
 Install on Android
 ==================
 
+Agent
+-----
+
+To install Android agent download netxms-mobile-agent-VERSION.apk (example: 
+netxms-mobile-agent-1.2.17.apk) file form http://www.netxms.org/download page. 
+Check that installation of applications from unknown sources is allowed in security 
+settings of your phone. Run this installer on required device. 
+
+After agent is installed go to settings and activate agent. After agent activation it 
+should be set next parameters: server address, port, user name, password. They can be 
+found in under main menu, parameters section. 
+
+.. note::
+  User that is used for connection should have :guilabel:`Login as mobile device` 
+  user right.
+  
+  Mobile device should be manually added to server. Find more information there: 
+  :ref:`monitoring-mobile-device`.
+
+Console
+-------
+
+To install Android console download netxms-console-VERSION.apk (example: 
+netxms-console-1.2.17.apk) file form http://www.netxms.org/download page. Check that 
+installation of applications from unknown sources is allowed in security settings of 
+your phone. Run this installer on required device.
+
+After agent is installed go to settings and in main menu, connection part set all 
+required connection credentials: server address, port, user name, password.
+
+.. note::
+  User that is used for connection should have :guilabel:`Login as mobile device` 
+  user right.
+
 Generic installation, upgrade and downgrade using source tarball
 ================================================================
 
+Server
+------
 
+If you wish to compile NetXMS server with encryption support on UNIX, you must have 
+OpenSSL package installed.
+
+
+  1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need source archive (named netxms-VERSION.tar.gz, for example netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be used as a substitution for an actual version number.
+  2. Unpack the archive: 
+  
+    :command:`tar zxvf netxms-1.2.15.tar.gz`
+    
+  3. Change directory to netxms-version and run configure script:
+  
+    :command:`cd netxms-1.2.15`
+    
+    :command:`sh ./configure --with-server --with-mysql --with-agent`    
+    
+    Important arguments:
+    
+    --prefix=DIRECTORY: installation prefix, all files go to the specified directory;
+    
+    --with-server: build server. Don't forget to add at least one DB Driver as well;
+    
+    --with-pgsql: build Postgres DB Driver (if you plan to use PostgreSQL as backend database);
+    
+    --with-mysql: build MySQL DB Driver (if you plan to use MySQL as backend database);
+    
+    --with-odbc: build ODBC DB driver (if you plan to connect to your backend database via ODBC; you will need UNIX ODBC package to do that);
+    
+    --with-sqlite: build SQLite DB driver (if you plan to use embedded SQLite database as backend database);
+    
+    --with-agent: build monitoring agent. It is strongly recommended to install agent on a server box;
+    
+    --disable-encryption: Disable encryption support.
+    
+    To learn more about possible configure parameters, run it with --help option.
+    
+  4. Run make and make install:
+  
+    :command:`make`
+    
+    :command:`make install`  
+    
+  5. Copy sample config files to desired locations:
+  
+    :command:`cp contrib/netxmsd.conf-dist /etc/netxmsd.conf`
+    
+    :command:`cp contrib/nxagentd.conf-dist /etc/nxagentd.conf`  
+    
+    By default, both server and agent will look for configuration files in /etc 
+    directory. If you wish to place configuration files in a different location, 
+    don't forget to use –c command line switch for agent and –config-file command-line 
+    switch for server to specify an alternate location.
+  
+  6. Check that database and user for it are created. :ref:`install_centos_database`
+  7. Modify server configuration file (default is /etc/netxmsd.conf). It should look 
+     the following way:
+     
+    .. code-block:: cfg
+    
+      DBDriver = mysql.ddr
+      DBServer = localhost
+      DBName = netxms
+      DBLogin = netxms
+      DBPassword = PaSsWd
+      LogFile = /var/log/netxmsd
+      LogFailedSQLQueries = yes
+        
+    More information about each configuration parameter can be found there: 
+    :ref:`server_configuration_parameters`.
+    
+  8. Modify agent's configuration file (/etc/nxagentd.conf). For detailed description 
+     of possible parameters, please consult NetXMS User's Manual. For the normal 
+     server's operation, you should add at least the following line to your agent's 
+     configuration file:
+  
+    .. code-block:: cfg
+      
+      MasterServers = 127.0.0.1, your_server_IP_address
+      
+  9. Initialise this database with nxdbmgr utility using sql-script in 
+     sql/dbinit_DBTYPE.sql. DBTYPE can be "mssql", "mysql", "pgsql", "oracle", or 
+     "sqlite".
+     
+     MySQL example:
+     
+    :command:`$ /usr/local/bin/nxdbmgr init /usr/local/share/netxms/sql/dbinit_mysql.sql`
+     
+  10. Run agent and server:
+  
+    :command:`$ /usr/local/bin/nxagentd -d`
+
+    :command:`$ /usr/local/bin/netxmsd -d`
+    
+Agent
+~~~~~
+
+If you wish to compile NetXMS agent with encryption support on UNIX, you must have 
+OpenSSL package installed.
+
+
+  1. Download the latest version from http://www.netxms.org/download, if you don't 
+     have it. You will need source archive (named netxms-VERSION.tar.gz, for example 
+     netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be 
+     used as a substitution for an actual version number.
+     
+  2. Unpack the archive: 
+  
+    :command:`tar zxvf netxms-1.2.15.tar.gz`
+    
+  3. Change directory to netxms-version and run configure script:
+  
+    :command:`cd netxms-1.2.15`
+    
+    :command:`sh ./configure --with-agent`    
+    
+    Important arguments:
+    
+    --prefix=DIRECTORY: installation prefix, all files go to the specified directory;
+    
+    --with-agent: build monitoring agent. It is strongly recommended to install agent on a server box;
+    
+    --disable-encryption: Disable encryption support.
+    
+    To learn more about possible configure parameters, run it with --help option. 
+    
+    By default all available subagents, that have required libraries are included in 
+    build. 
+    
+  4. Run make and make install:
+  
+    :command:`make`
+    
+    :command:`make install`  
+    
+  5. Copy sample config files to desired locations:
+    
+    :command:`cp contrib/nxagentd.conf-dist /etc/nxagentd.conf`  
+    
+    By default, agent will look for configuration files in /etc 
+    directory. If you wish to place configuration files in a different location, 
+    don't forget to use –c command line switch for agent and –config-file command-line 
+    switch for server to specify an alternate location.
+    
+  6. Modify agent's configuration file (/etc/nxagentd.conf). For detailed description 
+     of possible parameters, please consult NetXMS User's Manual. For the normal 
+     server's operation, you should add at least the following line to your agent's 
+     configuration file:
+  
+    .. code-block:: cfg
+      
+      MasterServers = your_server_IP_address
+      LogFile = log_file
+      
+      More configuration parameters can be found there: :ref:`agent_configuration_file`.
+      
+  10. Run agent:
+  
+    :command:`$ /usr/local/bin/nxagentd -d`
 
 Cryptographic verification of installation files
 ================================================

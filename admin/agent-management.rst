@@ -338,7 +338,9 @@ When it is required to write password or :guilabel:`Shared Secret` in agent
 configuration file, there is possibility to encrypt it. All passwords can 
 be encrypted with help of :ref:`nxencpasswd-tools-label` command line tool and added 
 in configuration file in encrypted way. 
-   
+  
+.. _subagent_list:
+  
 Subagents
 =========
 Subagents are used to extend agent functionality. NetXMS subagent are libraries that are loaded by agent.

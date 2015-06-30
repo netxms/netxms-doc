@@ -822,4 +822,46 @@ Adding additional compiler or linker flags
 
 (e.g. fixing atomics)
 
+WebUI additional configuration
+==============================
 
+Installing web interface on remote system
+-----------------------------------------
+
+By default nxmc.war will try to connect to NetXMS server at address 127.0.0.1. To 
+change that, create configuration file called nxmc.properties as following:
+
+.. code-block:: cfg
+
+  server = 127.0.0.1
+  sessionTimeout = 120
+  enableAdvancedSettings = true
+
+Change server property to IP address or host name of your NetXMS server and put 
+properties file to class path of your application server. Default locations for 
+different servers are following:
+
+**Jetty**
+
+
+**Tomcat**
+
+Depending on version and Linux distribution. For Debian it will be /usr/share/tomcat7/lib.
+
+
+**Oracle Weblogic**
+
+$WEBLOGIC_HOME/user_projects/domains/YOURDOMAIN
+
+Custom logo on login screen
+---------------------------
+
+It is possible to change default logo on login screen to custom image by setting 
+loginFormImage property in nxmc.properties file. Image file must be located within 
+application server's class path and file name must be given relative to class path 
+root with leading slash. For example, if custom image is in file logo.jpg located 
+in the same directory as nxmc.properties, correct entry will be:
+
+.. code-block:: cfg
+
+  loginFormImage = /logo.jpg

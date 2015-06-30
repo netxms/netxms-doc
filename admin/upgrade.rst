@@ -226,7 +226,7 @@ Generic upgrade using source tarball
 ====================================
 
 Server
-~~~~~~
+------
 
   1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need source archive (named netxms-VERSION.tar.gz, for example netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be used as a substitution for an actual version number.
   2. Unpack the archive:
@@ -269,7 +269,7 @@ Server
   11. Start NetXMS server.
 
 Agent
-~~~~~
+-----
 
   1. Download the latest version from http://www.netxms.org/download, if you don't 
      have it. You will need source archive (named netxms-VERSION.tar.gz, for example 

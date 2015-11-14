@@ -323,16 +323,16 @@ Next two fields in combinations:
 Integration with LDAP
 =====================
 
-NetXMS can be integrated with LDAP. LDAP users and groups are added to NetXMS database and afterwards can be used for login in to NetXMS system. LDAP users are also inserted into groups as per LDAP. (Available since: NetXMS 1.2.15)
+.. since:: 1.2.15
 
-Limitations:
+NetXMS can perform one-way synchronization of users and groups with external LDAP server. User list replica is refreshed automatically.
 
-If user with the same login name already exists, the LDAP user will not be created. So it is not possible to add from LDAP user with name "admin" and group with name "Everyone".
+Already existing NetXMS users or groups will not be modified during initial synchronization (e.g. user "admin" or group "Everyone").
 
 LDAP synchronization configuration
 ----------------------------------
 
-LDAP synchronization parameters: 
+Server parameters controlling LDAP synchronization: 
 
 .. list-table::
    :header-rows: 1
@@ -342,11 +342,19 @@ LDAP synchronization parameters:
      - Description
      - Default value
    * - LdapConnectionString ``*``
-     - The LdapConnectionString configuration parameter may be a comma- or whitespace-separated list of URIs containing only  the  schema,  the host, and the port fields.  Apart from ldap, other (non-standard) recognized values of the  schema  field  are ldaps (LDAP over TLS), ldapi (LDAP over IPC), and cldap (connectionless LDAP).  If other fields are present, the behavior is undefined. Format: `schema://host:port`\ . 
+     - Comma- or whitespace-separated list of URIs in a format `schema://host:port`.
+       Supported schemas: `ldap://`, `ldaps://` (LDAP over TLS), `ldapi://` (LDAP over IPC), and `cldap://` (connectionless LDAP).
 
-       **Windows specific**\ : for server based on Windows system this parameter should be set according to this rules: empty string(attempts to find the "default" LDAP server), a domain name, or a space-separated list of host names or dotted strings that represent the IP address of hosts running an LDAP server to which to connect. Each host name in the list can include an optional port number which is separated from the host itself with a colon (:). 
+       **Windows specific**\ : for server based on Windows system this
+       parameter should be set according to this rules: empty string(attempts
+       to find the "default" LDAP server), a domain name, or a space-separated
+       list of host names or dotted strings that represent the IP address of
+       hosts running an LDAP server to which to connect. Each host name in the
+       list can include an optional port number which is separated from the
+       host itself with a colon (:). 
 
-       **Non Open LDAP library specific**\ : Windows, old Open LDAP and not Open LDAp libraries does not support mixed schema type so all links should be 'ldap://' or all 'ldaps://'.
+       Note: most LDAP implementations except recent versions of OpenLDAP do not
+       support mixed schema types in the single connection string.
      - ldap://localhost:389
    * - LdapSyncUser ``*``
      - User login for LDAP synchronization
@@ -394,13 +402,13 @@ Synchronization also can be done manually with `ldapsync` or just `ldap` command
 LDAP users/groups relationships with native NetXMS users/groups
 ---------------------------------------------------------------
 
-LDAP user can be added to non LDAP grop and non LDAP user can be added to LDAP group. But if LDAP user will be added to LDAP group, then while next synchronization user will be removed from group. 
+LDAP users and groups are handled in exactly the same was as users from internal database. Only difference is that LDAP group membership is refreshed on each synchronisation and any non-LDAP user will be removed from the group.
 
 
 Login with help of LDAP user
 ----------------------------
 
-To login into NetXMS there should be selected `Password` login type, should be entered user login(LdapMappingName) and LDAP password. 
+Login process is completely transparent for the user - user name should match attribute set by `LdapMappingName` and password should be current LDAP password for that user.
 
 LDAP configuration debuging
 ---------------------------

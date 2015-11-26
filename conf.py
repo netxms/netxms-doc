@@ -40,7 +40,7 @@ if version != release:
 # -- Options for HTML output ----------------------------------------------
 html_short_title = "Home"
 
-html_theme = 'nature'
+# html_theme = 'nature'
 #html_logo = '_images/logo.png'
 html_favicon = 'favicon.ico'
 html_static_path = ['_static']

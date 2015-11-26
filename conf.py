@@ -40,7 +40,12 @@ if version != release:
 # -- Options for HTML output ----------------------------------------------
 html_short_title = "Home"
 
-# html_theme = 'nature'
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+if on_rtd:
+    html_theme = 'default'
+else:
+    html_theme = 'alabaster'
+
 #html_logo = '_images/logo.png'
 html_favicon = 'favicon.ico'
 html_static_path = ['_static']

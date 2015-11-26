@@ -34,8 +34,7 @@ pygments_style = 'sphinx'
 
 locale_dirs = ['_locale']
 
-if version != release:
-    todo_include_todos=True
+todo_include_todos = False
 
 # -- Options for HTML output ----------------------------------------------
 html_short_title = "Home"

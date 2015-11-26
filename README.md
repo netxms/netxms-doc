@@ -7,6 +7,14 @@ Components:
 * manpages/ - UNIX man pages.
 
 # Notes
+## Local setup
+* mkvirtualenv sphinx
+* workon sphinx
+* pip install -r requirements.txt
+
+## Automatic rebuild and reload
+* cd admin && sphinx-autobuild . _build_html
+
 ## Building translated version:
 * make gettext
 * sphinx-intl update -p _build/locale -l ru

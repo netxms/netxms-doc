@@ -323,7 +323,7 @@ Next two fields in combinations:
 Integration with LDAP
 =====================
 
-.. since:: 1.2.15
+.. versionadded:: 1.2.15
 
 NetXMS can perform one-way synchronization of users and groups with external LDAP server. User list replica is refreshed automatically.
 

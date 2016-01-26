@@ -78,46 +78,46 @@ We provide deb packages for Debian users at http://packages.netxms.org/, which i
 public APT repository. Packages are signed, so you'll need to install additional 
 encryption key for signature verification.
 
-.. note::
-
-  At the moment (23/3/15) we provide binary packages for Debian only, 
-  Ubuntu support will be shortly.
-  
 There are 2 options for server and agent installation on Debian/Ubuntu systems: 
 using APT repository or from source. There will be described instruction only for 
-APT repository. I installation using source tarball is described 
+APT repository. Installation using source tarball is described 
 :ref:`there <install_from_tarball>`.
 
 Adding our APT repository
 -------------------------
 
-There are two options to add APT repository. Using recommended way of adding APT 
-repository you will not have errors in case if keys will be changed. 
+There are two options to add APT repository: by hand or using netxms-release
+package. Use of the release package is encouraged because it allow easy change
+in repository configuration and encryption keys updated in the feature.
 
-After repository is added run package update command:
+Recommended way
+~~~~~~~~~~~~~~~
 
-:command:`apt-get update`
+Install netxms-release_1.1_all.deb package that contain description of NetXMS
+repository (this package support all Debian and Ubuntu systems):
 
-Recommended
-~~~~~~~~~~~
+:command:`wget http://packages.netxms.org/netxms-release_1.1_all.deb`
 
-Install netxms-release_1.0-1_all.deb package that contain description of NetXMS 
-repository (this package should support all Debian and Ubuntu systems):
+:command:`sudo dpkg -i netxms-release_1.1_all.deb`
 
-:command:`wget http://packages.netxms.org/netxms-release_1.0-1_all.deb`
+Update APT cache:
 
-:command:`dpkg -i netxms-release_1.0-1_all.deb`
+:command:`sudo apt-get update`
 
-Usual
-~~~~~
+Manual way
+~~~~~~~~~~
 
-Add the repository to your sources.list (change "wheezy" to correct distro name):
+Add the repository to your sources.list (change "jessie" to correct distro name):
 
-:command:`deb http://packages.netxms.org/debian/ wheezy main`
+:command:`deb http://packages.netxms.org/debian/ jessie main`
 
 Fetch and install the GnuPG key:
 
 :command:`wget -q -O - http://packages.netxms.org/netxms.gpg | sudo apt-key add -`
+
+Update APT cache:
+
+:command:`sudo apt-get update`
 
 Installing packages
 -------------------
@@ -780,38 +780,6 @@ OpenSSL package installed.
   10. Run agent:
   
     :command:`$ /usr/local/bin/nxagentd -d`
-
-Cryptographic verification of installation files
-================================================
-
-
-Synopsis
---------
-
-
-Importing the Phusion Software Signing key
-------------------------------------------
-
-
-Verifying the Phusion Software Signing key
-------------------------------------------
-
-
-Verifying the gem and tarball
------------------------------
-
-
-Verifying Git signatures
-------------------------
-
-
-Verifying DEB and RPM packages
-------------------------------
-
-
-Revocation
-----------
-
 
 Customizing the compilation process
 ===================================

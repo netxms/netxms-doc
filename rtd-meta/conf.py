@@ -23,6 +23,11 @@ todo_include_todos = False
 
 # -- Options for HTML output ----------------------------------------------
 
-html_theme = 'default'
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+if on_rtd:
+    html_theme = 'default'
+else:
+    html_theme = 'alabaster'
+
 html_static_path = ['_static']
 htmlhelp_basename = 'NetXMSdoc'

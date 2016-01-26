@@ -26,7 +26,7 @@ project_author = "Raden Solutions, SIA"
 copyright = u'2015, ' + project_author
 
 version = '2.0'
-release = '2.0-M2'
+release = '2.0.2'
 
 exclude_patterns = ['build']
 
@@ -43,7 +43,8 @@ on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 if on_rtd:
     html_theme = 'default'
 else:
-    html_theme = 'alabaster'
+    import sphinx_rtd_theme
+    html_theme = 'sphinx_rtd_theme'
 
 #html_logo = '_images/logo.png'
 html_favicon = 'favicon.ico'
@@ -55,7 +56,7 @@ html_show_sphinx = False
 # -- Options for LaTeX output ---------------------------------------------
 latex_elements = {
     'papersize': 'a4paper',
-    #'pointsize': '10pt',
+    'pointsize': '8t',
 }
 
 #latex_elements = {
@@ -118,6 +119,8 @@ def setup(app):
         extDirs = [d for d in extDirs if module.strip() not in d]
     for d in extDirs:
         exclude_patterns.append(d[7:]) # remove 'source/'
+
+    app.add_stylesheet("theme_overrides.css")
 
 # -- Options for Epub output ----------------------------------------------
 

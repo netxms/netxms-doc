@@ -1,8 +1,8 @@
 .. _getting-things-monitored:
 
-##############################################
-Common monitoring tasks (rename this chapter!)
-##############################################
+#######################
+Common monitoring tasks
+#######################
 
 
 Operating System

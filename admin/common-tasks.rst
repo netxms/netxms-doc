@@ -8,111 +8,107 @@ Common monitoring tasks
 Operating System
 ================
 
-There are separate subagent for each operating system type. This subagent is loaded 
-automatically on agent start. They hide distinctions of similar function implementation 
-on different platforms. They provide options to monitor agent statistic, processes 
-statistic, file system, interface statistics, CPU, memory statistic. 
+Most OS-related metrics (file system, CPU, network) are provided by
+"platform subagent", which is loaded automatically by the agent on the startup.
 
-List of subagents:
+List of available subagents:
 
   * linux
   * aix
   * hpux
-  * winnt (Windows)
-  * sunos
+  * winnt (all Windows flavours)
+  * sunos (Solaris)
   * darwin (MacOS)
   * freebsd
   * netbsd
   * openbsd
-  
-Full list of parameters and compatibility between different platforms available 
-:ref:`there <list-of-supported-metrics>`. In this section will be shown most common 
-metric configurations. 
 
+In this section we cover only most common metrics.
+:ref:`Detailed list <list-of-supported-metrics>` available bellow.
 
 Example
 -------
 
-In examples will be shown only DCI configuration with threshold. Generated event 
-processing options can be found in :ref:`event-processing` chapter. 
+In examples will be shown only DCI configuration with threshold. Generated event
+processing options can be found in :ref:`event-processing` chapter.
 
 Process monitoring
 ~~~~~~~~~~~~~~~~~~
 
-In this example will be configured monitoring of running "mysqld" process. And one 
+In this example will be configured monitoring of running "mysqld" process. And one
 threshold: when process count is less then 1(process is not running).
 
-Create DCI for Process.Count(*) metric to monitor "mysqld" process count. 
+Create DCI for Process.Count(*) metric to monitor "mysqld" process count.
 
 .. figure:: _images/os-metric-process-monitoring.png
 
-Create threshold. It will be triggered when process count is not equal to 1(process is 
-not running). As prerequisite it was created 2 events. 
+Create threshold. It will be triggered when process count is not equal to 1(process is
+not running). As prerequisite it was created 2 events.
 
 .. figure:: _images/os-metric-process-monitoring2.png
 
   Events
-  
+
 .. figure:: _images/os-metric-process-monitoring3.png
 
   Threshold 1
 
-As in message of error is used Instance parameter, it should be set in 
-:guilabel:`Threshold` window. 
-  
+As in message of error is used Instance parameter, it should be set in
+:guilabel:`Threshold` window.
+
 .. figure:: _images/os-metric-process-monitoring4.png
 
 
 Disk free space monitoring
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this example will be configured monitoring of free space in percents for / disk and 
-two thresholds: when disk space less then 15% and less then 7%. 
+In this example will be configured monitoring of free space in percents for / disk and
+two thresholds: when disk space less then 15% and less then 7%.
 
 
-Create DCI for FileSystem.FreePerc(*) metric to monitor space on /. 
+Create DCI for FileSystem.FreePerc(*) metric to monitor space on /.
 
 .. figure:: _images/os-metric-disk-free-space-example.png
 
-Create 2 thresholds. One will be triggered when free space is less than 15% and other 
-one when free space is less than 7%. Before threshold creation was created 3 events: 
+Create 2 thresholds. One will be triggered when free space is less than 15% and other
+one when free space is less than 7%. Before threshold creation was created 3 events:
 
 .. figure:: _images/os-metric-disk-free-space-example2.png
 
   Events
-  
+
 .. figure:: _images/os-metric-disk-free-space-example3.png
 
   Threshold 1
-  
+
 .. figure:: _images/os-metric-disk-free-space-example4.png
 
   Threshold 2
 
-As in message of error is used Instance parameter, it should be set in 
-:guilabel:`Threshold` window. 
-  
+As in message of error is used Instance parameter, it should be set in
+:guilabel:`Threshold` window.
+
 .. figure:: _images/os-metric-disk-free-space-example5.png
 
   Both
-  
+
 CPU usage
 ~~~~~~~~~
 
-This example will show how to configure monitoring of CPU usage and create event when 
-CPU usage is more than 90% for more than 5 minutes. 
+This example will show how to configure monitoring of CPU usage and create event when
+CPU usage is more than 90% for more than 5 minutes.
 
 Create DCI for System.CPU.LoadAvg metric.
 
 .. figure:: _images/os-metric-cpu-usage-example.png
 
-Create threshold that will create event in case if last 5 values are more than 90 
+Create threshold that will create event in case if last 5 values are more than 90
 (last 5 minutes CPU usage is more than 90%).
 
 .. figure:: _images/os-metric-cpu-usage-example2.png
 
   Events
-  
+
 .. figure:: _images/os-metric-cpu-usage-example3.png
 
   Threshold
@@ -120,30 +116,30 @@ Create threshold that will create event in case if last 5 values are more than 9
 File meta information
 =====================
 
-Monitoring of file system is implemented by OS subagents. Full description of this 
-functions can be found :ref:`there <list-of-supported-metrics>`. There is provided 
-option to get file hash, creation, last edit and other timestamps, file size and 
-number of files in the directory. In this sections will be shown only the most 
-commonly used configurations. 
+Monitoring of file system is implemented by OS subagents. Full description of this
+functions can be found :ref:`there <list-of-supported-metrics>`. There is provided
+option to get file hash, creation, last edit and other timestamps, file size and
+number of files in the directory. In this sections will be shown only the most
+commonly used configurations.
 
 Examples
 --------
 
-In examples will be shown only DCI configuration with threshold. Generated event 
-processing options can be found in :ref:`event-processing` chapter. 
+In examples will be shown only DCI configuration with threshold. Generated event
+processing options can be found in :ref:`event-processing` chapter.
 
 Example 1
 ~~~~~~~~~
 
-In this example will be shown how to check that specific folder exceed specified size. 
+In this example will be shown how to check that specific folder exceed specified size.
 
-Create DCI for File.Size(*) metric to monitor folder size. Required parameters: 
+Create DCI for File.Size(*) metric to monitor folder size. Required parameters:
 /path,*,1.
 
 .. figure:: _images/file-meta-info-example.png
 
-In threshold it should be checked that last value is less than 2 GB. That mean 
-that returned value should be less than 2 000 000 000 bytes. 
+In threshold it should be checked that last value is less than 2 GB. That mean
+that returned value should be less than 2 000 000 000 bytes.
 
 .. figure:: _images/file-meta-info-example2.png
 
@@ -152,18 +148,18 @@ that returned value should be less than 2 000 000 000 bytes.
 Example 2
 ~~~~~~~~~
 
-In this example will be configured monitoring that in exact folder exist files that 
-was modified less then half an hour ago. 
+In this example will be configured monitoring that in exact folder exist files that
+was modified less then half an hour ago.
 
-Create DCI for File.Count(*) metric to monitor file count in folder /path, that match 
-any pattern, folder should be checked recursively, file match any size, files are 
-created less than 30 minutes ago. This conditions will be given to metric as this 
+Create DCI for File.Count(*) metric to monitor file count in folder /path, that match
+any pattern, folder should be checked recursively, file match any size, files are
+created less than 30 minutes ago. This conditions will be given to metric as this
 parameters: path,*,1,0,-1800.
 
 .. figure:: _images/file-meta-info2-example.png
 
-In threshold it should be checked that at least one file meeting conditions exists. 
-That mean that file count should be more than 1. Prerequisite is to create 2 events. 
+In threshold it should be checked that at least one file meeting conditions exists.
+That mean that file count should be more than 1. Prerequisite is to create 2 events.
 
 
 .. figure:: _images/file-meta-info2-example2.png
@@ -174,13 +170,13 @@ That mean that file count should be more than 1. Prerequisite is to create 2 eve
 
   Threshold
 
-As in message of error is used Instance parameter, it should be set in 
-:guilabel:`Threshold` window. 
+As in message of error is used Instance parameter, it should be set in
+:guilabel:`Threshold` window.
 
 .. figure:: _images/file-meta-info2-example4.png
-  
+
 .. _log-monitoring:
-  
+
 Log monitoring
 ==============
 
@@ -205,7 +201,7 @@ Example of agent configuration file:
 .. code-block:: cfg
 
    SubAgent = logwatch.nsm
- 
+
    # Below is log parsers definitions
    *LOGWATCH
    Parser = C:\NetXMS\parser1.xml
@@ -698,21 +694,21 @@ event's parameter:
     </parser>
 
 .. _service-monitoring:
-    
+
 Service monitoring
 ==================
 
-There are two options to add service monitoring: the first one is to add it through 
-menu option :guilabel:`Create Network Service...` as an object with the status 
-that will be propagated on a node, and the second one is to add it's monitoring as 
-DCI. 
+There are two options to add service monitoring: the first one is to add it through
+menu option :guilabel:`Create Network Service...` as an object with the status
+that will be propagated on a node, and the second one is to add it's monitoring as
+DCI.
 
 Network Service
 ---------------
 
 Object representing network service running on a node (like http or
-ssh), which is accessible online (via TCP IP). Network Service objects 
-are always created manually. Currently, the system works with the following 
+ssh), which is accessible online (via TCP IP). Network Service objects
+are always created manually. Currently, the system works with the following
 protocols - HTTP, POP3, SMTP, Telnet, SSH and Custom protocol type. For Custom
 protocol, a user should define the TCP port number and the system will be
 checking whether that port is available. For the predefined standard services
@@ -724,48 +720,48 @@ object is created, it will be automatically included into the status poll. Each
 time when the status poll for the particular node is carried out, all Network
 Service objects are polled for a reply. If an object's reply corresponds to a
 certain condition, its status is set as NORMAL. If an object is not responding,
-its status will be hanged to CRITICAL. Wile network service creation there can be 
-also created :term:`DCI` that will collect service status. 
+its status will be hanged to CRITICAL. Wile network service creation there can be
+also created :term:`DCI` that will collect service status.
 
 .. figure:: _images/create_network_service.png
 
-In default configuration request is done 
-with help of Port Check subagent on the server node. If it should be done through 
-different node is should be changed in it's properties after service creation by 
-selecting Poller node. There is also possibility to set quantity of polls that is 
-required to be sure that state have changed. 
+In default configuration request is done
+with help of Port Check subagent on the server node. If it should be done through
+different node is should be changed in it's properties after service creation by
+selecting Poller node. There is also possibility to set quantity of polls that is
+required to be sure that state have changed.
 
 .. figure:: _images/network_service_properties.png
 
 Service monitoring using DCI
 ----------------------------
 
-Second option is to use :term:`DCI` to monitor service. There are 2 subagents that 
-provide service monitoring metrics: PortCheck and NetSVC. It is recommended to use 
-NetSVC for all curl supported protocols. As it can check not only availability, but 
-also response. For unsupported protocols can be used Custom check of PortCheck 
+Second option is to use :term:`DCI` to monitor service. There are 2 subagents that
+provide service monitoring metrics: PortCheck and NetSVC. It is recommended to use
+NetSVC for all curl supported protocols. As it can check not only availability, but
+also response. For unsupported protocols can be used Custom check of PortCheck
 subagent.
 
-For HTTP services there is also option to use ECS subagent. This subagent has only 3 Metrics. Two 
-of them calculate hash and last one measure time. 
+For HTTP services there is also option to use ECS subagent. This subagent has only 3 Metrics. Two
+of them calculate hash and last one measure time.
 
 
 PortCheck configuration
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-This subagent can be used to check TCP ports and specifically implements checks for 
-common services. It is highly recommended to use netsvc subagent especially for 
-HTTP and HTTPS monitoring. 
+This subagent can be used to check TCP ports and specifically implements checks for
+common services. It is highly recommended to use netsvc subagent especially for
+HTTP and HTTPS monitoring.
 
 When loaded, PORTCHECK subagent adds the following Metrics to node Metric list:
 
-.. list-table:: 
+.. list-table::
    :widths: 50 100
    :header-rows: 1
-   
-   * - Parameter 
-     - Description 
-   * - ServiceCheck.Custom(\ *target*\ ,\ *port*\ [,\ *timeout*\ ]) 
+
+   * - Parameter
+     - Description
+   * - ServiceCheck.Custom(\ *target*\ ,\ *port*\ [,\ *timeout*\ ])
      - Check that TCP *port* is open on *target*. Optional argument *timeout* specifies timeout in milliseconds.  This is a very simple test that does nothing more than check the port is open.
    * - ServiceCheck.HTTP(\ *target*\ ,[\ *port*\ ],\ *URI*\ ,\ *hostHeader*\ [,\ *regex*\ [,\ *timeout*\ ]])
      - Check that HTTP service is running on *target*.  Optional argument *port* specifies the port to connect with, otherwise 80 will be used.  The *URI* is NOT a URL it is the host header request URI.  As an example to test URL http://www.netxms.org/index.html enter www.netxms.org:/index.html. *hostHeader* is currently not used, but may be the Host option at some point in the request made.  Optional argument *regex* is the regular expression to check returned from the request, otherwise "^HTTP/1.[01] 200 .*" will be used.  Optional argument *timeout* specifies timeout in milliseconds.
@@ -777,18 +773,18 @@ When loaded, PORTCHECK subagent adds the following Metrics to node Metric list:
      - Check that SSH service is running on *target*.  Optional argument *port* specifies the port to connect with, otherwise 22 will be used.  Optional argument *timeout* specifies timeout in milliseconds.
    * - ServiceCheck.Telnet(\ *target*\ [,\ *port*\ [,\ *timeout*\ ]])
      - Check that Telnet service is running on *target*.  Optional argument *port* specifies the port to connect with, otherwise 23 will be used.  Optional argument *timeout* specifies timeout in milliseconds.
-     
+
 .. note:
-  Parameters in [ ] are optional, when optional parameters are used they should 
-  be used without [ ]. 
-     
-     
+  Parameters in [ ] are optional, when optional parameters are used they should
+  be used without [ ].
+
+
 All of the ServiceCheck.* parameters return the following values:
 
-.. list-table:: 
+.. list-table::
    :widths: 15 50
    :header-rows: 1
-   
+
    * - Value
      - Description
    * - 0
@@ -799,15 +795,15 @@ All of the ServiceCheck.* parameters return the following values:
      - Cannot connect to *target*.
    * - 3
      - Invalid / Unexpected response from *target*.
-     
-All configuration parameters related to PORTCHECK subagent should be placed into 
-***PORTCHECK** section of agent's configuration file. The following configuration parameters 
+
+All configuration parameters related to PORTCHECK subagent should be placed into
+***PORTCHECK** section of agent's configuration file. The following configuration parameters
 are supported:
 
-.. list-table:: 
+.. list-table::
    :widths: 20 20 100 20
    :header-rows: 1
-   
+
    * - Parameter
      - Format
      - Description
@@ -820,9 +816,9 @@ are supported:
      - *milliseconds*
      - Set response timeout to *milliseconds*.
      - 3000
-  
+
 Configuration example:
-  
+
 .. code-block:: cfg
 
    # This sample nxagentd.conf instructs agent to:
@@ -841,46 +837,46 @@ Configuration example:
 NetSVC configuration
 ~~~~~~~~~~~~~~~~~~~~
 
-This subagent can be used to check network services supported by libcurl. More about 
+This subagent can be used to check network services supported by libcurl. More about
 syntaxes can be found there: http://curl.haxx.se/docs/manpage.html.
 
 This subagent will add this Metrics to node Metric list:
 
-.. list-table:: 
+.. list-table::
    :widths: 50 100
    :header-rows: 1
-   
-   * - Parameter 
-     - Description 
-   * - Service.Check(,) ServiceCheck.Custom(\ *target*\ ,\ *port*\ [,\ *timeout*\ ]) 
+
+   * - Parameter
+     - Description
+   * - Service.Check(,) ServiceCheck.Custom(\ *target*\ ,\ *port*\ [,\ *timeout*\ ])
      - Check that TCP *port* is open on *target*. Optional argument *timeout* specifies timeout in milliseconds.  This is a very simple test that does nothing more than check the port is open.
 
 
-HTTP check example: 
+HTTP check example:
 
 .. code-block:: cfg
 
    Service.Check(https://inside.test.ru/,^HTTP/1\.[01] 200.*)
-   
-"^HTTP/1\.[01] 200.*" - this is default value and may be missed in expression. 
+
+"^HTTP/1\.[01] 200.*" - this is default value and may be missed in expression.
 
 .. note::
-  If agent is build from sources, then libcurl-dev should be installed to 
-  build netsvc subagent. 
-  
+  If agent is build from sources, then libcurl-dev should be installed to
+  build netsvc subagent.
+
 ECS
 ~~~
 
-This subagent works with HTTP only. It can be used to measure page load time and checking page 
-hash. Request timeout for this subageint is 30 seconds. 
+This subagent works with HTTP only. It can be used to measure page load time and checking page
+hash. Request timeout for this subageint is 30 seconds.
 
 
-.. list-table:: 
+.. list-table::
    :widths: 50 100
    :header-rows: 1
-   
-   * - Parameter 
-     - Description 
+
+   * - Parameter
+     - Description
    * - ECS.HttpSHA1(\ *URL*\ )
      - Calculates SHA1 hash of provided URL
    * - ECS.HttpMD5(\ *URL*\ )
@@ -892,31 +888,31 @@ hash. Request timeout for this subageint is 30 seconds.
 
   MasterServers = netxms.demo
   Subagent = ecs.nsm
-  
+
 
 .. _database-monitoring:
 
 Database monitoring
 ===================
 
-There are created few specialized monitoring subagents: Oracle, DB2, MongoDB. Further 
-will be described how to configure and use this subagents. Besides this there is 
-opportunity to monitor also other types of databases supported by NetXMS 
-server(:ref:`link to supported database list<supported-db-list>`) using database query 
-suabgent as this databases support receiving performance parameters using queries. 
-This subagent details are described in :ref:`dbquery` chapter. 
+There are created few specialized monitoring subagents: Oracle, DB2, MongoDB. Further
+will be described how to configure and use this subagents. Besides this there is
+opportunity to monitor also other types of databases supported by NetXMS
+server(:ref:`link to supported database list<supported-db-list>`) using database query
+suabgent as this databases support receiving performance parameters using queries.
+This subagent details are described in :ref:`dbquery` chapter.
 
 Oracle
 ------
 
-NetXMS subagent for Oracle DBMS monitoring (further referred to as Oracle subagent) monitors 
+NetXMS subagent for Oracle DBMS monitoring (further referred to as Oracle subagent) monitors
 one or more instances of Oracle databases and reports various database-related parameters.
 
-All parameters available from Oracle subagent gathered or calculated once per minute thus it's 
-recommended to set DCI poll interval for these items to 60 seconds or more. All parameters are 
-obtained or derived from the data available in Oracle's data dictionary tables and views through 
-regular select queries. Oracle subagent does not monitor any of the metrics related to lower level 
-database layers, such as database processes. Monitoring of such parameters can be achieved through 
+All parameters available from Oracle subagent gathered or calculated once per minute thus it's
+recommended to set DCI poll interval for these items to 60 seconds or more. All parameters are
+obtained or derived from the data available in Oracle's data dictionary tables and views through
+regular select queries. Oracle subagent does not monitor any of the metrics related to lower level
+database layers, such as database processes. Monitoring of such parameters can be achieved through
 the standard NetXMS functionality.
 
 Pre-requisites
@@ -927,7 +923,7 @@ An Oracle user with the role **select_catalog_role** assigned.
 Required rights can be assigned to user with the following query:
 
 .. code-block:: sql
-   
+
    grant select_catalog_role to user;
 
 Where *user* is the user configured in Oracle subagent for database access.
@@ -936,14 +932,14 @@ Where *user* is the user configured in Oracle subagent for database access.
 Configuration file
 ~~~~~~~~~~~~~~~~~~
 
-Oracle subagent can be configured using XML configuration file (usually created 
+Oracle subagent can be configured using XML configuration file (usually created
 as separate file in configuration include directory), or in simplified INI format,
 usually in main agent configuration file.
 
 XML configuration:
 
-You can specify multiple databases in the **oracle** section. Each database description 
-must be surrounded by database tags with the **id** attribute. It can be any unique integer 
+You can specify multiple databases in the **oracle** section. Each database description
+must be surrounded by database tags with the **id** attribute. It can be any unique integer
 and instructs the Oracle subagent about the order in which database sections will be processed.
 
 Each database definition supports the following parameters:
@@ -990,8 +986,8 @@ Sample Oracle subagent configuration file in XML format:
 
 INI configuration:
 
-You can specify only one database when using INI configuration format. If you need 
-to monitor multiple databases from same agent, you should use configuration file in XML format. 
+You can specify only one database when using INI configuration format. If you need
+to monitor multiple databases from same agent, you should use configuration file in XML format.
 
 **ORACLE** section can contain the following parameters:
 
@@ -1182,23 +1178,23 @@ When loaded, Oracle subagent adds the following tables to agent:
 DB2
 ---
 
-NetXMS subagent for DB2 monitoring is designed to provide a way to extract various parameters 
+NetXMS subagent for DB2 monitoring is designed to provide a way to extract various parameters
 known as Data Collection Items (DCI) from an instance or several instances of DB2 database.
 
 Configuration
 ~~~~~~~~~~~~~
 
-DB2 subagent can be configured in two ways. The first one would be a simple INI file and the 
-second one would be an XML configuration file. Please note that to use the XML configuration, 
-you first need to declare the XML file in the DB2 section of the INI configuration file. The 
+DB2 subagent can be configured in two ways. The first one would be a simple INI file and the
+second one would be an XML configuration file. Please note that to use the XML configuration,
+you first need to declare the XML file in the DB2 section of the INI configuration file. The
 details are below.
 
 The configuration section in INI file looks like the following:
 
 .. code-block:: cfg
-   
+
    SubAgent          = db2.nsm
-   
+
    *DB2
    DBName            = dbname
    DBAlias           = dbalias
@@ -1209,34 +1205,34 @@ The configuration section in INI file looks like the following:
 
 Parameters:
 
-.. list-table:: 
+.. list-table::
    :widths: 20 20 70 20
    :header-rows: 1
-   
-   * - Parameter 
+
+   * - Parameter
      - Format
-     - Description 
+     - Description
      - Default value
    * - DBName
      - string
      - The name of the database to connect to
-     - 
+     -
    * - DBAlias
      - string
      - The alias of the database to connect to
-     - 
+     -
    * - UserName
      - string
      - The name of the user for the database to connect to
-     - 
+     -
    * - Password
      - string
      - The password for the database to connect to
-     - 
+     -
    * - EncryptedPassword
      - string
      - The encrypted password for the database to connect to (use nxencpasswd for encryption)
-     - 
+     -
    * - QueryInterval
      - milliseconds
      - The interval to perform queries with
@@ -1245,39 +1241,39 @@ Parameters:
      - milliseconds
      - The interval to try to reconnect to the database if the connection was lost or could not be established
      - 30
-  
+
 XML configuration allows the monitoring of several database instances.
 
-To be able to use the XML configuration file, you first need to specify the file to use in the 
+To be able to use the XML configuration file, you first need to specify the file to use in the
 DB2 section of the INI file. The syntax is as follows:
 
 .. code-block:: cfg
-   
+
    SubAgent          = db2.nsm
-   
+
    *DB2
    ConfigFile        = /myhome/configs/db2.xml
 
-.. note: 
+.. note:
   Note that all other entries in the DB2 will be ignored.
-  
-.. list-table:: 
+
+.. list-table::
    :widths: 20 20 70 20
    :header-rows: 1
-   
-   * - Parameter 
+
+   * - Parameter
      - Format
-     - Description 
+     - Description
      - Default value
    * - ConfigFile
      - string
      - The path to the XML configuration file
-     -  
+     -
 
 The XML configuration file itself should look like this:
 
 .. code-block:: xml
-   
+
    <config>
        <db2sub>
            <db2 id="1">
@@ -1298,25 +1294,25 @@ The XML configuration file itself should look like this:
            </db2>
        </db2sub>
    </config>
-  
-As you can see, the parameters are the same as the ones from the INI configuration. Each database 
-declaration must be placed in the ``db2sub`` tag and enclosed in the ``db2`` tag. The ``db2`` tag 
+
+As you can see, the parameters are the same as the ones from the INI configuration. Each database
+declaration must be placed in the ``db2sub`` tag and enclosed in the ``db2`` tag. The ``db2`` tag
 must have a numerical id which has to be a positive integer greater than 0.
 
 Provided parameters
 ~~~~~~~~~~~~~~~~~~~
 
-To get a DCI from the subagent, you need to specify the id from the ``db2`` entry in the XML 
-configuration file (in case of INI configuration, the id will be **1**). To specify the id, you 
-need to add it enclosed in brackets to the name of the parameter that is being requested (e.g., 
-``db2.parameter.to.request(**1**)``). In the example, the parameter ``db2.parameter.to.request`` 
+To get a DCI from the subagent, you need to specify the id from the ``db2`` entry in the XML
+configuration file (in case of INI configuration, the id will be **1**). To specify the id, you
+need to add it enclosed in brackets to the name of the parameter that is being requested (e.g.,
+``db2.parameter.to.request(**1**)``). In the example, the parameter ``db2.parameter.to.request``
 from the database with the id **1** will be returned.
 
-.. list-table:: 
+.. list-table::
    :widths: 40 20 20 70
    :header-rows: 1
-   
-   * - Parameter 
+
+   * - Parameter
      - Arguments
      - Return type
      - Description
@@ -1377,7 +1373,7 @@ from the database with the id **1** will be returned.
      - DCI_DT_INT
      - The number of tables using type-1 indexes
    * - DB2.Table.Index.Type2(*)
-     - Database id 
+     - Database id
      - DCI_DT_INT
      - The number of tables using type-2 indexes
    * - DB2.Table.Reorg.Pending(*)
@@ -1684,55 +1680,55 @@ from the database with the id **1** will be returned.
      - Database id
      - DCI_DT_INT
      - The number of section executions that referenced columns in tables using a scan
-     
-     
+
+
 MongoDB
 -------
 
 .. versionadded:: 2.0-M3
 
-NetXMS subagent for MongoDB monitoring. Monitors one or more instances of MongoDB databases and 
-reports various database-related parameters. 
+NetXMS subagent for MongoDB monitoring. Monitors one or more instances of MongoDB databases and
+reports various database-related parameters.
 
-All parameters available from MongoDB subagent gathered or calculated once per minute thus it's 
-recommended to set DCI poll interval for these items to 60 seconds or more. It is supposed that 
-by one agent will be monitored databases with same version. 
+All parameters available from MongoDB subagent gathered or calculated once per minute thus it's
+recommended to set DCI poll interval for these items to 60 seconds or more. It is supposed that
+by one agent will be monitored databases with same version.
 
 Building mongodb subagent
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use "--with-mongodb=/path/to/mongoc driver" parameter to include MongoDB subagent in build. Was tested with 
-mongo-c-driver-1.1.0. 
+Use "--with-mongodb=/path/to/mongoc driver" parameter to include MongoDB subagent in build. Was tested with
+mongo-c-driver-1.1.0.
 
 Agent Start
 ~~~~~~~~~~~
-While start of subagent at least one database should be up and running. Otherwise subagent will not start. 
-On start subagent requests serverStatus to get list of possible DCI. This list may vary from version to version 
+While start of subagent at least one database should be up and running. Otherwise subagent will not start.
+On start subagent requests serverStatus to get list of possible DCI. This list may vary from version to version
 of MongoDB.
 
 Configuration file
 ~~~~~~~~~~~~~~~~~~
 
 .. todo:
-  Add description of configuration string for connection to database. 
+  Add description of configuration string for connection to database.
 
 Parameters
 ~~~~~~~~~~
 
-There are 2 types of parameters: serverStatus parameters, that are generated form response on a subagent start 
-and predefined for database status. 
+There are 2 types of parameters: serverStatus parameters, that are generated form response on a subagent start
+and predefined for database status.
 
-Description of serverStatus parameters can be found there: `serverStatus <http://docs.mongodb.org/manual/reference/command/serverStatus/>`_. 
-In this type of DCI should be given id of server from where parameter should be taken. 
+Description of serverStatus parameters can be found there: `serverStatus <http://docs.mongodb.org/manual/reference/command/serverStatus/>`_.
+In this type of DCI should be given id of server from where parameter should be taken.
 
-Description of database status parameters can be found there: `dbStats <http://docs.mongodb.org/master/reference/command/dbStats/>`_. 
+Description of database status parameters can be found there: `dbStats <http://docs.mongodb.org/master/reference/command/dbStats/>`_.
 
-.. list-table:: 
+.. list-table::
    :widths: 50 100
    :header-rows: 1
-   
-   * - Parameter 
-     - Description 
+
+   * - Parameter
+     - Description
    * - MongoDB.collectionsNum(*id*,\ *databaseName*)
      - Contains a count of the number of collections in that database.
    * - MongoDB.objectsNum(*id*,\ *databaseName*)
@@ -1753,17 +1749,17 @@ Description of database status parameters can be found there: `dbStats <http://d
      - The total size in bytes of the data files that hold the database.
    * - MongoDB.nsSizeMB(*id*,\ *databaseName*)
      - The total size of the namespace files (i.e. that end with .ns) for this database.
-     
-     
+
+
 List
 ~~~~
 
-.. list-table:: 
+.. list-table::
    :widths: 50 100
    :header-rows: 1
-   
-   * - Parameter 
-     - Description 
+
+   * - Parameter
+     - Description
    * - MongoDB.ListDatabases(*id*)
      - Returns list of databases existing on this server
 
@@ -1775,8 +1771,8 @@ Application monitoring
 Process monitoring
 ------------------
 
-Platform subagents support process monitoring. Process metrics have "Process.*" format. 
-Metrics differ between different OS. Detailed description of each metric can be found 
+Platform subagents support process monitoring. Process metrics have "Process.*" format.
+Metrics differ between different OS. Detailed description of each metric can be found
 in :ref:`list-of-supported-metrics`.
 
 .. _dbquery:
@@ -1784,24 +1780,24 @@ in :ref:`list-of-supported-metrics`.
 Application Database Monitoring
 -------------------------------
 
-For application database monitoring can be used database monitoring subagents or 
-database query subagents. Information about database monitoring subagents can be 
-found :ref:`there<database-monitoring>`. In this chapter will be described only 
-DBQuery subagents usage and configuration. This subagent supports all databases that 
-are supported by NetXMS server :ref:`link to supported database list<supported-db-list>`. 
+For application database monitoring can be used database monitoring subagents or
+database query subagents. Information about database monitoring subagents can be
+found :ref:`there<database-monitoring>`. In this chapter will be described only
+DBQuery subagents usage and configuration. This subagent supports all databases that
+are supported by NetXMS server :ref:`link to supported database list<supported-db-list>`.
 
 This type of Metrics provide DBQuery subagent. This subagent has 2 types of Metrics:
 one that periodically executes SQL queries and returns results and error
-codes as Metric parameters and second execute queries by Metric request(synchronously). 
-SQL queries are specified in the agent configuration. Background query can be also 
-executed per request. Synchronously executed query can have parameters that are 
-passes to it by DCI configuration. 
+codes as Metric parameters and second execute queries by Metric request(synchronously).
+SQL queries are specified in the agent configuration. Background query can be also
+executed per request. Synchronously executed query can have parameters that are
+passes to it by DCI configuration.
 
 .. versionadded:: 2.5
    Synchronously executed queries
 
-For time consuming SQL requests it is highly recommended to use background execution. 
-Heavy SQL can cause request timeout for synchronous execution. 
+For time consuming SQL requests it is highly recommended to use background execution.
+Heavy SQL can cause request timeout for synchronous execution.
 
 Parameters
 ~~~~~~~~~~
@@ -1819,7 +1815,7 @@ When loaded, DBQuery subagent adds the following parameters to agent:
 | DB.QueryStatus(*name*)                 | Status of last execution of the query *name*. Query with given name must be defined in configuration file. |
 |                                        | Value returned is native SQL error code.                                                                   |
 +----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| DB.QueryStatusText(*name*)             | Status of last execution of the query *name* as a text. Query with given name must be defined              |  
+| DB.QueryStatusText(*name*)             | Status of last execution of the query *name* as a text. Query with given name must be defined              |
 |                                        | in configuration file.                                                                                     |
 +----------------------------------------+------------------------------------------------------------------------------------------------------------+
 | *queryName*                            | Result of immediate execution of query defined in agent config file with name *queryName*.                 |
@@ -1851,14 +1847,14 @@ When loaded, DBQuery subagent adds the following tables to agent:
 Configuration file
 ~~~~~~~~~~~~~~~~~~
 
-All configuration parameters related to DBQuery subagent should be placed into **\*DBQUERY** section of agent's configuration file. 
+All configuration parameters related to DBQuery subagent should be placed into **\*DBQUERY** section of agent's configuration file.
 The following configuration parameters are supported:
 
-.. list-table:: 
+.. list-table::
    :header-rows: 1
    :widths: 25 50 200
 
-   * - Parameter 
+   * - Parameter
      - Format
      - Description
    * - Database
@@ -1866,27 +1862,27 @@ The following configuration parameters are supported:
      - Define new database connection (See database connection options section below).
    * - Query
      - *name*:*dbid*:*interval*:*query*
-     - Define new query. This parameter can be specified multiple times to define multiple queries. 
+     - Define new query. This parameter can be specified multiple times to define multiple queries.
        Fields in query definition have the following meaning:
-       
+
         - *name*     Query name which will be used in parameters to retrieve collected data.
         - *dbid*     Database ID (defined by Database parameter)
         - *interval* Polling interval in seconds.
         - *query*    SQL query to be executed.
    * - ConfigurableQuery
      - *name*:*dbid*:*description*:*query*
-     - Define new query. This parameter can be specified multiple times to define 
+     - Define new query. This parameter can be specified multiple times to define
        multiple queries. Fields in query definition have the following meaning:
-       
+
         - *name*        Query name which will be used in parameters to retrieve collected data.
         - *dbid*        Database ID (defined by Database parameter)
         - *description* Description that will be shown in agents parameter description.
         - *query*       SQL query to be executed.
 
-         
+
 Database connection options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         
+
 +-----------------------+-----------+--------------------------------------------------+
 | Name                  | Status    | Description                                      |
 +=======================+===========+==================================================+
@@ -1917,13 +1913,13 @@ Database connection options
 +-----------------------+-----------+--------------------------------------------------+
 | **server**            | optional  | Database server name or IP address.              |
 +-----------------------+-----------+--------------------------------------------------+
-         
+
 
 Configuration Example
 ~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cfg
-   
+
    # This sample nxagentd.conf instructs agent to:
    #   1. load DBQuery subagent
    #   2. Define two databases - db1 (Oracle) and db2 (MySQL).
@@ -1945,16 +1941,16 @@ Configuration Example
 Log monitoring
 --------------
 
-Application logs can be added to monitoring. For log monitoring configuration refer to 
-:ref:`log-monitoring` chapter. 
+Application logs can be added to monitoring. For log monitoring configuration refer to
+:ref:`log-monitoring` chapter.
 
 External Metrics
 ----------------
 
-It is possible to define External metrics that will get metric data from the script that 
-is executed on the agent. This option can be used to get status from some command line 
-tools or from self made scripts. Information about options and configuration is 
-available in :ref:`agent-external-parameter` chapter. 
+It is possible to define External metrics that will get metric data from the script that
+is executed on the agent. This option can be used to get status from some command line
+tools or from self made scripts. Information about options and configuration is
+available in :ref:`agent-external-parameter` chapter.
 
 
 ICMP ping
@@ -1995,7 +1991,7 @@ When loaded, PING subagent adds the following parameters to agent:
 |                                       | *target*. Argument *target* can be either IP address or name specified in Target configuration      |
 |                                       | record (see below).                                                                                 |
 +---------------------------------------+-----------------------------------------------------------------------------------------------------+
-                                                
+
 
 Metric Lists
 ------------
@@ -2016,7 +2012,7 @@ Metric Lists
 Configuration file
 ------------------
 
-All configuration parameters related to PING subagent should be placed into **\*PING** section of agent's configuration file. 
+All configuration parameters related to PING subagent should be placed into **\*PING** section of agent's configuration file.
 The following configuration parameters are supported:
 
 +-------------------+---------------------+----------------------------------------------------------------------------------------+---------------+
@@ -2040,15 +2036,15 @@ The following configuration parameters are supported:
 Configuration example:
 
 .. code-block:: cfg
-   
+
    # This sample nxagentd.conf instructs agent to:
    #   1. load PING subagent
    #   2. Ping target 10.0.0.1 with default size (46 bytes) packets and 10.0.0.2 with 1000 bytes packets
    #   3. Timeout for ping set to 1 second and pings are sent 12 times per minute (each 5 seconds)
-   
+
    MasterServers = netxms.demo
    SubAgent = ping.nsm
-   
+
    *PING
    Timeout = 1000
    PacketRate = 12
@@ -2061,12 +2057,12 @@ Configuration example:
 Monitoring hardware(sensors)
 ============================
 
-NetXMS has subagents that allow to monitor hardware sensors. 
-  * lm-sensors - Can collect data from all sensors that are supported by 
-    `lm-sensors <http://www.lm-sensors.org/wiki/Devices>`_ drivers on Luinux. 
-  * DS18x20 - This subagent collects temperature data form ds18x20 sensors. Linux only. 
-  * RPI - This subagent is created for Raspberry Pi. It can collect data from dht22 
-    sensor and get status of any GPO pin. 
+NetXMS has subagents that allow to monitor hardware sensors.
+  * lm-sensors - Can collect data from all sensors that are supported by
+    `lm-sensors <http://www.lm-sensors.org/wiki/Devices>`_ drivers on Luinux.
+  * DS18x20 - This subagent collects temperature data form ds18x20 sensors. Linux only.
+  * RPI - This subagent is created for Raspberry Pi. It can collect data from dht22
+    sensor and get status of any GPO pin.
 
 lm-sensors
 ----------
@@ -2076,24 +2072,24 @@ This subagent can be used to read hardware status using lm_sensors package.
 Pre-requisites
 ~~~~~~~~~~~~~~
 
-Package lm_sensors should be installed and configured properly. Output of 
-`sensors <http://www.lm-sensors.org/wiki/man/sensors>`_ command 
-should produce meaningful output (see example below). 
+Package lm_sensors should be installed and configured properly. Output of
+`sensors <http://www.lm-sensors.org/wiki/man/sensors>`_ command
+should produce meaningful output (see example below).
 
 .. code-block:: shell
 
    alk@b08s02ur:~$ sensors
    w83627dhg-isa-0290
    Adapter: ISA adapter
-   Vcore:       +1.14 V  (min =  +0.00 V, max =  +1.74 V)   
+   Vcore:       +1.14 V  (min =  +0.00 V, max =  +1.74 V)
    in1:         +1.61 V  (min =  +0.05 V, max =  +0.01 V)   ALARM
-   AVCC:        +3.31 V  (min =  +2.98 V, max =  +3.63 V)   
-   VCC:         +3.31 V  (min =  +2.98 V, max =  +3.63 V)   
+   AVCC:        +3.31 V  (min =  +2.98 V, max =  +3.63 V)
+   VCC:         +3.31 V  (min =  +2.98 V, max =  +3.63 V)
    in4:         +1.79 V  (min =  +1.29 V, max =  +0.05 V)   ALARM
-   in5:         +1.26 V  (min =  +0.05 V, max =  +1.67 V)   
+   in5:         +1.26 V  (min =  +0.05 V, max =  +1.67 V)
    in6:         +0.10 V  (min =  +0.26 V, max =  +0.08 V)   ALARM
-   3VSB:        +3.30 V  (min =  +2.98 V, max =  +3.63 V)   
-   Vbat:        +3.18 V  (min =  +2.70 V, max =  +3.30 V)   
+   3VSB:        +3.30 V  (min =  +2.98 V, max =  +3.63 V)
+   Vbat:        +3.18 V  (min =  +2.70 V, max =  +3.30 V)
    fan1:       3308 RPM  (min = 1188 RPM, div = 8)
    fan2:       6250 RPM  (min = 84375 RPM, div = 8)  ALARM
    fan3:          0 RPM  (min = 5273 RPM, div = 128)  ALARM
@@ -2106,11 +2102,11 @@ should produce meaningful output (see example below).
 
    coretemp-isa-0000
    Adapter: ISA adapter
-   Core 0:      +37.0°C  (high = +76.0°C, crit = +100.0°C)  
+   Core 0:      +37.0°C  (high = +76.0°C, crit = +100.0°C)
 
    coretemp-isa-0001
    Adapter: ISA adapter
-   Core 1:      +37.0°C  (high = +76.0°C, crit = +100.0°C)  
+   Core 1:      +37.0°C  (high = +76.0°C, crit = +100.0°C)
 
 
 Parameters
@@ -2128,8 +2124,8 @@ When loaded, lm_sensors subagent adds the following parameters:
 Configuration file
 ~~~~~~~~~~~~~~~~~~
 
-All configuration parameters related to lm_sensors subagent should be placed into 
-**\*LMSENSORS** section of agent's configuration file. 
+All configuration parameters related to lm_sensors subagent should be placed into
+**\*LMSENSORS** section of agent's configuration file.
 The following configuration parameters are supported:
 
 +----------------+---------+--------------------------------------------------------------------------+-------------------------------------------------------+
@@ -2159,45 +2155,45 @@ Sample usage
 (based on output of "sensors" from Pre-requisites section)
 
 .. code-block:: cfg
-   
+
    alk@b08s02ur:~$ nxget netxms.demo 'LMSensors.Value(coretemp-isa-0001,Core 1)'
    38.000000
    alk@b08s02ur:~$ nxget netxms.demo 'LMSensors.Value(w83627dhg-isa-0290,AVCC)'
    3.312000
 
-  
+
 DS18x20
 -------
 
-This subagent collects temperature from DS18x20 sensor. Subagent available for Linux 
-only. To use this subagent 1-Wire driver should be installed. 
+This subagent collects temperature from DS18x20 sensor. Subagent available for Linux
+only. To use this subagent 1-Wire driver should be installed.
 
 Parameters
 ~~~~~~~~~~
 
-.. list-table:: 
+.. list-table::
    :header-rows: 1
    :widths: 50 30 200
 
-   * - Parameter 
+   * - Parameter
      - Type
      - Meaning
-   * - Sensor.Temperature(*) 
+   * - Sensor.Temperature(*)
      - Float
      - Sensor temperature
 
 Configuration file
 ~~~~~~~~~~~~~~~~~~
 
-All configuration parameters related to lm_sensors subagent should be placed into 
-**\*DS18X20** section of agent's configuration file. 
+All configuration parameters related to lm_sensors subagent should be placed into
+**\*DS18X20** section of agent's configuration file.
 The following configuration parameters are supported:
 
-.. list-table:: 
+.. list-table::
    :header-rows: 1
    :widths: 25 50 200
 
-   * - Parameter 
+   * - Parameter
      - Format
      - Description
    * - Sensor
@@ -2218,22 +2214,22 @@ Configuration example
 RPI
 ---
 
-This subagent collects data from Raspberry Pi dht22 sensor and status of GPO pins. 
+This subagent collects data from Raspberry Pi dht22 sensor and status of GPO pins.
 
 Parameters
 ~~~~~~~~~~
 
-.. list-table:: 
+.. list-table::
    :header-rows: 1
    :widths: 50 30 200
 
-   * - Parameter 
+   * - Parameter
      - Type
      - Meaning
    * - GPIO.PinState(pinNumber)
      - Integer
-     - State of pin with given number. This pin number should be enabled in agent 
-       configuration file. 
+     - State of pin with given number. This pin number should be enabled in agent
+       configuration file.
    * - Sensors.Humidity
      - Integer
      - Sensors data for humidity
@@ -2244,15 +2240,15 @@ Parameters
 Configuration file
 ~~~~~~~~~~~~~~~~~~
 
-All configuration parameters related to lm_sensors subagent should be placed into 
-**\*RPI** section of agent's configuration file. 
+All configuration parameters related to lm_sensors subagent should be placed into
+**\*RPI** section of agent's configuration file.
 The following configuration parameters are supported:
 
-.. list-table:: 
+.. list-table::
    :header-rows: 1
    :widths: 25 50 200
 
-   * - Parameter 
+   * - Parameter
      - Format
      - Description
    * - DisableDHT22
@@ -2260,7 +2256,7 @@ The following configuration parameters are supported:
      - Disables dht22 sensor if ``yes``. By default ``no``.
    * - EnabledPins
      - Coma separated list of numbers
-     - List of pins that are enabled for status check. 
+     - List of pins that are enabled for status check.
 
 Configuration example
 ~~~~~~~~~~~~~~~~~~~~~
@@ -2277,41 +2273,41 @@ Configuration example
 UPS monitoring
 ==============
 
-There are two options to monitor UPS: first is through USB or serial connection with 
-help of subagent and second one is through the network with help of SNMP. 
+There are two options to monitor UPS: first is through USB or serial connection with
+help of subagent and second one is through the network with help of SNMP.
 
-Subagent can be used for monitoring UPS (Uninterruptible Power Supply) attached 
-to serial or USB port on computer where NetXMS agent is running. USB-attached devices 
-currently supported only on Windows platform, serial is supported on all platforms. 
+Subagent can be used for monitoring UPS (Uninterruptible Power Supply) attached
+to serial or USB port on computer where NetXMS agent is running. USB-attached devices
+currently supported only on Windows platform, serial is supported on all platforms.
 One subagent can monitor multiple attached devices.
 
 
 USB or serial UPS monitoring
 ----------------------------
 
-You can monitor UPS devices attached to the hosts via serial cable or USB via UPS 
-subagent. Once you have your UPS attached to the host and NetXMS agent installed, 
-you should configure UPS subagent. First, add the following line to agent's 
+You can monitor UPS devices attached to the hosts via serial cable or USB via UPS
+subagent. Once you have your UPS attached to the host and NetXMS agent installed,
+you should configure UPS subagent. First, add the following line to agent's
 configuration file main section:
 
 .. code-block:: cfg
 
  SubAgent = ups.nsm
 
-Second, configure attached UPS devices. Create ``UPS`` section, and for each UPS 
+Second, configure attached UPS devices. Create ``UPS`` section, and for each UPS
 device attached to the host add line in the following format:
 
 .. code-block:: cfg
 
  Device = id:port:protocol
 
-where id is a number in range 0 .. 127 which will be used in requests to identify 
-device; port is a communication port for serial connection or UPS serial number 
-for USB connection; and protocol is a communication protocol used by connected device. 
-Protocol can be either APC (for APC devices), BCMXCP (for devices using BCM/XCP 
-protocol – for example, HP, Compaq, or PowerWare devices), or USB for USB-attached 
-devices. Below is an example of UPS configuration section for two devices attached 
-via serial ports, one is APC device (configured as device 0) and one is HP device 
+where id is a number in range 0 .. 127 which will be used in requests to identify
+device; port is a communication port for serial connection or UPS serial number
+for USB connection; and protocol is a communication protocol used by connected device.
+Protocol can be either APC (for APC devices), BCMXCP (for devices using BCM/XCP
+protocol – for example, HP, Compaq, or PowerWare devices), or USB for USB-attached
+devices. Below is an example of UPS configuration section for two devices attached
+via serial ports, one is APC device (configured as device 0) and one is HP device
 (configured as device 1):
 
 .. code-block:: cfg
@@ -2321,15 +2317,15 @@ via serial ports, one is APC device (configured as device 0) and one is HP devic
   Device = 0:/dev/ttyS0:APC
   Device = 1:/dev/ttyS1:BCMXCP
 
-  
-Once UPS subagent is configured, you can start to monitor UPS devices status via 
+
+Once UPS subagent is configured, you can start to monitor UPS devices status via
 parameters provided by it:
 
-.. list-table:: 
+.. list-table::
    :header-rows: 1
    :widths: 50 30 200
 
-   * - Parameter 
+   * - Parameter
      - Type
      - Meaning
    * - UPS.BatteryLevel(*)
@@ -2338,15 +2334,15 @@ parameters provided by it:
    * - UPS.BatteryVoltage(*)
      - Float
      - Current battery voltage.
-   * - UPS.ConnectionStatus(* 
+   * - UPS.ConnectionStatus(*
      - Integer
      - Connection status between agent and device. Can have the following values:
         * 0 - Agent is communication with the device
         * 1 - Comunication with the device has been lost
-   * - UPS.EstimatedRuntime(*) 
+   * - UPS.EstimatedRuntime(*)
      - Integer
      - Estimated on-battery runtime in minutes.
-   * - UPS.Firmware(*) 
+   * - UPS.Firmware(*)
      - String
      - Device's firmware version.
    * - UPS.InputVoltage(*)
@@ -2361,7 +2357,7 @@ parameters provided by it:
    * - UPS.MfgDate(*)
      - String
      - Device manufacturing date.
-   * - UPS.Model(*) 
+   * - UPS.Model(*)
      - String
      - Device model name.
    * - UPS.NominalBatteryVoltage(*)
@@ -2383,38 +2379,38 @@ parameters provided by it:
      - Integer
      - Internal device temperature.
 
-     
-Please note that not all parameters supported by all UPS devices. Many old or simple 
+
+Please note that not all parameters supported by all UPS devices. Many old or simple
 models will support only basic things like UPS.OnlineStatus parameter.
-Most typical approach is to monitor UPS.OnlineStatus for going to 1 or 2, and then 
-send notifications to administrators and shutdown affected hosts if needed. You can 
-also monitor UPS.EstimatedRuntime parameter for the same purposes if your devices 
+Most typical approach is to monitor UPS.OnlineStatus for going to 1 or 2, and then
+send notifications to administrators and shutdown affected hosts if needed. You can
+also monitor UPS.EstimatedRuntime parameter for the same purposes if your devices
 support it.
 
 
 Simple Scenario
 ~~~~~~~~~~~~~~~
 
-Consider the following simple scenario: you have two servers, Node_A and Node_B, 
-connected to one UPS device. UPS device is APC Smart UPS 1700, connected with serial 
-cable to Node_A on first COM port. Both nodes are running Windows operating system. 
-You need to notify administrator if UPS goes to battery power, and shutdown both 
-nodes in case of low battery condition. We assume that both nodes have NetXMS agent 
+Consider the following simple scenario: you have two servers, Node_A and Node_B,
+connected to one UPS device. UPS device is APC Smart UPS 1700, connected with serial
+cable to Node_A on first COM port. Both nodes are running Windows operating system.
+You need to notify administrator if UPS goes to battery power, and shutdown both
+nodes in case of low battery condition. We assume that both nodes have NetXMS agent
 installed.
 To accomplish this, do the following:
 
 **Step 1.**
 
-Configure UPS monitoring subagent on Node_A. Add the following line to main agent's 
+Configure UPS monitoring subagent on Node_A. Add the following line to main agent's
 config section:
 
-.. code-block:: cfg  
+.. code-block:: cfg
 
   SubAgent = ups.nsm
 
 At the end of configuration file, create UPS subagent configuration section:
 
-.. code-block:: cfg  
+.. code-block:: cfg
 
   # UPS subagent configuration section
   *UPS
@@ -2424,14 +2420,14 @@ At the end of configuration file, create UPS subagent configuration section:
 SNMP UPS monitoring
 -------------------
 
-Other option to monitor UPS is using SNMP. NetXMS already includes MIBs for some UPS, 
-like APC UPS and standard UPS MIB. 
-Description for possible OIDs and some additional information for APC UPS configuration 
-can be found on a 
-`NetXMS wiki <https://wiki.netxms.org/wiki/UPS_Monitoring_(APC)_via_SNMP>`_. 
+Other option to monitor UPS is using SNMP. NetXMS already includes MIBs for some UPS,
+like APC UPS and standard UPS MIB.
+Description for possible OIDs and some additional information for APC UPS configuration
+can be found on a
+`NetXMS wiki <https://wiki.netxms.org/wiki/UPS_Monitoring_(APC)_via_SNMP>`_.
 
-Please check :ref:`import-mib` for MIB loadding and :ref:`dci-configuration` for 
-metric collection. 
+Please check :ref:`import-mib` for MIB loadding and :ref:`dci-configuration` for
+metric collection.
 
 
 Cluster monitoring
@@ -2445,22 +2441,22 @@ Monitoring mobile devices
 
 .. Used version on wiki:  00:14, 16 February 2013‎ Marco Incalcaterra
 
-NetXMS has mobile agent for Android devices running version 2.2. and later. Currently, 
+NetXMS has mobile agent for Android devices running version 2.2. and later. Currently,
 a very limited set of info can be monitored and reported to a NetXMS server.
 
 Metrics
 -------
 
-Unlike other metrics mobile ones are provided with :guilabel:`Internal` origin as they 
-are not collected by server, but pushed from mobile agent. 
+Unlike other metrics mobile ones are provided with :guilabel:`Internal` origin as they
+are not collected by server, but pushed from mobile agent.
 
 
-.. list-table:: 
+.. list-table::
    :widths: 50 100
    :header-rows: 1
-   
-   * - Parameter 
-     - Description 
+
+   * - Parameter
+     - Description
    * - MobileDevice.BattaryLevel
      - Battery charging level in percents.
    * - MobileDevice.DeviceId
@@ -2476,7 +2472,7 @@ are not collected by server, but pushed from mobile agent.
    * - MobileDevice.SerialNumber
      - Serial number
    * - MobileDevice.UsedId
-     - 
+     -
    * - MobileDevice.Vendor
      - Mobile device vendor
 
@@ -2486,8 +2482,8 @@ GUI
 Main Window
 ~~~~~~~~~~~
 
-.. figure:: _images/mobile_agent.png  
-  
+.. figure:: _images/mobile_agent.png
+
 Sections:
   1. Agent status. In case agent is active, reports the basic info about configuration such as scheduler for new location acquisition and connection to server where to update info collected.
   2. Last location section reports info about the last location acquired (date/time, source provider, geo coordinates and estimated accuracy.
@@ -2511,12 +2507,12 @@ This section is used to configure the behaviour of the agent.
 Global settings
 ~~~~~~~~~~~~~~~
 
-  * :guilabel:`Activate agent`: when set makes the agent operational. 
+  * :guilabel:`Activate agent`: when set makes the agent operational.
   * :guilabel:`Autostart on boot`: automatically starts the agent on boot (to be effective, agent must be set to be active).
   * :guilabel:`Scheduler`: provides the ability to define a “one range” daily on which the agent is operational. Out of the specified range the agent will not collect any new position and will not try to make connections to the server. When set it is possible to specify:
       1. :guilabel:`Daily activation on`: start time for daily activation.
       2. :guilabel:`Daily activation off`: stop time for daily activation.
-    
+
 Connection
 ~~~~~~~~~~
 
@@ -2537,22 +2533,20 @@ Location
   * :guilabel:`Duration (min)`: maximum amount of time, in minutes, that has to elapse before giving up on acquiring a new position.
   * :guilabel:`Location strategy`: allows selecting the source provider that has to be used to acquire a new position, allowed providers:
       1. :guilabel:`Network only`: tries to acquire position from network provider. Network provider is usually fast in acquiring a new position but it is not much accurate, especially using data connection (range from 1Km to 2Km, depending on antennas deployment), the service is not available all around the world. Wi-Fi connection seems to guarantee much higher precision due to a correlation between last known position acquired from GPS.
-      2. :guilabel:`GPS only`: tries to acquire position from GPS provider. GPS provider is usually slow in acquiring a new position, time depends on several factors such as how much time has elapsed since last position, number of satellites in free view (inside buildings can be really had to get a position). 
+      2. :guilabel:`GPS only`: tries to acquire position from GPS provider. GPS provider is usually slow in acquiring a new position, time depends on several factors such as how much time has elapsed since last position, number of satellites in free view (inside buildings can be really had to get a position).
       3. :guilabel:`Network and GPS`: tries to acquire a position from Network provider or GPS provider, the first one that gives a position is considered ok. There is no special algorithm to evaluate accuracy, the unique criteria is the speed of the fix.
 
-.. note:: 
-  Please note that on 2G networks (GPRS/EDGE) data connection is not available 
-  while you are busy in a conversation, position acquisition will fail. On 3G 
-  networks (UMTS/HSxPA) data connection is available and so the position 
-  acquisition. However, if the agent is not able to get a new fix within the 
-  time-frame specified, it will try to gather a position from any available 
+.. note::
+  Please note that on 2G networks (GPRS/EDGE) data connection is not available
+  while you are busy in a conversation, position acquisition will fail. On 3G
+  networks (UMTS/HSxPA) data connection is available and so the position
+  acquisition. However, if the agent is not able to get a new fix within the
+  time-frame specified, it will try to gather a position from any available
   provider that has a valid cached position to provide.
 
 Notification
 ~~~~~~~~~~~~
 
-Toast notification: when set allows the agent to display “toast” notifications 
-to the user (such as pushing data to the server, inform user about the start of 
+Toast notification: when set allows the agent to display “toast” notifications
+to the user (such as pushing data to the server, inform user about the start of
 the agent, etc.).
-
-  

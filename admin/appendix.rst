@@ -884,6 +884,10 @@ These parameters can be changed in
     - The number of threads used to perform agent upgrades (i.e. maximum number of parallel upgrades).
     - 10
     - No
+  * - OffileDataRelevanceTime
+    - Time period in seconds within which received offline data still relevant for threshold validation
+    - 86400
+    - Yes
   * - PasswordComplexity
     - Set of flags to enforce password complexity (see [[UM::User_Management#Password_Policy|Password Policy]] for more details).
     - 0

@@ -327,6 +327,9 @@ description can be found there: :ref:`how_data_collection`.
 Agent side cache is configurable globally, on node level, and on DCI level. By 
 default it's off.
 
+All collected data goes throught all transfarmations and thresholds only when it comes to server. 
+To prevent generation of old events it can be set :guilabel:`OffileDataRelivanceTime` configuration variable to time period in seconds within which received offline data still relevant for threshold validation. By dafault it is set to 1 day. 
+
 .. versionadded:: 2.0-M5
     Offline data collection. 
 

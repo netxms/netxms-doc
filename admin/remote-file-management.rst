@@ -99,16 +99,25 @@ Other options
  - It is possible to move files and folders with help of drag and drop.
  - To refresh all view should be used view refresh button(not form folder menu). But in this case all expanded folders will be closed.
 
+Advanced File Managment
+=======================
 
-File upload to multiple nodes
------------------------------
+There are options to run multiple file uploqad to agents, file upload jobs on holad and scheduled 
+file upload jobs. All this options are available uploading file from server to agent. That means that befor upload file should be uploaded to server for instruction check :ref:`upload-file-on-server-label` section.
 
-There is possibility to upload one file from server storage to multiple nodes in few clicks. 
+Advanced file upload can be accessed selecting required nodes(can be selected more than 
+one with help of 'Ctrl' key) and in object menue selecting :guilabel:`Upload file...`.
 
- 1. File should be uploaded to server for instruction check :ref:`upload-file-on-server-label` section. 
- 2. From object tree should be selected nodes to which upload will be done. Selection can be done with help of 'Ctrl' key.
- 3. Right click on one of selected nodes and chose "Upload file..."
- 4. There will be asked to provide path were to download file and server file that will be uploaded. (If destination will not be set then as a destination will be taken from agent's config parameter 'FileStore').
+.. figure:: _images/server_to_agent_file_upload.png
+
+Job configuration:
+ - File that should be uploaded on the agent(s). 
+ - Remote file path(If destination will not be set then as a destination will be taken from agent's config parameter 'FileStore'). If path is set agent will check if there is access to this folder. Access is configured by :guilabel:`filemgr` subagent, check :ref:`agent_file_managment`.
+ - Job can be created "on hold". This mean that job will be created, but not started. After creation it can be manually started selecting job in :guilabel:`Server Jobs` view and clicking :guilabel:`Unhold`.
+ - Other option is to schedule file upload job. It can scheduled to be executed once at exact time(:guilabel:`One time execution`) or to be executed in schedule(:guilabel:`Cron schedule`). Scheduled execution is set like `cron expression <https://en.wikipedia.org/wiki/Cron>`_.
+
+Result of file upload job can be checked in :guilabel:`Server Jobs` view. It can be accessed by clicking :menuselection:`View --> Server Jobs`.
+
 
 .. _server-files-label:
 

@@ -337,7 +337,8 @@ passed as arguments of generated event. You can use macros defined in
 :ref:`log-monitoring-macros` section. Also, it is possible to define inverted
 match rules (rules when log record considered matching if it does not match
 regular expression). Inverted match can be set by setting attribute ``invert``
-to ``1``.
+to ``1``. Other possible option that can be configured is number of times that 
+exptession should be matched to generate event. 
 
 Some examples:
 
@@ -351,15 +352,41 @@ an event.
 
 .. code-block:: xml
 
-    <match>[0-9]{3}</match>
+    <match repeatCount="3" repeatInterval="120" reset="false">[0-9]{3}</match>
 
-This regular expression will match any line containing at least 3 consecutive digits.
+This regular expression will match any line containing at least 3 consecutive digits. 
+And event will be generated only if this regular expression will be matched 3 or 
+more times in 2 minutes(120 seconds). Matched count wount be reset once mark will 
+is reached, so if expresstion is matched more than 3 times in 2 minutes, event will 
+be generated more than one time. 
 
 .. code-block:: xml
 
     <match invert="1">abc</match>
 
 This regular expression will match any line not containing character sequence ``abc``.
+
+Possible attributes for tag ``<match>``:
+
++----------------+------------------------------------------------------+---------------+
+| Option         | Description                                          | Default value |
++================+======================================================+===============+
+| invert         | If this option set to ``true``, it will be matched   | false         |
+|                | amy line that does not contain matching expression.  |               |
++----------------+------------------------------------------------------+---------------+
+| repeatCount    | The number ot times expression should be matched to  | 0             |
+|                | generate event. It this option set to ``0``, event   |               |
+|                | will be generated immediately on expression match.   |               |
++----------------+------------------------------------------------------+---------------+
+| repeatInterval | The time interval during which the expression should | 0             |
+|                | be matched. It this option set to ``0``, event will  |               |
+|                | be generated immediately on expression match.        |               |
++----------------+------------------------------------------------------+---------------+
+| reset          | If this option set to ``true``, it will set to zero  | true          |
+|                | match repeat count. So if while ``repeatInterval``   |               |
+|                | expression have been matched ``repeatCount`` times+1 |               |
+|                | it will not generate second event.                   |               |
++----------------+------------------------------------------------------+---------------+
 
 
 <id> Tag

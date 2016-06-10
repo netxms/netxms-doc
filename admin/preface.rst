@@ -23,6 +23,7 @@ Contact us if you run into a problem of found a bug.
   * `Facebook <https://www.facebook.com/netxms>`_
   * `Google+ <https://plus.google.com/u/0/s/netxms>`_
   * `Twitter <https://twitter.com/netxms>`_
+  * `Telegram <https://telegram.me/netxms>`_
 
 Priority support for NetXMS is provided by
 `Raden Solutions <http://www.radensolutions.com/>`_

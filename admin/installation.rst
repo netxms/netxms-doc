@@ -47,7 +47,7 @@ Supported database engines:
    * Oracle 11g, 12
    * PostgreSQL 9.1 and higher
    * DB/2 v10
-   * SQLite (for development pur)
+   * SQLite (only for test purposes)
 
 Database size and load is very hard to predict, because it is dependent on a number of
 monitored nodes and collected parameters. If you plan to install database engine on

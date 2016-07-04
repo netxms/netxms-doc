@@ -301,6 +301,8 @@ Agent
   7. Run agent:
   
     :command:`$ /usr/local/bin/nxagentd -d`
+    
+.. _agent-remote-update:
 
 Centralized agent upgrade
 =========================

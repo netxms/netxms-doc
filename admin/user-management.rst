@@ -111,7 +111,7 @@ The following system access rights can be granted:
    * - Manage mapping tables
      - Allows user to manage mapping tables
    * - Manage packages
-     - Allow user to install, remove, and deploy agent packages. :ref:`agent-remote-update`
+     - Allow user to install, remove, and deploy server agent packages. :ref:`agent-remote-update`
    * - Manage server files
      - Allow user to upload files to server and delete files stored on server. :ref:`server-files-label`
    * - Manage script library

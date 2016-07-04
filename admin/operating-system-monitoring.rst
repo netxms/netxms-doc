@@ -1,0 +1,110 @@
+.. _operating-system-monitoring:
+
+===========================
+Operating System Monitoring
+===========================
+
+Most OS-related metrics (file system, CPU, network) are provided by
+"platform subagent", which is loaded automatically by the agent on the startup.
+
+List of available subagents:
+
+  * linux
+  * aix
+  * hpux
+  * winnt (all Windows flavours)
+  * sunos (Solaris)
+  * darwin (MacOS)
+  * freebsd
+  * netbsd
+  * openbsd
+
+In this section we cover only most common metrics.
+:ref:`Detailed list <list-of-supported-metrics>` available bellow.
+
+Example
+=======
+
+In examples will be shown only DCI configuration with threshold. Generated event
+processing options can be found in :ref:`event-processing` chapter.
+
+Process monitoring
+------------------
+
+In this example will be configured monitoring of running "mysqld" process. And one
+threshold: when process count is less then 1(process is not running).
+
+Create DCI for Process.Count(*) metric to monitor "mysqld" process count.
+
+.. figure:: _images/os-metric-process-monitoring.png
+
+Create threshold. It will be triggered when process count is not equal to 1(process is
+not running). As prerequisite it was created 2 events.
+
+.. figure:: _images/os-metric-process-monitoring2.png
+
+  Events
+
+.. figure:: _images/os-metric-process-monitoring3.png
+
+  Threshold 1
+
+As in message of error is used Instance parameter, it should be set in
+:guilabel:`Threshold` window.
+
+.. figure:: _images/os-metric-process-monitoring4.png
+
+
+Disk free space monitoring
+--------------------------
+
+In this example will be configured monitoring of free space in percents for / disk and
+two thresholds: when disk space less then 15% and less then 7%.
+
+
+Create DCI for FileSystem.FreePerc(*) metric to monitor space on /.
+
+.. figure:: _images/os-metric-disk-free-space-example.png
+
+Create 2 thresholds. One will be triggered when free space is less than 15% and other
+one when free space is less than 7%. Before threshold creation was created 3 events:
+
+.. figure:: _images/os-metric-disk-free-space-example2.png
+
+  Events
+
+.. figure:: _images/os-metric-disk-free-space-example3.png
+
+  Threshold 1
+
+.. figure:: _images/os-metric-disk-free-space-example4.png
+
+  Threshold 2
+
+As in message of error is used Instance parameter, it should be set in
+:guilabel:`Threshold` window.
+
+.. figure:: _images/os-metric-disk-free-space-example5.png
+
+  Both
+
+CPU usage
+---------
+
+This example will show how to configure monitoring of CPU usage and create event when
+CPU usage is more than 90% for more than 5 minutes.
+
+Create DCI for System.CPU.LoadAvg metric.
+
+.. figure:: _images/os-metric-cpu-usage-example.png
+
+Create threshold that will create event in case if last 5 values are more than 90
+(last 5 minutes CPU usage is more than 90%).
+
+.. figure:: _images/os-metric-cpu-usage-example2.png
+
+  Events
+
+.. figure:: _images/os-metric-cpu-usage-example3.png
+
+  Threshold

@@ -19,7 +19,17 @@ NetXMS Administrator Guide
    data-collection
    event-processing
    visualisation
-   common-tasks
+   operating-system-monitoring
+   file-meta-info-monitoring
+   log-monitoring
+   service-monitoring
+   database-monitoring
+   application-monitoring
+   icmp-ping
+   hardware-monitoring
+   ups-monitoring
+   cluster-monitoring
+   mobile-device-monitoring
    topology
    sla
    remote-file-management
@@ -27,6 +37,9 @@ NetXMS Administrator Guide
    image-library
    mobile-console
    advanced
+   schedule
    scripting
    appendix
    glossary
+
+   

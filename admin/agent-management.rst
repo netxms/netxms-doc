@@ -347,7 +347,7 @@ Subagents are used to extend agent functionality. NetXMS subagent are libraries 
 By default all subagents are included in agent build. Subagent may be not included in build
 only if on time of the build there were no required libraries for subagent build. To enable 
 subagent is require just to add line in main agent configuration file(example: "Subagent=dbquery.nsm").
-More about configuration and usage of subagents will be described in :ref:`getting-things-monitored` chapter.
+More about configuration and usage of subagents will be described in monitoring chapters.
 
 There is list of available manually loaded NetXMS subagents:
 

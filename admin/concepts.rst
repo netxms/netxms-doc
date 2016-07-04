@@ -293,7 +293,7 @@ types, usually performed with different intervals:
 +--------------------+----------------------------------------------------------------------------------------------+
 | Instance Discovery | Verify all DCIs created by instance discovery process                                        |
 +--------------------+----------------------------------------------------------------------------------------------+
-| Network Discovery  | Searches for new nodes                                                                        |
+| Network Discovery  | Searches for new nodes                                                                       |
 +--------------------+----------------------------------------------------------------------------------------------+
 
 .. _basic-concepts-dci:

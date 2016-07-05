@@ -127,7 +127,11 @@ NetXMS server maintain persistent connection with reporting server on
 Reporting Server
 ----------------
 
-Report definitions are loaded from the file system by scanning workspace folder, expected structure: ``$WORKSPACE/definitions/$REPORT_GUID``. Each report folder should contain file ``main.jrxml``, any additional files (images, translation files) should be referenced in ``main.jrxml`` with relative paths. Sample directory listing::
+Report definitions are loaded from the file system by scanning workspace folder, 
+expected structure: ``$WORKSPACE/definitions/$REPORT_GUID``. Each report folder 
+should contain file ``main.jrxml``, any additional files (images, translation 
+files) should be referenced in ``main.jrxml`` with relative paths. Sample 
+directory listing::
 
   workspace/definitions/6eb9c41c-e9f0-4e17-ac57-de747e16e480/i18n.properties
   workspace/definitions/6eb9c41c-e9f0-4e17-ac57-de747e16e480/main.jrxml
@@ -183,3 +187,190 @@ Format of ``logback.xml`` is described in `Logback manual`_.
 Access Control
 --------------
 
+Installation Manual
+===================
+
+Setup
+-----
+1. Unpack netxms-reporting-server-2.0-M2.zip into some folder, in this example - /opt/nxreporting
+
+2. Create directory "conf"
+
+3. (Optional)Create logger configuration: conf/logback.xml (sample attached), 
+   detailed description here: http://logback.qos.ch/manual/configuration.html#syntax
+
+   .. code-block:: xml
+   
+        <?xml version="1.0" encoding="UTF-8"?>
+        <configuration>
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>/opt/nxreporting/log/nxreporting</file>
+            
+            <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>/opt/nxreporting/log/nxreporting.%i.gz</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>5</maxIndex>
+            </rollingPolicy>
+
+            <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>16MB</maxFileSize>
+            </triggeringPolicy>
+            <encoder>
+            <pattern>%d %5p | %t | %-55logger{55} | %m %n</pattern>
+            </encoder>
+        </appender>
+
+   
+4. Create configuration file for reporting server: conf/nxreporting.xml
+
+    .. code-block:: xml
+
+        <config>
+        <workspace>/opt/nxreporting/workspace</workspace>
+            <netxmsdConfig>/opt/netxms/etc/netxmsd.conf</netxmsdConfig>
+            <datasources>
+                <datasource>
+                    <id>secondary</id>
+                    <type>postgresql</type>
+                    <url>jdbc:postgresql://127.0.0.1/netxms</url>
+                    <username>netxms</username>
+                    <password>netxms</password>
+                </datasource>
+            </datasources>
+            <smtp>
+                <server>127.0.0.1</server>
+                <from>noreply@netxms.org</from>
+            </smtp>
+            <netxms>
+                <server>127.0.0.1</server>
+                <login>admin</login>
+                <password>netxms</password>
+            </netxms>
+        </config>
+
+    In most cases (when reports are using only single datasource), setting 
+    "netxmsdConfig" is enough, database type and credentials will loaded 
+    automatically from netxmsd.conf. "netxms" section of the config is required 
+    for reports, which load data not from SQL datasource, but using NetXMS API 
+    instead (connection is maintained by reporting server).
+
+5. Create workspace directory (as set by "workspace" parameter), it will contain both report 
+   definitions and intermediate report data (in "output" directory).
+
+6. Put report definition jars into workspace/definitions/:
+
+    .. code-block:: none
+
+        AirAlk:~() $ ls -al /opt/nxreporting/workspace/definitions/*.jar
+        -rw-r--r--  1 alk  wheel  3729 Mar 11 15:31 /opt/nxreporting/workspace/definitions/alarm-history-1.0.0.jar
+        -rw-r--r--  1 alk  wheel  5607 Mar 11 15:31 /opt/nxreporting/workspace/definitions/alarm-resolution-time-1.0.0.jar
+        -rw-r--r--  1 alk  wheel  4570 Mar 11 15:31 /opt/nxreporting/workspace/definitions/alarm-resolution-time-statistics-by-users-1.0.0.jar
+        -rw-r--r--  1 alk  wheel  4203 Mar 11 15:31 /opt/nxreporting/workspace/definitions/dci-1.0.0.jar
+        -rw-r--r--  1 alk  wheel  9968 Mar 11 15:31 /opt/nxreporting/workspace/definitions/epp-1.0.0.jar
+        …
+        
+7. Enable reporting server connector, set EnableReportingServer to 1 (either 
+   in GUI - server configuration, or using command line: "nxdbmgr set 
+   EnableReportingServer 1"), then restart netxmsd.
+   
+8. Create additional tables by executing both scripts from 
+   https://git.netxms.org/public/netxms.git/tree/refs/heads/develop:/src/java/nxreporting/sql
+
+9. Start reporting server:
+
+    .. code-block:: none
+
+        cd /opt/nxreporting
+        java -jar nxreporting-2.0-M2.jar
+
+    When started with "-jar" option, java will automatically find configuration files in conf/ and all libraries in lib/. However, you can run it differently (and omit "cd /opt/nxreporting"):
+
+    .. code-block:: none
+
+        java -cp /opt/nxreporting/lib/\*.jar:/opt/nxreporting/conf:/opt/nxreporting/nxreporting-2.0-M2.jar com.radensolutions.reporting.Launcher
+
+    or, if you are running windows:
+
+    .. code-block:: none
+
+        java -cp /opt/nxreporting/lib/\*.jar:/opt/nxreporting/conf:/opt/nxreporting/nxreporting-2.0-M2.jar com.radensolutions.reporting.Launcher
+
+        
+    In under 10 seconds, netxmsd should connect to reporting 
+    server and list of available reports will be visible in 
+    "Reporting" perspective.
+
+Resulting directory structure
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: none
+
+    /opt/nxreporting:
+    total 5728
+    drwxr-xr-x   6 alk  wheel      204 Apr  7 20:31 .
+    drwxr-xr-x  14 alk  wheel      476 Apr  3 20:07 ..
+    drwxr-xr-x   4 alk  wheel      136 Apr  7 20:31 conf
+    drwxr-xr-x  79 alk  wheel     2686 Jan 23 10:29 lib
+    -rw-r--r--   1 alk  wheel  2929061 Jan 23 10:29 nxreporting-2.0-M2.jar
+    drwxr-xr-x   4 alk  wheel      136 Mar 11 15:06 workspace
+
+    /opt/nxreporting/conf:
+    total 16
+    drwxr-xr-x  4 alk  wheel   136 Apr  7 20:31 .
+    drwxr-xr-x  6 alk  wheel   204 Apr  7 20:31 ..
+    -rw-r--r--  1 alk  wheel  1367 Apr  7 20:21 logback.xml
+    -rw-r--r--  1 alk  wheel   764 Apr  7 13:21 nxreporting.xml
+
+    /opt/nxreporting/lib:
+    total 109528
+    …
+
+    /opt/nxreporting/workspace:
+    total 0
+    drwxr-xr-x   4 alk  wheel   136 Mar 11 15:06 .
+    drwxr-xr-x   6 alk  wheel   204 Apr  7 20:31 ..
+    drwxr-xr-x  32 alk  wheel  1088 Mar 11 15:43 definitions
+    drwxr-xr-x   8 alk  wheel   272 Mar 11 15:42 output
+
+    /opt/nxreporting/workspace/definitions:
+    total 248
+    drwxr-xr-x  32 alk  wheel  1088 Mar 11 15:43 .
+    drwxr-xr-x   4 alk  wheel   136 Mar 11 15:06 ..
+    -rw-r--r--   1 alk  wheel  3729 Mar 11 15:31 alarm-history-1.0.0.jar
+    -rw-r--r--   1 alk  wheel  5607 Mar 11 15:31 alarm-resolution-time-1.0.0.jar
+    -rw-r--r--   1 alk  wheel  4570 Mar 11 15:31 alarm-resolution-time-statistics-by-users-1.0.0.jar
+    …
+
+    /opt/nxreporting/workspace/output:
+    total 0
+    drwxr-xr-x   8 alk  wheel  272 Mar 11 15:42 .
+    drwxr-xr-x   4 alk  wheel  136 Mar 11 15:06 ..
+    drwxr-xr-x   4 alk  wheel  136 Mar 11 15:44 01827cdb-cb23-4b06-b607-fd02c4279add
+    drwxr-xr-x   4 alk  wheel  136 Mar  7 22:04 52ce4398-a131-4a79-887e-672cc73d5d34
+    drwxr-xr-x   3 alk  wheel  102 Mar 11 15:44 8a7c025c-84c8-4914-b2bf-3b4cde27a224
+    …
+    
+.. https://www.netxms.org/forum/installation/install-report-server/
+.. http://www.netxms.org/forum/installation/reporting-server-4315/
+
+Report definitions
+------------------
+
+On startup, reporting server scan workspace/definitions directory for \*.jar files.
+Each file is unpacked into it's own folder based on jar name (e.g. "report1.jar" 
+will be unpacked into "report1"). Each archive should contain at least one file 
+– "main.jrxml", which is main report definition. It can also contain subreports, 
+images – or anything else, supported by Jasper Reports. Any additional resources 
+should be referenced using paths relative to root folder of unpacked report, which 
+is set as addtional paramter "SUBREPORT_DIR" (e.g. "$P{SUBREPORT_DIR}/logo.png").
+
+Archive can also contain java code, which will be used as data provider (instead 
+of querying SQL database). Reporting server will try to load class 
+"report.DataSource", which should implement interface 
+"com.radensolutions.reporting.custom.NXCLDataSource" (attached sample: Event 
+Processing Policy). Query string language in jrxml should be set to "nxcl" 
+(default - SQL).
+
+Simplest way to create jar files are using Maven, empty project is provided in 
+samples archive. Running "mvn package" will produce complete jar file in "target" 
+directory.

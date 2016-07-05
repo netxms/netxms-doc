@@ -905,13 +905,13 @@ These parameters can be changed in
     - 1
     - Yes
   * - PollerThreadPoolBaseSize
-    - This parameter represents base thread pool size. From this pool will be taken threads for all types of polls: DCI collection,
-      Status poll, Configuration poll, etc. This is minimal number of threads that will always run.
+    - This parameter represents base thread pool size. From this pool will be taken threads for all types of polls: Status poll, 
+      Configuration poll, etc. except DCI collection(:guilabel:`NumberOfDataCollectors`). This is minimal number of threads that will always run.
     - 10
     - Yes
   * - PollerThreadPoolMaxSize
     - This parameter represents maximum thread pool size till which pool can be increased. From this pool will be taken threads for
-      all types of polls: DCI collection, Status poll, Configuration poll, etc. In case of big load on a server number of threads can be
+      all types of polls: Status poll, Configuration poll, etc. except DCI collection(:guilabel:`NumberOfDataCollectors`). In case of big load on a server number of threads can be
       increased till this size. When load come back to normal, number of threads will be automatically decreased to base size.
     - 250
     - Yes

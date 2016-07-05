@@ -817,7 +817,7 @@ If object tool called from alarm's pop-up menu the following additional macros a
    * - ``%S``
      - Event's severity code as text.
    * - ``%y``
-     - Elarm state as number. Possible values are:
+     - Alarm state as number. Possible values are:
          - 0 - :guilabel:`Outstanding`
          - 1 - :guilabel:`Acknowledged`
          - 2 - :guilabel:`Resolved`

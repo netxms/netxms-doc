@@ -736,8 +736,42 @@ the content of the file from agent.
 Macro Substitution
 ------------------
 
-Action, file download, local command, and URL tool types allows macro substitution. Any string enclosed into pair of percent signs considered macro name and is expanded.
+
+Action, file download, local command, and URL tool types allows macro substitution. Any string starting with percent sign considered macro name and is expanded.
 The following macros recognized:
+
+
+.. versionadded:: 2.0.-RC1
+
+.. list-table::
+   :header-rows: 1
+   :class: longtable
+
+   * - Macro
+     - Description
+   * - ``%n``
+     - Object name.
+   * - ``%a``
+     - Object IP address.
+   * - ``%g``
+     - Globally unique identifier (GUID) of object.
+   * - ``%i``
+     - Unique ID of object in hexadecimal form. Always prefixed
+       with 0x and contains exactly 8 digits (for example 0x000029AC).
+   * - ``%I``
+     - Unique ID of object in decimal form.
+   * - ``%v``
+     - NetXMS server's version.
+   * - ``%U``
+     - Name of the current user
+   * - ``%(name)``
+     - Value of input field. 
+   * - ``%{name}``
+     - Value of custom attribute.
+   * - ``%%``
+     - Insert ``%`` character.
+     
+.. deprecated:: 2.0.-RC1
 
 .. list-table::
    :widths: 30 70
@@ -756,6 +790,44 @@ The following macros recognized:
 
 If object tool called from alarm's pop-up menu the following additional macros are available:
 
+.. versionadded:: 2.0.-RC1
+
+.. list-table::
+   :header-rows: 1
+   :class: longtable
+
+   * - Macro
+     - Description
+   * - ``%A``
+     - Alarm's text (can be used only in actions to put text of alarm from the
+       same event processing policy rule).
+   * - ``%c``
+     - Event's code.
+   * - ``%m``
+     - Event's message text (meaningless in event template).
+   * - ``%N``
+     - Event's name.
+   * - ``%s``
+     - Event's severity code as number. Possible values are:
+         - 0 - :guilabel:`Normal`
+         - 1 - :guilabel:`Warning`
+         - 2 - :guilabel:`Minor`
+         - 3 - :guilabel:`Major`
+         - 4 - :guilabel:`Critical`
+   * - ``%S``
+     - Event's severity code as text.
+   * - ``%y``
+     - Elarm state as number. Possible values are:
+         - 0 - :guilabel:`Outstanding`
+         - 1 - :guilabel:`Acknowledged`
+         - 2 - :guilabel:`Resolved`
+         - 3 - :guilabel:`Terminated`
+   * - ``%Y``
+     - Alatm's id.
+     
+
+.. deprecated:: 2.0.-RC1
+
 .. list-table::
    :widths: 30 70
    :header-rows: 1
@@ -772,9 +844,13 @@ If object tool called from alarm's pop-up menu the following additional macros a
      - Alarm severity as text.
    * - ALARM_STATE
      - Alarm state code (0 for outstanding, 1 for acknowledged, 2 for resolved).
+     
+:guilabel:`Internal object tool` is special case of object tools. 
+Macro expansions not performed for :guilabel:`Internal object tools`. 
           
-For any unknown macro name system will try to read custom attribute with given name (attribute search is case sensitive). If attribute with given name not found,
-empty string will be inserted.
+For any unknown macro name system will try to read custom attribute 
+with given name (attribute search is case sensitive). If attribute 
+with given name not found, empty string will be inserted.
 
 Properties
 ----------

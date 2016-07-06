@@ -247,6 +247,22 @@ Object's status can be one of the following:
 .. |DISABLED| image:: _images/icons/status/disabled.png
 .. |TESTING| image:: _images/icons/status/testing.png
 
+Unmanaged status
+----------------
+
+Objects can be unmanaged. In this status object is not polled, DCIs are not collected, 
+no data is updated about object. This status can be used to store data about object 
+that temporrary or at permonently unavailabe or not managed. 
+
+.. _maintenance_mode:
+
+Maintanence mode
+------------------
+
+This is special status, because it is not included in usual status lit. This 
+status prevents event processing for special node. While this status node is 
+still polled and DCI data is still collected, but no event is generated. 
+
 Event Processing
 ================
 

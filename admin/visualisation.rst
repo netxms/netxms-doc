@@ -5,6 +5,7 @@
 Data and Network visualisation
 ##############################
 
+.. _network_map:
 
 Network maps
 ============
@@ -262,52 +263,142 @@ dashboard, and one or more element type specific pages to control element's
 appearance and displayed information. The following element types are
 available:
 
-.. list-table::
-   :header-rows: 1
-   :widths: 25 75
+Label
+~~~~~
 
-   * - Type
-     - Description
-   * - Alarm Viewer
-     - List of alarms for given object subtree.
-   * - Availability Chart
-     - Pie chart showing availability percentage for given business service.
-   * - Bar Chart
-     - Bar chart.
-   * - Bar Chart for Table DCI
-     - Bar chart built from data collected via single table DCI.
-   * - Custom Widget
-     - Custom widget provided by third party console plugin.
-   * - Dashboard
-     - Another dashboard object (or multiple objects) rendered as element of
-       this dashboard.
-   * - Dial Chart
-     - Dial chart.
-   * - Geo Map
-     - Geographic map centered at given location.
-   * - Label
-     - Text label with configurable text and colors.
-   * - Line Chart
-     - Line chart.
-   * - Network Map
-     - Network map object rendered as dashboard element.
-   * - Pie Chart
-     - Pie chart.
-   * - Pie Chart for Table DCI
-     - Pie chart built from data collected via single table DCI.
-   * - Separator
-     - Separator, can be shown as line, box, or simply empty space.
-   * - Status Chart
-     - Bar chart which shows current status distribution for nodes under given
-       root.
-   * - Status Indicator
-     - Shows current status of selected object.
-   * - Tube Chart
-     - Tube chart.
-   * - Tube Chart for Table DCI
-     - Tube chart built from data collected via single table DCI.
-   * - Web Page
-     - Web page at given URL rendered within dashboard.
+Text label with configurable text and colours.
+
+.. figure:: _images/dashboard_labelW.png
+
+Line Chart
+~~~~~~~~~~
+
+Line chart.
+
+.. figure:: _images/dashboard_line_charW.png
+
+Bar Chart
+~~~~~~~~~
+
+Bar chart.
+
+.. figure:: _images/dashboard_bar_chart.png
+
+Pie Chart
+~~~~~~~~~
+
+Pie chart.
+
+.. figure:: _images/dashboard_pie_chartW.png
+
+Tube chart
+~~~~~~~~~~
+
+Tube chart.
+
+.. figure:: _images/dashboard_tube_chartW.png
+
+Status Chart
+~~~~~~~~~~~~
+
+Bar chart which shows current status distribution for nodes under given root.
+
+.. figure:: _images/dashboard_status_chartW.png
+
+Status Indicator
+~~~~~~~~~~~~~~~~
+
+Shows current status of selected object.
+
+.. figure:: _images/dashboard_status_indicatorW.png
+
+Dashboard
+~~~~~~~~~
+
+Another dashboard object (or multiple objects) rendered 
+as element of this dashboard.
+
+Network Map
+~~~~~~~~~~~
+
+:ref:`Network map<network_map>` object rendered as dashboard element.
+
+Custom Widget
+~~~~~~~~~~~~~
+
+Custom widget provided by third party console plugin. This options allows to 
+add widget from third party loaded plugin. 
+
+Get Map
+~~~~~~~
+
+Geographic map centered at given location.
+
+.. figure:: _images/dashbard_geo_mapW.png
+
+Alarm Viewer
+~~~~~~~~~~~~
+
+:ref:`List of alarms<alarms>` for given object subtree.
+
+.. figure:: _images/dashbard_alarm_viewerW.png
+
+Availability Chart
+~~~~~~~~~~~~~~~~~~
+
+Pie chart showing availability percentage for given business service
+
+.. figure:: _images/dashbard_availability_chartW.png
+
+Gauge
+~~~~~
+
+Gauge have 3 types of widgets
+
+    - Dail is radeal gauge with configurable maximum, minimum values. Scale can have fixed colour or can be separated to  3 colour configurable zones.
+    - Dar is linear gauge with configurable maximum, minimum values. Scale can have fixed colour or can be separated to  3 colour configurable zones. (Not yet implemented)
+    - Text is text gauge, that can be coloured using fixed colour, changed depending on 3 configurable colour zones or coloured using threshold colour(severity).
+
+.. figure:: dashboard_gauge_3typesW.png
+
+Web Page
+~~~~~~~~
+
+Web page at given URL rendered within dashboard
+
+Bar Chart for Table DCI
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Bar chart built from data collected via single table DCI.
+
+Pie Chart for Table DCI
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Pie chart built from data collected via single table DCI
+
+Tube Chart for Table DCI
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Tube chart built from data collected via single table DCI
+
+Separator
+~~~~~~~~~
+
+Separator, can be shown as line, box, or simply empty space
+
+Table Value
+~~~~~~~~~~~
+
+
+
+Status Map
+~~~~~~~~~~
+
+
+
+DCI Summary Table
+~~~~~~~~~~~~~~~~~
+
 
 
 Element Property Pages
@@ -347,8 +438,8 @@ like following:
    * - Display name
      - Name for this data source to be used in chart's legend. If left empty,
        DCI description will be used.
-   * - Color
-     - Allows you to define specific color for this data source or let system
+   * - Colour
+     - Allows you to define specific colour for this data source or let system
        to pick one automatically.
    * - Area chart
      - This option is valid only for line charts and toggles data source
@@ -504,14 +595,14 @@ is on, you will see :guilabel:`Autoupdate` message in the status bar of graph
 window.
 
 
-Change colors
--------------
+Change colours
+--------------
 
-You can change colors used to paint lines and graph elements in the graph
+You can change colours used to paint lines and graph elements in the graph
 properties dialog. To access graph properties, right-click on it, and select
 :guilabel:`Properties` from the pop-up menu. Alternatively, you can use main
 application menu: :menuselection:`Graph --> Properties`. In the properties
-dialog, click on colored box for appropriate element to choose different color.
+dialog, click on coloured box for appropriate element to choose different colour.
 
 
 Save current settings as predefined graph

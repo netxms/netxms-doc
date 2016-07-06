@@ -111,6 +111,8 @@ node named "IPSO" two e-mail actions must be executed.
 
    Example 1
 
+.. _alarms:
+   
 Alarms
 ======
 

@@ -359,7 +359,7 @@ Gauge have 3 types of widgets
     - Dar is linear gauge with configurable maximum, minimum values. Scale can have fixed colour or can be separated to  3 colour configurable zones. (Not yet implemented)
     - Text is text gauge, that can be coloured using fixed colour, changed depending on 3 configurable colour zones or coloured using threshold colour(severity).
 
-.. figure:: dashboard_gauge_3typesW.png
+.. figure:: _images/dashboard_gauge_3typesW.png
 
 Web Page
 ~~~~~~~~

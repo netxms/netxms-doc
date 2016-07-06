@@ -446,7 +446,7 @@ Object Tools
 
 There can be created tools that will be executed on objects. Tools can be managed
 in "Object Tools" view. Tools are shown under "Tools" item of node menu.
-There are some predefined object tools:
+There are some :ref:`predefined object tools<object_tools_predefined>`:
 
 .. figure:: _images/object_tools.png
    :scale: 65%
@@ -456,15 +456,23 @@ enabled when required. When object tool is disabled it is not shown under "Tools
 item of node menu. There is also common option to set image for each object tool in 
 the tool properties. 
 
+Tool can have :ref:`input fields<object_tools_input_fields>`, 
+:ref:`filder depending on execution object<object_tools_filter>`,
+:ref:`macro substitution<object_tools_macro>` and 
+:ref:`personal access control configuration<object_tools_access_control>`. 
+
+
+Object tool types
+-----------------
 
 Internal
---------
+~~~~~~~~
 
 Commands that are defined in :term:`Management Console`. The only command available for now is 
 :guilabel:`Wakeup node`. 
 
 Agent Command
--------------
+~~~~~~~~~~~~~
 
 This tool will execute command on an agent node and will show it's output if 
 :guilabel:`Command generates output` option will be enabled. 
@@ -503,7 +511,7 @@ This tool will execute command on an agent node and will show it's output if
      - If chosen, tool is not shown in node menu. 
 
 SNMP Table
-----------
+~~~~~~~~~~
 
 :guilabel:`SNMP Table` is used to get SNMP table from node on which it is executed 
 and then show results in the table form. 
@@ -542,7 +550,7 @@ and then show results in the table form.
      - If chosen, tool is not shown in node menu. 
 
 Agent Table
------------
+~~~~~~~~~~~
 
 :guilabel:`Agent Table` is used to get agent list from node on which it is executed 
 and then show results in the table form. 
@@ -581,7 +589,7 @@ and then show results in the table form.
      - If chosen, tool is not shown in node menu. 
 
 URL
----
+~~~
 
 :guilabel:`URL` tool opens URL in web browser. 
 
@@ -616,7 +624,7 @@ URL
      
 
 Local Command
--------------
+~~~~~~~~~~~~~
 
 :guilabel:`Local Command` tool will execute command on the local node and will show it's output if 
 :guilabel:`Command generates output` option will be enabled. 
@@ -656,7 +664,7 @@ to execute command on web page receiver's machine.
      - If chosen, tool is not shown in node menu. 
 
 Server Command
---------------
+~~~~~~~~~~~~~~
 
 :guilabel:`Server command` tool can be used to execute command on a server. 
 
@@ -693,7 +701,7 @@ Server Command
      
    
 Download File
--------------
+~~~~~~~~~~~~~
 
 :guilabel:`Download file` tool can be used to monitor agent logs. This tool will retrieve 
 the content of the file from agent. 
@@ -732,10 +740,10 @@ the content of the file from agent.
    * - Disable Object Tool
      - If chosen, tool is not shown in node menu. 
      
+.. _object_tools_macro:
      
 Macro Substitution
 ------------------
-
 
 Action, file download, local command, and URL tool types allows macro substitution. Any string starting with percent sign considered macro name and is expanded.
 The following macros recognized:
@@ -854,6 +862,9 @@ with given name not found, empty string will be inserted.
 
 Properties
 ----------
+
+.. _object_tools_filter:
+
 Filer
 ~~~~~
 
@@ -867,6 +878,8 @@ There are 5 types of filtering. Show object tool:
   5. if provided :term:`template <Template>` name matches provided comma separated regular expression list
 
 .. figure:: _images/obj_tool_filter.png
+
+.. _object_tools_access_control:
 
 Access Control
 ~~~~~~~~~~~~~~
@@ -891,8 +904,27 @@ response message.
 
 .. figure:: _images/obj_tool_columns2.png
 
+.. _object_tools_input_fields:
+
+Input fields
+~~~~~~~~~~~~
+
+There is option to add input fields for object tool commands. This fields are defined on the
+:guilabel:`Input fields` view and added to command in ``%(name)`` format. More about formats 
+can be found in :ref:`object_tools_macro` chapter.
+
+Input field can be one of this types:
+
+    - Text
+    - Password
+    - Number
+
+.. figure:: _images/object_tools_input_fields.png
+
+.. _object_tools_predefined: 
+
 Predefined Object Tools
-=======================
+-----------------------
 
 NetXMS is deviled with some predefined Object Tools. There is full list of them:
 

@@ -364,41 +364,55 @@ Gauge have 3 types of widgets
 Web Page
 ~~~~~~~~
 
-Web page at given URL rendered within dashboard
+Web page at given URL rendered within dashboard.
 
 Bar Chart for Table DCI
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Bar chart built from data collected via single table DCI.
 
+.. figure:: _images/dashboard_table_bar_chartW.png
+
 Pie Chart for Table DCI
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Pie chart built from data collected via single table DCI
+Pie chart built from data collected via single table DCI.
+
+.. figure:: _images/dashboard_table_pie_chartW.png
 
 Tube Chart for Table DCI
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Tube chart built from data collected via single table DCI
+Tube chart built from data collected via single table DCI.
+
+.. figure:: _images/dashboard_table_tube_chartW.png
 
 Separator
 ~~~~~~~~~
 
-Separator, can be shown as line, box, or simply empty space
+Separator, can be shown as line, box, or simply empty space.
+
+.. figure:: _images/dashboard_separatorW.png
 
 Table Value
 ~~~~~~~~~~~
 
-
+Tis widget displays table with last values of Table DCI.
 
 Status Map
 ~~~~~~~~~~
 
+Status map shows statuses of all objects like colourd rectangle, inside selected parent. 
 
+.. figure:: _images/dashboard_status_mapW.png
 
 DCI Summary Table
 ~~~~~~~~~~~~~~~~~
 
+:ref:`DCI Summary Table<dci-summary-table-label>` widget provides summary DCI infromation 
+about objects under container.
+
+.. figure:: _images/dashboard_summary_tableW.png
 
 
 Element Property Pages

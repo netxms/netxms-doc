@@ -306,6 +306,9 @@ command can be given parameters in format: ``commandName param1 param2 param3...
 Check that user under witch :file:`nxagentd` process run has permission to run this 
 command. 
 
+As the :guilabel:`Remote Host` can be used hostname or object name(int format: ``@objectName``).
+Second option allows action execution on node behind proxy. 
+
 Send e-mail
 -----------
 

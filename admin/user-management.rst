@@ -385,7 +385,13 @@ Server parameters controlling LDAP synchronization:
      - 
    * - LdapUserClass ``*``
      - There is specified which object class represents user objects. If found entry will not be of a user ot group class, it will be just ignored.
-     - displayName
+     - 
+   * - LdapGroupUniqueId
+     - Unique identifier for LDAP group object. By default LDAP groups are identified by DN. If in your configuration DN can be changed any time it is useful to choose other attribute as unique group identifier. 
+     -
+   * - LdapUserUniqueId
+     - Unique identifier for LDAP user object. By default LDAP users are identified by DN. If in your configuration DN can be changed any time it is useful to choose other attribute as unique user identifier. 
+     -
    * - LdapSyncInterval ``*``
      - This parameter is for setting synchronization interval in minutes between NetXMS server and LDAP server. If synchronization parameter is set to 0 - synchronization will not be done. 
      - 0
@@ -485,6 +491,10 @@ Active Directory
      - group
    * - LdapUserClass
      - user
+   * - LdapGroupUniqueId
+     - objectGUID
+   * - LdapUserUniqueId
+     - objectGUID
    * - LdapSyncInterval
      - 1440
 
@@ -519,6 +529,10 @@ Open LDAP
      - groupOfNames
    * - LdapUserClass
      - inetOrgPerson
+   * - LdapGroupUniqueId
+     - 
+   * - LdapUserUniqueId
+     - 
    * - LdapSyncInterval
      - 1440
      

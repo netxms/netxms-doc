@@ -33,7 +33,7 @@ You can create and modify :guilabel:`Event Processing Policy` using
 
 To create event policy right click on entry before or after witch new Event 
 Processing Policy should appear and select :guilabel:`Insert before` or 
-:guilabel:`Insert after`. 
+:guilabel:`Insert after`. Drag and drop can be used for rule reorganization.
 
 .. figure:: _images/epp_entity_menue.png
 

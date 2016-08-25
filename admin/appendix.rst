@@ -276,6 +276,9 @@ Agent configuration file (nxagentd.conf)
    * - ListenPort
      - TCP port to be used for incoming requests.
      - 4700
+   * - LogFailedSQLQueries
+     - Enable (yes) or disable (no) failed SQL queries logging
+     - No
    * - LogFile
      - Agent's log file. To write log to syslog (or Event Log on Windows), use {syslog} as file name.
      - {syslog}
@@ -413,6 +416,9 @@ Server configuration file (netxmsd.conf)
   * - LogFailedSQLQueries
     - Control logging of failed SQL queries. Possible values: yes or no.
     - yes
+  * - LogFailedSQLQueries
+    - Enable (yes) or disable (no) failed SQL queries logging
+    - No
   * - LogFile
     - Server's log file. To write log to syslog (or Event Log on Windows), use {syslog} as file name.
     - {syslog}

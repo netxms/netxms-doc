@@ -29,6 +29,7 @@ NetXMS Administrator Guide
    hardware-monitoring
    ups-monitoring
    cluster-monitoring
+   hypervisor-monitoring
    mobile-device-monitoring
    topology
    sla

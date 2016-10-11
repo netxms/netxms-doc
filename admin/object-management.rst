@@ -740,6 +740,47 @@ the content of the file from agent.
    * - Disable Object Tool
      - If chosen, tool is not shown in node menu. 
      
+   
+Server Script
+~~~~~~~~~~~~~
+
+:guilabel:`Server Script` tool can be used to execute NXSL script form :guilabel:`Script Librarry`. 
+This fool provide full renge of capabilities that are available thought NXSL scripting.
+
+.. figure:: _images/obj_tool_script.png
+   :scale: 65%
+
+   
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+ 
+   * - Field name
+     - Description
+   * - Name
+     - Name that will be shown in node menu. Submenu can be created with "->" notation.
+   * - Description
+     - Description is shown in "Object Tools" view. Should be used to describe tool purpose.
+   * - Script
+     - Name of the script from the :guilabel:`Script Library`
+   * - Command generates output
+     - If chosen, new window with script execution result will be opened. 
+   * - This tool requires confirmation before execution 
+     - If chosen, before execution of tool will be shown Yes/No pop-up with text from "Confirmation message" field.
+   * - Confirmation message
+     - Can be set the message that will be shown in confirmation pop-up. 
+   * - Show this tool in node commands
+     - If this option is selected, then this tool will be shown for applicable nodes 
+       on :guilabel:`Object Details` view as node command. 
+   * - Command name
+     - This will be shown as a name of the command.
+   * - Command short name
+     - Is used when usual name is too long for display.
+   * - Disable Object Tool
+     - If chosen, tool is not shown in node menu. 
+     
+     
+     
 .. _object_tools_macro:
      
 Macro Substitution

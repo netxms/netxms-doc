@@ -257,7 +257,7 @@ Agent configuration file (nxagentd.conf)
        ExternalParameter and ExternalParameterShellExec behaves identically.
      -
    * - ExternalParametersProvider
-     - Adds list of metrics that are cashed by agent and returned to server per request. Metrics should be returned in *metric=value* format each pair in new line.
+     - Adds list of metrics that are cached by the agent and returned to server per request. Metrics should be returned in *metric=value* format each pair in new line.
      - No defaults
    * - ExternalSubagent
      - ID of external subagent. Should be same as ``ExternalMasterAgent`` in master agent configuration file.

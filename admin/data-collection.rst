@@ -35,7 +35,7 @@ It is also possibility to push data to server. If DCI source is set to
 data source.
 
 .. versionadded:: 2.0-M5
-    Agent cashing mode 
+    Agent caching mode 
     
 By default DCI data is not collected while connection between server and agent is 
 broken as poll request could not get till agent. There is special configuration 
@@ -316,10 +316,10 @@ Table DCI collects and stores data in table format(multi row, column).
 
 .. _offline-data-collection:
 
-Agent cashing mode
+Agent caching mode
 ==================
 
-Agent cashing mode allows metric data to be obtained while connection between 
+Agent caching mode allows metric data to be obtained while connection between 
 server and agent have been broken. This option is available for metrics, table 
 metrics and proxy SNMP metrics. Not implemented for proxy SNMP table metrics and 
 DCIs with custom schedule. While break data is stored on agent, and on connect it 
@@ -334,7 +334,7 @@ variable to time period in seconds within which received offline data still rele
 validation. By default it is set to 1 day. 
 
 .. versionadded:: 2.0-M5
-    Agent cashing mode. 
+    Agent caching mode. 
 
 Configuration
 -------------

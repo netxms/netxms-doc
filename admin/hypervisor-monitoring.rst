@@ -1,4 +1,4 @@
-.. _ups-monitoring:
+.. _hypervisor-monitoring:
 
 =====================
 Hypervisor monitoring

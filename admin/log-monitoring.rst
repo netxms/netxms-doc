@@ -93,6 +93,19 @@ In the ``<parser>`` tag you can specify the following options:
 
 In the ``<file>`` tag you should specify log file to apply this parser to. To specify Windows Event Log, prepend it's name with asterisk (``*``), for example ``*System``.
 
+It is possible to specify the encoding of the log file by adding the ``encoding`` attribute. By default, the parser will attempt to detect the encoding by scaning the file`s BOM. 
+
+File encodings that can be defined in the ``encoding`` attribute:
+* ``ACP``
+* ``UTF-8``
+* ``UCS-2``
+* ``UCS-2LE``
+* ``UCS-2BE``
+* ``UCS-4``
+* ``UCS-4LE``
+* ``UCS-4BE``
+
+When using ``UCS-2`` or ``UCS-4`` values, the endianness of the system will be detected automatically.
 
 .. _log-monitoring-macros:
 

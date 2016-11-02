@@ -96,6 +96,7 @@ In the ``<file>`` tag you should specify log file to apply this parser to. To sp
 It is possible to specify the encoding of the log file by adding the ``encoding`` attribute. By default, the parser will attempt to detect the encoding by scaning the file`s BOM. 
 
 File encodings that can be defined in the ``encoding`` attribute:
+
 * ``ACP``
 * ``UTF-8``
 * ``UCS-2``

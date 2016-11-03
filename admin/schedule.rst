@@ -1,3 +1,6 @@
+.. _schedule:
+
+
 ===============
 Scheduled tasks
 ===============

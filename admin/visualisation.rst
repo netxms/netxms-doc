@@ -751,6 +751,11 @@ More information on filters can be found in :ref:`object_tools_filter`.
 
 There are two options to add sources to the template graph. Sources can be added manually by configuring the Data Source parameters yourself or by importing data source information from DCI`s that have already been applied to other nodes.
 
+.. figure:: _images/temp_graph_conf_modify.png
+	:scale: 50
+
+When adding or editing a source, it is possible to use Java regex in the DCI Name and DCI Description fields. This can be handy when used with the Multiple match option which will use all DCI`s that match the particular regex. The order in which the DCI list is searched is first by DCI Name and then by DCI Description.
+
 History
 =======
 

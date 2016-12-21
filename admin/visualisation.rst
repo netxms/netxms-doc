@@ -647,6 +647,110 @@ have full access to it, even if he is not in access list.
 If you need to delete predefined graph, you can do it by right-clicking on it
 in predefined graph tree, and selecting :guilabel:`Delete` from context menu.
 
+
+Save current settings as template graph
+---------------------------------------
+
+.. figure:: _images/save_as_temp_graph.png
+	:scale: 50
+
+Current graph settings can be saved as a template graph for an easy template graph creation. The difference between predefined graphs and template graphs are that template graphs are not configured to view specific DCI`s on a node, instead they are configured to view DCI names that can be found on many nodes (e.g. ``FileSystem.FreePerc(/)``). This allows for the creation of certain graph templates to monitor, for example, disk usage that can be reused on any node to which the appropreate DCI`s are applied on via :ref:`dci-configuration`.
+
+See detailed information on template graphs in the section :ref:`template-graph-conf`.
+
+In the Graph name field of the pop-up save dialog, enter the desired name for the template graph by which you can later identify your it in the :ref:`template-graph-conf` which can be found in :menuselection:`Configuration-->Template Graph Configuration`.
+
+.. figure:: _images/temp_graph_menu.png
+	:scale: 50
+
+Template graphs can be accessed in the :guilabel:`Object Browser` as seen on the screenshot above. When a template graph is created, it will appear in the sub-menus of the nodes found in :guilabel:`Object Browser`, the rest of the settings can be accessed by editing a template graph in the :ref:`template-graph-conf`.
+
+.. _template-graph-conf:
+
+Template Graph Configuration
+----------------------------
+
+Template graphs are used to ease the monitoring of a pre-set list of DCI`s on multiple nodes by adding a list of DCI names to the template source. This allows for the possibility to create templates to monitor specific data on any node to which the appropriate DCI`s are applied on.
+
+.. figure:: _images/temp_graph_conf.png
+	:scale: 50
+
+The :guilabel:`Template Graph Configuration` is used to create and edit template graphs. Properties for already created template graphs can be brought up by double clicking the template graph you wish to edit and new ones can be added by pressing the green cross on the top right or by right clicking and selecting :guilabel:`Create new template graph`.
+
+.. figure:: _images/temp_graph_conf_acl.png
+	:scale: 50
+
+	Name and access rights of a graph
+
+The above property page provides the possibility to configure the name of the template graph and the access rights. The user who has created the template graph will have full access to it even though the username will not show up in the access right list.
+
+.. figure:: _images/temp_graph_conf_gen.png
+	:scale: 50
+
+	General graph properties.
+
+Title:
+
+	- The title that the graph will have when opened.
+	- The title can contain special characters described in :ref:`object_tools_macro`.
+
+Options:
+
+.. list-table::
+   :widths: 25 50
+   :header-rows: 1
+
+   * - Option
+     - Description
+   * - Show grid lines
+     - Enable or disable grid lines for the graph.
+   * - Stacked
+     - Stacks the graphs of each value on top of one another to be able to see the total value easier (e.g. useful when monitoring cpu usage).
+   * - Show legend
+     - Enable or disable the legend of the graph.
+   * - Show extended legend
+     - Enable or disable the extended legent of the graph (Max, Avg, Min, Curr).
+   * - Refresh automatically
+     - Enable or disable auto-refresh.
+   * - Logaritmic scale
+     - Use the logaritmic scale for the graph.
+   * - Translucent
+     - Enable or disable the translucency of the graph.
+   * - Show host names
+     - Show host name of the node from which the value is taken.
+   * - Area chart
+     - Highlights the area underneath the graph.
+   * - Line width
+     - Adjust the width of the lines.
+   * - Legend position
+     - Set the position of the legend.
+   * - Refresh interval
+     - Set the refresh interval.
+
+Time Period:
+
+Provides the possibility to configure the time period of the graph. It is possible to set a dynamic time frame (Back from now) and a static time frame (Fixed time frame).
+
+Y Axis Range:
+
+Adjust the range of the Y axis on the graph.
+
+.. figure:: _images/temp_graph_conf_filter.png
+	:scale: 50
+
+	Template graph filter properties.
+
+It may be necessary to set certain filters for a template graph. This can be useful if the graph contains DCI names that are only available on NetXMS agent or are SNMP dependant.
+
+More information on filters can be found in :ref:`object_tools_filter`.
+
+.. figure:: _images/temp_graph_conf_source.png
+	:scale: 50
+
+	Template graph sources
+
+There are two options to add sources to the template graph. Sources can be added manually by configuring the Data Source parameters yourself or by importing data source information from DCI`s that have already been applied to other nodes.
+
 History
 =======
 

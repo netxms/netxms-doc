@@ -906,8 +906,8 @@ Properties
 
 .. _object_tools_filter:
 
-Filer
-~~~~~
+Filter
+~~~~~~
 
 Filters are used to chose on witch nodes to show object tool. 
 There are 5 types of filtering. Show object tool:

@@ -367,6 +367,51 @@ There is list of available manually loaded NetXMS subagents:
   * WinPref
   * WMI
   * MongoDB
+  * Java
+  
+.. _java-subagent:
+  
+Java subagent
+-------------
+
+This is a special type of subagent, that allows to load Java plugins(subagents written using Java language). 
+Java subagent does not provide any functionality by itself. 
+
+There are several configuration parameters that are supported by Java subagent. None of them is mandatory. 
+
+.. list-table::
+   :header-rows: 1
+   :widths: 50 200
+   
+   * - Parameter
+     - Description
+   * - Jvm
+     - Path to JVM. System default is used if not set.
+   * - Classpath
+     - This parameter is added to java CLASSPATH.
+   * - Plugin
+     - This parameter defines plugin that should be loaded. Can be used multiple times. 
+
+Configuration example:
+
+.. code-block:: cfg
+
+   MasterServers = netxms.demo
+   SubAgent=java.nsm
+   
+   [JAVA]
+   Jvm = /path/to/jvm
+   Classpath = /path/to/user/classes
+   Plugin = bind9.jar
+
+
+Java plugins
+~~~~~~~~~~~~
+
+List of avalivable java plugins:
+
+  * JMX
+  * Bind9
   
 Load of subagent as separate process
 ------------------------------------

@@ -29,6 +29,7 @@ NetXMS Administrator Guide
    hardware-monitoring
    ups-monitoring
    cluster-monitoring
+   jvm-monitoring
    hypervisor-monitoring
    mobile-device-monitoring
    topology

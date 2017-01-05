@@ -496,6 +496,14 @@ These parameters can be changed in
     - Maximum alarm count that will be displayed on :guilabel:`Alarm Browser` page. Alarms that exceed this count will not be shown.
     - 4096
     - No
+  * - AlarmSummaryEmailRecipients
+    - A semicolon separated list of e-mail addresses to which the alarm summary will be sent.
+    - 
+    - No
+  * - AlarmSummarySchedule
+    - Schedule for sending alarm summary e-mails in cron format.
+    - 0 0 * * *
+    - No
   * - AllowDirectSMS
     - Allow (1) or disallow (0) sending of SMS via NetXMS server using nxsms utility.
     - 0
@@ -665,6 +673,10 @@ These parameters can be changed in
     - Enable (1) or disable (0) audit log.
     - 1
     - Yes
+  * - EnableAlarmSummaryEmails
+    - Enable (1) or disable (0) alarm summary emails.
+    - 0
+    - No
   * - EnableCheckPointSNMP
     -
     - 0

@@ -223,8 +223,17 @@ alarm with this severity will come silently.
 .. figure:: _images/Alarm_Sound_Preferences.png
    :scale: 65%
 
+Alarm Browser
+-------------
+
+When an alarm is generated it will appear in the Alarm Browser where information about currently active
+alarms can be viewed.
+
+.. figure:: _images/alarm_browser.png
+   :scale: 65%
+
 Alarm Comments
---------------
+~~~~~~~~~~~~~~
 
 For each alarm can be created comments in "Alarm Details"
 
@@ -237,6 +246,30 @@ or "Alarm Comments" views.
    :scale: 65%
 
 Comment can be created, edited or deleted. All comments will be deleted after alarm termination. 
+
+Alarm Summary Emails
+~~~~~~~~~~~~~~~~~~~~
+
+It is possible to schedule emails which contain a summary of all currently active alarms, similar 
+to what can be seen in the Alarm Browser.
+
+To enable Alarm Summary Emails it is required to configure the following server parameters:
+
+.. list-table::
+   :widths: 25
+   :header-rows: 1
+
+   * - Name
+   * - SMTPFromAddr
+   * - SMTPFromName
+   * - SMTPPort
+   * - SMTPRetryCount
+   * - SMTPServer
+   * - EnableAlarmSummaryEmails
+   * - AlarmSummaryEmailSchedule
+   * - AlarmSummaryEmailRecipients
+
+Further information on server configuration parameters can be found in :ref:`server_configuration_parameters`.
 
 .. _generating_alarms:
 

@@ -26,7 +26,7 @@ project_author = "Raden Solutions, SIA"
 copyright = u'2015, ' + project_author
 
 version = '2.1'
-release = '2.1-M1'
+release = '2.1-M2'
 
 exclude_patterns = ['build']
 

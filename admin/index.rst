@@ -19,6 +19,7 @@ NetXMS Administrator Guide
    data-collection
    event-processing
    visualisation
+   grafana-integration
    operating-system-monitoring
    file-meta-info-monitoring
    log-monitoring

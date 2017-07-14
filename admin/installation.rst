@@ -33,7 +33,7 @@ OpenSSL is required for encryption support (UNIX only).
 Server
 ------
 
-Minimal requirements: Core 2 duo 1GHz, 1024MB RAM, 1GBMB disk space.
+Minimal requirements: Core 2 duo 1GHz, 1024MB RAM, 1GB disk space.
 
 Database
 --------

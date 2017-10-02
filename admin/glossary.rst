@@ -4,7 +4,7 @@ Glossary
 
 .. glossary::
   :sorted:
-
+  
   Action
     Configurable operation which can be executed by the system when
     :term:`Event` is passing thru :term:`Event Processing Policy`. Multiple
@@ -25,11 +25,20 @@ Glossary
     Infrastructure Service which is used internally by the IT Service Provider
     and is not usually visible to the Business.
 
+  CA
+    Certification authority is an entity that issues digital certificates. 
+    More details in :wikipedia:`Wikipedia <Certificate authority>`
+    
   Condition
     (Create condition in infrastructure services)
 
   Container
     :term:`Object` that can store other containers and :term:`nodes <Node>`.
+    
+  CSR
+    Certificate signing request is a message sent from an applicant to a 
+    certificate authority in order to apply for a digital identity certificate.
+    More details in :wikipedia:`Wikipedia <Certificate signing request>`
 
   DCI
     Abbreviation for :term:`Data Collection Item`
@@ -42,6 +51,10 @@ Glossary
 
   Data Collection Item
     Configuration entity of a single :term:`Metric`.
+    
+  DNS
+    Domain Name System. More details in
+    :wikipedia:`Wikipedia <Domain Name System>`
 
   Entire Network
     Automatically generated object hierarchy that contains all nodes and IP
@@ -282,6 +295,11 @@ Glossary
   Syslog
     Widely used standard for message logging. More details in
     :wikipedia:`Wikipedia <Syslog>`.
+    
+  TLS 
+    Transport Layer Security is a cryptographic protocols that provide 
+    communications security over a computer network. More details in
+    :wikipedia:`Wikipedia <Transport Layer Security>`.
 
   UPS
     An uninterruptible power supply, also uninterruptible power source, UPS or

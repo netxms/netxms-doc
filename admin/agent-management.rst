@@ -23,12 +23,39 @@ monitoring options. This is optional for installation, but it's installation giv
 Agent configuration files
 =========================
 
-Agent have 2 types of configuration files: master configuration file and additional 
-configuration file(Agent Policies files). Only master configuration file is mandatory file. 
-Minimal configuration for master configuration file is server address. To afterwards be able to
-apply all other changes from the server, address of it should be should be given as MasterServers.
+Agent have 3 types of configuration files: master configuration file, additional 
+configuration files sroted and Agent Policies files. Master configuration file is the only mandatory file. 
+Minimal configuration for master configuration file is server address. Address should be  
+set as MasterServers to be able to apply other changes already from the server.
 
 **After configuration file change agent should be restarted to apply new changes.** 
+
+Configuration files and policies should be written in XML or 'key = value' format. In XML 
+format general tag should be <config> and then can be added any agent or subagent 
+parameter as a tag.
+
+'key = value' format example:
+
+.. code-block:: cfg    
+   
+   MasterServers = 10.0.0.4
+   SubAgent = winperf.nsm
+   # Below is a configuration for winperf subagent, in separate section   
+   *WinPerf # Other way to define section satart: [WinPerf]
+   EnableDefaultCounters = yes
+   
+Same example in XML format
+
+.. code-block:: xml    
+   
+   <config>   
+      <MasterServers>10.0.0.4</MasterServers>
+      <SubAgent>winperf.nsm</Subagent>
+      <!-- Below is a configuration for winperf subagent, in separate section -->
+      <WinPerf>
+         <EnableDefaultCounters>yes</EnableDefaultCounters>
+      </WinPerf>
+   </config> 
 
 .. _master-configuration-file-label:
 
@@ -42,7 +69,7 @@ contain one or more parameters in *Parameter = Value* form, each parameter shoul
 be on its own line. Comments can be inserted after "#" sign. This file can also 
 contain configuration for subagents. In this case, subagents’ parameters should 
 be placed in separate sections. Beginning of the section is indicated by "*" sign, 
-followed by a section name or in section name in braces(example: "[sectionName]").
+followed by a section name or by section name in braces(example: "[sectionName]").
 
 If build configuration was done with --prefix='prefix' parameter, then configuration file will 
 be searched in the following order (UNIX):
@@ -83,9 +110,11 @@ Configuration file example:
 Additional configuration files
 ------------------------------
 Additional configuration files override or supplement configuration parameters form main file. 
-They are used to store applied :guilabel:`Policies` configuration, but can be also created 
-and updated manually. More information about Policies can be read there: :ref:`agent-policies-label`.
+There are two types of additional files one are used to store applied :guilabel:`Policies` configuration, 
+others can be created and updated manually. More information about Policies can be read there: :ref:`agent-policies-label`.
 
+Next will be described default folders for manually created files. Policies files will be stored in a 
+separate folder under :guilabel:`DataDirectory`.
 If configuration of build was done with --prefix='prefix' parameter, then config will 
 be searched in next order(UNIX):
 
@@ -134,6 +163,8 @@ get new one from server - agent fails to start.
 
 .. versionadded:: 1.2.15    
 
+**Doesn't wotk with tunnel agent connection**
+
 Configuration
 ~~~~~~~~~~~~~
 
@@ -154,22 +185,20 @@ Each config has a name, filter and config content.
 
 .. figure:: _images/agent_config_manager.png
 
-
 .. _agent-policies-label:
 
 Agent Policies
 --------------
 
 Agent policies can be configured on server in :guilabel:`Policies` part. There can be 
-used the same parameters as in main configuration file in XML or 'key = value' format. 
+used the same parameters and format as in any NetXMS agent configuration file. 
 
 To create policy in menu of container where should be created policy select 
-:guilabel:`Create agent policy(configuration file)` and give required object name and 
-press :guilabel:`OK`. Than in newly created object's properties add configuration 
-parameters in :guilabel:`Configuration File` tab. 
+:menuselection:`Create->Agent Configuration File...` and give required object name and 
+press :guilabel:`OK`. Than newly created policy can be modified by selecting 
+:menuselection:`Edit Policy...` from object menu. 
 
-In XML format general tag should be <config> and then can be added any agent or subagent 
-parameter as a tag. Example:
+Example:
 
 .. code-block:: xml
 
@@ -197,29 +226,35 @@ Example:
       .. figure:: _images/policy_example.png
 
 After policy is created it should be installed on required nodes. Node and agent on it 
-should be up and running and all folder path to additional configuration files and 
-register should exist. Nodes should be manually restarted after policy was applied to 
-run it with new configuration. To install policy in object menu select :guilabel:`Install...`,
+should be up and running. Nodes should be manually restarted after policy was applied to 
+run it with new configuration. To install policy in object menu select :menuselection:`Install...`,
 select :guilabel:`Install on nodes selected below`, select required nodes in object browser and 
 click :guilabel:`OK`.
 
-Installed policy configurations are stored as additional config files. List of applied 
-policies is stored in Windows registry on in registry file in UNIX. If policy is successfully 
-applied on a :term:`node <Node>` it will be seen under this policy.
- 
+Installed policy configurations are stored as additional config files under agent 
+:guilabel:`DataDirectory`. List of applied policies is stored agent local database. If policy is 
+successfully applied on a :term:`node <Node>` it will be seen under this policy.
 
 Example:
 
       .. figure:: _images/applied_policy.png
 
 If Policies have changed it should be reapplied manually. Is is done with command in 
-object menu :guilabel:`Install...`, then select :guilabel:`Install on all nodes where this 
+object menu :menuselection:`Install...`, then select :guilabel:`Install on all nodes where this 
 policy already installed` and click :guilabel:`OK`.
 
 Policy can be also uninstalled. To do this right click on policy object and select 
-:guilabel:`Uninstall...`, select node from witch this policy will be removed and click :guilabel:`OK`.
-In this case additional configuration file and registry recored connected to this policy are removed
-from node. In order to apply the changes it is required manually to restart agent. 
+:menuselection:`Uninstall...`, select node from witch this policy will be removed and click :guilabel:`OK`.
+In this case additional configuration file is removed from node. In order to apply the changes it is 
+required manually to restart the agent. 
+
+In case of Policy deploy, Policy uninstall, Policy update job fail, unsuccessfully operation will be 
+scheduled for re-execution. :guilabel:`JobRetryCount` server configuration variable represents 
+number of retries. First time job is rescheduled in 10 minutes. Each next wait time is twice more 
+than the previous time.  
+
+Installed policies are checked on configuration poll and are reinstalled if policy is marked as 
+applied on a server, but is missing on the node.
       
 Advantage of creating configuration in policies - if configuration for nodes is changed, 
 then it should be changed only once for all nodes on witch it is applied. 
@@ -237,6 +272,7 @@ Agent Configuration Files on Server:
   - Works with Master config
   - Do not required initial config(can be started without config), but in this case agent 
     will fail if nothing will be returned from server
+  - Doesn't work with tunnel agent connection
 
 Agent Policies:
   - Not possible for bootstrap agent
@@ -251,22 +287,45 @@ Agent Policies:
     like(MasterServers or LogFile), then policy will overwrite master config configuration
   - If policy and master config have same parameter that can be set multiple times 
     like(Target for PING subagent or Query for DBQUERY), then policy will merge lists of configs
+  - Can work with tunnel agent connection
 
 
 Agent registration
 ==================
+
+There are available two ways of agent, server communication. Standard one is when server initialize 
+connection to agent, the second one is when tunnel is used and agent initialize connection to server.
+
+Server to agent connection
+--------------------------
 
 There are few ways to register agent:
    1. To enter it manually by creating a node
    2. Run the network discovery and enter the range of IP addresses.
    3. Register agent on management server "nxagentd -r <addr>",  where <addr> is the IP address of server. 
       To register agents using this option also :guilabel:`EnableAgentRegistration` parameter should be set to 1.
+      
+.. _agent-to-server-agent-conf-label:   
+   
+Agent to server connection
+--------------------------
+
+This connection requires certificate configuration on server side. More about required actions can be found in 
+:ref:`server-tunnel-cert-conf`. Agent requires :guilabel:`ServerConnection` parameter set in agentd.conf file to 
+server :term:`DNS` or server IP address. 
+
+Just after start agent will try to connect to server. On first connect node will be shown in list of 
+
+There are few ways to register agent:
+   1. To enter it manually by creating a node and then binding tunnel to already created node.
+   2. Create node from :guilabel:`Agent Tunnel Manager` view by selecting one or more tunnels and selecting 
+      :guilabel:`Create node and bind...` menu item. 
    
 Security
 ========
 
-Agent <--> server message encryption 
-------------------------------------
+Message encryption in server to agent connection 
+------------------------------------------------
 
 Server encryption policy is configured in :guilabel:`Server Configuration` view by 
 selecting one of 4 options for :guilabel:`DefaultEncryptionPolicy` parameter. Default 
@@ -294,6 +353,15 @@ Policy types:
 .. note::
   Configuration will be simplified in next releases. 
 
+Security in agent to server connection
+--------------------------------------
+
+Agent to server connection uses :term:`TLS` protocol to ensure communication security. Server has root certificate, that 
+is used to issue public certificate for agent. Additionally to this server issues certificates only to the nodes that were 
+manually accepted on server, this process can be automated by NXShell if required. More information: 
+`NXShell examples <https://wiki.netxms.org/wiki/Using_nxshell_to_automate_bulk_operations>`_, 
+`Latest Javadoc <https://www.netxms.org/documentation/javadoc/latest/>`_.
+  
 Server access levels
 --------------------
 
@@ -301,13 +369,14 @@ Depending on how server's IP address(or domain) is added to in nxagentd.conf, it
 have different access level. It is preferred to use MasterServers. There are 3 levels 
 of access for an agent:  
 
-   1. MasterServers - full access
+   1. MasterServers - full access.
    2. ControlServers - can read data and execute predefined actions, but cannot change 
       config nor install policies.
-   3. Servers - read only access
+   3. Servers - read only access. (Is default for tunneled agent connection if other server level is not defined)
    
 In case if server IP is not listed in one of this parameters agent will not enable 
-connection with it. 
+connection with server in server to agent connection or will set access level to :guilabel:`Servers` if tunnel 
+connection is used. 
 
 Shared secret
 -------------
@@ -441,7 +510,8 @@ Agent configuration
 -------------------
 
 To enable NetXMS Agent proxy "EnableProxy" agent configuration parameter should 
-be set to "yes".
+be set to :guilabel:`yes`.
+
 
 .. _agent-external-parameter:
 
@@ -511,11 +581,28 @@ are separated with new line.
   # With DCI parameters
   ExternalList=Name(*):command $1 $2
 
+ExternalParameter
+-----------------
+
+``ExternalParameter`` defines name of the metric and command that is executed 
+synchronously when this metric is requested by server. There can be provided parameters 
+form DCI configuration, that will be available like $1, $2, $3..., $9 variables. To 
+accept arguments metric name should contain "(*)" symbols after name.
+
+.. code-block:: cfg
+
+  # Exaple
+
+  # Woithout DCI parameters
+  ExternalParameter=Name:command
+
+  # With DCI parameters
+  ExternalParameter=Name(*):command $1 $2
   
 ExternalParametersProvider
 --------------------------
 
-``ExternalList`` defines command(script) and execution interval in seconds. Defined 
+``ExternalParametersProvider`` defines command(script) and execution interval in seconds. Defined 
 script will be executed as per interval and agent will cache parameter list. When server 
 will request one of provided parameters it's value will be read from the agent cache. 
 Main purpose is to providing data from long-running processes, or return multiple 
@@ -544,3 +631,26 @@ Example of agent configuration:
   
   #Example (run /tmp/test.sh every 5 seconds)
   ExternalParametersProvider=/tmp/test.sh:5
+  
+ExternalTable
+-------------
+
+``ExternalTable`` defines name of the table metric, table metric description, column separator, 
+instance column and command. Command is executed synchronously when this metric is requested by server.
+Each table line is separated with new line symbol. First line in returned text used as a name of the columns 
+and all next lines will be used like table data. There can be provided parameters form DCI configuration, 
+that will be available like $1, $2, $3..., $9 variables. To accept arguments metric name should contain 
+"(*)" symbols after name.
+
+.. code-block:: cfg
+
+  # Exaple
+
+  # Woithout DCI parameters
+  ExternalTable=dciName:instanceColumns=columnName;description=description;separator=|:command
+
+  # With DCI parameters
+  ExternalTable(*)=dciName:instanceColumns=columnName;description=description;separator=|:command $1 $2
+
+
+

@@ -544,10 +544,13 @@ alarms, or actions. You may use the following macros to accomplish this:
 
    * - Macro
      - Description
-   * - ``%n``
-     - Name of event source object.
    * - ``%a``
      - IP address of event source object.
+   * - ``%A``
+     - Alarm's text (can be used only in actions to put text of alarm from the
+       same event processing policy rule).
+   * - ``%c``
+     - Event's code.
    * - ``%g``
      - Globally unique identifier (GUID) of event source object.
    * - ``%i``
@@ -555,13 +558,15 @@ alarms, or actions. You may use the following macros to accomplish this:
        with 0x and contains exactly 8 digits (for example 0x000029AC).
    * - ``%I``
      - Unique ID of event source object in decimal form.
-   * - ``%t``
-     - Event's timestamp is a form day-month-year hour:minute:second.
-   * - ``%T``
-     - Event's timestamp as a number of seconds since epoch (as returned by
-       `time() <http://linux.die.net/man/2/time>`_ function).
-   * - ``%c``
-     - Event's code.
+   * - ``%K``
+     - Alarm's key (can be used only in actions to put text of alarm from the
+       same event processing policy rule).
+   * - ``%m``
+     - Event's message text (meaningless in event template).
+   * - ``%M``
+     - Custom message text. Can be set in filtering script by setting ``CUSTOM_MESSAGE`` variable.
+   * - ``%n``
+     - Name of event source object.
    * - ``%N``
      - Event's name.
    * - ``%s``
@@ -573,17 +578,15 @@ alarms, or actions. You may use the following macros to accomplish this:
          - 4 - :guilabel:`Critical`
    * - ``%S``
      - Event's severity code as text.
-   * - ``%v``
-     - NetXMS server's version.
+   * - ``%t``
+     - Event's timestamp is a form day-month-year hour:minute:second.
+   * - ``%T``
+     - Event's timestamp as a number of seconds since epoch (as returned by
+       `time() <http://linux.die.net/man/2/time>`_ function).
    * - ``%u``
      - User tag associated with the event.
-   * - ``%m``
-     - Event's message text (meaningless in event template).
-   * - ``%A``
-     - Alarm's text (can be used only in actions to put text of alarm from the
-       same event processing policy rule).
-   * - ``%M``
-     - Custom message text. Can be set in filtering script by setting ``CUSTOM_MESSAGE`` variable.
+   * - ``%v``
+     - NetXMS server's version.
    * - ``%[name]``
      - Value returned by script. You should specify name of the script from script library.
    * - ``%{name}``
@@ -618,4 +621,3 @@ Event's parameter with given name
   * %<currentValue>
   * %<instance>
   * %<isRepeatedEvent>
-  

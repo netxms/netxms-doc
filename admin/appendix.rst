@@ -187,8 +187,8 @@ Agent configuration file (nxagentd.conf)
      - Enable (yes) or disable (no) creation of agent's crash dumps. Windows only
      - no
    * - DataDirectory
-     -
-     -
+     - Directory where additional agent filws will be stored. Like policies files, local agent database, etc.
+     - Default value varey dependin on platform. Windows: %NETXMS_HOME%\\var, Linux: /var/lib/netxms or %NETXMS_HOME%/var/lib/netxms.
    * - DailyLogFileSuffix
      - Log file name suffix used when ``LogRotationMode`` is set to 1 (daily), can contain `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_ macros
      - %Y%m%d

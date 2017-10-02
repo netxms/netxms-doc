@@ -31,6 +31,101 @@ Configuration file example:
   DBPassword = password
   LogFailedSQLQueries = yes
   LogFile = {syslog}
+  
+.. _server-tunnel-cert-conf:
+  
+Server configuration for Agent to Server connection
+===================================================
+
+NetXMS provides option to establish connection from agent to server. This requires 
+additional configuration on server and on agent sides. This chapter describes server 
+side configuration. Agent side configuration can be found in :ref:`agent-to-server-agent-conf-label`.
+Agent to server connection is a :term:`TLS` tunnel carrying virtual server to agent connections.
+
+Server configuration can be separated into two parts: initial configuration (certificate generation and 
+configuration) and node binding. 
+
+Initial configuration
+---------------------
+
+Certificate should be issued and added to the server configuration. This certificate 
+will be used to issue public certificates for agents. Certificate usage should allow 
+certificate signing. Certificates should be in PEM format. Server key should be 
+added to the certificate file or should be provided as a separate configuration parameter. 
+
+Certificate can be obtained in two ways:
+    1. By sending :term:`CSR` request to your :term:`CA`
+    2. Create self signed certificate
+
+Possible server configuration parameters:
+
+.. list-table:: 
+  :widths: 30 70 60
+  :header-rows: 1
+
+  * - Parameter 
+    - Description
+    - Required
+  * - ServerCACertificate
+    - Your certificate authority certificate or self generated :term:`CA` certificate. If certificate 
+      chain for server certificate is longer all upper level certificates should be added to 
+      configuration file by adding multiple ServerCACertificate entries.
+    - Yes
+  * - ServerCertificate
+    - Certificate issued by certificate authority.
+    - Yes
+  * - ServerCertificatePassword
+    - Issued certificate password
+    - Can be omitted for non password certificates
+  * - ServerCertificateKey
+    - Issued certificate key
+    - Can be omitted if key is included in server certificate file. 
+
+Self signed certificate sample
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This manual describes only simplest option: self signed certificate creation without password. It 
+does not contain any information about file access right assignment or certificate password configuration. 
+
+    * Create private root key:
+        openssl genrsa -out rootCA.key 2048
+    * Create self signed root certificate:
+        openssl req -x509 -new -key rootCA.key -days 10000 -out rootCA.crt
+    * Create server key
+        openssl genrsa -out server.key 2048
+    * Create server certificate
+        openssl req -new -key server.key -out server.csr
+    * Sign server certificate with root certificate
+        openssl x509 -req -in server101.mycloud.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server101.mycloud.crt -days 5000
+
+Add newly created certificates to server configuration (netxmsd.conf file).
+
+.. code-block:: cfg  
+
+    ServerCACertificate = /opt/netxms/key/rootCA.crt
+    ServerCertificate = /opt/netxms/key/server.crt
+    ServerCertificateKey = /opt/netxms/key/server.key
+
+    
+Node binding
+------------
+
+Once server certificates are configured and agent is correctly configured (:guilabel:`ServerConnection` 
+parameter set in agentd.conf) requests for agent to server connection will be shown in :guilabel:`Agent Tunnel Manager` view. 
+
+.. figure:: _images/tunnel_unbound_node.png
+   :scale: 65%
+
+   Agent Tunnel Manager
+   
+User should manually accept them by binding to existing node :guilabel:`Bind...` or by creating 
+new one :guilabel:`Create node and bind...`. Once node will be bound - it's state in :guilabel:`Agent Tunnel Manager` 
+view will be changed to :guilabel:`Bound`.
+
+.. figure:: _images/tunnel_bound_node.png
+   :scale: 65%
+
+   Agent Tunnel Manager
 
   
 Configuration variables

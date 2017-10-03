@@ -789,57 +789,39 @@ Macro Substitution
 Action, file download, local command, and URL tool types allows macro substitution. Any string starting with percent sign considered macro name and is expanded.
 The following macros recognized:
 
-
-.. versionadded:: 2.0.-RC1
-
 .. list-table::
    :header-rows: 1
    :class: longtable
 
    * - Macro
      - Description
-   * - ``%n``
-     - Object name.
    * - ``%a``
-     - Object IP address.
+     - IP address of event source object.
    * - ``%g``
-     - Globally unique identifier (GUID) of object.
+     - Globally unique identifier (GUID) of event source object.
    * - ``%i``
-     - Unique ID of object in hexadecimal form. Always prefixed
+     - Unique ID of event source object in hexadecimal form. Always prefixed
        with 0x and contains exactly 8 digits (for example 0x000029AC).
    * - ``%I``
-     - Unique ID of object in decimal form.
+     - Unique ID of event source object in decimal form.
+   * - ``%n``
+     - Name of event source object.
+   * - ``%U``
+     - User name of executer
    * - ``%v``
      - NetXMS server's version.
-   * - ``%U``
-     - Name of the current user
-   * - ``%(name)``
-     - Value of input field. 
+   * - ``%[name]``
+     - Value returned by script. You should specify name of the script from script library.
    * - ``%{name}``
      - Value of custom attribute.
+   * - ``%(name)``
+     - Value of input field.
+   * - ``%<name>``
+     - Parameter with given name.
    * - ``%%``
      - Insert ``%`` character.
-     
-.. deprecated:: 2.0.-RC1
-
-.. list-table::
-   :widths: 30 70
-   :header-rows: 1
- 
-   * - Name
-     - Description
-   * - OBJECT_ID
-     - ID of selected node object.
-   * - OBJECT_IP_ADDR
-     - Primary IP address of selected node object.
-   * - OBJECT_NAME
-     - Name of selected node object.
-   * - `custom_attribute`
-     - User defined attribute 
 
 If object tool called from alarm's pop-up menu the following additional macros are available:
-
-.. versionadded:: 2.0.-RC1
 
 .. list-table::
    :header-rows: 1
@@ -872,27 +854,7 @@ If object tool called from alarm's pop-up menu the following additional macros a
          - 2 - :guilabel:`Resolved`
          - 3 - :guilabel:`Terminated`
    * - ``%Y``
-     - Alatm's id.
-     
-
-.. deprecated:: 2.0.-RC1
-
-.. list-table::
-   :widths: 30 70
-   :header-rows: 1
- 
-   * - Name
-     - Description
-   * - ALARM_ID
-     - ID of selected alarm.
-   * - ALARM_MESSAGE
-     - Message text of the alarm.
-   * - ALARM_SEVERITY
-     - Alarm severity as a number.
-   * - ALARM_SEVERITY_TEXT
-     - Alarm severity as text.
-   * - ALARM_STATE
-     - Alarm state code (0 for outstanding, 1 for acknowledged, 2 for resolved).
+     - Alarm's id.
      
 :guilabel:`Internal object tool` is special case of object tools. 
 Macro expansions not performed for :guilabel:`Internal object tools`. 

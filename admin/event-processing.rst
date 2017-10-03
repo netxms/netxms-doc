@@ -614,10 +614,13 @@ following notations:
 Event's parameter with given name
 ---------------------------------
 
+Threshold reached/rearmed named parameters:
   * %<dciId>
   * %<dciName>
   * %<dciDescription>
   * %<thresholdValue>
   * %<currentValue>
   * %<instance>
-  * %<isRepeatedEvent>
+  * %<isRepeatedEvent> - set only for DCI reached events
+  * %<dciValue>
+  

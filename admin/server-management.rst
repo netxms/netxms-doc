@@ -96,7 +96,7 @@ does not contain any information about file access right assignment or certifica
     * Create server certificate
         openssl req -new -key server.key -out server.csr
     * Sign server certificate with root certificate
-        openssl x509 -req -in server101.mycloud.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server101.mycloud.crt -days 5000
+        openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 5000
 
 Add newly created certificates to server configuration (netxmsd.conf file).
 

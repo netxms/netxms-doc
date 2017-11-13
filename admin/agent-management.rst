@@ -114,7 +114,17 @@ There are two types of additional files one are used to store applied :guilabel:
 others can be created and updated manually. More information about Policies can be read there: :ref:`agent-policies-label`.
 
 Next will be described default folders for manually created files. Policies files will be stored in a 
-separate folder under :guilabel:`DataDirectory`.
+separate folder named :guilabel:`configure_ap` under :guilabel:`DataDirectory`.
+
+Default to data directory for UNIX like systems:
+
+    1. :file:`$NETXMS_HOME/var/lib/netxms`
+    2. :file:`/var/lib/netxms`
+    
+For Windows systems:
+
+    1. :file:`'installation directory'\\var`
+
 If configuration of build was done with --prefix='prefix' parameter, then config will 
 be searched in next order(UNIX):
 
@@ -204,7 +214,7 @@ Example:
 
   <config>
     <agent>
-      <-- there can be added comment -->
+      <!-- there can be added comment -->
       <MasterServers>127.0.0.1</MasterServers>
       <SubAgent>netsvc.nsm</SubAgent>
       <SubAgent>dbquery.nsm</SubAgent>
@@ -614,16 +624,17 @@ pairs should be separated by new line. If parameter takes argument, it should be
 included in "Parameter(...)".
 
 Example of the script:
+
 .. code-block:: shell
   
-  #!/bin/sh
- 
-  echo 'Parameter1=Value1'
-  echo 'Parameter2=Value2'
-  echo 'ParameterWithArgs(AAA)=Value3'
+  #!/bin/sh 
+  echo 'Parameter1=Value1'  
+  echo 'Parameter2=Value2'  
+  echo 'ParameterWithArgs(AAA)=Value3'  
   echo 'ParameterWithArgs(BBB)=Value4'
   
 Example of agent configuration:
+
 .. code-block:: cfg
   
   #Exaple

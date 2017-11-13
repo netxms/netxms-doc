@@ -53,9 +53,6 @@ server change. Information about configuration options can be found there:
 DCI configuration
 =================
 
-Basic configuration
--------------------
-
 Data collection for a node can be configured using management console. To open
 data collection configuration window, right-click on node object in
 :guilabel:`Object Browser` or on a :guilabel:`Network Map`, and click
@@ -64,13 +61,15 @@ collection items. From here, you can add new or change existing parameters to
 monitor. Right click on the item will open pop-up menu with all possible
 actions.
 
-.. todo: 
-  Add description of each action in DCI object menu. Separate each field description 
-  by property pages. 
-
 Each DCI have multiple attributes which affects the way data is collected.
 Detailed information about each attribute is given below.
 
+General
+-------
+
+.. figure:: _images/dci_general_page.png
+
+    DCI configuration general property page
 
 Description
 ~~~~~~~~~~~
@@ -89,6 +88,7 @@ For NetXMS agent and internal parameters it will be parameter name, and for
 SNMP agent it will be an SNMP OID. You can use the :guilabel:`Select` button
 for easier selection of required parameter name.
 
+Available agent parameter names are obtained while :guilabel:`Configuration poll`.
 
 Origin
 ~~~~~~
@@ -121,17 +121,67 @@ example, you cannot use operations like ``less than`` or ``greater than`` on
 strings. If you select parameter from the list using the :guilabel:`Select`
 button, correct data type will be set automatically.
 
+Source node
+~~~~~~~~~~~
 
-Polling Interval
-~~~~~~~~~~~~~~~~
+Sorce node of metrci collection. This can be used when other node provides 
+information about this node. In this way collected data can be collected and 
+shown on right nodes. 
 
-An interval between consecutive polls, in seconds. If you select the
-:guilabel:`Use advanced scheduling` option, this field has no meaning and will
-be disabled.
+Othe example of usage is virtual nodes(node with IP 0.0.0.0). In this case 
+node state can be obtained from the DCI created on this node but collected 
+from the other one. 
 
+Data is collected from the same node if no value set.
+
+Polling
+~~~~~~~
+
+Polling mode and interval describe schedule type and interval between consecutive 
+polls, in seconds. However, collecting too many values for too long will lead to
+significant increase of your database size and possible performance degradation.
+
+Can be selected one of options:
+
+    - :guilabel:`Fixed intervals (default)` - default value will be taken form :guilabel:`DefaultDCIPollingInterval` server configuration parameter. 
+    - :guilabel:`Fixed intervals (custom)` - value entered on the DCI properties page will be taken.
+    - :guilabel:`Use advanced scheduling` - schedules configured in :guilabel:`Advanced Schedule` page will be used  
+
+
+Storage
+~~~~~~~
+
+This attribute specifies how long the collected data should be kept in
+database, in days. Minimum retention time is 1 day and maximum is not limited.
+However, keeping too many collected values for too long will lead to
+significant increase of your database size and possible performance
+degradation.
+
+Possible options:
+
+    - :guilabel:`Use default retention time` - default value will be taken form :guilabel:`DefaultDCIRetentionTime` server configuration parameter. 
+    - :guilabel:`Use default retention time` - value entered on the DCI properties page will be taken.
+    - :guilabel:`Do not save collected data to database` - will not save collected data to database, but will store last value in memory
+    
+Last option is used when it is required to show latest (every 1 second collected) data on Dashboard, but 
+it is too much data to store in database. So 2 DCI configurations are created. 
+One to store historical data collected once per minute and the second one, that is not stored in database, but 
+is collected every second and up to date displayed on dashboards.
+
+
+Status
+~~~~~~
+
+:term:`DCI` status can be one of the following: :guilabel:`Active`,
+:guilabel:`Disabled`, :guilabel:`Not Supported`. Server will collect data only
+if the status is :guilabel:`Active`. If you wish to stop data collection
+without removing :term:`DCI` configuration and collected data, the
+:guilabel:`Disabled` status can be set manually. If requested parameter is not
+supported by target node, the :guilabel:`Not Supported` status is set by the
+server.
 
 Advanced Schedule
-~~~~~~~~~~~~~~~~~
+-----------------
 
 If you turn on this flag, NetXMS server will use custom schedule for collecting
 DCI values instead of fixed intervals. This schedule can be configured on the
@@ -168,8 +218,12 @@ Allowed values for each filed are:
 
 A field may be an asterisk (``*``), which always stands for "any".
 
+.. figure:: _images/dci_custom_schedule_page.png
+
+    DCI configuration custom schedule property page
+
 Examples
-""""""""
+~~~~~~~~
 
 Run five minutes after midnight, every day:
   
@@ -195,7 +249,16 @@ Run twice a minute (on seconds 0 and 45):
 Run every 45 seconds:
 
   ``* * * * * *%45``
-  
+
+Cluster
+-------
+
+This section is available only for DCI's collected on cluster.
+
+
+.. figure:: _images/dci_cluster_page.png
+
+    DCI configuration cluster property page
 
 Associate with cluster resource
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -205,37 +268,20 @@ collection and processing will occur only if node you configured DCI for is
 current owner of this resource. This field is valid only for cluster member
 nodes.
 
+Data aggregation
+~~~~~~~~~~~~~~~~
 
-Retention Time
-~~~~~~~~~~~~~~
+This section is responsible for cluster data aggregation way. 
+:guilabel:`Aggregate values from cluster nodes` option means, that DCI form cluster 
+will be collected on each node separately and aggregated on cluster using one of the 
+aggregation options.
 
-This attribute specifies how long the collected data should be kept in
-database, in days. Minimum retention time is 1 day and maximum is not limited.
-However, keeping too many collected values for too long will lead to
-significant increase of your database size and possible performance
-degradation.
+Aggregation options:
 
-
-Status
-~~~~~~
-
-:term:`DCI` status can be one of the following: :guilabel:`Active`,
-:guilabel:`Disabled`, :guilabel:`Not Supported`. Server will collect data only
-if the status is :guilabel:`Active`. If you wish to stop data collection
-without removing :term:`DCI` configuration and collected data, the
-:guilabel:`Disabled` status can be set manually. If requested parameter is not
-supported by target node, the :guilabel:`Not Supported` status is set by the
-server.
-
-Other Options
-~~~~~~~~~~~~~
-  1. There is option to show last DCI value in object tooltip on a map. 
-     (Other Options -> Show last value in object tooltip)
-  2. DCI can be used to calculate object status. Such kind of DCI should 
-     return integer number from 0 till 4 representing object status. To 
-     use DCI for status calculation, there should be selected this option 
-     in it's properties (Other Options -> Use this DCI for node status 
-     calculation).
+    - Total
+    - Average
+    - Min 
+    - Max
 
 Data Transformations
 --------------------
@@ -280,108 +326,32 @@ predefined global variables: ``$node`` (reference to current node object), and
 ``$dci`` (reference to current DCI object). For more information about NetXMS
 scripting language, please consult :ref:`scripting` chapter in this manual.
 
-.. _dci-push-parameters-label:
-
-Push parameters
----------------
-
-NetXMS gives you ability to push DCI values when you need it instead of polling
-them on specific time intervals. To be able to push data to the server, you
-should take the following steps:
-
-#. Set your DCI's origin to Push Agent and configure other properties as usual,
-   excluding polling interval which is meaningless in case of pushed data.
-#. Create separate user account or pick an existing one and give "Push Data"
-   access right on the DCI owning node to that user.
-#. Use :ref:`nxapush-label` or :ref:`nxpush-label` utility or client API for pushing data.
+Transformation script can be tested in the same view, by clicking :guilabel:`Test...` 
+and entering test input data. 
 
 
-List DCIs
----------
+.. figure:: _images/dci_transformation_page.png
 
-Usually DCIs have scalar values. A list DCI is a special DCI which returns a
-list of values. List DCIs are mostly used by NetXMS internally (to get the list
-of network interfaces during the configuration poll, for example) but can also
-be utilized by user in some occasions. NetXMS Management Console does not
-support list DCIs directly but their names are used as input parameters for
-Instance Discovery methods. List DCI values can be also obtained with
-:command:`nxget` command line utility (e.g. for use in scripts).
-
-
-Table DCIs
-----------
-
-Table DCI collects and stores data in table format(multi row, column). 
-
-
-.. _offline-data-collection:
-
-Agent caching mode
-==================
-
-Agent caching mode allows metric data to be obtained while connection between 
-server and agent have been broken. This option is available for metrics, table 
-metrics and proxy SNMP metrics. Not implemented for proxy SNMP table metrics and 
-DCIs with custom schedule. While break data is stored on agent, and on connect it 
-is send to server. Detailed description can be found there: :ref:`how_data_collection`.
-
-Agent side cache is configurable globally, on node level, and on DCI level. By 
-default it's off.
-
-All collected data goes thought all transformations and thresholds only when it comes to server. 
-To prevent generation of old events it can be set :guilabel:`OffileDataRelivanceTime` configuration 
-variable to time period in seconds within which received offline data still relevant for threshold 
-validation. By default it is set to 1 day. 
-
-.. versionadded:: 2.0-M5
-    Agent caching mode. 
-
-Configuration
--------------
-
-It can be configured:
-  - globally - set configuration parameter :guilabel:`DefaultAgentCacheMode` to  1 (on) or 2 (off).
-  - on node level - :guilabel:`Agent cache mode` can be changed to :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use globas settings) in node properties on :guilabel:`Polling` page
-  - on DCI level - :guilabel:`Agent cache mode` can be changed to :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use node level settings) in DCI properties on :guilabel:`General` page
-
-  
-.. _last-values:
-
-Last DCI values View
-====================
-
-.. todo:
-  Add description of this view with all menu items. 
+    DCI configuration transformation property page
+    
 
 Thresholds
-==========
-
-Overview
---------
+----------
 
 For every DCI you can define one or more thresholds. Each threshold there is a
 pair of condition and event - if condition becomes true, associated event is
 generated. To configure thresholds, open the data collection editor for node or
-template, right-click on the DCI record and select :guilabel:`Edit` from the
-pop-up menu, then select the :guilabel:`Thresholds` page. You can add, modify
-and delete thresholds using buttons below the threshold list. If you need to
-change the threshold order, select one threshold and use arrow buttons located
-on the right to move the selected threshold up or down.
+template. You can add, modify and delete thresholds using buttons below the 
+threshold list. If you need to change the threshold order, select one threshold 
+and use arrow buttons located on the right to move the selected threshold up or down.
 
 
-Instance
---------
+.. figure:: _images/dci_threshold_page.png
 
-Each DCI has an :guilabel:`Instance` attribute, which is a free-form text
-string, passed as a 6th parameter to events associated with thresholds. You can
-use this parameter to distinguish between similar events related to different
-instances of the same entity. For example, if you have an event generated when
-file system was low on free space, you can set the :guilabel:`Instance`
-attribute to file system mount point.
-
+    DCI configuration threshold property page
 
 Threshold Processing
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: _images/threshold_processing_algorithm.png
    
@@ -423,7 +393,7 @@ thresholds.
 
 
 Threshold Configuration
------------------------
+~~~~~~~~~~~~~~~~~~~~~~~
 
 When adding or modifying a threshold, you will see the following dialog:
 
@@ -489,7 +459,7 @@ resending of events, or specify interval in seconds between repeated events.
 
 
 Thresholds and Events
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 You can choose any event to be generated when threshold becomes active or
 returns to inactive state. However, you should avoid using predefined system
@@ -504,7 +474,7 @@ first, and use this event in the threshold configuration. NetXMS has some
 preconfigured events that are intended to be used with thresholds. Their names
 start with ``DC_``.
 
-The system will pass the following six parameters to all events generated as a
+The system will pass the following seven parameters to all events generated as a
 reaction to threshold violation:
 
 #. Parameter name (DCI's name attribute)
@@ -513,6 +483,15 @@ reaction to threshold violation:
 #. Actual value
 #. Unique DCI identifier
 #. Instance (DCI's instance attribute)
+#. Repeat flag
+
+And those on table threshold violation:
+
+#. Table DCI name
+#. Table DCI description
+#. Table DCI ID
+#. Table row
+#. Instance
 
 For example, if you are creating a custom event that is intended to be
 generated when file system is low on free space, and wish to include file
@@ -528,7 +507,195 @@ For events generated on threshold's return to inactive state (default event is
 #. DCI description
 #. Unique DCI identifier
 #. Instance (DCI's instance attribute)
+#. Threshold value
+#. Actual value
 
+And those on table threshold rearm:
+
+#. Table DCI name
+#. Table DCI description
+#. Table DCI ID
+#. Table row
+#. Instance
+
+Instance
+--------
+
+Each DCI has an :guilabel:`Instance` attribute, which is a free-form text
+string, passed as a 6th parameter to events associated with thresholds. You can
+use this parameter to distinguish between similar events related to different
+instances of the same entity. For example, if you have an event generated when
+file system was low on free space, you can set the :guilabel:`Instance`
+attribute to file system mount point.
+
+Sometimes you may need to monitor multiple instances of some entity, with exact
+names and number of instances not known or different from node to node. Typical
+example is file systems or network interfaces. To automate creation of DCIs for
+each instance you can use instance discovery mechanism. First you have to
+create "master" DCI. Create DCI as usual, but in places where normally you
+would put instance name, use the special macro {instance}. Then, go to
+:guilabel:`Instance Discovery` tab in DCI properties, and configure instance
+discovery method and optionally filter script.
+
+.. figure:: _images/dci_instance_page.png
+
+    DCI configuration instance discovery property page
+
+Discovery Methods
+~~~~~~~~~~~~~~~~~
+
+There are four different methods for instance discovery:
+
+
+================== ========== =================================================
+Method             Input Data Description
+================== ========== =================================================
+Agent List         List name  Read list from agent and use it's values as
+                              instance names.
+Agent Table        Table name Read table from agent and use it's instance
+                              column values as instance names.
+SNMP Walk - Values Base OID   Do SNMP walk starting from given OID and use
+                              values of returned varbinds as instance names.
+SNMP Walk - OIDs   Base OID   Do SNMP walk starting from given OID and use IDs
+                              of returned varbinds as instance names.
+================== ========== =================================================
+
+
+Instance Filter
+~~~~~~~~~~~~~~~
+
+You can optionally filter out unneeded instances and transform instance names
+using filtering script written in NXSL. Script will be called for each instance
+and can return ``TRUE`` (to accept instance), ``FALSE`` (to reject instance),
+and array of two elements - first is ``TRUE`` and second is new value for
+instance name.
+
+Performance tab
+---------------
+
+Main information about node(:guilabel:`Object Details`) can be supplemented with DCI 
+information displayed as text(last value) on :guilabel:`Object Details`->
+:guilabel:`Overview` page or in graph way on :guilabel:`Object Details`->:guilabel:`Performance` tab.
+
+DCI representation in text way can be configured on :ref:`dci-othe-options-label`. Next will be described only 
+graph DCI representation configuration on :guilabel:`Performance` tab of :guilabel:`Object Details`.
+
+Multiple DCIs can be grouped in one graph. To group them use the same group name in "Group" field.
+
+
+.. figure:: _images/dci_performance_tab_page.png
+
+    DCI configuration instance discovery property page
+
+Access Control
+--------------
+
+This page provides access control management option to each DCI. If no user set, then access rights are 
+inherited from node. So any user that is able to read node is able to see last value of this DCI and user
+that is able to modify node is able to change and see DCI configuration.  When list is not empty, 
+then both access to node and access to DCI are check on DCI configuration or value request. 
+
+.. versionadded:: 3.0-M1
+    Agent caching mode
+
+.. figure:: _images/dci_access_control_page.png
+
+    DCI configuration access control property page
+
+.. _dci-othe-options-label:
+
+Other options
+-------------
+
+Other available options:
+
+    - Show last value in object tooltip - shows DCI last value on tooltip that is shown on network maps.
+    - Show last value in object overview - shows DCI last value on :guilabel:`Object Details`->:guilabel:`Overview` page.
+    - Use this DCI for node status calculation - Uses value returned by this DCI as a status, that 
+      participate in object status calculation. Such kind of DCI should 
+      return integer number from 0 till 4 representing object status.
+
+
+.. figure:: _images/dci_other_opt_page.png
+
+    DCI configuration other option property page
+
+Comments
+--------
+
+This configuration part can be used for free for text comments. To make additional notes
+about DCI configuration or usage.
+
+
+.. _dci-push-parameters-label:
+
+Push parameters
+===============
+
+NetXMS gives you ability to push DCI values when you need it instead of polling
+them on specific time intervals. To be able to push data to the server, you
+should take the following steps:
+
+#. Set your DCI's origin to Push Agent and configure other properties as usual,
+   excluding polling interval which is meaningless in case of pushed data.
+#. Create separate user account or pick an existing one and give "Push Data"
+   access right on the DCI owning node to that user.
+#. Use :ref:`nxapush-label` or :ref:`nxpush-label` utility or client API for pushing data.
+
+
+DCI types
+=========
+
+List DCIs
+---------
+
+Usually DCIs have scalar values. A list DCI is a special DCI which returns a
+list of values. List DCIs are mostly used by NetXMS internally (to get the list
+of network interfaces during the configuration poll, for example) but can also
+be utilized by user in some occasions. NetXMS Management Console does not
+support list DCIs directly but their names are used as input parameters for
+Instance Discovery methods. List DCI values can be also obtained with
+:command:`nxget` command line utility (e.g. for use in scripts).
+
+
+.. _offline-data-collection:
+
+Agent caching mode
+==================
+
+Agent caching mode allows metric data to be obtained while connection between 
+server and agent have been broken. This option is available for metrics, table 
+metrics and proxy SNMP metrics. Not implemented for proxy SNMP table metrics and 
+DCIs with custom schedule. While break data is stored on agent, and on connect it 
+is send to server. Detailed description can be found there: :ref:`how_data_collection`.
+
+Agent side cache is configurable globally, on node level, and on DCI level. By 
+default it's off.
+
+All collected data goes thought all transformations and thresholds only when it comes to server. 
+To prevent generation of old events it can be set :guilabel:`OffileDataRelivanceTime` configuration 
+variable to time period in seconds within which received offline data still relevant for threshold 
+validation. By default it is set to 1 day. 
+
+.. versionadded:: 2.0-M5
+    Agent caching mode. 
+
+Configuration
+-------------
+
+It can be configured:
+  - globally - set configuration parameter :guilabel:`DefaultAgentCacheMode` to  1 (on) or 2 (off).
+  - on node level - :guilabel:`Agent cache mode` can be changed to :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use globas settings) in node properties on :guilabel:`Polling` page
+  - on DCI level - :guilabel:`Agent cache mode` can be changed to :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use node level settings) in DCI properties on :guilabel:`General` page
+
+  
+.. _last-values:
+
+Last DCI values View
+====================
+
+.. todo:
+  Add description of this view with all menu items. 
 
 .. _data-collection-templates:
 
@@ -653,49 +820,6 @@ created DCI with the following description:
 Please note that if you change something in the node, name for example, these
 changes will not be reflected automatically in DCI texts generated from macros.
 However, they will be updated if you reapply template to the node.
-
-
-Instance Discovery
-==================
-
-Sometimes you may need to monitor multiple instances of some entity, with exact
-names and number of instances not known or different from node to node. Typical
-example is file systems or network interfaces. To automate creation of DCIs for
-each instance you can use instance discovery mechanism. First you have to
-create "master" DCI. Create DCI as usual, but in places where normally you
-would put instance name, use the special macro {instance}. Then, go to
-:guilabel:`Instance Discovery` tab in DCI properties, and configure instance
-discovery method and optionally filter script.
-
-
-Discovery Methods
------------------
-
-There are four different methods for instance discovery:
-
-
-================== ========== =================================================
-Method             Input Data Description
-================== ========== =================================================
-Agent List         List name  Read list from agent and use it's values as
-                              instance names.
-Agent Table        Table name Read table from agent and use it's instance
-                              column values as instance names.
-SNMP Walk - Values Base OID   Do SNMP walk starting from given OID and use
-                              values of returned varbinds as instance names.
-SNMP Walk - OIDs   Base OID   Do SNMP walk starting from given OID and use IDs
-                              of returned varbinds as instance names.
-================== ========== =================================================
-
-
-Instance Filter
----------------
-
-You can optionally filter out unneeded instances and transform instance names
-using filtering script written in NXSL. Script will be called for each instance
-and can return ``TRUE`` (to accept instance), ``FALSE`` (to reject instance),
-and array of two elements - first is ``TRUE`` and second is new value for
-instance name.
 
 
 Working with collected data

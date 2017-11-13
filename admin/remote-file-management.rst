@@ -33,7 +33,7 @@ The following configuration parameters are supported:
 +================+=========+===========================================+================+
 | RootFolder     | String  | The folder to witch will be given access. | no             |
 |                |         | The following options can be set:         |                |                 
-|                |         |  - ``ro`` - Read-Only root                |                |
+|                |         |  - **ro** - Read-Only root                |                |
 +----------------+---------+-------------------------------------------+----------------+
 
 Agent's configuration file example:

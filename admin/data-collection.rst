@@ -537,6 +537,11 @@ would put instance name, use the special macro {instance}. Then, go to
 :guilabel:`Instance Discovery` tab in DCI properties, and configure instance
 discovery method and optionally filter script.
 
+Instance discovery creates 2 macros for substitution:
+
+    - {instance} - instance name
+    - {instance-name} - instance user readable description
+
 .. figure:: _images/dci_instance_page.png
 
     DCI configuration instance discovery property page

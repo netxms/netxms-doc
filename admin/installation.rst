@@ -817,3 +817,11 @@ in the same directory as nxmc.properties, correct entry will be:
 .. code-block:: cfg
 
   loginFormImage = /logo.jpg
+
+
+Default credentials
+===================
+
+Login: admin
+
+Password: netxms

@@ -124,6 +124,12 @@ Change *DRIVER_NAME* to driver name that you need:
   * netxms-dbdrv-mysql -  MySQL driver
   * netxms-dbdrv-odbc - unixODBC driver (can be used with DB/2 and Microsoft SQL)
   * netxms-dbdrv-oracle - Oracle driver
+  
+Server default credentials:
+
+Login: admin
+
+Password: netxms
 
 Agent
 ~~~~~
@@ -278,6 +284,13 @@ OpenSSL package installed.
     :command:`$ /usr/local/bin/nxagentd -d`
 
     :command:`$ /usr/local/bin/netxmsd -d`
+    
+  
+Server default credentials:
+
+Login: admin
+
+Password: netxms
 
 .. _install_centos_database:
 
@@ -497,6 +510,13 @@ Server
   13. Follow the prompts until server configuration will be complete. After successful
   server configuration, installation will be finished, and you will have NetXMS server
   up and running.
+  
+  
+Server default credentials:
+
+Login: admin
+
+Password: netxms
 
 Agent
 ~~~~~
@@ -698,6 +718,13 @@ OpenSSL package installed.
     :command:`$ /usr/local/bin/nxagentd -d`
 
     :command:`$ /usr/local/bin/netxmsd -d`
+    
+  
+Server default credentials:
+
+Login: admin
+
+Password: netxms
 
 Agent
 ~~~~~
@@ -819,9 +846,19 @@ in the same directory as nxmc.properties, correct entry will be:
   loginFormImage = /logo.jpg
 
 
+Login credentials
+=================
+
 Default credentials
-===================
+-------------------
+
+After server installation default credentials are set:
 
 Login: admin
 
 Password: netxms
+
+Credential reset to default
+---------------------------
+
+Information about access reset in case of lost password can be found in :ref:`password-reset` chapter.

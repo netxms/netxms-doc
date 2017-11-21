@@ -5,11 +5,41 @@ Grafana integration
 ###################
 
 NetXMS Grafana integration provides the possiblity to display important data using
-the Grafana platform and the NetXMS WebAPI.
+the Grafana platform and the :ref:`NetXMS WebAPI <rest-api>`.
 
-Currently a Grafana data source is available and information on setup can be found on
-https://wiki.netxms.org/wiki/NetXMS_Grafana_data_source_setup.
-The features provided by the data source are described in the paragraphs below.
+Integration with Grafana
+========================
+
+The NetXMS Grafana datasource provides an alternative way of monitoring to that of the NetXMS Web and Desktop consoles or the Android app, by using the Grafana platform and the NetXMS WebAPI.
+
+Requirments
+-----------
+
+The following prerequisites need to be set-up first:
+
+A running instance of the NetXMS Server.
+A running instance of the NetXMS WebAPI.
+A running instance Grafana (more information in https://grafana.com/get).
+
+Installation
+------------
+
+See https://grafana.com/plugins/radensolutions-netxms-datasource/installation
+
+For installation from source:
+
+    1. Clone the NetXMS Grafana datasource GitHub repository from https://github.com/netxms/grafana.
+    2. Copy the files from the repository to :file:`GRAFANA_HOME/data/plugins/datasources/NetXMS`
+    3. Restart your Grafana server.
+    4. Login to your Grafana web interface and add the NetXMS datasource in the Data Sources section.
+
+Features
+--------
+
+The datasource currently supports the following functionality:
+
+   * Visualisation of configured data collection items for objects in graphs and tables.
+   * Listing of active alarms on a general or a per object basis
 
 .. _grafana-config:
 

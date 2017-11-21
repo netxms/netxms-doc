@@ -244,28 +244,32 @@ according to convention: Hook\:\:\ `Pool_name`.
 
 Example: Hook\:\:ConfigurationPoll
 
-Full list of hooks and 
+Full list of hooks:  
 
-  * - Hook name
-    - Description 
-    - Parameters
-  * - Hook\:\:StatusPoll
-    - Hook that is executed at the end of status poll
-    - $node
-  * - Hook\:\:ConfigurationPoll
-    - Hook that is executed at the end of configuration poll
-    - $node
-  * - Hook\:\:InstancePoll
-    - Hook that is executed after instance discovery poll.
-    - $node
-  * - Hook\:\:TopologyPoll
-    - Hook that is executed at the ens of topology poll
-    - $node
-  * - Hook\:\:AcceptNewNode
-    - Hook that is executed on a new node add. This script should return 1 if 
-      node should be added. In case if script returns nothing or something other 
-      than 1 - node will not be added. 
-    - $ipAddr, $ipNetMask, $macAddr, $zoneId
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70 30
+
+   * - Hook name
+     - Description 
+     - Parameters
+   * - Hook\:\:StatusPoll
+     - Hook that is executed at the end of status poll
+     - $node
+   * - Hook\:\:ConfigurationPoll
+     - Hook that is executed at the end of configuration poll
+     - $node
+   * - Hook\:\:InstancePoll
+     - Hook that is executed after instance discovery poll.
+     - $node
+   * - Hook\:\:TopologyPoll
+     - Hook that is executed at the ens of topology poll
+     - $node
+   * - Hook\:\:AcceptNewNode
+     - Hook that is executed on a new node add. This script should return 1 if 
+       node should be added. In case if script returns nothing or something other 
+       than 1 - node will not be added. 
+     - $ipAddr, $ipNetMask, $macAddr, $zoneId
 
 Usually hooks are used for automatic actions that need to be done on node. 
 For example automatic remove change of expected state of interface depending 
@@ -273,6 +277,8 @@ on some external parameters.
 
 Troubleshooting
 ===============
+
+.. _password-reset:
 
 Reset password for user "admin"
 -------------------------------
@@ -283,38 +289,28 @@ Reset password for user "admin"
 
 Passwords in NetXMS are stored in hashed, not-reversible way, so there are no way to recover it, but it can be reseted.
 
+.. versionadded:: 2.1-M0
+
+Use following command to reset password and unlock account:
+
+.. code-block:: sh
+
+   nxdbmgr reset-system-account
+   
+This operation will unlock "system" user and change it's password to default ("netxms").
+
 .. versionadded:: 1.2.9
+
+.. deprecated:: 2.1-M0
 
 Use following command to reset password and unlock account:
 
 .. code-block:: sh
 
    nxdbmgr resetadmin
+   
+Password for user "admin" will be reset to default password: "netxms".
 
-.. deprecated:: 1.2.9
-
-To reset password to installation default ("netxms"):
-
-#. Stop ``netxmsd``
-#. Run ``nxdbmgr check`` to make sure that server is down and database is unlocked
-#. Create temporary file "reset.sql" with following content:
-
-   .. code-block:: sql
-
-      UPDATE users SET
-        password='3A445C0072CD69D9030CC6644020E5C4576051B1',
-        flags=8,
-        grace_logins=5,
-        auth_method=0,
-        auth_failures=0,
-        disabled_until=0
-      WHERE id=0;
-
-#. Execute reset.sql:
-
-   .. code-block:: sh
-
-      nxdbmgr batch reset.sql
 
 Enable Crash Dump Generation
 ----------------------------
@@ -359,3 +355,302 @@ On a new node creation is generated SYS_NODE_ADDED event. So any automatic
 actions that should be done on a node can be done by creating :term:`EPP` rule
 on on this event, that will run script. In such way can be done node bind to 
 container, policy or template auto apply and other automatic actions. 
+
+.. _autologin:
+
+Autologin for Management Console
+================================
+
+.. versionadded:: 1.2.9
+
+Starting from version 1.2.4, it is possible to connect management console (nxmc) 
+or web management console to server automatically without login dialog. This chapter 
+describes additional command line options and URL parameters for that.
+
+Desktop Console
+---------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+   
+   * - Command line option
+     - Description 
+   * - -auto
+     - Connect to server automatically without login dialog
+   * - -dashboard=dashboard
+     - Automatically open given dashboard after login (either dashboard object ID or name can be specified)
+   * - -login=login
+     - Set login name
+   * - -password=password	
+     - Set password, default is empty
+   * - -server=address
+     - Set server name or IP address
+    
+For example, to connect management console to server 10.0.0.2 as user guest with empty password, use command
+
+.. code-block:: abap
+
+    nxmc -auto -server=10.0.0.2 -login=guest
+    
+Web Console
+-----------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - URL parameters
+     - Description 
+   * - auto
+     - Connect to server automatically without login dialog
+   * - dashboard=dashboard
+     - Automatically open given dashboard after login (either dashboard object ID or name can be specified)
+   * - login=login
+     - Set login name
+   * - password=password	
+     - Set password, default is empty
+   * - server=address
+     - Set server name or IP address
+    
+For example, to connect web management console to server 10.0.0.2 as user guest with empty password and 
+open dashboard called "SystemOverview", use URL
+
+.. code-block:: abap
+
+    http://server/nxmc?auto&server=10.0.0.2&login=guest&dashboard=SystemOverview
+
+
+NetXMS data usage in external products
+======================================
+
+NetXMS provides next options to use data in other applications:
+
+    * Use :ref:`autologin <autologin>` and dashboard name in URL to add dashboard to your company
+      documentation(where URL usage is possible). 
+    * Use :ref:`Grafana <grafana-integration>` for graph creation and further usage
+    * Get data through :ref:`Web API <rest-api>`
+    
+.. _rest-api:
+
+Web API/Rest API
+================
+
+The NetXMS WebAPI is being developed to support larger integration possibilities for the NetXMS 
+server and is based on the RESTful philosophy. API calls are REST-like (although not purely RESTful) 
+and uses JSON for data exchange. The API currently supports Grafana integration and 
+some additional parameters for integration. The NetXMS WebAPI is currently in very early development!
+
+Information about Grafana configuration can be found :ref:`here <grafana-integration>`.
+
+Requirements
+------------
+
+   * A running instance of the NetXMS server.
+   * Access to a web server.
+   * Git tools
+   * Maven tools
+   
+Setup
+-----
+
+1. Clone the NetXMS git repository to a folder on your computer.
+2. Navigate to :file:`NETXMS_GIT/src/server/nxapisrv/java` 
+3. Run :command:`mvn package` 
+4. Copy the resulting .war file from :file:`/targets/netxms-websvc-2.1-M3.war` to your web server.
+5. Create a :file:`nxapisrv.properties` file and place it in the property file location of your 
+   web server and specify the NetXMS Server address with the property.
+   
+Localhost address will be used if no address was set. Server configuration example:
+
+   .. code-block:: cfg
+   
+        NXServer=sever.office.radensolutions.com
+        
+Implemented functionality
+-------------------------
+
+Authentication
+~~~~~~~~~~~~~~
+
+Login
+^^^^^
+
+There are implemented 3 options of authentication:
+    
+   1. Basic authentication for Rest API session creation, more information can be found on :wikipedia:`Wikipedia <Basic access authentication>` 
+   2. Through POST request for Rest API session creation
+   3. Through POST request for NetXMS user external authentication(can be used as external authentication source)
+
+Authentication used as external source of user authentication. User that try to login thought 
+this authentication type should have "External tool integration account" access right.
+
+Request type: **POST**
+
+JSON data:
+
+.. code-block:: json
+
+    {"login":"admin","password":"netxms"}
+
+Request path: *API_HOME*/authenticate
+
+Return data: 
+
+    The API will return a 200 response if the credentials are correct, a 400 response if 
+    either login or password is not provided or 401 if the provided credentials are incorrect.
+    
+Authentication used to gain Rest API session.
+
+Request type: **POST**
+
+JSON data:
+
+.. code-block:: json
+
+    {"login":"admin","password":"netxms"}
+
+Request path: *API_HOME*/sessions
+
+Return data: 
+
+    On success server will set cookie session_handle and json with session GUID and server version.
+    Further on each subsequent request cookie should be passed. 
+    
+Logout
+^^^^^^
+
+To log out request with given session ID.
+
+Request type: **DELETE**
+
+Request path: *API_HOME*/session/**{sid}**
+
+Return data: 
+
+    The API will return a 200 response if log out succeed. 
+
+Objects
+~~~~~~~
+
+Get multiple objects with filters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Request to get all objects available to this user or to get objects that fulfil 
+filter requirements and are available to this user.
+
+Request type: **GET**
+
+Request path: *API_HOME*/objects
+
+Filter options:
+    
+    * area=\ *geographical area*
+    * class=\ *class list*
+    * name=\ *pattern*
+    
+Return data: 
+
+    Will return filtered objects or all objects available to user.
+
+Get object by id
+^^^^^^^^^^^^^^^^
+
+Request to get exact object identified by ID or GUID.  
+
+Request type: **GET**
+
+Request path: *API_HOME*/objects/**{object-id}**
+
+Return data: 
+
+    Object information identified by provided ID or GUID.
+
+Alarms
+~~~~~~
+
+Full scope of currently active alarms can be obtained or object specific list. 
+
+All alarms
+^^^^^^^^^^
+
+Request to get all active alarms available to this user.
+
+Request type: **GET**
+
+Request path: *API_HOME*/alarms
+    
+Return data: 
+
+    Will return all active alarms available to this user.
+
+All node alarms
+^^^^^^^^^^^^^^^
+
+Request to get all active alarms for exact object identified by ID or GUID.
+
+Request type: **GET**
+
+Request path: *API_HOME*/alarms/**{object-id}**
+    
+Return data: 
+
+    Will return all active alarms available to this user for requested node.
+
+
+DCI Data
+~~~~~~~~
+
+There are 2 options to get DCI last values. First is to get last values for one DCI and the second one is to create adhoc summary table with required values for all nodes under container. 
+
+DCI last values
+^^^^^^^^^^^^^^^
+
+Request to get last values of DCI identified by ID for exact object identified by ID or GUID.
+
+Request type: **GET**
+
+Request path: *API_HOME*/objects/**{object-id}**/datacollection/**{dci-id}**/values
+
+Filter options:
+    
+    * from=\ *requested period start time as unix timestamp*
+    * to=\ *requested period end time as unix timestamp*
+    * timeInterval=\ *requested time interval in seconds*
+    * itemCount=\ *number of items to be returned*
+    
+Return data: 
+
+    Will return last values for requested node and DCI limited by filters.
+
+Adhoc summary table
+^^^^^^^^^^^^^^^^^^^
+
+Option to get last values for multiple nodes(for all nodes under provided container) for the same DCIs. Required DCIs and container are provided in request.
+
+Request type: **POST**
+
+Request path: *API_HOME*/summaryTable/adHoc
+
+POST request JSON
+
+.. code-block:: json
+
+    {
+        "baseObject":"ContainerName",
+        "columns": [
+            {
+            "columnName":"Free form name that will be used in return table for this column",
+            "dciName":"Name of DCI, that will be used for filtering"
+            },
+            {
+            "columnName":"Name2",
+            "dciName":"DCIName2"
+            }
+        ]
+    }
+
+Return data: 
+
+    Will return adhoc summary table configured accordingly to request json.
+    

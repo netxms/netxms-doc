@@ -37,11 +37,19 @@ Not all attributes are mandatory.
 Superuser
 ~~~~~~~~~
 
-NetXMS has built-in superuser with ID ``0``, which always has full access to
-the system. Default login name for superuser is ``admin``. Default password is
-``netxms`` and user will be forced to change it on first login. Superuser
-account can be renamed or disabled, but cannot be deleted.
+.. note::
 
+    Before version 2.1-M0 there was only 1 default user ``admin`` with user ID 0 and
+    access to everything by default. After version 2.1-M0 admin was made a normal user which 
+    can be deleted or disabled. As a default user with access to everything was created 
+    ``system`` user, that by default is disabled. 
+
+NetXMS has built-in superuser with ID ``0``, which always has full access to
+the system. Default login name for superuser is ``system``. By default user is 
+disabled. Superuser account can be renamed or disabled/enabled, but cannot be deleted.
+
+System user can be used to correct access rights to object, that exists, but 
+none has access to it.
 
 Groups
 ------

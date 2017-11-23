@@ -85,7 +85,7 @@ Glossary
     as web service.
 
   Metric
-    TBD
+    One entity of collected data
 
   MIB Explorer
     :term:`View` in user interface, which allows to navigate SNMP MIB tree and

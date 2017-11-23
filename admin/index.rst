@@ -42,7 +42,6 @@ NetXMS Administrator Guide
    advanced
    schedule
    scripting
-   nxsl-class-description
    appendix
    glossary
 

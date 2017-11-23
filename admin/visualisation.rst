@@ -256,9 +256,9 @@ element. You will be prompted with element type selection dialog:
 
 .. figure:: _images/DashboardProperties.png
 
-When new element added, you can edit it by double-clicking on record in
-elements list, or by pressing :guilabel:`Edit` button. Each element have
-:guilabel:`Layout` property page which controls element's layout inside
+When a new element is added, you can edit it by double-clicking on it's record in
+the elements list, or by pressing the :guilabel:`Edit` button. Each element have
+:guilabel:`Layout` property page which controls the element's layout inside the 
 dashboard, and one or more element type specific pages to control element's
 appearance and displayed information. The following element types are
 available:
@@ -434,7 +434,7 @@ Data Sources
 :guilabel:`Data sources` page is available for all DCI based elements: Bar
 Chart, Dial Chart, Line Chart, Pie Chart, and Tube Chart. Here you can define
 what DCIs should be used as data sources for the chart. Up to 16 DCIs can be
-added to single chart. You can configure multiple properties for each data
+added to a single chart. You can configure multiple properties for each data
 source. To edit data source, either double click on appropriate item in the
 list, or press :guilabel:`Edit` button. Data source configuration dialog looks
 like following:
@@ -508,11 +508,11 @@ it will be displayed above page content.
 Understanding Element Layout
 ----------------------------
 
-Dashboard uses grid concept to layout it's elements. Available space divided
-into rows and columns, and each element occupies one or more cells. Number of
-columns configured in dashboard object properties, and number of rows
-calculated automatically based on number of columns, number of elements, and
-number of cells occupied by each element. Elements are laid out in columns from
+Dashboard uses grid concept to layout it's elements. Available space is divided
+into rows and columns, and each element occupies one or more cells. The number of
+columns is configured in dashboard object properties, and number of rows is 
+calculated automatically based on number of columns, elements, and
+cells occupied by each element. Elements are laid out in columns from
 left to right, and a new row is created when there are no space left for next
 element on current row. Each element has horizontal and vertical alignment
 properties. Default for both is :guilabel:`FILL`. Possible alignment values are
@@ -564,6 +564,10 @@ a loop, follow these steps:
 
    Sample configuration of two dashboards displayed in a loop for 40 seconds each.
 
+Tutorials
+---------
+
+Rashboard creation tutorial available on `Youtube <http://youtu.be/ZfJQiUIDHY4>`_
 
 Graphs
 ======

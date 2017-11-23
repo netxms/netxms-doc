@@ -147,6 +147,21 @@ The next, and final, line of our small program is:
 ``return`` is another built-in operator which exits the function and sets it's
 return value.
 
+Script entry point
+------------------
+
+NXSL handles script entry in 2 ways:
+
+    * Explicit main() function
+    * Implicit $main() fucntion
+    
+If an explicitelly defined main() exists, it will be called.
+
+
+
+If an explicit main() doesnt exist, an implicit $main() fucntion will be created by the script interpreter and the script will enter at the $main() function.
+
+The $main() fucntion is constructed from code that is not a part of any other functions.
 
 Types
 -----
@@ -350,25 +365,38 @@ access element with index ``3`` of array ``a`` you should use
 Array Initialization
 ~~~~~~~~~~~~~~~~~~~~
 
-New array can be created in two ways. First is to use ``'array``' operator:
+New array can be created in two ways. First is to use ``'array``' operator.
+This statement will create empty array and assign reference to it to variable ``a``.
 
 .. code-block:: c
 
    array a;
 
-This statement will create empty array and assign reference to it to variable
-``a``.
+You can then assign values to the array like this. 
 
-Second way is to use ``%( )`` construct to create array already populated with
-values:
+Please note arrays in NXSL are sparse, so you can have elements with nothing in between.
 
 .. code-block:: c
 
-   a = %(1, 2, 3, 4);
+    array a; 
+    a[1] = 1;
+    a[2] = 2;
+    a[260] = 260;    
+    println(a[1]); // will print 1
 
-This statement will create array with four elements at positions 0, 1, 2, and
-3, and assign reference to this array to variable ``a``. Array initialization
-can also be used directly in expressions, like this:
+Second way is to use %( ) construct to create array already populated with values.
+
+This statement will create array with four elements at positions 0, 1, 2, and 3, and assign reference to this array to variable a.
+    
+.. code-block:: c
+
+    // no need to use "array a;" here, since we are creating it dirrectly
+    a = %(1, 2, 3, 4);
+    
+    println(a[0]); // will actually print 1, since 1 is the 0th member
+
+
+Array initialization can also be used directly in expressions, like this:
 
 .. code-block:: c
 
@@ -376,6 +404,7 @@ can also be used directly in expressions, like this:
    {
       return %(2, "text", %(1, 2, 3));
    }
+
 
 In this example function ``f`` returns array of 3 elements - number, text, and
 another array of 3 numeric elements.
@@ -484,6 +513,16 @@ Comparison operators allow you to compare two values.
    * - ``a ~= b``
      - Match
      - ``TRUE`` if ``a`` is matched to regular expression ``b``. As a side
+       effect, assigns values to special variables ``$1``, ``$2``, ``$3``, etc.
+       See see :ref:`regular-expressions` for details.
+   * - ``a match b``
+     - Match
+     - ``TRUE`` if ``a`` is matched to regular expression ``b``. As a side
+       effect, assigns values to special variables ``$1``, ``$2``, ``$3``, etc.
+       See see :ref:`regular-expressions` for details.
+   * - ``a imatch b``
+     - Match (case insensitive)
+     - ``TRUE`` if ``a`` is matched to regular expression ``b`` (case insensitive). As a side
        effect, assigns values to special variables ``$1``, ``$2``, ``$3``, etc.
        See see :ref:`regular-expressions` for details.
 

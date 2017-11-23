@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-execfile('../conf.py')
+exec(open("../conf.py").read())
 # -- General -------------------------------------------------------------------
 project = u'Developer Guide'
 

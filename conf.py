@@ -7,7 +7,7 @@ import glob
 from os.path import basename
 
 # -- General configuration ------------------------------------------------
-print os.path.abspath('../_lib')
+print(os.path.abspath('../_lib'))
 sys.path.insert(0, os.path.abspath('../_lib'))
 
 extensions = [

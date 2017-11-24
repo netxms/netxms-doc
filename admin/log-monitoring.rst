@@ -284,19 +284,21 @@ levels you should specify sum of appropriate codes. Severity level codes are
 following:
 
 
-+------+---------------+
-| Code |  Severity     |
-+======+===============+
-| 1    | Error         |
-+------+---------------+
-| 2    | Warning       |
-+------+---------------+
-| 4    | Information   |
-+------+---------------+
-| 8    | Audit Success |
-+------+---------------+
-| 16   | Audit Failure |
-+------+---------------+
++------+--------------------------------------------------------------------------+
+| Code |  Severity                                                                |
++======+==========================================================================+
+| 1    | Error                                                                    |
++------+--------------------------------------------------------------------------+
+| 2    | Warning                                                                  |
++------+--------------------------------------------------------------------------+
+| 4    | Information                                                              |
++------+--------------------------------------------------------------------------+
+| 8    | Audit Success                                                            |
++------+--------------------------------------------------------------------------+
+| 16   | Audit Failure                                                            |
++------+--------------------------------------------------------------------------+
+| 256  | Critical (since 2.0-M4 only on Windows 7/Windows Server 2008 and higher) |
++------+--------------------------------------------------------------------------+
 
 
 Some examples:
@@ -558,3 +560,23 @@ event's parameter:
         </rules>
     </parser>
     
+Passing parameters to events
+============================
+
+The log parser can send parameters to events.
+Anything matched by the regular expression within () will be sent to the event as a parameter.
+
+Consider the following line is received via syslog, or added to a monitored file:
+
+.. code-block:: cfg
+
+    24.04.2015 12:22:15 1 5 system,error,critical login failure for user testUser from 11.2.33.41 via ssh
+    
+We can extract username and login method from the syslog message, and pass it as parameters to an event with the following rule:
+
+.. code-block:: xml
+
+    <match>system,error,critical login failure for user (.*) from .* via (.*)</match>
+    <event params="2">10000</event>
+    
+Username will be sent to the event as %1, IP address will not be sent, and login method will be sent as %2.

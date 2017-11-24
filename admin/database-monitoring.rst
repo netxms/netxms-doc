@@ -873,3 +873,100 @@ List
      - Description
    * - MongoDB.ListDatabases(*id*)
      - Returns list of databases existing on this server
+
+Informix
+========
+
+NetXMS subagent for Informix (further referred to as Informix subagent) monitors one or more Informix databases and reports database-related parameters.
+
+All parameters available from Informix subagent gathered or calculated once per minute thus its recommended to set DCI poll interval for these items to 60 seconds or more. All parameters are obtained or derived from the data available in Informix system catalogs. Informix subagent does not monitor any of the metrics related to lower level database layers, such as database processes. Monitoring of such parameters can be achieved through the standard NetXMS functionality.
+
+Pre-requisites
+--------------
+
+An database user must have rights to Informix system catalog tables.
+
+Configuration
+-------------
+
+You can specify multiple databases in the informix section. Each database description must be surrounded by database tags with the id attribute. id can be any unique integer, it instructs the Informix subagent about the order in which database sections will be processed.
+
+Each database definition supports the following parameters:
+
+
+.. list-table::
+   :widths: 50 100
+   :header-rows: 1
+   
+   * - Parameter
+     - Description
+   * - Id
+     - Database identifier. It will be used to address this database in parameters.	
+   * - Name
+     - Database name. This is a name of Informix DSN.
+   * - Server
+     - Name of the Informix server.
+   * - UserName
+     - User name for connecting to database.
+   * - Password
+     - Database user password.
+     
+Configuration example:
+
+.. code-block:: cfg
+
+    Subagent=informix.nsm
+    
+    *informix
+    ID=db1
+    DBName = instance1
+    DBLogin = user
+    DBPassword = password
+    
+Provided parameters
+~~~~~~~~~~~~~~~~~~~
+
+To get a DCI from the subagent, you need to specify the id from the ``db2`` entry in the XML
+configuration file (in case of INI configuration, the id will be **1**). To specify the id, you
+need to add it enclosed in brackets to the name of the parameter that is being requested (e.g.,
+``db2.parameter.to.request(**1**)``). In the example, the parameter ``db2.parameter.to.request``
+from the database with the id **1** will be returned.
+
+.. list-table::
+   :widths: 40 20 20 70
+   :header-rows: 1
+
+   * - Parameter
+     - Arguments
+     - Return type
+     - Description
+   * - Informix.Session.Count(*)
+     - Database id
+     - DCI_DT_INT
+     - Number of sessions opened
+   * - Informix.Database.Owner(*)
+     - Database id
+     - DCI_DT_STRING
+     - The database creation date
+   * - Informix.Database.Logged(*)
+     - Database id
+     - DCI_DT_INT
+     - Returns 1 if the database is logged, 0 - otherwise
+   * - Informix.Dbspace.Pages.PageSize(*)
+     - Database id
+     - DCI_DT_INT
+     - A size of a dbspace page in bytes
+   * - Informix.Dbspace.Pages.PageSize(*)
+     - Database id
+     - DCI_DT_INT
+     - A number of pages used in the dbspace
+   * - Informix.Dbspace.Pages.Free(*)
+     - Database id
+     - DCI_DT_INT
+     - A number of free pages in the dbspace
+   * - Informix.Dbspace.Pages.FreePerc(*)
+     - Database id
+     - DCI_DT_INT
+     - Percentage of free space in the dbspace
+     
+     

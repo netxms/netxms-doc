@@ -8,7 +8,7 @@ html_title = "NetXMS %s %s" % (release, project)
 
 # -- Options for LaTeX output --------------------------------------------------
 latex_documents = [
-    ('index', 'netxms-admin.tex', u'NetXMS %s' % project, project_author, 'manual'),
+    ('index', 'netxms-user.tex', u'NetXMS %s' % project, project_author, 'manual'),
 ]
 
 # -- Options for Epub output ----------------------------------------------

@@ -133,7 +133,7 @@ Configuration example:
    #   3. Default timeout for commands set to 5 seconds (5000 milliseconds)
 
    MasterServers = netxms.demo
-   SubAgent = /usr/lib/libnsm_portcheck.so
+   SubAgent =  portcheck.nsm
 
    *portCheck
    DomainName = netxms.demo

@@ -243,11 +243,11 @@ These are the necessary configuration sections and parameters for the MQTT subag
 	  - String
 	  - This section holds the data needed to connect to the MQTT broker
 	* - [MQTT/Brokers/broker_name/Events]
-	  - "EVENT_NAME"
+	  - ``EVENT_NAME``
 	  - String
 	  - This section is for specifying MQTT topic and event matching
 	* - [MQTT/Brokers/broker_name/Metrics]
-	  - "Metric.Name"
+	  - ``Metric.Name``
 	  - Dot separated string
 	  - This section is for mapping data posted to MQTT topics to metrics
 
@@ -267,3 +267,10 @@ Configuration example
 	[MQTT/Brokers/Office/Metrics]
 	MeterHub.Telemetry.RSSI = "tele/5C:CF:7F:25:79:D6/RSSI"
 	MeterHub.Telemetry.Time = "tele/5C:CF:7F:25:79:D6/TIME"
+
+This configuration will connect to an MQTT broker Office at the Hostname.
+Whenever data is published to the topic ``cmnd/5C:CF:7F:25:79:D6/#``, the event
+``MQTT_METERHUB_RAW_DATA`` will be triggered. It will also provide two metrics,
+``MeterHub.Telemetry.RSSI`` and ``MeterHub.Telemetry.Time`` which will report data
+received on the topics ``tele/5C:CF:7F:25:79:D6/RSSI`` and ``tele/5C:CF:7F:25:79:D6/TIME``
+respectively.

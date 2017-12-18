@@ -216,3 +216,54 @@ Configuration example
    *RPI
    DisableDHT22 = no
    EnabledPins = 1,4,5,8
+
+MQTT
+====
+
+This is a subagent that can be used to collect data from devices and sensors
+that use MQTT protocol for communication. The subagent can be used to connect to
+existing MQTT brokers, listen to user specified topics, map posted data to metrics
+and generate events.
+
+Configuration file
+------------------
+
+These are the necessary configuration sections and parameters for the MQTT subagent:
+
+.. list-table::
+	:header-rows: 1
+	:widths: 25	50 50 200
+
+	* - Section
+	  - Parameters
+	  - Format
+	  - Description
+	* - [MQTT/Brokers/broker_name]
+	  - Hostname, Port, Login, Password
+	  - String
+	  - This section holds the data needed to connect to the MQTT broker
+	* - [MQTT/Brokers/broker_name/Events]
+	  - "EVENT_NAME"
+	  - String
+	  - This section is for specifying MQTT topic and event matching
+	* - [MQTT/Brokers/broker_name/Metrics]
+	  - "Metric.Name"
+	  - Dot separated string
+	  - This section is for mapping data posted to MQTT topics to metrics
+
+Configuration example
+---------------------
+
+.. code-block:: cfg
+
+	SubAgent = mqtt.nsm
+
+	[MQTT/Brokers/Office]
+	Hostname = mqtt.office.radensolutions.com
+
+	[MQTT/Brokers/Office/Events]
+	MQTT_METERHUB_RAW_DATA = "cmnd/5C:CF:7F:25:79:D6/#"
+
+	[MQTT/Brokers/Office/Metrics]
+	MeterHub.Telemetry.RSSI = "tele/5C:CF:7F:25:79:D6/RSSI"
+	MeterHub.Telemetry.Time = "tele/5C:CF:7F:25:79:D6/TIME"

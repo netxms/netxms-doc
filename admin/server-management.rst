@@ -34,8 +34,8 @@ Configuration file example:
   
 .. _server-tunnel-cert-conf:
   
-Server configuration for Agent to Server connection
-===================================================
+Server configuration for Agent to Server connection / Tunnel connection
+======================================================================= 
 
 NetXMS provides option to establish connection from agent to server. This requires 
 additional configuration on server and on agent sides. This chapter describes server 
@@ -44,6 +44,31 @@ Agent to server connection is a :term:`TLS` tunnel carrying virtual server to ag
 
 Server configuration can be separated into two parts: initial configuration (certificate generation and 
 configuration) and node binding. 
+
+.. versionadded:: 2.2.3
+    Tunnel automatic action options
+    
+Server provide option to configure automatic options on new unbound tunnel connection. Once new unbound 
+tunnel connection comes to server - idle timeout counter starts for this connection. If nothing done 
+while :guilabel:`AgentTunnels.UnboundTunnelTimeout` time, automatic action selected in 
+:guilabel:`AgentTunnels.UnboundTunnelTimeoutAction` will be executed. 
+
+There are 4 types of actions, that can be done automatically:
+    1. Reset tunnel - close tunnel. It will be automatically reopened again by agent. This process will 
+       update information on server in case of change on agent.
+    2. Generate event - generates event :guilabel:`SYS_UNBOUND_TUNNEL`, that later can be used for 
+       administrator notification or any other automatic action(see :ref:`event-processing`). 
+    3. Bind tunnel to existing node - will try to find correct node and bind tunnel to it. Node matching rules 
+       will be described further. 
+    4. Bind tunnel to existing node or create new node - will try to find correct node and bind tunnel to it. 
+       If node is not found new node will be created under container mentioned in :guilabel:`AgentTunnels.NewNodesContainer`
+       server configuration parameter.  Node matching rules will be described further. 
+   
+Node is matched for binding if:
+    1. Zone UIN given by agent (is configured in agent configuration under :guilabel:`ZoneUIN`) match to node zone id
+    2. IP given by agent match to node's IP address
+    3. Hostname or FQDN match with node name
+    
 
 Initial configuration
 ---------------------
@@ -57,7 +82,7 @@ Certificate can be obtained in two ways:
     1. By sending :term:`CSR` request to your :term:`CA`
     2. Create self signed certificate
 
-Possible server configuration parameters:
+Possible server file configuration:
 
 .. list-table:: 
   :widths: 30 70 60
@@ -80,6 +105,21 @@ Possible server configuration parameters:
   * - ServerCertificateKey
     - Issued certificate key
     - Can be omitted if key is included in server certificate file. 
+    
+Possible server variable configuration:
+  * - Parameter 
+    - Description
+    - Default
+  * - AgentTunnels.UnboundTunnelTimeoutAction
+    - Atcho that will be executed after idle timeout. Actions are described here: :ref:`server-tunnel-cert-conf`
+    - Reset tunnel
+  * - AgentTunnels.UnboundTunnelTimeout
+    - Tunnel idle timeout in seconds, that will be waited till automatic action execution.
+    - 3600
+  * - AgentTunnels.NewNodesContainer
+    - Container name where newly created nodes will accrue. You can use ``->`` character pair to create 
+      subtree ( like ``Office->Tunnel``). If no container is set nodes will appear under :guilabel:`Entire Network`
+    - 
 
 Self signed certificate sample
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

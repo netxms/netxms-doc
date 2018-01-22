@@ -4,7 +4,23 @@
 ICMP ping
 =========
 
-This subagent can be used to measure ICMP ping response times from one location to another.
+This subagent can be used to measure ICMP ping response times from one location to another. 
+There are two types of metrics: offline collected and offline collected. 
+Oflline collected metrics:
+    * ICMP.AvgPingTime 
+    * ICMP.LastPingTime
+    * ICMP.PacketLoss
+    * ICMP.PingStdDev
+    
+Online metric:
+    * Icmp.Ping
+    
+Offline metric targets can be configured in agent configuration file or agent will create new 
+target automatically on first request. Automatically created targets will return 0 as a result 
+on the firs request.
+
+.. versionadded:: 2.2.2
+    Automatic target configuration in PING subagent
 
 Metrics
 =======
@@ -27,7 +43,7 @@ When loaded, PING subagent adds the following parameters to agent:
 |                                       | request for paramter's value, and will return response time for that particular request. Argument   |
 |                                       | *target* should be an IP address. Optional argument *timeout* specifies timeout in milliseconds.    |
 |                                       | Default timeout is 1 second. Optional argument *psize* specifies packet size in bytes, including    |
-|                                       | IP header. If this argument is omited, value from DefaultPacketSize configuration parameter         |
+|                                       | IP header. If this argument is omitted, value from DefaultPacketSize configuration parameter        |
 |                                       | will be used.                                                                                       |
 |                                       | Please note that other parameters just returns result of background ping process, while this        |
 |                                       | parameter waits for actual ping completion and then returns the result. Because of this behavior,   |
@@ -41,21 +57,31 @@ When loaded, PING subagent adds the following parameters to agent:
 +---------------------------------------+-----------------------------------------------------------------------------------------------------+
 
 
+Metric Tables
+=============
+
++-----------------+---------------------------------------------+
+| Table           | Description                                 |
++=================+=============================================+
+| Icmp.Targets    | Table of configured ping targets. Contains: |
+|                 | * IP address                                |
+|                 | * Last response time (milliseconds)         |
+|                 | * Average response time (milliseconds)      |
+|                 | * Packet loss (percents)                    |
+|                 | * Configured packet size                    |
+|                 | * Name                                      |
+|                 | * DNS name                                  |
+|                 | * Automatic                                 |
++-----------------+---------------------------------------------+
+
 Metric Lists
 ============
 
-+-----------------+-------------------------------------------------------------------------------------------+
-| List            | Description                                                                               |
-+=================+===========================================================================================+
-| Icmp.TargetList | List of configured ping targets. Each line has the following fields, separated by spaces: |
-|                 | * IP address                                                                              |
-|                 | * Last response time (milliseconds)                                                       |
-|                 | * Average response time (milliseconds)                                                    |
-|                 | * Packet loss (percents)                                                                  |
-|                 | * Configured packet size                                                                  |
-|                 | * Name                                                                                    |
-+-----------------+-------------------------------------------------------------------------------------------+
-
++-----------------+---------------------------------------+
+| List            | Description                           |
++=================+=======================================+
+| Icmp.Targets    | List of configured ping target names. |
++-----------------+---------------------------------------+
 
 Configuration file
 ==================  
@@ -73,7 +99,7 @@ The following configuration parameters are supported:
 +-------------------+---------------------+----------------------------------------------------------------------------------------+---------------+
 | Target            | *ip*:*name*:*psize* | Add target with IP address *ip* to background ping target list and assign an optional  | *none*        |
 |                   |                     | name *name* to it. Target will be pinged using packets of *psize* bytes size. Name     |               |
-|                   |                     | and packet size fields are optional and can be omited. This parameter can be given     |               |
+|                   |                     | and packet size fields are optional and can be omitted. This parameter can be given    |               |
 |                   |                     | multiple times to add multiple targets.                                                |               |
 +-------------------+---------------------+----------------------------------------------------------------------------------------+---------------+
 | Timeout           | *milliseconds*      | Set response timeout to *milliseconds*. Allowed values are from 500 to 5000 and values | 3000          |

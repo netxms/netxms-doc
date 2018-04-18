@@ -176,254 +176,17 @@ run. Tested containers: Tomcat7, Jetty7.
 Installing on Red Hat, Fedora, CentOS or ScientificLinux
 ========================================================
 
-Agent and server for this systems can be installed only from source.
-
-Adding our YUM repository
--------------------------
-
-.. note::
-
-  YUM repository for this systems will be created soon.
-
-Installing
-----------
-
-Server
-~~~~~~
-
-Installing server using source archive:
-
-If you wish to compile NetXMS server with encryption support on UNIX, you must have
-OpenSSL package installed.
-
-
-  1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need source archive (named netxms-VERSION.tar.gz, for example netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be used as a substitution for an actual version number.
-  2. Unpack the archive:
-
-    :command:`tar zxvf netxms-1.2.15.tar.gz`
-
-  3. Change directory to netxms-version and run configure script:
-
-    :command:`cd netxms-1.2.15`
-
-    :command:`sh ./configure --with-server --with-mysql --with-agent`
-
-    Important arguments:
-
-    --prefix=DIRECTORY: installation prefix, all files go to the specified directory;
-
-    --with-server: build server. Don't forget to add at least one DB Driver as well;
-
-    --with-pgsql: build Postgres DB Driver (if you plan to use PostgreSQL as backend database);
-
-    --with-mysql: build MySQL DB Driver (if you plan to use MySQL as backend database);
-
-    --with-odbc: build ODBC DB driver (if you plan to connect to your backend database via ODBC; you will need UNIX ODBC package to do that);
-
-    --with-sqlite: build SQLite DB driver (if you plan to use embedded SQLite database as backend database);
-
-    --with-agent: build monitoring agent. It is strongly recommended to install agent on a server box;
-
-    --disable-encryption: Disable encryption support.
-
-    To learn more about possible configure parameters, run it with --help option.
-
-  4. Run make and make install:
-
-    :command:`make`
-
-    :command:`make install`
-
-  5. Copy sample config files to desired locations:
-
-    :command:`cp contrib/netxmsd.conf-dist /etc/netxmsd.conf`
-
-    :command:`cp contrib/nxagentd.conf-dist /etc/nxagentd.conf`
-
-    By default, both server and agent will look for configuration files in /etc
-    directory. If you wish to place configuration files in a different location,
-    don't forget to use –c command line switch for agent and –config-file command-line
-    switch for server to specify an alternate location.
-
-  6. Check that database and user are created. :ref:`install_centos_database`
-  7. Modify server configuration file (default is /etc/netxmsd.conf). It should look
-     the following way:
-
-    .. code-block:: cfg
-
-      DBDriver = mysql.ddr
-      DBServer = localhost
-      DBName = netxms
-      DBLogin = netxms
-      DBPassword = PaSsWd
-      LogFile = /var/log/netxmsd
-      LogFailedSQLQueries = yes
-
-    More information about each configuration parameter can be found there:
-    :ref:`server_configuration_parameters`.
-
-  8. Modify agent's configuration file (/etc/nxagentd.conf). For detailed description
-     of possible parameters, please consult NetXMS User's Manual. For the normal
-     server's operation, you should add at least the following line to your agent's
-     configuration file:
-
-    .. code-block:: cfg
-
-      MasterServers = 127.0.0.1, your_server_IP_address
-
-  9. Initialise this database with nxdbmgr utility using sql-script in
-     sql/dbinit_DBTYPE.sql. DBTYPE can be "mssql", "mysql", "pgsql", "oracle", or
-     "sqlite".
-
-     MySQL example:
-
-    :command:`$ /usr/local/bin/nxdbmgr init /usr/local/share/netxms/sql/dbinit_mysql.sql`
-
-  10. Run agent and server:
-
-    :command:`$ /usr/local/bin/nxagentd -d`
-
-    :command:`$ /usr/local/bin/netxmsd -d`
-    
-  
-Server default credentials:
-
-Login: admin
-
-Password: netxms
-
-.. _install_centos_database:
-
-Database
-~~~~~~~~
-
-Create Database and User with access rights to this database.
-
-Example for MySQL:
-
-.. code-block:: sql
-
-  mysql -u root -p mysql
-  mysql> CREATE DATABASE netxms;
-  mysql> GRANT ALL ON netxms.* TO netxms@localhost IDENTIFIED BY 'PaSsWd';
-  mysql> \q
-
-`Example for Oracle 11g. <https://wiki.netxms.org/wiki/Oracle>`_
-
-
-Please note that database user you have created should have rights to create
-new tables.
-
-Agent
-~~~~~
-
-Installing agent using source archive:
-
-If you wish to compile NetXMS agent with encryption support on UNIX, you must have
-OpenSSL package installed.
-
-
-  1. Download the latest version from http://www.netxms.org/download, if you don't
-     have it. You will need source archive (named netxms-VERSION.tar.gz, for example
-     netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be
-     used as a substitution for an actual version number.
-
-  2. Unpack the archive:
-
-    :command:`tar zxvf netxms-1.2.15.tar.gz`
-
-  3. Change directory to netxms-version and run configure script:
-
-    :command:`cd netxms-1.2.15`
-
-    :command:`sh ./configure --with-agent`
-
-    Important arguments:
-
-    --prefix=DIRECTORY: installation prefix, all files go to the specified directory;
-
-    --with-agent: build monitoring agent. It is strongly recommended to install agent on a server box;
-
-    --disable-encryption: Disable encryption support.
-
-    To learn more about possible configure parameters, run it with --help option.
-
-    By default all available subagents, that have required libraries are included in
-    build.
-
-  4. Run make and make install:
-
-    :command:`make`
-
-    :command:`make install`
-
-  5. Copy sample config files to desired locations:
-
-    :command:`cp contrib/nxagentd.conf-dist /etc/nxagentd.conf`
-
-    By default, agent will look for configuration files in /etc
-    directory. If you wish to place configuration files in a different location,
-    don't forget to use –c command line switch for agent.
-
-  6. Modify agent's configuration file (/etc/nxagentd.conf). For the normal
-     agent's operation, you should add at least the following line to your agent's
-     configuration file:
-
-    .. code-block:: cfg
-
-      MasterServers = your_server_IP_address
-      LogFile = log_file
-
-      More configuration parameters can be found there: :ref:`agent_configuration_file`.
-
-  10. Run agent:
-
-    :command:`$ /usr/local/bin/nxagentd -d`
-
-Management Console
-~~~~~~~~~~~~~~~~~~
-
-Desktop Management Console:
-
- 1. Download the latest version from http://www.netxms.org/download. You will need
-    Linux installer(named nxmc-VERSION-linux-gtk-x86.tar.gz or
-    nxmc-VERSION-linux-gtk-x64.tar.gz, for example nxmc-1.2.17-linux-gtk-x64.tar.gz).
- 2. Expand package to your preferred directory using command:
-
-    :command:`tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DIRECTORY`
-
- 3. Run nxmc file form extracted catalog.
-
-Web Management Console:
-
-NetXMS web interface is java based and should be deployed into servlet container to
-run. Tested containers: Tomcat7, Jetty7.
-
-  1. Install one of servlet containers that support servlet-api version 3.
-
-  2. Download latest version of WAR file from Web Interface Binaries section
-     http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
-     nxmc-1.2.17.war).
-
-  3. Copy nxmc.war to webapps directory, in a few seconds it will be autodeployed and
-     available at http://SERVER_IP:SERVER_PORT/nxmc/
-
-     Tomcat default folder:  /var/lib/tomcat6/webapps
-
-     Jetty default folder: $JETTY_HOME/webapps/
+RPM packagese are not released at the moment. Please refer to section :ref:`Installing from source <install_from_sources>`.
 
 Installing on Windows
 =====================
 
-Installing
-----------
-
 Server
-~~~~~~
+------
 
   1. Download the latest version from http://www.netxms.org/download.
      You will need Windows installer (named netxms-VERSION.exe or
-     netxms-VERSION-x64.exe, for example netxms-1.2.15.exe). Please note that in
+     netxms-VERSION-x64.exe, for example netxms-VERSION.exe). Please note that in
      following steps VERSION will be used as a substitution for an actual version
      number.
   2. Run the installer package on your server machine. Installation wizard will be
@@ -519,7 +282,7 @@ Login: admin
 Password: netxms
 
 Agent
-~~~~~
+-----
 
   1. Download the latest version from http://www.netxms.org/download, if you don't
      have it. You will need Windows Agent installer (named nxagent-VERSION.exe or
@@ -553,7 +316,7 @@ Agent
   4. Follow the prompts to complete the installation.
 
 Management console
-~~~~~~~~~~~~~~~~~~
+------------------
 
 Desktop Management Console:
 
@@ -619,178 +382,198 @@ required connection credentials: server address, port, user name, password.
   User that is used for connection should have :guilabel:`Login as mobile device`
   user right.
 
-.. _install_from_tarball:
+.. _install_from_sources:
 
-Generic installation, upgrade and downgrade using source tarball
-================================================================
+Installing from sources
+=======================
 
 Server
 ------
 
-If you wish to compile NetXMS server with encryption support on UNIX, you must have
-OpenSSL package installed.
+Since version 2.2.4 encryption support is enforced when building server.
 
+  #. Download source archive (netxms-VERSION.tar.gz) from http://www.netxms.org/download/. *VERSION* is used in names instead of an actual version number.
+  #. Unpack the archive:
 
-  1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need source archive (named netxms-VERSION.tar.gz, for example netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be used as a substitution for an actual version number.
-  2. Unpack the archive:
+        :command:`tar zxvf netxms-VERSION.tar.gz`
 
-    :command:`tar zxvf netxms-1.2.15.tar.gz`
+  #. Change directory to netxms-VERSION and run configure script:
 
-  3. Change directory to netxms-version and run configure script:
+        :command:`cd netxms-VERSION`
+        :command:`./configure --with-server --with-pgsql --with-agent`
 
-    :command:`cd netxms-1.2.15`
+        Most commonly used options (check full list with :command:`./configure --list`):
 
-    :command:`sh ./configure --with-server --with-mysql --with-agent`
+        +--------------------+------------------------------------------------------------------------------------------+
+        | Name               | Description                                                                              |
+        +====================+==========================================================================================+
+        | --prefix=DIRECTORY | Installation prefix, all files go to the specified directory                             |
+        +--------------------+------------------------------------------------------------------------------------------+
+        | --with-server      | Build server binaries. You will need to select at least one DB driver as well            |
+        +--------------------+------------------------------------------------------------------------------------------+
+        | --with-agent       | Build monitoring agent. It is strongly recommended to install agent on a server box      |
+        +--------------------+------------------------------------------------------------------------------------------+
+        | --with-pgsql       | Build Postgres DB Driver (if you plan to use PostgreSQL as backend database)             |
+        +--------------------+------------------------------------------------------------------------------------------+
+        | --with-mysql       | Build MySQL DB Driver (if you plan to use MySQL as backend database)                     |
+        +--------------------+------------------------------------------------------------------------------------------+
+        | --with-odbc        | Build ODBC DB driver (if you plan to connect to your backend database via unixODBC)      |
+        +--------------------+------------------------------------------------------------------------------------------+
+        | --with-sqlite      | Build SQLite DB driver (if you plan to use embedded SQLite database as backend database) |
+        +--------------------+------------------------------------------------------------------------------------------+
 
-    Important arguments:
+  #. Run build binaries and install them into /usr/local (unless changed with configure flag --prefix)
 
-    --prefix=DIRECTORY: installation prefix, all files go to the specified directory;
+        :command:`make`
 
-    --with-server: build server. Don't forget to add at least one DB Driver as well;
+        :command:`make install`
 
-    --with-pgsql: build Postgres DB Driver (if you plan to use PostgreSQL as backend database);
+  #. Copy sample config file:
 
-    --with-mysql: build MySQL DB Driver (if you plan to use MySQL as backend database);
+        :command:`cp contrib/netxmsd.conf-dist /usr/local/etc/netxmsd.conf`
 
-    --with-odbc: build ODBC DB driver (if you plan to connect to your backend database via ODBC; you will need UNIX ODBC package to do that);
+        By default, server load configuration file PREFIX/etc/netxmsd.conf (where PREFIX is installation prefix set by configure), unless different file is specified with command line switch "-c".
 
-    --with-sqlite: build SQLite DB driver (if you plan to use embedded SQLite database as backend database);
+  #. Create database user and adjust configuration file (netxmsd.conf) accordingly:
 
-    --with-agent: build monitoring agent. It is strongly recommended to install agent on a server box;
+     PostgreSQL:
 
-    --disable-encryption: Disable encryption support.
+        .. code-block:: sh
 
-    To learn more about possible configure parameters, run it with --help option.
+          createuser -P netxms
+          createdb -O netxms netxms
 
-  4. Run make and make install:
+        .. code-block:: cfg
 
-    :command:`make`
+          DBDriver = pgsql.ddr
+          DBServer = localhost
+          DBName = netxms
+          DBLogin = netxms
+          DBPassword = PaSsWd
 
-    :command:`make install`
+     MySQL:
 
-  5. Copy sample config files to desired locations:
+        .. code-block:: sh
 
-    :command:`cp contrib/netxmsd.conf-dist /etc/netxmsd.conf`
+          echo "CREATE DATABASE netxms;" | mysql -u root -p
+          echo "GRANT ALL on netxms.* to 'netxms'@'localhost' IDENTIFIED BY 'PaSsWd';" | mysql -u root -p
 
-    :command:`cp contrib/nxagentd.conf-dist /etc/nxagentd.conf`
+        .. code-block:: cfg
 
-    By default, both server and agent will look for configuration files in /etc
-    directory. If you wish to place configuration files in a different location,
-    don't forget to use –c command line switch for agent and –config-file command-line
-    switch for server to specify an alternate location.
+          DBDriver = mysql.ddr
+          DBServer = localhost
+          DBName = netxms
+          DBLogin = netxms
+          DBPassword = PaSsWd
 
-  6. Check that database and user for it are created. :ref:`install_centos_database`
-  7. Modify server configuration file (default is /etc/netxmsd.conf). It should look
-     the following way:
+     Oracle:
 
-    .. code-block:: cfg
+        .. code-block:: sql
 
-      DBDriver = mysql.ddr
-      DBServer = localhost
-      DBName = netxms
-      DBLogin = netxms
-      DBPassword = PaSsWd
-      LogFile = /var/log/netxmsd
-      LogFailedSQLQueries = yes
+          -- USER SQL
+          CREATE USER netxms IDENTIFIED BY PaSwD 
+          DEFAULT TABLESPACE USERS
+          TEMPORARY TABLESPACE TEMP;
+          -- QUOTAS
+          ALTER USER netxms QUOTA UNLIMITED ON USERS;
+          -- ROLES
+          GRANT CREATE SESSION, CREATE TABLE, CREATE PROCEDURE TO netxms;
 
-    More information about each configuration parameter can be found there:
-    :ref:`server_configuration_parameters`.
+        .. code-block:: cfg
 
-  8. Modify agent's configuration file (/etc/nxagentd.conf). For detailed description
-     of possible parameters, please consult NetXMS User's Manual. For the normal
-     server's operation, you should add at least the following line to your agent's
-     configuration file:
+          DBDriver = oracle.ddr
+          DBServer = //127.0.0.1/XE # instanct client compatible connection string
+          DBLogin = netxms
+          DBPassword = PaSsWd
 
-    .. code-block:: cfg
+  #. Further adjust server configuration file if required.
 
-      MasterServers = 127.0.0.1, your_server_IP_address
+     Detailed information about each configuration parameter can be found in section :ref:`server_configuration_file`.
 
-  9. Initialise this database with nxdbmgr utility using sql-script in
-     sql/dbinit_DBTYPE.sql. DBTYPE can be "mssql", "mysql", "pgsql", "oracle", or
-     "sqlite".
+  #. Create required tables and load inital configuration using nxdbmgr utility:
 
-     MySQL example:
+     PostgreSQL:
 
-    :command:`$ /usr/local/bin/nxdbmgr init /usr/local/share/netxms/sql/dbinit_mysql.sql`
+     .. code-block:: sh
 
-  10. Run agent and server:
+       /usr/local/bin/nxdbmgr init /usr/local/share/netxms/sql/dbinit_pgsql.sql
 
-    :command:`$ /usr/local/bin/nxagentd -d`
+     MySQL:
 
-    :command:`$ /usr/local/bin/netxmsd -d`
-    
+     .. code-block:: sh
+
+       /usr/local/bin/nxdbmgr init /usr/local/share/netxms/sql/dbinit_mysql.sql
+
+     Oracle:
+
+     .. code-block:: sh
+
+       /usr/local/bin/nxdbmgr init /usr/local/share/netxms/sql/dbinit_oracle.sql
+
+     SQLite:
+
+     .. code-block:: sh
+
+       /usr/local/bin/nxdbmgr init /usr/local/share/netxms/sql/dbinit_sqlite.sql
+
+  #. Run server:
+
+     .. code-block:: sh
+
+       /usr/local/bin/netxmsd -d
   
-Server default credentials:
-
-Login: admin
-
-Password: netxms
 
 Agent
-~~~~~
+-----
 
-If you wish to compile NetXMS agent with encryption support on UNIX, you must have
-OpenSSL package installed.
+  #. Download source archive (netxms-VERSION.tar.gz) from http://www.netxms.org/download/. *VERSION* is used in names instead of an actual version number.
+  #. Unpack the archive:
 
+        :command:`tar zxvf netxms-VERSION.tar.gz`
 
-  1. Download the latest version from http://www.netxms.org/download, if you don't
-     have it. You will need source archive (named netxms-VERSION.tar.gz, for example
-     netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be
-     used as a substitution for an actual version number.
+  #. Change directory to netxms-VERSION and run configure script:
 
-  2. Unpack the archive:
+        :command:`cd netxms-VERSION`
+        :command:`./configure --with-agent`
 
-    :command:`tar zxvf netxms-1.2.15.tar.gz`
+        Most commonly used options (check full list with :command:`./configure --list`):
 
-  3. Change directory to netxms-version and run configure script:
+        +--------------------+------------------------------------------------------------------------------------------+
+        | Name               | Description                                                                              |
+        +====================+==========================================================================================+
+        | --prefix=DIRECTORY | Installation prefix, all files go to the specified directory                             |
+        +--------------------+------------------------------------------------------------------------------------------+
+        | --with-agent       | Build monitoring agent. It is strongly recommended to install agent on a server box      |
+        +--------------------+------------------------------------------------------------------------------------------+
 
-    :command:`cd netxms-1.2.15`
+  #. Run build binaries and install them into /usr/local (unless changed with configure flag --prefix)
 
-    :command:`sh ./configure --with-agent`
+        :command:`make`
 
-    Important arguments:
+        :command:`make install`
 
-    --prefix=DIRECTORY: installation prefix, all files go to the specified directory;
+  #. Copy sample config file:
 
-    --with-agent: build monitoring agent. It is strongly recommended to install agent on a server box;
+        :command:`cp contrib/nxagentd.conf-dist /usr/local/etc/nxagentd.conf`
 
-    --disable-encryption: Disable encryption support.
+        By default, agent load configuration file PREFIX/etc/netxmsd.conf (where PREFIX is installation prefix set by configure), unless different file is specified with command line switch "-c".
 
-    To learn more about possible configure parameters, run it with --help option.
+  #. Adjust agent configuration file if required.
 
-    By default all available subagents, that have required libraries are included in
-    build.
+     Detailed information about each configuration parameter can be found in section :ref:`agent_configuration_file`.
 
-  4. Run make and make install:
+     Minimal required configuration:
 
-    :command:`make`
+     .. code-block:: cfg
 
-    :command:`make install`
+       MasterServers = 172.16.1.1 # server's IP - agent will drop connections unless address is whitelisted here
+       LogFile = /var/log/nxagentd
 
-  5. Copy sample config files to desired locations:
+  #. Run agent:
 
-    :command:`cp contrib/nxagentd.conf-dist /etc/nxagentd.conf`
+     .. code-block:: sh
 
-    By default, agent will look for configuration files in /etc
-    directory. If you wish to place configuration files in a different location,
-    don't forget to use –c command line switch for agent and –config-file command-line
-    switch for server to specify an alternate location.
-
-  6. Modify agent's configuration file (/etc/nxagentd.conf). For detailed description
-     of possible parameters, please consult NetXMS User's Manual. For the normal
-     server's operation, you should add at least the following line to your agent's
-     configuration file:
-
-    .. code-block:: cfg
-
-      MasterServers = your_server_IP_address
-      LogFile = log_file
-
-      More configuration parameters can be found there: :ref:`agent_configuration_file`.
-
-  10. Run agent:
-
-    :command:`$ /usr/local/bin/nxagentd -d`
+       /usr/local/bin/nxagentd -d
 
 Customizing the compilation process
 ===================================
@@ -846,19 +629,9 @@ in the same directory as nxmc.properties, correct entry will be:
   loginFormImage = /logo.jpg
 
 
-Login credentials
-=================
+Default login credentials
+=========================
 
-Default credentials
--------------------
+Default login is "admin" with password "netxms". On first login, user will be requested to change it immediately.
 
-After server installation default credentials are set:
-
-Login: admin
-
-Password: netxms
-
-Credential reset to default
----------------------------
-
-Information about access reset in case of lost password can be found in :ref:`password-reset` chapter.
+If required, password can be reset back to default using :ref:`nxdbmgr utility <password-reset>`.

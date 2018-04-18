@@ -28,13 +28,13 @@ All configuration parameters related to filemng subagent should be placed
 into **\*filemgr** section of agent's configuration file. 
 The following configuration parameters are supported:
 
-+----------------+---------+-------------------------------------------+----------------+
-| Parameter      | Format  | Description                               | Default value  |
-+================+=========+===========================================+================+
-| RootFolder     | String  | The folder to witch will be given access. | no             |
-|                |         | The following options can be set:         |                |                 
-|                |         |    - **ro** - Read-Only root              |                |
-+----------------+---------+-------------------------------------------+----------------+
++------------+----------------------------------------------+
+| Parameter  | Description                                  |
++============+==============================================+
+| RootFolder | Path to the folder which should be exposed.  |
+|            | If ";ro" is appended to path - agent will    |
+|            | reject any write operations with this folder |
++------------+----------------------------------------------+
 
 Agent's configuration file example:
 
@@ -44,9 +44,9 @@ Agent's configuration file example:
    SubAgent = filemgr.nsm
 
    [filemgr]
-   RootFolder = /home/zev
-   RootFolder = /home/zev/etc
-   RootFolder = /logs;ro
+   RootFolder = /home/zev # read/write access
+   RootFolder = /home/zev/etc # read/write access
+   RootFolder = /logs;ro # read only access
 
    
 Access rights

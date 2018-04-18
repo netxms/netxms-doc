@@ -13,7 +13,7 @@ Operating system
 NetXMS server can work on:
 
    * Windows 7 and higher, Windows Server 2003 and higher
-   * RedHat Enterprise Linux, SUSE Linux, CentOS, Debian Linux, Ubuntu Linux
+   * Red Hat Enterprise Linux, SUSE Linux, CentOS, Debian Linux, Ubuntu Linux
    * FreeBSD, NetBSD, OpenBSD
    * Solaris 10, 11
    * HP-UX 11.23, 11.31
@@ -171,12 +171,10 @@ run. Tested containers: Tomcat7, Jetty7.
      Jetty default folder: $JETTY_HOME/webapps/
 
 
-.. _centos_install:
-
 Installing on Red Hat, Fedora, CentOS or ScientificLinux
 ========================================================
 
-RPM packagese are not released at the moment. Please refer to section :ref:`Installing from source <install_from_sources>`.
+RPM packages are not released at the moment. Please refer to section :ref:`Installing from source <install_from_sources>`.
 
 Installing on Windows
 =====================
@@ -336,7 +334,7 @@ automated way of installation:
 
   1. Download the latest version from http://www.netxms.org/download. You will need
      Windows installer netxms-webui-VERSION-x64.exe or netxms-webui-VERSION.exe
-     (exmple: netxms-webui-1.2.17-x64.exe).
+     (example: netxms-webui-1.2.17-x64.exe).
 
   2. Run the installer package on your server machine. Installation wizard will be
      shown. Follow the prompts. While installation it will be possible to change
@@ -413,7 +411,7 @@ Since version 2.2.4 encryption support is enforced when building server.
         +--------------------+------------------------------------------------------------------------------------------+
         | --with-agent       | Build monitoring agent. It is strongly recommended to install agent on a server box      |
         +--------------------+------------------------------------------------------------------------------------------+
-        | --with-pgsql       | Build Postgres DB Driver (if you plan to use PostgreSQL as backend database)             |
+        | --with-pgsql       | Build PostgresSQL DB Driver (if you plan to use PostgreSQL as backend database)          |
         +--------------------+------------------------------------------------------------------------------------------+
         | --with-mysql       | Build MySQL DB Driver (if you plan to use MySQL as backend database)                     |
         +--------------------+------------------------------------------------------------------------------------------+
@@ -482,7 +480,7 @@ Since version 2.2.4 encryption support is enforced when building server.
         .. code-block:: cfg
 
           DBDriver = oracle.ddr
-          DBServer = //127.0.0.1/XE # instanct client compatible connection string
+          DBServer = //127.0.0.1/XE # instant client compatible connection string
           DBLogin = netxms
           DBPassword = PaSsWd
 
@@ -490,7 +488,7 @@ Since version 2.2.4 encryption support is enforced when building server.
 
      Detailed information about each configuration parameter can be found in section :ref:`server_configuration_file`.
 
-  #. Create required tables and load inital configuration using nxdbmgr utility:
+  #. Create required tables and load initial configuration using nxdbmgr utility:
 
      PostgreSQL:
 

@@ -55,7 +55,8 @@ Property pages:
 
 Except common properties subnets has :guilabel:`Map Appearance` and :guilabel:`Trusted Nodes` 
 tabs. :guilabel:`Map Appearance` tab defines images that will be used to display this 
-object on a :term:`Network Map`. :guilabel:`Trusted Nodes` is used to define object list that 
+object on a :term:`Network Map` and drill-down object (object that will be opened when double 
+click on this object on :term:`Network Map`). :guilabel:`Trusted Nodes` is used to define object list that 
 have access to this object from the script. 
 
 Menu items:
@@ -85,7 +86,8 @@ for communication options with this node(like host name, agent proxy and authent
 SNMP proxy and authentication and ICMP proxy), :guilabel:`Polling` tab is responsible 
 for disabling pols for specific node, :guilabel:`Location` is used to configure location
 of the node, :guilabel:`Map Appearance` tab defines images that will be used to display this 
-object on a :term:`Network Map`.
+object on a :term:`Network Map` and drill-down object (object that will be opened when double 
+click on this object on :term:`Network Map`).
 
 Menu items:
 
@@ -214,11 +216,33 @@ of this device. From the menu can be selected the period to show on history map.
 :ref:`Data Collection Configuration view<dci-configuration>`, that is used 
 to configure collected :term:`metrics <Metric>` from node. 
 
+Chassis
+-------
+
 Rack
 ----
 
+Rack is an object that should be used to visualize server room organization in NetXMS. Once rack object is created nodes can be assigned to rack, by selecting 
+rack pbject, orientation, positon, high and front, rear immages for each Node, 
+Chassis objects in properties of the object.
+
 Cluster
 -------
+
+Is created to display nodes logical organization in cluster. Cluster nodes may have 
+shared resources and networks, processes may move between nodes, so metric collection should 
+be organized accordingly. Cluster object provides option to aggregate collected data form 
+cluster nodes. More about data aggregation can be found there: :ref:`data-agregation`.
+
+Besides default property pages cluster has also:
+ - :guilabel:`Cluster Resources` - there can be configured IP resources of the cluster. Further on :guilabel:`Cluster` view of :guilabel:`Object Details` will be shown current owner of resources
+ - :guilabel:`Cluster Networks`
+ - :guilabel:`Poling`
+ - :guilabel:`Dashboards` - there dashboard can be asociates with object, so on right click assocciated desboards will be displayed in the list
+ - :guilabel:`External Resources`
+ - :guilabel:`Location`
+ - :guilabel:`Map Appearance`
+ - :guilabel:`Trusted Nodes`
 
 Intrface
 --------
@@ -248,7 +272,8 @@ Besides default property pages condition has also:
    - :guilabel:`Script` tab is used to write script that will calculate if condition should 
      be activated or deactivated.
    - :guilabel:`Map Appearance` tab defines images that will be used to display this 
-      object on a :term:`Network Map`. 
+      object on a :term:`Network Map` and drill-down object (object that will be opened when double 
+      click on this object on :term:`Network Map`). 
    - :guilabel:`Trusted Nodes` is used to define object list that 
       have access to this object from the script. 
      
@@ -271,7 +296,8 @@ Besides default property pages condition has also:
    - :guilabel:`Automatic bind` about this functionality can be found :ref:`there<automatic-bind>`
    - :guilabel:`Location`  is used to configure location of the node
    - :guilabel:`Map Appearance` tab defines images that will be used to display this 
-      object on a :term:`Network Map`. 
+      object on a :term:`Network Map` and drill-down object (object that will be opened when double 
+click on this object on :term:`Network Map`). 
    - :guilabel:`Trusted Nodes` is used to define object list that 
       have access to this object from the script. 
 

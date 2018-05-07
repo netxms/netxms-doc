@@ -663,5 +663,10 @@ that will be available like $1, $2, $3..., $9 variables. To accept arguments met
   # With DCI parameters
   ExternalTable(*)=dciName:instanceColumns=columnName;description=description;separator=|:command $1 $2
 
-
-
+Separator supports special macross for separator:
+    
+    * \\n - \\n
+    * \\r - \\r
+    * \\s - space
+    * \\t - tab
+    * \\u115 - unicode character number 115

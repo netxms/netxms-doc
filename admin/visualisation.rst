@@ -179,11 +179,13 @@ If there is chosen manual layout, then after each object movement map should be 
 to save the new place of object. 
 
 
-Object status
-~~~~~~~~~~~~~
+Display object as
+~~~~~~~~~~~~~~~~~
+
    * Show status background - will display background behind object image according to it's state.
    * Show status icon - will display icon of object state near each object
    * Show status frame - will display frame around object icon according to it's state
+   * Floor plan - will display nodes as ajustable recatangles. This can be used to display hardware placment on room plan. 
 
 
 Routing

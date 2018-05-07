@@ -268,6 +268,8 @@ collection and processing will occur only if node you configured DCI for is
 current owner of this resource. This field is valid only for cluster member
 nodes.
 
+.. _data-agregation:
+
 Data aggregation
 ~~~~~~~~~~~~~~~~
 

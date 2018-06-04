@@ -141,6 +141,9 @@ In the ``<file>`` tag you should specify log file to apply this parser to. To sp
    * - keepopen
      - Defines if file is keped opened all the rime or is reopened on each parsing iteration. 
      - 1
+   * - ignoreModificationTime
+     - Ignores modification time of log file 
+     - 0
 
  
 .. _log-monitoring-macros:

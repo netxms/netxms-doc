@@ -195,80 +195,14 @@ Each config has a name, filter and config content.
 
 .. figure:: _images/agent_config_manager.png
 
-.. _agent-policies-label:
+Agent configuration policy
+--------------------------
 
-Agent Policies
---------------
+Another option to store and spread agent configuration are agent policies. In this case agent 
+configuration is stored on the server side as a policy and applied to the agents from the server 
+by the user. More information about policies and it's types can be found in 
+:ref:`agent-policies-label` chapter.
 
-Agent policies can be configured on server in :guilabel:`Policies` part. There can be 
-used the same parameters and format as in any NetXMS agent configuration file. 
-
-To create policy in menu of container where should be created policy select 
-:menuselection:`Create->Agent Configuration File...` and give required object name and 
-press :guilabel:`OK`. Than newly created policy can be modified by selecting 
-:menuselection:`Edit Policy...` from object menu. 
-
-Example:
-
-.. code-block:: xml
-
-  <config>
-    <agent>
-      <!-- there can be added comment -->
-      <MasterServers>127.0.0.1</MasterServers>
-      <SubAgent>netsvc.nsm</SubAgent>
-      <SubAgent>dbquery.nsm</SubAgent>
-      <SubAgent>filemgr.nsm</SubAgent>
-    </agent>
-    <DBQUERY>
-      <Database>id=myDB;driver=mysql.ddr;server=127.0.0.1;login=netxms;password=xxxxx;dbname=netxms</Database>
-      <Query>dbquery1:myDB:60:SELECT name FROM images</Query>
-      <ConfigurableQuery>dbquery2:myDB:Comment in param :SELECT name FROM images WHERE name like ?</ConfigurableQuery>
-      <ConfigurableQuery>byID:myDB:Comment in param :SELECT name FROM users WHERE id=?</ConfigurableQuery>
-    </DBQUERY>      
-    <filemgr>
-      <RootFolder>/</RootFolder>
-    </filemgr>
-  </config>
-
-Example:
-
-      .. figure:: _images/policy_example.png
-
-After policy is created it should be installed on required nodes. Node and agent on it 
-should be up and running. Nodes should be manually restarted after policy was applied to 
-run it with new configuration. To install policy in object menu select :menuselection:`Install...`,
-select :guilabel:`Install on nodes selected below`, select required nodes in object browser and 
-click :guilabel:`OK`.
-
-Installed policy configurations are stored as additional config files under agent 
-:guilabel:`DataDirectory`. List of applied policies is stored agent local database. If policy is 
-successfully applied on a :term:`node <Node>` it will be seen under this policy.
-
-Example:
-
-      .. figure:: _images/applied_policy.png
-
-If Policies have changed it should be reapplied manually. Is is done with command in 
-object menu :menuselection:`Install...`, then select :guilabel:`Install on all nodes where this 
-policy already installed` and click :guilabel:`OK`.
-
-Policy can be also uninstalled. To do this right click on policy object and select 
-:menuselection:`Uninstall...`, select node from witch this policy will be removed and click :guilabel:`OK`.
-In this case additional configuration file is removed from node. In order to apply the changes it is 
-required manually to restart the agent. 
-
-In case of Policy deploy, Policy uninstall, Policy update job fail, unsuccessfully operation will be 
-scheduled for re-execution. :guilabel:`JobRetryCount` server configuration variable represents 
-number of retries. First time job is rescheduled in 10 minutes. Each next wait time is twice more 
-than the previous time.  
-
-Installed policies are checked on configuration poll and are reinstalled if policy is marked as 
-applied on a server, but is missing on the node.
-      
-Advantage of creating configuration in policies - if configuration for nodes is changed, 
-then it should be changed only once for all nodes on witch it is applied. 
- 
 Agent Policies vs. Agent Configuration Files on Server 
 ------------------------------------------------------
 
@@ -299,6 +233,114 @@ Agent Policies:
     like(Target for PING subagent or Query for DBQUERY), then policy will merge lists of configs
   - Can work with tunnel agent connection
 
+.. _agent-policies-label:
+  
+Agent Policies
+==============
+
+Agent policies can be configured on server in :guilabel:`Policies` part. There are 2 types of
+policies: Agent configuration file policy and Log parser policy. 
+
+Advantage of creating configuration in policies - if configuration for nodes is changed, 
+then it should be changed only once for all nodes on witch it is applied. 
+
+Agent configuration file policy
+-------------------------------
+
+There can be 
+used the same parameters and format as in any NetXMS agent configuration file. 
+
+To create policy in menu of container where should be created policy select 
+:menuselection:`Create->Agent configuration policy...` and give required object name and 
+press :guilabel:`OK`. Than newly created policy can be modified by selecting 
+:menuselection:`Edit Policy...` from object menu. 
+
+Example:
+
+.. code-block:: xml
+
+  <config>
+    <agent>
+      <!-- there can be added comment -->
+      <MasterServers>127.0.0.1</MasterServers>
+      <SubAgent>netsvc.nsm</SubAgent>
+      <SubAgent>dbquery.nsm</SubAgent>
+      <SubAgent>filemgr.nsm</SubAgent>
+    </agent>
+    <DBQUERY>
+      <Database>id=myDB;driver=mysql.ddr;server=127.0.0.1;login=netxms;password=xxxxx;dbname=netxms</Database>
+      <Query>dbquery1:myDB:60:SELECT name FROM images</Query>
+      <ConfigurableQuery>dbquery2:myDB:Comment in param :SELECT name FROM images WHERE name like ?</ConfigurableQuery>
+      <ConfigurableQuery>byID:myDB:Comment in param :SELECT name FROM users WHERE id=?</ConfigurableQuery>
+    </DBQUERY>      
+    <filemgr>
+      <RootFolder>/</RootFolder>
+    </filemgr>
+  </config>
+
+Example:
+
+      .. figure:: _images/policy_example.png
+      
+Nodes should be manually restarted after policy was applied, changed or removed 
+to run it with new configuration.
+      
+Log parser policy
+-----------------
+
+Infromation about log parser format available in :ref:`log-monitoring` chapter. 
+
+To create policy in menu of container where should be created policy select 
+:menuselection:`Create->Log parser policy...` and give required object name and 
+press :guilabel:`OK`. Than newly created policy can be modified by selecting 
+:menuselection:`Edit Policy...` from object menu. 
+
+Parser configuration is applied on instalaltion - no agent restart required. 
+
+Policy group
+------------
+
+Policies can be organized into groups. 
+
+To create new group select :menuselection:`Create->Policy group...` and give 
+required object name and press :guilabel:`OK`.
+
+Common information
+------------------
+
+After policy is created it should be installed on required nodes. Node and agent on it 
+should be up and running. To install policy in object menu select :menuselection:`Install...`,
+select :guilabel:`Install on nodes selected below`, select required nodes in object browser and 
+click :guilabel:`OK`. 
+
+Installed policy configurations are stored as additional config files under agent 
+:guilabel:`DataDirectory`. List of applied policies is stored in agent local database. If policy is 
+successfully applied on a :term:`node <Node>` it will be seen under this policy.
+
+Example:
+
+      .. figure:: _images/applied_policy.png
+
+If Policies have changed it should be reapplied manually. Is is done with command in 
+object menu :menuselection:`Install...`, then select :guilabel:`Install on all nodes where this 
+policy already installed` and click :guilabel:`OK`.
+
+Policy can be also uninstalled. To do this right click on policy object and select 
+:menuselection:`Uninstall...`, select node from witch this policy will be removed and click :guilabel:`OK`.
+In this case additional configuration file is removed from node.  
+
+In case of Policy deploy, Policy uninstall, Policy update job fail, unsuccessfully operation will be 
+scheduled for re-execution. :guilabel:`JobRetryCount` server configuration variable represents 
+number of retries. First time job is rescheduled in 10 minutes. Each next wait time is twice more 
+than the previous time.  
+
+Installed policies are checked on configuration poll and are reinstalled if policy is marked as 
+applied on a server, but is missing on the node.
+      
+.. note::
+    
+    Some types of policies require agent restart for changes to be applied. 
+ 
 
 Agent registration
 ==================

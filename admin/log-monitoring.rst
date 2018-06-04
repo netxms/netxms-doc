@@ -19,7 +19,19 @@ Agent Configuration for Log Monitoring
 ======================================
 
 To be able to monitor logs with NetXMS agent, you should load ``LOGWATCH``
-subagent and define parser configuration for each log file you wish to monitor.
+subagent. There are two options to define parser configuration:
+
+#. Create log parser rule files on the system and define them in ``LOGWATCH`` 
+   part of agent configuration. 
+#. Create log parser policy and apply them to all required nodes. In this 
+   case file will be automatically created on the file system and added to 
+   processing. More information about :ref:`agent-policies-label`
+    
+.. note::
+
+   Logs files with same processing rules can be configured in the same parser 
+   configuration file. 
+   
 Example of agent configuration file:
 
 .. code-block:: cfg
@@ -52,6 +64,7 @@ Parser definition file is an XML document with the following structure:
 
     <parser>
         <file>file name</file>
+        <!-- more <file> tags can follow -->
         <macros>
             <macro name="name">macro body</macro>
             <!-- more <macro> tags can follow -->
@@ -86,28 +99,50 @@ In the ``<parser>`` tag you can specify the following options:
 +------------+------------------------------------------------------+---------------+
 | trace      | Trace level                                          | 0             |
 +------------+------------------------------------------------------+---------------+
+| name       | Parser name that is used in trace                    | *empty*       |
++------------+------------------------------------------------------+---------------+
 
 
 <file> Tag
 ==========
 
-In the ``<file>`` tag you should specify log file to apply this parser to. To specify Windows Event Log, prepend it's name with asterisk (``*``), for example ``*System``.
+In the ``<file>`` tag you should specify log file to apply this parser to. To specify Windows Event Log, prepend it's name with asterisk (``*``), for example ``*System``. Multiples ``<file>`` tags can be used - in this case same rules will be applied to all files. 
 
-It is possible to specify the encoding of the log file by adding the ``encoding`` attribute. By default, the parser will attempt to detect the encoding by scaning the file`s BOM. 
+.. list-table::
+   :header-rows: 1
+   :widths: 50 200 200
 
-File encodings that can be defined in the ``encoding`` attribute:
+   * - Option
+     - Description
+     - Default value
+   * - encoding
+     - It is possible to specify the encoding of the log file by adding the ``encoding`` attribute. 
+       File encodings that can be defined:
+       
+            * ``ACP``
+            * ``UTF-8``
+            * ``UCS-2``
+            * ``UCS-2LE``
+            * ``UCS-2BE``
+            * ``UCS-4``
+            * ``UCS-4LE``
+            * ``UCS-4BE``
+        
+       When using ``UCS-2`` or ``UCS-4`` values, the endianness of the system will be detected automatically.
+       
+     - By default, the parser will attempt to detect the encoding by scanning the file`s BOM.
+   * - preallocated
+     - Should be set when log file is prealocated(filled with zeros) before logs get written into it. 
+     - 0
+   * - snapshot
+     - Create VSS snapshot and uses snapshot file for parsing. Can be used when log is opened by other 
+       application as exclusive open. Windows only. Can highly increase CPU usage.  
+     - 0
+   * - keepopen
+     - Defines if file is keped opened all the rime or is reopened on each parsing iteration. 
+     - 1
 
-* ``ACP``
-* ``UTF-8``
-* ``UCS-2``
-* ``UCS-2LE``
-* ``UCS-2BE``
-* ``UCS-4``
-* ``UCS-4LE``
-* ``UCS-4BE``
-
-When using ``UCS-2`` or ``UCS-4`` values, the endianness of the system will be detected automatically.
-
+ 
 .. _log-monitoring-macros:
 
 Macros
@@ -120,6 +155,9 @@ format ``dd/mm/yy HH:MM:SS``. You can define the following macro:
 
 .. code-block:: xml
 
+    <macros>
+        <macro name="timestamp">dd/mm/yy HH:MM:SS</macro>
+    </macros>
     <rules>
         <rule>
             <match>@{timestamp}.*([A-Za-z]+) failed.*</match>
@@ -138,8 +176,12 @@ Please note that ``<macros>`` section always should be located before
 Matching rules
 ==============
 
-In the ``<rules>`` section you define matching rules for log records. Each rule
-placed inside it's own ``<rule>`` tag. Each rule can have additional options:
+In the ``<rules>`` section you define matching rules for log records.
+
+<rule> Tag
+-----------
+
+Each rule placed inside it's own ``<rule>`` tag. Each rule can have additional options:
 
 .. list-table::
    :widths: 15 70 15
@@ -149,7 +191,7 @@ placed inside it's own ``<rule>`` tag. Each rule can have additional options:
      - Description
      - Default value
    * - break
-     - If this option set to ``1`` and curent line match to regular expression
+     - If this option set to ``1`` and current line match to regular expression
        in the rule, parser will stop processing of current line, even if global
        parser option ``processAll`` was set to ``1``. If this option set to
        ``0`` (which is default), processing will stop according to
@@ -157,6 +199,9 @@ placed inside it's own ``<rule>`` tag. Each rule can have additional options:
      - 0
    * - context
      - Name of the context this rule belongs to. If this option is set, rule will be processed only if given context was already activated with <context> tag in one of the rules processed earlier (it can be either same line or one of the previous lines).
+     - *empty*
+   * - name
+     - Name of rule that is used in trace
      - *empty*
 
 Inside the ``<rule>`` section there are the following additional tags:
@@ -176,7 +221,7 @@ passed as arguments of generated event. You can use macros defined in
 match rules (rules when log record considered matching if it does not match
 regular expression). Inverted match can be set by setting attribute ``invert``
 to ``1``. Other possible option that can be configured is number of times that 
-exptession should be matched to generate event. 
+expression should be matched to generate event. 
 
 Some examples:
 
@@ -210,9 +255,9 @@ Possible attributes for tag ``<match>``:
 | Option         | Description                                          | Default value |
 +================+======================================================+===============+
 | invert         | If this option set to ``true``, it will be matched   | false         |
-|                | amy line that does not contain matching expression.  |               |
+|                | any line that does not contain matching expression.  |               |
 +----------------+------------------------------------------------------+---------------+
-| repeatCount    | The number ot times expression should be matched to  | 0             |
+| repeatCount    | The number of times expression should be matched to  | 0             |
 |                | generate event. It this option set to ``0``, event   |               |
 |                | will be generated immediately on expression match.   |               |
 +----------------+------------------------------------------------------+---------------+
@@ -478,17 +523,18 @@ Tag ``<description>`` contains textual description of the rule, which will be sh
 
 Tag ``<event>`` defines event to be generated if current log record match to
 regular expression defined in ``<match>`` tag. Inside ``<event>`` tag you
-should specify event code to be generated (or event name if you configure
-server-side syslog parsing). If you wish to pass parts of log record text
-extracted with regular expression as event's parameters, you should specify
-correct number of parameters in ``params`` attribute.
+should specify event name or event code to be generated. All matched capture groups 
+will be given to the event as an event parameters.  
 
 
 <context> Tag
 -------------
 
-Tag ``<context>`` defines activation or deactivation of contexts. It has the
-following format:
+Tag ``<context>`` defines activation or deactivation of contexts. This option can 
+be used for multi line match. First line sets context and next generates event in case if 
+context was set. Examples can be found further in :ref:`log_parser_examles` section.
+
+It has the following format:
 
 .. code-block:: xml
 
@@ -503,8 +549,10 @@ Possible actions are:
 +--------+----------------------------------------------------+
 | set    | Activate (set "active" flag of) given context.     |
 +--------+----------------------------------------------------+
+| reset  | Defines how context will be deactivated            |
++--------+----------------------------------------------------+
 
-Reset mode determines how context will be deactivated (reset). Possible values for reset mode are:
+Possible values for reset mode are:
 
 +------------+-------------------------------------------------------+
 | Reset mode | Description                                           |
@@ -521,10 +569,37 @@ Both ``action`` and ``reset`` attributes can be omitted; default value for
 ``action`` is ``set``, and default value for ``reset`` is ``auto``.
 
 
+Excluse schedule
+================
+
+Tag ``<exclusionSchedules>`` defines time when file should not be parsed. Each cron expression 
+should be defined in ``<schedule>``. This should be used to define time when file should not be 
+opened. Once time does not match cron file will be reopened and all added lines will be parsed. 
+
+Examle:
+
+.. code-block:: xml
+
+    <parser>
+        <file>/var/log/messages</file>
+        <rules>
+            <rule>
+                <match>error</match>
+                <event>USR_APP_ERROR</event>
+            </rule>
+        </rules>
+    </parser>
+    <exclusionSchedules>
+        <schedule>0-2 0 * * *</schedule>
+    </exclusionSchedules>
+
+    
+.. _log_parser_examles:
+
 Examples of Parser Definition File
 ==================================
 
-Generate event with code ``100000`` if line in the log file /var/log/messages
+Generate event with name ``USR_APP_ERROR`` if line in the log file /var/log/messages
 contains word error:
 
 .. code-block:: xml
@@ -534,12 +609,12 @@ contains word error:
         <rules>
             <rule>
                 <match>error</match>
-                <event>100000</event>
+                <event>USR_APP_ERROR</event>
             </rule>
         </rules>
     </parser>
 
-Generate event with code ``200000`` if line in the log file ``C:\demo.log``
+Generate event with name ``SYS_PROCESS_START_FAILED`` if line in the log file ``C:\demo.log``
 contains word ``process:`` and is immediately following line containing text
 ``process startup failed``; everything after word ``process:`` will be sent as
 event's parameter:
@@ -555,7 +630,7 @@ event's parameter:
             </rule>
             <rule context="STARTUP_FAILED">
                 <match>process:(.*)</match>
-                <event params="1">200000</event>
+                <event>SYS_PROCESS_START_FAILED</event>
             </rule>
         </rules>
     </parser>
@@ -564,7 +639,8 @@ Passing parameters to events
 ============================
 
 The log parser can send parameters to events.
-Anything matched by the regular expression within () will be sent to the event as a parameter.
+Anything matched by the regular expression within () will be sent to the event as a parameter. 
+For Windows event log event strings also are added. 
 
 Consider the following line is received via syslog, or added to a monitored file:
 
@@ -577,6 +653,6 @@ We can extract username and login method from the syslog message, and pass it as
 .. code-block:: xml
 
     <match>system,error,critical login failure for user (.*) from .* via (.*)</match>
-    <event params="2">10000</event>
+    <event>10000</event>
     
 Username will be sent to the event as %1, IP address will not be sent, and login method will be sent as %2.

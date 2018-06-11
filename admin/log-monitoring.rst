@@ -82,8 +82,10 @@ Parser definition file is an XML document with the following structure:
         </rules>
     </parser>
 
-
-Entire ``<macros>`` section can be omitted, and inside ``<rule>`` tag only ``<match>`` is mandatory.
+    
+.. note::
+    
+    Entire ``<macros>`` section can be omitted. Empty ``<rule>`` tag will match any line (like <rule> <match>.*</match> </rule>).  
 
 Global Parser Options
 =====================
@@ -138,8 +140,8 @@ In the ``<file>`` tag you should specify log file to apply this parser to. To sp
      - Create VSS snapshot and uses snapshot file for parsing. Can be used when log is opened by other 
        application as exclusive open. Windows only. Can highly increase CPU usage.  
      - 0
-   * - keepopen
-     - Defines if file is keped opened all the rime or is reopened on each parsing iteration. 
+   * - keepOpen
+     - Defines if the file is kept open or reopened on each parsing iteration. 
      - 1
    * - ignoreModificationTime
      - Ignores modification time of log file 
@@ -572,14 +574,14 @@ Both ``action`` and ``reset`` attributes can be omitted; default value for
 ``action`` is ``set``, and default value for ``reset`` is ``auto``.
 
 
-Excluse schedule
-================
+<exclusionSchedules> Tag
+------------------------
 
 Tag ``<exclusionSchedules>`` defines time when file should not be parsed. Each cron expression 
 should be defined in ``<schedule>``. This should be used to define time when file should not be 
 opened. Once time does not match cron file will be reopened and all added lines will be parsed. 
 
-Examle:
+Example:
 
 .. code-block:: xml
 
@@ -591,10 +593,10 @@ Examle:
                 <event>USR_APP_ERROR</event>
             </rule>
         </rules>
+        <exclusionSchedules>
+            <schedule>0-2 0 * * *</schedule>
+        </exclusionSchedules>
     </parser>
-    <exclusionSchedules>
-        <schedule>0-2 0 * * *</schedule>
-    </exclusionSchedules>
 
     
 .. _log_parser_examles:
@@ -642,8 +644,23 @@ Passing parameters to events
 ============================
 
 The log parser can send parameters to events.
-Anything matched by the regular expression within () will be sent to the event as a parameter. 
-For Windows event log event strings also are added. 
+All capture groups will be sent to the event as a parameters. For Windows additional 
+
++----------+----------------------------------------------------+
+| Number   | Description                                        |
++==========+====================================================+
+| 1 to n   | Capture groups                                     |
++----------+----------------------------------------------------+
+| n+1      | Windows publisher name                             |
++----------+----------------------------------------------------+
+| n+2      | Windows event id                                   |
++----------+----------------------------------------------------+
+| n+3      | Windows severity                                   |
++----------+----------------------------------------------------+
+| n+4      | Windows record Id                                  |
++----------+----------------------------------------------------+
+| n+5 to k | Windows event strings                              |
++----------+----------------------------------------------------+
 
 Consider the following line is received via syslog, or added to a monitored file:
 

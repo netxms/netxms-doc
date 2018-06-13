@@ -342,6 +342,44 @@ automated way of installation:
 
   3. After installation procedure is finished check that WEB GUI is available at
      http://SERVER_IP:SERVER_PORT/nxmc/
+     
+Unattended installation of NetXMS Agent
+---------------------------------------
+
+Windows Agent installer (named nxagent-VERSION.exe, for example nxagent-0.2.20.exe),
+has various command line options for unattended installation. These options are following:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 50 200
+   
+   * - Option
+     - Description
+   * - /CENTRALCONFIG
+     - Read configuration from server on startup
+   * - /DIR=path
+     - Set installation directory (default is C:\NetXMS)
+   * - /LOCALCONFIG 
+     - Use local configuration file (it is the default)
+   * - /LOG
+     - Causes Setup to create a log file in the user's TEMP directory detailing file installation and [Run] actions taken during the installation process. 
+   * - /NOSUBAGENT=name
+     - Disable subagent name
+   * - /SERVER=IP
+     - Set server IP address or host name (will be set in configuration file as MasterServers)
+   * - /SILENT
+     - Don't show installation wizard, only a progress bar
+   * - /SUBAGENT=name 
+     - Add sub-agent loading directive to configuration file. You can specify this parameter multiple times to add more than one sub-agent. List of possible subagents: :ref:`subagent_list`.
+   * - /SUPPRESSMSGBOXES 
+     - Don't ask user anything
+   * - /VERYSILENT  
+     - Don't show anything
+     
+Example:
+     
+:command:`nxagent-1.0.5.exe /VERYSILENT /SUPPRESSMSGBOXES /SERVER=10.0.0.1 /SUBAGENT=UPS /SUBAGENT=PING`
+     
 
 Install on Android
 ==================

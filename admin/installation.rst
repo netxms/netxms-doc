@@ -347,7 +347,9 @@ Unattended installation of NetXMS Agent
 ---------------------------------------
 
 Windows Agent installer (named nxagent-VERSION.exe, for example nxagent-0.2.20.exe),
-has various command line options for unattended installation. These options are following:
+has various command line options for unattended installation. Installation will ignore 
+any configuration file options (/CONFIGENTRY, /NOSUBAGENT, /SERVER, /SUBAGENT) if config 
+file already exists or if /CENTRALCONFIG option is used. These options are following:
 
 .. list-table::
    :header-rows: 1
@@ -357,6 +359,8 @@ has various command line options for unattended installation. These options are 
      - Description
    * - /CENTRALCONFIG
      - Read configuration from server on startup
+   * - /CONFIGENTRY  
+     - It can be used to add any parameter to configuration file during initial install. You can specify it multiple times to add multiple lines. Section names can be added as well.
    * - /DIR=path
      - Set installation directory (default is C:\NetXMS)
    * - /LOCALCONFIG 
@@ -378,8 +382,14 @@ has various command line options for unattended installation. These options are 
      
 Example:
      
-:command:`nxagent-1.0.5.exe /VERYSILENT /SUPPRESSMSGBOXES /SERVER=10.0.0.1 /SUBAGENT=UPS /SUBAGENT=PING`
+:command:`nxagent-1.0.5.exe /VERYSILENT /SUPPRESSMSGBOXES /SERVER=10.0.0.1 /SUBAGENT=UPS /SUBAGENT=FILEMGR /CONFIGENTRY=ZoneUIN=15 /CONFIGENTRY=[FILEMGR] /CONFIGENTRY=RootFolder=C:\`
      
+This command will add 3 lines at the end of generated config file:
+
+.. code-block::
+    ZoneUIN=15
+    [FILEMGR]
+    RootFolder=C:\
 
 Install on Android
 ==================

@@ -127,16 +127,35 @@ Self signed certificate sample
 This manual describes only simplest option: self signed certificate creation without password. It 
 does not contain any information about file access right assignment or certificate password configuration. 
 
-    * Create private root key:
-        openssl genrsa -out rootCA.key 2048
-    * Create self signed root certificate:
-        openssl req -x509 -new -key rootCA.key -days 10000 -out rootCA.crt
-    * Create server key
-        openssl genrsa -out server.key 2048
-    * Create server certificate
-        openssl req -new -key server.key -out server.csr
-    * Sign server certificate with root certificate
-        openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 5000
+    #. Create private root key:
+        :command:`openssl genrsa -out rootCA.key 2048`
+    #. Create self signed root certificate:
+        :command:`openssl req -x509 -new -key rootCA.key -days 10000 -out rootCA.crt`
+    #. Create server key
+        :command:`openssl genrsa -out server.key 2048`
+    #. Create :file:`openssl.conf` file. Content of file (dn section should be changed accordingly):
+    
+        .. code-block:: cfg 
+            
+            [req]
+            distinguished_name = dn
+            req_extensions = v3_ca
+            prompt = no
+
+            [dn]
+            countryName = LV
+            stateOrProvinceName = Riga
+            localityName = Riga
+            organizationName = netxms.org
+            commonName = NetXMS Server
+
+            [v3_ca]
+            basicConstraints = CA:TRUE    
+    
+    #. Create server certificate
+        :command:`openssl req -new -key server.key -out server.csr -config openssl.conf`
+    #. Sign server certificate with root certificate
+        :command:`openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 5000 -extfile openssl.conf -extensions v3_ca`
 
 Add newly created certificates to server configuration (netxmsd.conf file).
 

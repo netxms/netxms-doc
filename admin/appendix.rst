@@ -195,6 +195,9 @@ Agent configuration file (nxagentd.conf)
    * - DebugLevel
      - Set agent debug logging level (0 - 9).  Value of 0 turns off debugging, 9 enables very detailed logging.  Can also be set with command line "-D<level>" option.
      - 0
+   * - DebugTags
+     - Set agent debug logging level (0 - 9) for exact log tag or log tag mask. Value of 0 turns off debugging, 9 enables very detailed logging. Configuration should look like ``debugTag:logLevel`` (like ``db.conn:6``). To configure multiple log tags, you should use multiple DebugTags parameters or write them coma separated (like ``proc.spexec:8,tunnel.*:4,db.conn:6``).
+     - 
    * - DisabeIPv4
      - Disables (yes) or enables(no) IPv4 support.
      - no
@@ -401,6 +404,9 @@ Server configuration file (netxmsd.conf)
   * - DebugLevel
     - Set server debug logging level (0 - 9).  Value of 0 turns off debugging, 9 enables very detailed logging.  Can also be set with command line ``-D <level>`` option.
     - 0
+   * - DebugTags
+     - Set server debug logging level (0 - 9) for exact log tag or log tag mask. Value of 0 turns off debugging, 9 enables very detailed logging. Configuration should look like ``debugTag:logLevel`` (like ``agent.tunnel.*:4``). To configure multiple log tags, you should use multiple DebugTags parameters or write them coma separated (like ``crypto.*:8,agent.tunnel.*:4``).
+     - 
   * - DumpDirectory
     - Directory for storing crash dumps.
     - "/" or "C:\"

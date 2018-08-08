@@ -247,8 +247,8 @@ then it should be changed only once for all nodes on witch it is applied.
 Agent configuration file policy
 -------------------------------
 
-There can be 
-used the same parameters and format as in any NetXMS agent configuration file. 
+There can be used the same parameters and format as in any NetXMS agent configuration file 
+(key=value format or XML format).
 
 To create policy in menu of container where should be created policy select 
 :menuselection:`Create->Agent configuration policy...` and give required object name and 
@@ -256,6 +256,22 @@ press :guilabel:`OK`. Than newly created policy can be modified by selecting
 :menuselection:`Edit Policy...` from object menu. 
 
 Example:
+
+.. code-block:: cfg
+
+  MasterServer=127.0.0.1
+  SubAgent=netsvc.nsm
+  SubAgent=dbquery.nsm
+  SubAgent=filemgr.nsm
+
+  [DBQUERY]
+  Database=id=myDB;driver=mysql.ddr;server=127.0.0.1;login=netxms;password=xxxxx;dbname=netxms
+  Query=dbquery1:myDB:60:SELECT name FROM images
+  ConfigurableQuery=dbquery2:myDB:Comment in param :SELECT name FROM images WHERE name like ?
+  ConfigurableQuery=byID:myDB:Comment in param :SELECT name FROM users WHERE id=?
+    
+  [filemgr]
+  RootFolder=/
 
 .. code-block:: xml
 

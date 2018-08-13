@@ -462,72 +462,23 @@ alarms for that node - in that case node's status will change to severity of mos
 NXLS Persistent Storage
 =======================
 
-.. TODO::
-  Once will be implemented - update functionality description.
+NXSL
+----
 
-Situations Overview
--------------------
+There are 2 functions:
+    - ReadPersistentStorage("key") - read value by key 
+    - WritePersistentStorage("key", "value") - insert or update value by key. If value will be empty - variable will be deleted. 
 
-Situations is a special type of event processing objects which allow you to
-track current state of your infrastructure and process events accordingly. Each
-situation has one or more instances, and each instance has one or more
-attributes. Situation objects allow you to store information about current
-situation in attributes and then use this information in event processing. For
-example, if you have one service (``service A``) depending on another
-(``service B``), and in case of ``service B`` failure you wish to get alarm
-about ``service B`` failure, and not about consequent ``service A`` failure. To
-accomplish this, you can do the following:
+View
+----
 
-#. Create situation object named ``ServiceStatus``
-#. In event processing policy, for processing of event indicating ``service B``
-   failure, add situation attribute update: update situation ``ServiceStatus``,
-   instance ``Service_B``, set attribute ``status`` to ``failed``
-#. In event processing policy, for rule generating alarm in case of ``service
-   A`` failure, add additional filtering using script - to match this rule only
-   if ``service B`` is not failed. Your script may look like the following:
+:guilabel:`Persistent Storage` view (:menuselection:`Configuration --> Persistent Storage`) provide information about current state of 
+Persistent Storage variables.
 
-
-.. code-block:: c
-
-  sub main()
-  {
-      s = FindSituation("ServiceStatus", "Service_B");
-      if (s != NULL)
-      {
-          if (s->status == "failed")
-              return 0; // Don't match rule
-      }
-      return 1; // Match rule
-  }
-
-
-Defining Situations
--------------------
-
-Situations can be configured via management console. To open situations editor,
-select :menuselection:`Configuration --> Situations Manager`. You will see
-situations tree. At the top of the tree is an abstract root element. Below are
-all defined situations - initially there are no situations, so you will see
-only root element. You can create situation either by right-clicking root
-element and selecting :guilabel:`Create` from pop-up menu.
-
-Next level in the tree below situations is situation instances. Initially it is
-empty, but when situations start updating, you will see existing instances for
-each situation.
-
-
-Updating Situations
--------------------
-
-Situations can be updated via :guilabel:`Event Processing Policy`. To update
-situation, you can edit :guilabel:`Situation` field in appropriate rule.
-Situation update dialog will looks like following:
-
-
-You can select situation to update, and enter instance name and attributes to
-be set. In instance name and attributes' values you can use same macros as in
-alarm generation.
-
+.. figure:: _images/pstorage.png
+  
+.. Note::
+    Situations functionality is depricated. Persistent storage should be used instead.
 
 .. _event-processing-macros:
 

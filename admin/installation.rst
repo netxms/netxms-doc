@@ -382,11 +382,12 @@ file already exists or if /CENTRALCONFIG option is used. These options are follo
      
 Example:
      
-:command:`nxagent-1.0.5.exe /VERYSILENT /SUPPRESSMSGBOXES /SERVER=10.0.0.1 /SUBAGENT=UPS /SUBAGENT=FILEMGR /CONFIGENTRY=ZoneUIN=15 /CONFIGENTRY=[FILEMGR] /CONFIGENTRY=RootFolder=C:\`
+:command:`nxagent-1.0.5.exe /VERYSILENT /SUPPRESSMSGBOXES /SERVER=10.0.0.1 /SUBAGENT=UPS /SUBAGENT=FILEMGR /CONFIGENTRY=ZoneUIN=15 /CONFIGENTRY=[FILEMGR] /CONFIGENTRY=RootFolder=C:\\`
      
 This command will add 3 lines at the end of generated config file:
 
-.. code-block::
+.. code-block:: cfg
+
     ZoneUIN=15
     [FILEMGR]
     RootFolder=C:\

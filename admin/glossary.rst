@@ -338,3 +338,4 @@ Glossary
     availability and reliability of routing paths via automatic default gateway
     selections on an IP subnetwork. More details in :wikipedia:`Wikipedia
     <Virtual Router Redundancy Protocol>`
+

@@ -81,12 +81,13 @@ In EPP properties there are following sections:
    * - Action --> Alarm
      - There can be set rules connected with alarm generation. Alarm can be created, 
        resolved or terminated ore done nothing. 
-   * - Action --> Situations 
-     - :ref:`event_corelation` **TODO** functionality will be changed to NXSL Pers. Store
+   * - Action --> Persistent Storage 
+     - :ref:`nxsl_persistent_storage` action like add/update or delete can be made.
    * - Action --> Server Actions 
      - There is defined list of actions to be executed if condition is met. For action 
        configuration refer to :ref:`actions` chapter.
-
+   * - Action --> Timer Cancellations
+     - There is defined list of timmers that should be canceled if condition is met. 
 
 
 
@@ -357,9 +358,6 @@ new event can be generated and this time email or SMS can be sent to operator or
 This escalation process can have as many steps as it is required. 
 
 
-Example 1:
-  - TODO: create example of escalation with screenshot of EPP
-
 .. _actions:
   
 Actions
@@ -369,14 +367,40 @@ In addition to alarm generation server can perform various types of actions as a
 Action types available in NetXMS are described in the following sections. Each action can be separately 
 disabled in action configuration. 
 
+After the action is added, it can be edited to add delay time and timer key. This option can be used to 
+prevent notification send in case if problem solved quickly enough. Key is a free form string that support 
+:ref:`macro<event-processing-macros>` and delay is the delay time in seconds before action is executed. 
+
+The next example shows the configuration for the situation when there is no need to notify anyone if node went down 
+and back up in just a minute.
+
+.. figure:: _images/delayed_action.png
+
+
+Escalation
+----------
+
+One :term:`EPP` rule can contain multiple actions with different delays. Delay timers are 
+canceled by other rule in case of problem resolution. 
+
+The next example shows that if node went down, then 
+   #. after 1 minute responsible person will be notified if the problem still persists
+   #. after 30 minutes the support manager will be notified if the problem still persists
+   #. after 1 hour the IT manager will be notified if the problem still persists 
+   
+.. figure:: _images/delayed_action_escalation.png
+
+Action types
+------------
+
 Execute command on management server
-------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Executes provided command on server node. Check that user under witch :file:`netxmsd` process 
 run has permission to run this command. 
 
 Execute command on remote node
-------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Executes provided command name defined in this nodes agent configuration file. To this 
 command can be given parameters in format: ``commandName param1 param2 param3...`` 
@@ -387,7 +411,7 @@ As the :guilabel:`Remote Host` can be used hostname or object name(int format: `
 Second option allows action execution on node behind proxy. 
 
 Send e-mail
------------
+~~~~~~~~~~~
 
 Send email to one or more recipients. Multiple recipients can be separated by semicolons. 
 Required server configuration parameters to send emails: ``SMTPFromAddr``, ``SMTPFromName``,
@@ -396,7 +420,7 @@ Required server configuration parameters to send emails: ``SMTPFromAddr``, ``SMT
 In message text can be used :ref:`event-processing-macros`.
 
 Send SMS
---------
+~~~~~~~~
 
 Send SMS to one or more recipients. Multiple recipients can be separated by semicolons. 
 Server will use :ref:`SMS driver<sms-drivers>` for actual message sending.
@@ -404,7 +428,7 @@ Server will use :ref:`SMS driver<sms-drivers>` for actual message sending.
 In message text can be used :ref:`event-processing-macros`.
 
 Send XMPP message
------------------
+~~~~~~~~~~~~~~~~~
 
 Sends XMPP/Jabber message to one or more recipients. Multiple recipients can be separated by semicolons.
 equired server configuration parameters to send XMPP message: :guilabel:`XMPPLogin`, :guilabel:`XMPPPassword`,
@@ -414,7 +438,7 @@ parameters check :ref:`server_configuration_parameters`.
 In message text can be used :ref:`event-processing-macros`.
 
 Execute NXSL script
--------------------
+~~~~~~~~~~~~~~~~~~~
 
 This action executes script form scrip library. In action configuration should be defined name of script. 
 Information about scripting and library can be found :ref:`there<scripting>`.
@@ -423,13 +447,14 @@ Information about scripting and library can be found :ref:`there<scripting>`.
 .. _forward_events:
 
 Forward event
--------------
+~~~~~~~~~~~~~
+
 NetXMS does not support configuration synchronization between two NetXMS servers(Distributed Monitoring). But it is possible
 to forward events from one server to another. This option allow synchronize events between servers but there are some limitation. 
 
 
 Configuration
-~~~~~~~~~~~~~
+^^^^^^^^^^^^^
 
 Source server configuration:
   1. Create new action of type "forward event" - it will have destination server address property.
@@ -442,7 +467,7 @@ Destination server configuration:
 
  
 Limitation
-~~~~~~~~~~
+^^^^^^^^^^
  
 Limitations of event forwarding:
   1. Event template with same event code or event name must exist on recipient server
@@ -457,7 +482,7 @@ polling protocols or unmanage nodes. Chose  depends on how you wish to see node'
 "unmanaged", regardless of active alarms. If you disable polling, node's status will be "unknown" unless there will be active 
 alarms for that node - in that case node's status will change to severity of most critical alarm.
 
-.. _event_corelation:
+.. _nxsl_persistent_storage:
 
 NXLS Persistent Storage
 =======================

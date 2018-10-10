@@ -403,13 +403,16 @@ Server parameters controlling LDAP synchronization:
    * - LdapUserDeleteAction ``*``
      - This parameter specifies what should be done while synchronization with deleted from LDAP user/group. 0 - if user should be just deleted from NetXMS DB. 1 - if it should be disabled. If it is chosen to disable user, then on LDAP sync user will be disabled and it's description will be change on "LDAP entry was deleted." Afterwards this user/group can be detached from LDAP and enabled if it is required or just deleted manually. 
      - 1
-   * - LdapMappingName ``*`` ``**``
-     - There should be specified name of attribute that's value will be used as a user login name
-     - uid 
-   * - LdapMappingFullName ``**``
+   * - LdapUserMappingName ``*`` 
+     - There should be specified name of attribute that's value will be used as a user's login name
+     -  
+   * - LdapGroupMappingName ``*`` 
+     - There should be specified name of attribute that's value will be used as a group's login name
+     -  
+   * - LdapMappingFullName 
      - There should be specified name of attribute that's value will be used as a user full name
-     - displayName
-   * - LdapMappingDescription ``**``
+     - 
+   * - LdapMappingDescription 
      - There should be specified name of attribute that's value will be used as a user description
      - 
    * - LdapGroupClass
@@ -432,7 +435,6 @@ Server parameters controlling LDAP synchronization:
      - 1000
 
 ``* Required fields``    
-``** Could not be the same field``
 
 Synchronization also can be done manually with `ldapsync` or just `ldap` command in server console.
 

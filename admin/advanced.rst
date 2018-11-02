@@ -465,7 +465,7 @@ Localhost address will be used if no address was set. Server configuration examp
 
    .. code-block:: cfg
    
-        NXServer=sever.office.radensolutions.com
+        netxms.server.address=sever.office.radensolutions.com
         
 Implemented functionality
 -------------------------

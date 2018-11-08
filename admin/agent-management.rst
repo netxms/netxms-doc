@@ -592,6 +592,10 @@ Other option to define new Metric that can be collected form node is to use
 be executed on a node and it's output will be provided as a Metric. In such way can 
 be added parameter and list metrics. 
 
+New Metrics will be visible in the :guilabel:`Available parameters` list only after agent 
+restarts (agent reads a configuration file only once on start) and configuration poll, 
+so to force it's appearance run :guilabel:`Configuration poll` manually after agent restart. 
+
 ExternalParameter/ExternalParameterShellExec
 --------------------------------------------
 

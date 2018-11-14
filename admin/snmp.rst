@@ -63,14 +63,17 @@ configured next things:
 
 .. figure:: _images/snmp_trap_mapping_configuration.png
 
-Setting default SNMP credentials
-================================
+.. _dafault_snmp:
 
-Default SNMP credentials can be set in :guilabel:`Network Discovery` section. It does not 
-matter if credentials are used for adding nodes manually, through network 
-discovery or with help of agent registration - in each case :guilabel:`Network Discovery` 
-configuration value will be checked. More about :guilabel:`Network Discovery` view 
-can be found :ref:`there<network-discovery>`.
+Default SNMP credentials
+========================
+
+Default SNMP credentials can be set in :menuselection:`Configuration --> SNMP Credentials`. 
+It does not matter if credentials are used for adding nodes manually, through network 
+discovery or with the help of agent registration - in each case :guilabel:`SNMP Credentials` 
+configuration value will be checked.
+
+.. figure:: _images/snmp_credentials.png
 
 
 Using ifTable and ifXTable

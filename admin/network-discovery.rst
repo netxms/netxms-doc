@@ -17,7 +17,7 @@ consider each responding address for adding to database. For each new device
 found NetXMS server tries to gather additional information using :term:`SNMP`
 and NetXMS agent, and then adds it to database. By default NetXMS server will
 add all discovered devices to database, but you can limit it by using discovery
-filters.
+filters. Default :term:`SNMP` credentials can be set in :ref:`dafault_snmp`.
 
 Active discovery runs every 2 hours and passive every 15 minutes. Thees values 
 can be change in ``ActiveDiscoveryInterval`` and ``DiscoveryPollingInterval`` 
@@ -38,9 +38,8 @@ will open:
 General
 -------
 
-In this section, you can choose network discovery mode, set default SNMP
-community string and chose if source node of :term:`SNMP Trap` should be 
-used for discovery. 
+In this section, you can choose network discovery mode, chose if source node of 
+:term:`SNMP Trap` or syslog source address should be used for discovery. 
 
 Filter
 ------
@@ -101,19 +100,3 @@ Address Filters
 In this section you can define address ranges for automatically generated
 discovery filter. This list has no effect if discovery is off or filter is not
 set to :guilabel:`Automatically generated script`.
-
-
-SNMP Communities
-----------------
-
-In this section you can add SNMP community strings to be tested during
-configuration polls. NetXMS server first will try default community string
-defined in :guilabel:`General` section, and then all community strings from
-this list.
-
-
-SNMP USM Credentials
---------------------
-
-In this section you can add SNMP version 3 credentials to be tested during
-configuration polls.

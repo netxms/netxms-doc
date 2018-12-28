@@ -23,10 +23,10 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 project_author = "Raden Solutions, SIA"
-copyright = u'2015, ' + project_author
+copyright = '2018, ' + project_author
 
 version = '2.2'
-release = '2.2.5'
+release = '2.2.11'
 
 exclude_patterns = ['build']
 

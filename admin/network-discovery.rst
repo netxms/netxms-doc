@@ -7,15 +7,15 @@ Network discovery
 Introduction
 ============
 
-NetXMS is capable of discovering your network automatically. Network discovery
+|product_name| is capable of discovering your network automatically. Network discovery
 module can operate in two modes - passive and active. In passive mode,
 information about new hosts and devices obtained from :term:`ARP` tables and
-routing tables of already known devices. NetXMS starts with it's own
-:term:`ARP` cache and routing table. In active discovery mode, NetXMS server
+routing tables of already known devices. |product_name| starts with it's own
+:term:`ARP` cache and routing table. In active discovery mode, |product_name| server
 will send an :term:`ICMP` echo requests to all IP addresses in given range, and
 consider each responding address for adding to database. For each new device
-found NetXMS server tries to gather additional information using :term:`SNMP`
-and NetXMS agent, and then adds it to database. By default NetXMS server will
+found |product_name| server tries to gather additional information using :term:`SNMP`
+and |product_name| agent, and then adds it to database. By default |product_name| server will
 add all discovered devices to database, but you can limit it by using discovery
 filters. Default :term:`SNMP` credentials can be set in :ref:`dafault_snmp`.
 
@@ -44,7 +44,7 @@ In this section, you can choose network discovery mode, chose if source node of
 Filter
 ------
 
-In this section, you can define filter for adding new nodes to NetXMS database.
+In this section, you can define filter for adding new nodes to |product_name| database.
 Filtering options are following:
 
 **No filtering**
@@ -65,8 +65,8 @@ additional options controls what nodes will be added to database:
 
 .. list-table::
 
-   * - Accept node if it has NetXMS agent
-     - If checked, only nodes with NetXMS agent detected will pass the filter.
+   * - Accept node if it has |product_name| agent
+     - If checked, only nodes with |product_name| agent detected will pass the filter.
    * - Accept node if it has SNMP agent
      - If checked, only nodes with SNMP agent detected will pass the filter.
    * - Accept node if it is within given range or subnet
@@ -74,21 +74,21 @@ additional options controls what nodes will be added to database:
        can be configured in :guilabel:`Address Filters` section.
 
 
-Please note that first two options (NetXMS agent presence and SNMP agent
+Please note that first two options (|product_name| agent presence and SNMP agent
 presence) forms ``OR`` condition - if both are checked, any node with either
-SNMP agent or NetXMS agent will pass. Address range check and first two options
+SNMP agent or |product_name| agent will pass. Address range check and first two options
 forms ``AND`` condition - so if potential node does pass agent presence check,
 but is not in allowed IP address range, it will not be accepted. In other
 words, if all three options are checked, condition for new node to pass filter
 can be written as following:
 
-  **if** (node has NetXMS agent **or** node has SNMP agent) **and** node within given range **then** pass
+  **if** (node has |product_name| agent **or** node has SNMP agent) **and** node within given range **then** pass
 
 
 Active Discovery Targets
 ------------------------
 
-In this section, you can define address ranges for active discovery. NetXMS
+In this section, you can define address ranges for active discovery. |product_name|
 server will periodically send ICMP echo requests to these addresses, and
 consider for addition to database every responding device. This list has no
 effect if active discovery is off.

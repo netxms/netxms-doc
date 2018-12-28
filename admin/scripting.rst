@@ -44,9 +44,9 @@ NXSL
 Overview
 --------
 
-In many parts of the system, fine tuning can be done by using NetXMS built-in
-scripting language called NXSL (stands for NetXMS Scripting Language). NXSL was
-designed specifically to be used as embedded scripting language within NetXMS,
+In many parts of the system, fine tuning can be done by using |product_name| built-in
+scripting language called NXSL (stands for |product_name| Scripting Language). NXSL was
+designed specifically to be used as embedded scripting language within |product_name|,
 and because of this has some specific features and limitations. Most notable is
 very limited access to data outside script boundaries – for example, from NXSL
 script you cannot access files on server, nor call external programs, nor even
@@ -203,7 +203,7 @@ assigned will return ``NULL`` value.
 Although NXSL has object type variables, it is not an object-oriented language.
 It is not possible to define classes or create objects at script level – only
 in extensions written in C++. Object type variables are used to return
-information about complex NetXMS objects, like nodes or events, in a convenient
+information about complex |product_name| objects, like nodes or events, in a convenient
 way. Please note that assigning object type variables actually holds reference
 to an object, so assigning object value to another variable does not duplicate
 actual object, but just copy reference to it.
@@ -828,7 +828,7 @@ Classes list
 NXShell
 =======
 
-NxShell is based on Jython and provide access to NetXMS Java API using interactive 
+NxShell is based on Jython and provide access to |product_name| Java API using interactive 
 shell. NxShell is build as single jar file, which includes all required libraries.
 
 Download: http://www.netxms.org/download/nxshell-VERSION.jar 
@@ -898,7 +898,7 @@ Example
 ~~~~~~~
 
 More examples can be found on a 
-`NetXMS wiki <https://wiki.netxms.org/wiki/Using_nxshell_to_automate_bulk_operations>`_.
+`|product_name| wiki <https://wiki.netxms.org/wiki/Using_nxshell_to_automate_bulk_operations>`_.
 
 .. code-block:: python
 

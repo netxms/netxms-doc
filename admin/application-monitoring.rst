@@ -20,7 +20,7 @@ For application database monitoring can be used database monitoring subagents or
 database query subagents. Information about database monitoring subagents can be
 found :ref:`there<database-monitoring>`. In this chapter will be described only
 DBQuery subagents usage and configuration. This subagent supports all databases that
-are supported by NetXMS server :ref:`link to supported database list<supported-db-list>`.
+are supported by |product_name| server :ref:`link to supported database list<supported-db-list>`.
 
 This type of Metrics provide DBQuery subagent. This subagent has 2 types of Metrics:
 one that periodically executes SQL queries and returns results and error

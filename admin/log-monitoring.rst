@@ -4,7 +4,7 @@
 Log monitoring
 ==============
 
-With NetXMS you can monitor changes in text log files, Windows Event Log, and
+With |product_name| you can monitor changes in text log files, Windows Event Log, and
 built-in syslog server. All log monitoring done by agents, except for built-in
 syslog server. In general, log processing goes as following:
 
@@ -18,7 +18,7 @@ syslog server. In general, log processing goes as following:
 Agent Configuration for Log Monitoring
 ======================================
 
-To be able to monitor logs with NetXMS agent, you should load ``LOGWATCH``
+To be able to monitor logs with |product_name| agent, you should load ``LOGWATCH``
 subagent. There are two options to define parser configuration:
 
 #. Create log parser rule files on the system and define them in ``LOGWATCH`` 
@@ -40,14 +40,14 @@ Example of agent configuration file:
 
    # Below is log parsers definitions
    *LOGWATCH
-   Parser = C:\NetXMS\parser1.xml
-   Parser = C:\NetXMS\parser2.xml
+   Parser = C:\|product_name|\parser1.xml
+   Parser = C:\|product_name|\parser2.xml
 
 
 Syslog Monitoring
 =================
 
-NetXMS has built-in syslog server, which can be used to receive logs from
+|product_name| has built-in syslog server, which can be used to receive logs from
 network devices and servers. It is also possible to parse incoming syslog
 messages in a way similar to Windows Event Log monitoring. To parse syslog
 messages, ``LOGWATCH`` subagent is not required – parsing is done by the server
@@ -371,7 +371,7 @@ used as a synonym for ``<severity>`` tag for syslog monitoring.
 <facility> Tag
 --------------
 
-Tag ``<facility>`` can be used to filter syslog records (received by NetXMS
+Tag ``<facility>`` can be used to filter syslog records (received by |product_name|
 built-in syslog server) by facility code. The following facility codes can be
 used:
 
@@ -449,7 +449,7 @@ tag for Windows Event Log monitoring.
 <tag> Tag
 ---------
 
-Tag ``<tag>`` can be used to filter syslog records (received by NetXMS built-in
+Tag ``<tag>`` can be used to filter syslog records (received by |product_name| built-in
 syslog server) by content of ``tag`` field. You can specify exact value or
 pattern with ``*`` and ``?`` meta characters.
 
@@ -473,7 +473,7 @@ Windows Event Log monitoring.
 <severity> Tag
 --------------
 
-Tag ``<severity>`` can be used to filter syslog records (received by NetXMS
+Tag ``<severity>`` can be used to filter syslog records (received by |product_name|
 built-in syslog server) by severity level. Each severity level has it's own
 code, and to filter by multiple severity levels you should specify sum of
 appropriate codes. Severity level codes are following:

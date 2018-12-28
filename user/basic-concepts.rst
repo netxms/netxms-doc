@@ -7,7 +7,7 @@ Basic Concepts
 Objects
 =======
 
-All network infrastructure monitored by NetXMS inside monitoring system
+All network infrastructure monitored by |product_name| inside monitoring system
 represented as a set of :term:`objects <Object>`. Each object
 represents one physical or logical entity (like host or network interface),
 or group of them. Objects are organized into hierarchical structure.
@@ -20,9 +20,9 @@ Every object has set of attributes; some of them are common
 depends on object class – for example, only :guilabel:`Node` objects have
 attribute :guilabel:`SNMP community string`. There are default attributes
 and custom attributes defined either by user or integrated application via
-NetXMS API.
+|product_name| API.
 
-NetXMS has eight top level objects – ``Entire Network``, ``Service Root``,
+|product_name| has eight top level objects – ``Entire Network``, ``Service Root``,
 ``Template Root``, ``Policy Root``, ``Network Map Root``, ``Dashboard Root``,
 ``Report Root``, and ``Business Service Root``. These objects served as an
 abstract root for appropriate object tree. All top level objects has only one
@@ -59,7 +59,7 @@ editable attribute – name.
      - Object representing physical host or network device(such as routers and switches).
        These objects can be created either manually by administrator or automatically during
        network discovery process. They have a lot of attributes controlling all aspects
-       of interaction between NetXMS server and managed node. For example, the attributes
+       of interaction between |product_name| server and managed node. For example, the attributes
        specify what data must be collected, how node status must be checked, which protocol
        versions to use etc. Node objects contain one or more interface objects. The system
        creates interface objects automatically during configuration polls.
@@ -82,7 +82,7 @@ editable attribute – name.
      -
    * - VPN Connector
      - Object representing VPN tunnel endpoint. Such objects can be created to
-       add VPN tunnels to network topology known y NetXMS server. VPN Connector
+       add VPN tunnels to network topology known y |product_name| server. VPN Connector
        objects are created manually. In case if there is a VPN
        connection linking two different networks open between two firewalls that are
        added to the system as objects, a user can create a VPN Connector object on
@@ -248,7 +248,7 @@ Data Collection Items
 
 Every node can have many parameters, such as CPU utilization, amount of free
 memory or disk space usage. The management server can collect these parameters,
-check them for threshold violations and store them in the database. In NetXMS,
+check them for threshold violations and store them in the database. In |product_name|,
 parameters configured for collection are called Data Collection Items or DCI
 for short. One DCI represents one node's parameter, and unlimited number of
 DCIs can be configured for any node.
@@ -266,13 +266,13 @@ DCI can be defined.
 Events and Alarms
 =================
 
-Many services within NetXMS gather information and generate events that are
-forwarded to NetXMS Event Queue. Events can also be emitted from agents on
+Many services within |product_name| gather information and generate events that are
+forwarded to |product_name| Event Queue. Events can also be emitted from agents on
 managed nodes, or from management applications residing on the management
-station or on specific network nodes. All events are processed by NetXMS Event
+station or on specific network nodes. All events are processed by |product_name| Event
 Processor one-by-one, according to the processing rules defined in Event
 Processing Policy. As a result of event processing, some actions can be taken,
-and event can be shown up as alarm, sent as e-mail or sms. NetXMS provides one 
+and event can be shown up as alarm, sent as e-mail or sms. |product_name| provides one 
 centralized location - the Alarm Browser, where the alarms are visible to your 
 team. You can control which events should be considered important enough to 
 show up as alarms. You and your team can easily monitor the posted alarms and 
@@ -283,19 +283,19 @@ Examples of alarms include:
 - A router exceeded its threshold of traffic volume that you configured in Data
   Collection.
 - The shell script that you wrote gathered the specific information you needed
-  and posted it to the NetXMS as an event.
+  and posted it to the |product_name| as an event.
 - One of your mission-critical servers switched to UPS battery power.
-- An SNMP agent on a managed critical server forwarded a trap to NetXMS because
+- An SNMP agent on a managed critical server forwarded a trap to |product_name| because
   it was overheating and about to fail.
 
 Zones
 =====
 
-As NetXMS server keeps track of an IP topology, it is important to maintain the 
+As |product_name| server keeps track of an IP topology, it is important to maintain the 
 configuration in which IP addresses do not overlap and that two IP addresses 
 from same subnet are really within one subnet. Sometimes, however, it is needed 
 to monitor multiple sites with overlapping IP address ranges. To correctly 
-handle such situation, zoning must be used. Zone in NetXMS is a group of IP 
+handle such situation, zoning must be used. Zone in |product_name| is a group of IP 
 subnets which form non-overlapping IP address space. There is always zone 0 which 
 contains subnets directly reachable by management server. For all other zones 
 server assumes that subnets within that zones are not reachable directly, and 

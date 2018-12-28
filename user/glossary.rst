@@ -26,7 +26,7 @@ Glossary
       collect (for example "CPU Usage"), collection schedule and thresholds
 
    Entire Network
-      Automatically generated hierarchy that contains all nodes known to NetXMS
+      Automatically generated hierarchy that contains all nodes known to |product_name|
     
    Alarm Browser
       View, which shows all active alarms in the system and provides tools to

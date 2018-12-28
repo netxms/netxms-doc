@@ -24,4 +24,4 @@ different categories. View can be zoomed in or zoomed out(library zoom is saved)
    
 Tips: 
   - Images on map are displayed full size. 
-  - Size of images predefined by NetXMS is 48x48
+  - Size of images predefined by |product_name| is 48x48

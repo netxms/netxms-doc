@@ -10,7 +10,7 @@ Planing
 Operating system
 ----------------
 
-NetXMS server can work on:
+|product_name| server can work on:
 
    * Windows 7 and higher, Windows Server 2003 and higher
    * Red Hat Enterprise Linux, SUSE Linux, CentOS, Debian Linux, Ubuntu Linux
@@ -19,7 +19,7 @@ NetXMS server can work on:
    * HP-UX 11.23, 11.31
    * AIX 5.3+
 
-NetXMS agent can work on:
+|product_name| agent can work on:
 
    * Windows XP and higher, Windows Server 2003 and higher
    * Linux
@@ -51,7 +51,7 @@ Supported database engines:
 
 Database size and load is very hard to predict, because it is dependent on a number of
 monitored nodes and collected parameters. If you plan to install database engine on
-the same machine as NetXMS server, increase your hardware requirements accordingly.
+the same machine as |product_name| server, increase your hardware requirements accordingly.
 
 Link to Excel file that allows roughly estimate the size that will be required for
 database: http://git.netxms.org/public/netxms.git/blob/HEAD:/doc/misc/database_sizing.xlsx
@@ -78,7 +78,7 @@ easy change in repository configuration and encryption keys updated in the featu
 Using netxms-release package
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Install netxms-release_1.1_all.deb package that contain description of NetXMS
+Install netxms-release_1.1_all.deb package that contain description of |product_name|
 repository (this package support all Debian and Ubuntu systems):
 
 :command:`$ wget http://packages.netxms.org/netxms-release_1.1_all.deb`
@@ -154,7 +154,7 @@ Desktop Management Console:
 
 Web Management Console:
 
-NetXMS web interface is java based and should be deployed into servlet container to
+|product_name| web interface is java based and should be deployed into servlet container to
 run. Tested containers: Tomcat7, Jetty7.
 
   1. Install one of servlet containers that support servlet-api version 3.
@@ -189,13 +189,13 @@ Server
      number.
   2. Run the installer package on your server machine. Installation wizard will be
      shown. Follow the prompts until the Select Components window opens.
-  3. On the Select Components window, select NetXMS Server option and an appropriate
+  3. On the Select Components window, select |product_name| Server option and an appropriate
      database client library. You do not have to install database client library
-     from NetXMS package, if it is already installed on the machine.
+     from |product_name| package, if it is already installed on the machine.
 
     .. figure:: _images/win_netxms_setup_components.png
 
-    If you plan to run NetXMS console from the same machine, select Administrator's Console option as well.
+    If you plan to run |product_name| console from the same machine, select Administrator's Console option as well.
 
   4. Follow the prompts until Ready to Install window opens.
 
@@ -205,7 +205,7 @@ Server
 
     .. figure:: _images/win_server_config_step1.png
 
-    Press the Next button to start NetXMS server configuration.
+    Press the Next button to start |product_name| server configuration.
 
   7. Database selection window will open:
 
@@ -228,7 +228,7 @@ Server
     If you wish to use Windows authentication for database connectivity, use * (asterisk)
     as a login name and leave the password field blank. If you specify asterisk as DBA
     login, user with which you are logged in to Windows should have administrative rights
-    to the database server. If you use asterisk as DB login, you should run NetXMS Server
+    to the database server. If you use asterisk as DB login, you should run |product_name| Server
     service as a user with appropriate rights to the database.
 
     **Oracle note**:
@@ -239,12 +239,12 @@ Server
 
     .. figure:: _images/win_server_config_step1.png
 
-    * Check Run IP autodiscovery process check-box, if you wish NetXMS server to
+    * Check Run IP autodiscovery process check-box, if you wish |product_name| server to
       automatically discover your IP network.
     * Increase number of status and configuration pollers if you plan to monitor
       large number of nodes.
 
-  9. On the next window, enter address of your SMTP server. NetXMS will use it to send
+  9. On the next window, enter address of your SMTP server. |product_name| will use it to send
      notification e-mails. If you have mobile phone attached to management server via
      serial cable or USB, select mobile phone driver and COM port; otherwise, select
      "<none>".
@@ -256,7 +256,7 @@ Server
 
     .. figure:: _images/win_server_config_step1.png
 
-    In most situations, you can run NetXMS server under Local System account. You may
+    In most situations, you can run |product_name| server under Local System account. You may
     need to run it under specific account if you are using Microsoft SQL database and
     Windows authentication, or for security reasons.
 
@@ -265,11 +265,11 @@ Server
     .. figure:: _images/win_server_config_step1.png
 
     If you have database engine running on same server, you can find it in service
-    list and mark, so NetXMS server's service will depend on database service and
+    list and mark, so |product_name| server's service will depend on database service and
     service startup order will be correct.
 
   13. Follow the prompts until server configuration will be complete. After successful
-  server configuration, installation will be finished, and you will have NetXMS server
+  server configuration, installation will be finished, and you will have |product_name| server
   up and running.
   
   
@@ -287,12 +287,12 @@ Agent
      nxagent-VERSION-x64.exe, for example nxagent-1.2.0.exe).
 
   2. Run the installer package on target server. Installation wizard will be shown.
-     Follow the prompts until the NetXMS Server window opens:
+     Follow the prompts until the |product_name| Server window opens:
 
      .. figure:: _images/win_agent_config.png
 
 
-     Enter IP address or host name of your NetXMS server. You can specify multiple
+     Enter IP address or host name of your |product_name| server. You can specify multiple
      management servers, separating them by commas. Press the Next button to continue.
 
 
@@ -343,8 +343,8 @@ automated way of installation:
   3. After installation procedure is finished check that WEB GUI is available at
      http://SERVER_IP:SERVER_PORT/nxmc/
      
-Unattended installation of NetXMS Agent
----------------------------------------
+Unattended installation of |product_name| Agent
+-----------------------------------------------
 
 Windows Agent installer (named nxagent-VERSION.exe, for example nxagent-0.2.20.exe),
 has various command line options for unattended installation. Installation will ignore 
@@ -362,7 +362,7 @@ file already exists or if /CENTRALCONFIG option is used. These options are follo
    * - /CONFIGENTRY  
      - It can be used to add any parameter to configuration file during initial install. You can specify it multiple times to add multiple lines. Section names can be added as well.
    * - /DIR=path
-     - Set installation directory (default is C:\NetXMS)
+     - Set installation directory (default is C:\|product_name|)
    * - /LOCALCONFIG 
      - Use local configuration file (it is the default)
    * - /LOG
@@ -637,7 +637,7 @@ WebUI additional configuration
 Installing web interface on remote system
 -----------------------------------------
 
-By default nxmc.war will try to connect to NetXMS server at address 127.0.0.1. To
+By default nxmc.war will try to connect to |product_name| server at address 127.0.0.1. To
 change that, create configuration file called nxmc.properties as following:
 
 .. code-block:: cfg
@@ -646,7 +646,7 @@ change that, create configuration file called nxmc.properties as following:
   sessionTimeout = 120
   enableAdvancedSettings = true
 
-Change server property to IP address or host name of your NetXMS server and put
+Change server property to IP address or host name of your |product_name| server and put
 properties file to class path of your application server. Default locations for
 different servers are following:
 

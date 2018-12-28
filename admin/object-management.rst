@@ -9,7 +9,7 @@ Object browser
 ==============
 
 :guilabel:`Object browser` organize all existing :term:`objects <Object>` in 
-hierarchical structure. NetXMS has eight top level objects – Entire Network, 
+hierarchical structure. |product_name| has eight top level objects – Entire Network, 
 Service Root, Template Root, Policy Root, Network Map Root, Dashboard Root, 
 Report Root, and Business Service Root. These objects served as an abstract 
 root for appropriate object tree. All top level objects has only one editable 
@@ -104,7 +104,7 @@ When node is unmanaged/managed - all it's childes like interfaces and service mo
 are also unmanaged/managed. In unmanaged state :term:`metrics <Metric>` are not 
 collected and no pols are scheduled. 
 
-Node can be deleted from NetXMS by :guilabel:`Delete` menu item. Node is not deleted synchronously, 
+Node can be deleted from |product_name| by :guilabel:`Delete` menu item. Node is not deleted synchronously, 
 but it is scheduled node deletion. While node deletion all data bout this node is 
 also collected(like metrics).
 
@@ -154,7 +154,7 @@ can be executed. Node can be accessed with ``$node`` variable.
 geolocation of the node is set, then with help of :guilabel:`Geolocation` item can be 
 opened map with shown on it object location. :guilabel:`Software Inventory` will show 
 full software list for nodes with Windows systems or Linux systems(that used rpn or deb 
-packages) and have NetXMS agent installed. :guilabel:`Service Dependency` will build 
+packages) and have |product_name| agent installed. :guilabel:`Service Dependency` will build 
 tree from this node with all container where this node is included. :guilabel:`Alarms` 
 will open alarm view with alarms only for this specific node. 
 
@@ -222,7 +222,7 @@ Chassis
 Rack
 ----
 
-Rack is an object that should be used to visualize server room organization in NetXMS. Once rack object is created nodes can be assigned to rack, by selecting 
+Rack is an object that should be used to visualize server room organization in |product_name|. Once rack object is created nodes can be assigned to rack, by selecting 
 rack pbject, orientation, positon, high and front, rear immages for each Node, 
 Chassis objects in properties of the object.
 
@@ -354,11 +354,11 @@ Custom attributes
 -----------------
 
 Every object can have custom attributes defined either by user or integrated application 
-via NetXMS API. Custom attributes distinguished by names (an attribute name can contain up 
+via |product_name| API. Custom attributes distinguished by names (an attribute name can contain up 
 to 127 printable characters), and have string values of unlimited length. However, if you wish 
 to access custom attributes in :term:`NXSL` scripts as properties of node object, you should name them 
 conforming to NXSL identifier naming constraints. To create or change value of custom attribute 
-manually, right-click object in NetXMS console, and select :menuselection:`Properties --> Custom Attributes tab`.
+manually, right-click object in |product_name| console, and select :menuselection:`Properties --> Custom Attributes tab`.
 
 .. figure:: _images/object_custom_attributes.png
 
@@ -401,7 +401,7 @@ Properties of the object.
 Access control
 --------------
 
-Object access rights controls access to NetXMS objects. Permissions given to an
+Object access rights controls access to |product_name| objects. Permissions given to an
 object inherited by all child objects, unless specifically blocked by turning
 off :guilabel:`Inherit access rights from parent object(s)` option in object's
 access control properties. Permissions given at different levels of the object
@@ -835,7 +835,7 @@ The following macros recognized:
    * - ``%U``
      - User name of executer
    * - ``%v``
-     - NetXMS server's version.
+     - |product_name| server's version.
    * - ``%[name]``
      - Value returned by script. You should specify name of the script from script library.
    * - ``%{name}``
@@ -955,7 +955,7 @@ Input field can be one of this types:
 Predefined Object Tools
 -----------------------
 
-NetXMS is deviled with some predefined Object Tools. There is full list of them:
+|product_name| is deviled with some predefined Object Tools. There is full list of them:
 
 .. list-table::
    :widths: 35 25 70 30
@@ -976,71 +976,71 @@ NetXMS is deviled with some predefined Object Tools. There is full list of them:
    * - :menuselection:`&Info->&Agent->&Subagent list`
      - Agent Table
      - Show list of loaded subagents
-     - NetXMS agent should be available
+     - |product_name| agent should be available
    * - :menuselection:`&Info->&Agent->Configured &ICMP targets`
      - Agent Table
      - Show list of actions supported by agent
-     - NetXMS agent should be available
+     - |product_name| agent should be available
    * - :menuselection:`&Info->&Agent->Supported &actions`
      - Agent Table
      - Show list of actions supported by agent
-     - NetXMS agent should be available
+     - |product_name| agent should be available
    * - :menuselection:`&Info->&Agent->Supported &lists`
      - Agent Table
      - Show list of lists supported by agent
-     - NetXMS agent should be available
+     - |product_name| agent should be available
    * - :menuselection:`&Info->&Agent->Supported &parameters`
      - Agent Table
      - Show list of parameters supported by agent
-     - NetXMS agent should be available
+     - |product_name| agent should be available
    * - :menuselection:`&Info->&Process list`
      - Agent Table
      - Show list of currently running processes
-     - NetXMS agent should be available
+     - |product_name| agent should be available
    * - :menuselection:`&Info->&Routing table (SNMP)`
      - SNMP Table
      - Show IP routing table
-     - NetXMS should support SNMP
+     - |product_name| should support SNMP
    * - :menuselection:`&Info->&Switch forwarding database (FDB)`
      - SNMP Table
      - Show switch forwarding database
-     - NetXMS should support SNMP
+     - |product_name| should support SNMP
    * - :menuselection:`&Info->Active &user sessions`
      - Agent Table
      - Show list of active user sessions
-     - NetXMS agent should be available
+     - |product_name| agent should be available
    * - :menuselection:`&Info->AR&P cache (Agent)`
      - Agent Table
      - Show ARP cache
-     - NetXMS agent should be available
+     - |product_name| agent should be available
    * - :menuselection:`&Info->Topology table (CDP)`
      - SNMP Table
      - Show topology table (CDP)
-     - NetXMS should support SNMP
+     - |product_name| should support SNMP
    * - :menuselection:`&Info->Topology table (LLDP)`
      - SNMP Table
      - Show topology table (LLDP)
-     - NetXMS should support SNMP
+     - |product_name| should support SNMP
    * - :menuselection:`&Info->Topology table (Nortel)`
      - SNMP Table
      - Show topology table (Nortel protocol)
-     - NetXMS should support SNMP
+     - |product_name| should support SNMP
    * - :menuselection:`&Restart system`
      - Action
-     - Restart target node via NetXMS agent
-     - NetXMS agent should be available
+     - Restart target node via |product_name| agent
+     - |product_name| agent should be available
    * - :menuselection:`&Shutdown system`
      - Action
-     - Shutdown target node via NetXMS agent
-     - NetXMS agent should be available
+     - Shutdown target node via |product_name| agent
+     - |product_name| agent should be available
    * - :menuselection:`&Wakeup node`
      - Internal
      - Wakeup node using Wake-On-LAN magic packet
      - 
    * - :menuselection:`Restart &agent`
      - Action
-     - Restart NetXMS agent on target node
-     - NetXMS agent should be available
+     - Restart |product_name| agent on target node
+     - |product_name| agent should be available
 
 
 

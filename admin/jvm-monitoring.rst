@@ -2,7 +2,7 @@
 JVM monitoring
 ==============
 
-NetXMS has Java plugin that allow to monitor JVM. This subagent is build using
+|product_name| has Java plugin that allow to monitor JVM. This subagent is build using
 JMX functionality. 
 
 Metrics

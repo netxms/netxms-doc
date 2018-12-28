@@ -11,7 +11,7 @@ How data collection works
 =========================
 
 Every node can have many data collection items configured (see
-:ref:`basic-concepts-dci` for detailed description). NetXMS server has a set of
+:ref:`basic-concepts-dci` for detailed description). |product_name| server has a set of
 threads dedicated to data collection, called `Data Collectors`, used to gather
 information from the nodes according to :term:`DCI` configuration. You can
 control how many data collectors will run simultaneously, by changing server
@@ -84,7 +84,7 @@ Parameter
 ~~~~~~~~~
 
 Name of the parameter of interest, used for making a request to target node.
-For NetXMS agent and internal parameters it will be parameter name, and for
+For |product_name| agent and internal parameters it will be parameter name, and for
 SNMP agent it will be an SNMP OID. You can use the :guilabel:`Select` button
 for easier selection of required parameter name.
 
@@ -95,11 +95,11 @@ Origin
 
 Origin of data (method of obtaining data). Possible origins are:
 
-- :guilabel:`NetXMS agent`
+- :guilabel:`|product_name| agent`
 - :guilabel:`SNMP agent`
 - :guilabel:`CheckPoint SNMP agent`
 - :guilabel:`Windows Performance Counter`
-- :guilabel:`Internal` (data generated inside NetXMS server process)
+- :guilabel:`Internal` (data generated inside |product_name| server process)
 - :guilabel:`Push Agent`
 - :guilabel:`Script` (from script library, can be used instead of internal dummy)
   
@@ -183,7 +183,7 @@ server.
 Advanced Schedule
 -----------------
 
-If you turn on this flag, NetXMS server will use custom schedule for collecting
+If you turn on this flag, |product_name| server will use custom schedule for collecting
 DCI values instead of fixed intervals. This schedule can be configured on the
 :guilabel:`Schedule` page. Advanced schedule consists of one or more records;
 each representing desired data collection time in cron-style format.
@@ -288,7 +288,7 @@ Aggregation options:
 Data Transformations
 --------------------
 
-In simplest case, NetXMS server collects values of specified parameters and
+In simplest case, |product_name| server collects values of specified parameters and
 stores them in the database. However, you can also specify various
 transformations for original value. For example, you may be interested in a
 delta value, not in a raw value of some parameter. Or, you may want to have
@@ -325,7 +325,7 @@ passed to the transformation script as a parameter; and a result of script
 execution is a final DCI value. Transformation script gets original value as
 first argument (available via special variable ``$1``), and also has two
 predefined global variables: ``$node`` (reference to current node object), and
-``$dci`` (reference to current DCI object). For more information about NetXMS
+``$dci`` (reference to current DCI object). For more information about |product_name|
 scripting language, please consult :ref:`scripting` chapter in this manual.
 
 Transformation script can be tested in the same view, by clicking :guilabel:`Test...` 
@@ -472,7 +472,7 @@ when node status will change to ::guilabel::`CRITICAL`. In your event
 processing configuration, you will be unable to determine actual reason for
 that event generation, and probably will get some unexpected results. If you
 need custom processing for specific threshold, you should create your own event
-first, and use this event in the threshold configuration. NetXMS has some
+first, and use this event in the threshold configuration. |product_name| has some
 preconfigured events that are intended to be used with thresholds. Their names
 start with ``DC_``.
 
@@ -639,7 +639,7 @@ about DCI configuration or usage.
 Push parameters
 ===============
 
-NetXMS gives you ability to push DCI values when you need it instead of polling
+|product_name| gives you ability to push DCI values when you need it instead of polling
 them on specific time intervals. To be able to push data to the server, you
 should take the following steps:
 
@@ -657,9 +657,9 @@ List DCIs
 ---------
 
 Usually DCIs have scalar values. A list DCI is a special DCI which returns a
-list of values. List DCIs are mostly used by NetXMS internally (to get the list
+list of values. List DCIs are mostly used by |product_name| internally (to get the list
 of network interfaces during the configuration poll, for example) but can also
-be utilized by user in some occasions. NetXMS Management Console does not
+be utilized by user in some occasions. |product_name| Management Console does not
 support list DCIs directly but their names are used as input parameters for
 Instance Discovery methods. List DCI values can be also obtained with
 :command:`nxget` command line utility (e.g. for use in scripts).

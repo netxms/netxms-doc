@@ -5,14 +5,14 @@ Agent management
 Introduction
 ============
    
-NetXMS agent is daemon or service that runs on a :term:`node<Node>` to provide additional
+|product_name| agent is daemon or service that runs on a :term:`node<Node>` to provide additional
 monitoring options. This is optional for installation, but it's installation gives next advantages:
 
-   * Centralized configuration - you can change configuration of agent from management console; if needed, you can even store agent configs on NetXMS server
-   * More secure: communications between NetXMS server and agent can be encrypted, additional authentication on agent can be configured
+   * Centralized configuration - you can change configuration of agent from management console; if needed, you can even store agent configs on |product_name| server
+   * More secure: communications between |product_name| server and agent can be encrypted, additional authentication on agent can be configured
    * TCP instead of UDP is used for communications with agent - this can help in case of slow and poor quality links
    * Remote command execution - agents can be used to execute commands on managed systems as a reaction to certain events
-   * Proxy functionality: agent can be used as a proxy to reach agents on hosts not directly accessible by NetXMS server
+   * Proxy functionality: agent can be used as a proxy to reach agents on hosts not directly accessible by |product_name| server
    * :term:`SNMP` proxy: agent can be used as a proxy to reach remote SNMP devices
    * :term:`SNMP Trap` proxy: agent can be used as a proxy to get messages from remote SNMP device
    * Extensible: you can add new parameters very easy using configuration option like ``ExternalParamer`` or by writing your own subagents
@@ -61,7 +61,7 @@ Same example in XML format
 
 Master configuration file
 -------------------------
-File nxagentd.conf is a master configuration file for NetXMS agent. It contains all 
+File nxagentd.conf is a master configuration file for |product_name| agent. It contains all 
 information necessary for agent's operation. Default location for this file is 
 :file:`/etc/nxagentd.conf` on UNIX systems and 
 :file:`'installation directory'\\etc\\nxagentd.conf'` on Windows. The file can 
@@ -84,7 +84,7 @@ For Windows systems:
 
    1. :file:`'installation directory'\\etc\\nxagentd.conf`
    
-For Windows location of NetXMS config can be change in registry. 
+For Windows location of |product_name| config can be change in registry. 
 
 
 If configuration file is placed in different location or named in different way,
@@ -247,7 +247,7 @@ then it should be changed only once for all nodes on witch it is applied.
 Agent configuration file policy
 -------------------------------
 
-There can be used the same parameters and format as in any NetXMS agent configuration file 
+There can be used the same parameters and format as in any |product_name| agent configuration file 
 (key=value format or XML format).
 
 To create policy in menu of container where should be created policy select 
@@ -480,13 +480,13 @@ in configuration file in encrypted way.
   
 Subagents
 =========
-Subagents are used to extend agent functionality. NetXMS subagent are libraries that are loaded by agent.
+Subagents are used to extend agent functionality. |product_name| subagent are libraries that are loaded by agent.
 By default all subagents are included in agent build. Subagent may be not included in build
 only if on time of the build there were no required libraries for subagent build. To enable 
 subagent is require just to add line in main agent configuration file(example: "Subagent=dbquery.nsm").
 More about configuration and usage of subagents will be described in monitoring chapters.
 
-There is list of available manually loaded NetXMS subagents:
+There is list of available manually loaded |product_name| subagents:
 
   * DB2
   * FileMGR
@@ -568,7 +568,7 @@ access to one of subnet nodes and used this node as a proxy node for others.
 
 Proxy node can be set while node creation or in :guilabel:`Communications` tab 
 of node properties. To configure proxy node select node in object selector 
-:guilabel:`NetXMS Agent Proxy`.
+:guilabel:`|product_name| Agent Proxy`.
 
 .. figure:: _images/create_node.png
 
@@ -577,7 +577,7 @@ of node properties. To configure proxy node select node in object selector
 Agent configuration
 -------------------
 
-To enable NetXMS Agent proxy "EnableProxy" agent configuration parameter should 
+To enable |product_name| Agent proxy "EnableProxy" agent configuration parameter should 
 be set to :guilabel:`yes`.
 
 

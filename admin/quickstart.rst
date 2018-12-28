@@ -119,7 +119,7 @@ Parameter                        Description
                                  Use larger value if you plan to gather many
                                  DCIs from each host.
 ``EnableSyslogDaemon``           Set this parameter to 1 if you want to
-                                 enable NetXMS built-in syslog server.
+                                 enable |product_name| built-in syslog server.
 ================================ ==============================================
 
 Minimal required configuration is done for server. 
@@ -136,7 +136,7 @@ Example of sample Windows configuration for mysql:
 .. code-block:: cfg  
 
   #
-  # Sample configuration file for NetXMS server
+  # Sample configuration file for |product_name| server
   #
 
   DBDriver = mysql.ddr
@@ -183,12 +183,12 @@ setting, double click on the row in the table or right-click and select
 Parameter                        Description
 ================================ ==============================================
 ``SMTPFromAddr``                 Address that will be shown as a sender address 
-                                 when notification from NetXMS will come.
+                                 when notification from |product_name| will come.
 ``SMTPFromName``                 Name that will be shown as a sender name 
-                                 when notification from NetXMS will come.
-``SMTPRetryCount``               Number of retries that NetXMS will try to do 
+                                 when notification from |product_name| will come.
+``SMTPRetryCount``               Number of retries that |product_name| will try to do 
                                  in case if message sending will fail. 
-``SMTPServer``                   Server IP address or DNS name where NetXMS 
+``SMTPServer``                   Server IP address or DNS name where |product_name| 
                                  will send request for message dispatch. 
 ================================ ============================================== 
 
@@ -250,7 +250,7 @@ Passive discovery
 =================
 
 It is recommended to enable passive discovery when it is required to add all nodes 
-in local network. In case if NetXMS server has access to switches and routers 
+in local network. In case if |product_name| server has access to switches and routers 
 via SNMP, all devices in network will be added automatically by discovery process. 
 
 To enable passive network discovery open :guilabel:`Network Discovery` view. 
@@ -261,7 +261,7 @@ depending on requirements:
 
   * Option to use SNMP trap source for further network discovery
   * Option to set filer that will define rules for not adding nodes to 
-    NetXMS server
+    |product_name| server
     
 In our configuration we will not use filter to add all node available on our 
 network and turn on option to use SNMP trap source address for discovery. 
@@ -273,15 +273,15 @@ Notes
 If you have enabled automatic network discovery, wait for initial network
 discovery completion. This process can take time, depending on size and
 complexity of your network. For large networks, we recommend that you let
-NetXMS run over night to gather the majority of network information available.
-You can watch discovery progress in a real time using NetXMS Management
+|product_name| run over night to gather the majority of network information available.
+You can watch discovery progress in a real time using |product_name| Management
 Console. Go to :guilabel:`Object Browser` or open default network map and see
 for new devices and networks.
 
 Please note that for successful network discovery your network must meet the
 following requirements:
 
-- NetXMS server must have access to switches and routers via SNMP.
+- |product_name| server must have access to switches and routers via SNMP.
 - All your network devices credentials(community string and password for v3) 
   should be added to default credential list in :guilabel:`Network Discovery` 
   view. 
@@ -303,7 +303,7 @@ presented with the following dialog window:
 Please note that adding a new node object may take some time, especially if a
 node is down or behind a firewall. After successful creation, a new node object
 will be placed into appropriate subnets automatically. As soon as you add a new
-node to the system, NetXMS server will start regular polling to determine the
+node to the system, |product_name| server will start regular polling to determine the
 node status.
 
 Add DCI thresholds 
@@ -327,7 +327,7 @@ CPU usage
 
 Add CPU usage metric form agent parameters:
 
-  1. Check that as origin is selected NetXMS Agent. 
+  1. Check that as origin is selected |product_name| Agent. 
   2. Click on :guilabel:`Select` button 
   3. Type in the input box "CPU" 
 
@@ -354,7 +354,7 @@ Add CPU usage metric form agent parameters:
 
 Add CPU usage metric form SNMP parameters:
 
-  1. Check that as origin is selected NetXMS Agent. 
+  1. Check that as origin is selected |product_name| Agent. 
   2. Click on :guilabel:`Select` button 
   3. Type in the input box ".1.3.6.1.4.1.9.9.109.1.1.1.1.4"(this OID can may be not 
      available for some devices)

@@ -73,7 +73,7 @@ In EPP properties there are following sections:
      - Optional matching script written in NXSL. If this field is empty, no
        additional checks performed. Otherwise, the event will be considered as
        matched only if the script returns non-zero (``TRUE``) return code. For
-       more information about NetXMS scripting language please refer to the
+       more information about |product_name| scripting language please refer to the
        chapter :ref:`scripting` in this manual.
    * - Action
      - In action part you can set what action should be done if event meets condition.
@@ -364,7 +364,7 @@ Actions
 =======
 
 In addition to alarm generation server can perform various types of actions as a reaction to an event. 
-Action types available in NetXMS are described in the following sections. Each action can be separately 
+Action types available in |product_name| are described in the following sections. Each action can be separately 
 disabled in action configuration. 
 
 After the action is added, it can be edited to add delay time and timer key. This option can be used to 
@@ -449,7 +449,7 @@ Information about scripting and library can be found :ref:`there<scripting>`.
 Forward event
 ~~~~~~~~~~~~~
 
-NetXMS does not support configuration synchronization between two NetXMS servers(Distributed Monitoring). But it is possible
+|product_name| does not support configuration synchronization between two |product_name| servers(Distributed Monitoring). But it is possible
 to forward events from one server to another. This option allow synchronize events between servers but there are some limitation. 
 
 
@@ -562,7 +562,7 @@ alarms, or actions. You may use the following macros to accomplish this:
    * - ``%u``
      - User tag associated with the event.
    * - ``%v``
-     - NetXMS server's version.
+     - |product_name| server's version.
    * - ``%[name]``
      - Value returned by script. You should specify name of the script from script library.
    * - ``%{name}``

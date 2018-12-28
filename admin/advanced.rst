@@ -10,11 +10,11 @@ Advanced topics
 Zones
 =====
 
-As NetXMS server keeps track of an IP topology, it is important to maintain the
+As |product_name| server keeps track of an IP topology, it is important to maintain the
 configuration in which IP addresses do not overlap and that two IP addresses
 from same subnet are really within one subnet. Sometimes, however, it is needed
 to monitor multiple sites with overlapping IP address ranges. To correctly
-handle such situation, zoning must be used. Zone in NetXMS is a group of IP
+handle such situation, zoning must be used. Zone in |product_name| is a group of IP
 subnets which form non-overlapping IP address space. There is always zone 0
 which contains subnets directly reachable by management server. For all other
 zones server assumes that subnets within that zones are not reachable directly,
@@ -39,9 +39,9 @@ Communications page in zone object properties:
 
 .. figure:: _images/Zone_comm_settings.png
 
-On this page you can set default proxy node for NetXMS agents, SNMP, and ICMP.
+On this page you can set default proxy node for |product_name| agents, SNMP, and ICMP.
 Note that proxy node must be in default zone and must have primary IP reachable
-by NetXMS server.
+by |product_name| server.
 
 
 Moving nodes between zones
@@ -58,9 +58,9 @@ poll on the node.
 Integration with external HelpDesk
 ----------------------------------
 
-NetXMS provides possibility to create issues in external helpdesk system 
-directly from NetXMS management console, based on pending alarms. In this 
-situation NetXMS and external helpdesk system will have synchronized 
+|product_name| provides possibility to create issues in external helpdesk system 
+directly from |product_name| management console, based on pending alarms. In this 
+situation |product_name| and external helpdesk system will have synchronized 
 issue workflow. 
 
 For now integration is done only with JIRA. 
@@ -68,11 +68,11 @@ For now integration is done only with JIRA.
 JIRA Module
 -----------
 
-This module provide integration between NetXMS and JIRA. 
+This module provide integration between |product_name| and JIRA. 
 
-Required NetXMS configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-For NetXMS is required to configure server parameters(they should be created by user) 
+Required |product_name| configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+For |product_name| is required to configure server parameters(they should be created by user) 
 and restart the server. 
 
 .. list-table::
@@ -84,7 +84,7 @@ and restart the server.
    * - HelpDeskLink
      - For JIRA integration should be set to “jira.hdlink” (without quotes)
    * - JiraIssueType
-     - Name of the JIRA issue type, which will be used by NetXMS. 
+     - Name of the JIRA issue type, which will be used by |product_name|. 
        Sample value: “Task” (without quotes)
    * - JiraLogin
      - Login of the JIRA user(This user should exist in JIRA system with with 
@@ -106,11 +106,11 @@ If all configuration was successfully done after rester in console should be pre
 
 Required JIRA configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-NetXMS JIRA plugin should be deployed to JIRA and configured. REST API should 
+|product_name| JIRA plugin should be deployed to JIRA and configured. REST API should 
 be enabled in JIRA configuration (enabled in default configuration).
 
 To access configuration page for the plugin, go to “System → Advanced” and select
-“NetXMS Integration” tab:
+“|product_name| Integration” tab:
 
 .. figure:: _images/jira_netxms_plugin_configuration.png
 
@@ -120,32 +120,32 @@ Possible configuration options:
      when turned off (default).
   2. “Force Save” — by default, plugin will verify configuration before saving
      (connectivity to all servers, credentials). This checkbox allows to bypass 
-     this step completely and save configuration even if one of more NetXMS 
+     this step completely and save configuration even if one of more |product_name| 
      servers are rejecting provided credentials or do not respond at all)
-  3. “Project Key” — Key of the project, where issues from NetXMS will be created. 
+  3. “Project Key” — Key of the project, where issues from |product_name| will be created. 
      This key will be also used in workflow operations — plugin will process 
      events related to this project:
 
       .. figure:: _images/jira_project_list.png
 
-  4. “Servers” — addresses of up to a 3 NetXMS servers, can be either 
+  4. “Servers” — addresses of up to a 3 |product_name| servers, can be either 
      IP address or hostname.
-  5. “Log In” — user login in NetXMS (User should exist in NetXMS with Read, View 
+  5. “Log In” — user login in |product_name| (User should exist in |product_name| with Read, View 
      Alarms, Acknowledge Alarms, Terminate Alarms to all nodes)
-  6. “Password” — user password in NetXMS 
+  6. “Password” — user password in |product_name| 
   
 Plugin will verify configuration and provide feedback. If one or more
-NetXMS servers are not responding (e.g. they are not configured yet), you can
+|product_name| servers are not responding (e.g. they are not configured yet), you can
 select “Force Save” to overrule verification process and save configuration.
 
 
 Workflow configuration
 ~~~~~~~~~~~~~~~~~~~~~~
-Since JIRA workflow can be much more sophisticated than alarm states in NetXMS, JIRA
-Administrator should decide which workflow transition should change NetXMS alarm
+Since JIRA workflow can be much more sophisticated than alarm states in |product_name|, JIRA
+Administrator should decide which workflow transition should change |product_name| alarm
 state.
 
-NetXMS supports four alarm states:
+|product_name| supports four alarm states:
 
   1. Outstanding — initial state, can’t be set from JIRA side
   2. Acknowledged — operator is aware of the problem and it’s in progress
@@ -166,7 +166,7 @@ Sample mapping:
    :widths: 30 30
    
    * - Transition
-     - NetXMS post-function action
+     - |product_name| post-function action
    * - Start Progress
      - Acknowledge
    * - Resolve Issue
@@ -180,9 +180,9 @@ Configure workflow in JIRA:
 
   1. Create new Workflow Schema if required
   2. Copy existing or create new Workflow
-  3. Assign Workflow to the project, where NetXMS will create issues
+  3. Assign Workflow to the project, where |product_name| will create issues
   4. Modify transitions to call plugin’s post-function and change related alarm in
-     NetXMS
+     |product_name|
      
     a. Click on a “cog” icon on a transition and select “View Post Functions”:
 
@@ -193,7 +193,7 @@ Configure workflow in JIRA:
 
     .. figure:: _images/jira_post_function2.png
 
-    c. Select “NetXMS Modify Alarm” and click “Add”:
+    c. Select “|product_name| Modify Alarm” and click “Add”:
     
     .. figure:: _images/jira_post_function3.png   
 
@@ -213,7 +213,7 @@ Tickets are created from from alarms manually. To create ticket user should have
 "Create helpdesk tickets" access for required objects.
 
 Steps to create ticket:
-  1. Right click on alarm in NetXMS and select “Create ticket in helpdesk system”:
+  1. Right click on alarm in |product_name| and select “Create ticket in helpdesk system”:
   
      .. figure:: _images/jira_create_ticket.png 
      
@@ -232,7 +232,7 @@ Steps to create ticket:
 Hooks (Pollers hooks)
 =====================
 
-NetXMS has 5 different poller types, sometimes it is required by user 
+|product_name| has 5 different poller types, sometimes it is required by user 
 to add some additional functionality while this polls. For this purpose 
 were created hooks. Hook is manually created script in 
 :guilabel:`Script Library` that is executed at the very end of the poll.
@@ -287,7 +287,7 @@ Reset password for user "admin"
 
    Server ("netxmsd") should be stopped while performing this operation!
 
-Passwords in NetXMS are stored in hashed, not-reversible way, so there are no way to recover it, but it can be reseted.
+Passwords in |product_name| are stored in hashed, not-reversible way, so there are no way to recover it, but it can be reseted.
 
 .. versionadded:: 2.1-M0
 
@@ -341,7 +341,7 @@ SNMP Device not recognised as SNMP-capable
 Common issues:
 
 #. Invalid community string or credentials
-#. Access control on the device or firewall prevent connections from NetXMS
+#. Access control on the device or firewall prevent connections from |product_name|
    server
 #. Device do not support ``System`` (.1.3.6.1.2.1.1) or ``Interfaces``
    (.1.3.6.1.2.1.2) MIBs, which are used to detect SNMP-capable devices. To
@@ -421,10 +421,10 @@ open dashboard called "SystemOverview", use URL
     http://server/nxmc?auto&server=10.0.0.2&login=guest&dashboard=SystemOverview
 
 
-NetXMS data usage in external products
-======================================
+|product_name| data usage in external products
+==============================================
 
-NetXMS provides next options to use data in other applications:
+|product_name| provides next options to use data in other applications:
 
     * Use :ref:`autologin <autologin>` and dashboard name in URL to add dashboard to your company
       documentation(where URL usage is possible). 
@@ -436,17 +436,17 @@ NetXMS provides next options to use data in other applications:
 Web API/Rest API
 ================
 
-The NetXMS WebAPI is being developed to support larger integration possibilities for the NetXMS 
+The |product_name| WebAPI is being developed to support larger integration possibilities for the |product_name| 
 server and is based on the RESTful philosophy. API calls are REST-like (although not purely RESTful) 
 and uses JSON for data exchange. The API currently supports Grafana integration and 
-some additional parameters for integration. The NetXMS WebAPI is currently in very early development!
+some additional parameters for integration. The |product_name| WebAPI is currently in very early development!
 
 Information about Grafana configuration can be found :ref:`here <grafana-integration>`.
 
 Requirements
 ------------
 
-   * A running instance of the NetXMS server.
+   * A running instance of the |product_name| server.
    * Access to a web server.
    * Git tools
    * Maven tools
@@ -454,12 +454,12 @@ Requirements
 Setup
 -----
 
-1. Clone the NetXMS git repository to a folder on your computer.
+1. Clone the |product_name| git repository to a folder on your computer.
 2. Navigate to :file:`NETXMS_GIT/src/server/nxapisrv/java` 
 3. Run :command:`mvn package` 
 4. Copy the resulting .war file from :file:`/targets/netxms-websvc-2.1-M3.war` to your web server.
 5. Create a :file:`nxapisrv.properties` file and place it in the property file location of your 
-   web server and specify the NetXMS Server address with the property.
+   web server and specify the |product_name| Server address with the property.
    
 Localhost address will be used if no address was set. Server configuration example:
 
@@ -486,7 +486,7 @@ There are implemented 3 options of authentication:
     
    1. Basic authentication for Rest API session creation, more information can be found on :wikipedia:`Wikipedia <Basic access authentication>` 
    2. Through POST request for Rest API session creation
-   3. Through POST request for NetXMS user external authentication(can be used as external authentication source)
+   3. Through POST request for |product_name| user external authentication(can be used as external authentication source)
 
 Authentication used as external source of user authentication. User that try to login thought 
 this authentication type should have "External tool integration account" access right.

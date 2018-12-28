@@ -91,7 +91,7 @@ Configure SNMP Proxy
 ====================
 
 If there is need to monitor nodes behind firewall using SNMP, there is option 
-to install on one of the nodes NetXMS agent, open all required ports for this node 
+to install on one of the nodes |product_name| agent, open all required ports for this node 
 and send SNMP request to other nodes in this subnet through installed agent. 
 
 Proxy configuration can be done wile creation of node of for already created node 
@@ -141,7 +141,7 @@ Import MIB
 
 MIB files (MIBs) describe structure of information transferred via SNMP. 
 Every device can support multiple MIBs, some of them are standard and 
-public, other can be proprietary and vendor specific. NetXMS uses compiled 
+public, other can be proprietary and vendor specific. |product_name| uses compiled 
 MIBs to allow you to select OID and see its description (for example when 
 selecting SNMP data for DCI collection). You do not need to compile new 
 MIBs if you are OK with direct input of OID.

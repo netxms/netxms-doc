@@ -4,7 +4,7 @@ User Interface
 
 .. note::
    
-  One of the goals of NetXMS Management Console is to provide identical user
+  One of the goals of |product_name| Management Console is to provide identical user
   expirience across all supported platforms, including Web Interface.
   Screenshots in this particular guide are based on Mac OS X version.
 
@@ -384,15 +384,15 @@ SNMP details as well as Capabilities.
 Node capabilities
 ~~~~~~~~~~~~~~~~~
 
-+------------+-------------------------------------------------------------------------------+
-| Capability | Description                                                                   |
-+============+===============================================================================+
-| isAgent    | True if NetXMS Server can communicate with NetXMS agent installed on the node |
-+------------+-------------------------------------------------------------------------------+
-| isRouter   | True if selected object can route network traffic                             |
-+------------+-------------------------------------------------------------------------------+
-| isSNMP     | True if selected object is SNMP-capable                                       |
-+------------+-------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------+
+| Capability | Description                                                                                   |
++============+===============================================================================================+
+| isAgent    | True if |product_name| Server can communicate with |product_name| agent installed on the node |
++------------+-----------------------------------------------------------------------------------------------+
+| isRouter   | True if selected object can route network traffic                                             |
++------------+-----------------------------------------------------------------------------------------------+
+| isSNMP     | True if selected object is SNMP-capable                                                       |
++------------+-----------------------------------------------------------------------------------------------+
 
 Alarms
 ------
@@ -488,7 +488,7 @@ or right-click and select :guilabel:`Open map` in pop-up menu.
 Reports
 =======
 
-NetXMS is integrated with `Jasper` reporting engine from `Jaspersoft
+|product_name| is integrated with `Jasper` reporting engine from `Jaspersoft
 <http://community.jaspersoft.com/>`_. This view allows user to generate report
 and download result as PDF file. Report generation can take long time, so it's
 done in background, without user interaction. When report is generated,
@@ -551,7 +551,7 @@ Business Services
 
 Business Services is a hierarchy of logical services as defined by
 administrator. Each service can represent combined state of multiple elements.
-For each service in the hierarchy, NetXMS calculates availability percentage
+For each service in the hierarchy, |product_name| calculates availability percentage
 and keeps track of all downtime cases. To check availability of any particular
 level, select it in :ref:`object-browser`.
 

@@ -27,7 +27,7 @@ Console, Web Interface or Management Console for Android.
 Objects
 =======
 
-All network infrastructure monitored by NetXMS inside monitoring system
+All network infrastructure monitored by |product_name| inside monitoring system
 represented as a set of :term:`objects <Object>`. Each object
 represents one physical or logical entity (like host or network interface),
 or group of them. Objects are organized into hierarchical structure.
@@ -40,9 +40,9 @@ Every object has set of attributes; some of them are common
 depends on object class – for example, only :guilabel:`Node` objects have
 attribute :guilabel:`SNMP community string`. There are default attributes
 and custom attributes defined either by user or integrated application via
-NetXMS API.
+|product_name| API.
 
-NetXMS has eight top level objects – ``Entire Network``, ``Service Root``,
+|product_name| has eight top level objects – ``Entire Network``, ``Service Root``,
 ``Template Root``, ``Policy Root``, ``Network Map Root``, ``Dashboard Root``,
 ``Report Root``, and ``Business Service Root``. These objects served as an
 abstract root for appropriate object tree. All top level objects has only one
@@ -79,7 +79,7 @@ editable attribute – name.
      - Object representing physical host or network device(such as routers and switches).
        These objects can be created either manually by administrator or automatically during
        network discovery process. They have a lot of attributes controlling all aspects
-       of interaction between NetXMS server and managed node. For example, the attributes
+       of interaction between |product_name| server and managed node. For example, the attributes
        specify what data must be collected, how node status must be checked, which protocol
        versions to use etc. Node objects contain one or more interface objects. The system
        creates interface objects automatically during configuration polls.
@@ -102,7 +102,7 @@ editable attribute – name.
      -
    * - VPN Connector
      - Object representing VPN tunnel endpoint. Such objects can be created to
-       add VPN tunnels to network topology known y NetXMS server. VPN Connector
+       add VPN tunnels to network topology known y |product_name| server. VPN Connector
        objects are created manually. In case if there is a VPN
        connection linking two different networks open between two firewalls that are
        added to the system as objects, a user can create a VPN Connector object on
@@ -266,17 +266,17 @@ still polled and DCI data is still collected, but no event is generated.
 Event Processing
 ================
 
-NetXMS is event based monitoring system. Events can come from different sources
+|product_name| is event based monitoring system. Events can come from different sources
 (polling processes (status, configuration, discovery, and data collection), :term:`SNMP`
 traps, and directly from external applications via client library.)
-and all are forwarded to NetXMS Event Queue. All events are processed by NetXMS
+and all are forwarded to |product_name| Event Queue. All events are processed by |product_name|
 Event Processor one-by-one, according to the processing rules defined in
 :term:`Event Processing Policy<EPP>`. As a result of event processing, preconfigured
 actions can be executed, and/or event can be shown up as :term:`alarm <Alarm>`.
 
 Usually alarm represents something that needs attention of network administrators
 or network control center operators, for example low free disk space on a server.
-NetXMS provides one centralized location, the Alarm Browser, where the alarms are
+|product_name| provides one centralized location, the Alarm Browser, where the alarms are
 visible. It can be configured which events should be considered
 important enough to show up as alarm.
 
@@ -289,7 +289,7 @@ important enough to show up as alarm.
 Polling
 =======
 
-For some type of objects NetXMS server start gathering status and configuration information
+For some type of objects |product_name| server start gathering status and configuration information
 as soon as they are added to the system. These object types are: nodes, conditions,
 clusters, business services. This process called *polling*. There are multiple polling
 types, usually performed with different intervals:
@@ -317,7 +317,7 @@ types, usually performed with different intervals:
 Data Collection
 ===============
 
-From each node NetXMS can collect one or more :term:`metrics <Metric>` which
+From each node |product_name| can collect one or more :term:`metrics <Metric>` which
 can be either single-value ("CPU.Usage"), or table ("FileSystem.Volumes").
 When new data sample is collected, it's value is checked against configured
 thresholds. This documentation use term :term:`Data Collection Item <DCI>`
@@ -333,8 +333,8 @@ Metrics can be collected from multiple data sources:
      - Description
    * - Internal
      - Metrics internal to the server (server statistics, etc.)
-   * - NetXMS Agent
-     - Data is collected from NetXMS agent, which should be installed
+   * - |product_name| Agent
+     - Data is collected from |product_name| agent, which should be installed
        on target node. Server collect data from agent based on schedule.
    * - SNMP
      - SNMP transport will be used. Server collect data based on schedule.
@@ -357,11 +357,11 @@ Discovery
 Network discovery
 -----------------
 
-NetXMS can detect new devices and servers on the network and automatically
+|product_name| can detect new devices and servers on the network and automatically
 create node objects for them. Two modes are available – passive and active.
 
 In passive mode server will use only non-intrusive methods by querying ATP and
-routing tables from known devices. Tables from the server running NetXMS are
+routing tables from known devices. Tables from the server running |product_name| are
 used as seed for passive discovery.
 
 In active mode server will periodically scan configured address ranges using
@@ -370,7 +370,7 @@ ICMP echo requests in addition to passive scan methods.
 Instance discovery
 ------------------
 
-NetXMS can create parameters for :term:`Data Collection Item <DCI>` automatically.
+|product_name| can create parameters for :term:`Data Collection Item <DCI>` automatically.
 Instance discovery collects information about node instances like disk mountpoints, 
 device list, etc. and automatically creates or removes :term:`DCIs <DCI>` with 
 uptained data.

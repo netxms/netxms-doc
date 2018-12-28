@@ -8,11 +8,11 @@ Network topology
 Introduction
 ============
 
-NetXMS server automatically creates and maintains network model on different
+|product_name| server automatically creates and maintains network model on different
 layers. All necessary information taken from ARP cache, routing tables, and
 switch forwarding database of managed nodes. Topology data provided by CDP,
 LLDP, and NDP (SONMP) protocols also used in building network model. Having
-network model instantly available allows NetXMS users to perform various
+network model instantly available allows |product_name| users to perform various
 network topology tasks much faster and easier.
 
 
@@ -56,7 +56,7 @@ Columns have the following meaning:
      - Name of interface object representing switch port
    * - Type
      - Connection type - direct or indirect. Direct connection type means that
-       NetXMS server did not detect any other devices on sdame switch port, and
+       |product_name| server did not detect any other devices on sdame switch port, and
        most likely end node connected directly to the switch. Indirect means
        that some other devices was detected on same switch port. Virtual
        machines and virtual machine host will always be detected as indirect.
@@ -68,7 +68,7 @@ Find MAC address
 It is possible to find location of any known MAC address in the network. To do
 this, select :menuselection:`Tools --> Find MAC address`. Results of a search
 will be displayed in the same results view. It is not necessary that node with
-given MAC address be managed by NetXMS server, but if it is, appropriate
+given MAC address be managed by |product_name| server, but if it is, appropriate
 details will be displayed.
 
 
@@ -78,5 +78,5 @@ Find IP address
 It is possible to find location of any known IP address in the network. To do
 this, select :menuselection:`Tools --> Find IP address`. Results of a search
 will be displayed in the same results view. It is not necessary that node with
-given IP address be managed by NetXMS server, but if it is, appropriate details
+given IP address be managed by |product_name| server, but if it is, appropriate details
 will be displayed.

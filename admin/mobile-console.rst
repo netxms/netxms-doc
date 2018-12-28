@@ -7,7 +7,7 @@ Mobile Console
 
 .. Used version on wiki:  14:17, 7 September 2014‎ Marco Incalcaterra 
 
-NetXMS mobile console is a monitoring tool for Android devices running version 2.2. 
+|product_name| mobile console is a monitoring tool for Android devices running version 2.2. 
 and later. 
 
 Currently, only a small subset of the functions present in the Desktop/Web edition 
@@ -82,7 +82,7 @@ Nodes
 =====
 
 This section is used to list and manage all nodes (all network infrastructure monitored 
-by NetXMS are represented as a set of objects. Each object represents one physical or 
+by |product_name| are represented as a set of objects. Each object represents one physical or 
 logical entity, or group of them). Objects can be organized into hierarchical 
 structure, the Nodes section is used to explore them. In the right bottom corner 
 of the icon there is a symbol that indicates the status of the node/container 

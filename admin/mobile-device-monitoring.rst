@@ -6,8 +6,8 @@ Monitoring mobile devices
 
 .. Used version on wiki:  00:14, 16 February 2013‎ Marco Incalcaterra
 
-NetXMS has mobile agent for Android devices running version 2.2. and later. Currently,
-a very limited set of info can be monitored and reported to a NetXMS server.
+|product_name| has mobile agent for Android devices running version 2.2. and later. Currently,
+a very limited set of info can be monitored and reported to a |product_name| server.
 
 Metrics
 =======

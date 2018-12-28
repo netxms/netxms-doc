@@ -630,7 +630,7 @@ Save current settings as predefined graph
 
 You can save current graph settings as predefined graph to allow quick and easy
 access in the future to information presented on graph. Preconfigured graphs
-can be used either by you or by other NetXMS users, depending on settings. To
+can be used either by you or by other |product_name| users, depending on settings. To
 save current graph configuration as predefined graph, select :guilabel:`Save`
 as predefined from graph view menu. The following dialog will appear:
 
@@ -639,7 +639,7 @@ as predefined from graph view menu. The following dialog will appear:
 In :guilabel:`Graph name` field, enter desired name for your predefined graph.
 It will appear in predefined graph tree exactly as written here. You can use
 ``->`` character pair to create subtree. For example, if you name your graph
-``NetXMS Server->System->CPU utilization (iowait)`` it will appear in the tree
+``|product_name| Server->System->CPU utilization (iowait)`` it will appear in the tree
 as following:
 
 .. figure:: _images/predefined_graph_tree.png
@@ -746,7 +746,7 @@ Adjust the range of the Y axis on the graph.
 
 	Template graph filter properties.
 
-It may be necessary to set certain filters for a template graph. This can be useful if the graph contains DCI names that are only available on NetXMS agent or are SNMP dependant.
+It may be necessary to set certain filters for a template graph. This can be useful if the graph contains DCI names that are only available on |product_name| agent or are SNMP dependant.
 
 More information on filters can be found in :ref:`object_tools_filter`.
 

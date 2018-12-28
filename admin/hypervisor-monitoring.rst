@@ -4,7 +4,7 @@
 Hypervisor monitoring
 =====================
 
-NetXMS has subagents that allow to monitor hypervisors. This subagent is build using
+|product_name| has subagents that allow to monitor hypervisors. This subagent is build using
 libvirt functionality. 
 
 Metrics

@@ -7,6 +7,10 @@ import glob
 from os.path import basename
 
 # -- General configuration ------------------------------------------------
+product_name = os.environ.get('PRODUCT', 'NetXMS')
+product_key = product_name.replace(' ', '-').lower()
+rst_epilog = '.. |product_name| replace:: %s' % product_name
+
 print((os.path.abspath('../_lib')))
 sys.path.insert(0, os.path.abspath('../_lib'))
 
@@ -121,6 +125,10 @@ def setup(app):
         exclude_patterns.append(d[7:]) # remove 'source/'
 
     app.add_stylesheet("theme_overrides.css")
+    if product_name is 'NetXMS':
+        app.add_config_value('release_type', 'oss', 'env')
+    else:
+        app.add_config_value('release_type', 'ee', 'env')
 
 # -- Options for Epub output ----------------------------------------------
 

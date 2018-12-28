@@ -6,9 +6,9 @@ Appendix
 
 SMS Drivers
 ===========
-NetXMS supports concept of SMS drivers to provide SMS sending functionality. Role of SMS driver
+|product_name| supports concept of SMS drivers to provide SMS sending functionality. Role of SMS driver
 is to provide level of abstraction on top of different SMS sending mechanisms and uniform SMS
-sending interface for server core. The following drivers are provided by default with NetXMS installation:
+sending interface for server core. The following drivers are provided by default with |product_name| installation:
 
 .. list-table::
    :widths: 25 75
@@ -178,7 +178,7 @@ Agent configuration file (nxagentd.conf)
      - Enable (yes) or disable (no) log writer as separate background thread. Has no effect if logging is done through syslog or Windows Event Log.
      - no
    * - CodePage
-     - Code page used by NetXMS agent. Has no effect on Windows or if agent was compiled without iconv support.
+     - Code page used by |product_name| agent. Has no effect on Windows or if agent was compiled without iconv support.
      - Depends on your system, usually ISO8859-1
    * - ControlServers
      - A list of management servers, which can execute actions on agent and change agent's config. Hosts listed in this parameter also have read access to the agent. Both IP addresses and DNS names can be used. Multiple servers can be specified in one line, separated by commas. If this parameter is used more than once, servers listed in all occurrences will have access to agent.
@@ -366,7 +366,7 @@ Server configuration file (netxmsd.conf)
     - Description
     - Default Value
   * - CodePage
-    - Code page used by NetXMS server. Has no effect on Windows or if server was compiled without iconv support.
+    - Code page used by |product_name| server. Has no effect on Windows or if server was compiled without iconv support.
     - Depends on your system, usually ISO8859-1
   * - CreateCrashDumps
     - Control creation of server's crash dumps. Possible values: yes or no. Has effect only on Windows platforms.
@@ -376,7 +376,7 @@ Server configuration file (netxmsd.conf)
     - %Y%m%d
   * - DataDirectory
     - Directory where server looks for compiled MIB files, keep server encryption key, etc.
-    - :file:`/var/netxms` or :file:`C:\\NetXMS\\var`
+    - :file:`/var/netxms` or :file:`C:\\|product_name|\\var`
   * - DBDriver
     - Database driver to be used.
     - No default value
@@ -511,7 +511,7 @@ These parameters can be changed in
     - 0 0 * * *
     - No
   * - AllowDirectSMS
-    - Allow (1) or disallow (0) sending of SMS via NetXMS server using nxsms utility.
+    - Allow (1) or disallow (0) sending of SMS via |product_name| server using nxsms utility.
     - 0
     - No
   * - AllowedCiphers
@@ -540,7 +540,7 @@ These parameters can be changed in
     - 90
     - No
   * - BeaconHosts
-    - Comma-separated list of hosts to be used as beacons for checking NetXMS server network connectivity. Either DNS names or IP addresses can be used. This list is pinged by NetXMS server and if none of the hosts have responded, server considers that connection with network is lost and generates specific event.
+    - Comma-separated list of hosts to be used as beacons for checking |product_name| server network connectivity. Either DNS names or IP addresses can be used. This list is pinged by |product_name| server and if none of the hosts have responded, server considers that connection with network is lost and generates specific event.
     -
     - Yes
   * - BeaconPollingInterval
@@ -700,7 +700,7 @@ These parameters can be changed in
     - 0
     - Yes
   * - EnableMultipleDBConnections
-    - Enable (1) or disable (0) multiple database connections from the NetXMS server. This setting has no effect on SQLite databases.
+    - Enable (1) or disable (0) multiple database connections from the |product_name| server. This setting has no effect on SQLite databases.
     - 1
     - Yes
   * - EnableNXSLContainerFunctions
@@ -845,7 +845,7 @@ These parameters can be changed in
     -
     - No
   * - LdapSyncInterval
-    - This parameter is for setting synchronization interval in minutes between NetXMS server and LDAP server. If synchronization parameter is set to 0 - synchronization will not be done.
+    - This parameter is for setting synchronization interval in minutes between |product_name| server and LDAP server. If synchronization parameter is set to 0 - synchronization will not be done.
     - 0
     - No
   * - LdapSyncUser
@@ -861,7 +861,7 @@ These parameters can be changed in
     -
     - No
   * - LdapUserDeleteAction
-    - This parameter specifies what should be done while synchronization with deleted from LDAP user/group. 0 - if user should be just deleted from NetXMS DB. 1 - if it should be disabled. If it is chosen to disable user, then on LDAP sync user will be disabled and it’s description will be change on “LDAP entry was deleted.” Afterwards this user/group can be detached from LDAP and enabled if it is required or just deleted manually.
+    - This parameter specifies what should be done while synchronization with deleted from LDAP user/group. 0 - if user should be just deleted from |product_name| DB. 1 - if it should be disabled. If it is chosen to disable user, then on LDAP sync user will be disabled and it’s description will be change on “LDAP entry was deleted.” Afterwards this user/group can be detached from LDAP and enabled if it is required or just deleted manually.
     - 1
     - No
   * - LockTimeout
@@ -873,7 +873,7 @@ These parameters can be changed in
     - 0
     - Yes
   * - MailEncoding
-    - Encoding for mails generated by NetXMS server.
+    - Encoding for mails generated by |product_name| server.
     - iso-8859-1
     - No
   * - MailBase64Subjects
@@ -885,7 +885,7 @@ These parameters can be changed in
     - 10
     - Yes
   * - MinPasswordLength
-    - Default minimum password length for a NetXMS user. The default applied only if per-user setting is not defined.
+    - Default minimum password length for a |product_name| user. The default applied only if per-user setting is not defined.
     - 0
     - No
   * - MinViewRefreshInterval
@@ -976,7 +976,7 @@ These parameters can be changed in
     - 3
     - No
   * - ReceiveForwardedEvents
-    - Enable (1) or disable (0) reception of events forwarded by another NetXMS server. Please note that for external event reception ISC listener should be enabled as well.
+    - Enable (1) or disable (0) reception of events forwarded by another |product_name| server. Please note that for external event reception ISC listener should be enabled as well.
     - 0
     - No
   * - ResolveDNSToIPOnStatusPoll
@@ -1014,7 +1014,7 @@ These parameters can be changed in
     - No
   * - SMTPFromName
     - A name used for sending mail.
-    - NetXMS Server
+    - |product_name| Server
     - No
   * - SMTPPort
     - TCP port for SMTP server.
@@ -1029,7 +1029,7 @@ These parameters can be changed in
     - localhost
     - No
   * - SNMPRequestTimeout
-    - Timeout in milliseconds for SNMP requests sent by NetXMS server.
+    - Timeout in milliseconds for SNMP requests sent by |product_name| server.
     - 2000
     - Yes
   * - SNMPTrapLogRetentionTime
@@ -1148,7 +1148,7 @@ These parameters can be changed in
     - 1
     - Yes
   * - WindowsConsoleUpgradeURL
-    - URL pointing to the actual version of NetXMS Console for Windows. Console application will try to download new version from this URL, if it detects that upgrade is needed. You can use %version % macro inside the URL to insert actual server version.
+    - URL pointing to the actual version of |product_name| Console for Windows. Console application will try to download new version from this URL, if it detects that upgrade is needed. You can use %version % macro inside the URL to insert actual server version.
     - http://www.netxms.org/download/netxms-%version%.exe
     - No
   * - XMPPLogin
@@ -1177,12 +1177,12 @@ Bundled Subagents
 Command line tools
 ==================
 
-NetXMS provide some additional command line tools. Each tool serves its own purpose.
+|product_name| provide some additional command line tools. Each tool serves its own purpose.
 
 DB Manager
 ----------
 
-This is tool used to make manipulations with NetXMS database.
+This is tool used to make manipulations with |product_name| database.
   ::
 
    Usage: nxdbmgr [<options>] <command>
@@ -1263,7 +1263,7 @@ Database migration
 
    nxdbmgr migrate old.configuration.file
 
-Is used to migrate NetXMS database between different database management system from NetXMS
+Is used to migrate |product_name| database between different database management system from |product_name|
 supported list.
 
 While migration nxdbmgr should use new configuration file(with new DB credentials) and as
@@ -1296,7 +1296,7 @@ nxapush
 -------
 This tool has same usage as nxpush, but it sends data throught local agent.
 
-When new version of NetXMS is released - version of server protocol is
+When new version of |product_name| is released - version of server protocol is
 changed. Change of version affects on server comunication with other tools
 like nxpush. So after each server update nxpush tool also should be updated.
 In case of usage nxapush - only agent should be updated as this tool uses agent
@@ -1317,7 +1317,7 @@ in server and agent configuration files.
 nxevent
 -------
 
-This tool can be used to push events to NetXMS server.
+This tool can be used to push events to |product_name| server.
 
 nxget
 -----

@@ -1,6 +1,6 @@
-##########################
-NetXMS Administrator Guide
-##########################
+###################
+Administrator Guide
+###################
 
 .. toctree::
    :maxdepth: 1

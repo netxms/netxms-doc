@@ -8,7 +8,7 @@ There are two options to monitor UPS: first is through USB or serial connection 
 help of subagent and second one is through the network with help of SNMP.
 
 Subagent can be used for monitoring UPS (Uninterruptible Power Supply) attached
-to serial or USB port on computer where NetXMS agent is running. USB-attached devices
+to serial or USB port on computer where |product_name| agent is running. USB-attached devices
 currently supported only on Windows platform, serial is supported on all platforms.
 One subagent can monitor multiple attached devices.
 
@@ -17,7 +17,7 @@ USB or serial UPS monitoring
 ============================
 
 You can monitor UPS devices attached to the hosts via serial cable or USB via UPS
-subagent. Once you have your UPS attached to the host and NetXMS agent installed,
+subagent. Once you have your UPS attached to the host and |product_name| agent installed,
 you should configure UPS subagent. First, add the following line to agent's
 configuration file main section:
 
@@ -126,7 +126,7 @@ Consider the following simple scenario: you have two servers, Node_A and Node_B,
 connected to one UPS device. UPS device is APC Smart UPS 1700, connected with serial
 cable to Node_A on first COM port. Both nodes are running Windows operating system.
 You need to notify administrator if UPS goes to battery power, and shutdown both
-nodes in case of low battery condition. We assume that both nodes have NetXMS agent
+nodes in case of low battery condition. We assume that both nodes have |product_name| agent
 installed.
 To accomplish this, do the following:
 
@@ -151,11 +151,11 @@ At the end of configuration file, create UPS subagent configuration section:
 SNMP UPS monitoring
 ===================
 
-Other option to monitor UPS is using SNMP. NetXMS already includes MIBs for some UPS,
+Other option to monitor UPS is using SNMP. |product_name| already includes MIBs for some UPS,
 like APC UPS and standard UPS MIB.
 Description for possible OIDs and some additional information for APC UPS configuration
 can be found on a
-`NetXMS wiki <https://wiki.netxms.org/wiki/UPS_Monitoring_(APC)_via_SNMP>`_.
+`|product_name| wiki <https://wiki.netxms.org/wiki/UPS_Monitoring_(APC)_via_SNMP>`_.
 
 Please check :ref:`import-mib` for MIB loadding and :ref:`dci-configuration` for
 metric collection.

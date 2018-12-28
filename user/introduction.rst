@@ -5,16 +5,16 @@ Introduction
 About this document
 ===================
 
-The User Manual describes the main aspects of NetXMS monitoring system. This
+The User Manual describes the main aspects of |product_name| monitoring system. This
 manual enables all users to get an overview of the various functionalities of
-NetXMS. The main aspects outlined in here describe the possibilities and
-functionaries of the NetXMS interface and elucidate working processes.
+|product_name|. The main aspects outlined in here describe the possibilities and
+functionaries of the |product_name| interface and elucidate working processes.
 
 Target audience
 ===============
 
-This manual is intended for NetXMS operators, and provides all information
-necessary to successfully operate NetXMS.
+This manual is intended for |product_name| operators, and provides all information
+necessary to successfully operate |product_name|.
 
 Conventions
 ===========

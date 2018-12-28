@@ -4,7 +4,7 @@
 Hardware(sensor) monitoring 
 ============================
 
-NetXMS has subagents that allow to monitor hardware sensors.
+|product_name| has subagents that allow to monitor hardware sensors.
   * lm-sensors - Can collect data from all sensors that are supported by
     `lm-sensors <http://www.lm-sensors.org/wiki/Devices>`_ drivers on Luinux.
   * DS18x20 - This subagent collects temperature data form ds18x20 sensors. Linux only.

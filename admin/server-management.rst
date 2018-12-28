@@ -6,7 +6,7 @@ Server management
 Configuration file
 ==================
 
-File netxmsd.conf is a configuration file for NetXMS server. It contains 
+File netxmsd.conf is a configuration file for |product_name| server. It contains 
 information necessary for establishing database connection, and some optional 
 server parameters. Default location for this file is :file:`/etc/netxmsd.conf`
 on UNIX systems and :file:`InstalationPath\etc\netxmsd.conf on Windows`.
@@ -21,7 +21,7 @@ Configuration file example:
 .. code-block:: cfg  
 
   #
-  # Sample configuration file for NetXMS server
+  # Sample configuration file for |product_name| server
   #
 
   DBDriver = mysql.ddr
@@ -37,7 +37,7 @@ Configuration file example:
 Server configuration for Agent to Server connection / Tunnel connection
 ======================================================================= 
 
-NetXMS provides option to establish connection from agent to server. This requires 
+|product_name| provides option to establish connection from agent to server. This requires 
 additional configuration on server and on agent sides. This chapter describes server 
 side configuration. Agent side configuration can be found in :ref:`agent-to-server-agent-conf-label`.
 Agent to server connection is a :term:`TLS` tunnel carrying virtual server to agent connections.
@@ -147,7 +147,7 @@ does not contain any information about file access right assignment or certifica
             stateOrProvinceName = Riga
             localityName = Riga
             organizationName = netxms.org
-            commonName = NetXMS Server
+            commonName = |product_name| Server
 
             [v3_ca]
             basicConstraints = CA:TRUE    
@@ -206,7 +206,7 @@ Please note that changes to most of the settings will take effect only after ser
 Synchronization between servers
 ===============================
 
-NetXMS does not provide horizontal scalability for server. But there is option to exchange with 
+|product_name| does not provide horizontal scalability for server. But there is option to exchange with 
 events between servers. Information about configuration can be found there: :ref:`forward_events`.
 Event forward does not work with zones. 
 
@@ -258,10 +258,10 @@ through XMPP should be fulfill next requirements:
   1. Server connection with XMPP should be configured in server configuration variables: 
      :guilabel:`XMPPLogin`, :guilabel:`XMPPPassword`, :guilabel:`XMPPPort`, 
      :guilabel:`XMPPServer`, :guilabel:`EnableXMPPConnector`. 
-  2. XMPP user that will send commands should be connected with NetXMS user by pointing 
-     it's XMPP name in :guilabel:`XMPP ID` filed of General tab of NetXMS user 
+  2. XMPP user that will send commands should be connected with |product_name| user by pointing 
+     it's XMPP name in :guilabel:`XMPP ID` filed of General tab of |product_name| user 
      properties. 
-  3. NetXMS user that will execute this commands should also have 
+  3. |product_name| user that will execute this commands should also have 
      :guilabel:`Execute commands via XMPP` access right. 
   
 Execution is done sending server command like a message to the user defined in 
@@ -279,7 +279,7 @@ Server commands
   * - debug [<level>|off]
     - Set debug level (valid range is 0..9)
   * - down 
-    - Shutdown NetXMS server
+    - Shutdown |product_name| server
   * - exec <script> [<params>]
     - Executes NXSL script from script library
   * - exit

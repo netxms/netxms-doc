@@ -7,7 +7,7 @@ Database monitoring
 
 There are created few specialized monitoring subagents: Oracle, DB2, MongoDB. Further
 will be described how to configure and use this subagents. Besides this there is
-opportunity to monitor also other types of databases supported by NetXMS
+opportunity to monitor also other types of databases supported by |product_name|
 server(:ref:`link to supported database list<supported-db-list>`) using database query
 suabgent as this databases support receiving performance parameters using queries.
 This subagent details are described in :ref:`dbquery` chapter.
@@ -15,7 +15,7 @@ This subagent details are described in :ref:`dbquery` chapter.
 Oracle
 ======
 
-NetXMS subagent for Oracle DBMS monitoring (further referred to as Oracle subagent) monitors
+|product_name| subagent for Oracle DBMS monitoring (further referred to as Oracle subagent) monitors
 one or more instances of Oracle databases and reports various database-related parameters.
 
 All parameters available from Oracle subagent gathered or calculated once per minute thus it's
@@ -23,7 +23,7 @@ recommended to set DCI poll interval for these items to 60 seconds or more. All 
 obtained or derived from the data available in Oracle's data dictionary tables and views through
 regular select queries. Oracle subagent does not monitor any of the metrics related to lower level
 database layers, such as database processes. Monitoring of such parameters can be achieved through
-the standard NetXMS functionality.
+the standard |product_name| functionality.
 
 Pre-requisites
 --------------
@@ -288,7 +288,7 @@ When loaded, Oracle subagent adds the following tables to agent:
 DB2
 ===
 
-NetXMS subagent for DB2 monitoring is designed to provide a way to extract various parameters
+|product_name| subagent for DB2 monitoring is designed to provide a way to extract various parameters
 known as Data Collection Items (DCI) from an instance or several instances of DB2 database.
 
 Configuration
@@ -797,7 +797,7 @@ MongoDB
 
 .. versionadded:: 2.0-M3
 
-NetXMS subagent for MongoDB monitoring. Monitors one or more instances of MongoDB databases and
+|product_name| subagent for MongoDB monitoring. Monitors one or more instances of MongoDB databases and
 reports various database-related parameters.
 
 All parameters available from MongoDB subagent gathered or calculated once per minute thus it's
@@ -877,9 +877,9 @@ List
 Informix
 ========
 
-NetXMS subagent for Informix (further referred to as Informix subagent) monitors one or more Informix databases and reports database-related parameters.
+|product_name| subagent for Informix (further referred to as Informix subagent) monitors one or more Informix databases and reports database-related parameters.
 
-All parameters available from Informix subagent gathered or calculated once per minute thus its recommended to set DCI poll interval for these items to 60 seconds or more. All parameters are obtained or derived from the data available in Informix system catalogs. Informix subagent does not monitor any of the metrics related to lower level database layers, such as database processes. Monitoring of such parameters can be achieved through the standard NetXMS functionality.
+All parameters available from Informix subagent gathered or calculated once per minute thus its recommended to set DCI poll interval for these items to 60 seconds or more. All parameters are obtained or derived from the data available in Informix system catalogs. Informix subagent does not monitor any of the metrics related to lower level database layers, such as database processes. Monitoring of such parameters can be achieved through the standard |product_name| functionality.
 
 Pre-requisites
 --------------

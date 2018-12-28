@@ -9,7 +9,7 @@ Glossary
     Configurable operation which can be executed by the system when
     :term:`Event` is passing thru :term:`Event Processing Policy`. Multiple
     action types are supported, including email or SMS notification, executing
-    OS commands and forwarding events to another instance of NetXMS server.
+    OS commands and forwarding events to another instance of |product_name| server.
 
   Alarm
     Outstanding issue which require operator attention. Alarms are created by
@@ -58,7 +58,7 @@ Glossary
 
   Entire Network
     Automatically generated object hierarchy that contains all nodes and IP
-    subnets known to NetXMS.
+    subnets known to |product_name|.
 
   EPP
     Abbreviation for :term:`Event Processing Policy`
@@ -80,7 +80,7 @@ Glossary
     define logical structure of the network.
 
   Management Console
-    NetXMS user interface. Available in form of `rich client
+    |product_name| user interface. Available in form of `rich client
     <http://en.wikipedia.org/wiki/Fat_client>`_ for both desktop and mobile or
     as web service.
 
@@ -95,28 +95,28 @@ Glossary
     Special type of :term:`Node` that represents monitored mobile device.
 
   Monitoring Agent
-    NetXMS or SNMP agent that provides information to NetXMS Server.
+    |product_name| or SNMP agent that provides information to |product_name| Server.
 
   Network Discovery
     Network investigation in order to find new :term:`nodes <Node>`. There are
     2 types of discovery: active and passive. In passive mode, information
     about new hosts and devices obtained from :term:`ARP` tables and routing
-    tables of already known devices. In active discovery mode, NetXMS server
+    tables of already known devices. In active discovery mode, |product_name| server
     will send an :term:`ICMP` echo requests to all IP addresses in given range,
     and consider each responding address for adding to database.
 
   Network Map
     Visual representaion of network topology.
 
-  NetXMS Agent
-    NetXMS daemon that is installed on monitored :term:`Node` to provide
+  |product_name| Agent
+    |product_name| daemon that is installed on monitored :term:`Node` to provide
     additional monitoring options.
 
   Node
     :term:`Object` that represents server or device.
 
   NXSL
-    NetXMS Scripting Language.
+    |product_name| Scripting Language.
 
   Object
     Representation of logical or physical entity.
@@ -125,7 +125,7 @@ Glossary
     Configurable operation that can be executed on :term:`Node`.
 
   Package Manager
-    :term:`View` that manages update packages for NetXMS agents.
+    :term:`View` that manages update packages for |product_name| agents.
 
   Perspective
     A perspective defines the initial set and layout of views in the Eclipse
@@ -141,8 +141,8 @@ Glossary
     Configuration, Topology, Discovery and Routing.
 
   Proxy Agent
-    NetXMS Agent capable of forwarding requests to :term:`nodes <Node>` which
-    are not directly accecible to NetXMS server. Agent support proxying of
+    |product_name| Agent capable of forwarding requests to :term:`nodes <Node>` which
+    are not directly accecible to |product_name| server. Agent support proxying of
     native agent protocol as well as SNMP. 
 
   Push parameter
@@ -150,7 +150,7 @@ Glossary
     agent.
 
   Subagent
-    Extension module (shared library) which can be loaded into NetXMS agent to
+    Extension module (shared library) which can be loaded into |product_name| agent to
     provide additional functionality.
 
   Template
@@ -175,7 +175,7 @@ Glossary
     on top of it.
 
   Zone
-    Zone in NetXMS is a group of IP subnets which form non-overlapping IP
+    Zone in |product_name| is a group of IP subnets which form non-overlapping IP
     address space. There is always zone 0 which contains subnets directly
     reachable by management server. For all other zones server assumes that
     subnets within that zones are not reachable directly, and proxy must be

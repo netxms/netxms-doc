@@ -9,7 +9,7 @@ Object browser
 ==============
 
 :guilabel:`Object browser` organize all existing :term:`objects <Object>` in 
-hierarchical structure. NetXMS has eight top level objects – Entire Network, 
+hierarchical structure. |product_name| has eight top level objects – Entire Network, 
 Service Root, Template Root, Policy Root, Network Map Root, Dashboard Root, 
 Report Root, and Business Service Root. These objects served as an abstract 
 root for appropriate object tree. All top level objects has only one editable 
@@ -114,7 +114,7 @@ there: :ref:`object_tools`.
 If geolocation of the node is set, then with help of :guilabel:`Geolocation` item can be 
 opened map with shown on it object location. :guilabel:`Software Inventory` will show 
 full software list for nodes with Windows systems or Linux systems(that used rpn or deb 
-packages) and have NetXMS agent installed. :guilabel:`Service Dependency` will build 
+packages) and have |product_name| agent installed. :guilabel:`Service Dependency` will build 
 tree from this node with all container where this node is included. :guilabel:`Alarms` 
 will open alarm view with alarms only for this specific node. 
 
@@ -242,7 +242,7 @@ Object Tools
 
 There can be created tools that will be executed on objects. Tools are shown under 
 "Tools" item of node menu. There are some pre defined object tools, but they can be 
-disabled or configured new by NetXMS administrator. 
+disabled or configured new by |product_name| administrator. 
 
 .. _last-values:
 

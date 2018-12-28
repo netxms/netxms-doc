@@ -10,7 +10,7 @@ Upgrading on Debian or Ubuntu
 Upgrading packages
 ------------------
 
-To update all NetXMS packages run command:
+To update all |product_name| packages run command:
 
 :command:`apt-get update && apt-get upgrade`
 
@@ -70,9 +70,9 @@ Server
 
     :command:`$ make`
     
-  5. Stop NetXMS server. 
+  5. Stop |product_name| server. 
   
-  6. Stop NetXMS agent. 
+  6. Stop |product_name| agent. 
   
   7. Check database for possible inconsistencies:
 
@@ -88,9 +88,9 @@ Server
 
     :command:`$ nxdbmgr upgrade`
     
-  10. Start NetXMS agent.
+  10. Start |product_name| agent.
 
-  11. Start NetXMS server.
+  11. Start |product_name| server.
 
 Agent
 ~~~~~
@@ -116,7 +116,7 @@ Agent
   
     :command:`make`
     
-  5. Stop NetXMS agent. 
+  5. Stop |product_name| agent. 
     
   6. Run make install:
    
@@ -161,29 +161,29 @@ Server
 
 1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need Windows installer (named netxms-VERSION.exe, for example netxms-1.2.15.exe).
 
-2. Stop NetXMS server.
+2. Stop |product_name| server.
 
 3. Check database for possible inconsistencies:
 
 .. code-block:: cfg
 
-  C:\NetXMS\bin> nxdbmgr check
+  C:\|product_name|\bin> nxdbmgr check
 
 Proceed to the next step only if database checker does not report any errors!
 
-4. Run NetXMS installer and follow the prompts. Normally, you will not need to change any settings on installation wizard windows. Alternatively, you can run the installer with /SILENT option to disable any prompts:
+4. Run |product_name| installer and follow the prompts. Normally, you will not need to change any settings on installation wizard windows. Alternatively, you can run the installer with /SILENT option to disable any prompts:
 
 .. code-block:: cfg
 
   C:\Download> netxms-1.2.15.exe /SILENT
 
-5. Check whether NetXMS Server service is running again. If it's not, most likely you have to upgrade your database to newer version. To upgrade database, use nxdbmgr utility:
+5. Check whether |product_name| Server service is running again. If it's not, most likely you have to upgrade your database to newer version. To upgrade database, use nxdbmgr utility:
 
 .. code-block:: cfg
 
-  C:\NetXMS\bin> nxdbmgr upgrade
+  C:\|product_name|\bin> nxdbmgr upgrade
 
-6. Start NetXMS server, if it is not already started.
+6. Start |product_name| server, if it is not already started.
   
 Agent
 ~~~~~
@@ -195,7 +195,7 @@ However, if you decide to upgrade agent manually, it can be done in just a few s
      have it. You will need Windows Agent installer (named nxagent-VERSION.exe or 
      nxagent-VERSION-x64.exe, for example nxagent-1.2.0.exe).
 
-  2. Run NetXMS agent installer and follow the prompts. Normally, you will not need 
+  2. Run |product_name| agent installer and follow the prompts. Normally, you will not need 
      to change any settings on installation wizard dialog windows. Alternatively, you 
      can run installer with /SILENT option to disable any prompts:
 
@@ -246,9 +246,9 @@ Server
 
     :command:`$ make`
     
-  5. Stop NetXMS server. 
+  5. Stop |product_name| server. 
   
-  6. Stop NetXMS agent. 
+  6. Stop |product_name| agent. 
   
   7. Check database for possible inconsistencies:
 
@@ -264,9 +264,9 @@ Server
 
     :command:`$ nxdbmgr upgrade`
     
-  10. Start NetXMS agent.
+  10. Start |product_name| agent.
 
-  11. Start NetXMS server.
+  11. Start |product_name| server.
 
 Agent
 -----
@@ -292,7 +292,7 @@ Agent
   
     :command:`make`
     
-  5. Stop NetXMS agent. 
+  5. Stop |product_name| agent. 
     
   6. Run make install:
    
@@ -308,7 +308,7 @@ Centralized agent upgrade
 =========================
 
 Steps to update agent remotely:
-   1. Download NetXMS agent installer from http://www.netxms.org/download/
+   1. Download |product_name| agent installer from http://www.netxms.org/download/
    2. Download the appropriate NPI file for your agent installer(NPI file is just a reference to actual package file. You should have it as well in the same directory as NPI file.)
    3. Open "Package Manager"  
    

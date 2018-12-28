@@ -9,7 +9,7 @@ User management
 Introduction
 ============
 
-NetXMS has it's own user database. All NetXMS user accounts stored in backend
+|product_name| has it's own user database. All |product_name| user accounts stored in backend
 SQL database. Each account has it's own unique login name and identifier. The
 account may also have a password.
 
@@ -20,7 +20,7 @@ Terms and Definitions
 Users
 -----
 
-NetXMS has the following attributes for users:
+|product_name| has the following attributes for users:
 
 - Unique identifier
 - Unique login name
@@ -44,7 +44,7 @@ Superuser
     can be deleted or disabled. As a default user with access to everything was created 
     ``system`` user, that by default is disabled. 
 
-NetXMS has built-in superuser with ID ``0``, which always has full access to
+|product_name| has built-in superuser with ID ``0``, which always has full access to
 the system. Default login name for superuser is ``system``. By default user is 
 disabled. Superuser account can be renamed or disabled/enabled, but cannot be deleted.
 
@@ -68,7 +68,7 @@ to the user.
 Everyone Group
 ~~~~~~~~~~~~~~
 
-NetXMS has built-in virtual group called :guilabel:`Everyone`. This group
+|product_name| has built-in virtual group called :guilabel:`Everyone`. This group
 always contains all users in the system. It cannot be deleted, and it's members
 list cannot be edited.
 
@@ -142,7 +142,7 @@ The following system access rights can be granted:
      - Allow user to read files stored on server and upload to agents (user
        still needs appropriate object rights for upload). :ref:`server-files-label` 
    * - Register agents
-     - Allow user to register NetXMS agents.
+     - Allow user to register |product_name| agents.
    * - Reporting server access
      - Allow user to access the Reporting server configuration. :ref:`reporting`
    * - Schedule file upload
@@ -152,7 +152,7 @@ The following system access rights can be granted:
    * - Schedule script execution
      - Allow user to schedule script execution. :ref:`schedule`
    * - Send SMS
-     - Allow user to send SMS via NetXMS server. This access right has no
+     - Allow user to send SMS via |product_name| server. This access right has no
        effect unless server configuration variable ``AllowDirectSMS`` set to
        ``1``.
    * - Unlink helpdesk tickets
@@ -180,7 +180,7 @@ Internal Password
 -----------------
 
 This is the default method for user authentication. Password provided by user
-compared against password stored in NetXMS database.
+compared against password stored in |product_name| database.
 
 
 Password Policy
@@ -196,7 +196,7 @@ Various restrictions can be put on internal passwords to force users to choose s
      - Description
      - Default
    * - MinPasswordLength
-     - Default minimum password length for a NetXMS user. The default applied only if per-user setting is not defined.
+     - Default minimum password length for a |product_name| user. The default applied only if per-user setting is not defined.
      - 0
    * - PasswordComplexity
      - Required pasword complexity. See table bellow for details.
@@ -241,14 +241,14 @@ force passwords to contain uppercase and lowercase letters,
 ``PasswordComplexity`` variable must be set to ``6`` (``2 + 4``).
 
 Changes to these configuration variables becomes effective immediately and does
-not require NetXMS server restart.
+not require |product_name| server restart.
 
 RADIUS
 ------
 
 If :guilabel:`RADIUS` authentication method selected password provided by user
 sent to RADIUS server for validation. User is granted access if RADIUS server
-responds with ``Access-Accept``. Communication between NetXMS server and RADIUS
+responds with ``Access-Accept``. Communication between |product_name| server and RADIUS
 server controlled by the following server configuration variables:
 
 .. list-table::
@@ -284,7 +284,7 @@ server controlled by the following server configuration variables:
      - 3
 
 Changes to these configuration variables becomes effective immediately and does
-not require NetXMS server restart.
+not require |product_name| server restart.
 
 
 Certificate Authentication
@@ -357,9 +357,9 @@ Integration with LDAP
 
 .. versionadded:: 1.2.15
 
-NetXMS can perform one-way synchronization of users and groups with external LDAP server. User list replica is refreshed automatically.
+|product_name| can perform one-way synchronization of users and groups with external LDAP server. User list replica is refreshed automatically.
 
-Already existing NetXMS users or groups will not be modified during initial synchronization (e.g. user "admin" or group "Everyone").
+Already existing |product_name| users or groups will not be modified during initial synchronization (e.g. user "admin" or group "Everyone").
 
 LDAP synchronization configuration
 ----------------------------------
@@ -401,7 +401,7 @@ Server parameters controlling LDAP synchronization:
      - The LdapSearchFilter is a string representation of the filter to apply in the search.
      -
    * - LdapUserDeleteAction ``*``
-     - This parameter specifies what should be done while synchronization with deleted from LDAP user/group. 0 - if user should be just deleted from NetXMS DB. 1 - if it should be disabled. If it is chosen to disable user, then on LDAP sync user will be disabled and it's description will be change on "LDAP entry was deleted." Afterwards this user/group can be detached from LDAP and enabled if it is required or just deleted manually. 
+     - This parameter specifies what should be done while synchronization with deleted from LDAP user/group. 0 - if user should be just deleted from |product_name| DB. 1 - if it should be disabled. If it is chosen to disable user, then on LDAP sync user will be disabled and it's description will be change on "LDAP entry was deleted." Afterwards this user/group can be detached from LDAP and enabled if it is required or just deleted manually. 
      - 1
    * - LdapUserMappingName ``*`` 
      - There should be specified name of attribute that's value will be used as a user's login name
@@ -428,7 +428,7 @@ Server parameters controlling LDAP synchronization:
      - Unique identifier for LDAP user object. By default LDAP users are identified by DN. If in your configuration DN can be changed any time it is useful to choose other attribute as unique user identifier. 
      -
    * - LdapSyncInterval ``*``
-     - This parameter is for setting synchronization interval in minutes between NetXMS server and LDAP server. If synchronization parameter is set to 0 - synchronization will not be done. 
+     - This parameter is for setting synchronization interval in minutes between |product_name| server and LDAP server. If synchronization parameter is set to 0 - synchronization will not be done. 
      - 0
    * - LdapPageSize ``*``
      - Limit of records that can be returned in one search page. 
@@ -439,8 +439,8 @@ Server parameters controlling LDAP synchronization:
 Synchronization also can be done manually with `ldapsync` or just `ldap` command in server console.
 
 
-LDAP users/groups relationships with native NetXMS users/groups
----------------------------------------------------------------
+LDAP users/groups relationships with native |product_name| users/groups
+-----------------------------------------------------------------------
 
 LDAP users and groups are handled in exactly the same was as users from internal database. Only difference is that LDAP group membership is refreshed on each synchronisation and any non-LDAP user will be removed from the group.
 
@@ -573,8 +573,8 @@ Open LDAP
 Managing User Accounts
 ======================
 
-All NetXMS user accounts can be managed from :guilabel:`User Manager` view
-available at :menuselection:`Configuration --> User Manager` in NetXMS Console.
+All |product_name| user accounts can be managed from :guilabel:`User Manager` view
+available at :menuselection:`Configuration --> User Manager` in |product_name| Console.
 Only users with granted system right :guilabel:`Manage users` can access
 :guilabel:`User Manager`.
 
@@ -590,7 +590,7 @@ Audit
 
 All important user actions are written to audit log. There are two audit
 logging modes - internal and external. Internal audit logging is on by default
-and writes audit records into table in NetXMS database. External audit logging
+and writes audit records into table in |product_name| database. External audit logging
 allows sending audit records to external system via syslog protocol. External
 audit logging is off by default. Audit logging controlled by the following
 server configuration variables:

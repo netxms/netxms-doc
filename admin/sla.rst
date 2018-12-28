@@ -28,8 +28,8 @@ Service
 Business Services represented with a tree-like hierarchy of nested logical
 services, nodes and service checks. One can think of a service as a container
 consisting of other services, service checks and nodes linked to service
-checks. In NetXMS terminology the last is called node link. For each service in
-the hierarchy, NetXMS calculates availability percentage and keeps track of all
+checks. In |product_name| terminology the last is called node link. For each service in
+the hierarchy, |product_name| calculates availability percentage and keeps track of all
 downtime cases. To check availability at any particular level, select it in the
 :guilabel:`Object Browser` or choose :guilabel:`Availability Chart` from the
 context menu.

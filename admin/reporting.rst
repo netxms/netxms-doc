@@ -7,7 +7,7 @@ Reporting
 
 Reporting module is an optional component, build on top of well known
 JasperReports_ library, which can produce pixel-perfect documents in variety of
-formats based on historical data collected by NetXMS.
+formats based on historical data collected by |product_name|.
 
 Reporting module consist of two main parts: user interface and standalone
 ``Reporting Server``, which handles all scheduling, execution, and optional
@@ -108,10 +108,10 @@ If report is no longer needed, right click on record and select :guilabel:`Delet
 Configuration
 =============
 
-NetXMS Server
--------------
+|product_name| Server
+---------------------
 
-NetXMS server maintain persistent connection with reporting server on
+|product_name| server maintain persistent connection with reporting server on
 `localhost:4710`, but if can be changed in configuration.
 
 +-------------------------+------------------------------------------------+---------------+
@@ -251,7 +251,7 @@ Setup
     In most cases (when reports are using only single datasource), setting 
     "netxmsdConfig" is enough, database type and credentials will loaded 
     automatically from netxmsd.conf. "netxms" section of the config is required 
-    for reports, which load data not from SQL datasource, but using NetXMS API 
+    for reports, which load data not from SQL datasource, but using |product_name| API 
     instead (connection is maintained by reporting server).
 
 5. Create workspace directory (as set by "workspace" parameter), it will contain both report 

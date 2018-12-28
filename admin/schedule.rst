@@ -5,7 +5,7 @@
 Scheduled tasks
 ===============
 
-NetXMS provide option to schedule different tasks. Each task have it's own parameter count and type. 
+|product_name| provide option to schedule different tasks. Each task have it's own parameter count and type. 
 The only common parameter is node on whitch task will be executed. Schedule time can be set in two 
 ways as one time schedule or as a cron task. 
 

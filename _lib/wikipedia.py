@@ -13,7 +13,7 @@ Sphinx/docutils extension to create links to Wikipedia articles.
 '''
 
 import re
-import urllib
+import urllib.request, urllib.parse, urllib.error
 from docutils import nodes, utils
 from sphinx.util.nodes import split_explicit_title
 
@@ -31,7 +31,7 @@ def make_wikipedia_link(name, rawtext, text, lineno, inliner,
         lang, target = m.groups()
         if not has_explicit:
             title = target
-    ref = base_url % lang + urllib.quote(target.replace(' ', '_').encode('utf8'), safe='')
+    ref = base_url % lang + urllib.parse.quote(target.replace(' ', '_').encode('utf8'), safe='')
 
     node = nodes.reference(rawtext, title, refuri=ref, **options)
     return [node],[]

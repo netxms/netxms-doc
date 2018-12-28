@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-execfile('../conf.py')
+exec(compile(open('../conf.py').read(), '../conf.py', 'exec'))
 # -- General -------------------------------------------------------------------
-project = u'User Manual'
+project = 'User Manual'
 
 # -- Options for HTML output ---------------------------------------------------
 html_title = "NetXMS %s %s" % (release, project)
 
 # -- Options for LaTeX output --------------------------------------------------
 latex_documents = [
-    ('index', 'netxms-user.tex', u'NetXMS %s' % project, project_author, 'manual'),
+    ('index', 'netxms-user.tex', 'NetXMS %s' % project, project_author, 'manual'),
 ]
 
 # -- Options for Epub output ----------------------------------------------

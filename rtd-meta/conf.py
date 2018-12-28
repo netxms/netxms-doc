@@ -8,9 +8,9 @@ import shlex
 source_suffix = '.rst'
 master_doc = 'index'
 
-project = u'NetXMS'
-copyright = u'2015, SIA Raden Solutions'
-author = u'SIA Raden Solutions'
+project = 'NetXMS'
+copyright = '2015, SIA Raden Solutions'
+author = 'SIA Raden Solutions'
 
 version = '1.0'
 release = '1.0'

@@ -7,7 +7,7 @@ import glob
 from os.path import basename
 
 # -- General configuration ------------------------------------------------
-print(os.path.abspath('../_lib'))
+print((os.path.abspath('../_lib')))
 sys.path.insert(0, os.path.abspath('../_lib'))
 
 extensions = [
@@ -113,7 +113,7 @@ def setup(app):
     app.connect('doctree-resolved', add_man_header_nodes)
 
     # ignore custom modules except listed in $MODULES
-    modules = os.environ['MODULES'].split(',') if os.environ.has_key('MODULES') else []
+    modules = os.environ['MODULES'].split(',') if 'MODULES' in os.environ else []
     extDirs = glob.glob('source/extensions/*')
     for module in modules:
         extDirs = [d for d in extDirs if module.strip() not in d]

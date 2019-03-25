@@ -44,7 +44,7 @@ parameter as a tag.
    *WinPerf # Other way to define section satart: [WinPerf]
    EnableDefaultCounters = yes
    
-Same example in XML format
+Same example in XML format:
 
 .. code-block:: xml    
    
@@ -56,6 +56,11 @@ Same example in XML format
          <EnableDefaultCounters>yes</EnableDefaultCounters>
       </WinPerf>
    </config> 
+   
+Example of configuration sections:
+
+.. figure:: _images/section_description.png
+
 
 .. _master-configuration-file-label:
 
@@ -589,8 +594,8 @@ Agent External Metrics
 Other option to define new Metric that can be collected form node is to use 
 ``ExternalParameter``/``ExternalParameterShellExec``, or ``ExternalList``, or 
 ``ExternalParametersProvider`` configuration parameters to define command that will 
-be executed on a node and it's output will be provided as a Metric. In such way can 
-be added parameter and list metrics. 
+be executed on a node and it's output will be provided as a Metric. This functionality 
+provides flexibility to create your own metrics, lists or table metrics. 
 
 New Metrics will be visible in the :guilabel:`Available parameters` list only after agent 
 restarts (agent reads a configuration file only once on start) and configuration poll, 
@@ -732,3 +737,33 @@ Separator supports special macross for separator:
     * \\s - space
     * \\t - tab
     * \\u115 - unicode character number 115
+
+.. _agent-actions:
+
+Agent Actions
+=============
+
+For security reasons actions that can be executed on agent first are defined in 
+agent configuration file and only then can be used by users. This excludes that an 
+unauthorized user can access system data through an arbitrary entered command. Only 
+users with access to the agent configuration file editing can define executed commands. 
+
+There are 2 options to define action:
+
+   #. Action - usual action defenition
+   #. ActionShellExec - Same as Action, but on the Windows platform agent will use shell to execute command instead of normal process creation. There is no difference between Action and ActionShellExec on UNIX platforms.
+   
+Both versions accept parameters that will be available like ``$1``, ``$2``, ``$3``..., ``$9`` variables.
+
+After action is defined it can be used in the :ref:`object tools - agent action<object_tool-agent-command>` or in 
+:ref:`actions - action ecevution on remote node<action-remote-execute>`. Action should be defined in main section of 
+agent configuration file. 
+
+.. code-block:: cfg
+
+  # Exaple
+  Action=Name:command
+  Action=Name:command $1 $2
+  Action=cleanLogs:rm /opt/netxms/log/*
+  Action=ping:ping $1
+  ActionShellExec=listFiles:dir $1

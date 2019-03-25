@@ -494,8 +494,9 @@ Object tool types
 Internal
 ~~~~~~~~
 
-Commands that are defined in :term:`Management Console`. The only command available for now is 
-:guilabel:`Wakeup node`. 
+Commands that are defined in :term:`Management Console`. The only command available for now is :guilabel:`Wakeup node`. 
+
+.. _object_tool-agent-command:
 
 Agent Command
 ~~~~~~~~~~~~~

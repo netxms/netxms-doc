@@ -399,6 +399,8 @@ Execute command on management server
 Executes provided command on server node. Check that user under witch :file:`netxmsd` process 
 run has permission to run this command. 
 
+.. _action-remote-execute:
+
 Execute command on remote node
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -76,6 +76,9 @@ list cannot be edited.
 System Access Rights
 --------------------
 
+|product_name| has 2 types of access rights access rights per system that are 
+described in this section and per object. 
+
 System access rights used to grant access to system-wide configuration (like
 :ref:`event-processing`) and functions (like agent registration).
 

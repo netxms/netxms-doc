@@ -359,7 +359,7 @@ file already exists or if /CENTRALCONFIG option is used. These options are follo
      - Description
    * - /CENTRALCONFIG
      - Read configuration from server on startup
-   * - /CONFIGENTRY  
+   * - /CONFIGENTRY=value 
      - It can be used to add any parameter to configuration file during initial install. You can specify it multiple times to add multiple lines. Section names can be added as well.
    * - /DIR=path
      - Set installation directory (default is C:\|product_name|)

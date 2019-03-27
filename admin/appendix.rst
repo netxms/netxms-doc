@@ -1322,7 +1322,162 @@ This tool can be used to push events to |product_name| server.
 nxget
 -----
 
-This tool can be used to get agent :term:`Metric` from node.
+This tool is intended to get values of :term:`Metric` from |product_name| agent.
+
+Syntax:
+
+.. code-block:: shell
+   
+   nxget [options] host [parameter [parameter ...]]
+   
+Where *host* is the name or IP address of the host running NetXMS agent; and 
+*parameter* is aparameter or list name, depending on given options. By default, 
+nxget will attempt to retrieve thevalue of one given parameter, unless given 
+options override it.
+
+Valid options for nxget
+~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. list-table::
+  :widths: 15 50
+  :header-rows: 1
+
+  * - Option
+    - Description
+  * - -a auth     
+    - Authentication method. Valid methods are "none",
+                  "plain", "md5" and "sha1". Default is "none".
+  * - -A auth     
+    - Authentication method for proxy agent.
+  * - -b          
+    - Batch mode - get all parameters listed on command line.
+  * - -C          
+    - Get agent's configuration file
+  * - -d delimiter
+    - Print table content as delimited text.
+  * - -D level    
+    - Set debug level (default is 0).
+  * - -e policy   
+    - Set encryption policy. Possible values are:
+    
+                    0 = Encryption disabled;
+                    1 = Encrypt connection only if agent requires encryption;
+                    2 = Encrypt connection if agent supports encryption;
+                    3 = Force encrypted connection;
+                    
+                  Default value is 1.
+  * - -E file     
+    - Take screenshot. First parameter is file name, second (optional) is session name.
+  * - -h          
+    - Display help and exit.
+  * - -i seconds  
+    - Get specified parameter(s) continously with given interval.
+  * - -I          
+    - Get list of supported parameters.
+  * - -K file     
+    - Specify server's key file
+                  (default is /opt/netxms/var/lib/netxms/.server_key).
+  * - -l          
+    - Requested parameter is a list.
+  * - -n          
+    - Show parameter's name in result.
+  * - -o proto    
+    - Protocol number to be used for service check.
+  * - -O port     
+    - Proxy agent's port number. Default is 4700.
+  * - -p port     
+    - Agent's port number. Default is 4700.
+  * - -P port     
+    - Network service port (to be used wth -S option).
+  * - -r string   
+    - Service check request string.
+  * - -R string   
+    - Service check expected response string.
+  * - -s secret   
+    - Shared secret for authentication.
+  * - -S addr     
+    - Check state of network service at given address.
+  * - -t type     
+    - Set type of service to be checked.
+                  Possible types are    - custom, ssh, pop3, smtp, ftp, http, https, telnet.
+  * - -T          
+    - Requested parameter is a table.
+  * - -v          
+    - Display version and exit.
+  * - -w seconds  
+    - Set command timeout (default is 5 seconds).
+  * - -W seconds  
+    - Set connection timeout (default is 30 seconds).
+  * - -X addr     
+    - Use proxy agent at given address.
+  * - -Z secret   
+    - Shared secret for proxy agent authentication.
+    
+Examples
+~~~~~~~~
+
+
+Get value of *Agent.Version* metric from agent at host 10.0.0.2:
+
+.. code-block:: shell
+
+   nxget 10.0.0.2 Agent.Version
+   
+Get value of *Agent.Uptime* and *System.Uptime* parameters in one request, with output inparameter = value form:
+
+.. code-block:: shell
+
+   nxget –bn 10.0.0.2 Agent.Uptime System.Uptime
+   
+Get agent configuration file from agent at host 10.0.0.2:
+
+.. code-block:: shell
+
+   nxget –C 10.0.0.2
+   
+Get value of *System.PlatformName* parameter from agent at host 10.0.0.2, connecting via proxyagent at 172.16.1.1:
+
+.. code-block:: shell
+
+   nxget –X 172.16.1.1 10.0.0.2 System.PlatformName
+   
+Get value of *Agent.SupportedParameters* enum from agent at host 10.0.0.10, forcing use of encrypted connection:
+
+.. code-block:: shell
+
+   nxget –e 3 –l 10.0.0.10 Agent.SupportedParameters
+   
+Check POP3 service at host 10.0.0.4 via agent at host 172.16.1.1:
+
+.. code-block:: shell
+
+   nxget –S 10.0.0.4 –t 2 –r user:pass 172.16.1.1
+
+Usefull lists for debuggind purpose
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. list-table::
+  :widths: 15 50
+  :header-rows: 1
+
+  * - List name
+    - Description
+  * - Agent.ActionList
+    - List of defined actions
+  * - Agent.SubAgentList
+    - List of loaded subagents
+  * - Agent.SupportedLists
+    - List of supported lists
+  * - Agent.SupportedParameters
+    - List of supported parameters
+  * - Agent.SupportedPushParameters
+    - List of supported push parameters
+  * - Agent.SupportedTables
+    - List of supported table parameters
+  * - Agent.ThreadPools
+    - List of thread pools
 
 nxmibc
 ------

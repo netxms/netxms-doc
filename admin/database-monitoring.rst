@@ -119,7 +119,7 @@ Sample Oracle subagent configuration file in INI format:
 
 .. code-block:: cfg
 
-   *ORACLE
+   [ORACLE]
    ID = DB1
    TNSName = TEST
    Username = NXMONITOR
@@ -305,7 +305,7 @@ The configuration section in INI file looks like the following:
 
    SubAgent          = db2.nsm
 
-   *DB2
+   [DB2]
    DBName            = dbname
    DBAlias           = dbalias
    UserName          = dbuser
@@ -361,7 +361,7 @@ DB2 section of the INI file. The syntax is as follows:
 
    SubAgent          = db2.nsm
 
-   *DB2
+   [DB2]
    ConfigFile        = /myhome/configs/db2.xml
 
 .. note:

@@ -92,7 +92,7 @@ Configuration example
    MasterServers = netxms.demo
    SubAgent = lmsensors.nsm
 
-   *LMSENSORS
+   [LMSENSORS]
    UseFahrenheit = yes
    ConfigFile = /etc/sensors.netxms.conf
 
@@ -155,7 +155,7 @@ Configuration example
    MasterServers = netxms.demo
    SubAgent = DS18X20.nsm
 
-   *DS18X20
+   [DS18X20]
    Sensor = sensorName:uiniqueID123456788990
 
 RPI
@@ -213,7 +213,7 @@ Configuration example
    MasterServers = netxms.demo
    SubAgent = rpi.nsm
 
-   *RPI
+   [RPI]
    DisableDHT22 = no
    EnabledPins = 1,4,5,8
 

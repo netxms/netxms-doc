@@ -39,7 +39,7 @@ Example of agent configuration file:
    SubAgent = logwatch.nsm
 
    # Below is log parsers definitions
-   *LOGWATCH
+   [LOGWATCH]
    Parser = C:\|product_name|\parser1.xml
    Parser = C:\|product_name|\parser2.xml
 

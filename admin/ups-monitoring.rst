@@ -44,7 +44,7 @@ via serial ports, one is APC device (configured as device 0) and one is HP devic
 .. code-block:: cfg
 
   # UPS subagent configuration section
-  *UPS
+  [UPS]
   Device = 0:/dev/ttyS0:APC
   Device = 1:/dev/ttyS1:BCMXCP
 
@@ -144,7 +144,7 @@ At the end of configuration file, create UPS subagent configuration section:
 .. code-block:: cfg
 
   # UPS subagent configuration section
-  *UPS
+  [UPS]
   Device = 0:"COM1:":APC
 
 

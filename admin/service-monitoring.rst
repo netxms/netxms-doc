@@ -135,7 +135,7 @@ Configuration example:
    MasterServers = netxms.demo
    SubAgent =  portcheck.nsm
 
-   *portCheck
+   [portCheck]
    DomainName = netxms.demo
    Timeout = 5000
 

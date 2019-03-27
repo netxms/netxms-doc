@@ -34,6 +34,9 @@ Configuration files and policies should be written in XML or 'key = value' forma
 format general tag should be <config> and then can be added any agent or subagent 
 parameter as a tag.
 
+.. note::
+   Right way to define section: **[sectionName]**. Previous one with asterisk is counted as dipricated: ***sectionName**.  
+
 'key = value' format example:
 
 .. code-block:: cfg    
@@ -41,7 +44,7 @@ parameter as a tag.
    MasterServers = 10.0.0.4
    SubAgent = winperf.nsm
    # Below is a configuration for winperf subagent, in separate section   
-   *WinPerf # Other way to define section satart: [WinPerf]
+   [WinPerf] 
    EnableDefaultCounters = yes
    
 Same example in XML format:

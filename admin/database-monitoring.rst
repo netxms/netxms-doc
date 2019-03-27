@@ -65,7 +65,7 @@ Each database definition supports the following parameters:
 +----------------------------------------+------------------------------------------------------------------------------------------------------------+
 | Password                               | Database user password.                                                                                    |
 +----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| EncryptedPassword                      | Database user password encrypted with nxencpasswd.                                                         |
+| EncryptedPassword                      | Database user password encrypted with :ref:`nxencpasswd-tools-label` tool.                                 |
 +----------------------------------------+------------------------------------------------------------------------------------------------------------+
 
 Sample Oracle subagent configuration file in XML format:
@@ -889,7 +889,7 @@ An database user must have rights to Informix system catalog tables.
 Configuration
 -------------
 
-You can specify multiple databases in the informix section. Each database description must be surrounded by database tags with the id attribute. id can be any unique integer, it instructs the Informix subagent about the order in which database sections will be processed.
+You can specify multiple databases in the informix section. Each database description must be surrounded by database tags with the id attribute. Id can be any unique integer, it instructs the Informix subagent about the order in which database sections will be processed.
 
 Each database definition supports the following parameters:
 
@@ -917,7 +917,7 @@ Configuration example:
 
     Subagent=informix.nsm
     
-    *informix
+    [informix]
     ID=db1
     DBName = instance1
     DBLogin = user
@@ -926,10 +926,10 @@ Configuration example:
 Provided parameters
 ~~~~~~~~~~~~~~~~~~~
 
-To get a DCI from the subagent, you need to specify the id from the ``db2`` entry in the XML
+To get a DCI from the subagent, you need to specify the id from the ``informix`` entry in the XML
 configuration file (in case of INI configuration, the id will be **1**). To specify the id, you
 need to add it enclosed in brackets to the name of the parameter that is being requested (e.g.,
-``db2.parameter.to.request(**1**)``). In the example, the parameter ``db2.parameter.to.request``
+``informix.parameter.to.request(**1**)``). In the example, the parameter ``informix.parameter.to.request``
 from the database with the id **1** will be returned.
 
 .. list-table::
@@ -969,4 +969,222 @@ from the database with the id **1** will be returned.
      - DCI_DT_INT
      - Percentage of free space in the dbspace
      
+
+MySQL
+=====
+
+|product_name| subagent for MySQL monitoring. Monitors one or more instances of MySQL databases and
+reports various database-related parameters.
+
+MySQL subagent requires |product_name| the MySQL driver to be available in the system. 
+
+Configuration
+-------------
+
+You can specify one or multiple databases in the MySQL section. In case of single database 
+definition simply set all required parameters under ``[mysql]`` section. In multi database 
+configuration define each database under ``mysql/databases/<name>`` section with unique 
+``<name>`` for each database. If no id provided ``<name>`` of the section will be used as a 
+database id. 
+
+
+Each database definition supports the following parameters:
+
+.. list-table::
+   :widths: 50 200 200
+   :header-rows: 1
+   
+   * - Parameter
+     - Description
+     - Default value
+   * - Id
+     - Database identifier. It will be used to address this database in parameters.	
+     - localdb - for single DB definition; last part of section name - for multi database definition
+   * - Name
+     - Database name. This is a name of MySQL DSN.
+     - information_schema
+   * - Server
+     - Name or IP of the MySQL server.
+     - 127.0.0.1
+   * - UserName
+     - User name for connecting to database.
+     - netxms
+   * - Password
+     - Database user password or encypred password. To encrypt password check :ref:`nxencpasswd-tools-label` tool.
+     - 
      
+Single database configuration example:
+
+.. code-block:: cfg
+
+    Subagent=mysql.nsm
+    
+    [mysql]
+    ID=db1
+    DBName = instance1
+    DBLogin = user
+    DBPassword = password
+    
+
+Multi database configuration example:
+
+.. code-block:: cfg
+
+    Subagent=mysql.nsm
+    
+    [mysql/databases/database#1]
+    ID=db1
+    DBName = instance1
+    DBLogin = user
+    DBPassword = password
+    Server = netxms.demo
+    
+    
+    [mysql/databases/local]
+    DBName = information_schema
+    DBLogin = user
+    DBPassword = encPassword
+    Server = 127.0.0.1
+
+    
+Provided parameters
+-------------------
+
+.. list-table::
+   :widths: 50 100
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+   * - MySQL.Connections.Aborted(*id*)
+     - MySQL: aborted connections
+   * - ySQL.Connections.BytesReceived(*id*)
+     - MySQL: bytes received from all clients
+   * - ySQL.Connections.BytesSent(*id*)
+     - MySQL: bytes sent to all clients
+   * - ySQL.Connections.Current(*id*)
+     - MySQL: number of active connections
+   * - ySQL.Connections.CurrentPerc(*id*)
+     - MySQL: connection pool usage (%)
+   * - ySQL.Connections.Failed(*id*)
+     - MySQL: failed connection attempts
+   * - ySQL.Connections.Limit(*id*)
+     - MySQL: maximum possible number of simultaneous connections
+   * - ySQL.Connections.Max(*id*)
+     - MySQL: maximum number of simultaneous connections
+   * - ySQL.Connections.MaxPerc(*id*)
+     - MySQL: maximum connection pool usage  (%)
+   * - ySQL.Connections.Total(*id*)
+     - MySQL: cumulative connection count
+   * - ySQL.InnoDB.BufferPool.Dirty(*id*)
+     - MySQL: InnoDB used buffer pool space in dirty pages
+   * - ySQL.InnoDB.BufferPool.DirtyPerc(*id*)
+     - MySQL: InnoDB used buffer pool space in dirty pages (%)
+   * - ySQL.InnoDB.BufferPool.Free(*id*)
+     - MySQL: InnoDB free buffer pool space
+   * - ySQL.InnoDB.BufferPool.FreePerc(*id*)
+     - MySQL: InnoDB free buffer pool space (%)
+   * - ySQL.InnoDB.BufferPool.Size(*id*)
+     - MySQL: InnoDB buffer pool size
+   * - ySQL.InnoDB.BufferPool.Used(*id*)
+     - MySQL: InnoDB used buffer pool space
+   * - ySQL.InnoDB.BufferPool.UsedPerc(*id*)
+     - MySQL: InnoDB used buffer pool space (%)
+   * - ySQL.InnoDB.DiskReads(*id*)
+     - MySQL: InnoDB disk reads
+   * - ySQL.InnoDB.ReadCacheHitRatio(*id*)
+     - MySQL: InnoDB read cache hit ratio (%)
+   * - ySQL.InnoDB.ReadRequest(*id*)
+     - MySQL: InnoDB read requests
+   * - ySQL.InnoDB.WriteRequest(*id*)
+     - MySQL: InnoDB write requests
+   * - ySQL.IsReachable(*id*)
+     - MySQL: is database reachable
+   * - ySQL.MyISAM.KeyCacheFree(*id*)
+     - MySQL: MyISAM key cache free space
+   * - ySQL.MyISAM.KeyCacheFreePerc(*id*)
+     - MySQL: MyISAM key cache free space (%)
+   * - ySQL.MyISAM.KeyCacheReadHitRatio(*id*)
+     - MySQL: MyISAM key cache read hit ratio (%)
+   * - ySQL.MyISAM.KeyCacheSize(*id*)
+     - MySQL: MyISAM key cache size
+   * - ySQL.MyISAM.KeyCacheUsed(*id*)
+     - MySQL: MyISAM key cache used space
+   * - ySQL.MyISAM.KeyCacheUsedPerc(*id*)
+     - MySQL: MyISAM key cache used space (%)
+   * - ySQL.MyISAM.KeyCacheWriteHitRatio(*id*)
+     - MySQL: MyISAM key cache write hit ratio (%)
+   * - ySQL.MyISAM.KeyDiskReads(*id*)
+     - MySQL: MyISAM key cache disk reads
+   * - ySQL.MyISAM.KeyDiskWrites(*id*)
+     - MySQL: MyISAM key cache disk writes
+   * - ySQL.MyISAM.KeyReadRequests(*id*)
+     - MySQL: MyISAM key cache read requests
+   * - ySQL.MyISAM.KeyWriteRequests(*id*)
+     - MySQL: MyISAM key cache write requests
+   * - ySQL.OpenFiles.Current(*id*)
+     - MySQL: open files
+   * - ySQL.OpenFiles.CurrentPerc(*id*)
+     - MySQL: open file pool usage (%)
+   * - ySQL.OpenFiles.Limit(*id*)
+     - MySQL: maximum possible number of open files
+   * - ySQL.Queries.Cache.HitRatio(*id*)
+     - MySQL: query cache hit ratio (%)
+   * - ySQL.Queries.Cache.Hits(*id*)
+     - MySQL: query cache hits
+   * - ySQL.Queries.Cache.Size(*id*)
+     - MySQL: query cache size
+   * - ySQL.Queries.ClientsTotal(*id*)
+     - MySQL: number of queries executed by clients
+   * - ySQL.Queries.Delete(*id*)
+     - MySQL: number of DELETE queries
+   * - ySQL.Queries.DeleteMultiTable(*id*)
+     - MySQL: number of multitable DELETE queries
+   * - ySQL.Queries.Insert(*id*)
+     - MySQL: number of INSERT queries
+   * - ySQL.Queries.Select(*id*)
+     - MySQL: number of SELECT queries
+   * - ySQL.Queries.Slow(*id*)
+     - MySQL: slow queries
+   * - ySQL.Queries.SlowPerc(*id*)
+     - MySQL: slow queries (%)
+   * - ySQL.Queries.Total(*id*)
+     - MySQL: number of queries
+   * - ySQL.Queries.Update(*id*)
+     - MySQL: number of UPDATE queries
+   * - ySQL.Queries.UpdateMultiTable(*id*)
+     - MySQL: number of multitable UPDATE queries
+   * - ySQL.Server.Uptime(*id*)
+     - MySQL: server uptime
+   * - ySQL.Sort.MergePasses(*id*)
+     - MySQL: sort merge passes
+   * - ySQL.Sort.MergeRatio(*id*)
+     - MySQL: sort merge ratio (%)
+   * - ySQL.Sort.Range(*id*)
+     - MySQL: number of sorts using ranges
+   * - ySQL.Sort.Scan(*id*)
+     - MySQL: number of sorts using table scans
+   * - ySQL.Tables.Fragmented(*id*)
+     - MySQL: fragmented tables
+   * - ySQL.Tables.Open(*id*)
+     - MySQL: open tables
+   * - ySQL.Tables.OpenLimit(*id*)
+     - MySQL: maximum possible number of open tables
+   * - ySQL.Tables.OpenPerc(*id*)
+     - MySQL: table open cache usage (%)
+   * - ySQL.Tables.Opened(*id*)
+     - MySQL: tables that have been opened
+   * - ySQL.TempTables.Created(*id*)
+     - MySQL: temporary tables created
+   * - ySQL.TempTables.CreatedOnDisk(*id*)
+     - MySQL: temporary tables created on disk
+   * - ySQL.TempTables.CreatedOnDiskPerc(*id*)
+     - MySQL: temporary tables created on disk (%)
+   * - ySQL.Threads.CacheHitRatio(*id*)
+     - MySQL: thread cache hit ratio (%)
+   * - ySQL.Threads.CacheSize(*id*)
+     - MySQL: thread cache size
+   * - ySQL.Threads.Created(*id*)
+     - MySQL: threads created
+   * - ySQL.Threads.Running(*id*)
+     - MySQL: threads running

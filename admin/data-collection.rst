@@ -602,9 +602,6 @@ inherited from node. So any user that is able to read node is able to see last v
 that is able to modify node is able to change and see DCI configuration.  When list is not empty, 
 then both access to node and access to DCI are check on DCI configuration or value request. 
 
-.. versionadded:: 3.0-M1
-    Agent caching mode
-
 .. figure:: _images/dci_access_control_page.png
 
     DCI configuration access control property page

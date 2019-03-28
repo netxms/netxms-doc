@@ -6,7 +6,7 @@ Log monitoring
 
 With |product_name| you can monitor changes in text log files, Windows Event Log, and
 built-in syslog server. All log monitoring done by agents, except for built-in
-syslog server. In general, log processing goes as following:
+syslog server. In general, most common log processing goes as following:
 
 #. When new line added to log file, it is passed to appropriate log parser
 #. If line matched one of the patterns, event associated with this pattern sent
@@ -14,6 +14,8 @@ syslog server. In general, log processing goes as following:
 #. Server receives event and passes to event processing policy as usual, with
    event source set to node from which event was received.
 
+Log parser also provides some additional statistic information through 
+:term:`metric`\ s. More information can be fount in :ref:`log-monitoring-parameters` chapter. 
 
 Agent Configuration for Log Monitoring
 ======================================
@@ -676,3 +678,40 @@ We can extract username and login method from the syslog message, and pass it as
     <event>10000</event>
     
 Username will be sent to the event as %1, IP address will not be sent, and login method will be sent as %2.
+
+.. _log-monitoring-parameters:
+
+Log parser parameters
+=====================
+
+Log parser provides some additional statistic information through :term:`metric`\ s. 
+Metrics wait as an argument name of the parser. If name is not set, then file name is used. 
+
+Available parameters:
+
+
+.. list-table::
+   :widths: 15 150 
+   :header-rows: 1
+
+   * - Name
+     - Description
+   * - LogWatch.Parser.Status(*name*)
+     - Parser *name* status
+   * - LogWatch.Parser.MatchedRecords(*name*)
+     - Number of records matched by parser *name*
+   * - LogWatch.Parser.ProcessedRecords(*name*)
+     - Number of records processed by parser *name*
+
+Available list parameters:
+
+
+.. list-table::
+   :widths: 15 150
+   :header-rows: 1
+
+   * - Name
+     - Description
+   * - LogWatch.ParserList
+     - List of parser names. If no name is defined than parser file name will be used.
+     

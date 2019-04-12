@@ -371,22 +371,84 @@ Each object has it's own status calculation properties. By default status is cal
 based on polling results, status of underlying objects, associated alarms and 
 status :term:`DCIs<DCI>`. But there can be used different options of status calculation. 
 
-Status calculation has two configuration parts: status propagation and status calculation.
+Status calculation has two configuration parts: 
+
+   - status propagation - the way how status form object is pushed to upper objects;
+   - status calculation - the way how object is calculating it's status based on statuses propagated by children objects. Once child object status is calculated most critical status is taken from status of underlying objects, associated alarms and status :term:`DCIs<DCI>`.
 
 .. figure:: _images/object_status_calculation.png
 
 For status propagation are available next options:
-  - Default
-  - Unchanged
-  - Fixed value: Normal, Warning, Minor, Major, Fixed
-  - Relative with offset
-  - Severity based
+  - Default - will take global configuration parameter (unchanged by default)
+  - Unchanged - will propagate status value without changes
+  - Fixed value: Normal, Warning, Minor, Major, Fixed - always will return fixed selected status
+  - Relative with offset - will add or remove some number for 
+  - Severity based - will convert current status based on user configured status mapping table
   
 For status calculation are available next options:
-  - Default
-  - Most critical
-  - Single threshold (%)
-  - Multiple thresholds
+  - Default - will take global configuration parameter (most critical by default)
+  - Most critical - Most critical status will be taken 
+  - Single threshold (%) - Percentage of objects that should be in status to change status of object
+  - Multiple thresholds - Same as previous but threshold is set for each status
+  
+Example of threshold status calculation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. figure:: _images/object_status_threshold_example.png
+
+
+Statuses of nodes in table:
+
+
+.. list-table::
+   :header-rows: 1
+   :stub-columns: 1
+   :widths: 25 25 25 25 25 25
+   
+
+   * - 
+     - Normal
+     - Warning
+     - Minor
+     - Major
+     - Critical
+   * - Node 1
+     - 1
+     - 0
+     - 0
+     - 0
+     - 0
+   * - Node 2
+     - 1
+     - 1
+     - 1
+     - 1
+     - 1
+   * - Node 3
+     - 1
+     - 1
+     - 0
+     - 0
+     - 0
+   * - Node 4
+     - 1
+     - 1
+     - 1
+     - 0
+     - 0
+   
+If "Single threshold (%)" option is selected and configuration is next:
+ - 75% 
+ 
+In this case status of container will be Warning, as 3/4 of nodes have Warning status or worse. 
+
+If "Multiple thresholds" is selected and configuration is next: 
+ - Warning 80
+ - Minor 50
+ - Major 25
+ - Critical 35
+ 
+In this case status of Container will be Major as bot thresholds for Minor and Major are reached and most critical from them is taken. 
 
 
 Comments

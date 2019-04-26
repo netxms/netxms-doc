@@ -12,6 +12,8 @@ server(:ref:`link to supported database list<supported-db-list>`) using database
 suabgent as this databases support receiving performance parameters using queries.
 This subagent details are described in :ref:`dbquery` chapter.
 
+.. _oracle-subagent:
+
 Oracle
 ======
 
@@ -284,6 +286,8 @@ When loaded, Oracle subagent adds the following tables to agent:
 | Oracle.TableSpaces(*dbid*)             | Tablespaces in database identified by *dbid*.                                                              |
 +----------------------------------------+------------------------------------------------------------------------------------------------------------+
 
+
+.. _db2-subagent:
 
 DB2
 ===
@@ -792,6 +796,8 @@ from the database with the id **1** will be returned.
      - The number of section executions that referenced columns in tables using a scan
 
 
+.. _mongodb-subagent:
+
 MongoDB
 =======
 
@@ -873,6 +879,9 @@ List
      - Description
    * - MongoDB.ListDatabases(*id*)
      - Returns list of databases existing on this server
+
+
+.. _informix-subagent:
 
 Informix
 ========
@@ -970,6 +979,8 @@ from the database with the id **1** will be returned.
      - Percentage of free space in the dbspace
      
 
+.. _mysql-subagent:
+
 MySQL
 =====
 
@@ -1057,134 +1068,134 @@ Provided parameters
    * - Parameter
      - Description
    * - MySQL.Connections.Aborted(*id*)
-     - MySQL: aborted connections
-   * - ySQL.Connections.BytesReceived(*id*)
-     - MySQL: bytes received from all clients
-   * - ySQL.Connections.BytesSent(*id*)
-     - MySQL: bytes sent to all clients
-   * - ySQL.Connections.Current(*id*)
-     - MySQL: number of active connections
-   * - ySQL.Connections.CurrentPerc(*id*)
-     - MySQL: connection pool usage (%)
-   * - ySQL.Connections.Failed(*id*)
-     - MySQL: failed connection attempts
-   * - ySQL.Connections.Limit(*id*)
-     - MySQL: maximum possible number of simultaneous connections
-   * - ySQL.Connections.Max(*id*)
-     - MySQL: maximum number of simultaneous connections
-   * - ySQL.Connections.MaxPerc(*id*)
-     - MySQL: maximum connection pool usage  (%)
-   * - ySQL.Connections.Total(*id*)
-     - MySQL: cumulative connection count
-   * - ySQL.InnoDB.BufferPool.Dirty(*id*)
-     - MySQL: InnoDB used buffer pool space in dirty pages
-   * - ySQL.InnoDB.BufferPool.DirtyPerc(*id*)
-     - MySQL: InnoDB used buffer pool space in dirty pages (%)
-   * - ySQL.InnoDB.BufferPool.Free(*id*)
-     - MySQL: InnoDB free buffer pool space
-   * - ySQL.InnoDB.BufferPool.FreePerc(*id*)
-     - MySQL: InnoDB free buffer pool space (%)
-   * - ySQL.InnoDB.BufferPool.Size(*id*)
-     - MySQL: InnoDB buffer pool size
-   * - ySQL.InnoDB.BufferPool.Used(*id*)
-     - MySQL: InnoDB used buffer pool space
-   * - ySQL.InnoDB.BufferPool.UsedPerc(*id*)
-     - MySQL: InnoDB used buffer pool space (%)
-   * - ySQL.InnoDB.DiskReads(*id*)
-     - MySQL: InnoDB disk reads
-   * - ySQL.InnoDB.ReadCacheHitRatio(*id*)
-     - MySQL: InnoDB read cache hit ratio (%)
-   * - ySQL.InnoDB.ReadRequest(*id*)
-     - MySQL: InnoDB read requests
-   * - ySQL.InnoDB.WriteRequest(*id*)
-     - MySQL: InnoDB write requests
-   * - ySQL.IsReachable(*id*)
-     - MySQL: is database reachable
-   * - ySQL.MyISAM.KeyCacheFree(*id*)
-     - MySQL: MyISAM key cache free space
-   * - ySQL.MyISAM.KeyCacheFreePerc(*id*)
-     - MySQL: MyISAM key cache free space (%)
-   * - ySQL.MyISAM.KeyCacheReadHitRatio(*id*)
-     - MySQL: MyISAM key cache read hit ratio (%)
-   * - ySQL.MyISAM.KeyCacheSize(*id*)
-     - MySQL: MyISAM key cache size
-   * - ySQL.MyISAM.KeyCacheUsed(*id*)
-     - MySQL: MyISAM key cache used space
-   * - ySQL.MyISAM.KeyCacheUsedPerc(*id*)
-     - MySQL: MyISAM key cache used space (%)
-   * - ySQL.MyISAM.KeyCacheWriteHitRatio(*id*)
-     - MySQL: MyISAM key cache write hit ratio (%)
-   * - ySQL.MyISAM.KeyDiskReads(*id*)
-     - MySQL: MyISAM key cache disk reads
-   * - ySQL.MyISAM.KeyDiskWrites(*id*)
-     - MySQL: MyISAM key cache disk writes
-   * - ySQL.MyISAM.KeyReadRequests(*id*)
-     - MySQL: MyISAM key cache read requests
-   * - ySQL.MyISAM.KeyWriteRequests(*id*)
-     - MySQL: MyISAM key cache write requests
-   * - ySQL.OpenFiles.Current(*id*)
-     - MySQL: open files
-   * - ySQL.OpenFiles.CurrentPerc(*id*)
-     - MySQL: open file pool usage (%)
-   * - ySQL.OpenFiles.Limit(*id*)
-     - MySQL: maximum possible number of open files
-   * - ySQL.Queries.Cache.HitRatio(*id*)
-     - MySQL: query cache hit ratio (%)
-   * - ySQL.Queries.Cache.Hits(*id*)
-     - MySQL: query cache hits
-   * - ySQL.Queries.Cache.Size(*id*)
-     - MySQL: query cache size
-   * - ySQL.Queries.ClientsTotal(*id*)
-     - MySQL: number of queries executed by clients
-   * - ySQL.Queries.Delete(*id*)
-     - MySQL: number of DELETE queries
-   * - ySQL.Queries.DeleteMultiTable(*id*)
-     - MySQL: number of multitable DELETE queries
-   * - ySQL.Queries.Insert(*id*)
-     - MySQL: number of INSERT queries
-   * - ySQL.Queries.Select(*id*)
-     - MySQL: number of SELECT queries
-   * - ySQL.Queries.Slow(*id*)
-     - MySQL: slow queries
-   * - ySQL.Queries.SlowPerc(*id*)
-     - MySQL: slow queries (%)
-   * - ySQL.Queries.Total(*id*)
-     - MySQL: number of queries
-   * - ySQL.Queries.Update(*id*)
-     - MySQL: number of UPDATE queries
-   * - ySQL.Queries.UpdateMultiTable(*id*)
-     - MySQL: number of multitable UPDATE queries
-   * - ySQL.Server.Uptime(*id*)
-     - MySQL: server uptime
-   * - ySQL.Sort.MergePasses(*id*)
-     - MySQL: sort merge passes
-   * - ySQL.Sort.MergeRatio(*id*)
-     - MySQL: sort merge ratio (%)
-   * - ySQL.Sort.Range(*id*)
-     - MySQL: number of sorts using ranges
-   * - ySQL.Sort.Scan(*id*)
-     - MySQL: number of sorts using table scans
-   * - ySQL.Tables.Fragmented(*id*)
-     - MySQL: fragmented tables
-   * - ySQL.Tables.Open(*id*)
-     - MySQL: open tables
-   * - ySQL.Tables.OpenLimit(*id*)
-     - MySQL: maximum possible number of open tables
-   * - ySQL.Tables.OpenPerc(*id*)
-     - MySQL: table open cache usage (%)
-   * - ySQL.Tables.Opened(*id*)
-     - MySQL: tables that have been opened
-   * - ySQL.TempTables.Created(*id*)
-     - MySQL: temporary tables created
-   * - ySQL.TempTables.CreatedOnDisk(*id*)
-     - MySQL: temporary tables created on disk
-   * - ySQL.TempTables.CreatedOnDiskPerc(*id*)
-     - MySQL: temporary tables created on disk (%)
-   * - ySQL.Threads.CacheHitRatio(*id*)
-     - MySQL: thread cache hit ratio (%)
-   * - ySQL.Threads.CacheSize(*id*)
-     - MySQL: thread cache size
-   * - ySQL.Threads.Created(*id*)
-     - MySQL: threads created
-   * - ySQL.Threads.Running(*id*)
-     - MySQL: threads running
+     - aborted connections
+   * - MySQL.Connections.BytesReceived(*id*)
+     - bytes received from all clients
+   * - MySQL.Connections.BytesSent(*id*)
+     - bytes sent to all clients
+   * - MySQL.Connections.Current(*id*)
+     - number of active connections
+   * - MySQL.Connections.CurrentPerc(*id*)
+     - connection pool usage (%)
+   * - MySQL.Connections.Failed(*id*)
+     - failed connection attempts
+   * - MySQL.Connections.Limit(*id*)
+     - maximum possible number of simultaneous connections
+   * - MySQL.Connections.Max(*id*)
+     - maximum number of simultaneous connections
+   * - MySQL.Connections.MaxPerc(*id*)
+     - maximum connection pool usage  (%)
+   * - MySQL.Connections.Total(*id*)
+     - cumulative connection count
+   * - MySQL.InnoDB.BufferPool.Dirty(*id*)
+     - InnoDB used buffer pool space in dirty pages
+   * - MySQL.InnoDB.BufferPool.DirtyPerc(*id*)
+     - InnoDB used buffer pool space in dirty pages (%)
+   * - MySQL.InnoDB.BufferPool.Free(*id*)
+     - InnoDB free buffer pool space
+   * - MySQL.InnoDB.BufferPool.FreePerc(*id*)
+     - InnoDB free buffer pool space (%)
+   * - MySQL.InnoDB.BufferPool.Size(*id*)
+     - InnoDB buffer pool size
+   * - MySQL.InnoDB.BufferPool.Used(*id*)
+     - InnoDB used buffer pool space
+   * - MySQL.InnoDB.BufferPool.UsedPerc(*id*)
+     - InnoDB used buffer pool space (%)
+   * - MySQL.InnoDB.DiskReads(*id*)
+     - InnoDB disk reads
+   * - MySQL.InnoDB.ReadCacheHitRatio(*id*)
+     - InnoDB read cache hit ratio (%)
+   * - MySQL.InnoDB.ReadRequest(*id*)
+     - InnoDB read requests
+   * - MySQL.InnoDB.WriteRequest(*id*)
+     - InnoDB write requests
+   * - MySQL.IsReachable(*id*)
+     - is database reachable
+   * - MySQL.MyISAM.KeyCacheFree(*id*)
+     - MyISAM key cache free space
+   * - MySQL.MyISAM.KeyCacheFreePerc(*id*)
+     - MyISAM key cache free space (%)
+   * - MySQL.MyISAM.KeyCacheReadHitRatio(*id*)
+     - MyISAM key cache read hit ratio (%)
+   * - MySQL.MyISAM.KeyCacheSize(*id*)
+     - MyISAM key cache size
+   * - MySQL.MyISAM.KeyCacheUsed(*id*)
+     - MyISAM key cache used space
+   * - MySQL.MyISAM.KeyCacheUsedPerc(*id*)
+     - MyISAM key cache used space (%)
+   * - MySQL.MyISAM.KeyCacheWriteHitRatio(*id*)
+     - MyISAM key cache write hit ratio (%)
+   * - MySQL.MyISAM.KeyDiskReads(*id*)
+     - MyISAM key cache disk reads
+   * - MySQL.MyISAM.KeyDiskWrites(*id*)
+     - MyISAM key cache disk writes
+   * - MySQL.MyISAM.KeyReadRequests(*id*)
+     - MyISAM key cache read requests
+   * - MySQL.MyISAM.KeyWriteRequests(*id*)
+     - MyISAM key cache write requests
+   * - MySQL.OpenFiles.Current(*id*)
+     - open files
+   * - MySQL.OpenFiles.CurrentPerc(*id*)
+     - open file pool usage (%)
+   * - MySQL.OpenFiles.Limit(*id*)
+     - maximum possible number of open files
+   * - MySQL.Queries.Cache.HitRatio(*id*)
+     - query cache hit ratio (%)
+   * - MySQL.Queries.Cache.Hits(*id*)
+     - query cache hits
+   * - MySQL.Queries.Cache.Size(*id*)
+     - query cache size
+   * - MySQL.Queries.ClientsTotal(*id*)
+     - number of queries executed by clients
+   * - MySQL.Queries.Delete(*id*)
+     - number of DELETE queries
+   * - MySQL.Queries.DeleteMultiTable(*id*)
+     - number of multitable DELETE queries
+   * - MySQL.Queries.Insert(*id*)
+     - number of INSERT queries
+   * - MySQL.Queries.Select(*id*)
+     - number of SELECT queries
+   * - MySQL.Queries.Slow(*id*)
+     - slow queries
+   * - MySQL.Queries.SlowPerc(*id*)
+     - slow queries (%)
+   * - MySQL.Queries.Total(*id*)
+     - number of queries
+   * - MySQL.Queries.Update(*id*)
+     - number of UPDATE queries
+   * - MySQL.Queries.UpdateMultiTable(*id*)
+     - number of multitable UPDATE queries
+   * - MySQL.Server.Uptime(*id*)
+     - server uptime
+   * - MySQL.Sort.MergePasses(*id*)
+     - sort merge passes
+   * - MySQL.Sort.MergeRatio(*id*)
+     - sort merge ratio (%)
+   * - MySQL.Sort.Range(*id*)
+     - number of sorts using ranges
+   * - MySQL.Sort.Scan(*id*)
+     - number of sorts using table scans
+   * - MySQL.Tables.Fragmented(*id*)
+     - fragmented tables
+   * - MySQL.Tables.Open(*id*)
+     - open tables
+   * - MySQL.Tables.OpenLimit(*id*)
+     - maximum possible number of open tables
+   * - MySQL.Tables.OpenPerc(*id*)
+     - table open cache usage (%)
+   * - MySQL.Tables.Opened(*id*)
+     - tables that have been opened
+   * - MySQL.TempTables.Created(*id*)
+     - temporary tables created
+   * - MySQL.TempTables.CreatedOnDisk(*id*)
+     - temporary tables created on disk
+   * - MySQL.TempTables.CreatedOnDiskPerc(*id*)
+     - temporary tables created on disk (%)
+   * - MySQL.Threads.CacheHitRatio(*id*)
+     - thread cache hit ratio (%)
+   * - MySQL.Threads.CacheSize(*id*)
+     - thread cache size
+   * - MySQL.Threads.Created(*id*)
+     - threads created
+   * - MySQL.Threads.Running(*id*)
+     - threads running

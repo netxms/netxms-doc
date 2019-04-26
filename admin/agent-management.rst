@@ -494,26 +494,32 @@ only if on time of the build there were no required libraries for subagent build
 subagent is require just to add line in main agent configuration file(example: "Subagent=dbquery.nsm").
 More about configuration and usage of subagents will be described in monitoring chapters.
 
-There is list of available manually loaded |product_name| subagents:
+Below is list of available |product_name| subagents:
 
-  * DB2
-  * FileMGR
-  * DBQuery
-  * ECS
-  * Informix
-  * Java
-  * lm-sensors
-  * ODBCQuery
-  * Oracle
+  * :ref:`Asterisk <asterisk-monitoring>`
+  * :ref:`DB2 <db2-subagent>`
+  * Database Query
+  * :ref:`DS18x20 <ds18x20-subagent>`
+  * File Manager
+  * :ref:`ECS <ecs-subagent>`
+  * :ref:`Informix <informix-subagent>`
+  * :ref:`Java <java-subagent>`
+  * :ref:`lm-sensors <hardware-monitoring>`
+  * :ref:`MongoDB <mongodb-subagent>`
+  * :ref:`MQTT <mqtt-subagent>`
+  * :ref:`MySQL <mysql-subagent>`
+  * :ref:`Network Service Check <netsvc-subagent>`
+  * ODBC Query
+  * :ref:`Oracle <oracle-subagent>`
   * Ping
-  * PortCheck
-  * netsvc
-  * UPS
-  * WinPref
+  * :ref:`Port Check <portcheck-subagent>`
+  * :ref:`Raspberry Pi <rpi-subagent>`
+  * :ref:`UPS <ups-monitoring>`
+  * Windows Performance
   * WMI
-  * MongoDB
-  * Java
-  
+  * XEN
+
+
 .. _java-subagent:
   
 Java subagent

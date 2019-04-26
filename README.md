@@ -12,6 +12,12 @@ Components:
 * workon sphinx
 * pip install -r requirements.txt
 
+## Ubuntu/Mint
+* apt install pip virtualenvwrapper latexmk
+* . /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+* mkvirtualenv sphinx -p *path/to/python3*
+* pip install -r requirements.txt
+
 ## macOS specific
 * brew cask install basictex
 * sudo tlmgr update --self

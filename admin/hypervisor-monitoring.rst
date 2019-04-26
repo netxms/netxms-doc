@@ -7,6 +7,40 @@ Hypervisor monitoring
 |product_name| has subagents that allow to monitor hypervisors. This subagent is build using
 libvirt functionality. 
 
+Configuration
+=============
+
+Configuration is separated into two parts: **vmgr** section defines all monitored hosts, and each host configuration
+is defined in separate section for each host.
+
+Each host configuration should contain connection URL. Login and password parameters are optional. URL creation 
+rules for each vitalization solution type can be found `in libvirt documentation: http://libvirt.org/drivers.html <http://libvirt.org/drivers.html>`_.
+
+
+Configuration example
+---------------------
+
+In this example two hosts are defined: **localESX1** and **test**. **localESX1** connection details are described in section **vmgr:localESX1**
+and **test** connection details are described in section **vmgr:test**.
+
+.. code-block:: cfg
+
+   MasterServers = netxms.demo
+   SubAgent = vmgr.nsm
+
+   [vmgr]
+   host = localESX1
+   host = test
+   
+   [vmgr:localESX1]
+   Url = esx://root@10.5.0.21/?no_verify=1
+   Login = root
+   Password = password
+
+   [vmgr:test]
+   Url = test:///default
+
+
 Metrics
 =======
 
@@ -19,7 +53,7 @@ Parameters
 
    * - Metric
      - Type
-     - Meaning
+     - Description
    * - VMGR.Host.CPU.Arch(hostName)
      - String
      - Host CPU architecture
@@ -63,13 +97,12 @@ Parameters
 Tables
 ------
 
-
 .. list-table::
    :header-rows: 1
    :widths: 50 200
 
    * - Metric
-     - Meaning
+     - Description
    * - VMGR.VM(hostName)
      - Connection VM table
    * - VMGR.InterfaceList(hostName)
@@ -95,44 +128,8 @@ Lists
    :widths: 50 200
    
    * - Metric
-     - Meaning
+     - Description
    * - VMGR.VMHost
      - List of hosts
    * - VMGR.VMList(hostName)
      - List of VM for the host
-
-
-Configuration
-=============
-
-Configuration is separeted to two parts. In "vmgr" part are defined all monitored hosts. Host configuration is 
-descibed afterwards in separate section for each host. 
-
-Each host configuration should contain connection URL. Login and password parameters are optional. URL creation 
-rules for each vitalization solution type can be found `in libvirt documentation: http://libvirt.org/drivers.html <http://libvirt.org/drivers.html>`_.
-
-
-Configuration example
----------------------
-
-In example are defined 2 hosts: localESX1 and test. localESX1 connection details are described in "vmgr:localESX1" 
-section and test connection details are described in "vmgr:test" section.
-
-.. code-block:: cfg
-
-   MasterServers = netxms.demo
-   SubAgent=vmgr.nsm
-
-   [vmgr]
-   host=localESX1
-   host=test
-   
-   [vmgr:localESX1]
-   Url=esx://root@10.5.0.21/?no_verify=1
-   Login=root
-   Password=password
-
-   [vmgr:test]
-   Url=test:///default
-   
-

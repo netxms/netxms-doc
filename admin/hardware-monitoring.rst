@@ -109,6 +109,8 @@ Sample usage
    3.312000
 
 
+.. _ds18x20-subagent:
+
 DS18x20
 =======
 
@@ -157,6 +159,9 @@ Configuration example
 
    [DS18X20]
    Sensor = sensorName:uiniqueID123456788990
+
+
+.. _rpi-subagent:
 
 RPI
 ===
@@ -216,6 +221,9 @@ Configuration example
    [RPI]
    DisableDHT22 = no
    EnabledPins = 1,4,5,8
+
+
+.. _mqtt-subagent:
 
 MQTT
 ====

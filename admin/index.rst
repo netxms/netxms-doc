@@ -32,6 +32,7 @@ Administrator Guide
    cluster-monitoring
    jvm-monitoring
    hypervisor-monitoring
+   asterisk-monitoring
    mobile-device-monitoring
    topology
    sla

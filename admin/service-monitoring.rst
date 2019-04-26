@@ -52,6 +52,8 @@ For HTTP services there is also option to use ECS subagent. This subagent has on
 of them calculate hash and last one measure time.
 
 
+.. _portcheck-subagent:
+
 PortCheck configuration
 -----------------------
 
@@ -140,6 +142,8 @@ Configuration example:
    Timeout = 5000
 
 
+.. _netsvc-subagent:
+
 NetSVC configuration
 --------------------
 
@@ -169,6 +173,9 @@ HTTP check example:
 .. note::
   If agent is build from sources, then libcurl-dev should be installed to
   build netsvc subagent.
+
+
+.. _ecs-subagent:
 
 ECS
 ---

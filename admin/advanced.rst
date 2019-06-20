@@ -448,17 +448,13 @@ Requirements
 
    * A running instance of the |product_name| server.
    * Access to a web server.
-   * Git tools
-   * Maven tools
    
 Setup
 -----
 
-1. Clone the |product_name| git repository to a folder on your computer.
-2. Navigate to :file:`NETXMS_GIT/src/server/nxapisrv/java` 
-3. Run :command:`mvn package` 
-4. Copy the resulting .war file from :file:`/targets/netxms-websvc-2.1-M3.war` to your web server.
-5. Create a :file:`nxapisrv.properties` file and place it in the property file location of your 
+1. Download netxms-websvc-VERSION.war (example: netxms-websvc-2.2.15.war) file form http://www.netxms.org/download page.
+2. Copy the downloaded .war file to your web server.
+3. Create a :file:`nxapisrv.properties` file and place it in the property file location of your 
    web server and specify the |product_name| Server address with the property.
    
 Localhost address will be used if no address was set. Server configuration example:

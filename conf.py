@@ -30,7 +30,7 @@ project_author = "Raden Solutions, SIA"
 copyright = '2018, ' + project_author
 
 version = '2.2'
-release = '2.2.11'
+release = '2.2.17'
 
 exclude_patterns = ['build']
 

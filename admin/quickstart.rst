@@ -35,7 +35,7 @@ In case if while installation MasterServer was set correctly no action is
 required form user. 
 
 Automatically generated configuration file can be found there: 
-:file:`'installation directory'\\etc\\nxagentd.conf'`.
+:file:`installation directory\\etc\\nxagentd.conf`.
 
 Configuration file for Windows should look like this:
 

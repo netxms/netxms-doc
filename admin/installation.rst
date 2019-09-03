@@ -353,7 +353,7 @@ file already exists or if /CENTRALCONFIG option is used. These options are follo
 
 .. list-table::
    :header-rows: 1
-   :widths: 50 200
+   :widths: 1 3
    
    * - Option
      - Description

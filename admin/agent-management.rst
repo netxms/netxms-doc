@@ -633,7 +633,7 @@ execution timeout or ``ExternalParametersProvider`` can be used.
 
 .. code-block:: cfg
 
-  # Exaple
+  # Example
 
   # Woithout DCI parameters
   ExternalParameter=Name:command
@@ -659,7 +659,7 @@ are separated with new line.
 
 .. code-block:: cfg
 
-  # Exaple
+  # Example
 
   # Woithout DCI parameters
   ExternalList=Name:command
@@ -677,7 +677,7 @@ accept arguments metric name should contain "(*)" symbols after name.
 
 .. code-block:: cfg
 
-  # Exaple
+  # Example
 
   # Woithout DCI parameters
   ExternalParameter=Name:command
@@ -713,7 +713,7 @@ Example of agent configuration:
 
 .. code-block:: cfg
 
-  #Exaple
+  #Example
   ExternalParametersProvider=PATH_TO_PROVIDER_SCRIPT:POLL_TIME_IN_SECONDS
 
   #Example (run /tmp/test.sh every 5 seconds)
@@ -731,7 +731,7 @@ that will be available like $1, $2, $3..., $9 variables. To accept arguments met
 
 .. code-block:: cfg
 
-  # Exaple
+  # Example
 
   # Woithout DCI parameters
   ExternalTable=dciName:instanceColumns=columnName;description=description;separator=|:command
@@ -770,7 +770,7 @@ agent configuration file.
 
 .. code-block:: cfg
 
-  # Exaple
+  # Example
   Action=Name:command
   Action=Name:command $1 $2
   Action=cleanLogs:rm /opt/netxms/log/*

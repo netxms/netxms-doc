@@ -35,17 +35,17 @@ It is also possibility to push data to server. If DCI source is set to
 data source.
 
 .. versionadded:: 2.0-M5
-    Agent caching mode 
-    
-By default DCI data is not collected while connection between server and agent is 
-broken as poll request could not get till agent. There is special configuration 
-that allows to collect data and store it on agent till connection with server is 
-restored and collected data is pushed to the server. This option is available for 
-metrics, table metrics and proxy SNMP metrics. Not implemented for proxy SNMP table 
-metrics and DCIs with custom schedule. In case of this configuration agent stores DCI 
-configuration locally and does all metric collection and dispatch by himself. DCI 
-configuration is synchronized on connect, DCI configuration change or SNMP proxy 
-server change. Information about configuration options can be found there: 
+    Agent caching mode
+
+By default DCI data is not collected while connection between server and agent is
+broken as poll request could not get till agent. There is special configuration
+that allows to collect data and store it on agent till connection with server is
+restored and collected data is pushed to the server. This option is available for
+metrics, table metrics and proxy SNMP metrics. Not implemented for proxy SNMP table
+metrics and DCIs with custom schedule. In case of this configuration agent stores DCI
+configuration locally and does all metric collection and dispatch by himself. DCI
+configuration is synchronized on connect, DCI configuration change or SNMP proxy
+server change. Information about configuration options can be found there:
 :ref:`offline-data-collection`.
 
 .. _dci-configuration:
@@ -102,7 +102,7 @@ Origin of data (method of obtaining data). Possible origins are:
 - :guilabel:`Internal` (data generated inside |product_name| server process)
 - :guilabel:`Push Agent`
 - :guilabel:`Script` (from script library, can be used instead of internal dummy)
-  
+
 
 :guilabel:`Push Agent` origin is very different from all others, because it
 represents DCIs whose values are pushed to server by external program (usually
@@ -124,28 +124,28 @@ button, correct data type will be set automatically.
 Source node
 ~~~~~~~~~~~
 
-Sorce node of metrci collection. This can be used when other node provides 
-information about this node. In this way collected data can be collected and 
-shown on right nodes. 
+Sorce node of metrci collection. This can be used when other node provides
+information about this node. In this way collected data can be collected and
+shown on right nodes.
 
-Othe example of usage is virtual nodes(node with IP 0.0.0.0). In this case 
-node state can be obtained from the DCI created on this node but collected 
-from the other one. 
+Othe example of usage is virtual nodes(node with IP 0.0.0.0). In this case
+node state can be obtained from the DCI created on this node but collected
+from the other one.
 
 Data is collected from the same node if no value set.
 
 Polling
 ~~~~~~~
 
-Polling mode and interval describe schedule type and interval between consecutive 
+Polling mode and interval describe schedule type and interval between consecutive
 polls, in seconds. However, collecting too many values for too long will lead to
 significant increase of your database size and possible performance degradation.
 
 Can be selected one of options:
 
-    - :guilabel:`Fixed intervals (default)` - default value will be taken form :guilabel:`DefaultDCIPollingInterval` server configuration parameter. 
+    - :guilabel:`Fixed intervals (default)` - default value will be taken form :guilabel:`DefaultDCIPollingInterval` server configuration parameter.
     - :guilabel:`Fixed intervals (custom)` - value entered on the DCI properties page will be taken.
-    - :guilabel:`Use advanced scheduling` - schedules configured in :guilabel:`Advanced Schedule` page will be used  
+    - :guilabel:`Use advanced scheduling` - schedules configured in :guilabel:`Advanced Schedule` page will be used
 
 
 Storage
@@ -159,13 +159,13 @@ degradation.
 
 Possible options:
 
-    - :guilabel:`Use default retention time` - default value will be taken form :guilabel:`DefaultDCIRetentionTime` server configuration parameter. 
+    - :guilabel:`Use default retention time` - default value will be taken form :guilabel:`DefaultDCIRetentionTime` server configuration parameter.
     - :guilabel:`Use default retention time` - value entered on the DCI properties page will be taken.
     - :guilabel:`Do not save collected data to database` - will not save collected data to database, but will store last value in memory
-    
-Last option is used when it is required to show latest (every 1 second collected) data on Dashboard, but 
-it is too much data to store in database. So 2 DCI configurations are created. 
-One to store historical data collected once per minute and the second one, that is not stored in database, but 
+
+Last option is used when it is required to show latest (every 1 second collected) data on Dashboard, but
+it is too much data to store in database. So 2 DCI configurations are created.
+One to store historical data collected once per minute and the second one, that is not stored in database, but
 is collected every second and up to date displayed on dashboards.
 
 
@@ -226,9 +226,9 @@ Examples
 ~~~~~~~~
 
 Run five minutes after midnight, every day:
-  
+
   ``5 0 * * *``
-  
+
 Run at 14:15 on the first day of every month:
 
   ``15 14 1 * *``
@@ -273,16 +273,16 @@ nodes.
 Data aggregation
 ~~~~~~~~~~~~~~~~
 
-This section is responsible for cluster data aggregation way. 
-:guilabel:`Aggregate values from cluster nodes` option means, that DCI form cluster 
-will be collected on each node separately and aggregated on cluster using one of the 
+This section is responsible for cluster data aggregation way.
+:guilabel:`Aggregate values from cluster nodes` option means, that DCI form cluster
+will be collected on each node separately and aggregated on cluster using one of the
 aggregation options.
 
 Aggregation options:
 
     - Total
     - Average
-    - Min 
+    - Min
     - Max
 
 Data Transformations
@@ -328,14 +328,14 @@ predefined global variables: ``$node`` (reference to current node object), and
 ``$dci`` (reference to current DCI object). For more information about |product_name|
 scripting language, please consult :ref:`scripting` chapter in this manual.
 
-Transformation script can be tested in the same view, by clicking :guilabel:`Test...` 
-and entering test input data. 
+Transformation script can be tested in the same view, by clicking :guilabel:`Test...`
+and entering test input data.
 
 
 .. figure:: _images/dci_transformation_page.png
 
     DCI configuration transformation property page
-    
+
 
 Thresholds
 ----------
@@ -343,8 +343,8 @@ Thresholds
 For every DCI you can define one or more thresholds. Each threshold there is a
 pair of condition and event - if condition becomes true, associated event is
 generated. To configure thresholds, open the data collection editor for node or
-template. You can add, modify and delete thresholds using buttons below the 
-threshold list. If you need to change the threshold order, select one threshold 
+template. You can add, modify and delete thresholds using buttons below the
+threshold list. If you need to change the threshold order, select one threshold
 and use arrow buttons located on the right to move the selected threshold up or down.
 
 
@@ -356,7 +356,7 @@ Threshold Processing
 ~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: _images/threshold_processing_algorithm.png
-   
+
    Threshold processing algorithm
 
 As you can see from this flowchart, threshold order is very important. Let's
@@ -414,7 +414,7 @@ Average value            An average value for last ``N`` polls will be used
 Mean deviation           A mean absolute deviation for last ``N`` polls will be
                          used (you have to configure a desired number of
                          polls). Additional information on how mean absolute
-                         deviation calculated can be found `here 
+                         deviation calculated can be found `here
                          <http://en.wikipedia.org/wiki/Mean_deviation>`_.
 Diff with previous value A delta between last and previous values will be
                          used. If DCI data type is string, system will use
@@ -580,11 +580,11 @@ instance name.
 Performance tab
 ---------------
 
-Main information about node(:guilabel:`Object Details`) can be supplemented with DCI 
+Main information about node(:guilabel:`Object Details`) can be supplemented with DCI
 information displayed as text(last value) on :guilabel:`Object Details`->
 :guilabel:`Overview` page or in graph way on :guilabel:`Object Details`->:guilabel:`Performance` tab.
 
-DCI representation in text way can be configured on :ref:`dci-othe-options-label`. Next will be described only 
+DCI representation in text way can be configured on :ref:`dci-othe-options-label`. Next will be described only
 graph DCI representation configuration on :guilabel:`Performance` tab of :guilabel:`Object Details`.
 
 Multiple DCIs can be grouped in one graph. To group them use the same group name in "Group" field.
@@ -597,10 +597,10 @@ Multiple DCIs can be grouped in one graph. To group them use the same group name
 Access Control
 --------------
 
-This page provides access control management option to each DCI. If no user set, then access rights are 
+This page provides access control management option to each DCI. If no user set, then access rights are
 inherited from node. So any user that is able to read node is able to see last value of this DCI and user
-that is able to modify node is able to change and see DCI configuration.  When list is not empty, 
-then both access to node and access to DCI are check on DCI configuration or value request. 
+that is able to modify node is able to change and see DCI configuration.  When list is not empty,
+then both access to node and access to DCI are check on DCI configuration or value request.
 
 .. figure:: _images/dci_access_control_page.png
 
@@ -615,8 +615,8 @@ Other available options:
 
     - Show last value in object tooltip - shows DCI last value on tooltip that is shown on network maps.
     - Show last value in object overview - shows DCI last value on :guilabel:`Object Details`->:guilabel:`Overview` page.
-    - Use this DCI for node status calculation - Uses value returned by this DCI as a status, that 
-      participate in object status calculation. Such kind of DCI should 
+    - Use this DCI for node status calculation - Uses value returned by this DCI as a status, that
+      participate in object status calculation. Such kind of DCI should
       return integer number from 0 till 4 representing object status.
 
 
@@ -667,22 +667,22 @@ Instance Discovery methods. List DCI values can be also obtained with
 Agent caching mode
 ==================
 
-Agent caching mode allows metric data to be obtained while connection between 
-server and agent have been broken. This option is available for metrics, table 
-metrics and proxy SNMP metrics. Not implemented for proxy SNMP table metrics and 
-DCIs with custom schedule. While break data is stored on agent, and on connect it 
+Agent caching mode allows metric data to be obtained while connection between
+server and agent have been broken. This option is available for metrics, table
+metrics and proxy SNMP metrics. Not implemented for proxy SNMP table metrics and
+DCIs with custom schedule. While break data is stored on agent, and on connect it
 is send to server. Detailed description can be found there: :ref:`how_data_collection`.
 
-Agent side cache is configurable globally, on node level, and on DCI level. By 
+Agent side cache is configurable globally, on node level, and on DCI level. By
 default it's off.
 
-All collected data goes thought all transformations and thresholds only when it comes to server. 
-To prevent generation of old events it can be set :guilabel:`OffileDataRelivanceTime` configuration 
-variable to time period in seconds within which received offline data still relevant for threshold 
-validation. By default it is set to 1 day. 
+All collected data goes thought all transformations and thresholds only when it comes to server.
+To prevent generation of old events it can be set :guilabel:`OffileDataRelivanceTime` configuration
+variable to time period in seconds within which received offline data still relevant for threshold
+validation. By default it is set to 1 day.
 
 .. versionadded:: 2.0-M5
-    Agent caching mode. 
+    Agent caching mode.
 
 Configuration
 -------------
@@ -692,14 +692,14 @@ It can be configured:
   - on node level - :guilabel:`Agent cache mode` can be changed to :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use globas settings) in node properties on :guilabel:`Polling` page
   - on DCI level - :guilabel:`Agent cache mode` can be changed to :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use node level settings) in DCI properties on :guilabel:`General` page
 
-  
+
 .. _last-values:
 
 Last DCI values View
 ====================
 
 .. todo:
-  Add description of this view with all menu items. 
+  Add description of this view with all menu items.
 
 .. _data-collection-templates:
 
@@ -831,9 +831,7 @@ Working with collected data
 
 Once you setup DCI, data starts collecting in the database. You can access this
 data and work with it in different ways. Data can be visualized in three ways:
-in graphical form, as a historical view(textual format) and as DCI summary table, 
+in graphical form, as a historical view(textual format) and as DCI summary table,
 this layout types can be combined in Dashboards.
 More detailed description about visualization and layout can be found there:
 :ref:`visualisation`.
-
-

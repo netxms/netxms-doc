@@ -4,7 +4,7 @@ Agent management
 
 Introduction
 ============
-   
+
 |product_name| agent is daemon or service that runs on a :term:`node<Node>` to provide additional
 monitoring options. This is optional for installation, but it's installation gives next advantages:
 
@@ -17,49 +17,49 @@ monitoring options. This is optional for installation, but it's installation giv
    * :term:`SNMP Trap` proxy: agent can be used as a proxy to get messages from remote SNMP device
    * Extensible: you can add new parameters very easy using configuration option like ``ExternalParamer`` or by writing your own subagents
    * Easy upgrade - you can upgrade all agents at once from console
-   * Provides file management possibilities on agent. 
+   * Provides file management possibilities on agent.
 
 
 Agent configuration files
 =========================
 
-Agent have 3 types of configuration files: master configuration file, additional 
-configuration files sroted and Agent Policies files. Master configuration file is the only mandatory file. 
-Minimal configuration for master configuration file is server address. Address should be  
+Agent have 3 types of configuration files: master configuration file, additional
+configuration files sroted and Agent Policies files. Master configuration file is the only mandatory file.
+Minimal configuration for master configuration file is server address. Address should be
 set as MasterServers to be able to apply other changes already from the server.
 
-**After configuration file change agent should be restarted to apply new changes.** 
+**After configuration file change agent should be restarted to apply new changes.**
 
-Configuration files and policies should be written in XML or 'key = value' format. In XML 
-format general tag should be <config> and then can be added any agent or subagent 
+Configuration files and policies should be written in XML or 'key = value' format. In XML
+format general tag should be <config> and then can be added any agent or subagent
 parameter as a tag.
 
 .. note::
-   Right way to define section: **[sectionName]**. Previous one with asterisk is counted as dipricated: ***sectionName**.  
+   Right way to define section: **[sectionName]**. Previous one with asterisk is counted as dipricated: ***sectionName**.
 
 'key = value' format example:
 
-.. code-block:: cfg    
-   
+.. code-block:: cfg
+
    MasterServers = 10.0.0.4
    SubAgent = winperf.nsm
-   # Below is a configuration for winperf subagent, in separate section   
-   [WinPerf] 
+   # Below is a configuration for winperf subagent, in separate section
+   [WinPerf]
    EnableDefaultCounters = yes
-   
+
 Same example in XML format:
 
-.. code-block:: xml    
-   
-   <config>   
+.. code-block:: xml
+
+   <config>
       <MasterServers>10.0.0.4</MasterServers>
       <SubAgent>winperf.nsm</Subagent>
       <!-- Below is a configuration for winperf subagent, in separate section -->
       <WinPerf>
          <EnableDefaultCounters>yes</EnableDefaultCounters>
       </WinPerf>
-   </config> 
-   
+   </config>
+
 Example of configuration sections:
 
 .. figure:: _images/section_description.png
@@ -69,17 +69,17 @@ Example of configuration sections:
 
 Master configuration file
 -------------------------
-File nxagentd.conf is a master configuration file for |product_name| agent. It contains all 
-information necessary for agent's operation. Default location for this file is 
-:file:`/etc/nxagentd.conf` on UNIX systems and 
-:file:`'installation directory'\\etc\\nxagentd.conf'` on Windows. The file can 
-contain one or more parameters in *Parameter = Value* form, each parameter should 
-be on its own line. Comments can be inserted after "#" sign. This file can also 
-contain configuration for subagents. In this case, subagents’ parameters should 
-be placed in separate sections. Beginning of the section is indicated by "*" sign, 
+File nxagentd.conf is a master configuration file for |product_name| agent. It contains all
+information necessary for agent's operation. Default location for this file is
+:file:`/etc/nxagentd.conf` on UNIX systems and
+:file:`'installation directory'\\etc\\nxagentd.conf'` on Windows. The file can
+contain one or more parameters in *Parameter = Value* form, each parameter should
+be on its own line. Comments can be inserted after "#" sign. This file can also
+contain configuration for subagents. In this case, subagents’ parameters should
+be placed in separate sections. Beginning of the section is indicated by "*" sign,
 followed by a section name or by section name in braces(example: "[sectionName]").
 
-If build configuration was done with --prefix='prefix' parameter, then configuration file will 
+If build configuration was done with --prefix='prefix' parameter, then configuration file will
 be searched in the following order (UNIX):
 
    1. :file:`$NETXMS_HOME/etc/nxagentd.conf`
@@ -87,23 +87,23 @@ be searched in the following order (UNIX):
    3. :file:`/etc/nxagentd.conf`
    4. :file:`/Database/etc/nxagentd.conf`
    5. :file:`/usr/etc/nxagentd.conf`
-   
+
 For Windows systems:
 
    1. :file:`'installation directory'\\etc\\nxagentd.conf`
-   
-For Windows location of |product_name| config can be change in registry. 
+
+For Windows location of |product_name| config can be change in registry.
 
 
 If configuration file is placed in different location or named in different way,
-then it's location and file name can be given to agent with -c parameter. 
+then it's location and file name can be given to agent with -c parameter.
 
 Detailed list of parameters can be found there: :ref:`agent_configuration_file`.
-     
+
 Configuration file example:
 
-.. code-block:: cfg    
-   
+.. code-block:: cfg
+
    #
    # Sample agent’s configuration file
    #
@@ -113,27 +113,27 @@ Configuration file example:
    # Below is a configuration for winperf subagent, in separate section
    *WinPerf
    EnableDefaultCounters = yes
-   
-  
+
+
 Additional configuration files
 ------------------------------
-Additional configuration files override or supplement configuration parameters form main file. 
-There are two types of additional files one are used to store applied :guilabel:`Policies` configuration, 
+Additional configuration files override or supplement configuration parameters form main file.
+There are two types of additional files one are used to store applied :guilabel:`Policies` configuration,
 others can be created and updated manually. More information about Policies can be read there: :ref:`agent-policies-label`.
 
-Next will be described default folders for manually created files. Policies files will be stored in a 
+Next will be described default folders for manually created files. Policies files will be stored in a
 separate folder named :guilabel:`configure_ap` under :guilabel:`DataDirectory`.
 
 Default to data directory for UNIX like systems:
 
     1. :file:`$NETXMS_HOME/var/lib/netxms`
     2. :file:`/var/lib/netxms`
-    
+
 For Windows systems:
 
     1. :file:`'installation directory'\\var`
 
-If configuration of build was done with --prefix='prefix' parameter, then config will 
+If configuration of build was done with --prefix='prefix' parameter, then config will
 be searched in next order(UNIX):
 
    1. :file:`$NETXMS_HOME/etc/nxagentd.conf.d`
@@ -141,14 +141,14 @@ be searched in next order(UNIX):
    3. :file:`/etc/nxagentd.conf.d`
    4. :file:`/Database/etc/nxagentd.conf.d`
    5. :file:`/usr/etc/nxagentd.conf.d`
-   
+
 For Windows systems:
 
    1. :file:`'installation directory'\\etc\\nxagentd.conf`
-   
-   
+
+
 .. _stored-agent-configurations-label:
-   
+
 Agent configuration options from server
 =======================================
 
@@ -157,72 +157,72 @@ Agent configuration options from server
 Edit configuration file remotely
 --------------------------------
 
-Right click on node, select from menu: :guilabel:`Edit agent's configuration file`. 
+Right click on node, select from menu: :guilabel:`Edit agent's configuration file`.
 
-On View exit there will be present dialog. New configuration apply is performed on agent restart. So to 
-immediately apply new configuration on config exit select :guilabel:`Save and Apply`. This option will 
-save config and automatically restart the agent. If just :guilabel:`Save` is selected, then agent 
+On View exit there will be present dialog. New configuration apply is performed on agent restart. So to
+immediately apply new configuration on config exit select :guilabel:`Save and Apply`. This option will
+save config and automatically restart the agent. If just :guilabel:`Save` is selected, then agent
 should be manually restarted to apply new configuration.
 
 
 Agent configuration files on server
 -----------------------------------
-   
-Agent master configuration files can be stored on server side and requested by agent with 
-parameter :command:`-M <serverAdress>`. On config request server goes through config list 
-from beginning till the end and one by one checks if this config is the requested one by 
-executing filter scripts. 
+
+Agent master configuration files can be stored on server side and requested by agent with
+parameter :command:`-M <serverAdress>`. On config request server goes through config list
+from beginning till the end and one by one checks if this config is the requested one by
+executing filter scripts.
 
 If server have found appropriate configuration file then it is sent to agent and old
-:file:`nxagentd.conf` file is overwritten with incoming one or created new one if there is no :file:`nxagentd.conf` 
-When agent can't connect to server or server hasn't found right config, the agent is started 
-with the old one. In case when old configuration file does not exist and it is not possible to 
-get new one from server - agent fails to start. 
+:file:`nxagentd.conf` file is overwritten with incoming one or created new one if there is no :file:`nxagentd.conf`
+When agent can't connect to server or server hasn't found right config, the agent is started
+with the old one. In case when old configuration file does not exist and it is not possible to
+get new one from server - agent fails to start.
 
-.. versionadded:: 1.2.15    
+.. versionadded:: 1.2.15
 
 **Doesn't wotk with tunnel agent connection**
 
 Configuration
 ~~~~~~~~~~~~~
 
-Each config has a name, filter and config content. 
+Each config has a name, filter and config content.
 
  - Name just identifies config.
- - Filter is check on config request to define witch configuration file to 
-   give back. Filter is defined with help of :term:`NXSL`. To configuration are given 
+ - Filter is check on config request to define witch configuration file to
+   give back. Filter is defined with help of :term:`NXSL`. To configuration are given
    next parameters:
-   
+
     - $1 - IP address
     - $2 - platform
     - $3 - major version number
     - $4 - minor version number
     - $5 - release number
-    
- - Configuration file is a content of returned configuration file. 
+
+ - Configuration file is a content of returned configuration file.
 
 .. figure:: _images/agent_config_manager.png
 
 Agent configuration policy
 --------------------------
 
-Another option to store and spread agent configuration are agent policies. In this case agent 
-configuration is stored on the server side as a policy and applied to the agents from the server 
-by the user. More information about policies and it's types can be found in 
+Another option to store and spread agent configuration are agent policies. In this case agent
+configuration is stored on the server side as a policy and applied to the agents from the server
+by the user. More information about policies and it's types can be found in
 :ref:`agent-policies-label` chapter.
 
-Agent Policies vs. Agent Configuration Files on Server 
+Agent Policies vs. Agent Configuration Files on Server
 ------------------------------------------------------
 
 A short lists of main points to compare both options:
 
 Agent Configuration Files on Server:
-  - Assignment is Rule based 
+  - Assignment is Rule based
   - Config download from server is each time the agent starts (if option '-M servername')
-  - When config is found on server, local Master config is overwritten, if not existing Master 
+  - When config is found on server, local Master config is overwritten, if not existing Master
     config is used
   - Works with Master config
-  - Do not required initial config(can be started without config), but in this case agent 
+  - Do not required initial config(can be started without config), but in this case agent
     will fail if nothing will be returned from server
   - Doesn't work with tunnel agent connection
 
@@ -235,33 +235,33 @@ Agent Policies:
   - Changed policies must be reinstalled on nodes (in console) and need agent restart
   - At minimum the server connection parameters must be in Master config to be able to start agent
   - Works with Additional configuration files(policies)
-  - If policy and master config have same parameter that can be set only once 
+  - If policy and master config have same parameter that can be set only once
     like(MasterServers or LogFile), then policy will overwrite master config configuration
-  - If policy and master config have same parameter that can be set multiple times 
+  - If policy and master config have same parameter that can be set multiple times
     like(Target for PING subagent or Query for DBQUERY), then policy will merge lists of configs
   - Can work with tunnel agent connection
 
 .. _agent-policies-label:
-  
+
 Agent Policies
 ==============
 
 Agent policies can be configured on server in :guilabel:`Policies` part. There are 2 types of
-policies: Agent configuration file policy and Log parser policy. 
+policies: Agent configuration file policy and Log parser policy.
 
-Advantage of creating configuration in policies - if configuration for nodes is changed, 
-then it should be changed only once for all nodes on witch it is applied. 
+Advantage of creating configuration in policies - if configuration for nodes is changed,
+then it should be changed only once for all nodes on witch it is applied.
 
 Agent configuration file policy
 -------------------------------
 
-There can be used the same parameters and format as in any |product_name| agent configuration file 
+There can be used the same parameters and format as in any |product_name| agent configuration file
 (key=value format or XML format).
 
-To create policy in menu of container where should be created policy select 
-:menuselection:`Create->Agent configuration policy...` and give required object name and 
-press :guilabel:`OK`. Than newly created policy can be modified by selecting 
-:menuselection:`Edit Policy...` from object menu. 
+To create policy in menu of container where should be created policy select
+:menuselection:`Create->Agent configuration policy...` and give required object name and
+press :guilabel:`OK`. Than newly created policy can be modified by selecting
+:menuselection:`Edit Policy...` from object menu.
 
 Example:
 
@@ -277,7 +277,7 @@ Example:
   Query=dbquery1:myDB:60:SELECT name FROM images
   ConfigurableQuery=dbquery2:myDB:Comment in param :SELECT name FROM images WHERE name like ?
   ConfigurableQuery=byID:myDB:Comment in param :SELECT name FROM users WHERE id=?
-    
+
   [filemgr]
   RootFolder=/
 
@@ -296,7 +296,7 @@ Example:
       <Query>dbquery1:myDB:60:SELECT name FROM images</Query>
       <ConfigurableQuery>dbquery2:myDB:Comment in param :SELECT name FROM images WHERE name like ?</ConfigurableQuery>
       <ConfigurableQuery>byID:myDB:Comment in param :SELECT name FROM users WHERE id=?</ConfigurableQuery>
-    </DBQUERY>      
+    </DBQUERY>
     <filemgr>
       <RootFolder>/</RootFolder>
     </filemgr>
@@ -305,71 +305,71 @@ Example:
 Example:
 
       .. figure:: _images/policy_example.png
-      
-Nodes should be manually restarted after policy was applied, changed or removed 
+
+Nodes should be manually restarted after policy was applied, changed or removed
 to run it with new configuration.
-      
+
 Log parser policy
 -----------------
 
-Infromation about log parser format available in :ref:`log-monitoring` chapter. 
+Infromation about log parser format available in :ref:`log-monitoring` chapter.
 
-To create policy in menu of container where should be created policy select 
-:menuselection:`Create->Log parser policy...` and give required object name and 
-press :guilabel:`OK`. Than newly created policy can be modified by selecting 
-:menuselection:`Edit Policy...` from object menu. 
+To create policy in menu of container where should be created policy select
+:menuselection:`Create->Log parser policy...` and give required object name and
+press :guilabel:`OK`. Than newly created policy can be modified by selecting
+:menuselection:`Edit Policy...` from object menu.
 
-Parser configuration is applied on instalaltion - no agent restart required. 
+Parser configuration is applied on instalaltion - no agent restart required.
 
 Policy group
 ------------
 
-Policies can be organized into groups. 
+Policies can be organized into groups.
 
-To create new group select :menuselection:`Create->Policy group...` and give 
+To create new group select :menuselection:`Create->Policy group...` and give
 required object name and press :guilabel:`OK`.
 
 Common information
 ------------------
 
-After policy is created it should be installed on required nodes. Node and agent on it 
+After policy is created it should be installed on required nodes. Node and agent on it
 should be up and running. To install policy in object menu select :menuselection:`Install...`,
-select :guilabel:`Install on nodes selected below`, select required nodes in object browser and 
-click :guilabel:`OK`. 
+select :guilabel:`Install on nodes selected below`, select required nodes in object browser and
+click :guilabel:`OK`.
 
-Installed policy configurations are stored as additional config files under agent 
-:guilabel:`DataDirectory`. List of applied policies is stored in agent local database. If policy is 
+Installed policy configurations are stored as additional config files under agent
+:guilabel:`DataDirectory`. List of applied policies is stored in agent local database. If policy is
 successfully applied on a :term:`node <Node>` it will be seen under this policy.
 
 Example:
 
       .. figure:: _images/applied_policy.png
 
-If Policies have changed it should be reapplied manually. Is is done with command in 
-object menu :menuselection:`Install...`, then select :guilabel:`Install on all nodes where this 
+If Policies have changed it should be reapplied manually. Is is done with command in
+object menu :menuselection:`Install...`, then select :guilabel:`Install on all nodes where this
 policy already installed` and click :guilabel:`OK`.
 
-Policy can be also uninstalled. To do this right click on policy object and select 
+Policy can be also uninstalled. To do this right click on policy object and select
 :menuselection:`Uninstall...`, select node from witch this policy will be removed and click :guilabel:`OK`.
-In this case additional configuration file is removed from node.  
+In this case additional configuration file is removed from node.
 
-In case of Policy deploy, Policy uninstall, Policy update job fail, unsuccessfully operation will be 
-scheduled for re-execution. :guilabel:`JobRetryCount` server configuration variable represents 
-number of retries. First time job is rescheduled in 10 minutes. Each next wait time is twice more 
-than the previous time.  
+In case of Policy deploy, Policy uninstall, Policy update job fail, unsuccessfully operation will be
+scheduled for re-execution. :guilabel:`JobRetryCount` server configuration variable represents
+number of retries. First time job is rescheduled in 10 minutes. Each next wait time is twice more
+than the previous time.
 
-Installed policies are checked on configuration poll and are reinstalled if policy is marked as 
+Installed policies are checked on configuration poll and are reinstalled if policy is marked as
 applied on a server, but is missing on the node.
-      
+
 .. note::
-    
-    Some types of policies require agent restart for changes to be applied. 
- 
+
+    Some types of policies require agent restart for changes to be applied.
+
 
 Agent registration
 ==================
 
-There are available two ways of agent, server communication. Standard one is when server initialize 
+There are available two ways of agent, server communication. Standard one is when server initialize
 connection to agent, the second one is when tunnel is used and agent initialize connection to server.
 
 Server to agent connection
@@ -378,119 +378,119 @@ Server to agent connection
 There are few ways to register agent:
    1. To enter it manually by creating a node
    2. Run the network discovery and enter the range of IP addresses.
-   3. Register agent on management server "nxagentd -r <addr>",  where <addr> is the IP address of server. 
+   3. Register agent on management server "nxagentd -r <addr>",  where <addr> is the IP address of server.
       To register agents using this option also :guilabel:`EnableAgentRegistration` parameter should be set to 1.
-      
-.. _agent-to-server-agent-conf-label:   
-   
+
+.. _agent-to-server-agent-conf-label:
+
 Agent to server connection
 --------------------------
 
-This connection requires certificate configuration on server side. More about required actions can be found in 
-:ref:`server-tunnel-cert-conf`. Agent requires :guilabel:`ServerConnection` parameter set in agentd.conf file to 
-server :term:`DNS` or server IP address. 
+This connection requires certificate configuration on server side. More about required actions can be found in
+:ref:`server-tunnel-cert-conf`. Agent requires :guilabel:`ServerConnection` parameter set in agentd.conf file to
+server :term:`DNS` or server IP address.
 
-Just after start agent will try to connect to server. On first connect node will be shown in list of 
+Just after start agent will try to connect to server. On first connect node will be shown in list of
 
 There are few ways to register agent:
    1. To enter it manually by creating a node and then binding tunnel to already created node.
-   2. Create node from :guilabel:`Agent Tunnel Manager` view by selecting one or more tunnels and selecting 
-      :guilabel:`Create node and bind...` menu item. 
-   
+   2. Create node from :guilabel:`Agent Tunnel Manager` view by selecting one or more tunnels and selecting
+      :guilabel:`Create node and bind...` menu item.
+
 Security
 ========
 
-Message encryption in server to agent connection 
+Message encryption in server to agent connection
 ------------------------------------------------
 
-Server encryption policy is configured in :guilabel:`Server Configuration` view by 
-selecting one of 4 options for :guilabel:`DefaultEncryptionPolicy` parameter. Default 
-Policy is 1. 
+Server encryption policy is configured in :guilabel:`Server Configuration` view by
+selecting one of 4 options for :guilabel:`DefaultEncryptionPolicy` parameter. Default
+Policy is 1.
 
 Policy types:
 
   * 0 - Forbid encryption. Will communicate with agents only using plain text messages.
-    If agent force encryption(set :guilabel:`RequireEncryption` agent configuration 
-    parameter to :guilabel:`yes`), server will not connect with this agent. 
-  * 1 - Allow encryption. Will communicate with agents using plain text messages if for 
-    exact node is not defined encryption force by setting :guilabel:`RequireEncryption` 
-    agent configuration parameter to :guilabel:`yes` or by selecting 
-    :guilabel:`Force encryption` option in Communication properties of node object. 
-  * 2 - Encryption preferred. Will communicate with agent using encryption. In case if 
-    agent does not support encryption will communicate with it using plain text. 
-  * 3 - Encryption required. Will communicate with agent using encryption. In case if 
-    agent does not support encryption will not establish connection. 
-    
+    If agent force encryption(set :guilabel:`RequireEncryption` agent configuration
+    parameter to :guilabel:`yes`), server will not connect with this agent.
+  * 1 - Allow encryption. Will communicate with agents using plain text messages if for
+    exact node is not defined encryption force by setting :guilabel:`RequireEncryption`
+    agent configuration parameter to :guilabel:`yes` or by selecting
+    :guilabel:`Force encryption` option in Communication properties of node object.
+  * 2 - Encryption preferred. Will communicate with agent using encryption. In case if
+    agent does not support encryption will communicate with it using plain text.
+  * 3 - Encryption required. Will communicate with agent using encryption. In case if
+    agent does not support encryption will not establish connection.
+
 .. figure:: _images/node_communications_tab.png
 
     Force encryption option for node.
-  
+
 
 .. note::
-  Configuration will be simplified in next releases. 
+  Configuration will be simplified in next releases.
 
 Security in agent to server connection
 --------------------------------------
 
-Agent to server connection uses :term:`TLS` protocol to ensure communication security. Server has root certificate, that 
-is used to issue public certificate for agent. Additionally to this server issues certificates only to the nodes that were 
-manually accepted on server, this process can be automated by NXShell if required. More information: 
-`NXShell examples <https://wiki.netxms.org/wiki/Using_nxshell_to_automate_bulk_operations>`_, 
+Agent to server connection uses :term:`TLS` protocol to ensure communication security. Server has root certificate, that
+is used to issue public certificate for agent. Additionally to this server issues certificates only to the nodes that were
+manually accepted on server, this process can be automated by NXShell if required. More information:
+`NXShell examples <https://wiki.netxms.org/wiki/Using_nxshell_to_automate_bulk_operations>`_,
 `Latest Javadoc <https://www.netxms.org/documentation/javadoc/latest/>`_.
-  
+
 Server access levels
 --------------------
 
-Depending on how server's IP address(or domain) is added to in nxagentd.conf, it will 
-have different access level. It is preferred to use MasterServers. There are 3 levels 
-of access for an agent:  
+Depending on how server's IP address(or domain) is added to in nxagentd.conf, it will
+have different access level. It is preferred to use MasterServers. There are 3 levels
+of access for an agent:
 
    1. MasterServers - full access.
-   2. ControlServers - can read data and execute predefined actions, but cannot change 
+   2. ControlServers - can read data and execute predefined actions, but cannot change
       config nor install policies.
    3. Servers - read only access. (Is default for tunneled agent connection if other server level is not defined)
-   
-In case if server IP is not listed in one of this parameters agent will not enable 
-connection with server in server to agent connection or will set access level to :guilabel:`Servers` if tunnel 
-connection is used. 
+
+In case if server IP is not listed in one of this parameters agent will not enable
+connection with server in server to agent connection or will set access level to :guilabel:`Servers` if tunnel
+connection is used.
 
 Shared secret
 -------------
 
-Shared secret is another level of server verification. By default authentication is 
-disabled. 
+Shared secret is another level of server verification. By default authentication is
+disabled.
 
-To enable :guilabel:`Shared Secret` verification on agent set :guilabel:`RequireAuthentication` 
-agent configuration parameter to :guilabel:`yes`. In :guilabel:`SharedSecret` agent 
+To enable :guilabel:`Shared Secret` verification on agent set :guilabel:`RequireAuthentication`
+agent configuration parameter to :guilabel:`yes`. In :guilabel:`SharedSecret` agent
 configuration parameter set password what should be used for authentication.
 
-If authentication for agent is enabled, then while connection agent requested shared 
-secret from the server. Server check if password was set for this specific node in 
-:guilabel:`Shared secret` field in communication properties of node. In case if there is 
-no shared secret server sends content of :guilabel:`AgentDefaultSharedSecret` server 
-configuration variable as shared secret. 
+If authentication for agent is enabled, then while connection agent requested shared
+secret from the server. Server check if password was set for this specific node in
+:guilabel:`Shared secret` field in communication properties of node. In case if there is
+no shared secret server sends content of :guilabel:`AgentDefaultSharedSecret` server
+configuration variable as shared secret.
 
 .. figure:: _images/node_communications_tab.png
 
-    Shared secret field in node communication properties. 
+    Shared secret field in node communication properties.
 
-In case shared secrets are not identical connection is not established. 
+In case shared secrets are not identical connection is not established.
 
 Password encryption
 -------------------
 
 When it is required to write password or :guilabel:`Shared Secret` in agent
-configuration file, there is possibility to encrypt it. All passwords can 
-be encrypted with help of :ref:`nxencpasswd-tools-label` command line tool and added 
-in configuration file in encrypted way. 
-  
+configuration file, there is possibility to encrypt it. All passwords can
+be encrypted with help of :ref:`nxencpasswd-tools-label` command line tool and added
+in configuration file in encrypted way.
+
 .. _subagent_list:
-  
+
 Subagents
 =========
 Subagents are used to extend agent functionality. |product_name| subagent are libraries that are loaded by agent.
 By default all subagents are included in agent build. Subagent may be not included in build
-only if on time of the build there were no required libraries for subagent build. To enable 
+only if on time of the build there were no required libraries for subagent build. To enable
 subagent is require just to add line in main agent configuration file(example: "Subagent=dbquery.nsm").
 More about configuration and usage of subagents will be described in monitoring chapters.
 
@@ -521,19 +521,19 @@ Below is list of available |product_name| subagents:
 
 
 .. _java-subagent:
-  
+
 Java subagent
 -------------
 
-This is a special type of subagent, that allows to load Java plugins(subagents written using Java language). 
-Java subagent does not provide any functionality by itself. 
+This is a special type of subagent, that allows to load Java plugins(subagents written using Java language).
+Java subagent does not provide any functionality by itself.
 
-There are several configuration parameters that are supported by Java subagent. None of them is mandatory. 
+There are several configuration parameters that are supported by Java subagent. None of them is mandatory.
 
 .. list-table::
    :header-rows: 1
    :widths: 50 200
-   
+
    * - Parameter
      - Description
    * - Jvm
@@ -541,7 +541,7 @@ There are several configuration parameters that are supported by Java subagent. 
    * - Classpath
      - This parameter is added to java CLASSPATH.
    * - Plugin
-     - This parameter defines plugin that should be loaded. Can be used multiple times. 
+     - This parameter defines plugin that should be loaded. Can be used multiple times.
 
 Configuration example:
 
@@ -549,7 +549,7 @@ Configuration example:
 
    MasterServers = netxms.demo
    SubAgent=java.nsm
-   
+
    [JAVA]
    Jvm = /path/to/jvm
    Classpath = /path/to/user/classes
@@ -563,25 +563,25 @@ List of avalivable java plugins:
 
   * JMX
   * Bind9
-  
+
 Load of subagent as separate process
 ------------------------------------
 
-Load of subagent as separate process can be used in case it is necessary to load agent and subagent 
-under different users. It can be done by adding ``ExternalSubagent`` parameter with unique ID that 
-will represent connection name between agent and subagent. Create second configuration file for this 
-subagent and add there ``ExternalMasterAgent`` parameter with same ID and run instance of :file:`nxagentd` with 
-this config. Now external subagent will communicate with master agent using Named Pipe. Only master agent will 
-communicate with server. 
+Load of subagent as separate process can be used in case it is necessary to load agent and subagent
+under different users. It can be done by adding ``ExternalSubagent`` parameter with unique ID that
+will represent connection name between agent and subagent. Create second configuration file for this
+subagent and add there ``ExternalMasterAgent`` parameter with same ID and run instance of :file:`nxagentd` with
+this config. Now external subagent will communicate with master agent using Named Pipe. Only master agent will
+communicate with server.
 
 Agent Proxy node configuration
 ==============================
 
-In case it is required to monitor nodes behind firewall, it can be configured 
-access to one of subnet nodes and used this node as a proxy node for others. 
+In case it is required to monitor nodes behind firewall, it can be configured
+access to one of subnet nodes and used this node as a proxy node for others.
 
-Proxy node can be set while node creation or in :guilabel:`Communications` tab 
-of node properties. To configure proxy node select node in object selector 
+Proxy node can be set while node creation or in :guilabel:`Communications` tab
+of node properties. To configure proxy node select node in object selector
 :guilabel:`|product_name| Agent Proxy`.
 
 .. figure:: _images/create_node.png
@@ -591,7 +591,7 @@ of node properties. To configure proxy node select node in object selector
 Agent configuration
 -------------------
 
-To enable |product_name| Agent proxy "EnableProxy" agent configuration parameter should 
+To enable |product_name| Agent proxy "EnableProxy" agent configuration parameter should
 be set to :guilabel:`yes`.
 
 
@@ -600,36 +600,36 @@ be set to :guilabel:`yes`.
 Agent External Metrics
 ======================
 
-Other option to define new Metric that can be collected form node is to use 
-``ExternalParameter``/``ExternalParameterShellExec``, or ``ExternalList``, or 
-``ExternalParametersProvider`` configuration parameters to define command that will 
-be executed on a node and it's output will be provided as a Metric. This functionality 
-provides flexibility to create your own metrics, lists or table metrics. 
+Other option to define new Metric that can be collected form node is to use
+``ExternalParameter``/``ExternalParameterShellExec``, or ``ExternalList``, or
+``ExternalParametersProvider`` configuration parameters to define command that will
+be executed on a node and it's output will be provided as a Metric. This functionality
+provides flexibility to create your own metrics, lists or table metrics.
 
-New Metrics will be visible in the :guilabel:`Available parameters` list only after agent 
-restarts (agent reads a configuration file only once on start) and configuration poll, 
-so to force it's appearance run :guilabel:`Configuration poll` manually after agent restart. 
+New Metrics will be visible in the :guilabel:`Available parameters` list only after agent
+restarts (agent reads a configuration file only once on start) and configuration poll,
+so to force it's appearance run :guilabel:`Configuration poll` manually after agent restart.
 
 ExternalParameter/ExternalParameterShellExec
 --------------------------------------------
 
-``ExternalParameter`` defines name of the metric and command that is executed synchronously 
-when this metric is requested  by server. There can be provided parameters form DCI 
-configuration, that will be available like $1, $2, $3..., $9 variables. To accept 
-arguments metric name should contain "(*)" symbols after name. Only first line of 
+``ExternalParameter`` defines name of the metric and command that is executed synchronously
+when this metric is requested  by server. There can be provided parameters form DCI
+configuration, that will be available like $1, $2, $3..., $9 variables. To accept
+arguments metric name should contain "(*)" symbols after name. Only first line of
 script output will be given as a result of execution(metric value).
 
-``ExternalParameterShellExec`` has same meaning as ``ExternalParameter`` with exception that 
-agent will use shell to execute specified command instead of system process exeution 
-API. This difference presented only on Windows system, on other systems 
+``ExternalParameterShellExec`` has same meaning as ``ExternalParameter`` with exception that
+agent will use shell to execute specified command instead of system process exeution
+API. This difference presented only on Windows system, on other systems
 ``ExternalParameter`` and ``ExternalParameterShellExec`` behaves identically.
 
-To add multiple parameters, you should use multiple 
+To add multiple parameters, you should use multiple
 ``ExternalParameter``/``ExternalParameterShellExec`` entries.
 
-As this commands are executed synchronously, long commands may cause timeout. In this 
-case ``ExecTimeout`` configuration parameter can be set to change external parameter 
-execution timeout or ``ExternalParametersProvider`` can be used. 
+As this commands are executed synchronously, long commands may cause timeout. In this
+case ``ExecTimeout`` configuration parameter can be set to change external parameter
+execution timeout or ``ExternalParametersProvider`` can be used.
 
 .. code-block:: cfg
 
@@ -646,16 +646,16 @@ execution timeout or ``ExternalParametersProvider`` can be used.
   #Real examples
   ExternalParameter = Test:echo test
   ExternalParameter = LineCount(*):cat $1 | wc -l
-  
-  
+
+
 ExternalList
 ------------
 
-``ExternalList`` defines name of the list metric and command that is executed 
-synchronously when this metric is requested by server. There can be provided parameters 
-form DCI configuration, that will be available like $1, $2, $3..., $9 variables. To 
-accept arguments metric name should contain "(*)" symbols after name. Lines of list 
-are separated with new line. 
+``ExternalList`` defines name of the list metric and command that is executed
+synchronously when this metric is requested by server. There can be provided parameters
+form DCI configuration, that will be available like $1, $2, $3..., $9 variables. To
+accept arguments metric name should contain "(*)" symbols after name. Lines of list
+are separated with new line.
 
 .. code-block:: cfg
 
@@ -670,9 +670,9 @@ are separated with new line.
 ExternalParameter
 -----------------
 
-``ExternalParameter`` defines name of the metric and command that is executed 
-synchronously when this metric is requested by server. There can be provided parameters 
-form DCI configuration, that will be available like $1, $2, $3..., $9 variables. To 
+``ExternalParameter`` defines name of the metric and command that is executed
+synchronously when this metric is requested by server. There can be provided parameters
+form DCI configuration, that will be available like $1, $2, $3..., $9 variables. To
 accept arguments metric name should contain "(*)" symbols after name.
 
 .. code-block:: cfg
@@ -684,49 +684,49 @@ accept arguments metric name should contain "(*)" symbols after name.
 
   # With DCI parameters
   ExternalParameter=Name(*):command $1 $2
-  
+
 ExternalParametersProvider
 --------------------------
 
-``ExternalParametersProvider`` defines command(script) and execution interval in seconds. Defined 
-script will be executed as per interval and agent will cache parameter list. When server 
-will request one of provided parameters it's value will be read from the agent cache. 
-Main purpose is to providing data from long-running processes, or return multiple 
-values at once. This approach can be also used for getting table database results in 
-parameter way(like columnName=value). 
+``ExternalParametersProvider`` defines command(script) and execution interval in seconds. Defined
+script will be executed as per interval and agent will cache parameter list. When server
+will request one of provided parameters it's value will be read from the agent cache.
+Main purpose is to providing data from long-running processes, or return multiple
+values at once. This approach can be also used for getting table database results in
+parameter way(like columnName=value).
 
-Script should print one or more "Parameter=Value" pairs to standard output. Multiple 
-pairs should be separated by new line. If parameter takes argument, it should be 
+Script should print one or more "Parameter=Value" pairs to standard output. Multiple
+pairs should be separated by new line. If parameter takes argument, it should be
 included in "Parameter(...)".
 
 Example of the script:
 
 .. code-block:: shell
-  
-  #!/bin/sh 
-  echo 'Parameter1=Value1'  
-  echo 'Parameter2=Value2'  
-  echo 'ParameterWithArgs(AAA)=Value3'  
+
+  #!/bin/sh
+  echo 'Parameter1=Value1'
+  echo 'Parameter2=Value2'
+  echo 'ParameterWithArgs(AAA)=Value3'
   echo 'ParameterWithArgs(BBB)=Value4'
-  
+
 Example of agent configuration:
 
 .. code-block:: cfg
-  
+
   #Exaple
   ExternalParametersProvider=PATH_TO_PROVIDER_SCRIPT:POLL_TIME_IN_SECONDS
-  
+
   #Example (run /tmp/test.sh every 5 seconds)
   ExternalParametersProvider=/tmp/test.sh:5
-  
+
 ExternalTable
 -------------
 
-``ExternalTable`` defines name of the table metric, table metric description, column separator, 
+``ExternalTable`` defines name of the table metric, table metric description, column separator,
 instance column and command. Command is executed synchronously when this metric is requested by server.
-Each table line is separated with new line symbol. First line in returned text used as a name of the columns 
-and all next lines will be used like table data. There can be provided parameters form DCI configuration, 
-that will be available like $1, $2, $3..., $9 variables. To accept arguments metric name should contain 
+Each table line is separated with new line symbol. First line in returned text used as a name of the columns
+and all next lines will be used like table data. There can be provided parameters form DCI configuration,
+that will be available like $1, $2, $3..., $9 variables. To accept arguments metric name should contain
 "(*)" symbols after name.
 
 .. code-block:: cfg
@@ -740,7 +740,7 @@ that will be available like $1, $2, $3..., $9 variables. To accept arguments met
   ExternalTable(*)=dciName:instanceColumns=columnName;description=description;separator=|:command $1 $2
 
 Separator supports special macross for separator:
-    
+
     * \\n - \\n
     * \\r - \\r
     * \\s - space
@@ -752,21 +752,21 @@ Separator supports special macross for separator:
 Agent Actions
 =============
 
-For security reasons actions that can be executed on agent first are defined in 
-agent configuration file and only then can be used by users. This excludes that an 
-unauthorized user can access system data through an arbitrary entered command. Only 
-users with access to the agent configuration file editing can define executed commands. 
+For security reasons actions that can be executed on agent first are defined in
+agent configuration file and only then can be used by users. This excludes that an
+unauthorized user can access system data through an arbitrary entered command. Only
+users with access to the agent configuration file editing can define executed commands.
 
 There are 2 options to define action:
 
    #. Action - usual action defenition
    #. ActionShellExec - Same as Action, but on the Windows platform agent will use shell to execute command instead of normal process creation. There is no difference between Action and ActionShellExec on UNIX platforms.
-   
+
 Both versions accept parameters that will be available like ``$1``, ``$2``, ``$3``..., ``$9`` variables.
 
-After action is defined it can be used in the :ref:`object tools - agent action<object_tool-agent-command>` or in 
-:ref:`actions - action ecevution on remote node<action-remote-execute>`. Action should be defined in main section of 
-agent configuration file. 
+After action is defined it can be used in the :ref:`object tools - agent action<object_tool-agent-command>` or in
+:ref:`actions - action ecevution on remote node<action-remote-execute>`. Action should be defined in main section of
+agent configuration file.
 
 .. code-block:: cfg
 

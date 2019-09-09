@@ -20,7 +20,7 @@ complete and it make no sense to repeat same processing process to render Excel
 file instead of PDF. When first step is finished, all processed information is
 saved into intermediate file on the reporting server and available for
 rendering at any time (e.g. user can render and download report from last year,
-even if source data is already purged). 
+even if source data is already purged).
 
 Reports execution and rendering can be initiated both manually and on schedule.
 
@@ -72,7 +72,7 @@ open schedule editor.
 .. figure:: _images/reporting_schedule_editor.png
 
    Schedule editor with two tabs, :guilabel:`General` and
-   :guilabel:`Notifications` 
+   :guilabel:`Notifications`
 
 :guilabel:`General` tab contains four scheduling options:
 
@@ -127,10 +127,10 @@ Configuration
 Reporting Server
 ----------------
 
-Report definitions are loaded from the file system by scanning workspace folder, 
-expected structure: ``$WORKSPACE/definitions/$REPORT_GUID``. Each report folder 
-should contain file ``main.jrxml``, any additional files (images, translation 
-files) should be referenced in ``main.jrxml`` with relative paths. Sample 
+Report definitions are loaded from the file system by scanning workspace folder,
+expected structure: ``$WORKSPACE/definitions/$REPORT_GUID``. Each report folder
+should contain file ``main.jrxml``, any additional files (images, translation
+files) should be referenced in ``main.jrxml`` with relative paths. Sample
 directory listing::
 
   workspace/definitions/6eb9c41c-e9f0-4e17-ac57-de747e16e480/i18n.properties
@@ -145,11 +145,11 @@ Format of ``logback.xml`` is described in `Logback manual`_.
 
 ``nxreporting.properties`` is a standard Java property file in ``key=value`` format.
 
-.. list-table:: 
+.. list-table::
    :header-rows: 1
    :widths: 30 70
 
-   * - Parameter 
+   * - Parameter
      - Description
    * - nxreporting.workspace
      - Path to workspace with deployed reports
@@ -160,29 +160,29 @@ Format of ``logback.xml`` is described in `Logback manual`_.
    * - system.datasource.dialect
      - Hibernate dialect, for example ``org.hibernate.dialect.PostgreSQLDialect``. More information in `JavaDoc <http://docs.jboss.org/hibernate/orm/4.1/javadocs/org/hibernate/dialect/Dialect.html>`_
    * - system.datasource.username
-     - 
+     -
    * - system.datasource.password
-     - 
+     -
    * - report.datasource.driverClassName
-     - 
+     -
    * - report.datasource.url
-     - 
+     -
    * - report.datasource.username
-     - 
+     -
    * - report.datasource.password
-     - 
+     -
    * - org.quartz.jobStore.dataSource
-     - 
+     -
    * - org.quartz.dataSource.myDS.driver
-     - 
+     -
    * - org.quartz.dataSource.myDS.URL
-     - 
+     -
    * - org.quartz.dataSource.myDS.user
-     - 
+     -
    * - org.quartz.dataSource.myDS.password
-     - 
+     -
    * - org.quartz.dataSource.myDS.maxConnections
-     - 
+     -
 
 Access Control
 --------------
@@ -196,16 +196,16 @@ Setup
 
 2. Create directory "conf"
 
-3. (Optional)Create logger configuration: conf/logback.xml (sample attached), 
+3. (Optional)Create logger configuration: conf/logback.xml (sample attached),
    detailed description here: http://logback.qos.ch/manual/configuration.html#syntax
 
    .. code-block:: xml
-   
+
         <?xml version="1.0" encoding="UTF-8"?>
         <configuration>
         <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <file>/opt/nxreporting/log/nxreporting</file>
-            
+
             <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
             <fileNamePattern>/opt/nxreporting/log/nxreporting.%i.gz</fileNamePattern>
             <minIndex>1</minIndex>
@@ -220,7 +220,7 @@ Setup
             </encoder>
         </appender>
 
-   
+
 4. Create configuration file for reporting server: conf/nxreporting.xml
 
     .. code-block:: xml
@@ -248,13 +248,13 @@ Setup
             </netxms>
         </config>
 
-    In most cases (when reports are using only single datasource), setting 
-    "netxmsdConfig" is enough, database type and credentials will loaded 
-    automatically from netxmsd.conf. "netxms" section of the config is required 
-    for reports, which load data not from SQL datasource, but using |product_name| API 
+    In most cases (when reports are using only single datasource), setting
+    "netxmsdConfig" is enough, database type and credentials will loaded
+    automatically from netxmsd.conf. "netxms" section of the config is required
+    for reports, which load data not from SQL datasource, but using |product_name| API
     instead (connection is maintained by reporting server).
 
-5. Create workspace directory (as set by "workspace" parameter), it will contain both report 
+5. Create workspace directory (as set by "workspace" parameter), it will contain both report
    definitions and intermediate report data (in "output" directory).
 
 6. Put report definition jars into workspace/definitions/:
@@ -268,12 +268,12 @@ Setup
         -rw-r--r--  1 alk  wheel  4203 Mar 11 15:31 /opt/nxreporting/workspace/definitions/dci-1.0.0.jar
         -rw-r--r--  1 alk  wheel  9968 Mar 11 15:31 /opt/nxreporting/workspace/definitions/epp-1.0.0.jar
         …
-        
-7. Enable reporting server connector, set EnableReportingServer to 1 (either 
-   in GUI - server configuration, or using command line: "nxdbmgr set 
+
+7. Enable reporting server connector, set EnableReportingServer to 1 (either
+   in GUI - server configuration, or using command line: "nxdbmgr set
    EnableReportingServer 1"), then restart netxmsd.
-   
-8. Create additional tables by executing both scripts from 
+
+8. Create additional tables by executing both scripts from
    https://git.netxms.org/public/netxms.git/tree/refs/heads/develop:/src/java/nxreporting/sql
 
 9. Start reporting server:
@@ -295,9 +295,9 @@ Setup
 
         java -cp /opt/nxreporting/lib/\*.jar:/opt/nxreporting/conf:/opt/nxreporting/nxreporting-2.0-M2.jar com.radensolutions.reporting.Launcher
 
-        
-    In under 10 seconds, netxmsd should connect to reporting 
-    server and list of available reports will be visible in 
+
+    In under 10 seconds, netxmsd should connect to reporting
+    server and list of available reports will be visible in
     "Reporting" perspective.
 
 Resulting directory structure
@@ -349,7 +349,7 @@ Resulting directory structure
     drwxr-xr-x   4 alk  wheel  136 Mar  7 22:04 52ce4398-a131-4a79-887e-672cc73d5d34
     drwxr-xr-x   3 alk  wheel  102 Mar 11 15:44 8a7c025c-84c8-4914-b2bf-3b4cde27a224
     …
-    
+
 .. https://www.netxms.org/forum/installation/install-report-server/
 .. http://www.netxms.org/forum/installation/reporting-server-4315/
 
@@ -357,20 +357,20 @@ Report definitions
 ------------------
 
 On startup, reporting server scan workspace/definitions directory for \*.jar files.
-Each file is unpacked into it's own folder based on jar name (e.g. "report1.jar" 
-will be unpacked into "report1"). Each archive should contain at least one file 
+Each file is unpacked into it's own folder based on jar name (e.g. "report1.jar"
+will be unpacked into "report1"). Each archive should contain at least one file
 – "main.jrxml", which is main report definition. It can also contain subreports, 
-images – or anything else, supported by Jasper Reports. Any additional resources 
-should be referenced using paths relative to root folder of unpacked report, which 
-is set as addtional paramter "SUBREPORT_DIR" (e.g. "$P{SUBREPORT_DIR}/logo.png").
+images – or anything else, supported by Jasper Reports. Any additional resources
+should be referenced using paths relative to root folder of unpacked report, which
+is set as additional parameter "SUBREPORT_DIR" (e.g. "$P{SUBREPORT_DIR}/logo.png").
 
-Archive can also contain java code, which will be used as data provider (instead 
-of querying SQL database). Reporting server will try to load class 
-"report.DataSource", which should implement interface 
-"com.radensolutions.reporting.custom.NXCLDataSource" (attached sample: Event 
-Processing Policy). Query string language in jrxml should be set to "nxcl" 
+Archive can also contain java code, which will be used as data provider (instead
+of querying SQL database). Reporting server will try to load class
+"report.DataSource", which should implement interface
+"com.radensolutions.reporting.custom.NXCLDataSource" (attached sample: Event
+Processing Policy). Query string language in jrxml should be set to "nxcl"
 (default - SQL).
 
-Simplest way to create jar files are using Maven, empty project is provided in 
-samples archive. Running "mvn package" will produce complete jar file in "target" 
+Simplest way to create jar files are using Maven, empty project is provided in
+samples archive. Running "mvn package" will produce complete jar file in "target"
 directory.

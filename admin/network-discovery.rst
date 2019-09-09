@@ -19,10 +19,10 @@ and |product_name| agent, and then adds it to database. By default |product_name
 add all discovered devices to database, but you can limit it by using discovery
 filters. Default :term:`SNMP` credentials can be set in :ref:`dafault_snmp`.
 
-Active discovery runs every 2 hours and passive every 15 minutes. Thees values 
-can be change in ``ActiveDiscoveryInterval`` and ``DiscoveryPollingInterval`` 
-server variables. Default number of discovery poller's threads is 1, this 
-value can be change by ``NumberOfDiscoveryPollers`` parameter. 
+Active discovery runs every 2 hours and passive every 15 minutes. Thees values
+can be change in ``ActiveDiscoveryInterval`` and ``DiscoveryPollingInterval``
+server variables. Default number of discovery poller's threads is 1, this
+value can be change by ``NumberOfDiscoveryPollers`` parameter.
 More information about server variables can be found :ref:`there <server_configuration_parameters>`.
 
 Configuring Network Discovery
@@ -38,8 +38,8 @@ will open:
 General
 -------
 
-In this section, you can choose network discovery mode, chose if source node of 
-:term:`SNMP Trap` or syslog source address should be used for discovery. 
+In this section, you can choose network discovery mode, chose if source node of
+:term:`SNMP Trap` or syslog source address should be used for discovery.
 
 Filter
 ------
@@ -70,7 +70,7 @@ additional options controls what nodes will be added to database:
    * - Accept node if it has SNMP agent
      - If checked, only nodes with SNMP agent detected will pass the filter.
    * - Accept node if it is within given range or subnet
-     - Only accept nodes withing given address range or subnet. Address ranges
+     - Only accept nodes within given address range or subnet. Address ranges
        can be configured in :guilabel:`Address Filters` section.
 
 

@@ -12,7 +12,7 @@ List of available subagents:
   * linux
   * aix
   * hpux
-  * winnt (all Windows flavours)
+  * winnt (all Windows flavors)
   * sunos (Solaris)
   * darwin (MacOS)
   * freebsd
@@ -31,8 +31,8 @@ processing options can be found in :ref:`event-processing` chapter.
 Process monitoring
 ------------------
 
-In this example will be configured monitoring of running "mysqld" process. And one
-threshold: when process count is less then 1(process is not running).
+In this example monitoring of running "mysqld" process will be configured and one
+threshold will be added: when process count is less then 1 (process is not running).
 
 Create DCI for Process.Count(*) metric to monitor "mysqld" process count.
 
@@ -58,8 +58,8 @@ As in message of error is used Instance parameter, it should be set in
 Disk free space monitoring
 --------------------------
 
-In this example will be configured monitoring of free space in percents for / disk and
-two thresholds: when disk space less then 15% and less then 7%.
+In this example monitoring of free space in percents for / disk will be configured and
+two thresholds will be added: when disk space less then 15% and less then 7%.
 
 
 Create DCI for FileSystem.FreePerc(*) metric to monitor space on /.

@@ -67,7 +67,7 @@ Main menu
 Settings
 --------
 
-This section is used to configure the behaviour of the agent.
+This section is used to configure the behavior of the agent.
 
 Global settings
 ---------------

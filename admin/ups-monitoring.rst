@@ -69,7 +69,7 @@ parameters provided by it:
      - Integer
      - Connection status between agent and device. Can have the following values:
         * 0 - Agent is communication with the device
-        * 1 - Comunication with the device has been lost
+        * 1 - Communication with the device has been lost
    * - UPS.EstimatedRuntime(*)
      - Integer
      - Estimated on-battery runtime in minutes.
@@ -157,5 +157,5 @@ Description for possible OIDs and some additional information for APC UPS config
 can be found on a
 `|product_name| wiki <https://wiki.netxms.org/wiki/UPS_Monitoring_(APC)_via_SNMP>`_.
 
-Please check :ref:`import-mib` for MIB loadding and :ref:`dci-configuration` for
+Please check :ref:`import-mib` for MIB loading and :ref:`dci-configuration` for
 metric collection.

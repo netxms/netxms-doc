@@ -250,18 +250,18 @@ Object's status can be one of the following:
 Unmanaged status
 ----------------
 
-Objects can be unmanaged. In this status object is not polled, DCIs are not collected, 
-no data is updated about object. This status can be used to store data about object 
-that temporrary or at permonently unavailabe or not managed. 
+Objects can be unmanaged. In this status object is not polled, DCIs are not collected,
+no data is updated about object. This status can be used to store data about object
+that temporary or at permanently unavailable or not managed.
 
 .. _maintenance_mode:
 
-Maintanence mode
+Maintenance mode
 ------------------
 
-This is special status, because it is not included in usual status lit. This 
-status prevents event processing for special node. While this status node is 
-still polled and DCI data is still collected, but no event is generated. 
+This is special status, because it is not included in usual status lit. This
+status prevents event processing for special node. While this status node is
+still polled and DCI data is still collected, but no event is generated.
 
 Event Processing
 ================
@@ -371,9 +371,9 @@ Instance discovery
 ------------------
 
 |product_name| can create parameters for :term:`Data Collection Item <DCI>` automatically.
-Instance discovery collects information about node instances like disk mountpoints, 
-device list, etc. and automatically creates or removes :term:`DCIs <DCI>` with 
-uptained data.
+Instance discovery collects information about node instances like disk mountpoints,
+device list, etc. and automatically creates or removes :term:`DCIs <DCI>` with
+obtained data.
 
 
 Security

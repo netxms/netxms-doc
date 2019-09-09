@@ -26,7 +26,7 @@ object is created, it will be automatically included into the status poll. Each
 time when the status poll for the particular node is carried out, all Network
 Service objects are polled for a reply. If an object's reply corresponds to a
 certain condition, its status is set as NORMAL. If an object is not responding,
-its status will be hanged to CRITICAL. Wile network service creation there can be
+it's status will be changed to CRITICAL. Wile network service creation there can be
 also created :term:`DCI` that will collect service status.
 
 .. figure:: _images/create_network_service.png
@@ -96,7 +96,7 @@ All of the ServiceCheck.* parameters return the following values:
    * - Value
      - Description
    * - 0
-     - Success, *target* was connected to an returned expected response.
+     - Success, *target* was connected to and returned expected response.
    * - 1
      - Invalid arguments were passed.
    * - 2
@@ -181,7 +181,7 @@ ECS
 ---
 
 This subagent works with HTTP only. It can be used to measure page load time and checking page
-hash. Request timeout for this subageint is 30 seconds.
+hash. Request timeout for this subagent is 30 seconds.
 
 
 .. list-table::
@@ -201,4 +201,3 @@ hash. Request timeout for this subageint is 30 seconds.
 
   MasterServers = netxms.demo
   Subagent = ecs.nsm
-  

@@ -4,7 +4,7 @@ Glossary
 
 .. glossary::
   :sorted:
-  
+
   Action
     Configurable operation which can be executed by the system when
     :term:`Event` is passing thru :term:`Event Processing Policy`. Multiple
@@ -26,17 +26,17 @@ Glossary
     and is not usually visible to the Business.
 
   CA
-    Certification authority is an entity that issues digital certificates. 
+    Certification authority is an entity that issues digital certificates.
     More details in :wikipedia:`Wikipedia <Certificate authority>`
-    
+
   Condition
     (Create condition in infrastructure services)
 
   Container
     :term:`Object` that can store other containers and :term:`nodes <Node>`.
-    
+
   CSR
-    Certificate signing request is a message sent from an applicant to a 
+    Certificate signing request is a message sent from an applicant to a
     certificate authority in order to apply for a digital identity certificate.
     More details in :wikipedia:`Wikipedia <Certificate signing request>`
 
@@ -51,7 +51,7 @@ Glossary
 
   Data Collection Item
     Configuration entity of a single :term:`Metric`.
-    
+
   DNS
     Domain Name System. More details in
     :wikipedia:`Wikipedia <Domain Name System>`
@@ -106,7 +106,7 @@ Glossary
     and consider each responding address for adding to database.
 
   Network Map
-    Visual representaion of network topology.
+    Visual representation of network topology.
 
   |product_name| Agent
     |product_name| daemon that is installed on monitored :term:`Node` to provide
@@ -142,8 +142,8 @@ Glossary
 
   Proxy Agent
     |product_name| Agent capable of forwarding requests to :term:`nodes <Node>` which
-    are not directly accecible to |product_name| server. Agent support proxying of
-    native agent protocol as well as SNMP. 
+    are not directly accessible to |product_name| server. Agent support proxying of
+    native agent protocol as well as SNMP.
 
   Push parameter
     Type of :term:`DCI`, where collected data is pushed into the server by the
@@ -295,9 +295,9 @@ Glossary
   Syslog
     Widely used standard for message logging. More details in
     :wikipedia:`Wikipedia <Syslog>`.
-    
-  TLS 
-    Transport Layer Security is a cryptographic protocols that provide 
+
+  TLS
+    Transport Layer Security is a cryptographic protocols that provide
     communications security over a computer network. More details in
     :wikipedia:`Wikipedia <Transport Layer Security>`.
 
@@ -338,4 +338,3 @@ Glossary
     availability and reliability of routing paths via automatic default gateway
     selections on an IP subnetwork. More details in :wikipedia:`Wikipedia
     <Virtual Router Redundancy Protocol>`
-

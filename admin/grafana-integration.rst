@@ -4,7 +4,7 @@
 Grafana integration
 ###################
 
-|product_name| Grafana integration provides the possiblity to display important data using
+|product_name| Grafana integration provides the possibility to display important data using
 the Grafana platform and the :ref:`|product_name| WebAPI <rest-api>`.
 
 Integration with Grafana
@@ -12,8 +12,8 @@ Integration with Grafana
 
 The |product_name| Grafana datasource provides an alternative way of monitoring to that of the |product_name| Web and Desktop consoles or the Android app, by using the Grafana platform and the |product_name| WebAPI.
 
-Requirments
------------
+Requirements
+------------
 
 The following prerequisites need to be set-up first:
 
@@ -38,7 +38,7 @@ Features
 
 The datasource currently supports the following functionality:
 
-   * Visualisation of configured data collection items for objects in graphs and tables.
+   * Visualization of configured data collection items for objects in graphs and tables.
    * Listing of active alarms on a general or a per object basis
 
 .. _grafana-config:
@@ -61,7 +61,7 @@ Alarm Browser
 .. figure:: _images/grafana-alarm-browser.png
 	:scale: 55%
 
-The data source provides the posibility to view currently active :ref:`alarms` on all nodes
+The data source provides the possibility to view currently active :ref:`alarms` on all nodes
 or on a per node basis. To do this, you need to add a new Table Panel to your Grafana dashboard
 and then edit the Metrics section of the panel settings. If the |product_name| data source is set as the
 default data source, it should have been added to the panel automatically, if not, select the name
@@ -89,7 +89,7 @@ Data Collection Items
 .. figure:: _images/grafana-dci.png
 	:scale: 55%
 
-The data source provides the posibility to visualize metrics collected from data collection items
+The data source provides the possibility to visualize metrics collected from data collection items
 configured on nodes. This can be achieved by adding a Graph Panel to your Grafana dashboard,
 adding the |product_name| data source to it and selecting the `DCI` data type in the Metrics section
 of the graph panel settings. Once this is done, it is possible to select the `Target` node from

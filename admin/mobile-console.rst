@@ -5,20 +5,20 @@ Mobile Console
 ##############
 
 
-.. Used version on wiki:  14:17, 7 September 2014‎ Marco Incalcaterra 
+.. Used version on wiki:  14:17, 7 September 2014‎ Marco Incalcaterra
 
-|product_name| mobile console is a monitoring tool for Android devices running version 2.2. 
-and later. 
+|product_name| mobile console is a monitoring tool for Android devices running version 2.2.
+and later.
 
-Currently, only a small subset of the functions present in the Desktop/Web edition 
-are implemented, mainly read/only operations. The next paragraphs briefly describes 
-each section. 
+Currently, only a small subset of the functions present in the Desktop/Web edition
+are implemented, mainly read/only operations. The next paragraphs briefly describes
+each section.
 
 
 Main window
 ===========
 
-Here you can see how appears the main window and the underneath levels. 
+Here you can see how appears the main window and the underneath levels.
 
 .. figure:: _images/360px-MobCons-main.png
 
@@ -35,17 +35,17 @@ Here you can see how appears the main window and the underneath levels.
 From the main window it is possible to get access to the following menu items:
 
   * :guilabel:`Settings`: select this item to configure the console.
-  * :guilabel:`Reconnect`: select this item to force a reconnection to the server to gather new 
+  * :guilabel:`Reconnect`: select this item to force a reconnection to the server to gather new
     collected data.
   * :guilabel:`Disconnect & Exit`: select this item to stop the console and exit from the app.
-  
-Underneath levels have menu that are context dependent, a detailed description can be 
+
+Underneath levels have menu that are context dependent, a detailed description can be
 found in each section.
 
 Alarms
 ======
 
-Alarms section is used to list and manage all pending alarms, eventually filtered on a 
+Alarms section is used to list and manage all pending alarms, eventually filtered on a
 particular node/container. Through this view it is possible to manage alarms:
 
   * :guilabel:`Actions`:
@@ -63,16 +63,16 @@ particular node/container. Through this view it is possible to manage alarms:
       * :guilabel:`Sort by node name descending`: sort list using node name that generated the event as criteria, descending.
   * :guilabel:`Select all`: select all the alarms from the list
   * :guilabel:`Unselect all`: clear any selection of alarms from the list
-  
+
 Dashboard
 =========
 
-Dashboards are defined by administrator and allow to combine any available 
-visualization components with data from multiple sources in order to create 
-high-level views to see network (or parts of it) health at a glance. Not all 
-elements are currently available for the mobile console, dashboards are properly 
-refreshed according to their schedule. Due to dashboard size, keep in mind that 
-Smartphones cannot be the best device to show them, a tablet is much more suitable 
+Dashboards are defined by administrator and allow to combine any available
+visualization components with data from multiple sources in order to create
+high-level views to see network (or parts of it) health at a glance. Not all
+elements are currently available for the mobile console, dashboards are properly
+refreshed according to their schedule. Due to dashboard size, keep in mind that
+Smartphones cannot be the best device to show them, a tablet is much more suitable
 device. Here an example:
 
 .. figure:: _images/360px-MobCons-dashboard.png
@@ -81,13 +81,13 @@ device. Here an example:
 Nodes
 =====
 
-This section is used to list and manage all nodes (all network infrastructure monitored 
-by |product_name| are represented as a set of objects. Each object represents one physical or 
-logical entity, or group of them). Objects can be organized into hierarchical 
-structure, the Nodes section is used to explore them. In the right bottom corner 
-of the icon there is a symbol that indicates the status of the node/container 
-following the same simbology used on the desktop console. Clicking on a container 
-will show the items inside, continuing to click up to an object will show a set of 
+This section is used to list and manage all nodes (all network infrastructure monitored
+by |product_name| are represented as a set of objects. Each object represents one physical or
+logical entity, or group of them). Objects can be organized into hierarchical
+structure, the Nodes section is used to explore them. In the right bottom corner
+of the icon there is a symbol that indicates the status of the node/container
+following the same symbology used on the desktop console. Clicking on a container
+will show the items inside, continuing to click up to an object will show a set of
 swipeable pages:
 
   * :guilabel:`Overview`: here are presented the main info associated to this node, such as the name, the primary IP, the status, etc.
@@ -97,7 +97,7 @@ swipeable pages:
           * :guilabel:`Sticky acknowledge`: sticky acknowledge the alarm.
           * :guilabel:`Resolve:` resolve the alarm.
           * :guilabel:`Terminate`: terminate the alarm.
-          * :guilabel:`View last values`: jump to the node info section to view the last values 
+          * :guilabel:`View last values`: jump to the node info section to view the last values
             for the node that generated the alarm.
       * :guilabel:`Select all`: select all the alarms from the list
       * :guilabel:`Unselect all`: clear any selection of alarms from the list
@@ -112,7 +112,7 @@ swipeable pages:
       * :guilabel:`Pie chart`: draw a pie chart with the last collected value
   * :guilabel:`Interfaces`: here are presented all the interfaces associated to this node. For each interface it is possible to instruct the following commands:
       * :guilabel:`Manage`: interface will be put in manage state
-      * :guilabel:`Unanage`: interface will be put in unmanage state
+      * :guilabel:`Unmanage`: interface will be put in unmanaged state
       * :guilabel:`Change expected state`: change the expected interface state, possible values:
           * :guilabel:`UP`: interface expected state will be put in UP state
           * :guilabel:`DOWN`: interface expected state will be put in DOWN state
@@ -131,9 +131,9 @@ swipeable pages:
 Graphics
 ========
 
-Predefined graphics are defined by administrator and can be used to view collected 
-data in a graphical form (as a line chart). Currently, the mobile console doesn’t 
-autorefresh the content of the graphic selected. Here an example of a predefined 
+Predefined graphics are defined by administrator and can be used to view collected
+data in a graphical form (as a line chart). Currently, the mobile console doesn’t
+autorefresh the content of the graphic selected. Here an example of a predefined
 graphs:
 
 .. figure:: _images/360px-MobCons-predgraph.png
@@ -142,16 +142,16 @@ graphs:
 MACaddress
 ==========
 
-This section is used to list previously searched MAC addresses or to start a new 
-search by scanning a barcode value (this feature needs the installation of Barcode 
-Scanner from Zxing Team – freely available on the Google Play), by input it manually 
+This section is used to list previously searched MAC addresses or to start a new
+search by scanning a barcode value (this feature needs the installation of Barcode
+Scanner from Zxing Team – freely available on the Google Play), by input it manually
 or by getting it directly from a node via the “Find Switch port” command.
 
 
 Settings
 ========
 
-This section is used to configure the behaviour of the console.
+This section is used to configure the behavior of the console.
 
 
 Global settings
@@ -159,7 +159,7 @@ Global settings
 
   * :guilabel:`Autostart on boot`: check to automatically start the agent on boot (to be effective, app must not be moved to SD card).
 
-  
+
 Connection
 ==========
 
@@ -177,9 +177,9 @@ Allows selecting the parameters used to connect to the server:
 Scheduler
 ---------
 
-Enables the possibility to define periodic connections to the server. If the scheduler 
-is not enabled the app will try to connect to the server every time it detects a new 
-connection (data or WiFi) and remains always connected as far as the connection 
+Enables the possibility to define periodic connections to the server. If the scheduler
+is not enabled the app will try to connect to the server every time it detects a new
+connection (data or WiFi) and remains always connected as far as the connection
 remains active:
 
   * :guilabel:`Enable scheduler`: check this to enable the scheduler.
@@ -197,13 +197,13 @@ Connection status
 
 This section is to manage the notifications related to the connection status.
 
-  * :guilabel:`Notification behaviour`: defines which kind of action should trigger notifications to the user. Possible options:
+  * :guilabel:`Notification behavior`: defines which kind of action should trigger notifications to the user. Possible options:
       * Never: ignore connection status
       * When connected: notify when connection is successful
       * When disconnected: notify when connection is unsuccessful
       * Always: notify either connection successful and connection unsuccessful
-  * :guilabel:`Toast notification`: provides connection notification via “toast” , behaviour is defined by “Notification behaviour”.<br />
-  * :guilabel:`Icon notification`: provides connection notification via icon in the status bar, behaviour is defined by “Notification behaviour”.
+  * :guilabel:`Toast notification`: provides connection notification via “toast” , behavior is defined by “Notification behavior”.<br />
+  * :guilabel:`Icon notification`: provides connection notification via icon in the status bar, behavior is defined by “Notification behavior”.
 
 Alarms
 ------
@@ -233,12 +233,12 @@ Allows to select the preferred multipliers to be used to show values. Allowed op
 Graph text size
 ---------------
 
-Allows to set the text size to be used for axis labels (if the default value is too 
+Allows to set the text size to be used for axis labels (if the default value is too
 small for high density devices).
 
 Show legend in graphs
 ---------------------
 
-Allows to select to show or not the legend in the top right angle of the graphs. Since 
-legend can be intrusive, especially when there are several lines plotted, user can 
+Allows to select to show or not the legend in the top right angle of the graphs. Since
+legend can be intrusive, especially when there are several lines plotted, user can
 select to disable the legend.

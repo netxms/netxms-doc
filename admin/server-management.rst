@@ -6,19 +6,19 @@ Server management
 Configuration file
 ==================
 
-File netxmsd.conf is a configuration file for |product_name| server. It contains 
-information necessary for establishing database connection, and some optional 
+File netxmsd.conf is a configuration file for |product_name| server. It contains
+information necessary for establishing database connection, and some optional
 server parameters. Default location for this file is :file:`/etc/netxmsd.conf`
 on UNIX systems and :file:`InstalationPath\etc\netxmsd.conf on Windows`.
 
-The file can contain one or more parameters in *Parameter = Value* form, 
+The file can contain one or more parameters in *Parameter = Value* form,
 each parameter should be on its own line. Comments can be inserted after "#" sign.
 
-Detailed list of parameters can be found there: :ref:`server_configuration_file`.    
-    
+Detailed list of parameters can be found there: :ref:`server_configuration_file`.
+
 Configuration file example:
 
-.. code-block:: cfg  
+.. code-block:: cfg
 
   #
   # Sample configuration file for |product_name| server
@@ -31,52 +31,52 @@ Configuration file example:
   DBPassword = password
   LogFailedSQLQueries = yes
   LogFile = {syslog}
-  
-.. _server-tunnel-cert-conf:
-  
-Server configuration for Agent to Server connection / Tunnel connection
-======================================================================= 
 
-|product_name| provides option to establish connection from agent to server. This requires 
-additional configuration on server and on agent sides. This chapter describes server 
+.. _server-tunnel-cert-conf:
+
+Server configuration for Agent to Server connection / Tunnel connection
+=======================================================================
+
+|product_name| provides option to establish connection from agent to server. This requires
+additional configuration on server and on agent sides. This chapter describes server
 side configuration. Agent side configuration can be found in :ref:`agent-to-server-agent-conf-label`.
 Agent to server connection is a :term:`TLS` tunnel carrying virtual server to agent connections.
 
-Server configuration can be separated into two parts: initial configuration (certificate generation and 
-configuration) and node binding. 
+Server configuration can be separated into two parts: initial configuration (certificate generation and
+configuration) and node binding.
 
 .. versionadded:: 2.2.3
     Tunnel automatic action options
-    
-Server provide option to configure automatic options on new unbound tunnel connection. Once new unbound 
-tunnel connection comes to server - idle timeout counter starts for this connection. If nothing done 
-while :guilabel:`AgentTunnels.UnboundTunnelTimeout` time, automatic action selected in 
-:guilabel:`AgentTunnels.UnboundTunnelTimeoutAction` will be executed. 
+
+Server provide option to configure automatic options on new unbound tunnel connection. Once new unbound
+tunnel connection comes to server - idle timeout counter starts for this connection. If nothing done
+while :guilabel:`AgentTunnels.UnboundTunnelTimeout` time, automatic action selected in
+:guilabel:`AgentTunnels.UnboundTunnelTimeoutAction` will be executed.
 
 There are 4 types of actions, that can be done automatically:
-    1. Reset tunnel - close tunnel. It will be automatically reopened again by agent. This process will 
+    1. Reset tunnel - close tunnel. It will be automatically reopened again by agent. This process will
        update information on server in case of change on agent.
-    2. Generate event - generates event :guilabel:`SYS_UNBOUND_TUNNEL`, that later can be used for 
-       administrator notification or any other automatic action(see :ref:`event-processing`). 
-    3. Bind tunnel to existing node - will try to find correct node and bind tunnel to it. Node matching rules 
-       will be described further. 
-    4. Bind tunnel to existing node or create new node - will try to find correct node and bind tunnel to it. 
+    2. Generate event - generates event :guilabel:`SYS_UNBOUND_TUNNEL`, that later can be used for
+       administrator notification or any other automatic action(see :ref:`event-processing`).
+    3. Bind tunnel to existing node - will try to find correct node and bind tunnel to it. Node matching rules
+       will be described further.
+    4. Bind tunnel to existing node or create new node - will try to find correct node and bind tunnel to it.
        If node is not found new node will be created under container mentioned in :guilabel:`AgentTunnels.NewNodesContainer`
-       server configuration parameter.  Node matching rules will be described further. 
-   
+       server configuration parameter.  Node matching rules will be described further.
+
 Node is matched for binding if:
     1. Zone UIN given by agent (is configured in agent configuration under :guilabel:`ZoneUIN`) match to node zone id
     2. IP given by agent match to node's IP address
     3. Hostname or FQDN match with node name
-    
+
 
 Initial configuration
 ---------------------
 
-Certificate should be issued and added to the server configuration. This certificate 
-will be used to issue public certificates for agents. Certificate usage should allow 
-certificate signing. Certificates should be in PEM format. Server key should be 
-added to the certificate file or should be provided as a separate configuration parameter. 
+Certificate should be issued and added to the server configuration. This certificate
+will be used to issue public certificates for agents. Certificate usage should allow
+certificate signing. Certificates should be in PEM format. Server key should be
+added to the certificate file or should be provided as a separate configuration parameter.
 
 Certificate can be obtained in two ways:
     1. By sending :term:`CSR` request to your :term:`CA`
@@ -84,16 +84,16 @@ Certificate can be obtained in two ways:
 
 Possible server file configuration:
 
-.. list-table:: 
+.. list-table::
   :widths: 30 70 60
   :header-rows: 1
 
-  * - Parameter 
+  * - Parameter
     - Description
     - Required
   * - ServerCACertificate
-    - Your certificate authority certificate or self generated :term:`CA` certificate. If certificate 
-      chain for server certificate is longer all upper level certificates should be added to 
+    - Your certificate authority certificate or self generated :term:`CA` certificate. If certificate
+      chain for server certificate is longer all upper level certificates should be added to
       configuration file by adding multiple ServerCACertificate entries.
     - Yes
   * - ServerCertificate
@@ -104,28 +104,28 @@ Possible server file configuration:
     - Can be omitted for non password certificates
   * - ServerCertificateKey
     - Issued certificate key
-    - Can be omitted if key is included in server certificate file. 
-    
+    - Can be omitted if key is included in server certificate file.
+
 Possible server variable configuration:
-  * - Parameter 
+  * - Parameter
     - Description
     - Default
   * - AgentTunnels.UnboundTunnelTimeoutAction
-    - Atcho that will be executed after idle timeout. Actions are described here: :ref:`server-tunnel-cert-conf`
+    - Action that will be executed after idle timeout. Actions are described here: :ref:`server-tunnel-cert-conf`
     - Reset tunnel
   * - AgentTunnels.UnboundTunnelTimeout
     - Tunnel idle timeout in seconds, that will be waited till automatic action execution.
     - 3600
   * - AgentTunnels.NewNodesContainer
-    - Container name where newly created nodes will accrue. You can use ``->`` character pair to create 
+    - Container name where newly created nodes will accrue. You can use ``->`` character pair to create
       subtree ( like ``Office->Tunnel``). If no container is set nodes will appear under :guilabel:`Entire Network`
-    - 
+    -
 
 Self signed certificate sample
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This manual describes only simplest option: self signed certificate creation without password. It 
-does not contain any information about file access right assignment or certificate password configuration. 
+This manual describes only simplest option: self signed certificate creation without password. It
+does not contain any information about file access right assignment or certificate password configuration.
 
     #. Create private root key:
         :command:`openssl genrsa -out rootCA.key 2048`
@@ -134,9 +134,9 @@ does not contain any information about file access right assignment or certifica
     #. Create server key
         :command:`openssl genrsa -out server.key 2048`
     #. Create :file:`openssl.conf` file. Content of file (dn section should be changed accordingly):
-    
-        .. code-block:: cfg 
-            
+
+        .. code-block:: cfg
+
             [req]
             distinguished_name = dn
             req_extensions = v3_ca
@@ -150,8 +150,8 @@ does not contain any information about file access right assignment or certifica
             commonName = |product_name| Server
 
             [v3_ca]
-            basicConstraints = CA:TRUE    
-    
+            basicConstraints = CA:TRUE
+
     #. Create server certificate
         :command:`openssl req -new -key server.key -out server.csr -config openssl.conf`
     #. Sign server certificate with root certificate
@@ -159,26 +159,26 @@ does not contain any information about file access right assignment or certifica
 
 Add newly created certificates to server configuration (netxmsd.conf file).
 
-.. code-block:: cfg  
+.. code-block:: cfg
 
     ServerCACertificate = /opt/netxms/key/rootCA.crt
     ServerCertificate = /opt/netxms/key/server.crt
     ServerCertificateKey = /opt/netxms/key/server.key
 
-    
+
 Node binding
 ------------
 
-Once server certificates are configured and agent is correctly configured (:guilabel:`ServerConnection` 
-parameter set in agentd.conf) requests for agent to server connection will be shown in :guilabel:`Agent Tunnel Manager` view. 
+Once server certificates are configured and agent is correctly configured (:guilabel:`ServerConnection`
+parameter set in agentd.conf) requests for agent to server connection will be shown in :guilabel:`Agent Tunnel Manager` view.
 
 .. figure:: _images/tunnel_unbound_node.png
    :scale: 65%
 
    Agent Tunnel Manager
-   
-User should manually accept them by binding to existing node :guilabel:`Bind...` or by creating 
-new one :guilabel:`Create node and bind...`. Once node will be bound - it's state in :guilabel:`Agent Tunnel Manager` 
+
+User should manually accept them by binding to existing node :guilabel:`Bind...` or by creating
+new one :guilabel:`Create node and bind...`. Once node will be bound - it's state in :guilabel:`Agent Tunnel Manager`
 view will be changed to :guilabel:`Bound`.
 
 .. figure:: _images/tunnel_bound_node.png
@@ -186,13 +186,13 @@ view will be changed to :guilabel:`Bound`.
 
    Agent Tunnel Manager
 
-  
+
 Configuration variables
 =======================
 
-These variables are stored in database and can be changed using 
+These variables are stored in database and can be changed using
 :guilabel:`Server Configuration Editor` :term:`view<View>` accessing it
-:menuselection:`Configuration-->Server Configuration` or with help 
+:menuselection:`Configuration-->Server Configuration` or with help
 of :file:`nxdbmgr`(example: :code:`nxdbmgr set <name> <value>`).
 
 .. figure:: _images/server_configuration.png
@@ -201,23 +201,23 @@ of :file:`nxdbmgr`(example: :code:`nxdbmgr set <name> <value>`).
    Server Configuration
 
 Detailed description of each configuration can be found there: :ref:`server_configuration_parameters`.
-Please note that changes to most of the settings will take effect only after server restart. 
+Please note that changes to most of the settings will take effect only after server restart.
 
 Synchronization between servers
 ===============================
 
-|product_name| does not provide horizontal scalability for server. But there is option to exchange with 
+|product_name| does not provide horizontal scalability for server. But there is option to exchange with
 events between servers. Information about configuration can be found there: :ref:`forward_events`.
-Event forward does not work with zones. 
+Event forward does not work with zones.
 
 netxmsd commandline options
 ===========================
 
-.. list-table:: 
+.. list-table::
   :widths: 30 70
   :header-rows: 1
 
-  * - Command 
+  * - Command
     - Description
   * - -e
     - Run database check on startup
@@ -237,48 +237,48 @@ netxmsd commandline options
   * - -v
     - Display version and exit
 
-    
+
 .. _server-debug-console:
 
 Server debug console
 ====================
 
-Server debug console can be opened in Java console. It can be found in 
+Server debug console can be opened in Java console. It can be found in
 :menuselection:`Tools -> Server Console`.
 
-It can be used to check debug messages or to execute one of server 
+It can be used to check debug messages or to execute one of server
 commands like "ldap sync".
 
 .. figure:: _images/server_console.png
    :scale: 65%
 
-Server commands can be executed also through XMPP. To execute server command 
+Server commands can be executed also through XMPP. To execute server command
 through XMPP should be fulfill next requirements:
 
-  1. Server connection with XMPP should be configured in server configuration variables: 
-     :guilabel:`XMPPLogin`, :guilabel:`XMPPPassword`, :guilabel:`XMPPPort`, 
-     :guilabel:`XMPPServer`, :guilabel:`EnableXMPPConnector`. 
-  2. XMPP user that will send commands should be connected with |product_name| user by pointing 
-     it's XMPP name in :guilabel:`XMPP ID` filed of General tab of |product_name| user 
-     properties. 
-  3. |product_name| user that will execute this commands should also have 
-     :guilabel:`Execute commands via XMPP` access right. 
-  
-Execution is done sending server command like a message to the user defined in 
-:guilabel:`XMPPLogin` server configuration variable. 
-   
+  1. Server connection with XMPP should be configured in server configuration variables:
+     :guilabel:`XMPPLogin`, :guilabel:`XMPPPassword`, :guilabel:`XMPPPort`,
+     :guilabel:`XMPPServer`, :guilabel:`EnableXMPPConnector`.
+  2. XMPP user that will send commands should be connected with |product_name| user by pointing
+     it's XMPP name in :guilabel:`XMPP ID` filed of General tab of |product_name| user
+     properties.
+  3. |product_name| user that will execute this commands should also have
+     :guilabel:`Execute commands via XMPP` access right.
+
+Execution is done sending server command like a message to the user defined in
+:guilabel:`XMPPLogin` server configuration variable.
+
 Server commands
 ---------------
 
-.. list-table:: 
+.. list-table::
   :widths: 30 70
   :header-rows: 1
 
-  * - Command 
+  * - Command
     - Description
   * - debug [<level>|off]
     - Set debug level (valid range is 0..9)
-  * - down 
+  * - down
     - Shutdown |product_name| server
   * - exec <script> [<params>]
     - Executes NXSL script from script library
@@ -306,7 +306,7 @@ Server commands
     - Show forwarding database for node
   * - show flags
     - Show internal server flags
-  * - show index <index> 
+  * - show index <index>
     - Show internal index
   * - show modules
     - Show loaded server modules
@@ -332,7 +332,7 @@ Server commands
     - Display watchdog information
   * - trace <node1> <node2>
     - Show network path trace between two nodes
-    
+
 
 Configuring self-monitoring
 ===========================
@@ -344,8 +344,8 @@ Database connection pool
 ICMP proxy
 ==========
 
-To used ICMP proxy Ping subagent should be loaded for ICMP proxy node. 
+To used ICMP proxy Ping subagent should be loaded for ICMP proxy node.
 
-This proxy is used to check node availability when :ref:`Zones <zones>` are used. 
+This proxy is used to check node availability when :ref:`Zones <zones>` are used.
 
 .. figure:: _images/node_communications_tab.png

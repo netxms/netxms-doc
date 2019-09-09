@@ -28,7 +28,7 @@ sending interface for server core. The following drivers are provided by default
      - Driver for websms.ru service (`<https://websms.ru>`_).
 
 To load SMS driver set server configuration parameter :guilabel:`SMSDriver` to name of SMS driver module. On startup
-SMS driver read it's configuration from server configuration parameter :guilabel:`SMSDrvConfig`. Meaning of that
+SMS driver reads it's configuration from server configuration parameter :guilabel:`SMSDrvConfig`. Meaning of that
 parameter is driver dependent and described separately for each driver.
 
 Generic GSM modem driver
@@ -187,8 +187,8 @@ Agent configuration file (nxagentd.conf)
      - Enable (yes) or disable (no) creation of agent's crash dumps. Windows only
      - no
    * - DataDirectory
-     - Directory where additional agent filws will be stored. Like policies files, local agent database, etc.
-     - Default value varey dependin on platform. Windows: %NETXMS_HOME%\\var, Linux: /var/lib/netxms or %NETXMS_HOME%/var/lib/netxms.
+     - Directory where additional agent files will be stored. Like policies files, local agent database, etc.
+     - Default value vary depending on platform. Windows: %NETXMS_HOME%\\var, Linux: /var/lib/netxms or %NETXMS_HOME%/var/lib/netxms.
    * - DailyLogFileSuffix
      - Log file name suffix used when ``LogRotationMode`` is set to 1 (daily), can contain `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_ macros
      - %Y%m%d
@@ -197,7 +197,7 @@ Agent configuration file (nxagentd.conf)
      - 0
    * - DebugTags
      - Set agent debug logging level (0 - 9) for exact log tag or log tag mask. Value of 0 turns off debugging, 9 enables very detailed logging. Configuration should look like ``debugTag:logLevel`` (like ``db.conn:6``). To configure multiple log tags, you should use multiple DebugTags parameters or write them coma separated (like ``proc.spexec:8,tunnel.*:4,db.conn:6``).
-     - 
+     -
    * - DisabeIPv4
      - Disables (yes) or enables(no) IPv4 support.
      - no
@@ -255,7 +255,7 @@ Agent configuration file (nxagentd.conf)
      - No defaults
    * - ExternalParameterShellExec
      - ExternalParameterShellExec has same meaning as ExternalParameter with exception that
-       agent will use shell to execute specified command instead of system process exeution
+       agent will use shell to execute specified command instead of system process execution
        API. This difference presented only on Windows system, on other systems
        ExternalParameter and ExternalParameterShellExec behaves identically.
      -
@@ -406,7 +406,7 @@ Server configuration file (netxmsd.conf)
     - 0
   * - DebugTags
     - Set server debug logging level (0 - 9) for exact log tag or log tag mask. Value of 0 turns off debugging, 9 enables very detailed logging. Configuration should look like ``debugTag:logLevel`` (like ``agent.tunnel.*:4``). To configure multiple log tags, you should use multiple DebugTags parameters or write them coma separated (like ``crypto.*:8,agent.tunnel.*:4``).
-    - 
+    -
   * - DumpDirectory
     - Directory for storing crash dumps.
     - "/" or "C:\"
@@ -504,7 +504,7 @@ These parameters can be changed in
     - No
   * - AlarmSummaryEmailRecipients
     - A semicolon separated list of e-mail addresses to which the alarm summary will be sent.
-    - 
+    -
     - No
   * - AlarmSummarySchedule
     - Schedule for sending alarm summary e-mails in cron format.
@@ -857,7 +857,7 @@ These parameters can be changed in
     -
     - No
   * - LdapUserClass
-    - There is specified which object class represents user objects. If found entry will not be of a user ot group class, it will be just ignored.
+    - There is specified which object class represents user objects. If found entry will not be of a user or group class, it will be just ignored.
     -
     - No
   * - LdapUserDeleteAction
@@ -929,7 +929,7 @@ These parameters can be changed in
     - 1
     - Yes
   * - PollerThreadPoolBaseSize
-    - This parameter represents base thread pool size. From this pool will be taken threads for all types of polls: Status poll, 
+    - This parameter represents base thread pool size. From this pool will be taken threads for all types of polls: Status poll,
       Configuration poll, etc. except DCI collection(:guilabel:`NumberOfDataCollectors`). This is minimal number of threads that will always run.
     - 10
     - Yes
@@ -1294,10 +1294,10 @@ nxappget
 
 nxapush
 -------
-This tool has same usage as nxpush, but it sends data throught local agent.
+This tool has same usage as nxpush, but it sends data through local agent.
 
 When new version of |product_name| is released - version of server protocol is
-changed. Change of version affects on server comunication with other tools
+changed. Change of version affects on server communication with other tools
 like nxpush. So after each server update nxpush tool also should be updated.
 In case of usage nxapush - only agent should be updated as this tool uses agent
 protocol to send data.
@@ -1327,12 +1327,12 @@ This tool is intended to get values of :term:`Metric` from |product_name| agent.
 Syntax:
 
 .. code-block:: shell
-   
+
    nxget [options] host [parameter [parameter ...]]
-   
-Where *host* is the name or IP address of the host running NetXMS agent; and 
-*parameter* is aparameter or list name, depending on given options. By default, 
-nxget will attempt to retrieve thevalue of one given parameter, unless given 
+
+Where *host* is the name or IP address of the host running NetXMS agent; and
+*parameter* is a parameter or a list name, depending on given options. By default,
+nxget will attempt to retrieve the value of one given parameter, unless given
 options override it.
 
 Valid options for nxget
@@ -1345,75 +1345,75 @@ Valid options for nxget
 
   * - Option
     - Description
-  * - -a auth     
+  * - -a auth
     - Authentication method. Valid methods are "none",
                   "plain", "md5" and "sha1". Default is "none".
-  * - -A auth     
+  * - -A auth
     - Authentication method for proxy agent.
-  * - -b          
+  * - -b
     - Batch mode - get all parameters listed on command line.
-  * - -C          
+  * - -C
     - Get agent's configuration file
   * - -d delimiter
     - Print table content as delimited text.
-  * - -D level    
+  * - -D level
     - Set debug level (default is 0).
-  * - -e policy   
+  * - -e policy
     - Set encryption policy. Possible values are:
-    
+
                     0 = Encryption disabled;
                     1 = Encrypt connection only if agent requires encryption;
                     2 = Encrypt connection if agent supports encryption;
                     3 = Force encrypted connection;
-                    
+
                   Default value is 1.
-  * - -E file     
+  * - -E file
     - Take screenshot. First parameter is file name, second (optional) is session name.
-  * - -h          
+  * - -h
     - Display help and exit.
-  * - -i seconds  
-    - Get specified parameter(s) continously with given interval.
-  * - -I          
+  * - -i seconds
+    - Get specified parameter(s) continuously with given interval.
+  * - -I
     - Get list of supported parameters.
-  * - -K file     
+  * - -K file
     - Specify server's key file
                   (default is /opt/netxms/var/lib/netxms/.server_key).
-  * - -l          
+  * - -l
     - Requested parameter is a list.
-  * - -n          
+  * - -n
     - Show parameter's name in result.
-  * - -o proto    
+  * - -o proto
     - Protocol number to be used for service check.
-  * - -O port     
+  * - -O port
     - Proxy agent's port number. Default is 4700.
-  * - -p port     
+  * - -p port
     - Agent's port number. Default is 4700.
-  * - -P port     
-    - Network service port (to be used wth -S option).
-  * - -r string   
+  * - -P port
+    - Network service port (to be used with -S option).
+  * - -r string
     - Service check request string.
-  * - -R string   
+  * - -R string
     - Service check expected response string.
-  * - -s secret   
+  * - -s secret
     - Shared secret for authentication.
-  * - -S addr     
+  * - -S addr
     - Check state of network service at given address.
-  * - -t type     
+  * - -t type
     - Set type of service to be checked.
                   Possible types are    - custom, ssh, pop3, smtp, ftp, http, https, telnet.
-  * - -T          
+  * - -T
     - Requested parameter is a table.
-  * - -v          
+  * - -v
     - Display version and exit.
-  * - -w seconds  
+  * - -w seconds
     - Set command timeout (default is 5 seconds).
-  * - -W seconds  
+  * - -W seconds
     - Set connection timeout (default is 30 seconds).
-  * - -X addr     
+  * - -X addr
     - Use proxy agent at given address.
-  * - -Z secret   
+  * - -Z secret
     - Shared secret for proxy agent authentication.
-    
+
 Examples
 ~~~~~~~~
 
@@ -1423,39 +1423,39 @@ Get value of *Agent.Version* metric from agent at host 10.0.0.2:
 .. code-block:: shell
 
    nxget 10.0.0.2 Agent.Version
-   
-Get value of *Agent.Uptime* and *System.Uptime* parameters in one request, with output inparameter = value form:
+
+Get value of *Agent.Uptime* and *System.Uptime* parameters in one request, with output in parameter = value form:
 
 .. code-block:: shell
 
    nxget –bn 10.0.0.2 Agent.Uptime System.Uptime
-   
+
 Get agent configuration file from agent at host 10.0.0.2:
 
 .. code-block:: shell
 
    nxget –C 10.0.0.2
-   
-Get value of *System.PlatformName* parameter from agent at host 10.0.0.2, connecting via proxyagent at 172.16.1.1:
+
+Get value of *System.PlatformName* parameter from agent at host 10.0.0.2, connecting via proxy agent at 172.16.1.1:
 
 .. code-block:: shell
 
    nxget –X 172.16.1.1 10.0.0.2 System.PlatformName
-   
+
 Get value of *Agent.SupportedParameters* enum from agent at host 10.0.0.10, forcing use of encrypted connection:
 
 .. code-block:: shell
 
    nxget –e 3 –l 10.0.0.10 Agent.SupportedParameters
-   
+
 Check POP3 service at host 10.0.0.4 via agent at host 172.16.1.1:
 
 .. code-block:: shell
 
    nxget –S 10.0.0.4 –t 2 –r user:pass 172.16.1.1
 
-Usefull lists for debuggind purpose
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Useful lists for debugging purpose
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 .. list-table::
@@ -1631,12 +1631,12 @@ Agent.IsSubagentLoaded(*)
 
 Data type: Integer
 
-Parameters: 
+Parameters:
     1. subagent name
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
-Check if given subagent is loaded. Return 1 if loaded and 0 if not. 
+Check if given subagent is loaded. Return 1 if loaded and 0 if not.
 
 
 Agent.LastTrapTime
@@ -1732,7 +1732,7 @@ Number of syslog messages received by agent
 Agent.SyslogProxy.QueueSize
 ---------------------------
 
-Data type: Unsigned Integer 
+Data type: Unsigned Integer
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
@@ -1742,46 +1742,46 @@ Agent syslog proxy queue size
 Agent.ThreadPool.ActiveRequests(*)
 ----------------------------------
 
-Data type: Unsigned Integer 
+Data type: Unsigned Integer
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
     1. Thread pool name. Possible options: MAIN, AGENT, POLLERS, SCHEDULER
 
-Count of active requests for specified agent thread pool. 
+Count of active requests for specified agent thread pool.
 
 
 Agent.ThreadPool.CurrSize(*)
 ----------------------------
 
-Data type: Unsigned Integer 
+Data type: Unsigned Integer
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
     1. Thread pool name. Possible options: MAIN, AGENT, POLLERS, SCHEDULER
 
-Current size of specified agent thread pool. 
+Current size of specified agent thread pool.
 
 
 Agent.ThreadPool.Load(*)
 ------------------------
 
-Data type: Unsigned Integer 
+Data type: Unsigned Integer
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
     1. Thread pool name. Possible options: MAIN, AGENT, POLLERS, SCHEDULER
 
-Current load of specified agent thread pool. It's active requests deviced by current thread count in precent. 
+Current load of specified agent thread pool. It's active requests deviced by current thread count in precent.
 
 
 Agent.ThreadPool.LoadAverage(*)
 -------------------------------
 
-Data type: Unsigned Integer 
+Data type: Unsigned Integer
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
@@ -1795,7 +1795,7 @@ Active request moving average load of specified agent thread pool for last minut
 Agent.ThreadPool.LoadAverage5(*)
 --------------------------------
 
-Data type: Unsigned Integer 
+Data type: Unsigned Integer
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
@@ -1809,7 +1809,7 @@ Active request moving average of specified agent thread pool for last 5 minutes.
 Agent.ThreadPool.LoadAverage15(*)
 ---------------------------------
 
-Data type: Unsigned Integer 
+Data type: Unsigned Integer
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
@@ -1823,7 +1823,7 @@ Active request moving average load of specified agent thread pool for last 15 mi
 Agent.ThreadPool.MaxSize(*)
 ---------------------------
 
-Data type: Unsigned Integer 
+Data type: Unsigned Integer
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
@@ -1836,7 +1836,7 @@ Maximum size of specified agent thread pool.
 Agent.ThreadPool.MinSize(*)
 ---------------------------
 
-Data type: Unsigned Integer 
+Data type: Unsigned Integer
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
@@ -1849,14 +1849,14 @@ Maximum size of specified agent thread pool.
 Agent.ThreadPool.Usage(*)
 -------------------------
 
-Data type: Unsigned Integer 
+Data type: Unsigned Integer
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
     1. Thread pool name. Possible options: MAIN, AGENT, POLLERS, SCHEDULER
 
-Current usage of specified agent thread pool. It's current thread count devided by max thread count in percent.
+Current usage of specified agent thread pool. The value is equal to current thread count divided by max thread count in percent.
 
 
 Agent.TimedOutRequests
@@ -1886,7 +1886,7 @@ Data type: Unsigned Integer
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
-Number of seconds since agentks start
+Number of seconds since agent start
 
 
 Agent.Version
@@ -2315,7 +2315,7 @@ Data type: String
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
-Next hop for given destination address accoring to host's routing table
+Next hop for given destination address according to host's routing table
 
 
 Net.RemoteShareStatus(*)
@@ -2388,7 +2388,7 @@ Parameters:
      machine name.
   2. Optional second argument specifies if counter requires two samples to calculate
      value (typical example of such counters is CPU utilization). Two samples will be
-     taken if ts set to 1.
+     taken if this argument is set to 1.
 
 Current value of given PDH counter.
 
@@ -2427,9 +2427,8 @@ Parameters:
   1. Process name
   2. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  3. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  3. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 Number of processes matching filter
 
@@ -2453,9 +2452,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 Total execution time for process
 
@@ -2479,9 +2477,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 GDI objects used by process
 
@@ -2505,9 +2502,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 
 Process.IO.OtherOp(*)
@@ -2529,9 +2525,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 
 Process.IO.ReadB(*)
@@ -2553,9 +2548,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 
 Process.IO.ReadOp(*)
@@ -2577,9 +2571,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 
 Process.IO.WriteB(*)
@@ -2601,9 +2594,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 
 Process.IO.WriteOp(*)
@@ -2625,9 +2617,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 
 Process.KernelTime(*)
@@ -2649,9 +2640,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 Total execution time in kernel mode for process
 
@@ -2675,9 +2665,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 Page faults for process
 
@@ -2701,9 +2690,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 Number of system calls made by process
 
@@ -2727,9 +2715,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 Number of threads in process
 
@@ -2753,9 +2740,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 USER objects used by process
 
@@ -2779,9 +2765,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 Total execution time in user mode for process
 
@@ -2805,9 +2790,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 Virtual memory used by process
 
@@ -2831,9 +2815,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression,
-     that should match wnd argument. If not set it means "match any". Process's window
-     title can be checked only on Windows platform.
+  4. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 Physical memory used by process
 
@@ -2878,7 +2861,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 CPU load average for last minute
 
 .. note::
-  On Windows this metric is provided by winpref subagent
+  On Windows this metric is provided by winperf subagent
 
 System.CPU.LoadAvg5
 -------------------
@@ -2890,7 +2873,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 CPU load average for last 5 minutes
 
 .. note::
-  On Windows this metric is provided by winpref subagent
+  On Windows this metric is provided by winperf subagent
 
 System.CPU.LoadAvg15
 --------------------
@@ -2902,7 +2885,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 CPU load average for last 15 minutes
 
 .. note::
-  On Windows this metric is provided by winpref subagent
+  On Windows this metric is provided by winperf subagent
 
 System.CPU.Usage
 ----------------
@@ -2914,7 +2897,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX
 Average CPU usage for last minute (percents, all CPUs)
 
 .. note::
-  On Windows this metric is provided by winpref subagent
+  On Windows this metric is provided by winperf subagent
 
 System.CPU.Usage(*)
 -------------------
@@ -2929,7 +2912,7 @@ Parameters:
 Average CPU usage for last minute (percents, specific CPU)
 
 .. note::
-  On Windows this metric is provided by winpref subagent
+  On Windows this metric is provided by winperf subagent
 
 System.CPU.Usage5
 -----------------
@@ -2941,7 +2924,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX
 Average CPU usage for last 5 minutes (percents, all CPUs)
 
 .. note::
-  On Windows this metric is provided by winpref subagent
+  On Windows this metric is provided by winperf subagent
 
 System.CPU.Usage5(*)
 --------------------
@@ -2956,7 +2939,7 @@ Parameters:
 Average CPU usage for last 5 minutes (percents, specific CPU)
 
 .. note::
-  On Windows this metric is provided by winpref subagent
+  On Windows this metric is provided by winperf subagent
 
 System.CPU.Usage15
 ------------------
@@ -2968,7 +2951,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX
 Average CPU usage for last 15 minutes (percents, all CPUs)
 
 .. note::
-  On Windows this metric is provided by winpref subagent
+  On Windows this metric is provided by winperf subagent
 
 System.CPU.Usage15(*)
 ---------------------
@@ -2983,7 +2966,7 @@ Parameters:
 Average CPU usage for last 15 minutes (percents, specific CPU)
 
 .. note::
-  On Windows this metric is provided by winpref subagent
+  On Windows this metric is provided by winperf subagent
 
 System.CPU.Usage.Idle
 ---------------------
@@ -3613,8 +3596,8 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX
 Average disk queue length for last minute
 
 .. note::
-  On Windows this metric is provided by winpref subagent
-  
+  On Windows this metric is provided by winperf subagent
+
 
 System.IO.DiskQueue(*)
 ----------------------
@@ -3639,8 +3622,8 @@ Supported Platforms: Windows, Linux
 Average disk busy time for last minute (percents)
 
 .. note::
-  On Windows this metric is provided by winpref subagent
-  
+  On Windows this metric is provided by winperf subagent
+
 
 System.IO.DiskTime(*)
 ---------------------
@@ -4034,4 +4017,4 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 Number of seconds since system boot
 
 .. note::
-  On Windows this metric is provided by winpref subagent
+  On Windows this metric is provided by winperf subagent

@@ -42,7 +42,7 @@ When loaded, PING subagent adds the following parameters to agent:
 |                                         | name specified in Target configuration record (see below).                                          |
 +-----------------------------------------+-----------------------------------------------------------------------------------------------------+
 | Icmp.Ping(*target*, *timeout*, *psize*) | ICMP ping response time from *target*. Agent will send echo request as soon as it receives          |
-|                                         | request for paramter's value, and will return response time for that particular request. Argument   |
+|                                         | request for parameter's value, and will return response time for that particular request. Argument  |
 |                                         | *target* should be an IP address. Optional argument *timeout* specifies timeout in milliseconds.    |
 |                                         | Default timeout is 1 second. Optional argument *psize* specifies packet size in bytes, including    |
 |                                         | IP header. If this argument is omitted, value from DefaultPacketSize configuration parameter        |

@@ -8,33 +8,33 @@ Scripting
 Scripting library
 =================
 
-:guilabel:`Script Library` is used to store scripts that can be afterwards executed as macros, 
-part of other script or just from server console. Scripts can be added, deleted and modified in 
-in this view. 
+:guilabel:`Script Library` is used to store scripts that can be afterwards executed as macros,
+part of other script or just from server console. Scripts can be added, deleted and modified in
+in this view.
 
-.. figure:: _images/script_librarry.png
+.. figure:: _images/script_library.png
 
 
 Usage
 -----
 
-Scripts from Script Librarry can be accesed as: 
+Scripts from Script Library can be accessed as:
   1. a macros $[\ `scriptName`\ ]
   2. used in other script in format: "use `scriptName`\ "
-  3. executed from server console "execute `scriptName`\ " 
-  4. executed as post action for pols - then script name should start from "`Hook::`\ " and then 
+  3. executed from server console "execute `scriptName`\ "
+  4. executed as post action for pols - then script name should start from "`Hook::`\ " and then
      should be name of poll like "Hook::ConfigurationPoll".
-     
-     
+
+
 .. _execute_server_script:
-     
+
 Execute Server Script
 =====================
 
-This view allows to execute arbitrary script. Script can be manually created just before execution, 
-and afterwards saved, can be taken from the script library, can be used modified script form the 
-script library and afterwards saved or saved as. If this view is opened on a node, then in the 
-script is available ``$node`` variable with node object. 
+This view allows to execute arbitrary script. Script can be manually created just before execution,
+and afterwards saved, can be taken from the script library, can be used modified script form the
+script library and afterwards saved or saved as. If this view is opened on a node, then in the
+script is available ``$node`` variable with node object.
 
 .. figure:: _images/execute_server_script.png
 
@@ -73,7 +73,7 @@ Syntactically, NXSL looks similar to Perl or C. Here's simple NXSL program:
 This program will print word ``Hello`` on screen.
 
 Also, keep in mind that you are free to choose your own formatting style. E.g.
-the above could have been written as: 
+the above could have been written as:
 
 .. code-block:: c
 
@@ -108,7 +108,7 @@ Now onto next line:
 
 This is a function definition. A function is a part of a program that can be
 called by other parts of the program. A function definition always has the
-following form: 
+following form:
 
 
     **sub** *name* **(** *parameters* **)**
@@ -138,7 +138,7 @@ standard output with carriage return, and ``"Hello!"`` is a string we want to
 print. Please note semicolon at the end of line – it's a separator between
 operators. Each operator should end with semicolon.
 
-The next, and final, line of our small program is: 
+The next, and final, line of our small program is:
 
 .. code-block:: c
 
@@ -154,7 +154,7 @@ NXSL handles script entry in 2 ways:
 
     * Explicit main() function
     * Implicit $main() fucntion
-    
+
 If an explicitelly defined main() exists, it will be called.
 
 
@@ -177,9 +177,9 @@ runtime error.
 NXSL supports the following variable types:
 
 - integer (32 bit),
-- unsigned integer (32 bit), 
-- integer (64 bit), unsigned integer (64 bit), 
-- floating-point number, 
+- unsigned integer (32 bit),
+- integer (64 bit), unsigned integer (64 bit),
+- floating-point number,
 - string,
 - array,
 - object.
@@ -218,7 +218,7 @@ Variables
 
 Variables in NXSL behave the same way as variables in most popular programming
 languages (C, C++, etc.) do, but in NXSL you don't have to declare variables
-before you use them. 
+before you use them.
 
 Scope of a variable can be either global (visible in any function in the
 script) or local (visible only in the function within which it was defined).
@@ -231,7 +231,7 @@ For example:
 
    x = 1;
    myFunction();
-   
+
    sub myFunction()
    {
       println "x=" . x;
@@ -246,7 +246,7 @@ produce expected result (prints ``x=1``):
 
    global x = 1;
    myFunction();
-   
+
    sub myFunction()
    {
       println "x=" . x;
@@ -347,7 +347,7 @@ An array in NXSL is actually an ordered map. A map is a type that associates
 ``values`` to ``keys``. This type is optimized for several different uses; it
 can be treated as an array, list (vector), hash table (an implementation of a
 map), dictionary, collection, stack, queue, and probably more. As array values
-can be other arrays. 
+can be other arrays.
 
 A ``key`` must be a non-negative integer. When an array is created, its size is
 not specified and its map can have empty spots in it. For example, an array can
@@ -372,27 +372,27 @@ This statement will create empty array and assign reference to it to variable ``
 
    array a;
 
-You can then assign values to the array like this. 
+You can then assign values to the array like this.
 
 Please note arrays in NXSL are sparse, so you can have elements with nothing in between.
 
 .. code-block:: c
 
-    array a; 
+    array a;
     a[1] = 1;
     a[2] = 2;
-    a[260] = 260;    
+    a[260] = 260;
     println(a[1]); // will print 1
 
 Second way is to use %( ) construct to create array already populated with values.
 
 This statement will create array with four elements at positions 0, 1, 2, and 3, and assign reference to this array to variable a.
-    
+
 .. code-block:: c
 
     // no need to use "array a;" here, since we are creating it dirrectly
     a = %(1, 2, 3, 4);
-    
+
     println(a[0]); // will actually print 1, since 1 is the 0th member
 
 
@@ -436,16 +436,16 @@ Arithmetic Operators
 
 The division operator (``/``) returns a float value unless the two operands are
 integers (or strings that get converted to integers) and the numbers are evenly
-divisible, in which case an integer value will be returned. 
+divisible, in which case an integer value will be returned.
 
-Calling modulus on float operands will yield runtime error. 
+Calling modulus on float operands will yield runtime error.
 
 
 Assignment Operator
 ~~~~~~~~~~~~~~~~~~~
 
 The assignment operator is ``=``, which means that the left operand gets set to
-the value of the expression on the rights (that is, "gets set to"). 
+the value of the expression on the rights (that is, "gets set to").
 
 
 Bitwise Operators
@@ -483,7 +483,7 @@ Bitwise Operators
 Comparison Operators
 ~~~~~~~~~~~~~~~~~~~~
 
-Comparison operators allow you to compare two values. 
+Comparison operators allow you to compare two values.
 
 .. list-table::
    :header-rows: 1
@@ -530,7 +530,7 @@ Comparison operators allow you to compare two values.
 Incrementing/Decrementing Operators
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-NXSL supports C-style pre- and post-increment and decrement operators. 
+NXSL supports C-style pre- and post-increment and decrement operators.
 
 .. list-table::
    :header-rows: 1
@@ -591,7 +591,7 @@ assignment, a function call, a loop, a conditional statement or even a
 statement that does nothing (an empty statement). Statements usually end with a
 semicolon. In addition, statements can be grouped into a statement-group by
 encapsulating a group of statements with curly braces. A statement-group is a
-statement by itself as well. The various statement types are supported: 
+statement by itself as well. The various statement types are supported:
 
 - if
 - else
@@ -608,7 +608,7 @@ statement by itself as well. The various statement types are supported:
 if
 ~~
 
-The ``if`` construct is one of the most important features of many languages. It allows for conditional execution of code fragments. NXSL features an ``if`` structure that is similar to that of C: 
+The ``if`` construct is one of the most important features of many languages. It allows for conditional execution of code fragments. NXSL features an ``if`` structure that is similar to that of C:
 
 .. code-block:: c
 
@@ -629,7 +629,7 @@ while
 ~~~~~
 
 ``while`` loops are the simplest type of loop in NXSL. They behave just like
-their C counterparts. The basic form of a ``while`` statement is: 
+their C counterparts. The basic form of a ``while`` statement is:
 
 
 .. code-block:: c
@@ -661,7 +661,7 @@ for
 ~~~
 
 ``for`` loops are the most complex loops in NXSL. They behave like their C
-counterparts. The syntax of a ``for`` loop is: 
+counterparts. The syntax of a ``for`` loop is:
 
 
 .. code-block:: c
@@ -670,11 +670,11 @@ counterparts. The syntax of a ``for`` loop is:
        statement
 
 The first expression (``expr1``) is evaluated (executed) once unconditionally
-at the beginning of the loop. 
+at the beginning of the loop.
 
 In the beginning of each iteration, ``expr2`` is evaluated. If it evaluates to
 ``TRUE``, the loop continues and the nested statement(s) are executed. If it
-evaluates to ``FALSE``, the execution of the loop ends. 
+evaluates to ``FALSE``, the execution of the loop ends.
 
 At the end of each iteration, ``expr3`` is evaluated (executed).
 
@@ -683,7 +683,7 @@ break
 ~~~~~
 
 ``break`` ends execution of the current ``for``, ``while``, ``do-while`` or
-``switch`` structure. 
+``switch`` structure.
 
 
 continue
@@ -691,7 +691,7 @@ continue
 
 ``continue`` is used within looping structures to skip the rest of the current
 loop iteration and continue execution at the condition evaluation and then the
-beginning of the next iteration. 
+beginning of the next iteration.
 
 
 switch
@@ -707,7 +707,7 @@ Example:
 
 .. code-block:: c
 
-     switch (input) 
+     switch (input)
      {
        case "1":
          trace(0,"Input is 1");
@@ -740,7 +740,7 @@ Expressions
 -----------
 
 The simplest yet most accurate way to define an expression is "anything that
-has a value". 
+has a value".
 
 The most basic forms of expressions are constants and variables. When you type
 ``a = 5``, you're assigning ``5`` into ``a``. ``5``, obviously, has the value
@@ -748,11 +748,11 @@ The most basic forms of expressions are constants and variables. When you type
 ``5`` is an integer constant).
 
 Slightly more complex examples for expressions are functions. Functions are
-expressions with the value of their return value. 
+expressions with the value of their return value.
 
 NXSL supports the following value types: integer values, floating point values
 (float), string values and arrays. Each of these value types can be assigned
-into variables or returned from functions. 
+into variables or returned from functions.
 
 
 Another good example of expression orientation is pre- and post-increment and
@@ -770,7 +770,7 @@ A very common type of expressions are comparison expressions. These expressions
 evaluate to either ``FALSE`` or ``TRUE``. NXSL supports ``>`` (bigger than),
 ``>=`` (bigger than or equal to), ``=`` (equal), ``!=`` (not equal), ``<``
 (less than) and ``<=`` (less than or equal to). These expressions are most
-commonly used inside conditional execution, such as ``if`` statements. 
+commonly used inside conditional execution, such as ``if`` statements.
 
 The last example of expressions is combined operator-assignment expressions.
 You already know that if you want to increment ``a`` by 1, you can simply write
@@ -804,7 +804,7 @@ the following example:
 
 .. code-block:: c
 
-   if ((x != null) && ((trim(x) == "abc") || (long_running_test(x)))  
+   if ((x != null) && ((trim(x) == "abc") || (long_running_test(x)))
       do_something();
 
 Without short-circuit evaluation, ``trim(x)`` would cause run-time error if
@@ -828,28 +828,28 @@ Classes list
 NXShell
 =======
 
-NxShell is based on Jython and provide access to |product_name| Java API using interactive 
+NxShell is based on Jython and provide access to |product_name| Java API using interactive
 shell. NxShell is build as single jar file, which includes all required libraries.
 
-Download: http://www.netxms.org/download/nxshell-VERSION.jar 
+Download: http://www.netxms.org/download/nxshell-VERSION.jar
 (example: http://www.netxms.org/download/nxshell-1.2.13.jar)
 
 Usage
 -----
 
-There are two options of this jar usage: 
+There are two options of this jar usage:
 
   1. it can be started as interactive shell;
 
      :command:`java -jar nxshell-1.2.15.jar`
 
-  2. it can be started with the script name as a first parameter. Then it will just 
-     execute this script and exit. Example: 
+  2. it can be started with the script name as a first parameter. Then it will just
+     execute this script and exit. Example:
 
      :command:`java -jar nxshell-1.2.15.jar test.py`
 
-When NxShell is started, it tries to get server IP, login and password from Java 
-properties. In interactive mode, user will be asked for details, otherwise 
+When NxShell is started, it tries to get server IP, login and password from Java
+properties. In interactive mode, user will be asked for details, otherwise
 default values will be used.
 
 Start as interactive shell, with IP and Login provided (password will be asked):
@@ -859,7 +859,7 @@ Start as interactive shell, with IP and Login provided (password will be asked):
 Properties
 ~~~~~~~~~~
 
-These properties should be set with JVM's "-D" option. Please make sure that all 
+These properties should be set with JVM's "-D" option. Please make sure that all
 "-D" options are before "-jar".
 
 ======================= ================
@@ -874,10 +874,10 @@ netxms.encryptSession   true
 Scripting
 ---------
 
-For details on API please refer to javadoc at 
+For details on API please refer to javadoc at
 http://www.netxms.org/documentation/javadoc/latest/.
 
-NxShell provide user with already connected and synchronised session to simplify 
+NxShell provide user with already connected and synchronised session to simplify
 scripting. Most required packages are imported as well to minimize typing.
 
 
@@ -887,7 +887,7 @@ Global Variables
 =============== ================================ =====================
 Variable        Type                             Notes
 =============== ================================ =====================
-session         org.netxms.client.NXCSession    
+session         org.netxms.client.NXCSession
 s               org.netxms.client.NXCSession     Alias for "session"
 =============== ================================ =====================
 
@@ -897,7 +897,7 @@ Helper Functions
 Example
 ~~~~~~~
 
-More examples can be found on a 
+More examples can be found on a
 `|product_name| wiki <https://wiki.netxms.org/wiki/Using_nxshell_to_automate_bulk_operations>`_.
 
 .. code-block:: python
@@ -906,7 +906,7 @@ More examples can be found on a
   cd = NXCObjectCreationData(objects.GenericObject.OBJECT_CONTAINER, "Sample Container", parentId);
   containerId = session.createObject(cd) # createObject return ID of newly created object
   print '"Sample Container" created, id=%d' % (containerId, )
-  
+
   flags = NXCObjectCreationData.CF_DISABLE_ICMP | \
           NXCObjectCreationData.CF_DISABLE_NXCP | \
           NXCObjectCreationData.CF_DISABLE_SNMP
@@ -917,5 +917,3 @@ More examples can be found on a
       cd.setPrimaryName("0.0.0.0") # Create node without IP address
       nodeId = session.createObject(cd)
       print '"%s" created, id=%d' % (name, nodeId)
-
-

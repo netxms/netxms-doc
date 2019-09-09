@@ -10,8 +10,8 @@ Data and Network visualisation
 Network maps
 ============
 
-Network map objects can be found in "Object browser" under "Network Maps". There can be 
-created and deleted maps and map groups. Maps can be organized in groups. 
+Network map objects can be found in "Object browser" under "Network Maps". There can be
+created and deleted maps and map groups. Maps can be organized in groups.
 
 .. figure:: _images/Network_maps_in_object_browser.png
 
@@ -22,13 +22,13 @@ There are 3 types of map that can be created:
    * Custom - will be created empty map.
    * Layer 2 Topology - will create map(if possible) with layer 2 topology of selected object.
    * IP Topology - will create map with known IP Topology of selected object. (More about network topology can be found there :ref:`topology`)
-  
+
 
 Type of created map affects only on initial map setup.
 
 Edit Maps
 ---------
-   
+
 .. figure:: _images/network_map_menu.png
 
 Adding Objects
@@ -36,7 +36,7 @@ Adding Objects
 
 Objects to map can be added in tow ways:
    1. Just drag and drop object to map from object browser.
-   2. "Add object..." from menu. 
+   2. "Add object..." from menu.
 
 To remove object from map:
    * Select object, right click and select "Remove from map" option.
@@ -44,13 +44,13 @@ To remove object from map:
 Adding Links between Objects
 ----------------------------
 
-Objects can be linked with a line. 
+Objects can be linked with a line.
 
 
 To link objects:
-   * Select two of objects with help of CTRL button and press "Link selected objects" button. 
+   * Select two of objects with help of CTRL button and press "Link selected objects" button.
 
-.. figure:: _images/network_map_top_menue.png
+.. figure:: _images/network_map_top_menu.png
 
 To remove the link:
    * Select line, right click and select "Remove from map" option.
@@ -64,10 +64,10 @@ Select line, right click and select "Properties".
 There can be configured:
    * Line name
    * Line comments shown near each connected object
-   * Line colour 
+   * Line color
       * Default - grey
       * Based on object status - object should be selected
-      * Custom colour
+      * Custom color
    * Routing algorithm
       * Map Default - will be taken default selection for whole map
       * Direct - straight line without bend points
@@ -75,7 +75,7 @@ There can be configured:
       * Bend points - bend point can be done manually with double click on the line (can be used to do dual link)
    * Data Source(there can be configured DCI values and text near them that will be displayed on a link)
       * For each Data Source can be configured: Data collection item,  name,  java format string(like "Text: %.4f", syntax http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax),  in case of table DCI also column and instance
-       
+
 Example of DCI data displayed on a link:
 
 .. figure:: _images/link_dci_data.png
@@ -83,11 +83,11 @@ Example of DCI data displayed on a link:
 Decorations
 -----------
 
-To map can be added also decorations like picture and group box. 
-To add picture it should be uploaded to "Image Library" before. 
+Decorations like picture and group box can be added to maps.
+To add picture it should be previously be uploaded to "Image Library".
 
 
-Creating group box you should specify it's size, colour and name. 
+When creating group box you should specify it's size, color and name.
 
 
 .. figure:: _images/network_map_decorations.png
@@ -95,20 +95,20 @@ Creating group box you should specify it's size, colour and name.
 
 DCI Container
 -------------
-DCI Container is part of decorations. It can be used to display separate dci values 
+DCI Container is part of decorations. It can be used to display separate dci values
 on a map.
 
 .. figure:: _images/dci_container_example.png
 
 **Container properties:**
 
-   * Background colour 
-   * Text colour
-   * If border should be shown and it's colour
+   * Background color
+   * Text color
+   * If border should be shown and it's color
    * Data Source - there can be configured DCI values and text near them that will be displayed
       * For each Data Source can be configured: Data collection item,  name,  format string(like "Text: %.4f"),  in case of table DCI also column and instance
 
-More examples: 
+More examples:
 
 .. figure:: _images/dci_container_example2.png
 
@@ -123,22 +123,22 @@ DCI Image is part of decorations. It can be used to display DCI status change in
    * Column - required only for table DCI
    * Instance - required only for table DCI
    * Default image - image that will be displayed if no rule is applicable on current value
-   * Rules 
+   * Rules
       * For each rule can be configured: operation,  value,  comment and image that will be displayed if this rule is applicable
 
 Hints:
 
-To use image it should be first uploaded to image library. 
+To use image it should be first uploaded to image library.
 
 
-Rules are processed from up to down, so if you want to describe in rules 
-something like: 
+Rules are processed from up to down, so if you want to describe in rules
+something like:
 
    * DCI > 3 => image1
    * DCI > 2 => image2
    * DCI > 4 => image3
 
-They should go in this sequence:   
+They should go in this sequence:
 
    * DCI > 4 => image3
    * DCI > 3 => image1
@@ -147,17 +147,17 @@ They should go in this sequence:
 
 Object Layout and display options
 ---------------------------------
-All object layout properties and display options are applicable only on objects, 
+All object layout properties and display options are applicable only on objects,
 not on decorations.
 
 
 Grid
 ~~~~
-   * Align to grid - will move all objects to grids 
-   * Snap to grid - all objects will be moved in grids and it will not be possible to place them not inside grid. 
-   * Show grid - will show grid according to which objects are located. 
+   * Align to grid - will move all objects to grids
+   * Snap to grid - all objects will be moved in grids and it will not be possible to place them not inside grid.
+   * Show grid - will show grid according to which objects are located.
 
-.. figure:: _images/network_map_top_menue.png
+.. figure:: _images/network_map_top_menu.png
 
 
 Layout
@@ -171,12 +171,12 @@ Objects can be placed manually on a map or can be chosen one of automatic layout
 
 
 If there is chosen automatic layout, then after each refresh object best matching place
-will be recalculated. So if new object is add - it is just required to refresh map to have 
-correctly placed objects. 
+will be recalculated. So if new object is add - it is just required to refresh map to have
+correctly placed objects.
 
 
-If there is chosen manual layout, then after each object movement map should be saved, 
-to save the new place of object. 
+If there is chosen manual layout, then after each object movement map should be saved,
+to save the new place of object.
 
 
 Display object as
@@ -185,20 +185,20 @@ Display object as
    * Show status background - will display background behind object image according to it's state.
    * Show status icon - will display icon of object state near each object
    * Show status frame - will display frame around object icon according to it's state
-   * Floor plan - will display nodes as ajustable recatangles. This can be used to display hardware placment on room plan. 
+   * Floor plan - will display nodes as adjustable rectangles. This can be used to display hardware placement on room plan.
 
 
 Routing
 ~~~~~~~
 Default routing type for whole map:
-   * Direct
-   * Manhattan
+   * Direct - objects are connected by links drawn to shortest route
+   * Manhattan - objects are connected by grid-based links
 
 
 Zoom
 ~~~~
-Map can be zoomed in and out with help of top menu buttons and 
-to predefined percentage selected from menu. 
+Map can be zoomed in and out with help of top menu buttons and
+to predefined percentage selected from menu.
 
 
 Object display options
@@ -213,13 +213,13 @@ Map Background
 --------------
 It can be set background for map:
    * Colour
-   * Image - image should be uploaded to "Image Library" before. 
+   * Image - image should be uploaded to "Image Library" before.
    * Geographic Map - place on map is chose with help of zoom and coordinates
 
 
-This can be used to show object physical please on map or on building plan. 
+This can be used to show object physical please on map or on building plan.
 
-Examples: 
+Examples:
 
 .. figure:: _images/networkmap_geomap.png
    :scale: 65%
@@ -260,7 +260,7 @@ element. You will be prompted with element type selection dialog:
 
 When a new element is added, you can edit it by double-clicking on it's record in
 the elements list, or by pressing the :guilabel:`Edit` button. Each element have
-:guilabel:`Layout` property page which controls the element's layout inside the 
+:guilabel:`Layout` property page which controls the element's layout inside the
 dashboard, and one or more element type specific pages to control element's
 appearance and displayed information. The following element types are
 available:
@@ -268,7 +268,7 @@ available:
 Label
 ~~~~~
 
-Text label with configurable text and colours.
+Text label with configurable text and colors.
 
 .. figure:: _images/dashboard_labelW.png
 
@@ -317,7 +317,7 @@ Shows current status of selected object.
 Dashboard
 ~~~~~~~~~
 
-Another dashboard object (or multiple objects) rendered 
+Another dashboard object (or multiple objects) rendered
 as element of this dashboard.
 
 Network Map
@@ -328,8 +328,8 @@ Network Map
 Custom Widget
 ~~~~~~~~~~~~~
 
-Custom widget provided by third party console plugin. This options allows to 
-add widget from third party loaded plugin. 
+Custom widget provided by third party console plugin. This options allows to
+add widget from third party loaded plugin.
 
 Get Map
 ~~~~~~~
@@ -357,9 +357,9 @@ Gauge
 
 Gauge have 3 types of widgets
 
-    - Dail is radeal gauge with configurable maximum, minimum values. Scale can have fixed colour or can be separated to  3 colour configurable zones.
-    - Dar is linear gauge with configurable maximum, minimum values. Scale can have fixed colour or can be separated to  3 colour configurable zones. (Not yet implemented)
-    - Text is text gauge, that can be coloured using fixed colour, changed depending on 3 configurable colour zones or coloured using threshold colour(severity).
+    - Dial is radial gauge with configurable maximum, minimum values. Scale can have fixed color or can be separated to  3 color configurable zones.
+    - Dar is linear gauge with configurable maximum, minimum values. Scale can have fixed color or can be separated to  3 color configurable zones. (Not yet implemented)
+    - Text is text gauge, that can be colored using fixed color, changed depending on 3 configurable color zones or colored using threshold color (severity).
 
 .. figure:: _images/dashboard_gauge_3typesW.png
 
@@ -399,19 +399,25 @@ Separator, can be shown as line, box, or simply empty space.
 Table Value
 ~~~~~~~~~~~
 
-Tis widget displays table with last values of Table DCI.
+This widget displays table with last values of Table DCI.
 
 Status Map
 ~~~~~~~~~~
 
-Status map shows statuses of all objects like colourd rectangle, inside selected parent. 
+Status map has three views: Flat view, Group view and Radial view.
+
+Flat view and Group view display nodes as rectangles, using color to indicate
+their status. In Flat view nodes are displayed without grouping, whether in
+Group view nodes are grouped by containers.
 
 .. figure:: _images/dashboard_status_mapW.png
+
+Radial view displays containers and nodes as hierarchical colored radial layout.
 
 DCI Summary Table
 ~~~~~~~~~~~~~~~~~
 
-:ref:`DCI Summary Table<dci-summary-table-label>` widget provides summary DCI infromation 
+:ref:`DCI Summary Table<dci-summary-table-label>` widget provides summary DCI information
 about objects under container.
 
 .. figure:: _images/dashboard_summary_tableW.png
@@ -455,7 +461,7 @@ like following:
      - Name for this data source to be used in chart's legend. If left empty,
        DCI description will be used.
    * - Colour
-     - Allows you to define specific colour for this data source or let system
+     - Allows you to define specific color for this data source or let system
        to pick one automatically.
    * - Area chart
      - This option is valid only for line charts and toggles data source
@@ -512,7 +518,7 @@ Understanding Element Layout
 
 Dashboard uses grid concept to layout it's elements. Available space is divided
 into rows and columns, and each element occupies one or more cells. The number of
-columns is configured in dashboard object properties, and number of rows is 
+columns is configured in dashboard object properties, and number of rows is
 calculated automatically based on number of columns, elements, and
 cells occupied by each element. Elements are laid out in columns from
 left to right, and a new row is created when there are no space left for next
@@ -569,7 +575,7 @@ a loop, follow these steps:
 Tutorials
 ---------
 
-Rashboard creation tutorial available on `Youtube <http://youtu.be/ZfJQiUIDHY4>`_
+Dashboard creation tutorial available on `Youtube <http://youtu.be/ZfJQiUIDHY4>`_
 
 Graphs
 ======
@@ -615,14 +621,14 @@ is on, you will see :guilabel:`Autoupdate` message in the status bar of graph
 window.
 
 
-Change colours
---------------
+Change colors
+-------------
 
-You can change colours used to paint lines and graph elements in the graph
+You can change colors used to paint lines and graph elements in the graph
 properties dialog. To access graph properties, right-click on it, and select
 :guilabel:`Properties` from the pop-up menu. Alternatively, you can use main
 application menu: :menuselection:`Graph --> Properties`. In the properties
-dialog, click on coloured box for appropriate element to choose different colour.
+dialog, click on colored box for appropriate element to choose different color.
 
 
 Save current settings as predefined graph
@@ -715,11 +721,11 @@ Options:
    * - Show legend
      - Enable or disable the legend of the graph.
    * - Show extended legend
-     - Enable or disable the extended legent of the graph (Max, Avg, Min, Curr).
+     - Enable or disable the extended legend of the graph (Max, Avg, Min, Curr).
    * - Refresh automatically
      - Enable or disable auto-refresh.
-   * - Logaritmic scale
-     - Use the logaritmic scale for the graph.
+   * - Logarithmic scale
+     - Use the logarithmic scale for the graph.
    * - Translucent
      - Enable or disable the translucency of the graph.
    * - Show host names
@@ -783,16 +789,16 @@ values of the DCI.
 Summary table
 =============
 
-It is possible to see DCI data as a table where each line is one node and each 
-column is a DCI. It can be configured for each summary table witch DCIs should be 
-present on it. 
+It is possible to see DCI data as a table where each line is one node and each
+column is a DCI. It can be configured for each summary table witch DCIs should be
+present on it.
 
 .. figure:: _images/summary_table.png
 
 Configuration
 -------------
 
-DCI summary table can be configured in Configuration -> Summary Table. 
+DCI summary table can be configured in Configuration -> Summary Table.
 
 .. figure:: _images/configure_dci_summary_table.png
    :scale: 65%
@@ -802,15 +808,14 @@ In general part:
   - Menu path - path where this summary table can be found. You can use
     ``->`` character pair to create subtree like "Linux->System information".
   - Title - title of view.
-  
+
 In columns part:
 
-  - There are added DCI's shat should be shown on the summary table. Where 
-    Name is name of column and DCI Name is parameter of DCI. 
+  - There are added DCI's shat should be shown on the summary table. Where
+    Name is name of column and DCI Name is parameter of DCI.
 
 Usage
 -----
 
-After DCI summary table is configured it can be accessed in container 
-object(Subnet, container...) menu under "Summary tables". 
-
+After DCI summary table is configured it can be accessed in container
+object(Subnet, container...) menu under "Summary tables".

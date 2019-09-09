@@ -9,7 +9,7 @@ There are created few specialized monitoring subagents: Oracle, DB2, MongoDB. Fu
 will be described how to configure and use this subagents. Besides this there is
 opportunity to monitor also other types of databases supported by |product_name|
 server(:ref:`link to supported database list<supported-db-list>`) using database query
-suabgent as this databases support receiving performance parameters using queries.
+subagent as this databases support receiving performance parameters using queries.
 This subagent details are described in :ref:`dbquery` chapter.
 
 .. _oracle-subagent:
@@ -888,12 +888,12 @@ Informix
 
 |product_name| subagent for Informix (further referred to as Informix subagent) monitors one or more Informix databases and reports database-related parameters.
 
-All parameters available from Informix subagent gathered or calculated once per minute thus its recommended to set DCI poll interval for these items to 60 seconds or more. All parameters are obtained or derived from the data available in Informix system catalogs. Informix subagent does not monitor any of the metrics related to lower level database layers, such as database processes. Monitoring of such parameters can be achieved through the standard |product_name| functionality.
+All parameters available from Informix subagent are gathered or calculated once per minute, thus its recommended to set DCI poll interval for these items to 60 seconds or more. All parameters are obtained or derived from the data available in Informix system catalogs. Informix subagent does not monitor any of the metrics related to lower level database layers, such as database processes. Monitoring of such parameters can be achieved through the standard |product_name| functionality.
 
 Pre-requisites
 --------------
 
-An database user must have rights to Informix system catalog tables.
+A database user must have access rights to Informix system catalog tables.
 
 Configuration
 -------------
@@ -906,11 +906,11 @@ Each database definition supports the following parameters:
 .. list-table::
    :widths: 50 100
    :header-rows: 1
-   
+
    * - Parameter
      - Description
    * - Id
-     - Database identifier. It will be used to address this database in parameters.	
+     - Database identifier. It will be used to address this database in parameters.
    * - Name
      - Database name. This is a name of Informix DSN.
    * - Server
@@ -919,19 +919,19 @@ Each database definition supports the following parameters:
      - User name for connecting to database.
    * - Password
      - Database user password.
-     
+
 Configuration example:
 
 .. code-block:: cfg
 
     Subagent=informix.nsm
-    
+
     [informix]
     ID=db1
     DBName = instance1
     DBLogin = user
     DBPassword = password
-    
+
 Provided parameters
 ~~~~~~~~~~~~~~~~~~~
 
@@ -977,7 +977,7 @@ from the database with the id **1** will be returned.
      - Database id
      - DCI_DT_INT
      - Percentage of free space in the dbspace
-     
+
 
 .. _mysql-subagent:
 
@@ -987,16 +987,16 @@ MySQL
 |product_name| subagent for MySQL monitoring. Monitors one or more instances of MySQL databases and
 reports various database-related parameters.
 
-MySQL subagent requires |product_name| the MySQL driver to be available in the system. 
+MySQL subagent requires |product_name| the MySQL driver to be available in the system.
 
 Configuration
 -------------
 
-You can specify one or multiple databases in the MySQL section. In case of single database 
-definition simply set all required parameters under ``[mysql]`` section. In multi database 
-configuration define each database under ``mysql/databases/<name>`` section with unique 
-``<name>`` for each database. If no id provided ``<name>`` of the section will be used as a 
-database id. 
+You can specify one or multiple databases in the MySQL section. In case of single database
+definition simply set all required parameters under ``[mysql]`` section. In multi database
+configuration define each database under ``mysql/databases/<name>`` section with unique
+``<name>`` for each database. If no id provided ``<name>`` of the section will be used as a
+database id.
 
 
 Each database definition supports the following parameters:
@@ -1004,12 +1004,12 @@ Each database definition supports the following parameters:
 .. list-table::
    :widths: 50 200 200
    :header-rows: 1
-   
+
    * - Parameter
      - Description
      - Default value
    * - Id
-     - Database identifier. It will be used to address this database in parameters.	
+     - Database identifier. It will be used to address this database in parameters.
      - localdb - for single DB definition; last part of section name - for multi database definition
    * - Name
      - Database name. This is a name of MySQL DSN.
@@ -1021,43 +1021,43 @@ Each database definition supports the following parameters:
      - User name for connecting to database.
      - netxms
    * - Password
-     - Database user password or encypred password. To encrypt password check :ref:`nxencpasswd-tools-label` tool.
-     - 
-     
+     - Database user password or encrypted password. To encrypt password check :ref:`nxencpasswd-tools-label` tool.
+     -
+
 Single database configuration example:
 
 .. code-block:: cfg
 
     Subagent=mysql.nsm
-    
+
     [mysql]
     ID=db1
     DBName = instance1
     DBLogin = user
     DBPassword = password
-    
+
 
 Multi database configuration example:
 
 .. code-block:: cfg
 
     Subagent=mysql.nsm
-    
+
     [mysql/databases/database#1]
     ID=db1
     DBName = instance1
     DBLogin = user
     DBPassword = password
     Server = netxms.demo
-    
-    
+
+
     [mysql/databases/local]
     DBName = information_schema
     DBLogin = user
     DBPassword = encPassword
     Server = 127.0.0.1
 
-    
+
 Provided parameters
 -------------------
 

@@ -124,11 +124,11 @@ button, correct data type will be set automatically.
 Source node
 ~~~~~~~~~~~
 
-Sorce node of metrci collection. This can be used when other node provides
+Source node of metrics collection. This can be used when other node provides
 information about this node. In this way collected data can be collected and
 shown on right nodes.
 
-Othe example of usage is virtual nodes(node with IP 0.0.0.0). In this case
+Other example of usage is virtual nodes (nodes with IP 0.0.0.0). In this case
 node state can be obtained from the DCI created on this node but collected
 from the other one.
 
@@ -573,9 +573,26 @@ Instance Filter
 
 You can optionally filter out unneeded instances and transform instance names
 using filtering script written in NXSL. Script will be called for each instance
-and can return ``TRUE`` (to accept instance), ``FALSE`` (to reject instance),
-and array of two elements - first is ``TRUE`` and second is new value for
-instance name.
+and can return either a binary value or an array.
+
+If binary value is returned, it has the following meaning:
+``TRUE`` (to accept instance), ``FALSE`` (to reject instance).
+
+If an array is returned, only first element of the array is obligatory,
+the rest elements are optional (but to include an element, all preceding
+elements should be included). Array structure:
+
+======================== =======================================================
+Data type                Description
+======================== =======================================================
+Boolean                  ``TRUE`` (accept instance), ``FALSE`` (reject instance).
+String                   Instance name, that will be available as {instance} macro.
+String                   Instance user-readable description, that will be available
+                         as {instance-name} macro
+NetObj                   .. versionadded:: 3.0.0
+                         Object connected with this :term:`DCI`
+======================== =======================================================
+
 
 Performance tab
 ---------------

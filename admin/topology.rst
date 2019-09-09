@@ -16,8 +16,8 @@ network model instantly available allows |product_name| users to perform various
 network topology tasks much faster and easier.
 
 
-How topology information built
-==============================
+How topology information is built
+=================================
 
 
 Find where node is connected
@@ -56,12 +56,12 @@ Columns have the following meaning:
      - Name of interface object representing switch port
    * - Type
      - Connection type - direct or indirect. Direct connection type means that
-       |product_name| server did not detect any other devices on sdame switch port, and
+       |product_name| server did not detect any other devices on same switch port, and
        most likely end node connected directly to the switch. Indirect means
        that some other devices was detected on same switch port. Virtual
        machines and virtual machine host will always be detected as indirect.
 
-       
+
 Find MAC address
 ================
 

@@ -24,7 +24,7 @@ Agent configuration files
 =========================
 
 Agent have 3 types of configuration files: master configuration file, additional
-configuration files sroted and Agent Policies files. Master configuration file is the only mandatory file.
+configuration files and Agent Policies files. Master configuration file is the only mandatory file.
 Minimal configuration for master configuration file is server address. Address should be
 set as MasterServers to be able to apply other changes already from the server.
 
@@ -35,7 +35,7 @@ format general tag should be <config> and then can be added any agent or subagen
 parameter as a tag.
 
 .. note::
-   Right way to define section: **[sectionName]**. Previous one with asterisk is counted as dipricated: ***sectionName**.
+   Right way to define section: **[sectionName]**. Previous one with asterisk is counted as deprecated: ***sectionName**.
 
 'key = value' format example:
 
@@ -152,7 +152,7 @@ For Windows systems:
 Agent configuration options from server
 =======================================
 
-.. _edit_agent_configuration_remotly:
+.. _edit_agent_configuration_remotely:
 
 Edit configuration file remotely
 --------------------------------
@@ -169,7 +169,7 @@ Agent configuration files on server
 -----------------------------------
 
 Agent master configuration files can be stored on server side and requested by agent with
-parameter :command:`-M <serverAdress>`. On config request server goes through config list
+parameter :command:`-M <serverAddress>`. On config request server goes through config list
 from beginning till the end and one by one checks if this config is the requested one by
 executing filter scripts.
 
@@ -181,7 +181,7 @@ get new one from server - agent fails to start.
 
 .. versionadded:: 1.2.15
 
-**Doesn't wotk with tunnel agent connection**
+**Doesn't work with tunnel agent connection**
 
 Configuration
 ~~~~~~~~~~~~~
@@ -312,14 +312,14 @@ to run it with new configuration.
 Log parser policy
 -----------------
 
-Infromation about log parser format available in :ref:`log-monitoring` chapter.
+Information about log parser format available in :ref:`log-monitoring` chapter.
 
 To create policy in menu of container where should be created policy select
 :menuselection:`Create->Log parser policy...` and give required object name and
 press :guilabel:`OK`. Than newly created policy can be modified by selecting
 :menuselection:`Edit Policy...` from object menu.
 
-Parser configuration is applied on instalaltion - no agent restart required.
+Parser configuration is applied on installation - no agent restart required.
 
 Policy group
 ------------
@@ -559,7 +559,7 @@ Configuration example:
 Java plugins
 ~~~~~~~~~~~~
 
-List of avalivable java plugins:
+List of available java plugins:
 
   * JMX
   * Bind9
@@ -620,7 +620,7 @@ arguments metric name should contain "(*)" symbols after name. Only first line o
 script output will be given as a result of execution(metric value).
 
 ``ExternalParameterShellExec`` has same meaning as ``ExternalParameter`` with exception that
-agent will use shell to execute specified command instead of system process exeution
+agent will use shell to execute specified command instead of system process execution
 API. This difference presented only on Windows system, on other systems
 ``ExternalParameter`` and ``ExternalParameterShellExec`` behaves identically.
 
@@ -635,7 +635,7 @@ execution timeout or ``ExternalParametersProvider`` can be used.
 
   # Example
 
-  # Woithout DCI parameters
+  # Without DCI parameters
   ExternalParameter=Name:command
   ExternalParameterShellExec=Name:command
 
@@ -661,7 +661,7 @@ are separated with new line.
 
   # Example
 
-  # Woithout DCI parameters
+  # Without DCI parameters
   ExternalList=Name:command
 
   # With DCI parameters
@@ -679,7 +679,7 @@ accept arguments metric name should contain "(*)" symbols after name.
 
   # Example
 
-  # Woithout DCI parameters
+  # Without DCI parameters
   ExternalParameter=Name:command
 
   # With DCI parameters
@@ -733,13 +733,13 @@ that will be available like $1, $2, $3..., $9 variables. To accept arguments met
 
   # Example
 
-  # Woithout DCI parameters
+  # Without DCI parameters
   ExternalTable=dciName:instanceColumns=columnName;description=description;separator=|:command
 
   # With DCI parameters
   ExternalTable(*)=dciName:instanceColumns=columnName;description=description;separator=|:command $1 $2
 
-Separator supports special macross for separator:
+Separator supports special macros for separator:
 
     * \\n - \\n
     * \\r - \\r
@@ -759,13 +759,13 @@ users with access to the agent configuration file editing can define executed co
 
 There are 2 options to define action:
 
-   #. Action - usual action defenition
+   #. Action - usual action definition
    #. ActionShellExec - Same as Action, but on the Windows platform agent will use shell to execute command instead of normal process creation. There is no difference between Action and ActionShellExec on UNIX platforms.
 
 Both versions accept parameters that will be available like ``$1``, ``$2``, ``$3``..., ``$9`` variables.
 
 After action is defined it can be used in the :ref:`object tools - agent action<object_tool-agent-command>` or in
-:ref:`actions - action ecevution on remote node<action-remote-execute>`. Action should be defined in main section of
+:ref:`actions - action execution on remote node<action-remote-execute>`. Action should be defined in main section of
 agent configuration file.
 
 .. code-block:: cfg

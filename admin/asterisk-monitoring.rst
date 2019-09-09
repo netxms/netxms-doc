@@ -39,8 +39,8 @@ replaced with unique name). Each section can have the following parameters:
 
 It is also possible to configure subagent to periodically perform SIP registration tests. Each test
 should be configured in separate configuration section named **Asterisk/SIPRegistrationTests/TestName**
-for local system and **Asterisk/SYstems/SystemName/SIPRegistrationTests/TestName** for other systems.
-*SystemName* and *TestName* should be replaced with unique system and test names respecively. Each test
+for local system and **Asterisk/Systems/SystemName/SIPRegistrationTests/TestName** for other systems.
+*SystemName* and *TestName* should be replaced with unique system and test names respectively. Each test
 configuration section can have the following parameters:
 
 .. list-table::
@@ -135,7 +135,7 @@ Parameters
 ----------
 
 All parameters accept system name as first argument. Name for default local system is **LOCAL**.
-If system name is omited local system is assumed. If system name is the only argument braces can be omited as well.
+If system name is omitted local system is assumed. If system name is the only argument braces can be omitted as well.
 
 .. list-table::
    :header-rows: 1
@@ -173,7 +173,7 @@ If system name is omited local system is assumed. If system name is the only arg
      - Number of up channels
    * - Asterisk.Channels.CurrentCalls(*system*)
      - Integer
-     - Number of currenty active calls
+     - Number of currently active calls
    * - Asterisk.Events.CallBarred(*system*)
      - Integer
      - Global cumulative counter of "call barred" events
@@ -315,7 +315,7 @@ Tables
 ------
 
 All tables accept system name as first argument. Name for default local system is **LOCAL**.
-If system name is omited local system is assumed. If system name is the only argument braces can be omited as well.
+If system name is omitted local system is assumed. If system name is the only argument braces can be omitted as well.
 
 .. list-table::
    :header-rows: 1
@@ -339,12 +339,12 @@ Lists
 -----
 
 All lists accept system name as first argument. Name for default local system is **LOCAL**.
-If system name is omited local system is assumed. If system name is the only argument braces can be omited as well.
+If system name is omitted local system is assumed. If system name is the only argument braces can be omitted as well.
 
 .. list-table::
    :header-rows: 1
    :widths: 50 200
-   
+
    * - Metric
      - Description
    * - Asterisk.Channels(*system*)

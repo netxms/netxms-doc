@@ -1,13 +1,13 @@
 .. _hardware-monitoring:
 
 ============================
-Hardware(sensor) monitoring 
+Hardware(sensor) monitoring
 ============================
 
 |product_name| has subagents that allow to monitor hardware sensors.
   * lm-sensors - Can collect data from all sensors that are supported by
-    `lm-sensors <http://www.lm-sensors.org/wiki/Devices>`_ drivers on Luinux.
-  * DS18x20 - This subagent collects temperature data form ds18x20 sensors. Linux only.
+    `lm-sensors <http://www.lm-sensors.org/wiki/Devices>`_ drivers on Linux.
+  * DS18x20 - This subagent collects temperature data from ds18x20 sensors. Linux only.
   * RPI - This subagent is created for Raspberry Pi. It can collect data from dht22
     sensor and get status of any GPO pin.
 

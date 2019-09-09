@@ -78,12 +78,12 @@ easy change in repository configuration and encryption keys updated in the featu
 Using netxms-release package
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Install netxms-release_1.1_all.deb package that contain description of |product_name|
+Install netxms-release_1.4_all.deb package that contain description of |product_name|
 repository (this package support all Debian and Ubuntu systems):
 
 :command:`$ wget http://packages.netxms.org/netxms-release_1.1_all.deb`
 
-:command:`$ sudo dpkg -i netxms-release_1.1_all.deb`
+:command:`$ sudo dpkg -i netxms-release_1.4_all.deb`
 
 Update APT cache:
 
@@ -124,7 +124,7 @@ Change *DRIVER_NAME* to driver name that you need:
   * netxms-dbdrv-mysql -  MySQL driver
   * netxms-dbdrv-odbc - unixODBC driver (can be used with DB/2 and Microsoft SQL)
   * netxms-dbdrv-oracle - Oracle driver
-  
+
 Server default credentials:
 
 Login: admin
@@ -271,8 +271,8 @@ Server
   13. Follow the prompts until server configuration will be complete. After successful
   server configuration, installation will be finished, and you will have |product_name| server
   up and running.
-  
-  
+
+
 Server default credentials:
 
 Login: admin
@@ -342,48 +342,48 @@ automated way of installation:
 
   3. After installation procedure is finished check that WEB GUI is available at
      http://SERVER_IP:SERVER_PORT/nxmc/
-     
+
 Unattended installation of |product_name| Agent
 -----------------------------------------------
 
 Windows Agent installer (named nxagent-VERSION.exe, for example nxagent-0.2.20.exe),
-has various command line options for unattended installation. Installation will ignore 
-any configuration file options (/CONFIGENTRY, /NOSUBAGENT, /SERVER, /SUBAGENT) if config 
+has various command line options for unattended installation. Installation will ignore
+any configuration file options (/CONFIGENTRY, /NOSUBAGENT, /SERVER, /SUBAGENT) if config
 file already exists or if /CENTRALCONFIG option is used. These options are following:
 
 .. list-table::
    :header-rows: 1
    :widths: 1 3
-   
+
    * - Option
      - Description
    * - /CENTRALCONFIG
      - Read configuration from server on startup
-   * - /CONFIGENTRY=value 
+   * - /CONFIGENTRY=value
      - It can be used to add any parameter to configuration file during initial install. You can specify it multiple times to add multiple lines. Section names can be added as well.
    * - /DIR=path
      - Set installation directory (default is C:\|product_name|)
-   * - /LOCALCONFIG 
+   * - /LOCALCONFIG
      - Use local configuration file (it is the default)
    * - /LOG
-     - Causes Setup to create a log file in the user's TEMP directory detailing file installation and [Run] actions taken during the installation process. 
+     - Causes Setup to create a log file in the user's TEMP directory detailing file installation and [Run] actions taken during the installation process.
    * - /NOSUBAGENT=name
      - Disable subagent name
    * - /SERVER=IP
      - Set server IP address or host name (will be set in configuration file as MasterServers)
    * - /SILENT
      - Don't show installation wizard, only a progress bar
-   * - /SUBAGENT=name 
+   * - /SUBAGENT=name
      - Add sub-agent loading directive to configuration file. You can specify this parameter multiple times to add more than one sub-agent. List of possible subagents: :ref:`subagent_list`.
-   * - /SUPPRESSMSGBOXES 
+   * - /SUPPRESSMSGBOXES
      - Don't ask user anything
-   * - /VERYSILENT  
+   * - /VERYSILENT
      - Don't show anything
-     
+
 Example:
-     
+
 :command:`nxagent-1.0.5.exe /VERYSILENT /SUPPRESSMSGBOXES /SERVER=10.0.0.1 /SUBAGENT=UPS /SUBAGENT=FILEMGR /CONFIGENTRY=ZoneUIN=15 /CONFIGENTRY=[FILEMGR] /CONFIGENTRY=RootFolder=C:\\`
-     
+
 This command will add 3 lines at the end of generated config file:
 
 .. code-block:: cfg
@@ -518,7 +518,7 @@ Since version 2.2.4 encryption support is enforced when building server.
         .. code-block:: sql
 
           -- USER SQL
-          CREATE USER netxms IDENTIFIED BY PaSwD 
+          CREATE USER netxms IDENTIFIED BY PaSwD
           DEFAULT TABLESPACE USERS
           TEMPORARY TABLESPACE TEMP;
           -- QUOTAS
@@ -568,7 +568,7 @@ Since version 2.2.4 encryption support is enforced when building server.
      .. code-block:: sh
 
        /usr/local/bin/netxmsd -d
-  
+
 
 Agent
 -----

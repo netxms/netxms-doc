@@ -8,38 +8,38 @@ Event processing
 Event Processing Policy
 =======================
 
-Actions taken by event processor for any specific event determined by set of
-rules called :guilabel:`Event Processing Policy`.
+Actions taken by event processor for any specific event are determined by a set
+of rules called :guilabel:`Event Processing Policy`.
 
 .. figure:: _images/event_processing_policy.png
 
    Event Processing Policy Screen
 
-Every rule has two parts - a matching part (called :guilabel:`Condition` in the
+Every rule has two parts - matching part (called :guilabel:`Condition` in the
 rule configuration dialog), which determines if the rule is appropriate for the
-current event, and an action part, which determines actions to be taken for
-matched events. 
+current event, and action part, which determines actions to be taken for
+matched events.
 
-Each event passes through all rules in the policy, so if it matches to more
+Each event passes through all rules in the policy, so if it matches more
 than one rule, actions specified in all matched rules will be executed. You can
 change this behavior by setting Stop Processing flag for the rule. If this flag
 is set and rule matched, processing of current event will be stopped.
 
-You can create and modify :guilabel:`Event Processing Policy` using 
-:guilabel:`Event Processing Policy Editor`. To access the 
-:guilabel:`Event Processing Policy Editor` window, press ``F4`` or select 
+You can create and modify :guilabel:`Event Processing Policy` using
+:guilabel:`Event Processing Policy Editor`. To access the
+:guilabel:`Event Processing Policy Editor` window, press ``F4`` or select
 :menuselection:`Tools --> Event Processing Policy` menu.
 
 
-To create event policy right click on entry before or after witch new Event 
-Processing Policy should appear and select :guilabel:`Insert before` or 
+To create event policy right click on entry before or after which new Event
+Processing Policy should appear and select :guilabel:`Insert before` or
 :guilabel:`Insert after`. Drag and drop can be used for rule reorganization.
 
 .. figure:: _images/epp_entity_menue.png
 
   Edit buttons
 
-To edit Event Processing Policy, filter or action click on icon in right 
+To edit Event Processing Policy, filter or action click on icon in right
 corner of an entry, it will open general properties of Event Processing Policy.
 
 .. figure:: _images/epp_edit_button.png
@@ -54,11 +54,9 @@ In EPP properties there are following sections:
 
    * - Section
      - Description
-   * - Comments
-     - There can be added comment about this policy that will be displayed like EPP name.
-   * - Condition
-     - This part determines if the rule is appropriate for the current event.
-       There can be disabled check of this EPP.
+   * - **Condition**
+     - Sub-sections of **Condition** section determine, if the rule is applicable to a particular event.
+       If checkbox :guilabel:`Rule is disabled` is set, this rule is ignored.
    * - Condition --> Source Objects
      - One or more event's source objects. This list can be left empty, which
        matches any node, or contain nodes, subnets, or containers. If you
@@ -71,34 +69,36 @@ In EPP properties there are following sections:
        be matched.
    * - Condition --> Filtering Script
      - Optional matching script written in NXSL. If this field is empty, no
-       additional checks performed. Otherwise, the event will be considered as
+       additional checks are performed. Otherwise, the event will be considered as
        matched only if the script returns non-zero (``TRUE``) return code. For
        more information about |product_name| scripting language please refer to the
        chapter :ref:`scripting` in this manual.
-   * - Action
-     - In action part you can set what action should be done if event meets condition.
-       There also can be set flag :guilabel:`Stop event processing`, that will stop check on this rule. 
+   * - **Action**
+     - Sub-sections of **Action** section determine what actions are performed if an event meets condition.
+       If checkbox :guilabel:`Stop event processing` is set, then subsequent rules (with higher rule number) will not be processed for a given event.
    * - Action --> Alarm
-     - There can be set rules connected with alarm generation. Alarm can be created, 
-       resolved or terminated ore done nothing. 
-   * - Action --> Persistent Storage 
+     - There can be set rules connected with alarm generation. Alarm can be created,
+       resolved or terminated or no action to alarms is done.
+   * - Action --> Persistent Storage
      - :ref:`nxsl_persistent_storage` action like add/update or delete can be made.
-   * - Action --> Server Actions 
-     - There is defined list of actions to be executed if condition is met. For action 
+   * - Action --> Server Actions
+     - Here a list of actions is defined to be executed if condition is met. For action
        configuration refer to :ref:`actions` chapter.
    * - Action --> Timer Cancellations
-     - There is defined list of timmers that should be canceled if condition is met. 
+     - Here a list of timers is defined that should be canceled if condition is met.
+   * - Comments
+     - Here a comment can be added. The comment is displayed as a name of the rule.
 
 
 
 .. figure:: _images/epp_properties.png
 
   Event Processing Policy properties
-     
+
 .. figure:: _images/epp_toolbar.png
 
   Description of EPP toolbar form left to right: save changes, expand all, collapse all, horizontal layout, vertical layout, cut EPP, copy EPP, paset EPP, delete EPP
-   
+
 
 ***After all manipulations are done - save changes by pressing save icon.***
 
@@ -106,14 +106,14 @@ Examples
 --------
 
 This rule defines that for every major or critical event originated from a
-node named "IPSO" two e-mail actions must be executed.
+node named "IPSO" two e-mail actions will be executed.
 
 .. figure:: _images/EPP_rule_config_example_1.png
 
    Example 1
 
 .. _alarms:
-   
+
 Alarms
 ======
 
@@ -124,10 +124,10 @@ As a result of event processing some events can be shown up as alarms. Usually
 alarm represents something that needs attention of network administrators or
 network control center operators, for example low free disk space on a server.
 
-All alarm events are logged to alarm log. A number of days the server keeps 
-an alarm history can be configured by "AlarmHistoryRetentionTime" server 
-configuration parameter. Alarm log can be viewied in "Alarm Log View"(Alt+F8).
-This view give option to query in alarm log required information. 
+All alarm events are logged to alarm log. The number of days the server keeps
+an alarm history can be configured by "AlarmHistoryRetentionTime" server
+configuration parameter. Alarm log can be viewed in "Alarm Log View"(Alt+F8).
+This view give option to query in alarm log required information.
 
 Every alarm has the following attributes:
 
@@ -168,14 +168,14 @@ Possible alarm states:
        A new event with the same alarm ID will reset the alarm state back to
        outstanding
    * - Sticky Acknowledged for time
-     - Alarm will remain acknowledged for given time interval even after new 
-       matching events, after time will pass alarm will be moved to outstanding 
-       state. This option can be used like snooze. When you know that there will 
-       be new matching events, but it will not change the situation. But after 
-       some time someone should check this problem. For example, if you have 
-       problem that cannot be solved until next week, so this alarm can be 
-       sticky acknowledged for 7 days. After 7 days this problem again will be 
-       in outstanding state. This type of acknowledge can be disabled by parameter 
+     - Alarm will remain acknowledged for given time interval even after new
+       matching events, after time will pass alarm will be moved to outstanding
+       state. This option can be used like snooze. When you know that there will
+       be new matching events, but it will not change the situation. But after
+       some time someone should check this problem. For example, if you have
+       problem that cannot be solved until next week, so this alarm can be
+       sticky acknowledged for 7 days. After 7 days this problem again will be
+       in outstanding state. This type of acknowledge can be disabled by parameter
        "EnableTimedAlarmAck" in server configuration view.
    * - Sticky Acknowledged
      - Alarm will remain acknowledged event after new matching events. This can
@@ -191,9 +191,9 @@ Possible alarm states:
        will not be seen in console, but alarm record will remain in database.
 
 
-There are 2 types of alarm state flows: strict and not strict. This option can 
-be configured in Preference page of Alarms or on server configuration page, 
-parameter "StrictAlarmStatusFlow". The difference between them is that in strict 
+There are 2 types of alarm state flows: strict and not strict. This option can
+be configured in Preference page of Alarms or on server configuration page,
+parameter "StrictAlarmStatusFlow". The difference between them is that in strict
 mode Terminate can be done only after Resolve state.
 
 
@@ -202,24 +202,29 @@ mode Terminate can be done only after Resolve state.
    :scale: 55%
 
    Not strict(default)
-   
+
 
 .. figure:: _images/AlarmStatesTransitionsInvokedByUser-strict.png
    :scale: 55%
 
    Strict
-   
+
 Alarm Melodies
 --------------
 
-On each severity of alarm can be set melody to play. This melody will be played 
+On each severity of alarm can be set melody to play. This melody will be played
 when new alarm in state outstanding will occur. Melody that should be played should
 exist on server in wav format. See instruction there: :ref:`upload-file-on-server-label`.
-By default there are no sounds on alarms. 
+By default there are no sounds on alarms.
 
-To set sound open preferences, there select :menuselection:`Alarms --> Alarm Sounds` tab. 
-There in drop-down will be seen all possible options. If sound will not be chosen, 
-alarm with this severity will come silently. 
+To set sound open preferences, there select :menuselection:`Alarms --> Alarm Sounds` tab.
+There in drop-down will be seen all possible options. If sound will not be chosen,
+alarm with this severity will come silently.
+
+To configure sounds, open preferences and select :menuselection:`Alarms --> Alarm Sounds` tab.
+Drop-downs next to each severity level have a list of available sounds. If no sound
+is chosen, alarm for given severity will come silently.
+
 
 .. figure:: _images/Alarm_Sound_Preferences.png
    :scale: 65%
@@ -241,17 +246,17 @@ For each alarm can be created comments in "Alarm Details"
 .. figure:: _images/alarm_details_comments.png
    :scale: 65%
 
-or "Alarm Comments" views. 
+or "Alarm Comments" views.
 
 .. figure:: _images/alarm_comments.png
    :scale: 65%
 
-Comment can be created, edited or deleted. All comments will be deleted after alarm termination. 
+Comment can be created, edited or deleted. All comments will be deleted after alarm termination.
 
 Alarm Summary Emails
 ~~~~~~~~~~~~~~~~~~~~
 
-It is possible to schedule emails which contain a summary of all currently active alarms, similar 
+It is possible to schedule emails which contain a summary of all currently active alarms, similar
 to what can be seen in the Alarm Browser.
 
 To enable Alarm Summary Emails it is required to configure the following server parameters:
@@ -283,9 +288,9 @@ dialog will look like this:
 
 .. figure:: _images/Alarm_config.png
 
-You should select :guilabel:`Generate new alarm` radio button to enable alarm generation from current rule. 
-In the :guilabel:`Message` field enter alarm's text, and in the alarm key enter value which will be used for 
-repeated alarms detection and automatic alarm termination. In both fields you can use macros described 
+You should select :guilabel:`Generate new alarm` radio button to enable alarm generation from current rule.
+In the :guilabel:`Message` field enter alarm's text, and in the alarm key enter value which will be used for
+repeated alarms detection and automatic alarm termination. In both fields you can use macros described
 in the :ref:`event-processing-macros` section.
 
 You can also configure sending of additional event if alarm will stay in
@@ -300,7 +305,7 @@ created and configured in the :ref:`alarm-category-config`.
 
 .. _alarm-category-config:
 
-Alarm Caregory Configurator
+Alarm Category Configurator
 ---------------------------
 
 Alarm categories can be created and configured in the :guilabel:`Alarm Category Configurator` which can
@@ -312,7 +317,7 @@ be found in :menuselection:`Configuration --> Alarm Category Configurator` menu:
    Alarm Category Configurator
 
 Alarm categories provide the possibility to configure access rights for viewing generated alarms on a per user
-or per group basis. When creating an alarm category, it is possible to set the :guilabel:`Category name`, 
+or per group basis. When creating an alarm category, it is possible to set the :guilabel:`Category name`,
 :guilabel:`Description`.
 
 .. figure:: _images/Alarm_category_properties.png
@@ -343,35 +348,35 @@ Automatic Alarm Termination/Resolve
 -----------------------------------
 
 You can terminate or resolve all active alarms with given key as a reaction for the event.
-To do this, select :guilabel:`Terminate alarm` radio button or :guilabel:`Resolve alarm` 
-radio button in alarm configuration dialog and enter value for alarm key. For that field 
+To do this, select :guilabel:`Terminate alarm` radio button or :guilabel:`Resolve alarm`
+radio button in alarm configuration dialog and enter value for alarm key. For that field
 you can use macros described in the :ref:`event-processing-macros` chapter.
 
 
 Escalation
 ----------
 
-As it was described in :ref:`generating_alarms` chapter there is possibility to generate new 
-event if alarm stay in :guilabel:`Outstanding` state for too long. Escalation is built on 
-this option. When alarm was generated, but no action was done from operator in predefined time, 
+As it was described in :ref:`generating_alarms` chapter there is possibility to generate new
+event if alarm stay in :guilabel:`Outstanding` state for too long. Escalation is built on
+this option. When alarm was generated, but no action was done from operator in predefined time,
 new event can be generated and this time email or SMS can be sent to operator or to it's manager.
-This escalation process can have as many steps as it is required. 
+This escalation process can have as many steps as it is required.
 
 
 .. _actions:
-  
+
 Actions
 =======
 
-In addition to alarm generation server can perform various types of actions as a reaction to an event. 
-Action types available in |product_name| are described in the following sections. Each action can be separately 
-disabled in action configuration. 
+In addition to alarm generation server can perform various types of actions as a reaction to an event.
+Action types available in |product_name| are described in the following sections. Each action can be separately
+disabled in action configuration.
 
-After the action is added, it can be edited to add delay time and timer key. This option can be used to 
-prevent notification send in case if problem solved quickly enough. Key is a free form string that support 
-:ref:`macro<event-processing-macros>` and delay is the delay time in seconds before action is executed. 
+After the action is added, it can be edited to add delay time and timer key. This option can be used to
+prevent notification sending in case if problem solved quickly enough. Key is a free form string that support
+:ref:`macro<event-processing-macros>` and delay is the delay time in seconds before action is executed.
 
-The next example shows the configuration for the situation when there is no need to notify anyone if node went down 
+The next example shows the configuration for the situation when there is no need to notify anyone if node went down
 and back up in just a minute.
 
 .. figure:: _images/delayed_action.png
@@ -380,14 +385,14 @@ and back up in just a minute.
 Escalation
 ----------
 
-One :term:`EPP` rule can contain multiple actions with different delays. Delay timers are 
-canceled by other rule in case of problem resolution. 
+One :term:`EPP` rule can contain multiple actions with different delays. Delay timers are
+canceled by other rule in case of problem resolution.
 
-The next example shows that if node went down, then 
+The next example shows that if node went down, then
    #. after 1 minute responsible person will be notified if the problem still persists
    #. after 30 minutes the support manager will be notified if the problem still persists
-   #. after 1 hour the IT manager will be notified if the problem still persists 
-   
+   #. after 1 hour the IT manager will be notified if the problem still persists
+
 .. figure:: _images/delayed_action_escalation.png
 
 Action types
@@ -396,26 +401,26 @@ Action types
 Execute command on management server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Executes provided command on server node. Check that user under witch :file:`netxmsd` process 
-run has permission to run this command. 
+Executes provided command on server node. Check that user under witch :file:`netxmsd` process
+run has permission to run this command.
 
 .. _action-remote-execute:
 
 Execute command on remote node
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Executes provided command name defined in this nodes agent configuration file. To this 
-command can be given parameters in format: ``commandName param1 param2 param3...`` 
-Check that user under witch :file:`nxagentd` process run has permission to run this 
-command. 
+Executes provided command name defined in this nodes agent configuration file. To this
+command can be given parameters in format: ``commandName param1 param2 param3...``
+Check that user under witch :file:`nxagentd` process run has permission to run this
+command.
 
 As the :guilabel:`Remote Host` can be used hostname or object name(int format: ``@objectName``).
-Second option allows action execution on node behind proxy. 
+Second option allows action execution on node behind proxy.
 
 Send e-mail
 ~~~~~~~~~~~
 
-Send email to one or more recipients. Multiple recipients can be separated by semicolons. 
+Send email to one or more recipients. Multiple recipients can be separated by semicolons.
 Required server configuration parameters to send emails: ``SMTPFromAddr``, ``SMTPFromName``,
 ``SMTPRetryCount``, ``SMTPServer``. For detailed description of parameters check :ref:`server_configuration_parameters`.
 
@@ -424,7 +429,7 @@ In message text can be used :ref:`event-processing-macros`.
 Send SMS
 ~~~~~~~~
 
-Send SMS to one or more recipients. Multiple recipients can be separated by semicolons. 
+Send SMS to one or more recipients. Multiple recipients can be separated by semicolons.
 Server will use :ref:`SMS driver<sms-drivers>` for actual message sending.
 
 In message text can be used :ref:`event-processing-macros`.
@@ -434,7 +439,7 @@ Send XMPP message
 
 Sends XMPP/Jabber message to one or more recipients. Multiple recipients can be separated by semicolons.
 equired server configuration parameters to send XMPP message: :guilabel:`XMPPLogin`, :guilabel:`XMPPPassword`,
-:guilabel:`XMPPPort`, :guilabel:`XMPPServer`, :guilabel:`EnableXMPPConnector`. For detailed description of 
+:guilabel:`XMPPPort`, :guilabel:`XMPPServer`, :guilabel:`EnableXMPPConnector`. For detailed description of
 parameters check :ref:`server_configuration_parameters`.
 
 In message text can be used :ref:`event-processing-macros`.
@@ -442,7 +447,7 @@ In message text can be used :ref:`event-processing-macros`.
 Execute NXSL script
 ~~~~~~~~~~~~~~~~~~~
 
-This action executes script form scrip library. In action configuration should be defined name of script. 
+This action executes script form scrip library. In action configuration should be defined name of script.
 Information about scripting and library can be found :ref:`there<scripting>`.
 
 
@@ -452,7 +457,7 @@ Forward event
 ~~~~~~~~~~~~~
 
 |product_name| does not support configuration synchronization between two |product_name| servers(Distributed Monitoring). But it is possible
-to forward events from one server to another. This option allow synchronize events between servers but there are some limitation. 
+to forward events from one server to another. This option allow synchronize events between servers but there are some limitation.
 
 
 Configuration
@@ -467,21 +472,21 @@ Destination server configuration:
   2. Open port 4702.
   3. Check that receiving server have all events as on a sending server
 
- 
+
 Limitation
 ^^^^^^^^^^
- 
+
 Limitations of event forwarding:
   1. Event template with same event code or event name must exist on recipient server
   2. Node object with same IP address as event's source node's address must exist on recipient server
   3. Does not work with zones
 
 Events not met these conditions are discarded.
-It is possible to check if and why incoming events are discarded if turn on level 5 debug on receiving server.
+It is possible to check if and why incoming events are discarded by turning on level 5 debug on receiving server.
 
-There can be used one of two options if it is required to disable polling of sender server nodes on recipient server: disable all 
-polling protocols or unmanage nodes. Chose  depends on how you wish to see node's status. For unmanaged node, it always be 
-"unmanaged", regardless of active alarms. If you disable polling, node's status will be "unknown" unless there will be active 
+There can be used one of two options if it is required to disable polling of sender server nodes on recipient server: disable all
+polling protocols or unmanage nodes. Chose  depends on how you wish to see node's status. For unmanaged node, it always be
+"unmanaged", regardless of active alarms. If you disable polling, node's status will be "unknown" unless there will be active
 alarms for that node - in that case node's status will change to severity of most critical alarm.
 
 .. _nxsl_persistent_storage:
@@ -493,19 +498,19 @@ NXSL
 ----
 
 There are 2 functions:
-    - ReadPersistentStorage("key") - read value by key 
-    - WritePersistentStorage("key", "value") - insert or update value by key. If value will be empty - variable will be deleted. 
+    - ReadPersistentStorage("key") - read value by key
+    - WritePersistentStorage("key", "value") - insert or update value by key. If value will be empty - variable will be deleted.
 
 View
 ----
 
-:guilabel:`Persistent Storage` view (:menuselection:`Configuration --> Persistent Storage`) provide information about current state of 
+:guilabel:`Persistent Storage` view (:menuselection:`Configuration --> Persistent Storage`) provide information about current state of
 Persistent Storage variables.
 
 .. figure:: _images/pstorage.png
-  
+
 .. Note::
-    Situations functionality is depricated. Persistent storage should be used instead.
+    Situations functionality is deprecated. Persistent storage should be used instead.
 
 .. _event-processing-macros:
 
@@ -601,4 +606,3 @@ Threshold reached/rearmed named parameters:
   * %<instance>
   * %<isRepeatedEvent> - set only for DCI reached events
   * %<dciValue>
-  

@@ -14,8 +14,8 @@ syslog server. In general, most common log processing goes as following:
 #. Server receives event and passes to event processing policy as usual, with
    event source set to node from which event was received.
 
-Log parser also provides some additional statistic information through 
-:term:`metric`\ s. More information can be fount in :ref:`log-monitoring-parameters` chapter. 
+Log parser also provides some additional statistic information through
+:term:`metric`\ s. More information can be fount in :ref:`log-monitoring-parameters` chapter.
 
 Agent Configuration for Log Monitoring
 ======================================
@@ -23,17 +23,17 @@ Agent Configuration for Log Monitoring
 To be able to monitor logs with |product_name| agent, you should load ``LOGWATCH``
 subagent. There are two options to define parser configuration:
 
-#. Create log parser rule files on the system and define them in ``LOGWATCH`` 
-   part of agent configuration. 
-#. Create log parser policy and apply them to all required nodes. In this 
-   case file will be automatically created on the file system and added to 
+#. Create log parser rule files on the system and define them in ``LOGWATCH``
+   part of agent configuration.
+#. Create log parser policy and apply them to all required nodes. In this
+   case file will be automatically created on the file system and added to
    processing. More information about :ref:`agent-policies-label`
-    
+
 .. note::
 
-   Logs files with same processing rules can be configured in the same parser 
-   configuration file. 
-   
+   Logs files with same processing rules can be configured in the same parser
+   configuration file.
+
 Example of agent configuration file:
 
 .. code-block:: cfg
@@ -84,10 +84,10 @@ Parser definition file is an XML document with the following structure:
         </rules>
     </parser>
 
-    
+
 .. note::
-    
-    Entire ``<macros>`` section can be omitted. Empty ``<rule>`` tag will match any line (like <rule> <match>.*</match> </rule>).  
+
+    Entire ``<macros>`` section can be omitted. Empty ``<rule>`` tag will match any line (like <rule> <match>.*</match> </rule>).
 
 Global Parser Options
 =====================
@@ -110,7 +110,7 @@ In the ``<parser>`` tag you can specify the following options:
 <file> Tag
 ==========
 
-In the ``<file>`` tag you should specify log file to apply this parser to. To specify Windows Event Log, prepend it's name with asterisk (``*``), for example ``*System``. Multiples ``<file>`` tags can be used - in this case same rules will be applied to all files. 
+In the ``<file>`` tag you should specify log file to apply this parser to. To specify Windows Event Log, prepend it's name with asterisk (``*``), for example ``*System``. Multiples ``<file>`` tags can be used - in this case same rules will be applied to all files.
 
 .. list-table::
    :header-rows: 1
@@ -120,9 +120,9 @@ In the ``<file>`` tag you should specify log file to apply this parser to. To sp
      - Description
      - Default value
    * - encoding
-     - It is possible to specify the encoding of the log file by adding the ``encoding`` attribute. 
+     - It is possible to specify the encoding of the log file by adding the ``encoding`` attribute.
        File encodings that can be defined:
-       
+
             * ``ACP``
             * ``UTF-8``
             * ``UCS-2``
@@ -131,25 +131,25 @@ In the ``<file>`` tag you should specify log file to apply this parser to. To sp
             * ``UCS-4``
             * ``UCS-4LE``
             * ``UCS-4BE``
-        
+
        When using ``UCS-2`` or ``UCS-4`` values, the endianness of the system will be detected automatically.
-       
+
      - By default, the parser will attempt to detect the encoding by scanning the file`s BOM.
    * - preallocated
-     - Should be set when log file is prealocated(filled with zeros) before logs get written into it. 
+     - Should be set when log file is preallocated(filled with zeros) before logs get written into it.
      - 0
    * - snapshot
-     - Create VSS snapshot and uses snapshot file for parsing. Can be used when log is opened by other 
-       application as exclusive open. Windows only. Can highly increase CPU usage.  
+     - Create VSS snapshot and uses snapshot file for parsing. Can be used when log is opened by other
+       application as exclusive open. Windows only. Can highly increase CPU usage.
      - 0
    * - keepOpen
-     - Defines if the file is kept open or reopened on each parsing iteration. 
+     - Defines if the file is kept open or reopened on each parsing iteration.
      - 1
    * - ignoreModificationTime
-     - Ignores modification time of log file 
+     - Ignores modification time of log file
      - 0
 
- 
+
 .. _log-monitoring-macros:
 
 Macros
@@ -188,7 +188,7 @@ In the ``<rules>`` section you define matching rules for log records.
 <rule> Tag
 -----------
 
-Each rule placed inside it's own ``<rule>`` tag. Each rule can have additional options:
+Each rule is placed inside it's own ``<rule>`` tag. Each rule can have additional options:
 
 .. list-table::
    :widths: 15 70 15
@@ -227,8 +227,8 @@ passed as arguments of generated event. You can use macros defined in
 :ref:`log-monitoring-macros` section. Also, it is possible to define inverted
 match rules (rules when log record considered matching if it does not match
 regular expression). Inverted match can be set by setting attribute ``invert``
-to ``1``. Other possible option that can be configured is number of times that 
-expression should be matched to generate event. 
+to ``1``. Other possible option that can be configured is number of times that
+expression should be matched to generate event.
 
 Some examples:
 
@@ -244,11 +244,11 @@ an event.
 
     <match repeatCount="3" repeatInterval="120" reset="false">[0-9]{3}</match>
 
-This regular expression will match any line containing at least 3 consecutive digits. 
-And event will be generated only if this regular expression will be matched 3 or 
-more times in 2 minutes(120 seconds). Matched count wount be reset once mark will 
-is reached, so if expresstion is matched more than 3 times in 2 minutes, event will 
-be generated more than one time. 
+This regular expression will match any line containing at least 3 consecutive digits.
+And event will be generated only if this regular expression will be matched 3 or
+more times in 2 minutes(120 seconds). Matched count won't be reset once mark
+is reached, so if expression is matched more than 3 times in 2 minutes, event will
+be generated more than one time.
 
 .. code-block:: xml
 
@@ -461,7 +461,7 @@ Some examples:
 
     <tag>httpd</tag>
 
-will match records with tag "httpd" (case-insensetive), and
+will match records with tag "httpd" (case-insensitive), and
 
 .. code-block:: xml
 
@@ -530,15 +530,15 @@ Tag ``<description>`` contains textual description of the rule, which will be sh
 
 Tag ``<event>`` defines event to be generated if current log record match to
 regular expression defined in ``<match>`` tag. Inside ``<event>`` tag you
-should specify event name or event code to be generated. All matched capture groups 
-will be given to the event as an event parameters.  
+should specify event name or event code to be generated. All matched capture groups
+will be given to the event as an event parameters.
 
 
 <context> Tag
 -------------
 
-Tag ``<context>`` defines activation or deactivation of contexts. This option can 
-be used for multi line match. First line sets context and next generates event in case if 
+Tag ``<context>`` defines activation or deactivation of contexts. This option can
+be used for multi line match. First line sets context and next generates event in case if
 context was set. Examples can be found further in :ref:`log_parser_examles` section.
 
 It has the following format:
@@ -579,9 +579,9 @@ Both ``action`` and ``reset`` attributes can be omitted; default value for
 <exclusionSchedules> Tag
 ------------------------
 
-Tag ``<exclusionSchedules>`` defines time when file should not be parsed. Each cron expression 
-should be defined in ``<schedule>``. This should be used to define time when file should not be 
-opened. Once time does not match cron file will be reopened and all added lines will be parsed. 
+Tag ``<exclusionSchedules>`` defines time when file should not be parsed. Each cron expression
+should be defined in ``<schedule>``. This should be used to define time when file should not be
+opened. Once time does not match cron file will be reopened and all added lines will be parsed.
 
 Example:
 
@@ -600,7 +600,7 @@ Example:
         </exclusionSchedules>
     </parser>
 
-    
+
 .. _log_parser_examles:
 
 Examples of Parser Definition File
@@ -641,12 +641,12 @@ event's parameter:
             </rule>
         </rules>
     </parser>
-    
+
 Passing parameters to events
 ============================
 
 The log parser can send parameters to events.
-All capture groups will be sent to the event as a parameters. For Windows additional 
+All capture groups will be sent to the event as a parameters. For Windows additional
 
 +----------+----------------------------------------------------+
 | Number   | Description                                        |
@@ -669,14 +669,14 @@ Consider the following line is received via syslog, or added to a monitored file
 .. code-block:: cfg
 
     24.04.2015 12:22:15 1 5 system,error,critical login failure for user testUser from 11.2.33.41 via ssh
-    
+
 We can extract username and login method from the syslog message, and pass it as parameters to an event with the following rule:
 
 .. code-block:: xml
 
     <match>system,error,critical login failure for user (.*) from .* via (.*)</match>
     <event>10000</event>
-    
+
 Username will be sent to the event as %1, IP address will not be sent, and login method will be sent as %2.
 
 .. _log-monitoring-parameters:
@@ -684,14 +684,14 @@ Username will be sent to the event as %1, IP address will not be sent, and login
 Log parser parameters
 =====================
 
-Log parser provides some additional statistic information through :term:`metric`\ s. 
-Metrics wait as an argument name of the parser. If name is not set, then file name is used. 
+Log parser provides some additional statistic information through :term:`metric`\ s.
+Metrics wait as an argument name of the parser. If name is not set, then file name is used.
 
 Available parameters:
 
 
 .. list-table::
-   :widths: 15 150 
+   :widths: 15 150
    :header-rows: 1
 
    * - Name
@@ -714,4 +714,3 @@ Available list parameters:
      - Description
    * - LogWatch.ParserList
      - List of parser names. If no name is defined than parser file name will be used.
-     

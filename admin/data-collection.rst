@@ -102,6 +102,7 @@ Origin of data (method of obtaining data). Possible origins are:
 - :guilabel:`Internal` (data generated inside |product_name| server process)
 - :guilabel:`Push Agent`
 - :guilabel:`Script` (from script library, can be used instead of internal dummy)
+- :guilabel:`SSH` Data collected by command executed through SSH connection
 
 
 :guilabel:`Push Agent` origin is very different from all others, because it
@@ -715,8 +716,14 @@ It can be configured:
 Last DCI values View
 ====================
 
-.. todo:
-  Add description of this view with all menu items.
+Last values view provides information about all collected data 
+on node the node, it's last value, last collection timestamp and threshold status. 
+
+It is possible to check last values or row last values in textual format or as a chart 
+by right clicking on DCI and selecting right display format. 
+
+
+.. figure:: _images/last_values.png
 
 .. _data-collection-templates:
 

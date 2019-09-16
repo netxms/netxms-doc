@@ -129,6 +129,8 @@ an alarm history can be configured by "AlarmHistoryRetentionTime" server
 configuration parameter. Alarm log can be viewed in "Alarm Log View"(Alt+F8).
 This view give option to query in alarm log required information.
 
+.. figure:: _images/alarm_log.png
+
 Every alarm has the following attributes:
 
 .. list-table::

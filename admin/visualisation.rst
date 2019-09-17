@@ -20,9 +20,13 @@ Creating Maps
 
 There are 3 types of map that can be created:
    * Custom - will be created empty map.
-   * Layer 2 Topology - will create map(if possible) with layer 2 topology of selected object.
-   * IP Topology - will create map with known IP Topology of selected object. (More about network topology can be found there :ref:`topology`)
+   * Layer 2 Topology - will create map(if possible) with layer 2 topology of selected object. Will be automatically updated on topology change.
+   * IP Topology - will create map with known IP Topology of selected object. (More about network topology can be found there :ref:`topology`) Will be automatically updated on topology change.
+   * Internal communication topology - map created based on internal communication between server and node (will show SNMP, ICMP, ). 
 
+.. figure:: _images/network_map_l2.png
+
+   Network map layer 2
 
 Type of created map affects only on initial map setup.
 
@@ -33,6 +37,11 @@ Edit Maps
 
 Adding Objects
 --------------
+
+Network map can be populated in 2 different ways: automatically and manually. 
+Automatically are populated Layer 2, IP Topology and Internal communication topology. 
+Object filer (in properties of the map) can be created for automatically populated 
+maps to filter out unrequited nodes.
 
 Objects to map can be added in tow ways:
    1. Just drag and drop object to map from object browser.

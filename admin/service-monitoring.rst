@@ -26,8 +26,8 @@ object is created, it will be automatically included into the status poll. Each
 time when the status poll for the particular node is carried out, all Network
 Service objects are polled for a reply. If an object's reply corresponds to a
 certain condition, its status is set as NORMAL. If an object is not responding,
-it's status will be changed to CRITICAL. Wile network service creation there can be
-also created :term:`DCI` that will collect service status.
+it's status will be changed to CRITICAL. It is possible to create a :term:`DCI`
+that will collect status of Network Service object.
 
 .. figure:: _images/create_network_service.png
 
@@ -44,9 +44,9 @@ Service monitoring using DCI
 
 Second option is to use :term:`DCI` to monitor service. There are 2 subagents that
 provide service monitoring metrics: PortCheck and NetSVC. It is recommended to use
-NetSVC for all curl supported protocols. As it can check not only availability, but
-also response. For unsupported protocols can be used Custom check of PortCheck
-subagent.
+NetSVC for all curl supported protocols, as it can check not only availability, but
+also response. For unsupported protocols Custom check of PortCheck subagent
+can be used.
 
 For HTTP services there is also option to use ECS subagent. This subagent has only 3 Metrics. Two
 of them calculate hash and last one measure time.
@@ -64,15 +64,20 @@ HTTP and HTTPS monitoring.
 When loaded, PORTCHECK subagent adds the following Metrics to node Metric list:
 
 .. list-table::
-   :widths: 50 100
+   :widths: 100 50
    :header-rows: 1
 
    * - Parameter
      - Description
    * - ServiceCheck.Custom(\ *target*\ ,\ *port*\ [,\ *timeout*\ ])
-     - Check that TCP *port* is open on *target*. Optional argument *timeout* specifies timeout in milliseconds.  This is a very simple test that does nothing more than check the port is open.
+     - Check that TCP *port* is open on *target*. Optional argument *timeout* specifies timeout in milliseconds, if it's not provided, default timeout from ***PORTCHECK** section of agent's configuration file will be used. This is a very simple test that does nothing more than check the port is open.
    * - ServiceCheck.HTTP(\ *target*\ ,[\ *port*\ ],\ *URI*\ ,\ *hostHeader*\ [,\ *regex*\ [,\ *timeout*\ ]])
-     - Check that HTTP service is running on *target*.  Optional argument *port* specifies the port to connect with, otherwise 80 will be used.  The *URI* is NOT a URL it is the host header request URI.  As an example to test URL http://www.netxms.org/index.html enter www.netxms.org:/index.html. *hostHeader* is currently not used, but may be the Host option at some point in the request made.  Optional argument *regex* is the regular expression to check returned from the request, otherwise "^HTTP/1.[01] 200 .*" will be used.  Optional argument *timeout* specifies timeout in milliseconds.
+     - Check that HTTP service is running on *target*.  Optional argument *port* specifies the port to connect to,
+       otherwise 80 will be used.  The *URI* is NOT a URL it is the host header request URI.
+       As an example to test URL http://www.netxms.org/index.html enter www.netxms.org:/index.html. *hostHeader* is
+       currently not used, but may be the Host option at some point in the request made.
+       Optional argument *regex* is the regular expression to check returned from the request,
+       otherwise "^HTTP/(1\\.[01]|2) 200 .*" will be used.  Optional argument *timeout* specifies timeout in milliseconds.
    * - ServiceCheck.POP3(\ *target*\ ,\ *username*\ ,\ *password*\ [,\ *timeout*\ )
      - Check that POP3 service is running on *target* and that we are able to login using the supplied *username* and *password*.  Optional argument *timeout* specifies timeout in milliseconds.
    * - ServiceCheck.SMTP(\ *target*\ ,\ *toAddress*\ [,\ *timeout*\ ])
@@ -96,7 +101,7 @@ All of the ServiceCheck.* parameters return the following values:
    * - Value
      - Description
    * - 0
-     - Success, *target* was connected to and returned expected response.
+     - Success, connection to *target* was established and expected response was received.
    * - 1
      - Invalid arguments were passed.
    * - 2
@@ -109,7 +114,7 @@ All configuration parameters related to PORTCHECK subagent should be placed into
 are supported:
 
 .. list-table::
-   :widths: 20 20 100 20
+   :widths: 25 20 100 20
    :header-rows: 1
 
    * - Parameter
@@ -122,7 +127,7 @@ are supported:
      - netxms.org
    * - Timeout
      - *milliseconds*
-     - Set response timeout to *milliseconds*.
+     - Set default response timeout in *milliseconds*.
      - 3000
 
 Configuration example:
@@ -147,8 +152,8 @@ Configuration example:
 NetSVC configuration
 --------------------
 
-This subagent can be used to check network services supported by libcurl. More about
-syntaxes can be found there: http://curl.haxx.se/docs/manpage.html.
+This subagent can be used to check network services supported by libcurl. More
+information about syntax can be found here: http://curl.haxx.se/docs/manpage.html.
 
 This subagent will add this Metrics to node Metric list:
 
@@ -158,17 +163,40 @@ This subagent will add this Metrics to node Metric list:
 
    * - Parameter
      - Description
-   * - Service.Check(,) ServiceCheck.Custom(\ *target*\ ,\ *port*\ [,\ *timeout*\ ])
-     - Check that TCP *port* is open on *target*. Optional argument *timeout* specifies timeout in milliseconds.  This is a very simple test that does nothing more than check the port is open.
+   * - Service.Check(\ *URL*\[, \ *regex*\])
+     - Check if data retrieved from *ULR* matches regular expression \ *regex*\.
+       \ *regex*\ can be omitted, it that case "^HTTP/(1\\.[01]|2) 200 .*" will be used.
+
+.. note:
+  Parameter(s) in [ ] are optional, when optional parameter(s) are used they should
+  be used without [ ].
+
+
+Service.Check parameter returns the following values:
+
+.. list-table::
+   :widths: 15 50
+   :header-rows: 1
+
+   * - Value
+     - Description
+   * - 0
+     - Success, connection to *target* was established and expected response was received.
+   * - 1
+     - Invalid arguments were passed.
+   * - 2
+     - Cannot connect to *target*.
+   * - 3
+     - Invalid / Unexpected response from *target*.
 
 
 HTTP check example:
 
 .. code-block:: cfg
 
-   Service.Check(https://inside.test.ru/,^HTTP/1\.[01] 200.*)
+   Service.Check(https://inside.test.ru/,^HTTP/(1\\.[01]|2) 200 .*)
 
-"^HTTP/1\.[01] 200.*" - this is default value and may be missed in expression.
+"^HTTP/(1\\.[01]|2) 200 .*" - this is default value and can be omitted in the expression.
 
 .. note::
   If agent is build from sources, then libcurl-dev should be installed to

@@ -8,19 +8,16 @@ Object management
 Object browser
 ==============
 
-:guilabel:`Object browser` organize all existing :term:`objects <Object>` in
-hierarchical structure. |product_name| has eight top level objects – Entire Network,
-Service Root, Template Root, Policy Root, Network Map Root, Dashboard Root,
-Report Root, and Business Service Root. These objects served as an abstract
-root for appropriate object tree. All top level objects has only one editable
-attribute – name.
+:guilabel:`Object browser` is a view in in :term:`Management Console`. It presents all
+existing :term:`objects <Object>` as a hierarchical structure. Overall description of
+objects can be found in concepts part: :ref:`concept_object`.
 
-Overall description about objects can be found in concepts part: :ref:`concept_object`.
+Object browser options
+----------------------
 
-Properties
-----------
+Object browser has a number of options that define how object tree is displayed.
 
-Object browser has next options:
+Object browser has following options:
  - Show filter :kbd:`CTRL+F2`, that shows search line that has special syntaxes
    for search. Syntaxes description can be found there: :ref:`object_browser_filters`.
  - Show status indicator :kbd:`CTRL+F3`
@@ -44,7 +41,7 @@ But there are few prefix that can be used for other search options:
 Objects
 =======
 
-Detailed information about objects, it's usage, parents and childes can be found in
+Detailed information about objects, it's usage, parents and children can be found in
 concept chapter, :ref:`concept_object`. In this section will be described only actions and
 properties that can be applied on different object classes.
 
@@ -358,7 +355,7 @@ via |product_name| API. Custom attributes distinguished by names (an attribute n
 to 127 printable characters), and have string values of unlimited length. However, if you wish
 to access custom attributes in :term:`NXSL` scripts as properties of node object, you should name them
 conforming to NXSL identifier naming constraints. To create or change value of custom attribute
-manually, right-click object in |product_name| console, and select :menuselection:`Properties --> Custom Attributes tab`.
+manually, right-click an object in |product_name| console, and select :menuselection:`Properties --> Custom Attributes tab`.
 
 .. figure:: _images/object_custom_attributes.png
 
@@ -508,7 +505,7 @@ The following object access rights can be granted:
    * - View alarms
      - View alarms with this object as source.
    * - Download file
-     - Allow user to download files from this node(from paths defined by filemng subagent). This access right is check also when download or tail of file is done from object tools.
+     - Allow user to download files from this node (from paths defined by filemng subagent). This access right is also checked when downloading or tail of file is done from object tools.
    * - Upload file
      - Allow user to upload files to this node(from paths defined by filemng subagent)
    * - Manage files
@@ -520,7 +517,7 @@ Object Details
 ==============
 
 Object details view provides main information about object. Each object has
-:guilabel:`Overview` tab that gisplays general information about object
+:guilabel:`Overview` tab that displays general information about object
 (like: ID, GUID, Class, and status of the object) and :guilabel:`Comments`.
 
 Subnet
@@ -532,23 +529,24 @@ Subnet
 Object Tools
 ============
 
-There can be created tools that will be executed on objects. Tools can be managed
-in "Object Tools" view. Tools are shown under "Tools" item of node menu.
-There are some :ref:`predefined object tools<object_tools_predefined>`:
+It is possible to create tools that will be executed on objects. Configured
+object tools are listed under :guilabel:`Tools` in object browser's context menu.
+A tool can ran a command on |product_name| server or node, obtain data from SNMP or
+|product_name| agent, etc...
 
-.. figure:: _images/object_tools.png
-   :scale: 65%
+Tools can be managed in :menuselection:`Configuration --> Object Tools`. There are
+some :ref:`predefined object tools<object_tools_predefined>` that are available
+after installation of the system.
 
-If object tool should be removed for some time it can be just disabled and then
+If an object tool is not needed for some time it can be just disabled and then
 enabled when required. When object tool is disabled it is not shown under "Tools"
-item of node menu. There is also common option to set image for each object tool in
-the tool properties.
+item of context menu. If an image (16x16 px) is configured for an object tool, it will be
+displayed next to object tool name in "Tools" menu.
 
 Tool can have :ref:`input fields<object_tools_input_fields>`,
-:ref:`filder depending on execution object<object_tools_filter>`,
+:ref:`filter depending on execution object<object_tools_filter>`,
 :ref:`macro substitution<object_tools_macro>` and
 :ref:`personal access control configuration<object_tools_access_control>`.
-
 
 Object tool types
 -----------------
@@ -556,7 +554,7 @@ Object tool types
 Internal
 ~~~~~~~~
 
-Commands that are defined in :term:`Management Console`. The only command available for now is :guilabel:`Wakeup node`.
+The only operation available for now is ``wakeup`` that sends magic packet to wake up a node.
 
 .. _object_tool-agent-command:
 
@@ -564,7 +562,7 @@ Agent Command
 ~~~~~~~~~~~~~
 
 This tool will execute command on an agent node and will show it's output if
-:guilabel:`Command generates output` option will be enabled.
+:guilabel:`Command generates output` option is enabled.
 
 .. figure:: _images/obj_tool_agent_command.png
    :scale: 65%
@@ -580,24 +578,25 @@ This tool will execute command on an agent node and will show it's output if
    * - Description
      - Description is shown in "Object Tools" view. Should be used to describe tool purpose.
    * - Command
-     - Command name that should be executed on a agent node, this command should be
-       defined in agent's config. To this command can be given parameters in format:
+     - Name of agent command that will be executed. There is a number of commands built into
+       agent and additional commands can be added by defining them in agent's config.
+       If command accepts parameters they are supplied it the following format:
        ``commandName param1 param2 param3...``
-   * - Command generated output
-     - If this option is selected, then on command execution will be opened window with it's output.
+   * - Command generates output
+     - If this option is selected then command execution will open a window with it's output.
    * - This tool requires confirmation before execution
-     - If chosen, before execution of tool will be shown Yes/No pop-up with text from "Confirmation message" field.
+     - If chosen a Yes/No pop-up with text from "Confirmation message" field will be shown before execution of tool.
    * - Confirmation message
-     - Can be set the message that will be shown in confirmation pop-up.
+     - Contains message that will be shown in confirmation pop-up.
    * - Show this tool in node commands
      - If this option is selected, then this tool will be shown for applicable nodes
        on :guilabel:`Object Details` view as node command.
    * - Command name
-     - This will be shown as a name of the command.
+     - Name of the command
    * - Command short name
-     - Is used when usual name is too long for display.
+     - Is used when :guilabel:`Command name` is too long for display.
    * - Disable Object Tool
-     - If chosen, tool is not shown in node menu.
+     - If chosen, tool is not shown in Object browser's context menu and Commands in Object Details.
 
 SNMP Table
 ~~~~~~~~~~
@@ -621,9 +620,49 @@ and then show results in the table form.
    * - Title
      - Title of view where table will be shown.
    * - Use as index for second and subsequent columns OID suffix of first column
-     - This option defines that as suffix for columns OID's to match lines will be used suffix of columns OID
+     - This option defines that suffix of columns OID will be used as suffix for columns OID's to match lines
    * - Use as index for second and subsequent columns Value of first column
-     - This option defines that as suffix for columns OID's to match lines will be used value of columns OID
+     - This option defines that value of columns OID will be used as suffix for columns OID's to match lines
+   * - This tool requires confirmation before execution
+     - If chosen, before execution of tool will be shown Yes/No pop-up with text from "Confirmation message" field.
+   * - Confirmation message
+     - Can be set the message that will be shown in confirmation pop-up.
+   * - Show this tool in node commands
+     - If this option is selected, then this tool will be shown for applicable nodes
+       on :guilabel:`Object Details` view as node command.
+   * - Command name
+     - This will be shown as a name of the command.
+   * - Command short name
+     - Is used when usual name is too long for display.
+   * - Disable Object Tool
+     - If chosen, tool is not shown in node menu.
+
+Agent List
+~~~~~~~~~~~
+
+:guilabel:`Agent List` is used to get agent list from node on which it is executed
+and then show results in the table form. Regular expression is used to split
+received data to columns.
+
+.. figure:: _images/obj_tool_agent_list.png
+   :scale: 65%
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Field name
+     - Description
+   * - Name
+     - Name that will be shown in node menu. Submenu can be created with "->" notation.
+   * - Description
+     - Description is shown in "Object Tools" view. Should be used to describe tool's purpose.
+   * - Title
+     - Title of view where table will be shown.
+   * - Parameter
+     - Name of list
+   * - Regular expression
+     - Regular expression that will parse each line of list to separate it on columns defined in :guilabel:`Columns` tab.
    * - This tool requires confirmation before execution
      - If chosen, before execution of tool will be shown Yes/No pop-up with text from "Confirmation message" field.
    * - Confirmation message
@@ -641,7 +680,9 @@ and then show results in the table form.
 Agent Table
 ~~~~~~~~~~~
 
-:guilabel:`Agent Table` is used to get agent list from node on which it is executed
+.. versionadded:: 3.0.0
+
+:guilabel:`Agent Table` is used to get agent table from node on which it is executed
 and then show results in the table form.
 
 .. figure:: _images/obj_tool_agent_table.png
@@ -661,8 +702,6 @@ and then show results in the table form.
      - Title of view where table will be shown.
    * - Parameter
      - Name of list
-   * - Regular expression
-     - Regular expression that will parse each line of list to separate it on columns defined in :guilabel:`Columns` tab.
    * - This tool requires confirmation before execution
      - If chosen, before execution of tool will be shown Yes/No pop-up with text from "Confirmation message" field.
    * - Confirmation message
@@ -715,10 +754,11 @@ URL
 Local Command
 ~~~~~~~~~~~~~
 
-:guilabel:`Local Command` tool will execute command on the local node and will show it's output if
-:guilabel:`Command generates output` option will be enabled.
+:guilabel:`Local Command` tool will execute command on the node, where
+Desktop Management Console is running and will show it's output if
+:guilabel:`Command generates output` option is enabled.
 
-This tool type is not visible from Web Console as there is not possible
+This tool type is not visible from Web Console as it is not possible
 to execute command on web page receiver's machine.
 
 .. figure:: _images/obj_tool_local_command.png
@@ -737,7 +777,7 @@ to execute command on web page receiver's machine.
    * - Command
      - Command that should be executed on a local machine
    * - Command generated output
-     - If this option is selected, then on command execution will be opened window with it's output.
+     - If this option is selected, then command execution will open a window with output of the command.
    * - This tool requires confirmation before execution
      - If chosen, before execution of tool will be shown Yes/No pop-up with text from "Confirmation message" field.
    * - Confirmation message
@@ -755,7 +795,7 @@ to execute command on web page receiver's machine.
 Server Command
 ~~~~~~~~~~~~~~
 
-:guilabel:`Server command` tool can be used to execute command on a server.
+:guilabel:`Server command` tool can be used to execute command on the server.
 
 .. figure:: _images/obj_tool_server_command.png
    :scale: 65%
@@ -773,7 +813,7 @@ Server Command
    * - Command
      - Command that should be executed on a server
    * - Command generated output
-     - ***Not yet implemented for server actions***
+     - If this option is selected, then command execution will open a window with output of the command.
    * - This tool requires confirmation before execution
      - If chosen, before execution of tool will be shown Yes/No pop-up with text from "Confirmation message" field.
    * - Confirmation message
@@ -812,7 +852,8 @@ the content of the file from agent.
    * - Remote File Name
      - Name of file that will be retrieved. In Windows systems should be with double back slash as a separator(C:\\\\log\\\\log.log). Can be used `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_ macros
    * - Limit initial download size
-     - Limits the size of download file. If is set not to 500 tool will retrieve last 500 bytes of requested file. If is set to 0,  then will retrieve full file.
+     - Limits the size of download file. If is set to 500, tool will retrieve last 500 bytes of requested file.
+       If is set to 0, complete file will be retrieved.
    * - Follow file changes
      - If chosen, "File View" will be updated when file will be populated with new data.
    * - This tool requires confirmation before execution
@@ -829,12 +870,11 @@ the content of the file from agent.
    * - Disable Object Tool
      - If chosen, tool is not shown in node menu.
 
-
 Server Script
 ~~~~~~~~~~~~~
 
-:guilabel:`Server Script` tool can be used to execute NXSL script form :guilabel:`Script Librarry`.
-This fool provide full renge of capabilities that are available thought NXSL scripting.
+:guilabel:`Server Script` tool can be used to execute NXSL script form :guilabel:`Script Library`.
+This fool provide full range of capabilities that are available thought NXSL scripting.
 
 .. figure:: _images/obj_tool_script.png
    :scale: 65%
@@ -879,8 +919,8 @@ Action, file download, local command, and URL tool types allows macro substituti
 The following macros recognized:
 
 .. list-table::
+   :widths: 25 75
    :header-rows: 1
-   :class: longtable
 
    * - Macro
      - Description
@@ -896,7 +936,7 @@ The following macros recognized:
    * - ``%n``
      - Name of event source object.
    * - ``%U``
-     - User name of executer
+     - User name of user that launched the object tool from user interface
    * - ``%v``
      - |product_name| server's version.
    * - ``%[name]``
@@ -913,8 +953,8 @@ The following macros recognized:
 If object tool called from alarm's pop-up menu the following additional macros are available:
 
 .. list-table::
+   :widths: 25 75
    :header-rows: 1
-   :class: longtable
 
    * - Macro
      - Description
@@ -977,7 +1017,7 @@ Access Control
 ~~~~~~~~~~~~~~
 
 In :guilabel:`Access Control` tab can be defined witch users or groups can
-execute this action. If no list will be empty - only administrator will be able
+execute this action. If the list is empty, only administrator will be able
 to execute this action.
 
 .. figure:: _images/obj_tool_access_control.png
@@ -985,7 +1025,7 @@ to execute this action.
 Columns
 ~~~~~~~
 
-:guilabel:`Columns` tab is used only for :guilabel:`Agent Table` and
+:guilabel:`Columns` tab is used only for :guilabel:`Agent List` and
 :guilabel:`SNMP Table` object tool types.
 
 For :guilabel:`SNMP Table` it describes name and type of matching OID from
@@ -1018,7 +1058,7 @@ Input field can be one of this types:
 Predefined Object Tools
 -----------------------
 
-|product_name| is deviled with some predefined Object Tools. There is full list of them:
+|product_name| is delivered with a number of predefined Object Tools. Here is the list of them:
 
 .. list-table::
    :widths: 35 25 70 30
@@ -1036,29 +1076,33 @@ Predefined Object Tools
      - URL
      - Open embedded web browser to node using HTTPS
      -
-   * - :menuselection:`&Info->&Agent->&Subagent list`
+   * - :menuselection:`&Info->&Agent->&Loaded subagents`
      - Agent Table
-     - Show list of loaded subagents
+     - Show information about loaded subagents
      - |product_name| agent should be available
    * - :menuselection:`&Info->&Agent->Configured &ICMP targets`
      - Agent Table
-     - Show list of actions supported by agent
-     - |product_name| agent should be available
+     - Show information about ICMP targets configured on this agent
+     - |product_name| agent and ping subagent should be available
    * - :menuselection:`&Info->&Agent->Supported &actions`
-     - Agent Table
-     - Show list of actions supported by agent
+     - Agent List
+     - Show information about actions supported by agent
      - |product_name| agent should be available
    * - :menuselection:`&Info->&Agent->Supported &lists`
-     - Agent Table
+     - Agent List
      - Show list of lists supported by agent
      - |product_name| agent should be available
    * - :menuselection:`&Info->&Agent->Supported &parameters`
-     - Agent Table
+     - Agent List
      - Show list of parameters supported by agent
      - |product_name| agent should be available
-   * - :menuselection:`&Info->&Process list`
+   * - :menuselection:`&Info->&Agent->Supported &tables`
+     - Agent List
+     - Show list of tables supported by agent
+     - |product_name| agent should be available
+   * - :menuselection:`&Info->&Current processes`
      - Agent Table
-     - Show list of currently running processes
+     - Show information about currently running processes
      - |product_name| agent should be available
    * - :menuselection:`&Info->&Routing table (SNMP)`
      - SNMP Table
@@ -1069,11 +1113,11 @@ Predefined Object Tools
      - Show switch forwarding database
      - |product_name| should support SNMP
    * - :menuselection:`&Info->Active &user sessions`
-     - Agent Table
-     - Show list of active user sessions
+     - Agent List
+     - Show information about active user sessions
      - |product_name| agent should be available
    * - :menuselection:`&Info->AR&P cache (Agent)`
-     - Agent Table
+     - Agent List
      - Show ARP cache
      - |product_name| agent should be available
    * - :menuselection:`&Info->Topology table (CDP)`

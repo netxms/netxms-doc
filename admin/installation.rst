@@ -81,7 +81,7 @@ Using netxms-release package
 Install netxms-release_1.4_all.deb package that contain description of |product_name|
 repository (this package support all Debian and Ubuntu systems):
 
-:command:`$ wget http://packages.netxms.org/netxms-release_1.1_all.deb`
+:command:`$ wget http://packages.netxms.org/netxms-release_1.4_all.deb`
 
 :command:`$ sudo dpkg -i netxms-release_1.4_all.deb`
 
@@ -543,25 +543,25 @@ Since version 2.2.4 encryption support is enforced when building server.
 
      .. code-block:: sh
 
-       /usr/local/bin/nxdbmgr init /usr/local/share/netxms/sql/dbinit_pgsql.sql
+       /usr/local/bin/nxdbmgr init
 
      MySQL:
 
      .. code-block:: sh
 
-       /usr/local/bin/nxdbmgr init /usr/local/share/netxms/sql/dbinit_mysql.sql
+       /usr/local/bin/nxdbmgr init
 
      Oracle:
 
      .. code-block:: sh
 
-       /usr/local/bin/nxdbmgr init /usr/local/share/netxms/sql/dbinit_oracle.sql
+       /usr/local/bin/nxdbmgr init
 
      SQLite:
 
      .. code-block:: sh
 
-       /usr/local/bin/nxdbmgr init /usr/local/share/netxms/sql/dbinit_sqlite.sql
+       /usr/local/bin/nxdbmgr init
 
   #. Run server:
 

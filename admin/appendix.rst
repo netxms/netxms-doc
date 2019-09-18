@@ -236,7 +236,7 @@ Agent configuration file (nxagentd.conf)
      - Enable (yes) or disable (no) SNMP Trap proxy functionality.
      - no
    * - EnableSubagentAutoload
-     - Enable (yes) or disable (no) loading of platform subagent(s).
+     - Enable (yes) or disable (no) automatic loading of subagent(s) depending on the platform on which the agent is running. 
      - yes
    * - EnableWatchdog
      - Enable (yes) or disable (no) automatic agent restart in case of unexpected shutdown.

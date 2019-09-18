@@ -36,20 +36,20 @@ Each object has it's own access rights. Access rights are applied
 hierarchically on all children of object. For example if it grant :guilabel:`Read`
 access right for user on a :guilabel:`Container`, than user have :guilabel:`Read`
 right on all objects that contains this :guilabel:`Container`.
-Every object has set of attributes; some of them are common
+Every object has set of attributes; some of them exist for all objects
 (like :guilabel:`id` and :guilabel:`name` or :guilabel:`status`),  while other
 depends on object class – for example, only :guilabel:`Node` objects have
 attribute :guilabel:`SNMP community string`. There are default attributes
-and custom attributes defined either by user or integrated application via
+and custom attributes defined either by user or external application via
 |product_name| API.
 
-|product_name| has eight top level objects – ``Entire Network``, ``Service Root``,
-``Template Root``, ``Policy Root``, ``Network Map Root``, ``Dashboard Root``,
-``Report Root``, and ``Business Service Root``. These objects served as an
-abstract root for appropriate object tree. All top level objects has only one
+|product_name| has six top level objects – ``Entire Network``,
+``Service Root`` (named "Infrastructure Services" after system installation),
+``Template Root``, ``Network Map Root``, ``Dashboard Root`` and
+``Business Service Root``. These objects serve as an
+abstract root for an appropriate object tree. All top level objects have only one
 editable attribute – name.
 
-.. tabularcolumns:: |p{0.2 \textwidth}|p{0.5 \textwidth}|p{0.3 \textwidth}|
 
 .. list-table::
    :widths: 20 50 30
@@ -70,30 +70,34 @@ editable attribute – name.
        without overlapping addresses. Contains appropriate subnet objects.
      - - Subnet
    * - Subnet
-     - Object representing IP subnet. Typically objects of this class created
+     - Object representing IP subnet. Typically objects of this class are created
        automatically by the system to reflect system's knowledge of IP
        topology. The system places Node objects inside an appropriate Subnet
        object based on an interface configuration. Subnet objects have only one
        editable attribute - :guilabel:`Name`.
      - - Node
    * - Node
-     - Object representing physical host or network device(such as routers and switches).
+     - Object representing physical host or network device (such as a router or network switch).
        These objects can be created either manually by administrator or automatically during
        network discovery process. They have a lot of attributes controlling all aspects
        of interaction between |product_name| server and managed node. For example, the attributes
        specify what data must be collected, how node status must be checked, which protocol
-       versions to use etc. Node objects contain one or more interface objects. The system
+       versions to use, etc. Node objects contain one or more interface objects. The system
        creates interface objects automatically during configuration polls.
      - - Interface
+       - Access point
        - Network Service
        - VPN Connector
-   * - Cluster
-     - Object representing cluster consisted of two or more hosts.
-     - - Node
    * - Interface
      - Interface objects represent network interfaces of managed computers and
        devices. These objects created automatically by the system during
        configuration polls or can be created manually by user.
+     -
+   * - Access point
+     - Object representing wireless network access point. A node can have
+       several access points, e.g. 2.4Ghz and 5Ghz, or in case of thin wireless
+       access points managed by a central controller. These objects are created
+       automatically by the system.
      -
    * - Network Service
      - Object representing network service running on a node (like http or
@@ -103,7 +107,7 @@ editable attribute – name.
      -
    * - VPN Connector
      - Object representing VPN tunnel endpoint. Such objects can be created to
-       add VPN tunnels to network topology known y |product_name| server. VPN Connector
+       add VPN tunnels to network topology known to |product_name| server. VPN Connector
        objects are created manually. In case if there is a VPN
        connection linking two different networks open between two firewalls that are
        added to the system as objects, a user can create a VPN Connector object on
@@ -113,26 +117,42 @@ editable attribute – name.
      -
    * - Service Root
      - Abstract object representing root of your infrastructure service tree.
-       System can have only one object of this class.
+       System can have only one object of this class. After system installation
+       it is named "Infrastructure Services".
      - - Cluster
+       - Chassis
        - Condition
        - Container
-       - Mobile Device
        - Node
+       - Sensor
        - Subnet
        - Rack
    * - Container
-     - Grouping object which can contain nodes, subnets, clusters, conditions,
-       or other containers. With help of container objects you can build
+     - Grouping object which can contain any type of objects that Service Root
+       can contain. With help of container objects you can build
        object's tree which represents logical hierarchy of IT services in your
        organization.
      - - Cluster
+       - Chassis
        - Condition
        - Container
-       - Mobile Device
        - Node
+       - Sensor
        - Subnet
        - Rack
+   * - Cluster
+     - Object representing cluster consisting of two or more nodes. See
+       :ref:`Cluster monitoring<cluster-monitoring>` for more information.
+     - - Node
+   * - Rack
+     - Object representing a rack. It has the same purpose as container, but
+       allows to configure visual representation of equipment installed in a rack.
+     - - Node
+       - Chassis
+   * - Chassis
+     - Object representing a chassis, e.g. a blade server enclosure. Chassis
+       can be configured as a part of a rack.
+     - - Node
    * - Condition
      - Object representing complicated condition – like "cpu on node1 is
        overloaded and node2 is down for more than 10 minutes". Conditions may
@@ -150,8 +170,8 @@ editable attribute – name.
      - - Template
        - Template Group
    * - Template
-     - Data collection template. See Data Collection section for more
-       information about templates.
+     - Data collection template. See :ref:`Data collection<data-collection>` section
+       for more information about templates.
      - - Mobile Device
        - Node
    * - Network Map Root
@@ -190,9 +210,6 @@ editable attribute – name.
      - Object used to check business service state. One business service can
        contain multiple checks.
      -
-   * - Rack
-     - Object representing rack(works like container)
-     - - Node
 
 Object status
 -------------
@@ -252,32 +269,32 @@ Unmanaged status
 ----------------
 
 Objects can be unmanaged. In this status object is not polled, DCIs are not collected,
-no data is updated about object. This status can be used to store data about object
-that temporary or at permanently unavailable or not managed.
+no data is updated about object. This status can be used to store data about an object
+that is temporary or permanently unavailable or not managed.
 
 .. _maintenance_mode:
 
 Maintenance mode
 ------------------
 
-This is special status, because it is not included in usual status lit. This
-status prevents event processing for special node. While this status node is
-still polled and DCI data is still collected, but no event is generated.
+This is special status, that's why it is not included in above status list. This
+status prevents event processing for specific node. While this node in maintenance
+mode is still polled and DCI data is still collected, but no event is generated.
 
 Event Processing
 ================
 
 |product_name| is event based monitoring system. Events can come from different sources
 (polling processes (status, configuration, discovery, and data collection), :term:`SNMP`
-traps, and directly from external applications via client library.)
-and all are forwarded to |product_name| Event Queue. All events are processed by |product_name|
+traps, and directly from external applications via client library).
+All events all are forwarded to |product_name| Event Queue. All events are processed by |product_name|
 Event Processor one-by-one, according to the processing rules defined in
 :term:`Event Processing Policy<EPP>`. As a result of event processing, preconfigured
 actions can be executed, and/or event can be shown up as :term:`alarm <Alarm>`.
 
 Usually alarm represents something that needs attention of network administrators
 or network control center operators, for example low free disk space on a server.
-|product_name| provides one centralized location, the Alarm Browser, where the alarms are
+|product_name| provides one centralized location, the Alarm Browser, where alarms are
 visible. It can be configured which events should be considered
 important enough to show up as alarm.
 
@@ -291,8 +308,14 @@ Polling
 =======
 
 For some type of objects |product_name| server start gathering status and configuration information
-as soon as they are added to the system. These object types are: nodes, conditions,
-clusters, business services. This process called *polling*. There are multiple polling
+as soon as they are added to the system. These object types are: nodes, access points, conditions,
+clusters, business services
+
+
+[zones health check (if >1 proxies in zone)]
+
+
+. This process called *polling*. There are multiple polling
 types, usually performed with different intervals:
 
 +--------------------+----------------------------------------------------------------------------------------------+
@@ -300,17 +323,17 @@ types, usually performed with different intervals:
 +====================+==============================================================================================+
 | Status             | Determine current status of an object                                                        |
 +--------------------+----------------------------------------------------------------------------------------------+
+| ICMP               | Ping nodes and gather response time statistics                                               |
++--------------------+----------------------------------------------------------------------------------------------+
 | Configuration      | Determine current configuration of an object (list of interfaces, supported protocols, etc.) |
 +--------------------+----------------------------------------------------------------------------------------------+
 | Topology           | Gather information related to network topology                                               |
-+--------------------+----------------------------------------------------------------------------------------------+
-| Discovery          | Find potential new nodes during network discovery cycles                                     |
 +--------------------+----------------------------------------------------------------------------------------------+
 | Routing            | Gather information about IP routing                                                          |
 +--------------------+----------------------------------------------------------------------------------------------+
 | Instance Discovery | Verify all DCIs created by instance discovery process                                        |
 +--------------------+----------------------------------------------------------------------------------------------+
-| Network Discovery  | Searches for new nodes                                                                       |
+| Network Discovery  | Searches for new nodes by polling information about neighbor IP addresses from known nodes   |
 +--------------------+----------------------------------------------------------------------------------------------+
 
 .. _basic-concepts-dci:
@@ -319,7 +342,8 @@ Data Collection
 ===============
 
 From each node |product_name| can collect one or more :term:`metrics <Metric>` which
-can be either single-value ("CPU.Usage"), or table ("FileSystem.Volumes").
+can be either single-value ("CPU.Usage"), list ("FileSystem.MountPoints")
+or table ("FileSystem.Volumes").
 When new data sample is collected, it's value is checked against configured
 thresholds. This documentation use term :term:`Data Collection Item <DCI>`
 to describe configuration of metric collection schedule, retention, and thresholds.
@@ -361,12 +385,13 @@ Network discovery
 |product_name| can detect new devices and servers on the network and automatically
 create node objects for them. Two modes are available – passive and active.
 
-In passive mode server will use only non-intrusive methods by querying ATP and
-routing tables from known devices. Tables from the server running |product_name| are
+In passive mode server will use only non-intrusive methods by querying ARP and
+routing tables from known nodes. Tables from the server running |product_name| are
 used as seed for passive discovery.
 
-In active mode server will periodically scan configured address ranges using
-ICMP echo requests in addition to passive scan methods.
+In active mode in addition to passive scan methods configured address ranges
+are periodically scanned using ICMP echo requests.
+
 
 Instance discovery
 ------------------

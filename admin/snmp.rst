@@ -63,7 +63,7 @@ configured next things:
 
 .. figure:: _images/snmp_trap_mapping_configuration.png
 
-.. _dafault_snmp:
+.. _default_snmp:
 
 Default SNMP credentials
 ========================

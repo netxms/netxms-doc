@@ -447,6 +447,7 @@ Since version 2.2.4 encryption support is enforced when building server.
   #. Change directory to netxms-VERSION and run configure script:
 
         :command:`cd netxms-VERSION`
+
         :command:`./configure --with-server --with-pgsql --with-agent`
 
         Most commonly used options (check full list with :command:`./configure --list`):
@@ -581,6 +582,7 @@ Agent
   #. Change directory to netxms-VERSION and run configure script:
 
         :command:`cd netxms-VERSION`
+
         :command:`./configure --with-agent`
 
         Most commonly used options (check full list with :command:`./configure --list`):

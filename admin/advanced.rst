@@ -25,8 +25,8 @@ Enable Zoning
 
 Zoning support is off by default. To turn it on you must set server's
 configuration variable ``EnableZoning`` to ``1`` and restart server. After
-restart, server will create default zone with ID ``0`` and put all existing
-subnets into that zone. Subnet tree will looks like this:
+restart, server will create default zone with UIN (unique identification number)
+``0`` and put all existing subnets into that zone. Subnet tree will looks like this:
 
 .. figure:: _images/Zoning_enabled.png
 
@@ -478,14 +478,37 @@ Authentication
 Login
 ^^^^^
 
-There are implemented 3 options of authentication:
+Any user account configured in NetXMX can be used to authenticate to Rest API, however
+this user should have access right to objects that will be requested through the API.
+
+There are 3 implemented options of authentication:
 
    1. Basic authentication for Rest API session creation, more information can be found on :wikipedia:`Wikipedia <Basic access authentication>`
    2. Through POST request for Rest API session creation
-   3. Through POST request for |product_name| user external authentication(can be used as external authentication source)
+   3. Through POST request to allow external software user authentication using |product_name| user accounts.
+      To be able to login using this authentication type, user account should have "External tool integration account" access right set.
 
-Authentication used as external source of user authentication. User that try to login thought
-this authentication type should have "External tool integration account" access right.
+Creating Rest API session:
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Request type: **POST**
+
+JSON data:
+
+.. code-block:: json
+
+    {"login":"admin","password":"netxms"}
+
+Request path: *API_HOME*/sessions
+
+Return data:
+
+    On success server will set cookie session_handle and json with session GUID and server version.
+    When performing subsequent requests, session GUID should be provided in `Session-Id:` field of request's header
+    or the cookie should be passed.
+
+Performing external authentication:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Request type: **POST**
 
@@ -504,21 +527,6 @@ Return data:
 
 Authentication used to gain Rest API session.
 
-Request type: **POST**
-
-JSON data:
-
-.. code-block:: json
-
-    {"login":"admin","password":"netxms"}
-
-Request path: *API_HOME*/sessions
-
-Return data:
-
-    On success server will set cookie session_handle and json with session GUID and server version.
-    Further on each subsequent request cookie should be passed.
-
 Logout
 ^^^^^^
 
@@ -526,7 +534,7 @@ To log out request with given session ID.
 
 Request type: **DELETE**
 
-Request path: *API_HOME*/session/**{sid}**
+Request path: *API_HOME*/sessions/**{sid}**
 
 Return data:
 
@@ -538,7 +546,7 @@ Objects
 Get multiple objects with filters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Request to get all objects available to this user or to get objects that fulfill
+Request to get all objects available to this user or to get objects that fulfil
 filter requirements and are available to this user.
 
 Request type: **GET**

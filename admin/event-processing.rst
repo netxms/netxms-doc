@@ -576,6 +576,12 @@ alarms, or actions. You may use the following macros to accomplish this:
      - Value returned by script. You should specify name of the script from script library.
    * - ``%{name}``
      - Value of custom attribute.
+   * - ``%{name:default_value}``
+     - Value of custom attribute. If such custom attribute does not exists on a particular
+       node, default_value is taken. If custom attribute exists, but has empty value,
+       this empty value is taken (if this macro is used somewhere, where it's value is
+       converted to numeric value - e.g. as threshold value for a numeric DCI - then empty
+       value will be converted to 0). 
    * - ``%<name>``
      - Event's parameter with given name.
    * - ``%1`` - ``%99``

@@ -114,7 +114,7 @@ applied simultaneously to all nodes.
 :guilabel:`Take screenshot` for now halfway implemented functionality. For now screenshot can
 be taken only from Windows machines.
 
-Description of :guilabel:`Edit agent's configuration` functionality can be found in :ref:`edit_agent_configuration_remotly`
+Description of :guilabel:`Edit agent's configuration` functionality can be found in :ref:`edit_agent_configuration_remotely`
 chapter.
 
 Poll options:

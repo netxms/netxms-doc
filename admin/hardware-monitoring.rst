@@ -240,7 +240,7 @@ These are the necessary configuration sections and parameters for the MQTT subag
 
 .. list-table::
 	:header-rows: 1
-	:widths: 25	50 50 200
+	:widths: 50	20 20 50
 
 	* - Section
 	  - Parameters

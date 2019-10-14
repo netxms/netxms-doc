@@ -78,12 +78,12 @@ easy change in repository configuration and encryption keys updated in the featu
 Using netxms-release package
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Install netxms-release_1.4_all.deb package that contain description of |product_name|
+Install netxms-release-latest.deb package that contain description of |product_name|
 repository (this package support all Debian and Ubuntu systems):
 
-:command:`$ wget http://packages.netxms.org/netxms-release_1.4_all.deb`
+:command:`$ wget http://packages.netxms.org/netxms-release-latest.deb`
 
-:command:`$ sudo dpkg -i netxms-release_1.4_all.deb`
+:command:`$ sudo dpkg -i netxms-release-latest.deb`
 
 Update APT cache:
 

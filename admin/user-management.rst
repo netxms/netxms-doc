@@ -154,9 +154,9 @@ The following system access rights can be granted:
      - Allow user to schedule maintenance for an object. :ref:`schedule`
    * - Schedule script execution
      - Allow user to schedule script execution. :ref:`schedule`
-   * - Send SMS
-     - Allow user to send SMS via |product_name| server. This access right has no
-       effect unless server configuration variable ``AllowDirectSMS`` set to
+   * - Send notifications
+     - Allow user to send notifications via |product_name| server. This access right has no
+       effect unless server configuration variable ``AllowDirectNotifications`` set to
        ``1``.
    * - Unlink helpdesk tickets
      - Allow user to unlink alarm from external helpdesk system :ref:`helpdesk-integration`.

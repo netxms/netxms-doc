@@ -8,8 +8,9 @@ Glossary
   Action
     Configurable operation which can be executed by the system when
     :term:`Event` is passing thru :term:`Event Processing Policy`. Multiple
-    action types are supported, including email or SMS notification, executing
-    OS commands and forwarding events to another instance of |product_name| server.
+    action types are supported, including email or notifications (SMS,
+    instant messages), executing OS commands and forwarding events to
+    another instance of |product_name| server.
 
   Alarm
     Outstanding issue which require operator attention. Alarms are created by

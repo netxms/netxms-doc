@@ -452,23 +452,26 @@ Since version 2.2.4 encryption support is enforced when building server.
 
         Most commonly used options (check full list with :command:`./configure --list`):
 
-        +--------------------+------------------------------------------------------------------------------------------+
-        | Name               | Description                                                                              |
-        +====================+==========================================================================================+
-        | --prefix=DIRECTORY | Installation prefix, all files go to the specified directory                             |
-        +--------------------+------------------------------------------------------------------------------------------+
-        | --with-server      | Build server binaries. You will need to select at least one DB driver as well            |
-        +--------------------+------------------------------------------------------------------------------------------+
-        | --with-agent       | Build monitoring agent. It is strongly recommended to install agent on a server box      |
-        +--------------------+------------------------------------------------------------------------------------------+
-        | --with-pgsql       | Build PostgresSQL DB Driver (if you plan to use PostgreSQL as backend database)          |
-        +--------------------+------------------------------------------------------------------------------------------+
-        | --with-mysql       | Build MySQL DB Driver (if you plan to use MySQL as backend database)                     |
-        +--------------------+------------------------------------------------------------------------------------------+
-        | --with-odbc        | Build ODBC DB driver (if you plan to connect to your backend database via unixODBC)      |
-        +--------------------+------------------------------------------------------------------------------------------+
-        | --with-sqlite      | Build SQLite DB driver (if you plan to use embedded SQLite database as backend database) |
-        +--------------------+------------------------------------------------------------------------------------------+
+        .. list-table::
+           :header-rows: 1
+           :widths: 30 70
+
+           * - Name
+             - Description
+           * - --prefix=DIRECTORY
+             - Installation prefix, all files go to the specified directory
+           * - --with-server
+             - Build server binaries. You will need to select at least one DB driver as well
+           * - --with-agent
+             - Build monitoring agent. It is strongly recommended to install agent on a server box
+           * - --with-pgsql
+             - Build PostgresSQL DB Driver (if you plan to use PostgreSQL as backend database)
+           * - --with-mysql
+             - Build MySQL DB Driver (if you plan to use MySQL as backend database)
+           * - --with-odbc
+             - Build ODBC DB driver (if you plan to connect to your backend database via unixODBC)
+           * - --with-sqlite
+             - Build SQLite DB driver (if you plan to use embedded SQLite database as backend database)
 
   #. Run build binaries and install them into /usr/local (unless changed with configure flag --prefix)
 
@@ -587,13 +590,16 @@ Agent
 
         Most commonly used options (check full list with :command:`./configure --list`):
 
-        +--------------------+------------------------------------------------------------------------------------------+
-        | Name               | Description                                                                              |
-        +====================+==========================================================================================+
-        | --prefix=DIRECTORY | Installation prefix, all files go to the specified directory                             |
-        +--------------------+------------------------------------------------------------------------------------------+
-        | --with-agent       | Build monitoring agent. It is strongly recommended to install agent on a server box      |
-        +--------------------+------------------------------------------------------------------------------------------+
+        .. list-table::
+           :header-rows: 1
+           :widths: 30 70
+
+           * - Name
+             - Description
+           * - --prefix=DIRECTORY
+             - Installation prefix, all files go to the specified directory
+           * - --with-agent
+             - Build monitoring agent. It is strongly recommended to install agent on a server box
 
   #. Run build binaries and install them into /usr/local (unless changed with configure flag --prefix)
 

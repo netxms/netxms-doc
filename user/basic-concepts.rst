@@ -230,18 +230,18 @@ Object's status can be one of the following:
 Unmanaged status
 ----------------
 
-Objects can be unmanaged. In this status object is not polled, DCIs are not collected, 
-no data is updated about object. This status can be used to store data about object 
-that temporrary or at permonently unavailabe or not managed. 
+Objects can be unmanaged. In this status object is not polled, DCIs are not collected,
+no data is updated about object. This status can be used to store data about object
+that temporrary or at permonently unavailabe or not managed.
 
 .. _maintenance_mode:
 
 Maintanence mode
 ------------------
 
-This is special status, because it is not included in usual status lit. This 
-status prevents event processing for special node. While this status node is 
-still polled and DCI data is still collected, but no event is generated. 
+This is special status, because it is not included in usual status lit. This
+status prevents event processing for special node. While this status node is
+still polled and DCI data is still collected, but no event is generated.
 
 Data Collection Items
 =====================
@@ -260,7 +260,7 @@ Each threshold is a combination of a condition and event pair. If a condition
 becomes true, associated "activation" event is generated, and when it becomes
 false again, "deactivation" event generated. Thresholds let you take a
 proactive approach to network management. Thresholds can be defined for any
-data collection items that is monitored, more than one threshold for a single 
+data collection items that is monitored, more than one threshold for a single
 DCI can be defined.
 
 Events and Alarms
@@ -272,10 +272,11 @@ managed nodes, or from management applications residing on the management
 station or on specific network nodes. All events are processed by |product_name| Event
 Processor one-by-one, according to the processing rules defined in Event
 Processing Policy. As a result of event processing, some actions can be taken,
-and event can be shown up as alarm, sent as e-mail or sms. |product_name| provides one 
-centralized location - the Alarm Browser, where the alarms are visible to your 
-team. You can control which events should be considered important enough to 
-show up as alarms. You and your team can easily monitor the posted alarms and 
+and event can be shown up as alarm, sent as e-mail and notifications
+(SMS, instant messages). |product_name| provides one 
+centralized location - the Alarm Browser, where the alarms are visible to your
+team. You can control which events should be considered important enough to
+show up as alarms. You and your team can easily monitor the posted alarms and
 take appropriate actions to preserve the health of your network.
 
 Examples of alarms include:
@@ -291,12 +292,12 @@ Examples of alarms include:
 Zones
 =====
 
-As |product_name| server keeps track of an IP topology, it is important to maintain the 
-configuration in which IP addresses do not overlap and that two IP addresses 
-from same subnet are really within one subnet. Sometimes, however, it is needed 
-to monitor multiple sites with overlapping IP address ranges. To correctly 
-handle such situation, zoning must be used. Zone in |product_name| is a group of IP 
-subnets which form non-overlapping IP address space. There is always zone 0 which 
-contains subnets directly reachable by management server. For all other zones 
-server assumes that subnets within that zones are not reachable directly, and 
+As |product_name| server keeps track of an IP topology, it is important to maintain the
+configuration in which IP addresses do not overlap and that two IP addresses
+from same subnet are really within one subnet. Sometimes, however, it is needed
+to monitor multiple sites with overlapping IP address ranges. To correctly
+handle such situation, zoning must be used. Zone in |product_name| is a group of IP
+subnets which form non-overlapping IP address space. There is always zone 0 which
+contains subnets directly reachable by management server. For all other zones
+server assumes that subnets within that zones are not reachable directly, and
 proxy must be used.

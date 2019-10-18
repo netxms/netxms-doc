@@ -361,8 +361,9 @@ Escalation
 As it was described in :ref:`generating_alarms` chapter there is possibility to generate new
 event if alarm stay in :guilabel:`Outstanding` state for too long. Escalation is built on
 this option. When alarm was generated, but no action was done from operator in predefined time,
-new event can be generated and this time email or SMS can be sent to operator or to it's manager.
-This escalation process can have as many steps as it is required.
+new event can be generated and this time email or notification (SMS, instant message)
+can be sent to operator or to it's manager. This escalation process can have as many steps
+as it is required.
 
 
 .. _actions:
@@ -428,11 +429,11 @@ Required server configuration parameters to send emails: ``SMTPFromAddr``, ``SMT
 
 In message text can be used :ref:`event-processing-macros`.
 
-Send SMS
-~~~~~~~~
+Send notification
+~~~~~~~~~~~~~~~~~
 
-Send SMS to one or more recipients. Multiple recipients can be separated by semicolons.
-Server will use :ref:`SMS driver<sms-drivers>` for actual message sending.
+Send notification, e.g. SMS, to one or more recipients. Multiple recipients can be separated by semicolons.
+Server will use :ref:`Notification channel drivers<notification-channel-drivers>` for actual message sending.
 
 In message text can be used :ref:`event-processing-macros`.
 
@@ -440,7 +441,7 @@ Send XMPP message
 ~~~~~~~~~~~~~~~~~
 
 Sends XMPP/Jabber message to one or more recipients. Multiple recipients can be separated by semicolons.
-equired server configuration parameters to send XMPP message: :guilabel:`XMPPLogin`, :guilabel:`XMPPPassword`,
+Required server configuration parameters to send XMPP message: :guilabel:`XMPPLogin`, :guilabel:`XMPPPassword`,
 :guilabel:`XMPPPort`, :guilabel:`XMPPServer`, :guilabel:`EnableXMPPConnector`. For detailed description of
 parameters check :ref:`server_configuration_parameters`.
 
@@ -581,7 +582,7 @@ alarms, or actions. You may use the following macros to accomplish this:
        node, default_value is taken. If custom attribute exists, but has empty value,
        this empty value is taken (if this macro is used somewhere, where it's value is
        converted to numeric value - e.g. as threshold value for a numeric DCI - then empty
-       value will be converted to 0). 
+       value will be converted to 0).
    * - ``%<name>``
      - Event's parameter with given name.
    * - ``%1`` - ``%99``

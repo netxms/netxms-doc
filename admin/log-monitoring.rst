@@ -533,6 +533,9 @@ regular expression defined in ``<match>`` tag. Inside ``<event>`` tag you
 should specify event name or event code to be generated. All matched capture groups
 will be given to the event as an event parameters.
 
+Event tag has ``tag`` attribute. If the attribute is set, then it will be added to 
+the selected event tag list.
+
 
 <context> Tag
 -------------

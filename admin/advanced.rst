@@ -229,18 +229,19 @@ Steps to create ticket:
 
 
 
-Hooks (Pollers hooks)
-=====================
+Hooks
+=====
 
-|product_name| has 5 different poller types, sometimes it is required by user
-to add some additional functionality while this polls. For this purpose
-were created hooks. Hook is manually created script in
-:guilabel:`Script Library` that is executed at the very end of the poll.
+Sometimes it is required to add some additional functionality after poll, object 
+creation or other action - for this purpose hooks were created. 
+Hook is manually created script in :guilabel:`Script Library` that is executed 
+at a special condition like end of the poll or interface creation. 
+
 More about poll types and purposes can be found :ref:`there <concepts_polling>`
 and about script creation :ref:`there <scripting>`.
 
 To be recognized as a hook script should have special name. It should be named
-according to convention: Hook\:\:\ `Pool_name`.
+according to convention: Hook\:\:\ `hook_name`.
 
 Example: Hook\:\:ConfigurationPoll
 
@@ -248,28 +249,74 @@ Full list of hooks:
 
 .. list-table::
    :header-rows: 1
-   :widths: 30 70 30
+   :widths: 70 70 70 70
 
    * - Hook name
      - Description
      - Parameters
+     - Return value
    * - Hook\:\:StatusPoll
      - Hook that is executed at the end of status poll
-     - $node
+     - $object - current object, one of 'NetObj' subclasses
+
+       $node - current object if it is 'Node' class
+     - none
    * - Hook\:\:ConfigurationPoll
      - Hook that is executed at the end of configuration poll
-     - $node
+     - $object - current object, one of 'NetObj' subclasses
+     
+       $node - current object if it is 'Node' class
+     - none
    * - Hook\:\:InstancePoll
      - Hook that is executed after instance discovery poll.
-     - $node
+     - $object - current object, one of 'NetObj' subclasses
+     
+       $node - current object if it is 'Node' class
+     - none
    * - Hook\:\:TopologyPoll
      - Hook that is executed at the ens of topology poll
-     - $node
+     - $node - current node, object of 'Node' type
+     - none
+   * - Hook\:\:CreateInterface
+     - Hook that is executed after new interface is created.
+     - $node - current node, object of 'Node' type
+      
+       $1 - current interface, object of 'Interface' type
+     - true/false - boolean - whether interface should be created
    * - Hook\:\:AcceptNewNode
      - Hook that is executed on a new node add. This script should return 1 if
        node should be added. In case if script returns nothing or something other
        than 1 - node will not be added.
-     - $ipAddr, $ipNetMask, $macAddr, $zoneId
+     - $ipAddr - IP address of the node being processed
+       
+       $ipNetMask - netmask of the node being processed
+
+       $macAddr - MAC address of the node being processed
+
+       $zoneId - zone ID of the node being processed
+     - true/false - boolean - whether node should be created
+   * - Hook\:\:DiscoveryPoll
+     - Hook that is executed at the ens of discovery poll
+     - $node - current node, object of 'Node' type
+     - none
+   * - Hook\:\:PostObjectCreate
+     - Hook that is executed after object is created
+     - $object - current object, one of 'NetObj' subclasses
+     
+       $node - current object if it is 'Node' class
+     - none
+   * - Hook\:\:CreateSubnet
+     - Hook that is executed at the ens subnet creation
+     - $node - current node, object of 'Node' class
+     
+       $1 - current subnet, object of 'Subnet' class
+     - true/false - boolean - whether subnet should be created
+   * - Hook\:\:UpdateInterface
+     - Hook that is executed at the ens of interface update
+     - $node - current node, object of 'Node' type
+      
+       $interface - current interface, object of 'Interface' type
+     - none
 
 Usually hooks are used for automatic actions that need to be done on node.
 For example automatic remove change of expected state of interface depending

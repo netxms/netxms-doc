@@ -552,7 +552,7 @@ alarms, or actions. You may use the following macros to accomplish this:
    * - ``%M``
      - Custom message text. Can be set in filtering script by setting ``CUSTOM_MESSAGE`` variable.
    * - ``%n``
-     - Name of event source object.
+     - Name of event source object or name of interface for intefrace macro expansion. 
    * - ``%N``
      - Event's name.
    * - ``%s``

@@ -433,7 +433,7 @@ Send notification
 ~~~~~~~~~~~~~~~~~
 
 Send notification, e.g. SMS, to one or more recipients. Multiple recipients can be separated by semicolons.
-Server will use :ref:`Notification channel drivers<notification-channel-drivers>` for actual message sending.
+Server will use :ref:`notification-channels` for actual message sending.
 
 In message text can be used :ref:`event-processing-macros`.
 
@@ -491,6 +491,201 @@ There can be used one of two options if it is required to disable polling of sen
 polling protocols or unmanage nodes. Chose  depends on how you wish to see node's status. For unmanaged node, it always be
 "unmanaged", regardless of active alarms. If you disable polling, node's status will be "unknown" unless there will be active
 alarms for that node - in that case node's status will change to severity of most critical alarm.
+
+
+.. _notification-channels:
+
+Notification channels
+---------------------
+
+.. versionadded:: 3.0.0
+
+|product_name| supports concept of notification channel drivers to provide SMS
+and instant message sending functionality. Role of notification channel driver
+is to provide level of abstraction on top of different notification sending
+mechanisms and uniform notification sending interface for server core.
+It is possible to set up and use several notification channels.
+
+Configuration of notification channels is done in :menuselection:`Configuration --> Notification channels`.
+
+.. figure:: _images/notification_channel_properties.png
+
+Notification channel driver parameters are specified in :guilabel:`Driver configuration`
+input field. Each parameter is given on a separate line in format: :guilabel:`parameter_name=parameter_value`.
+Meaning of parameters is driver dependent and described separately for each driver. It a parameter
+is not given, it's default value will be used.
+
+Once notification channel is created is is seen in channel list with green or read square next to the name - 
+it is channel status identifier. It should be green if driver initialization was successful or read in other cases.
+:guilabel:`Status` column displays last sent attempt status and :guilabel:`Error message` column provide more information 
+about driver initialization or sending error. 
+
+.. figure:: _images/notification_channels.png
+
+
+Drivers
+~~~~~~~
+
+The following drivers are provided by default with |product_name| installation:
+
+.. list-table::
+   :class: longtable
+   :widths: 25 75
+   :header-rows: 1
+
+   * - Driver
+     - Description
+   * - anysms.ncd
+     - SMS driver for any-sms.biz service (`<http://any-sms.biz>`_). Configuration parameters:
+
+       * login (default: user)
+       * password (default: password)
+       * sender (default: NETXMS)
+       * gateway (default: 28)
+
+   * - dbtable.ncd
+     - This driver saves notifications to a database. Configuration parameters:
+
+       * DBDriver (default: sqlite.ddr)
+       * DBName (default: netxms)
+       * DBLogin (default: netxms)
+       * DBPassword
+       * DBServer (default: localhost)
+       * DBSchema
+       * MaxMessageLength (default: 255)
+       * MaxNumberLength (default: 32)
+       * QueryTemplate
+
+   * - dummy.ncd
+     - Dummy driver for debugging purposes. Does not send any actual notifications
+       and only logs them to server log file. This driver has no configuration
+       parameters. It is necessary to set debug level to :guilabel:`debug=6` or
+       higher to get records in the log file.
+   * - gsm.ncd
+     - Driver for serial or USB attached GSM modems with support for standard GSM AT command set. Configuration parameters:
+
+       * BlockSize (default: 8)
+       * DataBits (default: 8)
+       * Parity (default: n)
+       * Port (default: COM1: on Windows platforms, /dev/ttyS0 on other platforms)
+       * Speed (default: 9600)
+       * StopBits (default: 1)
+       * TextMode (1 - text mode, 0 - PDU mode, default: 1)
+       * UseQuotes (1 - use quotes, 0 - do not use quotes, default: 1)
+       * WriteDelay (default: 100)
+
+   * - kannel.ncd
+     - Driver for Kannel SMS gateway (`<http://www.kannel.org>`_). Configuration parameters:
+
+       * login (default: user)
+       * password (default: password)
+       * host (default: 127.0.0.1)
+       * port (default: 13001)
+
+   * - msteams.ncd
+     - Notification channel driver for Microsoft Teams. Configuration parameters:
+
+       * ThemeColor - team color in RGB, default: FF6A00 (optional parameter)
+       * UseMessageCards - flag if message cards should be used, default: no (optional parameter)
+       
+       Optional configuration section "Channels" should contain channelName=IncomingWebhookURL. 
+       More information about setting up incoming webhook available `there <https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-using#setting-up-a-custom-incoming-webhook>`_      
+       
+       MsTeams requires 2 fields in action configuration:
+       
+       * Recipient name - channel name defined in :guilabel:`Channels` section or incoming webhook URL
+       * Message - message to be sent
+       
+       .. code-block:: cfg
+         
+            #config example
+            ThemeColor=FF6A00
+            UseMessageCards = false
+            
+            [Channels]
+            channelName=IncommingWebhookURL
+
+
+   * - mymobile.ncd
+     - SMS driver for MyMobile API gateways. Configuration parameters:
+
+       * username
+       * password
+
+   * - nexmo.ncd
+     - SMS driver for Nexmo gateway. Configuration parameters:
+
+       * apiKey (default: key)
+       * apiSecret (default: secret)
+       * from (default: NetXMS)
+
+   * - nxagent.ncd
+     - Similar to gsm.ncd, but sending is done via GSM modem, attached to |product_name| agent. Configuration parameters:
+
+       * hostname (default localhost)
+       * port (default: 4700)
+       * timeout (seconds, default: 30)
+       * secret
+
+   * - portech.ncd
+     - Driver for Portech MV-372 and MV-374 GSM gateways (`<https://www.portech.com.tw/p3-product1_1.asp?Pid=14>`_). Configuration parameters:
+
+       * host (default: 10.0.0.1)
+       * secondaryHost
+       * login (default: admin)
+       * password (default: admin)
+       * mode (PDU or TEXT, default: PDU)
+
+   * - slack.ncd
+     - Driver for slack.com service. Configuration parameters:
+
+       * url
+       * username
+
+   * - smseagle.ncd
+     - Driver for SMSEagle Hardware SMS Gateway. Configuration parameters:
+
+       * host (default: 127.0.0.1)
+       * port (defalut: 80)
+       * login (default: user)
+       * password (default: password)
+       * https (1 - use https, 0 - do not use https)
+
+   * - telegram.ncd
+     - Notification channel driver for Telegram messenger. Configuration parameter:
+
+       * AuthToken
+       
+       To confiugre Telegram notifications it is required to talk to BotFather and 
+       get bot authentication token (AUTH_TOKEN). Set authentication token (AUTH_TOKEN) in notification 
+       channel configuration in format: AuthToken=AUTH_TOKEN
+       Telegram's bot can't initiate conversations with users. A user must either add them to a group or send them a message first. 
+       
+       Telegram notification channel requires 2 fields in action configuration: 
+       
+       * Recipient name - name of the channel or usernmae (public channel should start with @ symbol)
+       * Message - text that should be sent
+
+   * - text2reach.ncd
+     - Driver for Text2Reach.com service (`<http://www.text2reach.com>`_). Configuration parameters:
+
+       * apikey (default: apikey)
+       * from (default: from)
+       * unicode (1 or 0, default: 1)
+       * blacklist (1 or 0, default: 0)
+
+   * - textfile.ncd
+     - Notification driver that writes messages to text file. Configuration parameter:
+
+       * filePath (default: /tmp/test.txt)
+
+   * - websms.ncd
+     - Driver for websms.ru service (`<https://websms.ru>`_). Configuration parameters:
+
+       * login (default: user)
+       * password (default: password)
+       * m_fromPhone
+
 
 .. _nxsl_persistent_storage:
 

@@ -9,13 +9,22 @@ built-in syslog server. All log monitoring done by agents, except for built-in
 syslog server. In general, most common log processing goes as following:
 
 #. When new line added to log file, it is passed to appropriate log parser
-#. If line matched one of the patterns, event associated with this pattern sent
-   to server
-#. Server receives event and passes to event processing policy as usual, with
+#. If line matched one of the patterns, an event associated with this pattern is sent
+   to |product_name| server.
+#. Server receives event and passes it to event processing policy as usual, with
    event source set to node from which event was received.
 
+For text log files, agent keeps status information about monitored files in memory only.
+This means that if the agent was stopped for a period of time, lines that were
+added to log file during that time will not be parsed.
+
+For Windows Event Log agent keeps status information in Windows registry. On
+agent start records that were added while the agent was stopped will be parsed.
+
 Log parser also provides some additional statistic information through
-:term:`metric`\ s. More information can be fount in :ref:`log-monitoring-parameters` chapter.
+:term:`metric`\ s. More information can be found in :ref:`log-monitoring-parameters` chapter.
+
+
 
 Agent Configuration for Log Monitoring
 ======================================
@@ -23,9 +32,9 @@ Agent Configuration for Log Monitoring
 To be able to monitor logs with |product_name| agent, you should load ``LOGWATCH``
 subagent. There are two options to define parser configuration:
 
-#. Create log parser rule files on the system and define them in ``LOGWATCH``
-   part of agent configuration.
-#. Create log parser policy and apply them to all required nodes. In this
+#. Create log parser rule files on the monitored system and define them
+   in ``LOGWATCH`` part of agent configuration.
+#. Create log parser policy and apply it to all required nodes. In this
    case file will be automatically created on the file system and added to
    processing. More information about :ref:`agent-policies-label`
 
@@ -42,8 +51,8 @@ Example of agent configuration file:
 
    # Below is log parsers definitions
    [LOGWATCH]
-   Parser = C:\|product_name|\parser1.xml
-   Parser = C:\|product_name|\parser2.xml
+   Parser = C:\log_monitoring_definitions\parser1.xml
+   Parser = C:\log_monitoring_definitions\parser2.xml
 
 
 Syslog Monitoring
@@ -101,16 +110,23 @@ In the ``<parser>`` tag you can specify the following options:
 |            | log record through all rules. If this option set to  |               |
 |            | ``0``, processing will stop after first match.       |               |
 +------------+------------------------------------------------------+---------------+
-| trace      | Trace level                                          | 0             |
+| trace      | Trace level for writing debug information to agent   | 0             |
+|            | log file.                                            |               |
 +------------+------------------------------------------------------+---------------+
-| name       | Parser name that is used in trace                    | *empty*       |
+| name       | Parser name that is used in statistic information    | *empty*       |
+|            | :term:`metric`\ s. See                               |               |
+|            | :ref:`log-monitoring-parameters`                     |               |
+|            | for more information.                                |               |
 +------------+------------------------------------------------------+---------------+
 
 
 <file> Tag
 ==========
 
-In the ``<file>`` tag you should specify log file to apply this parser to. To specify Windows Event Log, prepend it's name with asterisk (``*``), for example ``*System``. Multiples ``<file>`` tags can be used - in this case same rules will be applied to all files.
+In the ``<file>`` tag you should specify log file to apply this parser to.
+To specify Windows Event Log, prepend it's name with asterisk (``*``),
+for example ``*System``. Multiples ``<file>`` tags can be used -
+in this case same rules will be applied to all files.
 
 .. list-table::
    :header-rows: 1
@@ -136,7 +152,7 @@ In the ``<file>`` tag you should specify log file to apply this parser to. To sp
 
      - By default, the parser will attempt to detect the encoding by scanning the file`s BOM.
    * - preallocated
-     - Should be set when log file is preallocated(filled with zeros) before logs get written into it.
+     - Should be set when log file is preallocated (filled with zeros) before logs get written into it.
      - 0
    * - snapshot
      - Create VSS snapshot and uses snapshot file for parsing. Can be used when log is opened by other
@@ -148,7 +164,9 @@ In the ``<file>`` tag you should specify log file to apply this parser to. To sp
    * - ignoreModificationTime
      - Ignores modification time of log file
      - 0
-
+   * - rescan
+     - When file modification is detected, parse the file from it's beginning. The file is also parsed on agent startup and when log parsing policy is reapplied.
+     - 0
 
 .. _log-monitoring-macros:
 
@@ -533,7 +551,7 @@ regular expression defined in ``<match>`` tag. Inside ``<event>`` tag you
 should specify event name or event code to be generated. All matched capture groups
 will be given to the event as an event parameters.
 
-Event tag has ``tag`` attribute. If the attribute is set, then it will be added to 
+Event tag has ``tag`` attribute. If the attribute is set, then it will be added to
 the selected event tag list.
 
 
@@ -650,6 +668,7 @@ Passing parameters to events
 
 The log parser can send parameters to events.
 All capture groups will be sent to the event as a parameters. For Windows additional
+parameters are provided.
 
 +----------+----------------------------------------------------+
 | Number   | Description                                        |
@@ -688,7 +707,9 @@ Log parser parameters
 =====================
 
 Log parser provides some additional statistic information through :term:`metric`\ s.
-Metrics wait as an argument name of the parser. If name is not set, then file name is used.
+Metrics take name of particular parser as an argument. If name is not set, then file name is used.
+
+Statistic information is reset on agent startup and when log parser policy is reapplied.
 
 Available parameters:
 

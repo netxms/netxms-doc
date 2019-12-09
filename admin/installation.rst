@@ -209,7 +209,7 @@ Server
 
   7. Database selection window will open:
 
-    .. figure:: _images/win_server_config_step1.png
+    .. figure:: _images/win_server_config_step2.png
 
 
   * Select the desired database engine and driver. For most databases, you will have
@@ -237,7 +237,7 @@ Server
 
   8. On the next window, you will be prompted for various polling parameters:
 
-    .. figure:: _images/win_server_config_step1.png
+    .. figure:: _images/win_server_config_step3.png
 
     * Check Run IP autodiscovery process check-box, if you wish |product_name| server to
       automatically discover your IP network.
@@ -254,7 +254,7 @@ Server
 
   11. Windows service configuration window will appear:
 
-    .. figure:: _images/win_server_config_step1.png
+    .. figure:: _images/win_server_config_step6.png
 
     In most situations, you can run |product_name| server under Local System account. You may
     need to run it under specific account if you are using Microsoft SQL database and
@@ -262,7 +262,7 @@ Server
 
   12. Windows service dependency window will appear:
 
-    .. figure:: _images/win_server_config_step1.png
+    .. figure:: _images/win_server_config_step7.png
 
     If you have database engine running on same server, you can find it in service
     list and mark, so |product_name| server's service will depend on database service and

@@ -515,10 +515,10 @@ input field. Each parameter is given on a separate line in format: :guilabel:`pa
 Meaning of parameters is driver dependent and described separately for each driver. It a parameter
 is not given, it's default value will be used.
 
-Once notification channel is created is is seen in channel list with green or read square next to the name - 
+Once notification channel is created is is seen in channel list with green or read square next to the name -
 it is channel status identifier. It should be green if driver initialization was successful or read in other cases.
-:guilabel:`Status` column displays last sent attempt status and :guilabel:`Error message` column provide more information 
-about driver initialization or sending error. 
+:guilabel:`Status` column displays last sent attempt status and :guilabel:`Error message` column provide more information
+about driver initialization or sending error.
 
 .. figure:: _images/notification_channels.png
 
@@ -587,21 +587,21 @@ The following drivers are provided by default with |product_name| installation:
 
        * ThemeColor - team color in RGB, default: FF6A00 (optional parameter)
        * UseMessageCards - flag if message cards should be used, default: no (optional parameter)
-       
-       Optional configuration section "Channels" should contain channelName=IncomingWebhookURL. 
-       More information about setting up incoming webhook available `there <https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-using#setting-up-a-custom-incoming-webhook>`_      
-       
+
+       Optional configuration section "Channels" should contain channelName=IncomingWebhookURL.
+       More information about setting up incoming webhook available `there <https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-using#setting-up-a-custom-incoming-webhook>`_
+
        MsTeams requires 2 fields in action configuration:
-       
+
        * Recipient name - channel name defined in :guilabel:`Channels` section or incoming webhook URL
        * Message - message to be sent
-       
+
        .. code-block:: cfg
-         
+
             #config example
             ThemeColor=FF6A00
             UseMessageCards = false
-            
+
             [Channels]
             channelName=IncommingWebhookURL
 
@@ -655,15 +655,16 @@ The following drivers are provided by default with |product_name| installation:
      - Notification channel driver for Telegram messenger. Configuration parameter:
 
        * AuthToken
-       
-       To confiugre Telegram notifications it is required to talk to BotFather and 
-       get bot authentication token (AUTH_TOKEN). Set authentication token (AUTH_TOKEN) in notification 
+
+       To confiugre Telegram notifications it is required to talk to BotFather and
+       get bot authentication token (AUTH_TOKEN). Set authentication token (AUTH_TOKEN) in notification
        channel configuration in format: AuthToken=AUTH_TOKEN
-       Telegram's bot can't initiate conversations with users. A user must either add them to a group or send them a message first. 
-       
-       Telegram notification channel requires 2 fields in action configuration: 
-       
-       * Recipient name - name of the channel or usernmae (public channel should start with @ symbol)
+
+       Telegram's bot can't initiate conversations with users. A user must either add them to a group or send them a message first.
+
+       Telegram notification channel requires 2 fields in action configuration:
+
+       * Recipient name - name of the channel or username (public channel should start with @ symbol)
        * Message - text that should be sent
 
    * - text2reach.ncd
@@ -747,7 +748,7 @@ alarms, or actions. You may use the following macros to accomplish this:
    * - ``%M``
      - Custom message text. Can be set in filtering script by setting ``CUSTOM_MESSAGE`` variable.
    * - ``%n``
-     - Name of event source object or name of interface for intefrace macro expansion. 
+     - Name of event source object or name of interface for intefrace macro expansion.
    * - ``%N``
      - Event's name.
    * - ``%s``

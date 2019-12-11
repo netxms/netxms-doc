@@ -2,14 +2,97 @@
 Appendix
 ########
 
+.. _cron_format:
+
+Cron format
+===========
+
+Record has five fields, separated by spaces: minute, hour, day of month, month,
+and day of week. In DCI Collection Schedule only, an optional the sixth field
+can be specified for resolution in seconds (this is a non-standard extension
+which is not compatible with a regular cron format).
+
+Allowed values and special characters for each field are:
++----------------------------+------------------------------+----------------------------+
+| Field                      | Allowed values               | Allowed special characters |
++============================+==============================+============================+
+| minute                     | 0 - 59                       | * , - /                    |
++----------------------------+------------------------------+----------------------------+
+| hour                       | 0 - 23                       | * , - /                    |
++----------------------------+------------------------------+----------------------------+
+| day of month               | 1 - 31                       | * , - / L                  |
++----------------------------+------------------------------+----------------------------+
+| month                      | 1 - 12                       | * , - /                    |
++----------------------------+------------------------------+----------------------------+
+| day of week                | 0 - 7 (0 and 7 is Sunday)    | * , - / L                  |
++----------------------------+------------------------------+----------------------------+
+| seconds (for DCI           | 0 - 59 (0 - unlimited for %) | * , - / %                  |
+| collection only, optional) |                              |                            |
++----------------------------+------------------------------+----------------------------+
+
+A field may be an asterisk (``*``), which always stands for "any".
+
+Commas (``,``) are used to separate items of a list. For example, using ``1,3,4``
+in the 5th field (day of week) means Mondays, Wednesdays and Fridays.
+
+Hyphens (``-``) define ranges. For example, using ``6-8`` in 4th field (month)
+means June, July and August.
+
+Slashes (``/``) can be combined with ranges to specify step values.
+For example, */5 in the minutes field indicates every 5 minutes.
+If a step value does not evenly divide it's range, there will be an
+inconsistent "short" period at the end of time-unit.
+
+``L`` stands for "last". When used in the day-of-week field, it allows
+to specify constructs such as "the last Friday" ("5L") of a given month.
+In the day-of-month field, it specifies the last day of the month.
+
+The sixth field (but not others) supports additional stepping syntax with a
+percent sign (``%``), which means that the step in seconds calculated in
+absolute seconds since the Unix epoch (00:00:00 UTC, 1st of January, 1970).
+It's not recommended to use seconds in custom schedules as your main data
+collection strategy though. Use seconds only if it is absolutely necessary.
+
+
+
+.. figure:: _images/dci_custom_schedule_page.png
+
+    DCI configuration custom schedule property page
+
+Examples
+~~~~~~~~
+
+Run five minutes after midnight, every day:
+
+  ``5 0 * * *``
+
+Run at 14:15 on the first day of every month:
+
+  ``15 14 1 * *``
+
+Run every 5 minutes:
+
+  ``*/5 * * * *``
+
+Run every minute on 10th second:
+
+  ``* * * * * 10``
+
+Run twice a minute (on seconds 0 and 45):
+
+  ``* * * * * */45``
+
+Run every 45 seconds from Monday till Friday:
+
+  ``* * * * 1-5 *%45``
+
+
 SMS Drivers
 ===========
 .. deprecated:: 3.0
 
 SMS driver functionality replaces by notification channel functionality.
-More can be found in :ref:`notification-channels` section. 
-
-
+More can be found in :ref:`notification-channels` section.
 
 .. _agent_configuration_file:
 
@@ -370,7 +453,7 @@ These parameters can be changed in
     -
     - No
   * - AlarmSummarySchedule
-    - Schedule for sending alarm summary e-mails in cron format.
+    - Schedule for sending alarm summary e-mails in cron format. See :ref:`cron_format` for supported cron format options.
     - 0 0 * * *
     - No
   * - AllowDirectSMS

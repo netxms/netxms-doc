@@ -116,7 +116,7 @@ Job configuration:
  - File that should be uploaded on the agent(s).
  - Remote file path(If destination will not be set then as a destination will be taken from agent's config parameter 'FileStore'). If path is set agent will check if there is access to this folder. Access is configured by :guilabel:`filemgr` subagent, check :ref:`agent_file_managment`.
  - Job can be created "on hold". This mean that job will be created, but not started. After creation it can be manually started selecting job in :guilabel:`Server Jobs` view and clicking :guilabel:`Unhold`.
- - Other option is to schedule file upload job. It can scheduled to be executed once at exact time(:guilabel:`One time execution`) or to be executed in schedule(:guilabel:`Cron schedule`). Scheduled execution is set like `cron expression <https://en.wikipedia.org/wiki/Cron>`_.
+ - Other option is to schedule file upload job. It can scheduled to be executed once at exact time (:guilabel:`One time execution`) or to be executed according to schedule(:guilabel:`Cron schedule`). See :ref:`cron_format` for supported cron format options.
 
 Result of file upload job can be checked in :guilabel:`Server Jobs` view. It can be accessed by clicking :menuselection:`View --> Server Jobs`.
 

@@ -7,7 +7,7 @@ Scheduled tasks
 
 |product_name| provide option to schedule different tasks. Each task have it's own parameter count and type.
 The only common parameter is node on which task will be executed. Schedule time can be set in two
-ways as one time schedule or as a cron task.
+ways as one time schedule or as a cron task (see :ref:`cron_format` for supported cron format options).
 
 .. figure:: _images/scheduled_task.png
 
@@ -94,4 +94,4 @@ Task specific access rights:
 For some tasks like :guilabel:`File.Upload` there is also checked if this user has right
 to upload file to this node and if there is an access to the specific folder. Access rights
 like this are checked while task execution, not while scheduling. If user does not have
-access, then task will just fail. 
+access, then task will just fail.

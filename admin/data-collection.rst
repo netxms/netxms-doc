@@ -188,68 +188,13 @@ If you turn on this flag, |product_name| server will use custom schedule for col
 DCI values instead of fixed intervals. This schedule can be configured on the
 :guilabel:`Schedule` page. Advanced schedule consists of one or more records;
 each representing desired data collection time in cron-style format.
-Record has five fields, separated by spaces: minute, hour, day of month, month,
-and day of week.
 
-Optionally, the sixth field can be specified for resolution in seconds (this is
-a non-standard extension which is not compatible with a regular cron format).
-Moreover, the sixth field (but not others) supports additional stepping syntax
-with a percent sign (``%``), which means that the step in seconds calculated in
-absolute seconds since the Unix epoch (00:00:00 UTC, 1st of January, 1970).
-It's not recommended to use seconds in custom schedules as your main data
-collection strategy though. Use seconds only if it is absolutely necessary.
+See :ref:`cron_format` for supported cron format options. 
 
-Allowed values for each filed are:
-
-+--------------------+---------------------------+
-| Field              | Value                     |
-+====================+===========================+
-| minute             | 0 - 59                    |
-+--------------------+---------------------------+
-| hour               | 0 - 23                    |
-+--------------------+---------------------------+
-| day of month       | 1 - 31                    |
-+--------------------+---------------------------+
-| month              | 1 - 12                    |
-+--------------------+---------------------------+
-| day of week        | 0 - 7 (0 and 7 is Sunday) |
-+--------------------+---------------------------+
-| seconds (optional) | 0 - 59                    |
-+--------------------+---------------------------+
-
-A field may be an asterisk (``*``), which always stands for "any".
-
-.. figure:: _images/dci_custom_schedule_page.png
-
-    DCI configuration custom schedule property page
-
-Examples
-~~~~~~~~
-
-Run five minutes after midnight, every day:
-
-  ``5 0 * * *``
-
-Run at 14:15 on the first day of every month:
-
-  ``15 14 1 * *``
-
-
-Run every 5 minutes:
-
-  ``*/5 * * *``
-
-Run every minute on 10th second:
-
-  ``* * * * * 10``
-
-Run twice a minute (on seconds 0 and 45):
-
-  ``* * * * * */45``
-
-Run every 45 seconds:
-
-  ``* * * * * *%45``
+For DCI Collection schedule it's possible to specify optional sixth cron field
+for resolution in seconds. It's not recommended to use seconds in custom
+schedules as your main data collection strategy though. Use seconds only
+if it is absolutely necessary.
 
 Cluster
 -------
@@ -716,11 +661,11 @@ It can be configured:
 Last DCI values View
 ====================
 
-Last values view provides information about all collected data 
-on node the node, it's last value, last collection timestamp and threshold status. 
+Last values view provides information about all collected data
+on node the node, it's last value, last collection timestamp and threshold status.
 
-It is possible to check last values or row last values in textual format or as a chart 
-by right clicking on DCI and selecting right display format. 
+It is possible to check last values or row last values in textual format or as a chart
+by right clicking on DCI and selecting right display format.
 
 
 .. figure:: _images/last_values.png

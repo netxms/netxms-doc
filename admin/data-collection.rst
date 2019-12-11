@@ -189,7 +189,7 @@ DCI values instead of fixed intervals. This schedule can be configured on the
 :guilabel:`Schedule` page. Advanced schedule consists of one or more records;
 each representing desired data collection time in cron-style format.
 
-See :ref:`cron_format` for supported cron format options. 
+See :ref:`cron_format` for supported cron format options.
 
 For DCI Collection schedule it's possible to specify optional sixth cron field
 for resolution in seconds. It's not recommended to use seconds in custom
@@ -528,16 +528,16 @@ If an array is returned, only first element of the array is obligatory,
 the rest elements are optional (but to include an element, all preceding
 elements should be included). Array structure:
 
-======================== =======================================================
+======================== ==========================================================
 Data type                Description
-======================== =======================================================
+======================== ==========================================================
 Boolean                  ``TRUE`` (accept instance), ``FALSE`` (reject instance).
 String                   Instance name, that will be available as {instance} macro.
 String                   Instance user-readable description, that will be available
                          as {instance-name} macro
 NetObj                   .. versionadded:: 3.0.0
                          Object connected with this :term:`DCI`
-======================== =======================================================
+======================== ==========================================================
 
 
 Performance tab

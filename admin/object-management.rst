@@ -1,4 +1,4 @@
-.. _object-management:
+automatic_bind_rules.. _object-management:
 
 
 #################
@@ -329,7 +329,7 @@ Automatic bind option
 For each container can be configured automatic binding rules. This can be done in
 :guilabel:`Automatic Bind Rules` tab of container properties.
 
-..figure:: _images/automatic_bind_rules.png
+.. figure:: _images/automatic_bind_rules.png
 
 There can be defined if script should be used for automatic binding, if script
 should be used for node unbinding and can be written script it selves.

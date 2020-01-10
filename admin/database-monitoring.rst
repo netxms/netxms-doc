@@ -813,7 +813,7 @@ by one agent will be monitored databases with same version.
 Building mongodb subagent
 -------------------------
 
-Use "--with-mongodb=/path/to/mongoc driver" parameter to include MongoDB subagent in build. Was tested with
+Use ``--with-mongodb=/path/to/mongoc driver`` parameter to include MongoDB subagent in build. Was tested with
 mongo-c-driver-1.1.0.
 
 Agent Start

@@ -17,7 +17,7 @@ information from the nodes according to :term:`DCI` configuration. You can
 control how many data collectors will run simultaneously, by changing server
 configuration parameter ``NumberOfDataCollectors``.
 
-All configured DCIs are checked for polling requirement every two seconds and
+All configured DCIs are checked for polling requirement every second and
 if DCI needs to be polled, appropriate polling request is placed into internal
 data polling queue. First available data collector will pick up the request and
 gather information from the node according to DCI configuration. If a new value
@@ -31,8 +31,8 @@ figure below.
    Newly received parameter processing
 
 It is also possibility to push data to server. If DCI source is set to
-:guilabel:`Push`, server just waits for new values instead of polling himself
-data source.
+:guilabel:`Push`, server just waits for new values instead of polling from
+a data source.
 
 .. versionadded:: 2.0-M5
     Agent caching mode
@@ -43,9 +43,9 @@ that allows to collect data and store it on agent till connection with server is
 restored and collected data is pushed to the server. This option is available for
 metrics, table metrics and proxy SNMP metrics. Not implemented for proxy SNMP table
 metrics and DCIs with custom schedule. In case of this configuration agent stores DCI
-configuration locally and does all metric collection and dispatch by himself. DCI
+configuration locally and does all metric collection and dispatch on its own. DCI
 configuration is synchronized on connect, DCI configuration change or SNMP proxy
-server change. Information about configuration options can be found there:
+server change. Information about configuration options can be found here:
 :ref:`offline-data-collection`.
 
 .. _dci-configuration:
@@ -633,8 +633,9 @@ Agent caching mode
 Agent caching mode allows metric data to be obtained while connection between
 server and agent have been broken. This option is available for metrics, table
 metrics and proxy SNMP metrics. Not implemented for proxy SNMP table metrics and
-DCIs with custom schedule. While break data is stored on agent, and on connect it
-is send to server. Detailed description can be found there: :ref:`how_data_collection`.
+DCIs with custom schedule. In the absence of connection to the server collected
+data is stored on agent, when connection is restored it is sent to server.
+Detailed description can be found there: :ref:`how_data_collection`.
 
 Agent side cache is configurable globally, on node level, and on DCI level. By
 default it's off.
@@ -651,8 +652,8 @@ Configuration
 -------------
 
 It can be configured:
-  - globally - set configuration parameter :guilabel:`DefaultAgentCacheMode` to  1 (on) or 2 (off).
-  - on node level - :guilabel:`Agent cache mode` can be changed to :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use globas settings) in node properties on :guilabel:`Polling` page
+  - globally - set configuration parameter :guilabel:`DefaultAgentCacheMode` to :guilabel:`on` or :guilabel:`off`.
+  - on node level - :guilabel:`Agent cache mode` can be changed to :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use global settings) in node properties on :guilabel:`Polling` page
   - on DCI level - :guilabel:`Agent cache mode` can be changed to :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use node level settings) in DCI properties on :guilabel:`General` page
 
 
@@ -661,11 +662,11 @@ It can be configured:
 Last DCI values View
 ====================
 
-Last values view provides information about all collected data
-on node the node, it's last value, last collection timestamp and threshold status.
+Last values view provides information about all data collected
+on a node: DCI last value, last collection timestamp and threshold status.
 
-It is possible to check last values or row last values in textual format or as a chart
-by right clicking on DCI and selecting right display format.
+It is possible to check last values or raw last values in textual format or as a chart
+by right clicking on DCI and selecting corresponding display format.
 
 
 .. figure:: _images/last_values.png

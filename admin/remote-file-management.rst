@@ -107,7 +107,7 @@ Advanced File Management
 There are options to run multiple file upload to agents, file upload jobs on hold and scheduled
 file upload jobs. All this options are available uploading file from server to agent. That means that before upload file should be uploaded to server for instruction check :ref:`upload-file-on-server-label` section.
 
-Advanced file upload can be accessed selecting required nodes(can be selected more than
+Advanced file upload can be accessed selecting required nodes (can be selected more than
 one with help of 'Ctrl' key) and in object menu selecting :guilabel:`Upload file...`.
 
 .. figure:: _images/server_to_agent_file_upload.png

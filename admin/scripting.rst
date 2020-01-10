@@ -52,7 +52,7 @@ very limited access to data outside script boundaries – for example, from NXSL
 script you cannot access files on server, nor call external programs, nor even
 access data of the node object other than script is running for without
 explicit permission. NXSL is interpreted language – scripts first compiled into
-internal representation (similar to byte code in Java), which than executed
+internal representation (similar to byte code in Java), which is then executed
 inside NXSL Virtual Machine. Language syntax and available functions can be
 found in `NXSL documentation <https://www.netxms.org/documentation/nxsl-3.0/>`_.
 
@@ -108,7 +108,7 @@ Scripting
 For details on API please refer to javadoc at
 http://www.netxms.org/documentation/javadoc/latest/.
 
-NxShell provide user with already connected and synchronized session to simplify 
+NxShell provide user with already connected and synchronized session to simplify
 scripting. Most required packages are imported as well to minimize typing.
 
 

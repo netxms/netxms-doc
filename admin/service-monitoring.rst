@@ -70,7 +70,7 @@ When loaded, PORTCHECK subagent adds the following Metrics to node Metric list:
    * - Parameter
      - Description
    * - ServiceCheck.Custom(\ *target*\ ,\ *port*\ [,\ *timeout*\ ])
-     - Check that TCP *port* is open on *target*. Optional argument *timeout* specifies timeout in milliseconds, if it's not provided, default timeout from ***PORTCHECK** section of agent's configuration file will be used. This is a very simple test that does nothing more than check the port is open.
+     - Check that TCP *port* is open on *target*. Optional argument *timeout* specifies timeout in milliseconds, if it's not provided, default timeout from ***PORTCHECK** section of agent's configuration file will be used. This is a very simple test that does nothing more than checking if the port is open.
    * - ServiceCheck.HTTP(\ *target*\ ,[\ *port*\ ],\ *URI*\ ,\ *hostHeader*\ [,\ *regex*\ [,\ *timeout*\ ]])
      - Check that HTTP service is running on *target*.  Optional argument *port* specifies the port to connect to,
        otherwise 80 will be used.  The *URI* is NOT a URL it is the host header request URI.

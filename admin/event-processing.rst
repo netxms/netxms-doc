@@ -404,7 +404,7 @@ Action types
 Execute command on management server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Executes provided command on server node. Check that user under witch :file:`netxmsd` process
+Executes provided command on server node. Check that user under which :file:`netxmsd` process
 run has permission to run this command.
 
 .. _action-remote-execute:
@@ -414,7 +414,7 @@ Execute command on remote node
 
 Executes provided command name defined in this nodes agent configuration file. To this
 command can be given parameters in format: ``commandName param1 param2 param3...``
-Check that user under witch :file:`nxagentd` process run has permission to run this
+Check that user under which :file:`nxagentd` process run has permission to run this
 command.
 
 As the :guilabel:`Remote Host` can be used hostname or object name(int format: ``@objectName``).

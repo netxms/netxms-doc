@@ -11,8 +11,8 @@ The system has three-tier architecture: the information is collected by
 monitoring agents (either our own high-performance agents or SNMP agents)
 and delivered to monitoring server for processing and storage. Network
 administrator can access collected data using cross-platform Management
-Console, Web Interface or Management Console for Android. Rich and Web console 
-have almost the same functionality and the same user interface. 
+Console, Web Interface or Management Console for Android. Rich and Web console
+have almost the same functionality and the same user interface.
 
 .. only:: html
 
@@ -34,7 +34,7 @@ represents one physical or logical entity (like host or network interface),
 or group of them. Objects are organized into hierarchical structure.
 Each object has it's own access rights. Access rights are applied
 hierarchically on all children of object. For example if it grant :guilabel:`Read`
-access right for user on a :guilabel:`Container`, than user have :guilabel:`Read`
+access right for user on a :guilabel:`Container`, then user have :guilabel:`Read`
 right on all objects that contains this :guilabel:`Container`.
 Every object has set of attributes; some of them exist for all objects
 (like :guilabel:`id` and :guilabel:`name` or :guilabel:`status`),  while other

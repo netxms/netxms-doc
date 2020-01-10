@@ -13,7 +13,7 @@ represents one physical or logical entity (like host or network interface),
 or group of them. Objects are organized into hierarchical structure.
 Each object has it's own access rights. Access rights are applied
 hierarchically on all children of object. For example if it grant :guilabel:`Read`
-access right for user on a :guilabel:`Container`, than user have :guilabel:`Read`
+access right for user on a :guilabel:`Container`, then user have :guilabel:`Read`
 right on all objects that contains this :guilabel:`Container`.
 Every object has set of attributes; some of them are common
 (like :guilabel:`id` and :guilabel:`name` or :guilabel:`status`),  while other
@@ -273,7 +273,7 @@ station or on specific network nodes. All events are processed by |product_name|
 Processor one-by-one, according to the processing rules defined in Event
 Processing Policy. As a result of event processing, some actions can be taken,
 and event can be shown up as alarm, sent as e-mail and notifications
-(SMS, instant messages). |product_name| provides one 
+(SMS, instant messages). |product_name| provides one
 centralized location - the Alarm Browser, where the alarms are visible to your
 team. You can control which events should be considered important enough to
 show up as alarms. You and your team can easily monitor the posted alarms and

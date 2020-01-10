@@ -6,7 +6,7 @@ Introduction
 ============
 
 |product_name| agent is daemon or service that runs on a :term:`node<Node>` to provide additional
-monitoring options. This is optional for installation, but it's installation gives next advantages:
+monitoring options. This is optional for installation, but it's installation gives following advantages:
 
    * Centralized configuration - you can change configuration of agent from management console; if needed, you can even store agent configs on |product_name| server
    * More secure: communications between |product_name| server and agent can be encrypted, additional authentication on agent can be configured
@@ -15,32 +15,43 @@ monitoring options. This is optional for installation, but it's installation giv
    * Proxy functionality: agent can be used as a proxy to reach agents on hosts not directly accessible by |product_name| server
    * :term:`SNMP` proxy: agent can be used as a proxy to reach remote SNMP devices
    * :term:`SNMP Trap` proxy: agent can be used as a proxy to get messages from remote SNMP device
-   * Extensible: you can add new parameters very easy using configuration option like ``ExternalParamer`` or by writing your own subagents
+   * Extensible: you can add new parameters very easy using configuration option like ``ExternalParameter`` or by writing your own subagents
    * Easy upgrade - you can upgrade all agents at once from console
    * Provides file management possibilities on agent.
+   * Provides log file monitoring functionality.
 
 
 Agent configuration files
 =========================
 
 Agent have 3 types of configuration files: master configuration file, additional
-configuration files and Agent Policies files. Master configuration file is the only mandatory file.
+configuration files and Agent Policy configuration files.
+Master configuration file is the only mandatory file.
 Minimal configuration for master configuration file is server address. Address should be
-set as MasterServers to be able to apply other changes already from the server.
+set as MasterServers to be able to apply other configuration settings from the server.
 
 **After configuration file change agent should be restarted to apply new changes.**
 
-Configuration files and policies should be written in XML or 'key = value' format. In XML
-format general tag should be <config> and then can be added any agent or subagent
-parameter as a tag.
+Two formats are supported for configuration files and configuration file policies: XML and 'key = value' format.
 
-.. note::
-   Right way to define section: **[sectionName]**. Previous one with asterisk is counted as deprecated: ***sectionName**.
+In 'key = value' format configuration file can contain one or more parameters in
+*Parameter = Value* form, each parameter should be on its own line.
+Parameters are grouped into sections. Beginning of a section is denoted by section
+name in square brackets (example: "[sectionName]").
+Section named "[Core]" contains parameters for agent itself. It's the default section, if a
+configuration file starts from parameter and not from section name, parameters are treated
+as belonging to "Core" section. Subagents’ parameters should be placed in separate sections named by subagent name.
+Same section name can be present several times in the configuration file.
+Comments can be inserted after "#" sign
+
+In XML format general tag should be <config>, second level tags contain section names and third level tags are
+agent or subagent configuration parameters.
 
 'key = value' format example:
 
 .. code-block:: cfg
 
+   [Core]
    MasterServers = 10.0.0.4
    SubAgent = winperf.nsm
    # Below is a configuration for winperf subagent, in separate section
@@ -52,8 +63,10 @@ Same example in XML format:
 .. code-block:: xml
 
    <config>
-      <MasterServers>10.0.0.4</MasterServers>
-      <SubAgent>winperf.nsm</Subagent>
+      <Core>
+         <MasterServers>10.0.0.4</MasterServers>
+         <SubAgent>winperf.nsm</Subagent>
+      </Core>
       <!-- Below is a configuration for winperf subagent, in separate section -->
       <WinPerf>
          <EnableDefaultCounters>yes</EnableDefaultCounters>
@@ -64,87 +77,91 @@ Example of configuration sections:
 
 .. figure:: _images/section_description.png
 
+Detailed list of parameters can be found here: :ref:`agent_configuration_file`.
+The following parameters can be specified in master configuration
+file only (and will be ignored if found in other configuration files):
+``DataDirectory`` and ``ConfigIncludeDir``.
 
 .. _master-configuration-file-label:
 
 Master configuration file
 -------------------------
-File nxagentd.conf is a master configuration file for |product_name| agent. It contains all
-information necessary for agent's operation. Default location for this file is
-:file:`/etc/nxagentd.conf` on UNIX systems and
-:file:`'installation directory'\\etc\\nxagentd.conf'` on Windows. The file can
-contain one or more parameters in *Parameter = Value* form, each parameter should
-be on its own line. Comments can be inserted after "#" sign. This file can also
-contain configuration for subagents. In this case, subagents’ parameters should
-be placed in separate sections. Beginning of the section is indicated by "*" sign,
-followed by a section name or by section name in braces(example: "[sectionName]").
+File nxagentd.conf is a master configuration file for |product_name| agent.
+Depending on OS there are different locations, where agent tries to find master configuration file.
 
-If build configuration was done with --prefix='prefix' parameter, then configuration file will
-be searched in the following order (UNIX):
+UNIX-like systems
+~~~~~~~~~~~~~~~~~
 
-   1. :file:`$NETXMS_HOME/etc/nxagentd.conf`
-   2. :file:`'prefix'/etc/nxagentd.conf`
-   3. :file:`/etc/nxagentd.conf`
-   4. :file:`/Database/etc/nxagentd.conf`
-   5. :file:`/usr/etc/nxagentd.conf`
+On UNIX systems master configuration file is searched in the following order:
 
-For Windows systems:
+  #. If :file:`$NETXMS_HOME` environment variable is set: :file:`$NETXMS_HOME/etc/nxagentd.conf`
+  #. :file:`'prefix'/etc/nxagentd.conf`. 'prefix' is set during build configuration with ``--prefix='prefix'`` parameter. If that parameter was not specified during build, ``/usr/local`` is used.
+  #. :file:`/Database/etc/nxagentd.conf`
+  #. :file:`/usr/etc/nxagentd.conf`
+  #. :file:`/etc/nxagentd.conf`
 
-   1. :file:`'installation directory'\\etc\\nxagentd.conf`
+If configuration file is placed in a different location or named in a different way,
+then it's location and file name can be given to agent with ``-c`` parameter or by
+specifying :file:`$NXAGENTD_CONFIG` environment variable. In this cause
+search in the locations mentioned above is not performed.
 
-For Windows location of |product_name| config can be change in registry.
+Windows
+~~~~~~~
 
+On Windows location of |product_name| config is stored in the registry. Alternatively,
+location of configuration file can be provided to agent with ``-c`` command line parameter.
+If there is no record in the registry and ``-c`` parameter is not specified, then
+agent tries to find configuration files in the following locations:
 
-If configuration file is placed in different location or named in different way,
-then it's location and file name can be given to agent with -c parameter.
+  #. :file:`'installation directory'\\etc\\nxagentd.conf`
+  #. :file:`C:\\nxagentd.conf`
 
-Detailed list of parameters can be found there: :ref:`agent_configuration_file`.
-
-Configuration file example:
-
-.. code-block:: cfg
-
-   #
-   # Sample agent’s configuration file
-   #
-   MasterServers = 10.0.0.4
-   LogFile = {syslog}
-   SubAgent = winperf.nsm
-   # Below is a configuration for winperf subagent, in separate section
-   *WinPerf
-   EnableDefaultCounters = yes
-
+.. _additional-configuration-file-label:
 
 Additional configuration files
 ------------------------------
-Additional configuration files override or supplement configuration parameters form main file.
-There are two types of additional files one are used to store applied :guilabel:`Policies` configuration,
-others can be created and updated manually. More information about Policies can be read there: :ref:`agent-policies-label`.
+To increase maintainability, configuration can be stored in multiple additional
+configuration files located in a specific folder.
+Additional configuration files override (if a parameter supports only one value)
+or supplement (if parameter supports multiple values, e.g. list of servers or root
+folders for filemgr subagent) configuration parameters from master file.
+Depending on OS there are different locations, where agent tries to find master configuration file.
 
-Next will be described default folders for manually created files. Policies files will be stored in a
-separate folder named :guilabel:`configure_ap` under :guilabel:`DataDirectory`.
+UNIX-like systems
+~~~~~~~~~~~~~~~~~
 
-Default to data directory for UNIX like systems:
+On UNIX systems it is searched in the following order (search is performed until first existing folder is found):
 
-    1. :file:`$NETXMS_HOME/var/lib/netxms`
-    2. :file:`/var/lib/netxms`
+  1. If :file:`$NETXMS_HOME` environment variable is set: :file:`$NETXMS_HOME/etc/nxagentd.conf.d`
+  2. :file:`'prefix'/etc/nxagentd.conf.d`. 'prefix' is set during build configuration with ``--prefix='prefix'`` parameter. If that parameter was not specified during build, ``/usr/local`` is used.
+  3. :file:`/Database/etc/nxagentd.conf.d`
+  4. :file:`/etc/nxagentd.conf.d`
+  5. :file:`/usr/etc/nxagentd.conf.d`
 
-For Windows systems:
+A different configuration file folder name can be given by
+specifying $NXAGENTD_CONFIG_D environment variable. In this cause
+search in the locations mentioned above is not performed.
 
-    1. :file:`'installation directory'\\var`
+Windows
+~~~~~~~
 
-If configuration of build was done with --prefix='prefix' parameter, then config will
-be searched in next order(UNIX):
+On Windows location of configuration file folder is stored in the registry.
+If there is no record in the registry, then agent tries to find configuration
+file folder in the following locations (search is performed until first existing folder is found):
 
-   1. :file:`$NETXMS_HOME/etc/nxagentd.conf.d`
-   2. :file:`'prefix'/etc/nxagentd.conf.d`
-   3. :file:`/etc/nxagentd.conf.d`
-   4. :file:`/Database/etc/nxagentd.conf.d`
-   5. :file:`/usr/etc/nxagentd.conf.d`
+   1. :file:`'installation directory'\\etc\\nxagentd.conf.d`
+   2. :file:`C:\\nxagentd.conf.d`
 
-For Windows systems:
 
-   1. :file:`'installation directory'\\etc\\nxagentd.conf`
+Agent policy configuration files
+--------------------------------
+
+:guilabel:`Agent policies` allow to store agent configuration on server and
+deliver it to the agents. More information about Policies can be read there: :ref:`agent-policies-label`.
+
+On agent configuration policy files are stored in a separate folder named
+:guilabel:`config_ap` under :guilabel:`DataDirectory` folder. Every policy
+is saved into a separate file named by policy GUID.
 
 
 .. _stored-agent-configurations-label:
@@ -157,27 +174,27 @@ Agent configuration options from server
 Edit configuration file remotely
 --------------------------------
 
-Right click on node, select from menu: :guilabel:`Edit agent's configuration file`.
-
-On View exit there will be present dialog. New configuration apply is performed on agent restart. So to
-immediately apply new configuration on config exit select :guilabel:`Save and Apply`. This option will
-save config and automatically restart the agent. If just :guilabel:`Save` is selected, then agent
-should be manually restarted to apply new configuration.
+Right click on node, select :guilabel:`Edit agent's configuration file` from menu.
+When closing the editor, a dialog will be presented. New configuration apply is
+performed on agent restart. So to immediately apply new configuration select :guilabel:`Save and Apply`.
+This option will save configuration file and automatically restart the agent.
+If just :guilabel:`Save` is selected, then agent should be manually restarted to apply new configuration.
 
 
 Agent configuration files on server
 -----------------------------------
 
-Agent master configuration files can be stored on server side and requested by agent with
-parameter :command:`-M <serverAddress>`. On config request server goes through config list
-from beginning till the end and one by one checks if this config is the requested one by
-executing filter scripts.
+Agent master configuration files can be stored on server side and requested by agent,
+if it is launched with :command:`-M <serverAddress>` command line parameter.
+Each configuration file on server is stored along with filter script.
+When server receives configuration request from agent, it goes through
+available configs and executes filter scripts to find an appropriate configuration.
 
-If server have found appropriate configuration file then it is sent to agent and old
-:file:`nxagentd.conf` file is overwritten with incoming one or created new one if there is no :file:`nxagentd.conf`
-When agent can't connect to server or server hasn't found right config, the agent is started
-with the old one. In case when old configuration file does not exist and it is not possible to
-get new one from server - agent fails to start.
+If appropriate configuration file is found, it is sent to agent and old
+:file:`nxagentd.conf` file is overwritten (or a new :file:`nxagentd.conf` file is created, if
+it did not exist). When agent can't connect to server or server hasn't found right configuration,
+the agent is started with old configuration file. In case if agent configuration file does not
+exist and it is not possible to get new one from the server - agent fails to start.
 
 .. versionadded:: 1.2.15
 
@@ -186,12 +203,12 @@ get new one from server - agent fails to start.
 Configuration
 ~~~~~~~~~~~~~
 
-Each config has a name, filter and config content.
+Each configuration has a name, filter script and the configuration file text.
 
- - Name just identifies config.
- - Filter is check on config request to define witch configuration file to
-   give back. Filter is defined with help of :term:`NXSL`. To configuration are given
-   next parameters:
+ - Name just identifies the configuration.
+ - Filter script is executed on configuration request to define which configuration file to
+   send to the agent. Filter is defined with help of :term:`NXSL` scripting language.
+   The following parameters are available in the filter script:
 
     - $1 - IP address
     - $2 - platform
@@ -199,46 +216,47 @@ Each config has a name, filter and config content.
     - $4 - minor version number
     - $5 - release number
 
- - Configuration file is a content of returned configuration file.
+ - Configuration file is the text of returned configuration file.
 
 .. figure:: _images/agent_config_manager.png
 
 Agent configuration policy
 --------------------------
 
-Another option to store and spread agent configuration are agent policies. In this case agent
-configuration is stored on the server side as a policy and applied to the agents from the server
-by the user. More information about policies and it's types can be found in
+Another option to store and distribute agent configuration are agent policies. In this case agent
+configuration is stored on the server side as a policy belonging to template and deployed to the agent when
+corresponding template is applied to a node. More information about policies and their types can be found in
 :ref:`agent-policies-label` chapter.
 
-Agent Policies vs. Agent Configuration Files on Server
-------------------------------------------------------
+Agent Configuration Policies vs. Agent Configuration Files on Server
+--------------------------------------------------------------------
 
 A short lists of main points to compare both options:
 
 Agent Configuration Files on Server:
-  - Assignment is Rule based
+  - Assignment is based on rules described in filter scripts
+  - When configuration is changed, agent restart is needed to activate new configuration
   - Config download from server is each time the agent starts (if option '-M servername')
-  - When config is found on server, local Master config is overwritten, if not existing Master
+  - When config is found on server, local Master config is overwritten, if not - existing Master
     config is used
-  - Works with Master config
-  - Do not required initial config(can be started without config), but in this case agent
-    will fail if nothing will be returned from server
-  - Doesn't work with tunnel agent connection
+  - Works with master configuration file
+  - Does not required initial config (agent can be started without config), but in this case agent
+    would fail if nothing was returned from server
+  - Server provides configuration file without authorization which can be a security
+    issue, if sensitive information is present in configuration file.
+  - Doesn't work via proxy
+  - Doesn't work via tunnel agent connection
 
 Agent Policies:
   - Not possible for bootstrap agent
-  - Also possible via proxy
-  - Assignment is only direct to nodes, not rule based
-  - Can be in XML or 'key = value' format
-  - SubAgent config sections also possible
-  - Changed policies must be reinstalled on nodes (in console) and need agent restart
-  - At minimum the server connection parameters must be in Master config to be able to start agent
-  - Works with Additional configuration files(policies)
-  - If policy and master config have same parameter that can be set only once
-    like(MasterServers or LogFile), then policy will overwrite master config configuration
+  - After policy is deployed to agent, the agent should be restarted to activate new configuration.
+  - At minimum the server connection parameters must be in master config to be able to start agent
+  - Each policy is saved in a separate configuration file
+  - If policy and master config have same parameter that can be set only once (e.g. LogFile),
+    then policy will overwrite master config configuration
   - If policy and master config have same parameter that can be set multiple times
-    like(Target for PING subagent or Query for DBQUERY), then policy will merge lists of configs
+    (e.g. Target for PING subagent or Query for DBQUERY), then policy will merge lists of configs
+  - Can work via proxy
   - Can work with tunnel agent connection
 
 .. _agent-policies-label:
@@ -246,22 +264,27 @@ Agent Policies:
 Agent Policies
 ==============
 
-Agent policies can be configured on server in :guilabel:`Policies` part. There are 2 types of
-policies: Agent configuration file policy and Log parser policy.
+Agent policies belong to templates, so they are applied to nodes to which a
+corresponding template is applied. The following policy types are available:
+  - Agent configuration policy
+  - File delivery policy
+  - Log parser policy
+  - User support application policy
 
-Advantage of creating configuration in policies - if configuration for nodes is changed,
-then it should be changed only once for all nodes on witch it is applied.
+Agent configuration policy
+--------------------------
 
-Agent configuration file policy
--------------------------------
+Using policy for configuration file maintenance has advantages that configuration
+is edited in centralized way and gives granular control on the configuration that each node gets.
 
-There can be used the same parameters and format as in any |product_name| agent configuration file
+It is possible to use the same parameters and format as in any |product_name| agent configuration file
 (key=value format or XML format).
 
-To create policy in menu of container where should be created policy select
-:menuselection:`Create->Agent configuration policy...` and give required object name and
-press :guilabel:`OK`. Than newly created policy can be modified by selecting
-:menuselection:`Edit Policy...` from object menu.
+To create agent configuration file policy, right click a template and select
+:menuselection:`Agent policies`. Click plus icon to create a new policy, give it a
+name, choose :guilabel:`Agent configuration` as policy type and
+click :guilabel:`OK`. Existing policy can be modified by right-clicking it and
+selecting :menuselection:`Edit` from the menu.
 
 Example:
 
@@ -284,13 +307,13 @@ Example:
 .. code-block:: xml
 
   <config>
-    <agent>
+    <core>
       <!-- there can be added comment -->
       <MasterServers>127.0.0.1</MasterServers>
       <SubAgent>netsvc.nsm</SubAgent>
       <SubAgent>dbquery.nsm</SubAgent>
       <SubAgent>filemgr.nsm</SubAgent>
-    </agent>
+    </core>
     <DBQUERY>
       <Database>id=myDB;driver=mysql.ddr;server=127.0.0.1;login=netxms;password=xxxxx;dbname=netxms</Database>
       <Query>dbquery1:myDB:60:SELECT name FROM images</Query>
@@ -306,64 +329,55 @@ Example:
 
       .. figure:: _images/policy_example.png
 
-Nodes should be manually restarted after policy was applied, changed or removed
-to run it with new configuration.
+Agent should be manually restarted to apply the configuration after the
+configuration policy is deployed or undeployed to node.
 
 Log parser policy
 -----------------
 
 Information about log parser format available in :ref:`log-monitoring` chapter.
 
-To create policy in menu of container where should be created policy select
-:menuselection:`Create->Log parser policy...` and give required object name and
-press :guilabel:`OK`. Than newly created policy can be modified by selecting
-:menuselection:`Edit Policy...` from object menu.
+To create log parser policy, right click a template and select
+:menuselection:`Agent policies`. Click plus icon to create a new policy, give it a
+name, choose :guilabel:`Log Parser` as policy type and
+click :guilabel:`OK`. Existing policy can be modified by right-clicking it and
+selecting :menuselection:`Edit` from the menu.
 
-Parser configuration is applied on installation - no agent restart required.
+Log parser configuration is applied right after log parser policy is deployed or
+undeployed to node - no agent restart is required.
 
-Policy group
-------------
 
-Policies can be organized into groups.
+File delivery policy
+--------------------
 
-To create new group select :menuselection:`Create->Policy group...` and give
-required object name and press :guilabel:`OK`.
+
+User support application policy
+-------------------------------
+
 
 Common information
 ------------------
 
-After policy is created it should be installed on required nodes. Node and agent on it
-should be up and running. To install policy in object menu select :menuselection:`Install...`,
-select :guilabel:`Install on nodes selected below`, select required nodes in object browser and
-click :guilabel:`OK`.
+Policies are automatically deployed to nodes after creation/modification or
+when a template is applied to a node. When configuration policy is deleted or
+template is removed from a node, the policy is automatically undeployed from node.
 
-Installed policy configurations are stored as additional config files under agent
-:guilabel:`DataDirectory`. List of applied policies is stored in agent local database. If policy is
-successfully applied on a :term:`node <Node>` it will be seen under this policy.
+Policies get deployed / undeployed:
+  - On node configuration poll.
+  - When list of Agent Policies is closed in the management console. If
+    a node is down at that moment, next attempt will happen on configuration poll.
+  - When template is applied or removed from a node. If a node is down at that
+    moment, next attempt will happen on configuration poll.
 
-Example:
+Installed policy configurations are stored as additional files under agent
+:guilabel:`DataDirectory`. List of applied policies is stored in agent local database.
 
-      .. figure:: _images/applied_policy.png
+If agent discovers for a record in local database, that policy file is missing, it will
+delete the record from database.
 
-If Policies have changed it should be reapplied manually. Is is done with command in
-object menu :menuselection:`Install...`, then select :guilabel:`Install on all nodes where this
-policy already installed` and click :guilabel:`OK`.
+When performing deployment, server checks information in agent's database with it's
+database and issues necessary commands/
 
-Policy can be also uninstalled. To do this right click on policy object and select
-:menuselection:`Uninstall...`, select node from witch this policy will be removed and click :guilabel:`OK`.
-In this case additional configuration file is removed from node.
-
-In case of Policy deploy, Policy uninstall, Policy update job fail, unsuccessfully operation will be
-scheduled for re-execution. :guilabel:`JobRetryCount` server configuration variable represents
-number of retries. First time job is rescheduled in 10 minutes. Each next wait time is twice more
-than the previous time.
-
-Installed policies are checked on configuration poll and are reinstalled if policy is marked as
-applied on a server, but is missing on the node.
-
-.. note::
-
-    Some types of policies require agent restart for changes to be applied.
 
 
 Agent registration
@@ -491,7 +505,7 @@ Subagents
 Subagents are used to extend agent functionality. |product_name| subagent are libraries that are loaded by agent.
 By default all subagents are included in agent build. Subagent may be not included in build
 only if on time of the build there were no required libraries for subagent build. To enable
-subagent is require just to add line in main agent configuration file(example: "Subagent=dbquery.nsm").
+subagent is require just to add line in main agent configuration file (example: "Subagent=dbquery.nsm").
 More about configuration and usage of subagents will be described in monitoring chapters.
 
 Below is list of available |product_name| subagents:

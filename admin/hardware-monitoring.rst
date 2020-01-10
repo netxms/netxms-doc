@@ -166,14 +166,14 @@ Configuration example
 RPI
 ===
 
-This subagent collects data from Raspberry Pi dht22 sensor and status of GPO pins.
+This subagent collects data from Raspberry Pi DHT22 sensor and status of GPIO pins.
 
 Parameters
 ----------
 
 .. list-table::
    :header-rows: 1
-   :widths: 50 30 200
+   :widths: 90 30 200
 
    * - Parameter
      - Type

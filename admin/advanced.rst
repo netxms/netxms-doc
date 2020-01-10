@@ -232,10 +232,10 @@ Steps to create ticket:
 Hooks
 =====
 
-Sometimes it is required to add some additional functionality after poll, object 
-creation or other action - for this purpose hooks were created. 
-Hook is manually created script in :guilabel:`Script Library` that is executed 
-at a special condition like end of the poll or interface creation. 
+Sometimes it is required to add some additional functionality after poll, object
+creation or other action - for this purpose hooks were created.
+Hook is manually created script in :guilabel:`Script Library` that is executed
+at a special condition like end of the poll or interface creation.
 
 More about poll types and purposes can be found :ref:`there <concepts_polling>`
 and about script creation :ref:`there <scripting>`.
@@ -264,13 +264,13 @@ Full list of hooks:
    * - Hook\:\:ConfigurationPoll
      - Hook that is executed at the end of configuration poll
      - $object - current object, one of 'NetObj' subclasses
-     
+
        $node - current object if it is 'Node' class
      - none
    * - Hook\:\:InstancePoll
      - Hook that is executed after instance discovery poll.
      - $object - current object, one of 'NetObj' subclasses
-     
+
        $node - current object if it is 'Node' class
      - none
    * - Hook\:\:TopologyPoll
@@ -280,7 +280,7 @@ Full list of hooks:
    * - Hook\:\:CreateInterface
      - Hook that is executed after new interface is created.
      - $node - current node, object of 'Node' type
-      
+
        $1 - current interface, object of 'Interface' type
      - true/false - boolean - whether interface should be created
    * - Hook\:\:AcceptNewNode
@@ -288,7 +288,7 @@ Full list of hooks:
        node should be added. In case if script returns nothing or something other
        than 1 - node will not be added.
      - $ipAddr - IP address of the node being processed
-       
+
        $ipNetMask - netmask of the node being processed
 
        $macAddr - MAC address of the node being processed
@@ -302,19 +302,19 @@ Full list of hooks:
    * - Hook\:\:PostObjectCreate
      - Hook that is executed after object is created
      - $object - current object, one of 'NetObj' subclasses
-     
+
        $node - current object if it is 'Node' class
      - none
    * - Hook\:\:CreateSubnet
      - Hook that is executed at the ens subnet creation
      - $node - current node, object of 'Node' class
-     
+
        $1 - current subnet, object of 'Subnet' class
      - true/false - boolean - whether subnet should be created
    * - Hook\:\:UpdateInterface
      - Hook that is executed at the ens of interface update
      - $node - current node, object of 'Node' type
-      
+
        $interface - current interface, object of 'Interface' type
      - none
 
@@ -401,7 +401,7 @@ Automatic actions on a new node
 On a new node creation is generated SYS_NODE_ADDED event. So any automatic
 actions that should be done on a node can be done by creating :term:`EPP` rule
 on on this event, that will run script. In such way can be done node bind to
-container, policy or template auto apply and other automatic actions.
+container, template auto apply and other automatic actions.
 
 .. _autologin:
 

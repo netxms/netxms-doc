@@ -603,7 +603,7 @@ Both ``action`` and ``reset`` attributes can be omitted; default value for
 Tag ``<exclusionSchedules>`` defines time when file should not be parsed. Each cron expression
 should be defined in ``<schedule>``. This should be used to define time when file should not be
 opened. Once time does not match cron file will be reopened and all added lines will be parsed.
-See :ref:`cron_format` for supported cron format options. 
+See :ref:`cron_format` for supported cron format options.
 
 Example:
 
@@ -738,4 +738,4 @@ Available list parameters:
    * - Name
      - Description
    * - LogWatch.ParserList
-     - List of parser names. If no name is defined than parser file name will be used.
+     - List of parser names. If no name is defined then parser file name will be used.

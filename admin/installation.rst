@@ -296,7 +296,7 @@ Agent
      management servers, separating them by commas. Press the Next button to continue.
 
 
-  3. Subagent Selection window will open:
+  3. Subagent selection window will open:
 
      .. figure:: _images/win_agent_subagents.png
 
@@ -458,19 +458,19 @@ Since version 2.2.4 encryption support is enforced when building server.
 
            * - Name
              - Description
-           * - --prefix=DIRECTORY
+           * - ``--prefix=DIRECTORY``
              - Installation prefix, all files go to the specified directory
-           * - --with-server
+           * - ``--with-server``
              - Build server binaries. You will need to select at least one DB driver as well
-           * - --with-agent
+           * - ``--with-agent``
              - Build monitoring agent. It is strongly recommended to install agent on a server box
-           * - --with-pgsql
+           * - ``--with-pgsql``
              - Build PostgresSQL DB Driver (if you plan to use PostgreSQL as backend database)
-           * - --with-mysql
+           * - ``--with-mysql``
              - Build MySQL DB Driver (if you plan to use MySQL as backend database)
-           * - --with-odbc
+           * - ``--with-odbc``
              - Build ODBC DB driver (if you plan to connect to your backend database via unixODBC)
-           * - --with-sqlite
+           * - ``--with-sqlite``
              - Build SQLite DB driver (if you plan to use embedded SQLite database as backend database)
 
   #. Run build binaries and install them into /usr/local (unless changed with configure flag --prefix)
@@ -596,12 +596,12 @@ Agent
 
            * - Name
              - Description
-           * - --prefix=DIRECTORY
+           * - ``--prefix=DIRECTORY``
              - Installation prefix, all files go to the specified directory
-           * - --with-agent
+           * - ``--with-agent``
              - Build monitoring agent. It is strongly recommended to install agent on a server box
 
-  #. Run build binaries and install them into /usr/local (unless changed with configure flag --prefix)
+  #. Run build binaries and install them into /usr/local (unless changed with configure flag ``--prefix``)
 
         :command:`make`
 

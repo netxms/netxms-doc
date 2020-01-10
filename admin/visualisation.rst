@@ -22,7 +22,7 @@ There are 3 types of map that can be created:
    * Custom - will be created empty map.
    * Layer 2 Topology - will create map(if possible) with layer 2 topology of selected object. Will be automatically updated on topology change.
    * IP Topology - will create map with known IP Topology of selected object. (More about network topology can be found there :ref:`topology`) Will be automatically updated on topology change.
-   * Internal communication topology - map created based on internal communication between server and node (will show SNMP, ICMP, ). 
+   * Internal communication topology - map created based on internal communication between server and node (will show SNMP, ICMP, ).
 
 .. figure:: _images/network_map_l2.png
 
@@ -38,9 +38,9 @@ Edit Maps
 Adding Objects
 --------------
 
-Network map can be populated in 2 different ways: automatically and manually. 
-Automatically are populated Layer 2, IP Topology and Internal communication topology. 
-Object filer (in properties of the map) can be created for automatically populated 
+Network map can be populated in 2 different ways: automatically and manually.
+Automatically are populated Layer 2, IP Topology and Internal communication topology.
+Object filer (in properties of the map) can be created for automatically populated
 maps to filter out unrequited nodes.
 
 Objects to map can be added in tow ways:
@@ -128,7 +128,7 @@ DCI Image is part of decorations. It can be used to display DCI status change in
 
 
 **DCI image properties**
-   * Data source - DCI witch data will be taken to process picture display rules
+   * Data source - DCI which data will be taken to process picture display rules
    * Column - required only for table DCI
    * Instance - required only for table DCI
    * Default image - image that will be displayed if no rule is applicable on current value
@@ -799,7 +799,7 @@ Summary table
 =============
 
 It is possible to see DCI data as a table where each line is one node and each
-column is a DCI. It can be configured for each summary table witch DCIs should be
+column is a DCI. It can be configured for each summary table which DCIs should be
 present on it.
 
 .. figure:: _images/summary_table.png

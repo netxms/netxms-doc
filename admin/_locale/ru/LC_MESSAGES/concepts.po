@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2015, Raden Solutions, SIA
 # This file is distributed under the same license as the Administrator Guide package.
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -97,7 +97,7 @@ msgid ""
 "them. Objects are organized into hierarchical structure. Each object has "
 "it's own access rights. Access rights are applied hierarchically on all "
 "children of object. For example if it grant :guilabel:`Read` access right "
-"for user on a :guilabel:`Container`, than user have :guilabel:`Read` right "
+"for user on a :guilabel:`Container`, then user have :guilabel:`Read` right "
 "on all objects that contains this :guilabel:`Container`. Every object has "
 "set of attributes; some of them are common (like :guilabel:`id` and "
 ":guilabel:`name` or :guilabel:`status`),  while other depends on object "

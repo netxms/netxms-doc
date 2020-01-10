@@ -41,7 +41,7 @@ Hyphens (``-``) define ranges. For example, using ``6-8`` in 4th field (month)
 means June, July and August.
 
 Slashes (``/``) can be combined with ranges to specify step values.
-For example, ``*/5`` in the minutes field indicates every 5 minutes.
+For example, */5 in the minutes field indicates every 5 minutes.
 If a step value does not evenly divide it's range, there will be an
 inconsistent "short" period at the end of time-unit.
 
@@ -62,7 +62,7 @@ collection strategy though. Use seconds only if it is absolutely necessary.
     DCI configuration custom schedule property page
 
 Examples
---------
+~~~~~~~~
 
 Run five minutes after midnight, every day:
 

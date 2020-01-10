@@ -1,4 +1,4 @@
-automatic_bind_rules.. _object-management:
+.. _object-management:
 
 
 #################
@@ -285,7 +285,7 @@ Container
 Containers can be created in Infrastructure Services tree. Existing nodes and
 subnets can be added to containers by using Bind operation, and removed by using
 Unbind operation. New nodes, conditions, clusters, containers, mobile devices and racks can also
-be created. They can be created using required menu item of container under witch this object should
+be created. They can be created using required menu item of container under which this object should
 appear. Containers and nodes inside them can be moved by :guilabel:`Move to another container` menu
 item or using drag&drop.
 
@@ -873,8 +873,8 @@ the content of the file from agent.
 Server Script
 ~~~~~~~~~~~~~
 
-:guilabel:`Server Script` tool can be used to execute NXSL script form :guilabel:`Script Library`.
-This fool provide full range of capabilities that are available thought NXSL scripting.
+:guilabel:`Server Script` tool can be used to execute NXSL script from :guilabel:`Script Library`.
+This tool provide full range of capabilities that are available thought NXSL scripting.
 
 .. figure:: _images/obj_tool_script.png
    :scale: 65%
@@ -1000,7 +1000,7 @@ Properties
 Filter
 ~~~~~~
 
-Filters are used to chose on witch nodes to show object tool.
+Filters are used to chose on which nodes to show object tool.
 There are 5 types of filtering. Show object tool:
 
   1. if agent available on a node
@@ -1016,7 +1016,7 @@ There are 5 types of filtering. Show object tool:
 Access Control
 ~~~~~~~~~~~~~~
 
-In :guilabel:`Access Control` tab can be defined witch users or groups can
+In :guilabel:`Access Control` tab can be defined which users or groups can
 execute this action. If the list is empty, only administrator will be able
 to execute this action.
 

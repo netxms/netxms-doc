@@ -536,7 +536,7 @@ String                   Instance name, that will be available as {instance} mac
 String                   Instance user-readable description, that will be available
                          as {instance-name} macro
 NetObj                   .. versionadded:: 3.0.0
-                         Object connected with this :term:`DCI`
+                           Object connected with this :term:`DCI`
 ======================== ==========================================================
 
 

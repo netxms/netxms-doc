@@ -383,7 +383,7 @@ database and issues necessary commands/
 Agent registration
 ==================
 
-There are available two ways of agent, server communication. Standard one is when server initialize
+Two ways of agent-server communication are available. Standard one is when server initializes
 connection to agent, the second one is when tunnel is used and agent initialize connection to server.
 
 Server to agent connection
@@ -392,8 +392,8 @@ Server to agent connection
 There are few ways to register agent:
    1. To enter it manually by creating a node
    2. Run the network discovery and enter the range of IP addresses.
-   3. Register agent on management server "nxagentd -r <addr>",  where <addr> is the IP address of server.
-      To register agents using this option also :guilabel:`EnableAgentRegistration` parameter should be set to 1.
+   3. Register agent on management server ``nxagentd -r <addr>``,  where <addr> is the IP address of server.
+      To register agents using this option :guilabel:`EnableAgentRegistration` server configuration parameter should be set to 1.
 
 .. _agent-to-server-agent-conf-label:
 
@@ -404,34 +404,34 @@ This connection requires certificate configuration on server side. More about re
 :ref:`server-tunnel-cert-conf`. Agent requires :guilabel:`ServerConnection` parameter set in agentd.conf file to
 server :term:`DNS` or server IP address.
 
-Just after start agent will try to connect to server. On first connect node will be shown in list of
+Right after agent start it will try to connect to the server. On first connect node will be shown in :guilabel:`Agent Tunnels`.
 
 There are few ways to register agent:
    1. To enter it manually by creating a node and then binding tunnel to already created node.
-   2. Create node from :guilabel:`Agent Tunnel Manager` view by selecting one or more tunnels and selecting
+   2. Create node from :guilabel:`Agent Tunnels` view by selecting one or more tunnels and selecting
       :guilabel:`Create node and bind...` menu item.
 
 Security
 ========
 
-Message encryption in server to agent connection
-------------------------------------------------
+Message encryption in server to agent communication
+---------------------------------------------------
 
 Server encryption policy is configured in :guilabel:`Server Configuration` view by
 selecting one of 4 options for :guilabel:`DefaultEncryptionPolicy` parameter. Default
-Policy is 1.
+Policy is 2.
 
 Policy types:
 
-  * 0 - Forbid encryption. Will communicate with agents only using plain text messages.
-    If agent force encryption(set :guilabel:`RequireEncryption` agent configuration
-    parameter to :guilabel:`yes`), server will not connect with this agent.
-  * 1 - Allow encryption. Will communicate with agents using plain text messages if for
-    exact node is not defined encryption force by setting :guilabel:`RequireEncryption`
+  * 0 - Forbid encryption. Will communicate with agents only using unencrypted messages.
+    If agent force encryption (:guilabel:`RequireEncryption` agent configuration
+    parameter is set to :guilabel:`yes`), server will not accept connection with this agent.
+  * 1 - Allow encryption. Will communicate with agents using unencrypted messages
+    if encryption is not enforced by setting :guilabel:`RequireEncryption`
     agent configuration parameter to :guilabel:`yes` or by selecting
     :guilabel:`Force encryption` option in Communication properties of node object.
-  * 2 - Encryption preferred. Will communicate with agent using encryption. In case if
-    agent does not support encryption will communicate with it using plain text.
+  * 2 - Encryption preferred. Will communicate with agents using encryption. In case if
+    agent does not support encryption will use unencrypted communication.
   * 3 - Encryption required. Will communicate with agent using encryption. In case if
     agent does not support encryption will not establish connection.
 
@@ -440,22 +440,22 @@ Policy types:
     Force encryption option for node.
 
 
-.. note::
-  Configuration will be simplified in next releases.
-
 Security in agent to server connection
 --------------------------------------
 
 Agent to server connection uses :term:`TLS` protocol to ensure communication security. Server has root certificate, that
-is used to issue public certificate for agent. Additionally to this server issues certificates only to the nodes that were
-manually accepted on server, this process can be automated by NXShell if required. More information:
+is used to issue public certificate for agent. Server issues certificate to node when user manually
+binds tunnel to a node in :guilabel:`Agent Tunnels`, or node is bind automatically
+(when :guilabel:`AgentTunnels.UnboundTunnelTimeoutAction` server configuration parameter is set to
+:guilabel:`Bind tunnel to existing node` or :guilabel:`Bind tunnel to existing node or create a new node`).
+If required, this process can also be automated by NXShell. More information:
 `NXShell examples <https://wiki.netxms.org/wiki/Using_nxshell_to_automate_bulk_operations>`_,
 `Latest Javadoc <https://www.netxms.org/documentation/javadoc/latest/>`_.
 
 Server access levels
 --------------------
 
-Depending on how server's IP address(or domain) is added to in nxagentd.conf, it will
+Depending on how server's IP address (or domain) is added to in nxagentd.conf, it will
 have different access level. It is preferred to use MasterServers. There are 3 levels
 of access for an agent:
 
@@ -465,8 +465,8 @@ of access for an agent:
    3. Servers - read only access. (Is default for tunneled agent connection if other server level is not defined)
 
 In case if server IP is not listed in one of this parameters agent will not enable
-connection with server in server to agent connection or will set access level to :guilabel:`Servers` if tunnel
-connection is used.
+connection with server in server to agent connection or will set access level
+to :guilabel:`Servers` if tunnel connection is used.
 
 Shared secret
 -------------

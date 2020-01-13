@@ -218,6 +218,9 @@ Agent configuration file (nxagentd.conf)
    * - ExternalParametersProvider
      - Adds list of metrics that are cached by the agent and returned to server per request. Metrics should be returned in *metric=value* format each pair in new line.
      - No defaults
+   * - ExternalParameterProviderTimeout
+     - Timeout in seconds for external parameters provider execution
+     - 30
    * - ExternalSubagent
      - ID of external subagent. Should be same as ``ExternalMasterAgent`` in master agent configuration file.
      - No defaults
@@ -259,8 +262,8 @@ Agent configuration file (nxagentd.conf)
      - List of management servers, which have full access to agent. Hosts listed in this group can upload files to agent and initiate agent upgrade, as well as perform any task allowed for hosts listed in Servers and ControlServers. Both IP addresses and DNS names can be used. Multiple servers can be specified in one line, separated by commas. If this parameter is used more than once, servers listed in all occurrences will have access to agent.
      - Empty list
    * - MaxLogSize
-     - Maximum log size, in bytes. When log file reaches this limit, log rotation occurs. Use 0 to disable log rotation.
-     - 16777216
+     - Maximum log size, in bytes. When log file reaches this limit, log rotation occurs. Use 0 to disable log rotation. This parameter supports (K, M, G, T suffixes).
+     - 16M
    * - MaxSessions
      - Maximum number of simultaneous communication sessions. Possible value can range from 2 to 1024.
      - 32

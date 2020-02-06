@@ -264,27 +264,53 @@ Agent Policies:
 Agent Policies
 ==============
 
-Agent policies belong to templates, so they are applied to nodes to which a
-corresponding template is applied. The following policy types are available:
+Agent policies are additional configuration created by user (agent configuration or files) that 
+are uploaded and updated on agent when template is manually or automatically applied on 
+the node. Agent policies belong to templates, so they are applied to nodes to which a
+corresponding template is applied. 
+
+To create policy, right click a template and select :menuselection:`Agent policies`. Click plus 
+icon to create a new policy, give it a name, choose correct policy type and
+click :guilabel:`OK`. Existing policy can be modified by right-clicking it and
+selecting :menuselection:`Edit` from the menu or by double clicking on it.
+
+The following policy types are available:
   - Agent configuration policy
   - File delivery policy
   - Log parser policy
   - User support application policy
 
+Policies are automatically deployed to nodes after creation/modification or
+when a template is applied to a node. When configuration policy is deleted or
+template is removed from a node, the policy is automatically undeployed from node.
+
+Policies get deployed / undeployed:
+  - On node configuration poll.
+  - When list of Agent Policies is closed in the management console. If
+    a node is down at that moment, next attempt will happen on configuration poll.
+  - When template is applied or removed from a node. If a node is down at that
+    moment, next attempt will happen on configuration poll.
+
+Installed policy configurations are stored as additional files under agent
+:guilabel:`DataDirectory`. List of applied policies is stored in agent local database.
+
+If agent discovers for a record in local database, that policy file is missing, it will
+delete the record from database.
+
+When performing deployment, server checks information in agent's database with it's
+database and issues necessary commands.
+
 Agent configuration policy
 --------------------------
 
+Agent configuration policy provides option to populate agent configuration with additional 
+parts. Main agent configuration is merged with additional rules from policy. 
 Using policy for configuration file maintenance has advantages that configuration
 is edited in centralized way and gives granular control on the configuration that each node gets.
+More information about different agent configuration options can be found in above chapters.
 
 It is possible to use the same parameters and format as in any |product_name| agent configuration file
 (key=value format or XML format).
-
-To create agent configuration file policy, right click a template and select
-:menuselection:`Agent policies`. Click plus icon to create a new policy, give it a
-name, choose :guilabel:`Agent configuration` as policy type and
-click :guilabel:`OK`. Existing policy can be modified by right-clicking it and
-selecting :menuselection:`Edit` from the menu.
 
 Example:
 
@@ -335,13 +361,7 @@ configuration policy is deployed or undeployed to node.
 Log parser policy
 -----------------
 
-Information about log parser format available in :ref:`log-monitoring` chapter.
-
-To create log parser policy, right click a template and select
-:menuselection:`Agent policies`. Click plus icon to create a new policy, give it a
-name, choose :guilabel:`Log Parser` as policy type and
-click :guilabel:`OK`. Existing policy can be modified by right-clicking it and
-selecting :menuselection:`Edit` from the menu.
+Information about log parser format and usage available in :ref:`log-monitoring` chapter.
 
 Log parser configuration is applied right after log parser policy is deployed or
 undeployed to node - no agent restart is required.
@@ -350,33 +370,32 @@ undeployed to node - no agent restart is required.
 File delivery policy
 --------------------
 
+File delivery policy is created to automatically upload files form server to agents. 
+
+First root folder or folders should be created - folders with the full path to place 
+where uploaded file and folder structure should be placed. Only files are uploaded and updated, 
+folders should already exist on file system, they are not created automatically. After folder 
+structure is created files can be added to this structure. 
+
+In file and folder names next macro can be used:
+
+  - Environment variables as %{ENV_VAR_NAME}
+  - `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_ macros
+  - Text inside \` braces will be executed as a command and first line of result will substitute the command with the braces 
+
+
+Example:
+
+  .. figure:: _images/policy_file_delivery.png
+
+.. note:
+  File delivery policy uses :ref:`File Manager<agent_file_managment>` to uplad files
+  so :guilabel:`filemgr` subagnt should be loaded and root folders should be defined 
+  to provide write access to folders.
+
 
 User support application policy
 -------------------------------
-
-
-Common information
-------------------
-
-Policies are automatically deployed to nodes after creation/modification or
-when a template is applied to a node. When configuration policy is deleted or
-template is removed from a node, the policy is automatically undeployed from node.
-
-Policies get deployed / undeployed:
-  - On node configuration poll.
-  - When list of Agent Policies is closed in the management console. If
-    a node is down at that moment, next attempt will happen on configuration poll.
-  - When template is applied or removed from a node. If a node is down at that
-    moment, next attempt will happen on configuration poll.
-
-Installed policy configurations are stored as additional files under agent
-:guilabel:`DataDirectory`. List of applied policies is stored in agent local database.
-
-If agent discovers for a record in local database, that policy file is missing, it will
-delete the record from database.
-
-When performing deployment, server checks information in agent's database with it's
-database and issues necessary commands/
 
 
 

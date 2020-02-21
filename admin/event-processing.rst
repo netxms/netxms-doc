@@ -655,6 +655,15 @@ The following drivers are provided by default with |product_name| installation:
      - Notification channel driver for Telegram messenger. Configuration parameter:
 
        * AuthToken
+       * DisableIPv4 - true to disable IPv4 usage
+       * DisableIPv6 - true to disable IPv6 usage
+       * Proxy - proxy url or ip or full configuration if format [scheme]://[login:password]@IP:[PORT]
+       * ProxyPort - proxy port 
+       * ProxyType - proxy type: http, https, socks4, socks4a, socks5, socks5h
+       * ProxyUser - proxy user name
+       * ProxyPassword - proxy user password
+
+       Only AuthToken field is mandatory field all others are optional
 
        To confiugre Telegram notifications it is required to talk to BotFather and
        get bot authentication token (AUTH_TOKEN). Set authentication token (AUTH_TOKEN) in notification

@@ -373,9 +373,9 @@ File delivery policy
 File delivery policy is created to automatically upload files form server to agents. 
 
 First root folder or folders should be created - folders with the full path to place 
-where uploaded file and folder structure should be placed. Only files are uploaded and updated, 
-folders should already exist on file system, they are not created automatically. After folder 
-structure is created files can be added to this structure. 
+where uploaded file and folder structure should be placed. After folder 
+structure is created files can be added to this structure. On policy apply folders will be 
+created if possible and files will be uploaded. 
 
 In file and folder names next macro can be used:
 

@@ -10,25 +10,42 @@ Planing
 Operating system
 ----------------
 
-|product_name| server can work on:
+Both |product_name| server and agent works fine on most operating systems, including Windows, Linux, and commercial UNIXes.
+However, we test and officialy support only some of them.
 
-   * Windows 7 and higher, Windows Server 2003 and higher
-   * Red Hat Enterprise Linux, SUSE Linux, CentOS, Debian Linux, Ubuntu Linux
-   * FreeBSD, NetBSD, OpenBSD
-   * Solaris 10, 11
-   * HP-UX 11.23, 11.31
-   * AIX 5.3+
+Supported platforms for |product_name| server:
 
-|product_name| agent can work on:
+   * Debian 9 (Stretch) and Debian 10 (Buster)
+   * Ubuntu 16.04 LTS (Xenial), 18.04 LTS (Bionic), and 19.10 (Eoan)
+   * Devuan ASCII
+   * Red Hat Enterprise Linux 7 and 8
+   * CentOS 7 and 8
+   * Windows 10, Windows Server 2016 and 2019
+   * FreeBSD 11, 11.3, and 12
+   * ArchLinux (Latest)
+   * AlpineLinux 3.8+
 
-   * Windows XP and higher, Windows Server 2003 and higher
-   * Linux
-   * FreeBSD, NetBSD, OpenBSD
-   * Solaris
-   * HP-UX
-   * AIX
+Suppoted platforms for |product_name| agent:
+   * Debian 9 (Stretch) and Debian 10 (Buster)
+   * Ubuntu 16.04 LTS (Xenial), 18.04 LTS (Bionic), and 19.10 (Eoan)
+   * Devuan ASCII
+   * Red Hat Enterprise Linux 7 and 8
+   * CentOS 7 and 8
+   * Windows 10, Windows Server 2016 and 2019
+   * FreeBSD 11, 11.3, and 12
+   * ArchLinux (Latest)
+   * AlpineLinux 3.8+
 
-OpenSSL is required for encryption support (UNIX only).
+Support for the following platforms provided only to customers with active support contract:
+
+   * Ubuntu 14.04 LTS
+   * Debian 8 (Jessie)
+   * Devuan Jessie
+   * Red Hat Enterprise Linux 6
+   * CentOS 6
+   * Windows 7, 8.1, Windows Server 2008 R2, 2012, and 2012 R2
+   * AIX 7.1
+   * SUSE Linux Enterprise Server 11, 12, and 15
 
 Server
 ------
@@ -44,7 +61,7 @@ Supported database engines:
 
    * Microsoft SQL 2005 and higher
    * MySQL 5.1 and higher
-   * Oracle 11g, 12
+   * Oracle 11g, 12c, 19c
    * PostgreSQL 9.1 and higher
    * DB/2 v10
    * SQLite (only for test purposes)

@@ -46,6 +46,8 @@ Support for the following platforms provided only to customers with active suppo
    * Windows 7, 8.1, Windows Server 2008 R2, 2012, and 2012 R2
    * AIX 7.1
    * SUSE Linux Enterprise Server 11, 12, and 15
+   * Solaris 11 (agent only)
+   * HP-UX 11.31 (agent only)
 
 Server
 ------

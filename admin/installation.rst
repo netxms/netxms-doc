@@ -26,6 +26,7 @@ Supported platforms for |product_name| server:
    * AlpineLinux 3.8+
 
 Suppoted platforms for |product_name| agent:
+
    * Debian 9 (Stretch) and Debian 10 (Buster)
    * Ubuntu 16.04 LTS (Xenial), 18.04 LTS (Bionic), and 19.10 (Eoan)
    * Devuan ASCII

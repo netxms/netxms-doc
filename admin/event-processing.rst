@@ -626,6 +626,17 @@ The following drivers are provided by default with |product_name| installation:
        * port (default: 4700)
        * timeout (seconds, default: 30)
        * secret
+       * encryption - optional parameter. Encryption policy: 
+
+            0 = Encryption disabled; 
+
+            1 = Encrypt connection only if agent requires encryption;
+
+            2 = Encrypt connection if agent supports encryption;
+
+            3 = Force encrypted connection;            
+            
+       * keyFile - optional parameter. Specify server's key file, if not specified will take default path.
 
    * - portech.ncd
      - Driver for Portech MV-372 and MV-374 GSM gateways (`<https://www.portech.com.tw/p3-product1_1.asp?Pid=14>`_). Configuration parameters:

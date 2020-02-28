@@ -4,6 +4,22 @@
 ICMP ping
 =========
 
+The following options exist to monitor systems using ICMP pings:
+* ICMP response statistic collection
+* Metrics provided by ping subagent
+
+
+ICMP response statistic collection
+==================================
+
+
+
+
+Ping subagent
+=============
+
+
+
 This subagent can be used to measure ICMP ping response times from one location to another.
 Measurements can be either scheduled by the agent itself or requested by the server.
 
@@ -25,7 +41,7 @@ Metrics available on request:
     Automatic configuration of targets
 
 Metrics
-=======
+-------
 
 When loaded, PING subagent adds the following parameters to agent:
 
@@ -38,8 +54,8 @@ When loaded, PING subagent adds the following parameters to agent:
 | Icmp.LastPingTime(*target*)             | Last ICMP ping response time from *target*. Argument *target* can be either IP address or name      |
 |                                         | specified in Target configuration record (see below).                                               |
 +-----------------------------------------+-----------------------------------------------------------------------------------------------------+
-| Icmp.PacketLoss(*target*)               | ICMP ping packet loss (in percents) for *target*. Argument *target* can be either IP address or     |
-|                                         | name specified in Target configuration record (see below).                                          |
+| Icmp.PacketLoss(*target*)               | ICMP ping packet loss (in percents) for *target* for last minute. Argument *target* can be either   |
+|                                         | IP address or name specified in Target configuration record (see below).                            |
 +-----------------------------------------+-----------------------------------------------------------------------------------------------------+
 | Icmp.Ping(*target*, *timeout*, *psize*) | ICMP ping response time from *target*. Agent will send echo request as soon as it receives          |
 |                                         | request for parameter's value, and will return response time for that particular request. Argument  |
@@ -61,7 +77,7 @@ When loaded, PING subagent adds the following parameters to agent:
 
 
 Tables
-======
+------
 
 +-----------------+---------------------------------------------+
 | Table           | Description                                 |
@@ -79,7 +95,7 @@ Tables
 +-----------------+---------------------------------------------+
 
 Lists
-=====
+-----
 
 +-----------------+---------------------------------------+
 | List            | Description                           |
@@ -88,7 +104,7 @@ Lists
 +-----------------+---------------------------------------+
 
 Configuration file
-==================
+------------------
 
 All configuration parameters related to PING subagent should be placed into **[PING]** section of agent's configuration file.
 The following configuration parameters are supported:

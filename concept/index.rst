@@ -1,6 +1,6 @@
-####################
-NetXMS Concept Guide
-####################
+############################
+|product_name| Concept Guide
+############################
 
 .. warning::
 
@@ -9,7 +9,7 @@ NetXMS Concept Guide
 .. toctree::
    :maxdepth: 3
    :glob:
-   
+
    preface
    architecture_overview
    objects

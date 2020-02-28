@@ -99,7 +99,7 @@ Other options
 ~~~~~~~~~~~~~
 
  - It is possible to move files and folders with help of drag and drop.
- - To refresh all view should be used view refresh button(not form folder menu). But in this case all expanded folders will be closed.
+ - To refresh all view should be used view refresh button (not form folder menu). But in this case all expanded folders will be closed.
 
 Advanced File Management
 ========================

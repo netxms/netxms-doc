@@ -129,10 +129,10 @@ exported to CSV.
 node and some other options:
 
 :guilabel:`Routing table`
-:guilabel:`IP route from...` will build network map with route form selected node to
-node that is selected form Object selector window.
+:guilabel:`IP route from...` will build network map with route from selected node to
+node that is selected from Object selector window.
 :guilabel:`IP route to...` will build network map with route to selected node from
-node that is selected form Object selector window.
+node that is selected from Object selector window.
 :guilabel:`IP Neighbors` will show all IP neighbors of this node.
 
 :guilabel:`Switch forwarding database(MAC address table)`

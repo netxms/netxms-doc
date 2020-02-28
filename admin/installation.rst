@@ -343,7 +343,7 @@ Desktop Management Console:
     nxmc-VERSION-win32-x64.zip, for example nxmc-1.2.17-win32-x64.zip).
  2. Extract zip in preferred directory.
 
- 3. Run nxmc file form extracted catalog.
+ 3. Run nxmc file from extracted catalog.
 
 Web Management Console:
 
@@ -382,7 +382,7 @@ file already exists or if /CENTRALCONFIG option is used. These options are follo
    * - /CONFIGENTRY=value
      - It can be used to add any parameter to configuration file during initial install. You can specify it multiple times to add multiple lines. Section names can be added as well.
    * - /DIR=path
-     - Set installation directory (default is C:\|product_name|)
+     - Set installation directory (default is C:\NetXMS)
    * - /LOCALCONFIG
      - Use local configuration file (it is the default)
    * - /LOG
@@ -419,7 +419,7 @@ Agent
 -----
 
 To install Android agent download netxms-mobile-agent-VERSION.apk (example:
-netxms-mobile-agent-1.2.17.apk) file form http://www.netxms.org/download page.
+netxms-mobile-agent-1.2.17.apk) file from http://www.netxms.org/download page.
 Check that installation of applications from unknown sources is allowed in security
 settings of your phone. Run this installer on required device.
 
@@ -438,7 +438,7 @@ Console
 -------
 
 To install Android console download netxms-console-VERSION.apk (example:
-netxms-console-1.2.17.apk) file form http://www.netxms.org/download page. Check that
+netxms-console-1.2.17.apk) file from http://www.netxms.org/download page. Check that
 installation of applications from unknown sources is allowed in security settings of
 your phone. Run this installer on required device.
 

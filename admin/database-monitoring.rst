@@ -832,7 +832,7 @@ Configuration file
 Parameters
 ----------
 
-There are 2 types of parameters: serverStatus parameters, that are generated form response on a subagent start
+There are 2 types of parameters: serverStatus parameters, that are generated from response on a subagent start
 and predefined for database status.
 
 Description of serverStatus parameters can be found there: `serverStatus <http://docs.mongodb.org/manual/reference/command/serverStatus/>`_.

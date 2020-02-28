@@ -109,21 +109,21 @@ Agent configuration file (nxagentd.conf)
      - Description
      - Default Value
    * - Action
-     - Define action, which can be later executed by management server. To cation can
-       be given parameters from the server. They can be accessed as ``$1``, ``$2``...
-       variables.
+     - Define action, which can be later executed by management server.
+       Parameters to the action can be provided from the
+       server. They can be accessed as ``$1``, ``$2``... variables.
      - No defaults
    * - ActionShellExec
      - Same as Action, but on Windows platform agent will use shell to execute command
        instead of normal process creation. There is no difference between Action and
-       ActionShellExec on UNIX platforms.To cation can be given parameters from the
+       ActionShellExec on UNIX platforms. Parameters to the action can be provided from the
        server. They can be accessed as ``$1``, ``$2``... variables.
      - No defaults
    * - AppAgent
      - The registered name of application with built in subagent library that can be as subagent by agent.
      - No defaults
    * - AutoStartUserAgent
-     - Enable (yes) or disable (no) automatic start of User Agent (Windows only). If enabled, Agent will check on it's start and periodically afterwards, if User Agent is running in each user session and will start it if needed. For this to work, Agent should be started under local SYSTEM user.
+     - Enable (yes) or disable (no) automatic start of User Support Application (Windows only). If enabled, Agent will check on it's start, if User Support Application is running in each user session and will start it if needed. For this to work, Agent should be started under local SYSTEM user.
      - no
    * - BackgroundLogWriter
      - Enable (yes) or disable (no) log writer as separate background thread. Has no effect if logging is done through syslog or Windows Event Log.
@@ -166,6 +166,9 @@ Agent configuration file (nxagentd.conf)
    * - EnableActions
      - Enable (yes) or disable (no) action execution by agent.
      - yes
+   * - EnableArbitraryCommandExecution
+     - Enables server to run any shell command on the agent without specifying it as action in agent's config file.
+     - no
    * - EnabledCiphers
      - Controls what ciphers agent can use for connection encryption. A value for this parameter is a cipher code. To enable more than one cipher, the codes should be summed up.
 
@@ -182,9 +185,15 @@ Agent configuration file (nxagentd.conf)
 
        **EnabledCiphers = 5**
      - 63
+   * - EnableControlConnector
+     - Enables named pipe used by the agent to receive shutdown and delayed restart commands. A command is sent by another instance of agent, launched with -k or -K parameter. Used on Windows during upgrade process.
+     - yes
    * - EnableProxy
      - Enable (yes) or disable (no) agent proxy functionality.
      - no
+   * - EnablePushConnector
+     - Enables named pipe / unix socket used by the agent to receive data sent by nxapush command line tool.
+     - yes
    * - EnableSNMPProxy
      - Enable (yes) or disable (no) SNMP proxy functionality.
      - no
@@ -194,17 +203,24 @@ Agent configuration file (nxagentd.conf)
    * - EnableSubagentAutoload
      - Enable (yes) or disable (no) automatic loading of subagent(s) depending on the platform on which the agent is running.
      - yes
+   * - EnableSyslogProxy
+     - Enable (yes) or disable (no) Syslog proxy functionality.
+     - no
+   * - EnableTCPProxy
+     - Enable TCP proxy functionality that allows to forward TCP connections inside the connection between |product_name| server and agent.
+       An example utility called TcpProxyApp that forwards local ports is provided.
+     - no
    * - EnableWatchdog
      - Enable (yes) or disable (no) automatic agent restart in case of unexpected shutdown.
      - no
    * - ExecTimeout
      - Timeout in milliseconds for external metric execution.
      - 2000
-   * - ExternalMasterAgent
-     - ID that is checked when external subagent connects to master agent. Should have same value as ``ExternalSubagent`` parameter in external subagent configuration file.
-     - No defaults
    * - ExternalList
      - Add list handled by external command. To add multiple parameters, you should use multiple``ExternalList`` entries.
+     - No defaults
+   * - ExternalMasterAgent
+     - ID that is checked when external subagent connects to master agent. Should have same value as ``ExternalSubagent`` parameter in external subagent configuration file.
      - No defaults
    * - ExternalParameter
      - Adds metric handled by external command. To add multiple parameters, you should use multiple ``ExternalParameter`` entries.
@@ -214,7 +230,7 @@ Agent configuration file (nxagentd.conf)
        agent will use shell to execute specified command instead of system process execution
        API. This difference presented only on Windows system, on other systems
        ExternalParameter and ExternalParameterShellExec behaves identically.
-     -
+     - No defaults
    * - ExternalParametersProvider
      - Adds list of metrics that are cached by the agent and returned to server per request. Metrics should be returned in *metric=value* format each pair in new line.
      - No defaults
@@ -224,25 +240,30 @@ Agent configuration file (nxagentd.conf)
    * - ExternalSubagent
      - ID of external subagent. Should be same as ``ExternalMasterAgent`` in master agent configuration file.
      - No defaults
+   * - ExternalTable
+     - Adds table metric handled by external command. To add multiple parameters, you should use multiple ``ExternalTable`` entries.
+       See :ref:`agent-external-parameter` for more information.
+     - No defaults
    * - FileStore
      - Directory to be used for storing files uploaded by management server(s). It's value is set to environment variable NETXMS_FILE_STORE that is available to all processed launched by agent.
-     - :file:`/tmp` on UINX
+     - :file:`/tmp` on UNIX
        :file:`C:\\` on Windows
    * - FullCrashDumps
      - Enable (yes) or disable (no) full crash dump generation. Windows only
      - no
+   * - GroupId
+     - GroupId under which |product_name| agent is started (Unix only). See also ``UserId`` parameter.
+     - No defaults
    * - ListenAddress
      - IP address that the agent should listen on. If 0.0.0.0 or * is specified as listen address, agent will listen on all available IP addresses.
      - 0.0.0.0
    * - ListenPort
      - TCP port to be used for incoming requests.
      - 4700
-   * - LogFailedSQLQueries
-     - Enable (yes) or disable (no) failed SQL queries logging
-     - No
    * - LogFile
      - Agent's log file. To write log to syslog (or Event Log on Windows), use {syslog} as file name.
-     - {syslog}
+     - :file:`/var/log/nxagentd` on UNIX
+       :file:`{syslog}` on Windows
    * - LogHistorySize
      - Defines how many old log files should be kept after log rotation.
      - 4
@@ -258,6 +279,9 @@ Agent configuration file (nxagentd.conf)
    * - LogUnresolvedSymbols
      - If set to yes, all dynamically resolved symbols, which failed to be resolved, will be logged.
      - no
+   * - LongRunningQueryThreshold
+     - Expressed in milliseconds. If a query to agent's local database or DBQuery subagent query takes longer then this time, the query will be logged to agent log file.
+     - 250
    * - MasterServers
      - List of management servers, which have full access to agent. Hosts listed in this group can upload files to agent and initiate agent upgrade, as well as perform any task allowed for hosts listed in Servers and ControlServers. Both IP addresses and DNS names can be used. Multiple servers can be specified in one line, separated by commas. If this parameter is used more than once, servers listed in all occurrences will have access to agent.
      - Empty list
@@ -267,6 +291,9 @@ Agent configuration file (nxagentd.conf)
    * - MaxSessions
      - Maximum number of simultaneous communication sessions. Possible value can range from 2 to 1024.
      - 32
+   * - OfflineDataExpirationTime
+     - Applicable only if Agent Cache Mode is on. Defines the duration (in days) for how collected data will be stored in agent's database if there is no connection to NetXMS server.
+     - 10
    * - PlatformSuffix
      - String to be added as suffix to the value of ``System.PlatformName`` parameter.
      - Empty string
@@ -276,6 +303,9 @@ Agent configuration file (nxagentd.conf)
    * - RequireEncryption
      - If set to yes, a host connected to an agent will be forced to use encryption, and if encryption is not supported by a remote host, the connection will be dropped. If an agent was compiled without encryption support, this parameter has no effect.
      - no
+   * - ServerConnection
+     - IP address or host name of |product_name| server for tunnel agent connection
+     - No defaults
    * - Servers
      - A list of management servers, which have read access to this agent. Both IP addresses and DNS names can be used. Multiple servers can be specified in one line, separated by commas. If this parameter is used more than once, servers listed in all occurrences will have access to agent.
      - Empty list
@@ -303,8 +333,32 @@ Agent configuration file (nxagentd.conf)
    * - SubAgent
      - Subagent to load. To load multiple subagents, you should use multiple SubAgent parameters. Subagents will be loaded in the same order as they appear in configuration file.
      - No defaults
+   * - SyslogListenPort
+     - Listening port number for syslog proxy functionality.
+     - 514
+   * - SystemName
+     - If tunnel agent connection is used, the system appears in :guilabel:`Agent Tunnel Manager` under that name.
+     - ``localhost`` is used by default
+   * - TunnelKeepaliveInterval
+     - Interval (in seconds) between keepalive packets over tunnel agent connection.
+     - 30
+   * - UserAgentExecutable
+     - Name of User Support Application executable used by AutoStartUserAgent and UserAgentWatchdog parameters.
+     - nxuseragent.exe
+   * - UserAgentWatchdog
+     - Enable (yes) or disable (no) automatic restart of User Support Application (Windows only). If enabled, Agent will check once per minute, if User Support Application is running in each user session and will start it if needed. For this to work, Agent should be started under local SYSTEM user.
+     - no
+   * - UserId
+     - Username under which |product_name| agent is started (Unix only). See also ``GroupId`` parameter.
+     - No defaults
    * - WaitForProcess
      - If specified, an agent will pause initialization until given process starts.
+     - No defaults
+   * - WriteLogAsJson
+     - Enable (yes) or disable (no) writing log file in JSON format.
+     - no
+   * - ZoneUIN
+     - Allows to set agent's zone explicitly. This can be useful when agent forwards syslog or SNMP traps of devices, that belong to a particular zone. Agent will include zone UIN along with the trap message that will allow correct matching of traps.
      - No defaults
 
 .. note::
@@ -380,12 +434,6 @@ Server configuration file (netxmsd.conf)
   * - ListenAddress
     - Interface address which should be used by server to listen for incoming connections. Use value 0.0.0.0 or * to use all available interfaces.
     - 0.0.0.0
-  * - LogFailedSQLQueries
-    - Control logging of failed SQL queries. Possible values: yes or no.
-    - yes
-  * - LogFailedSQLQueries
-    - Enable (yes) or disable (no) failed SQL queries logging
-    - No
   * - LogFile
     - Server's log file. To write log to syslog (or Event Log on Windows), use {syslog} as file name.
     - {syslog}
@@ -448,7 +496,7 @@ These parameters can be changed in
     - 2000
     - Yes
   * - AgentDefaultSharedSecret
-    - String that will be used as a shared secret in case if agent will required authentication.
+    - String that will be used as a shared secret in case if agent will require authentication.
     - netxms
     - No
   * - AgentUpgradeWaitTime
@@ -732,14 +780,26 @@ These parameters can be changed in
     - Interval of housekeeper'a running (in seconds). Housekeeper deletes old log lines, old DCI data, cleans removed objects and does VACUUM for PostgreSQL.
     - 3600
     - Yes
-  * - IcmpPingSize
+  * - ICMP.CollectPollStatistics
+    - Collect ICMP poll statistics for all nodes by default. See :ref:`icmp-ping` chapter for information.
+    - 1
+    - No
+  * - ICMP.PingSize
     - Size of ICMP packets (in bytes, excluding IP header size) used for status polls.
     - 46
     - Yes
-  * - IcmpPingTimeout
+  * - ICMP.PingTimeout
     - Timeout for ICMP ping used for status polls (in milliseconds).
     - 1500
     - Yes
+  * - ICMP.PollingInterval
+    - Interval between ICMP statistic collection polls (in seconds)
+    - 60
+    - No
+  * - ICMP.StatisticPeriod
+    - Time period for collecting ICMP statistics (in number of polls).
+    - 60
+    - No
   * - InternalCA
     - Enable (1) or disable (0) internal certificate authority.
     - 0
@@ -1105,11 +1165,11 @@ These parameters can be changed in
     - http://www.netxms.org/download/netxms-%version%.exe
     - No
   * - XMPPLogin
-    - Login name that will be used to authentication on XMPP server.
+    - Login name that will be used for authentication on XMPP server.
     - netxms@localhost
     - Yes
   * - XMPPPassword
-    - Password that will be used to authentication on XMPP server.
+    - Password that will be used for authentication on XMPP server.
     - netxms
     - Yes
   * - XMPPPort
@@ -1285,7 +1345,7 @@ Syntax:
 
    nxget [options] host [parameter [parameter ...]]
 
-Where *host* is the name or IP address of the host running NetXMS agent; and
+Where *host* is the name or IP address of the host running |product_name| agent; and
 *parameter* is a parameter or a list name, depending on given options. By default,
 nxget will attempt to retrieve the value of one given parameter, unless given
 options override it.
@@ -2099,7 +2159,7 @@ Data type: Integer
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Network interface administrative status (1 = enabled, 2 = disabled, 3 = testing)
 
@@ -2112,7 +2172,7 @@ Data type: Unsigned Integer 64-bit
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Number of input bytes on interface
 
@@ -2125,7 +2185,7 @@ Data type: Unsigned Integer 64-bit
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Number of output bytes on interface
 
@@ -2138,7 +2198,7 @@ Data type: String
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Description of interface
 
@@ -2151,7 +2211,7 @@ Data type: Unsigned Integer
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Number of input errors on interface
 
@@ -2164,7 +2224,7 @@ Data type: Integer
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Link status of interface
 
@@ -2177,7 +2237,7 @@ Data type: Integer
 Supported Platforms: Windows, AIX, HP-UX
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 
 Net.Interface.OperStatus(*)
@@ -2188,7 +2248,7 @@ Data type: Integer
 Supported Platforms: Windows, Linux, Solaris, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Network interface operational status (0 = down, 1 = up)
 
@@ -2201,7 +2261,7 @@ Data type: Unsigned Integer
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Number of output errors on interface
 
@@ -2214,7 +2274,7 @@ Data type: UInt32
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Number of input packets on interface
 
@@ -2227,7 +2287,7 @@ Data type: UInt32
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Number of output packets on interface
 
@@ -2240,7 +2300,7 @@ Data type: UInt32
 Supported Platforms: Windows, Solaris, AIX, HP-UX
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 
 Net.IP.Forwarding

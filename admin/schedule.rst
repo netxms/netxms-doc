@@ -37,7 +37,7 @@ Example: Warning-C.wav,/destination/location/Warning-C.wav
 Script Execution
 ================
 
-Task is named :guilabel:`Execute.Script`. This task executes script form library. Selected
+Task is named :guilabel:`Execute.Script`. This task executes script from library. Selected
 node is set as :guilabel:`$node` variable in the script.
 
 Parameters:

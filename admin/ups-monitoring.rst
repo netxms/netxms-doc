@@ -155,7 +155,7 @@ Other option to monitor UPS is using SNMP. |product_name| already includes MIBs 
 like APC UPS and standard UPS MIB.
 Description for possible OIDs and some additional information for APC UPS configuration
 can be found on a
-`|product_name| wiki <https://wiki.netxms.org/wiki/UPS_Monitoring_(APC)_via_SNMP>`_.
+`NetXMS wiki <https://wiki.netxms.org/wiki/UPS_Monitoring_(APC)_via_SNMP>`_.
 
 Please check :ref:`import-mib` for MIB loading and :ref:`dci-configuration` for
 metric collection.

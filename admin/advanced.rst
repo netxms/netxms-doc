@@ -499,7 +499,7 @@ Requirements
 Setup
 -----
 
-1. Download netxms-websvc-VERSION.war (example: netxms-websvc-2.2.15.war) file form http://www.netxms.org/download page.
+1. Download netxms-websvc-VERSION.war (example: netxms-websvc-2.2.15.war) file from http://www.netxms.org/download page.
 2. Copy the downloaded .war file to your web server.
 3. Create a :file:`nxapisrv.properties` file and place it in the property file location of your
    web server and specify the |product_name| Server address with the property.

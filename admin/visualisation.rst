@@ -654,7 +654,7 @@ as predefined from graph view menu. The following dialog will appear:
 In :guilabel:`Graph name` field, enter desired name for your predefined graph.
 It will appear in predefined graph tree exactly as written here. You can use
 ``->`` character pair to create subtree. For example, if you name your graph
-``|product_name| Server->System->CPU utilization (iowait)`` it will appear in the tree
+``NetXMS Server->System->CPU utilization (iowait)`` it will appear in the tree
 as following:
 
 .. figure:: _images/predefined_graph_tree.png

@@ -234,9 +234,6 @@ Agent configuration file (nxagentd.conf)
    * - ListenPort
      - TCP port to be used for incoming requests.
      - 4700
-   * - LogFailedSQLQueries
-     - Enable (yes) or disable (no) failed SQL queries logging
-     - No
    * - LogFile
      - Agent's log file. To write log to syslog (or Event Log on Windows), use {syslog} as file name.
      - {syslog}
@@ -377,12 +374,6 @@ Server configuration file (netxmsd.conf)
   * - ListenAddress
     - Interface address which should be used by server to listen for incoming connections. Use value 0.0.0.0 or * to use all available interfaces.
     - 0.0.0.0
-  * - LogFailedSQLQueries
-    - Control logging of failed SQL queries. Possible values: yes or no.
-    - yes
-  * - LogFailedSQLQueries
-    - Enable (yes) or disable (no) failed SQL queries logging
-    - No
   * - LogFile
     - Server's log file. To write log to syslog (or Event Log on Windows), use {syslog} as file name.
     - {syslog}
@@ -1282,7 +1273,7 @@ Syntax:
 
    nxget [options] host [parameter [parameter ...]]
 
-Where *host* is the name or IP address of the host running NetXMS agent; and
+Where *host* is the name or IP address of the host running |product_name| agent; and
 *parameter* is a parameter or a list name, depending on given options. By default,
 nxget will attempt to retrieve the value of one given parameter, unless given
 options override it.
@@ -2096,7 +2087,7 @@ Data type: Integer
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Network interface administrative status (1 = enabled, 2 = disabled, 3 = testing)
 
@@ -2109,7 +2100,7 @@ Data type: Unsigned Integer 64-bit
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Number of input bytes on interface
 
@@ -2122,7 +2113,7 @@ Data type: Unsigned Integer 64-bit
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Number of output bytes on interface
 
@@ -2135,7 +2126,7 @@ Data type: String
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Description of interface
 
@@ -2148,7 +2139,7 @@ Data type: Unsigned Integer
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Number of input errors on interface
 
@@ -2161,7 +2152,7 @@ Data type: Integer
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Link status of interface
 
@@ -2174,7 +2165,7 @@ Data type: Integer
 Supported Platforms: Windows, AIX, HP-UX
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 
 Net.Interface.OperStatus(*)
@@ -2185,7 +2176,7 @@ Data type: Integer
 Supported Platforms: Windows, Linux, Solaris, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Network interface operational status (0 = down, 1 = up)
 
@@ -2198,7 +2189,7 @@ Data type: Unsigned Integer
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Number of output errors on interface
 
@@ -2211,7 +2202,7 @@ Data type: UInt32
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Number of input packets on interface
 
@@ -2224,7 +2215,7 @@ Data type: UInt32
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 Number of output packets on interface
 
@@ -2237,7 +2228,7 @@ Data type: UInt32
 Supported Platforms: Windows, Solaris, AIX, HP-UX
 
 Parameters:
-  1. Interface name or interface index. Index can be obtained form ``Net.InterfaceList`` list.
+  1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.
 
 
 Net.IP.Forwarding

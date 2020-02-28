@@ -5,7 +5,7 @@ Grafana integration
 ###################
 
 |product_name| Grafana integration provides the possibility to display important data using
-the Grafana platform and the :ref:`|product_name| WebAPI <rest-api>`.
+the Grafana platform and the :ref:`NetXMS WebAPI <rest-api>`.
 
 Integration with Grafana
 ========================
@@ -29,7 +29,7 @@ See https://grafana.com/plugins/radensolutions-netxms-datasource/installation
 For installation from source:
 
     1. Clone the |product_name| Grafana datasource GitHub repository from https://github.com/netxms/grafana.
-    2. Copy the files from the repository to :file:`GRAFANA_HOME/data/plugins/datasources/|product_name|`
+    2. Copy the files from the repository to :file:`GRAFANA_HOME/data/plugins/datasources/netxms`
     3. Restart your Grafana server.
     4. Login to your Grafana web interface and add the |product_name| datasource in the Data Sources section.
 

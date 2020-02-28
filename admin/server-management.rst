@@ -21,7 +21,7 @@ Configuration file example:
 .. code-block:: cfg
 
   #
-  # Sample configuration file for |product_name| server
+  # Sample server configuration file
   #
 
   DBDriver = mysql.ddr
@@ -29,7 +29,6 @@ Configuration file example:
   DBName = netxms_db
   DBLogin = netxms
   DBPassword = password
-  LogFailedSQLQueries = yes
   LogFile = {syslog}
 
 .. _server-tunnel-cert-conf:
@@ -85,7 +84,7 @@ Certificate can be obtained in two ways:
 Possible server file configuration:
 
 .. list-table::
-  :widths: 30 70 60
+  :widths: 50 70 60
   :header-rows: 1
 
   * - Parameter
@@ -107,6 +106,11 @@ Possible server file configuration:
     - Can be omitted if key is included in server certificate file.
 
 Possible server variable configuration:
+
+.. list-table::
+  :widths: 50 70 60
+  :header-rows: 1
+
   * - Parameter
     - Description
     - Default
@@ -147,7 +151,7 @@ does not contain any information about file access right assignment or certifica
             stateOrProvinceName = Riga
             localityName = Riga
             organizationName = netxms.org
-            commonName = |product_name| Server
+            commonName = Monitoring Server
 
             [v3_ca]
             basicConstraints = CA:TRUE

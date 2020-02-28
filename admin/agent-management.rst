@@ -264,12 +264,12 @@ Agent Policies:
 Agent Policies
 ==============
 
-Agent policies are additional configuration created by user (agent configuration or files) that 
-are uploaded and updated on agent when template is manually or automatically applied on 
+Agent policies are additional configuration created by user (agent configuration or files) that
+are uploaded and updated on agent when template is manually or automatically applied on
 the node. Agent policies belong to templates, so they are applied to nodes to which a
-corresponding template is applied. 
+corresponding template is applied.
 
-To create policy, right click a template and select :menuselection:`Agent policies`. Click plus 
+To create policy, right click a template and select :menuselection:`Agent policies`. Click plus
 icon to create a new policy, give it a name, choose correct policy type and
 click :guilabel:`OK`. Existing policy can be modified by right-clicking it and
 selecting :menuselection:`Edit` from the menu or by double clicking on it.
@@ -303,8 +303,8 @@ database and issues necessary commands.
 Agent configuration policy
 --------------------------
 
-Agent configuration policy provides option to populate agent configuration with additional 
-parts. Main agent configuration is merged with additional rules from policy. 
+Agent configuration policy provides option to populate agent configuration with additional
+parts. Main agent configuration is merged with additional rules from policy.
 Using policy for configuration file maintenance has advantages that configuration
 is edited in centralized way and gives granular control on the configuration that each node gets.
 More information about different agent configuration options can be found in above chapters.
@@ -390,7 +390,7 @@ Example:
 
 .. note:
   File delivery policy uses :ref:`File Manager<agent_file_managment>` to uplad files
-  so :guilabel:`filemgr` subagnt should be loaded and root folders should be defined 
+  so :guilabel:`filemgr` subagnt should be loaded and root folders should be defined
   to provide write access to folders.
 
 
@@ -613,9 +613,9 @@ Agent Proxy node configuration
 In case it is required to monitor nodes behind firewall, it can be configured
 access to one of subnet nodes and used this node as a proxy node for others.
 
-Proxy node can be set while node creation or in :guilabel:`Communications` tab
+Proxy node can be set during node creation or in :guilabel:`Communications` tab
 of node properties. To configure proxy node select node in object selector
-:guilabel:`|product_name| Agent Proxy`.
+:guilabel:`NetXMS Agent Proxy`.
 
 .. figure:: _images/create_node.png
 
@@ -633,7 +633,7 @@ be set to :guilabel:`yes`.
 Agent External Metrics
 ======================
 
-Other option to define new Metric that can be collected form node is to use
+Other option to define new Metric that can be collected from node is to use
 ``ExternalParameter``/``ExternalParameterShellExec``, or ``ExternalList``, or
 ``ExternalParametersProvider`` configuration parameters to define command that will
 be executed on a node and it's output will be provided as a Metric. This functionality
@@ -647,7 +647,7 @@ ExternalParameter/ExternalParameterShellExec
 --------------------------------------------
 
 ``ExternalParameter`` defines name of the metric and command that is executed synchronously
-when this metric is requested  by server. There can be provided parameters form DCI
+when this metric is requested by server. There can be provided parameters from DCI
 configuration, that will be available like $1, $2, $3..., $9 variables. To accept
 arguments metric name should contain "(*)" symbols after name. Only first line of
 script output will be given as a result of execution(metric value).
@@ -686,7 +686,7 @@ ExternalList
 
 ``ExternalList`` defines name of the list metric and command that is executed
 synchronously when this metric is requested by server. There can be provided parameters
-form DCI configuration, that will be available like $1, $2, $3..., $9 variables. To
+from DCI configuration, that will be available like $1, $2, $3..., $9 variables. To
 accept arguments metric name should contain "(*)" symbols after name. Lines of list
 are separated with new line.
 
@@ -700,23 +700,6 @@ are separated with new line.
   # With DCI parameters
   ExternalList=Name(*):command $1 $2
 
-ExternalParameter
------------------
-
-``ExternalParameter`` defines name of the metric and command that is executed
-synchronously when this metric is requested by server. There can be provided parameters
-form DCI configuration, that will be available like $1, $2, $3..., $9 variables. To
-accept arguments metric name should contain "(*)" symbols after name.
-
-.. code-block:: cfg
-
-  # Example
-
-  # Without DCI parameters
-  ExternalParameter=Name:command
-
-  # With DCI parameters
-  ExternalParameter=Name(*):command $1 $2
 
 ExternalParametersProvider
 --------------------------
@@ -724,9 +707,8 @@ ExternalParametersProvider
 ``ExternalParametersProvider`` defines command(script) and execution interval in seconds. Defined
 script will be executed as per interval and agent will cache parameter list. When server
 will request one of provided parameters it's value will be read from the agent cache.
-Main purpose is to providing data from long-running processes, or return multiple
-values at once. This approach can be also used for getting table database results in
-parameter way(like columnName=value).
+Main purpose is to provide data from long-running processes, or return multiple
+values at once.
 
 Script should print one or more "Parameter=Value" pairs to standard output. Multiple
 pairs should be separated by new line. If parameter takes argument, it should be
@@ -756,9 +738,15 @@ ExternalTable
 -------------
 
 ``ExternalTable`` defines name of the table metric, table metric description, column separator,
-instance column and command. Command is executed synchronously when this metric is requested by server.
+instance column(s) and command. Instance column(s), descriptions and separator are optional.
+If separator is not specified, default value of ``,`` is used.
+
+Instance column should contain unique identifier for each table row. If several instance columns are used, then
+combination of these columns should be unique. This is necessary for building graphs and for threshold violation event generation.
+
+Command is executed synchronously when this metric is requested by server.
 Each table line is separated with new line symbol. First line in returned text used as a name of the columns
-and all next lines will be used like table data. There can be provided parameters form DCI configuration,
+and all next lines will be used like table data. Parameters from DCI configuration can be provided,
 that will be available like $1, $2, $3..., $9 variables. To accept arguments metric name should contain
 "(*)" symbols after name.
 

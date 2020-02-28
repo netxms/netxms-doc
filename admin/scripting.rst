@@ -32,7 +32,7 @@ Execute Server Script
 =====================
 
 This view allows to execute arbitrary script. Script can be manually created just before execution,
-and afterwards saved, can be taken from the script library, can be used modified script form the
+and afterwards saved, can be taken from the script library, can be used modified script from the
 script library and afterwards saved or saved as. If this view is opened on a node, then in the
 script is available ``$node`` variable with node object.
 
@@ -129,7 +129,7 @@ Example
 ~~~~~~~
 
 More examples can be found on a
-`|product_name| wiki <https://wiki.netxms.org/wiki/Using_nxshell_to_automate_bulk_operations>`_.
+`NetXMS wiki <https://wiki.netxms.org/wiki/Using_nxshell_to_automate_bulk_operations>`_.
 
 .. code-block:: python
 

@@ -166,10 +166,10 @@ exported to CSV.
 node and some other options:
 
 :guilabel:`Routing table`
-:guilabel:`IP route from...` will build network map with route form selected node to
-node that is selected form Object selector window.
+:guilabel:`IP route from...` will build network map with route from selected node to
+node that was selected in Object selector window.
 :guilabel:`IP route to...` will build network map with route to selected node from
-node that is selected form Object selector window.
+node that was selected in Object selector window.
 :guilabel:`IP Neighbors` will show all IP neighbors of this node.
 
 :guilabel:`Switch forwarding database(MAC address table)`
@@ -228,7 +228,7 @@ Cluster
 
 Is created to display nodes logical organization in cluster. Cluster nodes may have
 shared resources and networks, processes may move between nodes, so metric collection should
-be organized accordingly. Cluster object provides option to aggregate collected data form
+be organized accordingly. Cluster object provides option to aggregate collected data from
 cluster nodes. More about data aggregation can be found there: :ref:`data-agregation`.
 
 Besides default property pages cluster has also:
@@ -370,7 +370,7 @@ status :term:`DCIs<DCI>`. But there can be used different options of status calc
 
 Status calculation has two configuration parts:
 
-   - status propagation - the way how status form object is pushed to upper objects;
+   - status propagation - the way how status from object is pushed to upper objects;
    - status calculation - the way how object is calculating it's status based on statuses propagated by children objects. Once child object status is calculated most critical status is taken from status of underlying objects, associated alarms and status :term:`DCIs<DCI>`.
 
 .. figure:: _images/object_status_calculation.png

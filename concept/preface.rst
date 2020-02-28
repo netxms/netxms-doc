@@ -6,8 +6,8 @@ Preface
 Purpose of this document
 ========================
 
-What is NetXMS
-==============
+What is |product_name|
+======================
 
 
 Supported operating systems and databases

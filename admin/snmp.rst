@@ -30,7 +30,7 @@ There are next options available for results:
   - Copy value of selected line to clipboard
   - Export selected lines to CSV
   - Show selection in MIB tree
-  - Create DCI form selected item
+  - Create DCI from selected item
 
 SNMP Trap Configuration
 =======================

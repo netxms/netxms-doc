@@ -95,7 +95,7 @@ Origin
 
 Origin of data (method of obtaining data). Possible origins are:
 
-- :guilabel:`|product_name| agent`
+- :guilabel:`NetXMS agent`
 - :guilabel:`SNMP agent`
 - :guilabel:`CheckPoint SNMP agent`
 - :guilabel:`Windows Performance Counter`
@@ -144,7 +144,7 @@ significant increase of your database size and possible performance degradation.
 
 Can be selected one of options:
 
-    - :guilabel:`Fixed intervals (default)` - default value will be taken form :guilabel:`DefaultDCIPollingInterval` server configuration parameter.
+    - :guilabel:`Fixed intervals (default)` - default value will be taken from :guilabel:`DefaultDCIPollingInterval` server configuration parameter.
     - :guilabel:`Fixed intervals (custom)` - value entered on the DCI properties page will be taken.
     - :guilabel:`Use advanced scheduling` - schedules configured in :guilabel:`Advanced Schedule` page will be used
 
@@ -160,7 +160,7 @@ degradation.
 
 Possible options:
 
-    - :guilabel:`Use default retention time` - default value will be taken form :guilabel:`DefaultDCIRetentionTime` server configuration parameter.
+    - :guilabel:`Use default retention time` - default value will be taken from :guilabel:`DefaultDCIRetentionTime` server configuration parameter.
     - :guilabel:`Use default retention time` - value entered on the DCI properties page will be taken.
     - :guilabel:`Do not save collected data to database` - will not save collected data to database, but will store last value in memory
 
@@ -220,7 +220,7 @@ Data aggregation
 ~~~~~~~~~~~~~~~~
 
 This section is responsible for cluster data aggregation way.
-:guilabel:`Aggregate values from cluster nodes` option means, that DCI form cluster
+:guilabel:`Aggregate values from cluster nodes` option means, that DCI from cluster
 will be collected on each node separately and aggregated on cluster using one of the
 aggregation options.
 

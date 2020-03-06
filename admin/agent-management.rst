@@ -370,18 +370,18 @@ undeployed to node - no agent restart is required.
 File delivery policy
 --------------------
 
-File delivery policy is created to automatically upload files form server to agents. 
+File delivery policy is created to automatically upload files form server to agents.
 
-First root folder or folders should be created - folders with the full path to place 
-where uploaded file and folder structure should be placed. After folder 
-structure is created files can be added to this structure. On policy apply folders will be 
-created if possible and files will be uploaded. 
+First root folder or folders should be created - folders with the full path to place
+where uploaded file and folder structure should be placed. After folder
+structure is created files can be added to this structure. On policy apply folders will be
+created if possible and files will be uploaded.
 
 In file and folder names next macro can be used:
 
   - Environment variables as %{ENV_VAR_NAME}
   - `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_ macros
-  - Text inside \` braces will be executed as a command and first line of result will substitute the command with the braces 
+  - Text inside \` braces will be executed as a command and first line of result will substitute the command with the braces
 
 
 Example:
@@ -652,10 +652,10 @@ configuration, that will be available like $1, $2, $3..., $9 variables. To accep
 arguments metric name should contain "(*)" symbols after name. Only first line of
 script output will be given as a result of execution(metric value).
 
-``ExternalParameterShellExec`` has same meaning as ``ExternalParameter`` with exception that
-agent will use shell to execute specified command instead of system process execution
-API. This difference presented only on Windows system, on other systems
-``ExternalParameter`` and ``ExternalParameterShellExec`` behaves identically.
+``ExternalParameterShellExec`` has same meaning as ``ExternalParameter`` and behaves identically on non-Windows systems.
+On Windows systems ``ExternalParameter`` executes specified command using system process execution
+API's CreateProcess() function. It will search in PATH, but the command should be with file extension, e.g. ``command.exe``.
+``ExternalParameterShellExec`` will use shell to execute specified command on Windows.
 
 To add multiple parameters, you should use multiple
 ``ExternalParameter``/``ExternalParameterShellExec`` entries.
@@ -780,7 +780,7 @@ users with access to the agent configuration file editing can define executed co
 
 There are 2 options to define action:
 
-   #. Action - usual action definition
+   #. Action - usual action definition. On Windows platform system process execution API's CreateProcess() is used to run the command, it will search in PATH, but the command should be with file extension, e.g. ``command.exe``.
    #. ActionShellExec - Same as Action, but on the Windows platform agent will use shell to execute command instead of normal process creation. There is no difference between Action and ActionShellExec on UNIX platforms.
 
 Both versions accept parameters that will be available like ``$1``, ``$2``, ``$3``..., ``$9`` variables.

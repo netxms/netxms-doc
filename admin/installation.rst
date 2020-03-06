@@ -563,26 +563,6 @@ Since version 2.2.4 encryption support is enforced when building server.
 
   #. Create required tables and load initial configuration using nxdbmgr utility:
 
-     PostgreSQL:
-
-     .. code-block:: sh
-
-       /usr/local/bin/nxdbmgr init
-
-     MySQL:
-
-     .. code-block:: sh
-
-       /usr/local/bin/nxdbmgr init
-
-     Oracle:
-
-     .. code-block:: sh
-
-       /usr/local/bin/nxdbmgr init
-
-     SQLite:
-
      .. code-block:: sh
 
        /usr/local/bin/nxdbmgr init

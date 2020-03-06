@@ -112,6 +112,8 @@ Agent configuration file (nxagentd.conf)
      - Define action, which can be later executed by management server. To cation can
        be given parameters from the server. They can be accessed as ``$1``, ``$2``...
        variables.
+       On Windows platform system process execution API's CreateProcess() is used to run the command,
+       it will search in PATH, but the command should be with file extension, e.g. ``command.exe``.
      - No defaults
    * - ActionShellExec
      - Same as Action, but on Windows platform agent will use shell to execute command
@@ -208,6 +210,8 @@ Agent configuration file (nxagentd.conf)
      - No defaults
    * - ExternalParameter
      - Adds metric handled by external command. To add multiple parameters, you should use multiple ``ExternalParameter`` entries.
+       On Windows platform system process execution API's CreateProcess() is used to run the command,
+       it will search in PATH, but the command should be with file extension, e.g. ``command.exe``.
      - No defaults
    * - ExternalParameterShellExec
      - ExternalParameterShellExec has same meaning as ExternalParameter with exception that

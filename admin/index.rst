@@ -23,6 +23,7 @@ Administrator Guide
    operating-system-monitoring
    file-meta-info-monitoring
    log-monitoring
+   ssh-monitoring
    service-monitoring
    database-monitoring
    application-monitoring
@@ -45,5 +46,3 @@ Administrator Guide
    scripting
    appendix
    glossary
-
-   

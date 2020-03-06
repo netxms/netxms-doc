@@ -333,7 +333,7 @@ Some examples:
 
     <source>Tcpip</source>
 
-will match records with event source ``"Tcpip`` (case-insensitive), and
+will match records with event source ``Tcpip`` (case-insensitive), and
 
 .. code-block:: xml
 

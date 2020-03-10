@@ -5,6 +5,7 @@ ICMP ping
 =========
 
 The following options exist to monitor systems using ICMP pings:
+
 * ICMP response statistic collection
 * Metrics provided by ping subagent
 
@@ -12,8 +13,39 @@ The following options exist to monitor systems using ICMP pings:
 ICMP response statistic collection
 ==================================
 
+|product_name| can periodically perform ICMP polls and calculate node availability statistics.
+This functionality can be controlled globally via server configuration parameter
+``ICMP.CollectPollStatistics`` or locally on each node.
+ICMP polling interval and statistic calculation period (expressed in number of polls),
+timeout and ICMP packet size are configured via server configuration parameters, see :ref:`server_configuration_parameters`.
 
+ICMP requests are sent to node's primary IP address. Additional targets can be specified in node's properties.
+It's also possible to set node's interfaces as targets by enabling
+:guilabel:`Collect ICMP response statistic for this interface` in properties of the interface
+(enabling this for interface that corresponds to primary IP address will lead to pinging this address twice).
 
+ICMP polling is performed from server, from a zone proxy if zoning is used or from specific proxy if it's selected in node properties.
+
+Results of ICMP response statistic collection for primary IP address are visible
+in :guilabel:`Object Details -> Overview` and are available as internal parameters:
+
+* ICMP.ResponseTime.Average
+* ICMP.PacketLoss
+* ICMP.ResponseTime.Last
+* ICMP.ResponseTime.Max
+* ICMP.ResponseTime.Min
+
+Results of ICMP response statistic collection for additional targets and interfaces are available as internal parameters:
+
+* ICMP.ResponseTime.Average(*)
+* ICMP.PacketLoss(*)
+* ICMP.ResponseTime.Last(*)
+* ICMP.ResponseTime.Max(*)
+* ICMP.ResponseTime.Min(*)
+
+For example, ``ICMP.PacketLoss(8.8.8.8)`` parameter will provide packet loss for target with IP address 8.8.8.8.
+
+No historical data is stored by default. It's necessary to configure DCIs using internal parameters to store historical data.
 
 Ping subagent
 =============

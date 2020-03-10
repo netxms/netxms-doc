@@ -271,7 +271,11 @@ passed to the transformation script as a parameter; and a result of script
 execution is a final DCI value. Transformation script gets original value as
 first argument (available via special variable ``$1``), and also has two
 predefined global variables: ``$node`` (reference to current node object), and
-``$dci`` (reference to current DCI object). For more information about |product_name|
+``$dci`` (reference to current DCI object).
+
+In case of table DCIs, ``$1`` special variable is an object of type Table. 
+
+For more information about |product_name|
 scripting language, please consult :ref:`scripting` chapter in this manual.
 
 Transformation script can be tested in the same view, by clicking :guilabel:`Test...`

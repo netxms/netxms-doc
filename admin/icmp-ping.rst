@@ -13,22 +13,26 @@ The following options exist to monitor systems using ICMP pings:
 ICMP response statistic collection
 ==================================
 
-|product_name| can periodically perform ICMP polls and calculate node availability statistics.
-This functionality can be controlled globally via server configuration parameter
-``ICMP.CollectPollStatistics`` or locally on each node.
-ICMP polling interval and statistic calculation period (expressed in number of polls),
-timeout and ICMP packet size are configured via server configuration parameters, see :ref:`server_configuration_parameters`.
+|product_name| can periodically perform ICMP polls and calculate node
+availability statistics. This functionality can be controlled globally via
+server configuration parameter ``ICMP.CollectPollStatistics`` or locally on each
+node. ICMP polling interval and statistic calculation period (expressed in
+number of polls), timeout and ICMP packet size are configured via server
+configuration parameters, see :ref:`server_configuration_parameters`.
 
-ICMP requests are sent to node's primary IP address. Additional targets can be specified in node's properties.
-It's also possible to set node's interfaces as targets by enabling
-:guilabel:`Collect ICMP response statistic for this interface` in properties of the interface
-(enabling this for interface that corresponds to primary IP address will lead to pinging this address twice).
+ICMP requests are sent to node's primary IP address. Additional targets can be
+specified in node's properties. It's also possible to set node's interfaces as
+targets by enabling :guilabel:`Collect ICMP response statistic for this
+interface` in properties of the interface (enabling this for interface that
+corresponds to primary IP address will lead to pinging this address twice).
 
-ICMP polling is performed from server, from a zone proxy if zoning is used or from specific proxy if it's configured in node properties.
-Proxying agent should have ``ping.nsm`` subagent enabled.
+ICMP polling is performed from server, from a zone proxy if zoning is used or
+from specific proxy if it's configured in node properties. Proxying agent should
+have ``ping.nsm`` subagent enabled.
 
 Results of ICMP response statistic collection for primary IP address are visible
-in :guilabel:`Object Details -> Overview` and are available as internal parameters:
+in :guilabel:`Object Details -> Overview` and are available as internal
+parameters:
 
 * ICMP.ResponseTime.Average
 * ICMP.PacketLoss
@@ -36,7 +40,8 @@ in :guilabel:`Object Details -> Overview` and are available as internal paramete
 * ICMP.ResponseTime.Max
 * ICMP.ResponseTime.Min
 
-Results of ICMP response statistic collection for additional targets and interfaces are available as internal parameters:
+Results of ICMP response statistic collection for additional targets and
+interfaces are available as internal parameters:
 
 * ICMP.ResponseTime.Average(*)
 * ICMP.PacketLoss(*)
@@ -44,17 +49,18 @@ Results of ICMP response statistic collection for additional targets and interfa
 * ICMP.ResponseTime.Max(*)
 * ICMP.ResponseTime.Min(*)
 
-For example, ``ICMP.PacketLoss(8.8.8.8)`` parameter will provide packet loss for target with IP address 8.8.8.8.
+For example, ``ICMP.PacketLoss(8.8.8.8)`` parameter will provide packet loss for
+target with IP address 8.8.8.8.
 
-No historical data is stored by default. It's necessary to configure DCIs using internal parameters to store historical data.
+No historical data is stored by default. It's necessary to configure DCIs using
+above mentioned internal parameters to store historical data.
 
 Ping subagent
 =============
 
-
-
-This subagent can be used to measure ICMP ping response times from one location to another.
-Measurements can be either scheduled by the agent itself or requested by the server.
+This subagent can be used to measure ICMP ping response times from one location
+to another. Measurements can be either scheduled by the agent itself or
+requested by the server.
 
 Metrics scheduled by the agent (based on "PacketRate" parameter):
 
@@ -63,15 +69,17 @@ Metrics scheduled by the agent (based on "PacketRate" parameter):
 * ICMP.PacketLoss
 * ICMP.PingStdDev
 
-These metrics can be either predefined (using one or more "Target" parameter), or registered automatically on first request.
-If targets are registered automatically, default packet size is used. First request to non-existing target will return "0" as a value.
+These metrics can be either defined in agent configuration file (using one or
+more "Target" parameters), or registered automatically on first request from
+server. If targets are registered automatically, default packet size is used.
+First request to non-existing target will return "0" as a value. Automatically
+registered targets are automatically removed after a timeout, if server stops
+requesting metrics for that target.
 
-Metrics available on request:
+
+Metrics available on demand:
 
 * ICMP.Ping
-
-.. versionadded:: 2.2.2
-    Automatic configuration of targets
 
 Metrics
 -------
@@ -97,15 +105,15 @@ When loaded, PING subagent adds the following parameters to agent:
 |                                         | IP header. If this argument is omitted, value from DefaultPacketSize configuration parameter        |
 |                                         | will be used.                                                                                       |
 |                                         |                                                                                                     |
-|                                         | Please note that other parameters just returns result of background ping process, while this        |
+|                                         | Please note that other parameters just return result of background ping process, while this         |
 |                                         | parameter waits for actual ping completion and then returns the result. Because of this behavior,   |
 |                                         | it is not recommended to use **Icmp.Ping** parameter for instant monitoring, only for               |
 |                                         | occasional tests. For instant monitoring, you should configure targets for background ping and use  |
 |                                         | **Icmp.AvgPingTime** or **Icmp.LastPingTime** parameters to retrieve results.                       |
 +-----------------------------------------+-----------------------------------------------------------------------------------------------------+
 | Icmp.PingStdDev(*target*)               | :wikipedia:`Standard deviation <Standard deviation>` of the response time for the                   |
-|                                         | *target*. Argument *target* can be either IP address or name specified in Target configuration      |
-|                                         | record (see below).                                                                                 |
+|                                         | *target* for last minute. Argument *target* can be either IP address or name specified in Target    |
+|                                         | configuration record (see below).                                                                                 |
 +-----------------------------------------+-----------------------------------------------------------------------------------------------------+
 
 

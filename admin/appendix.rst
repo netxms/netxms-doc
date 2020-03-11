@@ -1152,6 +1152,7 @@ These parameters can be changed in
     - Yes
   * - UseIfXTable
     - Enable (1) or disable (0) use of SNMP ifXTable instead of ifTable for interface configuration polling.
+      See :ref:`snmp` for more information. 
     - 1
     - No
   * - UseInterfaceAliases

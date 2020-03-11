@@ -24,7 +24,8 @@ It's also possible to set node's interfaces as targets by enabling
 :guilabel:`Collect ICMP response statistic for this interface` in properties of the interface
 (enabling this for interface that corresponds to primary IP address will lead to pinging this address twice).
 
-ICMP polling is performed from server, from a zone proxy if zoning is used or from specific proxy if it's selected in node properties.
+ICMP polling is performed from server, from a zone proxy if zoning is used or from specific proxy if it's configured in node properties.
+Proxying agent should have ``ping.nsm`` subagent enabled.
 
 Results of ICMP response statistic collection for primary IP address are visible
 in :guilabel:`Object Details -> Overview` and are available as internal parameters:

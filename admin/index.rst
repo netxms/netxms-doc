@@ -25,6 +25,7 @@ Administrator Guide
    log-monitoring
    ssh-monitoring
    service-monitoring
+   web-services-monitoring
    database-monitoring
    application-monitoring
    icmp-ping

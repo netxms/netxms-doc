@@ -125,7 +125,9 @@ Agent configuration file (nxagentd.conf)
      - The registered name of application with built in subagent library that can be as subagent by agent.
      - No defaults
    * - AutoStartUserAgent
-     - Enable (yes) or disable (no) automatic start of User Support Application (Windows only). If enabled, Agent will check on it's start, if User Support Application is running in each user session and will start it if needed. For this to work, Agent should be started under local SYSTEM user.
+     - Enable (yes) or disable (no) automatic start of User Support Application (Windows only).
+       If enabled, Agent will check on it's start, if User Support Application is running in each user
+       session and will start it if needed. For this to work, Agent should be started under local SYSTEM user.
      - no
    * - BackgroundLogWriter
      - Enable (yes) or disable (no) log writer as separate background thread. Has no effect if logging is done through syslog or Windows Event Log.
@@ -227,7 +229,7 @@ Agent configuration file (nxagentd.conf)
    * - ExternalParameter
      - Adds metric handled by external command. To add multiple parameters, you should use multiple ``ExternalParameter`` entries.
        On Windows platform system process execution API's CreateProcess() is used to run the command,
-       it will search in PATH, but the command should be with file extension, e.g. ``command.exe``.     
+       it will search in PATH, but the command should be with file extension, e.g. ``command.exe``.
      - No defaults
    * - ExternalParameterShellExec
      - ExternalParameterShellExec has same meaning as ExternalParameter with exception that

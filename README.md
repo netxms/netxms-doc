@@ -21,7 +21,7 @@ Components:
 ## macOS specific
 * brew cask install basictex
 * sudo tlmgr update --self
-* sudo tlmgr install latexmk fncychap titlesec tabulary varwidth framed wrapfig capt-of needspace helvetic courier
+* sudo tlmgr install latexmk fncychap titlesec tabulary varwidth framed wrapfig capt-of needspace helvetic courier letltxmacro
 
 ## Automatic rebuild and reload
 * cd admin && sphinx-autobuild . _build_html

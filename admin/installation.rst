@@ -382,7 +382,7 @@ file already exists or if /CENTRALCONFIG option is used. These options are follo
    * - /CONFIGENTRY=value
      - It can be used to add any parameter to configuration file during initial install. You can specify it multiple times to add multiple lines. Section names can be added as well.
    * - /DIR=path
-     - Set installation directory (default is C:\NetXMS)
+     - Set installation directory (default is C:\\NetXMS)
    * - /LOCALCONFIG
      - Use local configuration file (it is the default)
    * - /LOG

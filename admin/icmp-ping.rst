@@ -113,7 +113,7 @@ When loaded, PING subagent adds the following parameters to agent:
 +-----------------------------------------+-----------------------------------------------------------------------------------------------------+
 | Icmp.PingStdDev(*target*)               | :wikipedia:`Standard deviation <Standard deviation>` of the response time for the                   |
 |                                         | *target* for last minute. Argument *target* can be either IP address or name specified in Target    |
-|                                         | configuration record (see below).                                                                                 |
+|                                         | configuration record (see below).                                                                   |
 +-----------------------------------------+-----------------------------------------------------------------------------------------------------+
 
 

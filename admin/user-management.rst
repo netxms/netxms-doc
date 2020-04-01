@@ -256,7 +256,7 @@ server controlled by the following server configuration variables:
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 70 10
+   :widths: 30 60 10
 
    * - Variable
      - Description

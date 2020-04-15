@@ -273,7 +273,7 @@ first argument (available via special variable ``$1``), and also has two
 predefined global variables: ``$node`` (reference to current node object), and
 ``$dci`` (reference to current DCI object).
 
-In case of table DCIs, ``$1`` special variable is an object of type Table. 
+In case of table DCIs, ``$1`` special variable is an object of type Table.
 
 For more information about |product_name|
 scripting language, please consult :ref:`scripting` chapter in this manual.
@@ -501,21 +501,27 @@ Instance discovery creates 2 macros for substitution:
 Discovery Methods
 ~~~~~~~~~~~~~~~~~
 
-There are four different methods for instance discovery:
+The following instance discovery methods are available:
 
 
-================== ========== =================================================
-Method             Input Data Description
-================== ========== =================================================
-Agent List         List name  Read list from agent and use it's values as
-                              instance names.
-Agent Table        Table name Read table from agent and use it's instance
-                              column values as instance names.
-SNMP Walk - Values Base OID   Do SNMP walk starting from given OID and use
-                              values of returned varbinds as instance names.
-SNMP Walk - OIDs   Base OID   Do SNMP walk starting from given OID and use IDs
-                              of returned varbinds as instance names.
-================== ========== =================================================
+================== =========== =================================================
+Method             Input Data  Description
+================== =========== =================================================
+Agent List         List name   Read list from agent and use it's values as
+                               instance names.
+Agent Table        Table name  Read table from agent and use it's instance
+                               column values as instance names. If there are
+                               several instance columns in that table, a
+                               concatenation of values will be used, separated
+                               by ``~~~`` (three tilda characters).
+SNMP Walk - Values Base OID    Do SNMP walk starting from given OID and use
+                               values of returned varbinds as instance names.
+SNMP Walk - OIDs   Base OID    Do SNMP walk starting from given OID and use IDs
+                               of returned varbinds as instance names.
+Script             Script name Instance names are provided by script from script
+                               library. The script should return an array
+                               of instance names.
+================== =========== =================================================
 
 
 Instance Filter

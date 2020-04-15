@@ -1722,7 +1722,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 Parameters:
     1. Thread pool name. Possible options: MAIN, AGENT, POLLERS, SCHEDULER
 
-Current load of specified agent thread pool. It's active requests deviced by current thread count in precent.
+Current load of specified agent thread pool. It's active requests divided by current thread count in precent.
 
 
 Agent.ThreadPool.LoadAverage(*)
@@ -1734,7 +1734,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 
 Parameters:
     1. Thread pool name. Possible options: MAIN, AGENT, POLLERS, SCHEDULER
-    2. *optional* Normalization flag. If it is set to 1, then the value is devided to max thread count.
+    2. *optional* Normalization flag. If it is set to 1, then the value is divided to max thread count.
 
 Active request moving average load of specified agent thread pool for last minute.
 
@@ -1748,7 +1748,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 
 Parameters:
     1. Thread pool name. Possible options: MAIN, AGENT, POLLERS, SCHEDULER
-    2. *optional* Normalization flag. If it is set to 1, then the value is devided to max thread count.
+    2. *optional* Normalization flag. If it is set to 1, then the value is divided to max thread count.
 
 Active request moving average of specified agent thread pool for last 5 minutes.
 
@@ -1762,7 +1762,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 
 Parameters:
     1. Thread pool name. Possible options: MAIN, AGENT, POLLERS, SCHEDULER
-    2. *optional* Normalization flag. If it is set to 1, then the value is devided to max thread count.
+    2. *optional* Normalization flag. If it is set to 1, then the value is divided to max thread count.
 
 Active request moving average load of specified agent thread pool for last 15 minutes.
 

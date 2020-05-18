@@ -11,47 +11,38 @@ Operating system
 ----------------
 
 Both |product_name| server and agent works fine on most operating systems, including Windows, Linux, and commercial UNIXes.
-However, we test and officialy support only some of them.
+However, we test and officially support only some of them.
 
-Supported platforms for |product_name| server:
+Supported platforms for |product_name| server and agent:
 
-   * Debian 9 (Stretch) and Debian 10 (Buster)
-   * Ubuntu 16.04 LTS (Xenial), 18.04 LTS (Bionic), and 19.10 (Eoan)
+   * Debian 9 (Stretch), 10 (Buster)
+   * Ubuntu 16.04 LTS (Xenial), 18.04 LTS (Bionic), 20.04 LTS (Focal Fossa)
    * Devuan ASCII
-   * Red Hat Enterprise Linux 7 and 8
-   * CentOS 7 and 8
-   * Windows 10, Windows Server 2016 and 2019
-   * FreeBSD 11, 11.3, and 12
+   * Red Hat Enterprise Linux 8
+   * CentOS 8
+   * Windows 10, Windows Server 2016, 2019
+   * FreeBSD 12
    * ArchLinux (Latest)
    * AlpineLinux 3.8+
+   * Raspbian Buster
 
-Suppoted platforms for |product_name| agent:
-
-   * Debian 9 (Stretch) and Debian 10 (Buster)
-   * Ubuntu 16.04 LTS (Xenial), 18.04 LTS (Bionic), and 19.10 (Eoan)
-   * Devuan ASCII
-   * Red Hat Enterprise Linux 7 and 8
-   * CentOS 7 and 8
-   * Windows 10, Windows Server 2016 and 2019
-   * FreeBSD 11, 11.3, and 12
-   * ArchLinux (Latest)
-   * AlpineLinux 3.8+
 
 Support for the following platforms provided only to customers with active support contract:
 
-   * Ubuntu 14.04 LTS
    * Debian 8 (Jessie)
+   * Ubuntu 14.04 LTS
    * Devuan Jessie
-   * Red Hat Enterprise Linux 6
-   * CentOS 6
-   * Windows 7, 8.1, Windows Server 2008 R2, 2012, and 2012 R2
-   * AIX 7.1
-   * SUSE Linux Enterprise Server 11, 12, and 15
+   * Red Hat Enterprise Linux 6, 7
+   * CentOS 6, CentOS 7
+   * FreeBSD 11, FreeBSD 11.3
+   * Windows 7, Windows 8.1, Windows Server 2008 R2, 2012, 2012 R2
+   * AIX 6.1, AIX 7.x
+   * SUSE Linux Enterprise Server 11, 12, 15
    * Solaris 11 (agent only)
    * HP-UX 11.31 (agent only)
 
-Server
-------
+Server hardware
+---------------
 
 Minimal requirements: Core 2 duo 1GHz, 1024MB RAM, 1GB disk space.
 
@@ -60,14 +51,16 @@ Database
 
 .. _supported-db-list:
 
-Supported database engines:
+Database engines supported by |product_name| server:
 
-   * Microsoft SQL 2005 and higher
-   * MySQL 5.1 and higher
-   * Oracle 11g, 12c, 19c
-   * PostgreSQL 9.1 and higher
-   * DB/2 v10
+   * PostgreSQL 9.5, 9.6, 10, 11, 12
+   * PostgreSQL with TimescaleDB 11, 12
+   * MySQL 5.6, 5.7, 8.0
+   * MariaDB 10.1, 10.2, 10.3, 10.4
+   * Oracle 12c, 18c, 19c
+   * Microsoft SQL Server 2012, 2014, 2016, 2017
    * SQLite (only for test purposes)
+
 
 Database size and load is very hard to predict, because it is dependent on a number of
 monitored nodes and collected parameters. If you plan to install database engine on

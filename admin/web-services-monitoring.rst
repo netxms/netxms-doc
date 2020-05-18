@@ -30,7 +30,8 @@ The following information can be configured:
 * Request timeout (in seconds)
 
 Web service URL and additional HTTP headers fields can contain macros that are
-expanded when actual request is made.
+expanded when actual request is made. So you can, for example, set URL as ``%{url}``
+and keep the actual URL in node's custom attribute ``url``.
 
 DCI Configuration
 -----------------

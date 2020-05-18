@@ -1353,9 +1353,8 @@ Syntax:
    nxget [options] host [parameter [parameter ...]]
 
 Where *host* is the name or IP address of the host running |product_name| agent; and
-*parameter* is a parameter or a list name, depending on given options. By default,
-nxget will attempt to retrieve the value of one given parameter, unless given
-options override it.
+*parameter* is a parameter, list or table name, depending on given options. By default,
+nxget will attempt to retrieve the value of only one given parameter, unless *-b* option is given. 
 
 Valid options for nxget
 ~~~~~~~~~~~~~~~~~~~~~~~

@@ -138,6 +138,15 @@ Change *DRIVER_NAME* to driver name that you need:
   * netxms-dbdrv-odbc - unixODBC driver (can be used with DB/2 and Microsoft SQL)
   * netxms-dbdrv-oracle - Oracle driver
 
+Database should be created and initialized after server and driver packages are installed. 
+Database creation examples can be found :ref:`there <db_creation>`.
+
+Database initialization command:
+
+.. code-block:: sh
+
+  /usr/local/bin/nxdbmgr init
+
 Server default credentials:
 
 Login: admin
@@ -498,57 +507,7 @@ Since version 2.2.4 encryption support is enforced when building server.
 
         By default, server load configuration file PREFIX/etc/netxmsd.conf (where PREFIX is installation prefix set by configure), unless different file is specified with command line switch "-c".
 
-  #. Create database user and adjust configuration file (netxmsd.conf) accordingly:
-
-     PostgreSQL:
-
-        .. code-block:: sh
-
-          createuser -P netxms
-          createdb -O netxms netxms
-
-        .. code-block:: cfg
-
-          DBDriver = pgsql.ddr
-          DBServer = localhost
-          DBName = netxms
-          DBLogin = netxms
-          DBPassword = PaSsWd
-
-     MySQL:
-
-        .. code-block:: sh
-
-          echo "CREATE DATABASE netxms;" | mysql -u root -p
-          echo "GRANT ALL on netxms.* to 'netxms'@'localhost' IDENTIFIED BY 'PaSsWd';" | mysql -u root -p
-
-        .. code-block:: cfg
-
-          DBDriver = mysql.ddr
-          DBServer = localhost
-          DBName = netxms
-          DBLogin = netxms
-          DBPassword = PaSsWd
-
-     Oracle:
-
-        .. code-block:: sql
-
-          -- USER SQL
-          CREATE USER netxms IDENTIFIED BY PaSwD
-          DEFAULT TABLESPACE USERS
-          TEMPORARY TABLESPACE TEMP;
-          -- QUOTAS
-          ALTER USER netxms QUOTA UNLIMITED ON USERS;
-          -- ROLES
-          GRANT CREATE SESSION, CREATE TABLE, CREATE PROCEDURE TO netxms;
-
-        .. code-block:: cfg
-
-          DBDriver = oracle.ddr
-          DBServer = //127.0.0.1/XE # instant client compatible connection string
-          DBLogin = netxms
-          DBPassword = PaSsWd
+  #. Create database user and adjust configuration file (netxmsd.conf) accordingly. Database creation examples can be found :ref:`there <db_creation>`.
 
   #. Further adjust server configuration file if required.
 
@@ -683,3 +642,63 @@ Default login credentials
 Default login is "admin" with password "netxms". On first login, user will be requested to change it immediately.
 
 If required, password can be reset back to default using :ref:`nxdbmgr utility <password-reset>`.
+
+.. _db_creation:
+
+Database creation examples
+==========================
+
+This chapter provides some database creation SQL examples. 
+
+PostgreSQL
+----------
+
+.. code-block:: sh
+
+  createuser -P netxms
+  createdb -O netxms netxms
+
+.. code-block:: cfg
+
+  DBDriver = pgsql.ddr
+  DBServer = localhost
+  DBName = netxms
+  DBLogin = netxms
+  DBPassword = PaSsWd
+
+MySQL
+-----
+
+.. code-block:: sh
+
+  echo "CREATE DATABASE netxms;" | mysql -u root -p
+  echo "GRANT ALL on netxms.* to 'netxms'@'localhost' IDENTIFIED BY 'PaSsWd';" | mysql -u root -p
+
+.. code-block:: cfg
+
+  DBDriver = mysql.ddr
+  DBServer = localhost
+  DBName = netxms
+  DBLogin = netxms
+  DBPassword = PaSsWd
+
+Oracle
+------
+
+.. code-block:: sql
+
+  -- USER SQL
+  CREATE USER netxms IDENTIFIED BY PaSwD
+  DEFAULT TABLESPACE USERS
+  TEMPORARY TABLESPACE TEMP;
+  -- QUOTAS
+  ALTER USER netxms QUOTA UNLIMITED ON USERS;
+  -- ROLES
+  GRANT CREATE SESSION, CREATE TABLE, CREATE PROCEDURE TO netxms;
+
+.. code-block:: cfg
+
+  DBDriver = oracle.ddr
+  DBServer = //127.0.0.1/XE # instant client compatible connection string
+  DBLogin = netxms
+  DBPassword = PaSsWd

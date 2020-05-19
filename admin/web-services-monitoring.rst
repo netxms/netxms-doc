@@ -42,15 +42,28 @@ document element that has to be retrieved (or regex with one capture group for
 text responses).
 
 For example:
-``WebService1:/system/cpu/usage``
-``WebService2(eth0):/stat/bytesIn``
-``WebService3(10,20,30):^(\d*)``
+   * ``WebService1:/system/cpu/usage``
+   * ``WebService2(eth0):/stat/bytesIn``
+   * ``WebService3(10,20,30):^(\d*)``
 
 Service arguments can be inserted into request URL or headers using macros %1,
 %2, and so on.
 For XML and JSON responses path to document element should start from ``/``.
 XML response, according to standard, should have only one upper level tag.
 For text response, first capture group of regular expression is returned.
+
+Instance discovery
+------------------
+
+For web service discovery “Web Service” instance discovery method can be used. 
+It  accepts web service name with optional arguments and path to the root element of the 
+document where enumeration will start. Each sub-element of given root element will be considered 
+separate instance.
+
+For example:
+   * ``WebService1:/system/cpu`` will enumerate all elements under "/system/cpu"
+   * ``WebService2(eth0):/stat`` will enumerate all elements under "/stat"
+
 
 Data collection process
 =======================

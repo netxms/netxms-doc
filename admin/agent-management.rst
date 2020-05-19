@@ -758,7 +758,7 @@ that will be available like $1, $2, $3..., $9 variables. To accept arguments met
   ExternalTable=dciName:instanceColumns=columnName;description=description;separator=|:command
 
   # With DCI parameters
-  ExternalTable(*)=dciName:instanceColumns=columnName;description=description;separator=|:command $1 $2
+  ExternalTable=dciName(*):instanceColumns=columnName;description=description;separator=|:command $1 $2
 
 Separator supports special macros for separator:
 

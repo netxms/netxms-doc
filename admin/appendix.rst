@@ -204,6 +204,9 @@ Agent configuration file (nxagentd.conf)
    * - EnableSNMPTrapProxy
      - Enable (yes) or disable (no) SNMP Trap proxy functionality.
      - no
+   * - EnableSSLTrace
+     - Enable (yes) or disable (no) additional debug messages from SSL library.
+     - no
    * - EnableSubagentAutoload
      - Enable (yes) or disable (no) automatic loading of subagent(s) depending on the platform on which the agent is running.
      - yes
@@ -1354,7 +1357,7 @@ Syntax:
 
 Where *host* is the name or IP address of the host running |product_name| agent; and
 *parameter* is a parameter, list or table name, depending on given options. By default,
-nxget will attempt to retrieve the value of only one given parameter, unless *-b* option is given. 
+nxget will attempt to retrieve the value of only one given parameter, unless *-b* option is given.
 
 Valid options for nxget
 ~~~~~~~~~~~~~~~~~~~~~~~

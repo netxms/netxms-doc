@@ -1643,6 +1643,9 @@ Cumulative counter of requests with errors in processing (others than unsupporte
 Agent.GeneratedTraps
 --------------------
 
+.. note::
+   Depricated
+
 Data type: Unsigned Integer 64-bit
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
@@ -1666,11 +1669,84 @@ Check if given subagent is loaded. Return 1 if loaded and 0 if not.
 Agent.LastTrapTime
 ------------------
 
+.. note::
+   Depricated
+
 Data type: Unsigned Integer 64-bit
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Timestamp of last generated trap
+
+
+Agent.IsUserAgentInstalled
+--------------------------
+
+Data type: Unsigned Integer
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Check if user support application is installed
+
+
+Agent.LocalDatabase.FailedQueries
+---------------------------------
+
+Data type: Unsigned Integer
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Agent local database: failed queries
+
+
+Agent.LocalDatabase.LongRunningQueries
+--------------------------------------
+
+Data type: Unsigned Integer
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Agent local database: long running queries
+
+
+Agent.LocalDatabase.Status
+--------------------------
+
+Data type: Unsigned Integer
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Agent local database: status
+
+
+Agent.LocalDatabase.TotalQueries
+--------------------------------
+
+Data type: Unsigned Integer
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Agent local database: total queries executed
+
+
+Agent.LogFile.Status
+--------------------
+
+Data type: Unsigned Integer
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Agent log status
+
+
+Agent.Notification.QueueSize
+----------------------------
+
+Data type: Unsigned Integer
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Agent notification queue size
 
 
 Agent.ProcessedRequests
@@ -1705,6 +1781,9 @@ Cumulative counter of connections rejected due to authentication failure
 
 Agent.SentTraps
 ---------------
+
+.. note::
+   Depricated
 
 Data type: Unsigned Integer 64-bit
 
@@ -1751,16 +1830,6 @@ Data type: Unsigned Integer 64-bit
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Number of syslog messages received by agent
-
-
-Agent.SyslogProxy.QueueSize
----------------------------
-
-Data type: Unsigned Integer
-
-Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
-
-Agent syslog proxy queue size
 
 
 Agent.ThreadPool.ActiveRequests(*)

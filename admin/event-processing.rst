@@ -588,13 +588,8 @@ The following drivers are provided by default with |product_name| installation:
        * ThemeColor - team color in RGB, default: FF6A00 (optional parameter)
        * UseMessageCards - flag if message cards should be used, default: no (optional parameter)
 
-       Optional configuration section "Channels" should contain channelName=IncomingWebhookURL.
-       More information about setting up incoming webhook available `there <https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-using#setting-up-a-custom-incoming-webhook>`_
-
-       MsTeams requires 2 fields in action configuration:
-
-       * Recipient name - channel name defined in :guilabel:`Channels` section or incoming webhook URL
-       * Message - message to be sent
+       Optional configuration section "Channels" should contain list of channels in the following format: channelName=URL, where channelName is an arbitrary name later used as recipient in action configuration.
+       More information about setting up the URL of incoming webhook available `there <https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-using#setting-up-a-custom-incoming-webhook>`_
 
        .. code-block:: cfg
 
@@ -603,7 +598,13 @@ The following drivers are provided by default with |product_name| installation:
             UseMessageCards = false
 
             [Channels]
-            channelName=IncommingWebhookURL
+            Channel=URL
+            AnotherChannel=URL
+
+       MsTeams requires 2 fields in action configuration:
+
+       * Recipient name - channel name defined in :guilabel:`Channels` section or incoming webhook URL
+       * Message - message to be sent
 
 
    * - mymobile.ncd
@@ -626,16 +627,16 @@ The following drivers are provided by default with |product_name| installation:
        * port (default: 4700)
        * timeout (seconds, default: 30)
        * secret
-       * encryption - optional parameter. Encryption policy: 
+       * encryption - optional parameter. Encryption policy:
 
-            0 = Encryption disabled; 
+            0 = Encryption disabled;
 
             1 = Encrypt connection only if agent requires encryption;
 
             2 = Encrypt connection if agent supports encryption;
 
-            3 = Force encrypted connection;            
-            
+            3 = Force encrypted connection;
+
        * keyFile - optional parameter. Specify server's key file, if not specified will take default path.
 
    * - portech.ncd
@@ -663,29 +664,51 @@ The following drivers are provided by default with |product_name| installation:
        * https (1 - use https, 0 - do not use https)
 
    * - telegram.ncd
-     - Notification channel driver for Telegram messenger. Configuration parameter:
+     - Notification channel driver for Telegram messenger. Configuration parameters:
 
        * AuthToken
        * DisableIPv4 - true to disable IPv4 usage
        * DisableIPv6 - true to disable IPv6 usage
        * Proxy - proxy url or ip or full configuration if format [scheme]://[login:password]@IP:[PORT]
-       * ProxyPort - proxy port 
+       * ProxyPort - proxy port
        * ProxyType - proxy type: http, https, socks4, socks4a, socks5, socks5h
        * ProxyUser - proxy user name
        * ProxyPassword - proxy user password
 
-       Only AuthToken field is mandatory field all others are optional
+       Only AuthToken field is mandatory field all others are optional.
 
-       To confiugre Telegram notifications it is required to talk to BotFather and
-       get bot authentication token (AUTH_TOKEN). Set authentication token (AUTH_TOKEN) in notification
-       channel configuration in format: AuthToken=AUTH_TOKEN
+       It is necessary to create a telegram bot that |product_name| server will use to send messages.
+       In order to create a new bot it's necessary to talk to BotFather and get bot authentication token (AUTH_TOKEN).
+       Set authentication token in notification channel configuration, e.g.: AuthToken=1234567890:jdiAiwdisUsWjvKpDenAlDjuqpx
 
-       Telegram's bot can't initiate conversations with users. A user must either add them to a group or send them a message first.
+       The bot can:
+       
+       * Have a private chat with another Telegram user
+       * Participate a group
+       * Be channel admin
+
+       Telegram's bot can't initiate conversations with users in a private chat or a group.
+       A user must either add bot to a group or send a private message to the bot first.
+
+       Chat, group or channel is identified by ID or name (without @ prefix).
+       For private chats only users who configured a Username can be identified
+       by name (without @ prefix). |product_name| stores the correspondence
+       between ID and name when the bot receives a message in chat or group
+       (|product_name| server should be running a that moment). If group,
+       channel name or username is changed, it's necessary to send any message
+       to the bot so new correspondence could be stored.
 
        Telegram notification channel requires 2 fields in action configuration:
 
-       * Recipient name - name of the channel or username (public channel should start with @ symbol)
+       * Recipient name - It could be name (of a group, channel or username, without @ prefix) or ID of group, channel or chat.
        * Message - text that should be sent
+
+       If you want to use ID to identify a recipient, you can get it by opening Telegram
+       API URL in your browser, e.g. https://api.telegram.org/bot1234567890:jdiAiwdisUsWjvKpDenAlDjuqpx/getUpdates
+       After sending a message to the bot or adding it to a group you should see chat id there.
+       You might need to temporary deconfigure Telegram notification channel, otherwise
+       if |product_name| server is running, it will read data from Telegram API first.
+
 
    * - text2reach.ncd
      - Driver for Text2Reach.com service (`<http://www.text2reach.com>`_). Configuration parameters:

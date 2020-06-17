@@ -4,12 +4,11 @@
 Database monitoring
 ===================
 
-
-There are created few specialized monitoring subagents: Oracle, DB2, MongoDB. Further
-will be described how to configure and use this subagents. Besides this there is
-opportunity to monitor also other types of databases supported by |product_name|
+There are several subagents for database monitoring: DB2, Informix, Oracle, MySQL, MongoDB.
+Below we will describe how to configure and use these subagents. Besides it's also
+possible to monitor other types of databases supported by |product_name|
 server(:ref:`link to supported database list<supported-db-list>`) using database query
-subagent as this databases support receiving performance parameters using queries.
+subagent as these databases support receiving performance parameters using queries.
 This subagent details are described in :ref:`dbquery` chapter.
 
 .. _oracle-subagent:
@@ -20,7 +19,7 @@ Oracle
 |product_name| subagent for Oracle DBMS monitoring (further referred to as Oracle subagent) monitors
 one or more instances of Oracle databases and reports various database-related parameters.
 
-All parameters available from Oracle subagent gathered or calculated once per minute thus it's
+All parameters available from Oracle subagent are collected or calculated once per minute thus it's
 recommended to set DCI poll interval for these items to 60 seconds or more. All parameters are
 obtained or derived from the data available in Oracle's data dictionary tables and views through
 regular select queries. Oracle subagent does not monitor any of the metrics related to lower level
@@ -48,27 +47,41 @@ Oracle subagent can be configured using XML configuration file (usually created
 as separate file in configuration include directory), or in simplified INI format,
 usually in main agent configuration file.
 
-XML configuration:
+Database definition supports the following parameters:
 
-You can specify multiple databases in the **oracle** section. Each database description
-must be surrounded by database tags with the **id** attribute. It can be any unique integer
-and instructs the Oracle subagent about the order in which database sections will be processed.
 
-Each database definition supports the following parameters:
+.. list-table::
+   :widths: 20 70 20
+   :header-rows: 1
 
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| Parameter                              | Description                                                                                                |
-+========================================+============================================================================================================+
-| Id                                     | Database identifier. It will be used to address this database in parameters.                               |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| Name                                   | Database TNS name or connection string.                                                                    |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| Username                               | User name for connecting to database.                                                                      |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| Password                               | Database user password.                                                                                    |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| EncryptedPassword                      | Database user password encrypted with :ref:`nxencpasswd-tools-label` tool.                                 |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
+   * - Parameter
+     - Description
+     - Default value
+   * - Id
+     - Database identifier. It will be used to address this database in parameters.
+     -
+   * - TnsName
+     - Database TNS name or connection string.
+     -
+   * - ConnectionTTL
+     - Time in seconds. When this time gets elapsed, connection to the DB is closed and reopened again.
+     - 3600
+   * - Username
+     - User name for connecting to database.
+     -
+   * - Password
+     - Database user password. When using INI format, remember to enclose password in double quotes ("password") if it contains # character.
+       This parameter automatically detects and accepts password encrypted with :ref:`nxencpasswd-tools-label` tool.
+     -
+   * - EncryptedPassword
+     - Database user password encrypted with :ref:`nxencpasswd-tools-label` tool. DEPRECATED. Use Password instead.
+     -
+
+
+XML configuration allows to specify multiple databases in the **oracle** section.
+Each database description must be surrounded by database tags with the **id** attribute.
+It can be any unique integer and instructs the Oracle subagent about the order in
+which database sections will be processed.
 
 Sample Oracle subagent configuration file in XML format:
 
@@ -96,26 +109,9 @@ Sample Oracle subagent configuration file in XML format:
        </oracle>
    </config>
 
-INI configuration:
 
 You can specify only one database when using INI configuration format. If you need
 to monitor multiple databases from same agent, you should use configuration file in XML format.
-
-**ORACLE** section can contain the following parameters:
-
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| Parameter                              | Description                                                                                                |
-+========================================+============================================================================================================+
-| Id                                     | Database identifier. It will be used to address this database in parameters.                               |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| Name                                   | Database TNS name or connection string.                                                                    |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| Username                               | User name for connecting to database.                                                                      |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| Password                               | Database user password.                                                                                    |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| EncryptedPassword                      | Database user password encrypted with nxencpasswd.                                                         |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
 
 Sample Oracle subagent configuration file in INI format:
 
@@ -123,14 +119,15 @@ Sample Oracle subagent configuration file in INI format:
 
    [ORACLE]
    ID = DB1
-   TNSName = TEST
-   Username = NXMONITOR
-   Password = NXMONITOR
+   Name = TEST
+   Username = dbuser
+   Password = "mypass123"
+
 
 Parameters
 ----------
 
-When loaded, Oracle subagent adds the following parameters to agent (all parameters requires database ID as first argument):
+When loaded, Oracle subagent adds the following parameters to agent (all parameters require database ID as first argument):
 
 +---------------------------------------------------------+-----------------------------------------------------------------------------------+
 | Parameter                                               | Description                                                                       |
@@ -303,21 +300,8 @@ second one would be an XML configuration file. Please note that to use the XML c
 you first need to declare the XML file in the DB2 section of the INI configuration file. The
 details are below.
 
-The configuration section in INI file looks like the following:
 
-.. code-block:: cfg
-
-   SubAgent          = db2.nsm
-
-   [DB2]
-   DBName            = dbname
-   DBAlias           = dbalias
-   UserName          = dbuser
-   Password          = mypass123
-   QueryInterval     = 60
-   ReconnectInterval = 30
-
-Parameters:
+Database definition supports the following parameters:
 
 .. list-table::
    :widths: 20 20 70 20
@@ -341,20 +325,37 @@ Parameters:
      -
    * - Password
      - string
-     - The password for the database to connect to
+     - The password for the database to connect to. When using INI format, remember to enclose password in double quotes ("password") if it contains # character.
+       This parameter automatically detects and accepts password encrypted with :ref:`nxencpasswd-tools-label` tool.
      -
    * - EncryptedPassword
      - string
-     - The encrypted password for the database to connect to (use nxencpasswd for encryption)
+     - Database user password encrypted with :ref:`nxencpasswd-tools-label` tool. DEPRECATED. Use Password instead.
      -
    * - QueryInterval
-     - milliseconds
+     - seconds
      - The interval to perform queries with
      - 60
    * - ReconnectInterval
-     - milliseconds
+     - seconds
      - The interval to try to reconnect to the database if the connection was lost or could not be established
      - 30
+
+
+Sample DB2 subagent configuration file in INI format:
+
+.. code-block:: cfg
+
+   SubAgent          = db2.nsm
+
+   [DB2]
+   DBName            = dbname
+   DBAlias           = dbalias
+   UserName          = dbuser
+   Password          = "mypass123"
+   QueryInterval     = 60
+   ReconnectInterval = 30
+
 
 XML configuration allows the monitoring of several database instances.
 
@@ -369,7 +370,7 @@ DB2 section of the INI file. The syntax is as follows:
    ConfigFile        = /myhome/configs/db2.xml
 
 .. note:
-  Note that all other entries in the DB2 will be ignored.
+  Note that all other entries in the DB2 section will be ignored.
 
 .. list-table::
    :widths: 20 20 70 20
@@ -410,7 +411,7 @@ The XML configuration file itself should look like this:
    </config>
 
 As you can see, the parameters are the same as the ones from the INI configuration. Each database
-declaration must be placed in the ``db2sub`` tag and enclosed in the ``db2`` tag. The ``db2`` tag
+declaration must be placed under the ``db2sub`` tag and enclosed in the ``db2`` tag. The ``db2`` tag
 must have a numerical id which has to be a positive integer greater than 0.
 
 Provided parameters
@@ -808,7 +809,7 @@ reports various database-related parameters.
 
 All parameters available from MongoDB subagent gathered or calculated once per minute thus it's
 recommended to set DCI poll interval for these items to 60 seconds or more. It is supposed that
-by one agent will be monitored databases with same version.
+only databases with same version are monitored by one agent.
 
 Building mongodb subagent
 -------------------------
@@ -886,9 +887,15 @@ List
 Informix
 ========
 
-|product_name| subagent for Informix (further referred to as Informix subagent) monitors one or more Informix databases and reports database-related parameters.
+|product_name| subagent for Informix (further referred to as Informix subagent)
+monitors one or more Informix databases and reports database-related parameters.
 
-All parameters available from Informix subagent are gathered or calculated once per minute, thus its recommended to set DCI poll interval for these items to 60 seconds or more. All parameters are obtained or derived from the data available in Informix system catalogs. Informix subagent does not monitor any of the metrics related to lower level database layers, such as database processes. Monitoring of such parameters can be achieved through the standard |product_name| functionality.
+All parameters available from Informix subagent are collected or calculated once
+per minute, thus its recommended to set DCI poll interval for these items to 60
+seconds or more. All parameters are obtained or derived from the data available
+in Informix system catalogs. Informix subagent does not monitor any of the metrics
+related to lower level database layers, such as database processes. Monitoring of
+such parameters can be achieved through the standard |product_name| functionality.
 
 Pre-requisites
 --------------
@@ -898,7 +905,10 @@ A database user must have access rights to Informix system catalog tables.
 Configuration
 -------------
 
-You can specify multiple databases in the informix section. Each database description must be surrounded by database tags with the id attribute. Id can be any unique integer, it instructs the Informix subagent about the order in which database sections will be processed.
+You can specify multiple databases in the informix section. Each database
+description must be surrounded by database tags with the id attribute. Id can be
+any unique integer, it instructs the Informix subagent about the order in which
+database sections will be processed.
 
 Each database definition supports the following parameters:
 
@@ -911,16 +921,18 @@ Each database definition supports the following parameters:
      - Description
    * - Id
      - Database identifier. It will be used to address this database in parameters.
-   * - Name
+   * - DBName
      - Database name. This is a name of Informix DSN.
-   * - Server
+   * - DBServer
      - Name of the Informix server.
-   * - UserName
+   * - DBLogin
      - User name for connecting to database.
-   * - Password
-     - Database user password.
+   * - DBPassword
+     - The password for the database to connect to. When using INI format, remember to enclose password in double quotes ("password") if it contains # character.
+       This parameter automatically detects and accepts password encrypted with :ref:`nxencpasswd-tools-label` tool.
 
-Configuration example:
+
+Configuration example in INI format:
 
 .. code-block:: cfg
 
@@ -930,15 +942,43 @@ Configuration example:
     ID=db1
     DBName = instance1
     DBLogin = user
-    DBPassword = password
+    DBPassword = "password"
+
+
+Configuration example in XML format:
+
+.. code-block:: xml
+
+   <config>
+       <agent>
+           <subagent>informix.nsm</subagent>
+       </agent>
+       <informix>
+           <databases>
+               <database id="1">
+                   <id>DB1</id>
+                   <DBName>TEST</DBName>
+                   <DBLogin>NXMONITOR</DBLogin>
+                   <DBPassword>NXMONITOR</DBPassword>
+               </database>
+               <database id="2">
+                   <id>DB2</id>
+                   <DBName>PROD</DBName>
+                   <DBLogin>NETXMS</DBLogin>
+                   <DBPassword>PASSWORD</DBPassword>
+               </database>
+           </databases>
+       </informix>
+   </config>
+
 
 Provided parameters
 ~~~~~~~~~~~~~~~~~~~
 
-To get a DCI from the subagent, you need to specify the id from the ``informix`` entry in the XML
-configuration file (in case of INI configuration, the id will be **1**). To specify the id, you
-need to add it enclosed in brackets to the name of the parameter that is being requested (e.g.,
-``informix.parameter.to.request(**1**)``). In the example, the parameter ``informix.parameter.to.request``
+To get a DCI from the subagent, you need to specify the id from the ``informix`` entry in
+configuration file. To specify the id, you need to add it enclosed in brackets to
+the name of the parameter that is being requested (e.g., ``informix.parameter.to.request(**1**)``).
+In the example, the parameter ``informix.parameter.to.request``
 from the database with the id **1** will be returned.
 
 .. list-table::
@@ -987,7 +1027,7 @@ MySQL
 |product_name| subagent for MySQL monitoring. Monitors one or more instances of MySQL databases and
 reports various database-related parameters.
 
-MySQL subagent requires |product_name| the MySQL driver to be available in the system.
+MySQL subagent requires MySQL driver to be available in the system.
 
 Configuration
 -------------
@@ -1011,18 +1051,23 @@ Each database definition supports the following parameters:
    * - Id
      - Database identifier. It will be used to address this database in parameters.
      - localdb - for single DB definition; last part of section name - for multi database definition
-   * - Name
+   * - Database
      - Database name. This is a name of MySQL DSN.
      - information_schema
    * - Server
      - Name or IP of the MySQL server.
      - 127.0.0.1
-   * - UserName
+   * - ConnectionTTL
+     - Time in seconds. When this time gets elapsed, connection to the DB is closed and reopened again.
+     - 3600
+   * - Login
      - User name for connecting to database.
      - netxms
    * - Password
-     - Database user password or encrypted password. To encrypt password check :ref:`nxencpasswd-tools-label` tool.
+     - Database user password. When using INI format, remember to enclose password in double quotes ("password") if it contains # character.
+       This parameter automatically detects and accepts password encrypted with :ref:`nxencpasswd-tools-label` tool.
      -
+
 
 Single database configuration example:
 
@@ -1031,10 +1076,10 @@ Single database configuration example:
     Subagent=mysql.nsm
 
     [mysql]
-    ID=db1
-    DBName = instance1
-    DBLogin = user
-    DBPassword = password
+    Id=db1
+    Database = instance1
+    Login = user
+    Password = password
 
 
 Multi database configuration example:
@@ -1045,16 +1090,16 @@ Multi database configuration example:
 
     [mysql/databases/database#1]
     ID=db1
-    DBName = instance1
-    DBLogin = user
-    DBPassword = password
+    Database = instance1
+    Login = user
+    Password = password
     Server = netxms.demo
 
 
     [mysql/databases/local]
-    DBName = information_schema
-    DBLogin = user
-    DBPassword = encPassword
+    Database = information_schema
+    Login = user
+    Password = encPassword
     Server = 127.0.0.1
 
 

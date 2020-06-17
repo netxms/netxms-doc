@@ -417,7 +417,7 @@ Server configuration file (netxmsd.conf)
     - Database name (not used by ODBC driver).
     - netxms_db
   * - DBPassword
-    - Database user's password.
+    - Database user's password. When using INI configuration file remember to enclose password in double qoutes ("password") if it contains # character. 
     - Empty password
   * - DBSchema
     - Schema name

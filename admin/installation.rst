@@ -138,7 +138,7 @@ Change *DRIVER_NAME* to driver name that you need:
   * netxms-dbdrv-odbc - unixODBC driver (can be used with DB/2 and Microsoft SQL)
   * netxms-dbdrv-oracle - Oracle driver
 
-Database should be created and initialized after server and driver packages are installed. 
+Database should be created and initialized after server and driver packages are installed.
 Database creation examples can be found :ref:`there <db_creation>`.
 
 Database initialization command:
@@ -205,8 +205,8 @@ Server
 ------
 
   1. Download the latest version from http://www.netxms.org/download.
-     You will need Windows installer (named netxms-VERSION.exe or
-     netxms-VERSION-x64.exe, for example netxms-VERSION.exe). Please note that in
+     You will need Windows installer (named netxms-VERSION-x64.exe, e.g.
+     netxms-server-3.4.178-x64.exe). Please note that in
      following steps VERSION will be used as a substitution for an actual version
      number.
   2. Run the installer package on your server machine. Installation wizard will be
@@ -217,7 +217,11 @@ Server
 
     .. figure:: _images/win_netxms_setup_components.png
 
-    If you plan to run |product_name| console from the same machine, select Administrator's Console option as well.
+  4. For a typical installation keep default settings on Select Additional Tasks window.
+     :guilabel:`Set hardened file system permissions` makes installation folder
+     accessible only to members of Administrators group and SYSTEM user.
+
+    .. figure:: _images/win_netxms_setup_additional_tasks.png
 
   4. Follow the prompts until Ready to Install window opens.
 
@@ -233,14 +237,13 @@ Server
 
     .. figure:: _images/win_server_config_step2.png
 
-
   * Select the desired database engine and driver. For most databases, you will have
     two drivers available – native and ODBC. Please note that if you select ODBC, you
     will have to manually configure ODBC source.
   * Enter the name of database server or ODBC source.
   * In DBA login name and DBA password fields, enter database administrator’s login
-    name and password. You have to fill these fields only if you have chosen Create
-    new database option.
+    name and password. You have to fill these fields only if you have chosen
+    :guilabel:`Create new database option`.
   * Enter the desired database name, database user name and password. If you are not
     using ODBC, the wizard will create database and a user for you. If ODBC is used,
     database and user should be created beforehand.
@@ -257,19 +260,8 @@ Server
 
     We recommend to use native database driver (oracle.ddr).
 
-  8. On the next window, you will be prompted for various polling parameters:
-
-    .. figure:: _images/win_server_config_step3.png
-
-    * Check Run IP autodiscovery process check-box, if you wish |product_name| server to
-      automatically discover your IP network.
-    * Increase number of status and configuration pollers if you plan to monitor
-      large number of nodes.
-
   9. On the next window, enter address of your SMTP server. |product_name| will use it to send
-     notification e-mails. If you have mobile phone attached to management server via
-     serial cable or USB, select mobile phone driver and COM port; otherwise, select
-     "<none>".
+     notification e-mails.
 
   10. Then next window will prompt you for logging method. Either check Event Log or
       select file, and press the Next button.
@@ -648,7 +640,7 @@ If required, password can be reset back to default using :ref:`nxdbmgr utility <
 Database creation examples
 ==========================
 
-This chapter provides some database creation SQL examples. 
+This chapter provides some database creation SQL examples.
 
 PostgreSQL
 ----------

@@ -417,7 +417,7 @@ Server configuration file (netxmsd.conf)
     - Database name (not used by ODBC driver).
     - netxms_db
   * - DBPassword
-    - Database user's password. When using INI configuration file remember to enclose password in double qoutes ("password") if it contains # character. 
+    - Database user's password. When using INI configuration file remember to enclose password in double qoutes ("password") if it contains # character.
     - Empty password
   * - DBSchema
     - Schema name
@@ -1232,8 +1232,8 @@ Valid commands are:
      - Initialize database
    * - migrate <source>
      - Migrate database from given source
-   * - resetadmin
-     - Unlock user "admin" and reset password to default ("netxms")
+   * - reset-system-account
+     - Unlock user "system" and reset it's password to default ("netxms")
    * - set <name> <value>
      - Set value of server configuration variable
    * - unlock

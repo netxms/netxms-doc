@@ -8,11 +8,11 @@ Architecture overview
 =====================
 
 The system has three-tier architecture: the information is collected by
-monitoring agents (either our own high-performance agents or SNMP agents)
-and delivered to monitoring server for processing and storage. Network
-administrator can access collected data using cross-platform Management
-Console, Web Interface or Management Console for Android. Rich and Web console
-have almost the same functionality and the same user interface.
+monitoring agents (either our own high-performance agents or SNMP agents) and
+delivered to monitoring server for processing and storage. Network administrator
+can access collected data using cross-platform Management Console (Rich
+Console), Web Interface (Web console) or Management Console for Android. Rich
+and Web console have almost the same functionality and the same user interface.
 
 .. only:: html
 
@@ -345,7 +345,7 @@ From each node |product_name| can collect one or more :term:`metrics <Metric>` w
 can be either single-value ("CPU.Usage"), list ("FileSystem.MountPoints")
 or table ("FileSystem.Volumes").
 When new data sample is collected, it's value is checked against configured
-thresholds. This documentation use term :term:`Data Collection Item <DCI>`
+thresholds. This documentation use term :term:`Data Collection Item <DCI>` (DCI)
 to describe configuration of metric collection schedule, retention, and thresholds.
 
 Metrics can be collected from multiple data sources:

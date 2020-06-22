@@ -32,7 +32,7 @@ This document covers installation, configuration, and use of |product_name|.
   Product Support
   ===============
 
-  Contact us if you run into a problem of found a bug.
+  Contact us if you run into a problem or found a bug.
 
     * `Forum <https://www.netxms.org/forum>`_
     * `Telegram <https://telegram.me/netxms>`_

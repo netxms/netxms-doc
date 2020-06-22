@@ -17,6 +17,7 @@ Supported platforms for |product_name| server and agent:
 
    * Debian 9 (Stretch), 10 (Buster)
    * Ubuntu 16.04 LTS (Xenial), 18.04 LTS (Bionic), 20.04 LTS (Focal Fossa)
+   * Linux Mint 19.3 (Tricia), Linux Mint Debian Edition 4
    * Devuan ASCII
    * Red Hat Enterprise Linux 8
    * CentOS 8
@@ -327,23 +328,24 @@ Agent
 
    * - Subagent
      - Description
-     - filemgr.nsm
+   * - filemgr.nsm
      - Provides access to spefified folders on monitored host from |product_name| Management Console File Manager.
        Is also being used for distributing Agent Policy configuration files (see :ref:`agent-policies-label`.)
-     - logwatch
+   * - logwatch
      - Allows monitoring log files and Windows Event Log and sending matched events to |product_name| server.
-     - ping.nsm
+   * - ping.nsm
      - Adds possibility to send ICMP pings from monitored host. Ping round-trip times can be collected by management server.
-     - netsvc.nsm, portcheck.nsm
+   * - netsvc.nsm, portcheck.nsm
      - Adds possibility to check network services (like FTP or HTTP) from monitored host.
-     - winperf.nsm
+   * - winperf.nsm
      - Provides access to Windows performance counters. This subagent is required if you need to collect CPU utilization from monitored host.
-     - wmi.nsm
+   * - wmi.nsm
      - Provides access to WMI data.
-     - ups.nsm
+   * - ups.nsm
      - Adds support for UPS monitoring. UPS can be attached to host via serial cable or USB.
 
-     For more information about subagents, please refer to :ref:`subagent_list`.
+
+For more information about subagents, please refer to :ref:`subagent_list`.
 
 
   4. Follow the prompts to complete the installation.

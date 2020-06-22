@@ -508,9 +508,15 @@ These parameters can be changed in
     -
     - 0
     - No
-  * - CapabilityExpirationTime
-    -
+  * - Objects.Nodes.CapabilityExpirationTime
+    - Time before capability (NetXMS agent, SNMP, EtherNet/IP, etc) expires if node is not responding for requests
+      via appropriate protocol. Expiration happens no earlier then CapabilityExpirationGracePeriod after a node returns form unreachable state.
     - 604800
+    - No
+  * - Objects.Nodes.CapabilityExpirationGracePeriod
+    - Additional timeout after a node returns from unreachable state to make sure
+      all services has started. Capability expiration will happen only after that timeout.  
+    - 3600
     - No
   * - CheckTrustedNodes
     - Enable (1) or disable (0) checking of trusted nodes list for cross-node data collection (using Proxy Node DCI attribute).

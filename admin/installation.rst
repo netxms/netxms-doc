@@ -127,14 +127,14 @@ To install server use this command:
 
 :command:`apt-get install netxms-server`
 
-Server does not include server drivers. They should be installed with separate command:
+Server package does not include server drivers. They should be installed with separate command:
 
 :command:`apt-get install DRIVER_NAME`
 
 Change *DRIVER_NAME* to driver name that you need:
 
   * netxms-dbdrv-pgsql - PostgreSQL driver
-  * netxms-dbdrv-mysql -  MySQL driver
+  * netxms-dbdrv-mysql - MySQL driver
   * netxms-dbdrv-odbc - unixODBC driver (can be used with DB/2 and Microsoft SQL)
   * netxms-dbdrv-oracle - Oracle driver
 
@@ -166,29 +166,33 @@ Management console
 Desktop Management Console:
 
  1. Download the latest version from http://www.netxms.org/download. You will need
-    Linux installer(named nxmc-VERSION-linux-gtk-x86.tar.gz or
-    nxmc-VERSION-linux-gtk-x64.tar.gz, for example nxmc-1.2.17-linux-gtk-x64.tar.gz).
+    Linux installer(named nxmc-VERSION-linux-gtk-x64.tar.gz, for example
+    nxmc-3.4.178-linux-gtk-x64.tar.gz).
+    Due to limitation of Eclipse platform used to build the Management Console,
+    only x64 build is currently available.
+
  2. Expand package to your preferred directory using command:
 
     :command:`tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DESTINATION_DIRECTORY`
 
  3. Run nxmc file from "/DESTINATION_DIRECTORY".
 
+
 Web Management Console:
 
 |product_name| web interface is java based and should be deployed into servlet container to
-run. Tested containers: Tomcat7, Jetty7.
+run. Tested containers: Tomcat8, Tomcat9, Jetty8, Jetty9.
 
   1. Install one of servlet containers that support servlet-api version 3.
 
   2. Download latest version of WAR file from Web Interface Binaries section
      http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
-     nxmc-1.2.17.war).
+     nxmc-3.4.178.war).
 
   3. Copy nxmc.war to webapps directory, in a few seconds it will be autodeployed and
      available at http://SERVER_IP:SERVER_PORT/nxmc/
 
-     Tomcat default folder:  /var/lib/tomcat7/webapps
+     Tomcat default folder:  /var/lib/tomcat9/webapps
 
      Jetty default folder: $JETTY_HOME/webapps/
 
@@ -298,7 +302,7 @@ Agent
 
   1. Download the latest version from http://www.netxms.org/download, if you don't
      have it. You will need Windows Agent installer (named nxagent-VERSION.exe or
-     nxagent-VERSION-x64.exe, for example nxagent-1.2.0.exe).
+     nxagent-VERSION-x64.exe, for example nxagent-3.4.178.exe).
 
   2. Run the installer package on target server. Installation wizard will be shown.
      Follow the prompts until the |product_name| Server window opens:
@@ -314,14 +318,31 @@ Agent
 
      .. figure:: _images/win_agent_subagents.png
 
-     In this window, you can select which subagents you wish to load. Each subagent extends agent's functionality, as described below:
+     In this window, you can select which subagents you wish to load. Each subagent
+     extends agent's functionality, e.g.:
 
-     Subagent    Description
-     ping.nsm    Adds possibility to send ICMP pings from monitored host. Ping round-trip times can be collected by management server.
-     portcheck.nsm   Adds possibility to check network services (like FTP or HTTP) from monitored host.
-     winperf.nsm Provides access to Windows performance counters. This subagent is required if you need to collect CPU utilization from monitored host.
-     wmi.nsm Provides access to WMI data.
-     ups.nsm Adds support for UPS monitoring. UPS can be attached to host via serial cable or USB.
+.. list-table::
+   :header-rows: 1
+   :widths: 50 200
+
+   * - Subagent
+     - Description
+     - filemgr.nsm
+     - Provides access to spefified folders on monitored host from |product_name| Management Console File Manager.
+       Is also being used for distributing Agent Policy configuration files (see :ref:`agent-policies-label`.)
+     - logwatch
+     - Allows monitoring log files and Windows Event Log and sending matched events to |product_name| server.
+     - ping.nsm
+     - Adds possibility to send ICMP pings from monitored host. Ping round-trip times can be collected by management server.
+     - netsvc.nsm, portcheck.nsm
+     - Adds possibility to check network services (like FTP or HTTP) from monitored host.
+     - winperf.nsm
+     - Provides access to Windows performance counters. This subagent is required if you need to collect CPU utilization from monitored host.
+     - wmi.nsm
+     - Provides access to WMI data.
+     - ups.nsm
+     - Adds support for UPS monitoring. UPS can be attached to host via serial cable or USB.
+
      For more information about subagents, please refer to :ref:`subagent_list`.
 
 
@@ -333,26 +354,27 @@ Management console
 Desktop Management Console:
 
  1. Download the latest version from http://www.netxms.org/download. You will need
-    Linux installer(named nxmc-VERSION-win32-x86.zip or
-    nxmc-VERSION-win32-x64.zip, for example nxmc-1.2.17-win32-x64.zip).
+    Windows archive (named nxmc-VERSION-win32-x64.zip, for example nxmc-3.4.178-win32-x64.zip).
+    Due to limitation of Eclipse platform used to build the Management Console,
+    only x64 build is currently available.
  2. Extract zip in preferred directory.
 
  3. Run nxmc file from extracted catalog.
 
 Web Management Console:
 
-Windows have 2 options: to install manually servlet container and just download tar and
-the second one is to use netxms-webui-VERSION.exe installer. Installer will install by
-himself jetty and copy into required folder tar file. There will be described only
-automated way of installation:
+Windows have two options: one is to manually install .war file into servlet container and
+the second one is to use netxms-webui-VERSION-x64.exe installer. Installer will
+install Jetty and copy .war file into required folder. Below will be described
+installation via the installer:
 
   1. Download the latest version from http://www.netxms.org/download. You will need
-     Windows installer netxms-webui-VERSION-x64.exe or netxms-webui-VERSION.exe
-     (example: netxms-webui-1.2.17-x64.exe).
+     Windows installer netxms-webui-VERSION-x64.exe (e.g.: netxms-webui-4.3.178-x64.exe).
+     Due to limitation of Eclipse platform used to build the Management Console,
+     only x64 build is currently available.
 
   2. Run the installer package on your server machine. Installation wizard will be
-     shown. Follow the prompts. While installation it will be possible to change
-     installation path and port.
+     shown. Follow the prompts. Installer allows to change installation path and port.
 
   3. After installation procedure is finished check that WEB GUI is available at
      http://SERVER_IP:SERVER_PORT/nxmc/
@@ -360,7 +382,7 @@ automated way of installation:
 Unattended installation of |product_name| Agent
 -----------------------------------------------
 
-Windows Agent installer (named nxagent-VERSION.exe, for example nxagent-0.2.20.exe),
+Windows Agent installer (named nxagent-VERSION.exe, for example nxagent-3.4.178.exe),
 has various command line options for unattended installation. Installation will ignore
 any configuration file options (/CONFIGENTRY, /NOSUBAGENT, /SERVER, /SUBAGENT) if config
 file already exists or if /CENTRALCONFIG option is used. These options are following:
@@ -396,7 +418,7 @@ file already exists or if /CENTRALCONFIG option is used. These options are follo
 
 Example:
 
-:command:`nxagent-1.0.5.exe /VERYSILENT /SUPPRESSMSGBOXES /SERVER=10.0.0.1 /SUBAGENT=UPS /SUBAGENT=FILEMGR /CONFIGENTRY=ZoneUIN=15 /CONFIGENTRY=[FILEMGR] /CONFIGENTRY=RootFolder=C:\\`
+:command:`nxagent-3.4.178.exe /VERYSILENT /SUPPRESSMSGBOXES /SERVER=10.0.0.1 /SUBAGENT=UPS /SUBAGENT=FILEMGR /CONFIGENTRY=ZoneUIN=15 /CONFIGENTRY=[FILEMGR] /CONFIGENTRY=RootFolder=C:\\`
 
 This command will add 3 lines at the end of generated config file:
 
@@ -409,30 +431,11 @@ This command will add 3 lines at the end of generated config file:
 Install on Android
 ==================
 
-Agent
------
-
-To install Android agent download netxms-mobile-agent-VERSION.apk (example:
-netxms-mobile-agent-1.2.17.apk) file from http://www.netxms.org/download page.
-Check that installation of applications from unknown sources is allowed in security
-settings of your phone. Run this installer on required device.
-
-After agent is installed go to settings and activate agent. After agent activation it
-should be set next parameters: server address, port, user name, password. They can be
-found in under main menu, parameters section.
-
-.. note::
-  User that is used for connection should have :guilabel:`Login as mobile device`
-  user right.
-
-  Mobile device should be manually added to server. Find more information there:
-  :ref:`monitoring-mobile-device`.
-
 Console
 -------
 
 To install Android console download netxms-console-VERSION.apk (example:
-netxms-console-1.2.17.apk) file from http://www.netxms.org/download page. Check that
+netxms-console-3.4.178.apk) file from http://www.netxms.org/download page. Check that
 installation of applications from unknown sources is allowed in security settings of
 your phone. Run this installer on required device.
 
@@ -607,7 +610,7 @@ different servers are following:
 
 **Tomcat**
 
-Debian default is /usr/share/tomcat7/lib. Other versions and Linux distribution
+Debian default is /usr/share/tomcat9/lib. Other versions and Linux distribution
 may have different location.
 
 **Oracle Weblogic**

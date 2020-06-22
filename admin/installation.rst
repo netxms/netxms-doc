@@ -181,7 +181,7 @@ Desktop Management Console:
 Web Management Console:
 
 |product_name| web interface is java based and should be deployed into servlet container to
-run. Tested containers: Tomcat8, Tomcat9, Jetty8, Jetty9.
+run. Minimal supported versions: Jetty 9.3.28, Tomcat 8.5.
 
   1. Install one of servlet containers that support servlet-api version 3.
 

@@ -1233,7 +1233,9 @@ Valid commands are:
    * - migrate <source>
      - Migrate database from given source
    * - reset-system-account
-     - Unlock user "system" and reset it's password to default ("netxms")
+     - Unlock user "system" and reset it's password to default ("netxms").
+       Warning: server ("netxmsd") should be stopped while performing password reset operation!
+       See :ref:`password-reset` for detailed procedure. 
    * - set <name> <value>
      - Set value of server configuration variable
    * - unlock

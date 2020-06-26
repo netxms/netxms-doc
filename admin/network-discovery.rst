@@ -13,7 +13,7 @@ module can operate in two modes - passive and active.
 In passive mode,
 information about new hosts and devices obtained from :term:`ARP` tables and
 routing tables of already known devices. |product_name| starts with it's own
-:term:`ARP` cache and routing table. 
+:term:`ARP` cache and routing table.
 
 In active discovery mode, |product_name| server
 will send an :term:`ICMP` echo requests to all IP addresses in given range, and
@@ -38,7 +38,6 @@ choose :menuselection:`Configuration --> Network Discovery`. Configuration form
 will open:
 
 .. figure:: _images/network_discovery_config.png
-   :scale: 70%
 
 General
 -------

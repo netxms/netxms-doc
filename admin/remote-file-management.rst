@@ -68,7 +68,6 @@ For each configured node it is possible to open File Manager. It will display
 all configured root folders and allow to browse into these folders.
 
 .. figure:: _images/file-manager.png
-   :scale: 100%
 
 
 File menu
@@ -80,7 +79,6 @@ File menu
  - Delete : deletes file
 
 .. figure:: _images/file_manager_file_menu.png
-   :scale: 100%
 
 Folder menu
 ~~~~~~~~~~~
@@ -93,7 +91,6 @@ Folder menu
  - Refresh this folder : refreshes content of selected folder in view
 
 .. figure:: _images/file_manager_folder_menu.png
-   :scale: 100%
 
 Other options
 ~~~~~~~~~~~~~
@@ -141,9 +138,7 @@ Upload file on server
 It can be done in "Server File List" view
 
 .. figure:: _images/server_file_list_view.png
-   :scale: 60%
 
 or "Tools"->"Upload file to server...".
 
 .. figure:: _images/upload_file_to_server.png
-   :scale: 60%

@@ -119,7 +119,6 @@ As soon as the uptime value changes it shows in the :guilabel:`Object Details`
 screen for the service:
 
 .. figure:: _images/5_Availability.png
-   :scale: 70
 
 Alternatively you can view the availability screen in a slightly different
 format by selecting :guilabel:`Availability chart` from the context menu.

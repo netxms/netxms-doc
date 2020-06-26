@@ -31,8 +31,6 @@ search results view will be opened (or updated if already open). Search results
 view looks like this:
 
 .. figure:: _images/Cp_search_results.png
-   :scale: 70
-
 
 Columns have the following meaning:
 
@@ -61,7 +59,7 @@ Columns have the following meaning:
        that some other devices was detected on same switch port. Virtual
        machines and virtual machine host will always be detected as indirect.
 
-       
+
 Find MAC address
 ================
 

@@ -59,7 +59,6 @@ Alarm Browser
 =============
 
 .. figure:: _images/grafana-alarm-browser.png
-	:scale: 55%
 
 The data source provides the possibility to view currently active :ref:`alarms` on all nodes
 or on a per node basis. To do this, you need to add a new Table Panel to your Grafana dashboard
@@ -87,7 +86,6 @@ Data Collection Items
 =====================
 
 .. figure:: _images/grafana-dci.png
-	:scale: 55%
 
 The data source provides the possibility to visualize metrics collected from data collection items
 configured on nodes. This can be achieved by adding a Graph Panel to your Grafana dashboard,

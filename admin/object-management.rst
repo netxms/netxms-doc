@@ -467,7 +467,6 @@ access control properties. Permissions given at different levels of the object
 tree summarize to form effective user rights for the object.
 
 .. figure:: _images/object_acess_rights.png
-   :scale: 65%
 
 The following object access rights can be granted:
 
@@ -565,7 +564,6 @@ This tool will execute command on an agent node and will show it's output if
 :guilabel:`Command generates output` option is enabled.
 
 .. figure:: _images/obj_tool_agent_command.png
-   :scale: 65%
 
 .. list-table::
    :widths: 30 70
@@ -605,7 +603,6 @@ SNMP Table
 and then show results in the table form.
 
 .. figure:: _images/obj_tool_snmp_table.png
-   :scale: 65%
 
 .. list-table::
    :widths: 30 70
@@ -645,7 +642,6 @@ and then show results in the table form. Regular expression is used to split
 received data to columns.
 
 .. figure:: _images/obj_tool_agent_list.png
-   :scale: 65%
 
 .. list-table::
    :widths: 30 70
@@ -686,7 +682,6 @@ Agent Table
 and then show results in the table form.
 
 .. figure:: _images/obj_tool_agent_table.png
-   :scale: 65%
 
 .. list-table::
    :widths: 30 70
@@ -722,7 +717,6 @@ URL
 :guilabel:`URL` tool opens URL in web browser.
 
 .. figure:: _images/obj_tool_url.png
-   :scale: 65%
 
 .. list-table::
    :widths: 30 70
@@ -762,7 +756,6 @@ This tool type is not visible from Web Console as it is not possible
 to execute command on web page receiver's machine.
 
 .. figure:: _images/obj_tool_local_command.png
-   :scale: 65%
 
 .. list-table::
    :widths: 30 70
@@ -798,7 +791,6 @@ Server Command
 :guilabel:`Server command` tool can be used to execute command on the server.
 
 .. figure:: _images/obj_tool_server_command.png
-   :scale: 65%
 
 .. list-table::
    :widths: 30 70
@@ -836,8 +828,6 @@ Download File
 the content of the file from agent.
 
 .. figure:: _images/obj_tool_get_file.png
-   :scale: 65%
-
 
 .. list-table::
    :widths: 30 70
@@ -877,8 +867,6 @@ Server Script
 This tool provide full range of capabilities that are available thought NXSL scripting.
 
 .. figure:: _images/obj_tool_script.png
-   :scale: 65%
-
 
 .. list-table::
    :widths: 30 70

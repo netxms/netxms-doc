@@ -83,7 +83,6 @@ System access rights used to grant access to system-wide configuration (like
 :ref:`event-processing`) and functions (like agent registration).
 
 .. figure:: _images/user_access_rights.png
-   :scale: 65%
 
 The following system access rights can be granted:
 
@@ -319,8 +318,6 @@ to copy the subject of certificate. Certificate subject is one of the ways to li
 certificate with a user.
 
 .. figure:: _images/certificate_view.png
-   :scale: 65%
-
 
 Link certificate and user
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -328,7 +325,6 @@ In "User Manager" view select user properties for required user.
 Then go to "Authentication" part.
 
 .. figure:: _images/user_prop_auth.png
-   :scale: 65%
 
 In "Authentication Method" section: "Certificate",  "Certificate or Password",
 "Certificate or RADIUS".

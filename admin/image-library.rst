@@ -20,7 +20,6 @@ different categories. View can be zoomed in or zoomed out (library zoom is saved
 
 
 .. figure:: _images/image_view.png
-   :scale: 65%
 
 Tips:
   - Images on map are displayed full size.

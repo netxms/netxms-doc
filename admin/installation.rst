@@ -170,7 +170,7 @@ Desktop Management Console:
     Linux installer(named nxmc-VERSION-linux-gtk-x64.tar.gz, for example
     nxmc-3.4.178-linux-gtk-x64.tar.gz).
     Due to limitation of Eclipse platform used to build the Management Console,
-    only x64 build is currently available.
+    only x64 build is currently provided.
 
  2. Expand package to your preferred directory using command:
 
@@ -358,7 +358,7 @@ Desktop Management Console:
  1. Download the latest version from http://www.netxms.org/download. You will need
     Windows archive (named nxmc-VERSION-win32-x64.zip, for example nxmc-3.4.178-win32-x64.zip).
     Due to limitation of Eclipse platform used to build the Management Console,
-    only x64 build is currently available.
+    only x64 build is currently provided.
  2. Extract zip in preferred directory.
 
  3. Run nxmc file from extracted catalog.
@@ -373,7 +373,7 @@ installation via the installer:
   1. Download the latest version from http://www.netxms.org/download. You will need
      Windows installer netxms-webui-VERSION-x64.exe (e.g.: netxms-webui-4.3.178-x64.exe).
      Due to limitation of Eclipse platform used to build the Management Console,
-     only x64 build is currently available.
+     only x64 build is currently provided.
 
   2. Run the installer package on your server machine. Installation wizard will be
      shown. Follow the prompts. Installer allows to change installation path and port.

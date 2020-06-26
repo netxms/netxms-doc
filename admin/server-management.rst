@@ -56,7 +56,7 @@ There are 4 types of actions, that can be done automatically:
     1. Reset tunnel - close tunnel. It will be automatically reopened again by agent. This process will
        update information on server in case of change on agent.
     2. Generate event - generates event :guilabel:`SYS_UNBOUND_TUNNEL`, that later can be used for
-       administrator notification or any other automatic action(see :ref:`event-processing`).
+       administrator notification or any other automatic action (see :ref:`event-processing`).
     3. Bind tunnel to existing node - will try to find correct node and bind tunnel to it. Node matching rules
        will be described further.
     4. Bind tunnel to existing node or create new node - will try to find correct node and bind tunnel to it.
@@ -177,7 +177,6 @@ Once server certificates are configured and agent is correctly configured (:guil
 parameter set in agentd.conf) requests for agent to server connection will be shown in :guilabel:`Agent Tunnel Manager` view.
 
 .. figure:: _images/tunnel_unbound_node.png
-   :scale: 65%
 
    Agent Tunnel Manager
 
@@ -186,7 +185,6 @@ new one :guilabel:`Create node and bind...`. Once node will be bound - it's stat
 view will be changed to :guilabel:`Bound`.
 
 .. figure:: _images/tunnel_bound_node.png
-   :scale: 65%
 
    Agent Tunnel Manager
 
@@ -200,7 +198,6 @@ These variables are stored in database and can be changed using
 of :file:`nxdbmgr`(example: :code:`nxdbmgr set <name> <value>`).
 
 .. figure:: _images/server_configuration.png
-   :scale: 65%
 
    Server Configuration
 
@@ -254,7 +251,6 @@ It can be used to check debug messages or to execute one of server
 commands like "ldap sync".
 
 .. figure:: _images/server_console.png
-   :scale: 65%
 
 Server commands can be executed also through XMPP. To execute server command
 through XMPP should be fulfill next requirements:

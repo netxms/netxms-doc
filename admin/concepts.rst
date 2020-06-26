@@ -14,14 +14,7 @@ can access collected data using cross-platform Management Console (Rich
 Console), Web Interface (Web console) or Management Console for Android. Rich
 and Web console have almost the same functionality and the same user interface.
 
-.. only:: html
-
   .. figure:: _images/architecture_scheme.png
-
-.. only:: latex
-
-  .. figure:: _images/architecture_scheme.png
-     :scale: 60
 
 .. _concept_object:
 
@@ -307,16 +300,12 @@ important enough to show up as alarm.
 Polling
 =======
 
-For some type of objects |product_name| server start gathering status and configuration information
-as soon as they are added to the system. These object types are: nodes, access points, conditions,
-clusters, business services
-
-
-[zones health check (if >1 proxies in zone)]
-
-
-. This process called *polling*. There are multiple polling
-types, usually performed with different intervals:
+For some type of objects |product_name| server start gathering status and
+configuration information as soon as they are added to the system. These object
+types are: nodes, access points, conditions, clusters, business services, zones
+(if a zone has more then one proxy, proxy health check is being performed).
+This process called *polling*. There are multiple polling types, usually
+performed with different intervals:
 
 +--------------------+----------------------------------------------------------------------------------------------+
 | Type               | Purpose                                                                                      |

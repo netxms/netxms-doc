@@ -327,36 +327,23 @@ Troubleshooting
 
 .. _password-reset:
 
-Reset password for user "admin"
--------------------------------
+Resetting "system" user password
+--------------------------------
 
 .. warning::
 
-   Server ("netxmsd") should be stopped while performing this operation!
+   Server ("netxmsd") should be stopped while performing password reset operation!
 
-Passwords in |product_name| are stored in hashed, not-reversible way, so there are no way to recover it, but it can be reseted.
+Passwords in |product_name| are stored in hashed, not-reversible way, so there
+are no way to recover it, but it can be reset. Use following procedure to reset
+password and unlock account:
 
-.. versionadded:: 2.1-M0
-
-Use following command to reset password and unlock account:
-
-.. code-block:: sh
-
-   nxdbmgr reset-system-account
-
-This operation will unlock "system" user and change it's password to default ("netxms").
-
-.. versionadded:: 1.2.9
-
-.. deprecated:: 2.1-M0
-
-Use following command to reset password and unlock account:
-
-.. code-block:: sh
-
-   nxdbmgr resetadmin
-
-Password for user "admin" will be reset to default password: "netxms".
+ 1. stop netxmsd
+ 2. run "nxdbmgr reset-system-account" to unlock "system" account and change it's password to default ("netxms").
+ 3. start netxmsd
+ 4. login as "system" using password "netxms"
+ 5. In user manager change password for any admin user account
+ 6. login as admin user and disable "system" user account
 
 
 Enable Crash Dump Generation

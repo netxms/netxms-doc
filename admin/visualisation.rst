@@ -231,9 +231,6 @@ This can be used to show object physical please on map or on building plan.
 Examples:
 
 .. figure:: _images/networkmap_geomap.png
-   :scale: 65%
-
-
 
 Dashboards
 ==========
@@ -562,8 +559,6 @@ following:
 This configuration will be rendered into this layout:
 
 .. image:: _images/DashboardComplexLayoutExample.png
-   :scale: 70
-
 
 Dashboard Rotation
 ------------------
@@ -673,7 +668,6 @@ Save current settings as template graph
 ---------------------------------------
 
 .. figure:: _images/save_as_temp_graph.png
-	:scale: 50
 
 Current graph settings can be saved as a template graph for an easy template graph creation. The difference between predefined graphs and template graphs are that template graphs are not configured to view specific DCI`s on a node, instead they are configured to view DCI names that can be found on many nodes (e.g. ``FileSystem.FreePerc(/)``). This allows for the creation of certain graph templates to monitor, for example, disk usage that can be reused on any node to which the appropreate DCI`s are applied on via :ref:`dci-configuration`.
 
@@ -682,7 +676,6 @@ See detailed information on template graphs in the section :ref:`template-graph-
 In the Graph name field of the pop-up save dialog, enter the desired name for the template graph by which you can later identify your it in the :ref:`template-graph-conf` which can be found in :menuselection:`Configuration-->Template Graph Configuration`.
 
 .. figure:: _images/temp_graph_menu.png
-	:scale: 50
 
 Template graphs can be accessed in the :guilabel:`Object Browser` as seen on the screenshot above. When a template graph is created, it will appear in the sub-menus of the nodes found in :guilabel:`Object Browser`, the rest of the settings can be accessed by editing a template graph in the :ref:`template-graph-conf`.
 
@@ -694,19 +687,16 @@ Template Graph Configuration
 Template graphs are used to ease the monitoring of a pre-set list of DCI`s on multiple nodes by adding a list of DCI names to the template source. This allows for the possibility to create templates to monitor specific data on any node to which the appropriate DCI`s are applied on.
 
 .. figure:: _images/temp_graph_conf.png
-	:scale: 50
 
 The :guilabel:`Template Graph Configuration` is used to create and edit template graphs. Properties for already created template graphs can be brought up by double clicking the template graph you wish to edit and new ones can be added by pressing the green cross on the top right or by right clicking and selecting :guilabel:`Create new template graph`.
 
 .. figure:: _images/temp_graph_conf_acl.png
-	:scale: 50
 
 	Name and access rights of a graph
 
 The above property page provides the possibility to configure the name of the template graph and the access rights. The user who has created the template graph will have full access to it even though the username will not show up in the access right list.
 
 .. figure:: _images/temp_graph_conf_gen.png
-	:scale: 50
 
 	General graph properties.
 
@@ -757,7 +747,6 @@ Y Axis Range:
 Adjust the range of the Y axis on the graph.
 
 .. figure:: _images/temp_graph_conf_filter.png
-	:scale: 50
 
 	Template graph filter properties.
 
@@ -766,14 +755,12 @@ It may be necessary to set certain filters for a template graph. This can be use
 More information on filters can be found in :ref:`object_tools_filter`.
 
 .. figure:: _images/temp_graph_conf_source.png
-	:scale: 50
 
 	Template graph sources
 
 There are two options to add sources to the template graph. Sources can be added manually by configuring the Data Source parameters yourself or by importing data source information from DCI`s that have already been applied to other nodes.
 
 .. figure:: _images/temp_graph_conf_modify.png
-	:scale: 50
 
 When adding or editing a source, it is possible to use Java regex in the DCI Name and DCI Description fields. This can be handy when used with the Multiple match option which will use all DCI`s that match the particular regex. The order in which the DCI list is searched is first by DCI Name and then by DCI Description.
 
@@ -810,7 +797,6 @@ Configuration
 DCI summary table can be configured in Configuration -> Summary Table.
 
 .. figure:: _images/configure_dci_summary_table.png
-   :scale: 65%
 
 In general part:
 

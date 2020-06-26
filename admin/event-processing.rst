@@ -201,13 +201,13 @@ mode Terminate can be done only after Resolve state.
 
 
 .. figure:: _images/AlarmStatesTransitionsInvokedByUser-NOTstrict.png
-   :scale: 55%
+   :scale: 60%
 
    Not strict(default)
 
 
 .. figure:: _images/AlarmStatesTransitionsInvokedByUser-strict.png
-   :scale: 55%
+   :scale: 60%
 
    Strict
 
@@ -229,7 +229,6 @@ is chosen, alarm for given severity will come silently.
 
 
 .. figure:: _images/Alarm_Sound_Preferences.png
-   :scale: 65%
 
 Alarm Browser
 -------------
@@ -238,7 +237,6 @@ When an alarm is generated it will appear in the Alarm Browser where information
 alarms can be viewed.
 
 .. figure:: _images/alarm_browser.png
-   :scale: 65%
 
 Alarm Comments
 ~~~~~~~~~~~~~~
@@ -246,12 +244,10 @@ Alarm Comments
 For each alarm can be created comments in "Alarm Details"
 
 .. figure:: _images/alarm_details_comments.png
-   :scale: 65%
 
 or "Alarm Comments" views.
 
 .. figure:: _images/alarm_comments.png
-   :scale: 65%
 
 Comment can be created, edited or deleted. All comments will be deleted after alarm termination.
 
@@ -314,7 +310,6 @@ Alarm categories can be created and configured in the :guilabel:`Alarm Category 
 be found in :menuselection:`Configuration --> Alarm Category Configurator` menu:
 
 .. figure:: _images/Alarm_category_config.png
-   :scale: 65%
 
    Alarm Category Configurator
 
@@ -682,7 +677,7 @@ The following drivers are provided by default with |product_name| installation:
        Set authentication token in notification channel configuration, e.g.: AuthToken=1234567890:jdiAiwdisUsWjvKpDenAlDjuqpx
 
        The bot can:
-       
+
        * Have a private chat with another Telegram user
        * Participate a group
        * Be channel admin

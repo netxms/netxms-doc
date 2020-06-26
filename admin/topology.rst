@@ -13,20 +13,20 @@ layers. All necessary information taken from ARP cache, routing tables, and
 switch forwarding database of managed nodes. Topology data provided by CDP,
 LLDP, and NDP (SONMP) protocols also used in building network model. Having
 network model instantly available allows |product_name| users to perform various
-network topology tasks much faster and easier. 
+network topology tasks much faster and easier.
 
 Requirements to build network topology:
 
- - All network equipment should be registered in |product_name| system 
+ - All network equipment should be registered in |product_name| system
  - Equipment should response to SNMP
  - Equipment should have at least STP
  - There will be more information if equipment will have LLDP or CDP
- 
-Manual topology poll can be started on the network equipment to heave information 
+
+Manual topology poll can be started on the network equipment to heave information
 about information availability.
 
-Based on network topology network correlation is done. Network correlation reduce 
-number of alerts and increase problem resolution speed. 
+Based on network topology network correlation is done. Network correlation reduce
+number of alerts and increase problem resolution speed.
 
 Currently there are 3 states/events regarding connectivity:
 
@@ -35,7 +35,7 @@ Currently there are 3 states/events regarding connectivity:
  - up (SYS_NODE_UP) - when node is reachable
 
 So when node becomes unreachable, either SYS_NODE_DOWN or SYS_NODE_UNREACHABLE event is generated, depending on root cause. But when node became reachable again, SYS_NODE_UP being generated.
- 
+
 How topology information is built
 =================================
 
@@ -51,8 +51,6 @@ search results view will be opened (or updated if already open). Search results
 view looks like this:
 
 .. figure:: _images/Cp_search_results.png
-   :scale: 70
-
 
 Columns have the following meaning:
 

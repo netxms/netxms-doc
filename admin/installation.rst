@@ -448,6 +448,26 @@ required connection credentials: server address, port, user name, password.
   User that is used for connection should have :guilabel:`Login as mobile device`
   user right.
 
+Agent
+-----
+
+To install Android agent download netxms-mobile-agent-VERSION.apk (example:
+netxms-mobile-agent-3.4.178.apk) file from http://www.netxms.org/download page.
+Check that installation of applications from unknown sources is allowed in security
+settings of your phone. Run this installer on required device.
+
+After agent is installed go to settings and activate agent. After agent activation
+several parameters should be set: server address, port, user name, password. They can be
+found in under main menu, parameters section.
+
+.. note::
+  User that is used for connection should have :guilabel:`Login as mobile device`
+  user right.
+
+  Mobile device should be manually added to server. Find more information see:
+  :ref:`monitoring-mobile-device`.
+
+
 .. _install_from_sources:
 
 Installing from sources

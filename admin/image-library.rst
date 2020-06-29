@@ -5,22 +5,12 @@
 Image library
 #############
 
-
-Introduction
-============
-
-All images used on map should be first uploaded to Image Library. It can be done through
-Image Library View.
-
-Image Library View
-==================
-
-There is possible to upload, delete and update images. They can be organized by
-different categories. View can be zoomed in or zoomed out (library zoom is saved).
+All images used on maps or as rack, chassis or chassis module image should be
+uploaded to Image Library first. It is possible to upload, delete and update
+images. They can be organized by categories.
 
 
-.. figure:: _images/image_view.png
+.. figure:: _images/image_library.png
 
 Tips:
-  - Images on map are displayed full size.
-  - Size of images predefined by |product_name| is 48x48
+  - Images on maps are displayed without scaling.

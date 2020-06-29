@@ -213,15 +213,51 @@ of this device. From the menu can be selected the period to show on history map.
 :ref:`Data Collection Configuration view<dci-configuration>`, that is used
 to configure collected :term:`metrics <Metric>` from node.
 
-Chassis
--------
-
 Rack
 ----
 
-Rack is an object that should be used to visualize server room organization in |product_name|. Once rack object is created nodes can be assigned to rack, by selecting
-rack object, orientation, position, high and front, rear images for each Node,
-Chassis objects in properties of the object.
+Rack is an object that visualizes server room organization in |product_name|.
+Node and chassis objects can be assigned to a rack in node properties,
+specifying position in the rack, height (number of occupied rack units),
+orientation (does it occupy full depth of the rack, or only present on front or
+back side of the rack).  Front and/or rear images can be selected from
+:ref:`image-library`.
+
+Rack visualization is available in Object Detail -> Rack view. Left click on a
+rack unit display a pop-up with brief information about the node or chassis.
+Right click will display node or chassis context menu. Double click on a chassis
+will open Chassis View in a separate tab.
+
+Status of rack units is denoted with color rectangle on the left edge of the rack.
+
+Chassis
+-------
+
+Chassis is an object visualizing a rack-mount chassis that have plug-in modules.
+Chassis visualization is available in Object Detail -> Chassis view.
+
+.. figure:: _images/chassis_example.png
+
+Each node that represents chassis module can have an image that will be
+displayed atop of chassis image. Status of each node is denoted with color
+rectangle in the upper left corner or it's image. Left click on node will
+display a pop-up with brief information about the node. Right click will
+display node context menu.
+
+.. figure:: _images/chassis_module_image_properties.png
+
+It is possible to configure the size of module's image and it's position on
+chassis image. Vertical size and position could be specified in mm or rack units
+(RU), while horizontal - in mm or horizontal pitch units (HP). Size calculation
+assumes that 1U chassis has 45mm height and 483mm width (including mounting
+brackets). Position (0, 0) is in the upper left corner.
+
+You can use a graphic editor, e.g. Gimp to find position values in mm. Open
+chassis image in Gimp and set  image width to 483 mm using Image -> Scale image.
+Now in the bottom left corner you can see current coordinates of mouse cursor in
+mm.
+
+Chassis module images should be uploaded using Image Library :ref:`image-library`.
 
 Cluster
 -------

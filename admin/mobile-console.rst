@@ -90,9 +90,12 @@ following the same symbology used on the desktop console. Clicking on a containe
 will show the items inside, continuing to click up to an object will show a set of
 swipeable pages:
 
-  * :guilabel:`Overview`: here are presented the main info associated to this node, such as the name, the primary IP, the status, etc.
-  * :guilabel:`Alarms`: here are presented the list of pending alarms (if any) for this node, with the possibility to manage them with the following commands:
+  * :guilabel:`Overview`: here are presented the main info associated to this node,
+    such as the name, the primary IP, the status, etc.
+  * :guilabel:`Alarms`: here are presented the list of pending alarms (if any)
+    for this node, with the possibility to manage them with the following commands:
       * :guilabel:`Actions`:
+        .. empty line needed, otherwise above label becomes bold ..
           * :guilabel:`Acknowledge`: acknowledge the alarm.
           * :guilabel:`Sticky acknowledge`: sticky acknowledge the alarm.
           * :guilabel:`Resolve:` resolve the alarm.
@@ -101,7 +104,8 @@ swipeable pages:
             for the node that generated the alarm.
       * :guilabel:`Select all`: select all the alarms from the list
       * :guilabel:`Unselect all`: clear any selection of alarms from the list
-  * :guilabel:`Last values`: here are presented the DCI collected for this node, as well as the possibility to draw the following graphics (for one or more values):
+  * :guilabel:`Last values`: here are presented the DCI collected for this node,
+    as well as the possibility to draw the following graphics (for one or more values):
       * :guilabel:`Last half hour`: draw one or more line graphs for the last half hour collected values
       * :guilabel:`Last hour`: draw one or more line graphs for the last hour collected values
       * :guilabel:`Last two hours`: draw one or more line graphs for the last two hours collected values
@@ -110,10 +114,12 @@ swipeable pages:
       * :guilabel:`Last week`: draw one or more line graphs for the last week collected values
       * :guilabel:`Bar chart`: draw a bar chart with the last collected value
       * :guilabel:`Pie chart`: draw a pie chart with the last collected value
-  * :guilabel:`Interfaces`: here are presented all the interfaces associated to this node. For each interface it is possible to instruct the following commands:
+  * :guilabel:`Interfaces`: here are presented all the interfaces associated to this node.
+    For each interface it is possible to instruct the following commands:
       * :guilabel:`Manage`: interface will be put in manage state
       * :guilabel:`Unmanage`: interface will be put in unmanaged state
-      * :guilabel:`Change expected state`: change the expected interface state, possible values:
+      * :guilabel:`Change expected state`:
+        change the expected interface state, possible values:
           * :guilabel:`UP`: interface expected state will be put in UP state
           * :guilabel:`DOWN`: interface expected state will be put in DOWN state
           * :guilabel:`IGNORE`: interface expected state will be put in IGNORE state

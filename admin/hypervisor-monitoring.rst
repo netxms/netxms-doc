@@ -5,7 +5,11 @@ Hypervisor monitoring
 =====================
 
 |product_name| has subagents that allow to monitor hypervisors. This subagent is build using
-libvirt functionality. 
+libvirt functionality. Due to the fact that libvirt is poorly supported on Windows platforms,
+vmgr subagent is not provided on Windows.
+
+When installing |product_name| from packages, vmgr subagent is provided as a separate package named netxms-agent-vmgr.
+If building from source, ./configure should be ran with --with-vmgr. 
 
 Configuration
 =============
@@ -13,7 +17,7 @@ Configuration
 Configuration is separated into two parts: **vmgr** section defines all monitored hosts, and each host configuration
 is defined in separate section for each host.
 
-Each host configuration should contain connection URL. Login and password parameters are optional. URL creation 
+Each host configuration should contain connection URL. Login and password parameters are optional. URL creation
 rules for each vitalization solution type can be found `in libvirt documentation: http://libvirt.org/drivers.html <http://libvirt.org/drivers.html>`_.
 
 
@@ -31,7 +35,7 @@ and **test** connection details are described in section **vmgr:test**.
    [vmgr]
    host = localESX1
    host = test
-   
+
    [vmgr:localESX1]
    Url = esx://root@10.5.0.21/?no_verify=1
    Login = root
@@ -70,7 +74,7 @@ Parameters
      - String
      - Host CPU model name
    * - VMGR.Host.CPU.Frequency(hostName)
-     - Unsigned integer 
+     - Unsigned integer
      - Host CPU frequency
    * - VMGR.Host.ConnectionType(hostName)
      - String
@@ -93,7 +97,7 @@ Parameters
    * - VMGR.VM.CPU.Time(hostName,vmName)
      - Unsigned integer 64
      - Maximum VM CPU time
-     
+
 Tables
 ------
 
@@ -126,7 +130,7 @@ Lists
 .. list-table::
    :header-rows: 1
    :widths: 50 200
-   
+
    * - Metric
      - Description
    * - VMGR.VMHost

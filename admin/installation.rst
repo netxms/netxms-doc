@@ -675,6 +675,16 @@ PostgreSQL
   createuser -P netxms
   createdb -O netxms netxms
 
+If TimescaleDB extension is about to be used, it should be added to the newly created database:
+
+.. code-block:: sh
+
+  psql netxms
+  CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;
+  \q
+
+Configuration file example:
+
 .. code-block:: cfg
 
   DBDriver = pgsql.ddr
@@ -690,6 +700,9 @@ MySQL
 
   echo "CREATE DATABASE netxms;" | mysql -u root -p
   echo "GRANT ALL on netxms.* to 'netxms'@'localhost' IDENTIFIED BY 'PaSsWd';" | mysql -u root -p
+
+
+Configuration file example:
 
 .. code-block:: cfg
 
@@ -712,6 +725,8 @@ Oracle
   ALTER USER netxms QUOTA UNLIMITED ON USERS;
   -- ROLES
   GRANT CREATE SESSION, CREATE TABLE, CREATE PROCEDURE TO netxms;
+
+Configuration file example:
 
 .. code-block:: cfg
 

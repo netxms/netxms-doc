@@ -1244,3 +1244,387 @@ Provided parameters
      - threads created
    * - MySQL.Threads.Running(*id*)
      - threads running
+
+
+.. _pgsql-subagent:
+
+PostgreSQL
+==========
+
+|product_name| subagent for PostgreSQL monitoring. Monitors one or more instances of PostgeSQL servers and
+reports various database-related parameters.
+
+PostgreSQL subagent requires PostgreSQL driver to be available in the system.
+
+Pre-requisites
+--------------
+
+A PostgreSQL user with **CONNECT** right to al least one database on the server.
+
+If the **PostgreSQL.DatabaseSize** parameter should be monitored the user must have the **CONNECT** right to other databases on the server too.
+
+
+Starting from the PostgreSQL version 10, the user must have the he role **pg_monitor** assigned.
+
+Required role can be assigned to user with the following query:
+
+.. code-block:: sql
+
+    GRANT  pg_monitor TO user;
+
+Where *user* is the user configured in PostgreSQL subagent for database access.
+
+
+Configuration
+-------------
+
+You can specify one or multiple PostgreSQL server instances in the PostgreSQL section. In case of single server
+definition simply set all required parameters under ``[pgsql]`` section. In multi server
+configuration define each server instance under ``pgsql/servers/<name>`` section with unique
+``<name>`` for each server. If no id provided ``<name>`` of the section will be used as a server id.
+
+It is not necessary to configure connections to more than one database on the same PostgreSQL server instance.
+
+Each server definition supports the following parameters:
+
+.. list-table::
+   :widths: 50 200 200
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+     - Default value
+   * - Id
+     - Server identifier. It will be used to address this server connection in parameters.
+     - localdb - for single server definition
+       
+       last part of section name - for multi server definition
+   * - Database
+     - Maintenance database name. This is a name of the database on the server the subagent is connected to.
+     - postgres
+   * - Server
+     - Name or IP of the PostgreSQL server.
+
+       If the sever uses differnt than default port (5432) the *:port* must be added to the server name or IP.
+     - 127.0.0.1
+   * - ConnectionTTL
+     - Time in seconds. When this time gets elapsed, connection to the DB is closed and reopened again.
+     - 3600
+   * - Login
+     - User name for connecting to database.
+     - netxms
+   * - Password
+     - Database user password.
+     
+       When using INI format, remember to enclose password in double quotes ("password") if it contains # character.
+       
+       This parameter automatically detects and accepts password encrypted with :ref:`nxencpasswd-tools-label` tool.
+     -
+
+
+Single server configuration example:
+
+.. code-block:: cfg
+
+    Subagent=pgsql.nsm
+
+    [pgsql]
+    Id=db1
+    Database = database1
+    Login = user
+    Password = password
+
+
+Multi server configuration example:
+
+.. code-block:: cfg
+
+    Subagent=pgsql.nsm
+
+    [pgsql/servers/mynetxms]
+    ID=monitor
+    Database = netxms
+    Login = user
+    Password = password
+    Server = netxms.demo
+
+
+    [pgsql/servers/local]
+    Login = user
+    Password = encPassword
+
+
+Parameters
+----------
+
+When loaded, PostgreSQL subagent adds two types of parameters to the agent.
+
+Database server parameters  are common for all databases on the server. These parameters require one argument which is server id from the configuration.
+
+Database parameters  are independent for each database on the server. These parameters require to arguments. The first one is server id from the configuration the second one is name of the database.
+If the second argument is missing the name of the maintenance database from the configuration is used.
+
+Alternatively, these two arguments can be specified as one argument in following format: *datanase_name@server_id*. This format is returned by the PostgreSQL.AllDatabases list.
+
+Following table shows the database server parameters:
+
+.. list-table::
+   :widths: 50 20 100
+   :header-rows: 1
+
+   * - 	Parameter	
+     - 	Type
+     - 	Description
+   * - 	PostgreSQL.IsReachable(*id*)	
+     - 	String	
+     - 	Is database server instance reachable
+   * - 	PostgreSQL.Version(*id*)	
+     - 	String	
+     - 	Database server version
+   * - 	PostgreSQL.Archiver.ArchivedCount(*id*)	
+     - 	Integer 64-bit	
+     - 	Number of WAL files that have been successfully archived
+   * - 	PostgreSQL.Archiver.FailedCount(*id*)	
+     - 	Integer 64-bit	
+     - 	Number of failed attempts for archiving WAL files
+   * - 	PostgreSQL.Archiver.IsArchiving(*id*)	
+     - 	String	
+     - 	Is archiving running
+   * - 	PostgreSQL.Archiver.LastArchivedAge(*id*)	
+     - 	Integer	
+     - 	Age of the last successful archive operation
+   * - 	PostgreSQL.Archiver.LastArchivedWAL(*id*)	
+     - 	String	
+     - 	Name of the last WAL file successfully archived
+   * - 	PostgreSQL.Archiver.LastFailedAge(*id*)	
+     - 	Integer	
+     - 	Age of the last failed archival operation
+   * - 	PostgreSQL.Archiver.LastFailedWAL(*id*)	
+     - 	String	
+     - 	Name of the WAL file of the last failed archival operation
+   * - 	PostgreSQL.BGWriter.BuffersAlloc(*id*)	
+     - 	Integer 64-bit	
+     - 	Cumulative number of buffers allocated
+   * - 	PostgreSQL.BGWriter.BuffersBackend(*id*)	
+     - 	Integer 64-bit	
+     - 	Cumulative number of buffers written directly by a backend
+   * - 	PostgreSQL.BGWriter.BuffersBackendFsync(*id*)	
+     - 	Integer 64-bit	
+     - 	Cumulative number of times a backend had to execute its own fsync call
+   * - 	PostgreSQL.BGWriter.BuffersClean(*id*)	
+     - 	Integer 64-bit	
+     - 	Cumulative number of buffers written by the background writer
+   * - 	PostgreSQL.BGWriter.BuffersCheckpoint(*id*)	
+     - 	Integer 64-bit	
+     - 	Cumulative number of buffers written during checkpoints
+   * - 	PostgreSQL.BGWriter.CheckpointsReq(*id*)	
+     - 	Integer 64-bit	
+     - 	Cumulative number of requested checkpoints that have been performed
+   * - 	PostgreSQL.BGWriter.CheckpointsTimed(*id*)	
+     - 	Integer 64-bit	
+     - 	Cumulative number of scheduled checkpoints that have been performed
+   * - 	PostgreSQL.BGWriter.CheckpointSyncTime(*id*)	
+     - 	Float	
+     - 	Total amount of time that has been spent in the portion of checkpoint processing where files are synchronized to disk, in milliseconds
+   * - 	PostgreSQL.BGWriter.CheckpointWriteTime(*id*)	
+     - 	Float	
+     - 	Total amount of time that has been spent in the portion of checkpoint processing where files are written to disk, in milliseconds
+   * - 	PostgreSQL.BGWriter.MaxWrittenClean(*id*)	
+     - 	Integer 64-bit	
+     - 	Cumulative number of times the background writer stopped a cleaning scan because it had written too many buffers
+   * - 	PostgreSQL.GlobalConnections.AutovacuumMax(*id*)	
+     - 	Integer	
+     - 	Maximal number of autovacuum backends
+   * - 	PostgreSQL.GlobalConnections.Total(*id*)	
+     - 	Integer	
+     - 	Total number of connections
+   * - 	PostgreSQL.GlobalConnections.TotalMax(*id*)	
+     - 	Integer	
+     - 	Maximal number of connections
+   * - 	PostgreSQL.GlobalConnections.TotalPct(*id*)	
+     - 	Integer	
+     - 	Used connections (%)
+   * - 	PostgreSQL.Replication.InRecovery(*id*)	
+     - 	String	
+     - 	Is recovery in progress
+   * - 	PostgreSQL.Replication.IsReceiver(*id*)	
+     - 	String	
+     - 	Is the server WAL receiver
+   * - 	PostgreSQL.Replication.Lag(*id*)	
+     - 	Integer	
+     - 	Replication lag in seconds
+   * - 	PostgreSQL.Replication.LagBytes(*id*)	
+     - 	Float	
+     - 	Replication lag in bytes
+   * - 	PostgreSQL.Replication.Stanby(*id*)	
+     - 	Integer 64-bit	
+     - 	Number of WAL senders
+   * - 	PostgreSQL.Replication.WALFiles(*id*)	
+     - 	Integer 64-bit	
+     - 	Number of the WAL files
+   * - 	PostgreSQL.Replication.WALSize(*id*)	
+     - 	Float	
+     - 	Size of the WAL files
+
+Following table shows the database parameters:
+
+.. list-table::
+   :widths: 50 20 100
+   :header-rows: 1
+
+   * - 	Parameter	
+     - 	Type
+     - 	Description
+   * - 	PostgreSQL.DBConnections.Active(*id*[, *database*])	
+     - 	Integer	
+     - 	Number of backends for this database executing a query
+   * - 	PostgreSQL.DBConnections.Autovacuum(*id*[, *database*])	
+     - 	Integer	
+     - 	Number of autovacuum backends for this database
+   * - 	PostgreSQL.DBConnections.FastpathFunctionCall(*id*[, *database*])	
+     - 	Integer	
+     - 	Number of backends for this database executing a fast-path function
+   * - 	PostgreSQL.DBConnections.Idle(*id*[, *database*])	
+     - 	Integer	
+     - 	Number of backends for this database waiting for a new client command
+   * - 	PostgreSQL.DBConnections.IdleInTransaction(*id*[, *database*])	
+     - 	Integer	
+     - 	Number of backends for this database in a transaction, but is not currently executing a query
+   * - 	PostgreSQL.DBConnections.IdleInTransactionAborted(*id*[, *database*])	
+     - 	Integer	
+     - 	Number of backends for this database in a transaction, but is not currently executing a query and one of the statements in the transaction caused an error
+   * - 	PostgreSQL.DBConnections.OldestXID(*id*[, *database*])	
+     - 	Integer	
+     - 	Age of the oldest XID
+   * - 	PostgreSQL.DBConnections.Total(*id*[, *database*])	
+     - 	Integer	
+     - 	Total number of backends for connections to this database
+   * - 	PostgreSQL.DBConnections.Waiting(*id*[, *database*])	
+     - 	Integer	
+     - 	Number of waiting backends for this database
+   * - 	PostgreSQL.Locks.AccessExclusive(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Number of AccessExclusive locks for this database
+   * - 	PostgreSQL.Locks.AccessShare(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Number of AccessShare locks for this database
+   * - 	PostgreSQL.Locks.Exclusive(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Number of Exclusive locks for this database
+   * - 	PostgreSQL.Locks.RowExclusive(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Number of RowExclusive locks for this database
+   * - 	PostgreSQL.Locks.RowShare(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Number of RowShare locks for this database
+   * - 	PostgreSQL.Locks.Share(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Number of Share locks for this database
+   * - 	PostgreSQL.Locks.ShareRowExclusive(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Number of ShareRowExclusive locks for this database
+   * - 	PostgreSQL.Locks.ShareUpdateExclusive(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Number of ShareUpdateExclusive locks for this database
+   * - 	PostgreSQL.Locks.Total(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Total number of locks for this database
+   * - 	PostgreSQL.Stats.BlkWriteTime(*id*[, *database*])	
+     - 	Float	
+     - 	Cumulative time spent writing data file blocks by backends in this database, in milliseconds
+   * - 	PostgreSQL.Stats.BlockReadTime(*id*[, *database*])	
+     - 	Float	
+     - 	Cumulative time spent reading data file blocks by backends in this database, in milliseconds
+   * - 	PostgreSQL.Stats.BlocksRead(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Cumulative number of disk blocks read in this database
+   * - 	PostgreSQL.Stats.BloksHit(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Cumulative number of times disk blocks were found already in the buffer cache
+   * - 	PostgreSQL.Stats.CacheHitRatio(*id*[, *database*])	
+     - 	Float	
+     - 	Query cache hit ratio (%)
+   * - 	PostgreSQL.Stats.Conflicts(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Cumulative number of queries canceled due to conflicts with recovery in this database (stanby servers only)
+   * - 	PostgreSQL.Stats.DatabaseSize(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Disk space used by the database
+   * - 	PostgreSQL.Stats.Deadlocks(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Cumulative number of deadlocks detected in this database
+   * - 	PostgreSQL.Stats.ChecksumFailures(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Cumulative number of data page checksum failures detected in this database
+   * - 	PostgreSQL.Stats.NumBackends(*id*[, *database*])	
+     - 	Integer	
+     - 	Number of backends currently connected to this database
+   * - 	PostgreSQL.Stats.RowsDeleted(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Cumulative number of rows deleted by queries in this database
+   * - 	PostgreSQL.Stats.RowsFetched(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Cumulative number of rows fetched by queries in this database
+   * - 	PostgreSQL.Stats.RowsInserted(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Cumulative number of rows inserted by queries in this database
+   * - 	PostgreSQL.Stats.RowsReturned(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Cumulative number of rows returned by queries in this database
+   * - 	PostgreSQL.Stats.RowsUpdated(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Cumulative number of rows updated by queries in this database
+   * - 	PostgreSQL.Stats.TempBytes(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Total amount of data written to temporary files by queries in this database
+   * - 	PostgreSQL.Stats.TempFiles(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Cumulative number of temporary files created by queries in this database
+   * - 	PostgreSQL.Stats.TransactionCommits(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Cumulative number of transactions in this database that have been committed
+   * - 	PostgreSQL.Stats.TransactionRollbacks(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Cumulative number of transactions in this database that have been rolled back
+   * - 	PostgreSQL.Transactions.Prepared(*id*[, *database*])	
+     - 	Integer 64-bit	
+     - 	Number of prepared transactions for this database
+  
+Lists
+-----
+
+When loaded, PostgreSQL subagent adds the following lists to agent:
+
+.. list-table::
+   :widths: 50 100
+   :header-rows: 1
+
+   * - 	List	
+     - 	Description
+   * - 	PostgreSQL.DBServers	
+     - 	All configured servers (server ids).
+   * - 	PostgreSQL.Databases(*id*)	
+     - 	All databases on server identified by *id*.
+   * - 	PostgreSQL.AllDatabases	
+     - 	All databases on configured servers. The format of the list items is *datanase_name@server_id*.
+   * - 	PostgreSQL.DataTags(*id*)	
+     - 	All data tags for server identified by *id*. Used only for internal diagnostics.  
+
+
+Tables
+------
+
+When loaded, PostgreSQL subagent adds the following tables to agent:
+
+.. list-table::
+   :widths: 50 100
+   :header-rows: 1
+
+   * - 	Table	
+     - 	Description
+   * - 	PostgreSQL.Backends(*id*)	
+     - 	Connection backends on server identified by *id*.
+   * - 	PostgreSQL.Locks(*id*)	
+     - 	Locks on server identified by *id*.
+   * - 	PostgreSQL.PrepparedTransactions(*id*)	
+     - 	Prepared transactions on server identified by *id*.

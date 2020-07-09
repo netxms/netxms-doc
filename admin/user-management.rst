@@ -349,6 +349,20 @@ Next two fields in combinations:
 
    Certificate mapping data: if no mapping data set, then linking certificate CN = user name, otherwise CN = mapping data
 
+
+CAS authentication
+------------------
+
+Central Authentication Service (CAS) single sign-on is supported in web
+interface only.  The following server configuration parameters control CAS
+operation: CAS.AllowedProxies, CAS.Host, CAS.Port, CAS.Service,
+CAS.TrustedCACert, CAS.ValidateURL. See :ref:`server_configuration_parameters`
+for the expanation of mentioned parameter meaning.
+
+Changes to these configuration variables becomes effective immediately and does
+not require |product_name| server restart.
+
+
 .. _ldap:
 
 Integration with LDAP

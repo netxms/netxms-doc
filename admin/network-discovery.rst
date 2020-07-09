@@ -15,20 +15,22 @@ information about new hosts and devices obtained from :term:`ARP` tables and
 routing tables of already known devices. |product_name| starts with it's own
 :term:`ARP` cache and routing table.
 
-In active discovery mode, |product_name| server
-will send an :term:`ICMP` echo requests to all IP addresses in given range, and
-consider each responding address for adding to database. If zoning is used, server
-sends echo request only in zone 0, in other zones requests are sent by proxies.
-For each new device found |product_name| server tries to gather additional information using :term:`SNMP`
-and |product_name| agent, and then adds it to database. By default |product_name| server will
-add all discovered devices to database, but you can limit it by using discovery
-filters. Default :term:`SNMP` credentials can be set in :ref:`default_snmp`.
+In active discovery mode, |product_name| server will send an :term:`ICMP` echo
+requests to all IP addresses in given range, and consider each responding
+address for adding to database. If zoning is used, server sends echo request
+only in zone 0, in other zones requests are sent by proxies. For each new device
+found |product_name| server tries to gather additional information using
+:term:`SNMP` and |product_name| agent, and then adds it to database. By default
+|product_name| server will add all discovered devices to database, but you can
+limit it by using discovery filters. Default :term:`SNMP` credentials can be set
+in :ref:`default_snmp`.
 
-Active discovery runs every 2 hours and passive every 15 minutes. These values
-can be change in ``ActiveDiscoveryInterval`` and ``DiscoveryPollingInterval``
-server variables. Default number of discovery poller's threads is 1, this
-value can be change by ``NumberOfDiscoveryPollers`` parameter.
-More information about server variables can be found :ref:`there <server_configuration_parameters>`.
+Default intervals are 2 hours for active discovery and 15 minutes for passive
+discovery. These values can be changed in Network Discovery configuration.
+Number of discovery  poller threads changes dynamically and is defined by server
+configuration parameters  ``ThreadPool.Discovery.BaseSize`` and
+``ThreadPool.Discovery.MaxSize``.  More information about server configuration
+parameters can be found :ref:`here <server_configuration_parameters>`.
 
 Configuring Network Discovery
 =============================
@@ -44,6 +46,13 @@ General
 
 In this section, you can choose network discovery mode, chose if source node of
 :term:`SNMP Trap` or syslog source address should be used for discovery.
+
+Schedule
+--------
+
+For passive discovery interval (in seconds) is selected.
+For active discovery you cen choose either an interval (in seconds) or cron
+format schedule (see :ref:`here <cron_format>` for more details).
 
 Filter
 ------

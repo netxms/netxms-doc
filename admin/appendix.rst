@@ -491,34 +491,41 @@ These parameters can be changed in
     - Description
     - Default Value
     - Require Restart
-  * - ActiveDiscoveryInterval
-    - Interval in seconds between active network discovery polls.
-    - 7200
-    - Yes
-  * - ActiveNetworkDiscovery
-    - Enable (1) or disable (0) active network discovery.
-      **This setting is change by Network Discovery GUI**
-    - 0
-    - Yes
   * - AgentCommandTimeout
-    - Timeout in milliseconds for commands sent to agent. If agent did not respond to command within given number of seconds, command considered as failed.
+    - Timeout in milliseconds for commands sent to agent. If agent did not respond to command within this time, command considered as failed.
     - 2000
     - Yes
-  * - AgentDefaultSharedSecret
-    - String that will be used as a shared secret in case if agent will require authentication.
-    - netxms
+  * - AgentTunnels.ListenPort
+    - TCP port number to listen on for incoming agent tunnel connections
+    - 4703
+    - Yes
+  * - AgentTunnels.NewNodesContainer
+    - Name of the container where nodes that were created automatically for unbound tunnels will be placed. If several containers with that name are present, it is not guaranteed, which container will be selected. If empty, such nodes will be created in infrastructure services root.
+    -
+    - No
+  * - AgentTunnels.UnboundTunnelTimeout
+    - Unbound agent tunnels inactivity timeout. If tunnel has not been bound or closed after that timeout, action defined by AgentTunnels.UnboundTunnelTimeoutAction parameter will be taken.
+    - 3600
+    - No
+  * - AgentTunnels.UnboundTunnelTimeoutAction
+    - Action to be taken when unbound agent tunnel timeout expires.
+    - Reset Tunnel
     - No
   * - AgentUpgradeWaitTime
     - Maximum wait time in seconds for agent restart after upgrade. If agent cannot be contacted after this time period, upgrade process is considered as failed.
     - 600
     - No
   * - AlarmHistoryRetentionTime
-    - A number of days the server keeps an alarm history in the database.
+    - Number of days the server keeps alarm history in the database.
     - 180
     - No
-  * - AlarmListDisplayLimit
-    - Maximum alarm count that will be displayed on :guilabel:`Alarm Browser` page. Alarms that exceed this count will not be shown.
-    - 4096
+  * - Alarms.IgnoreHelpdeskState
+    - If set, alarm helpdesk state will be ignored when resolving or terminating.
+    - 0
+    - No
+  * - Alarms.ResolveExpirationTime
+    - Expiration time (in seconds) for resolved alarms. If set to non-zero, resolved and untouched alarms will be terminated automatically after given timeout.
+    - 0
     - No
   * - AlarmSummaryEmailRecipients
     - A semicolon separated list of e-mail addresses to which the alarm summary will be sent.
@@ -528,30 +535,28 @@ These parameters can be changed in
     - Schedule for sending alarm summary e-mails in cron format. See :ref:`cron_format` for supported cron format options.
     - 0 0 * * *
     - No
-  * - AllowDirectSMS
-    - Allow (1) or disallow (0) sending of SMS via |product_name| server using nxsms utility.
+  * - AllowDirectNotifications
+    - Allow (1) or disallow (0) sending of notification via NetXMS server using nxnotify utility.
     - 0
     - No
   * - AllowedCiphers
-    - A bitmask for encryption algorithms allowed in the server(sum the values to allow multiple algorithms at once):
+    - A bitmask for encryption algorithms allowed in the server
+      (sum of the values to allow multiple algorithms at once):
         - 1 - AES256
         - 2 - Blowfish
         - 4 - IDEA
         - 8 - 3DES
         - 16 - AES128
-    - 31
+        - 32 - Blowfish-128
+    - 63
     - Yes
   * - AllowTrapVarbindsConversion
-    -
+    - Allows/disallows conversion of SNMP trap OCTET STRING varbinds into hex strings if they contain non-printable characters.
     - 1
     - Yes
-  * - AnonymousFileAccess
-    -
-    - 0
-    - No
   * - ApplyDCIFromTemplateToDisabledDCI
     - Set to 1 to apply all DCIs from a template to the node, including disabled ones.
-    - 0
+    - 1
     - Yes
   * - AuditLogRetentionTime
     - Retention time in days for the records in audit log. All records older than specified will be deleted by housekeeping process.
@@ -570,56 +575,132 @@ These parameters can be changed in
     - 1000
     - Yes
   * - BlockInactiveUserAccounts
-    -
+    - Inactivity time after which user account will be blocked (0 to disable blocking).
     - 0
     - No
-  * - CapabilityExpirationTime
+  * - CAS.AllowedProxies
+    - Comma-separated list of allowed CAS (Central Authentication Service) proxies.
     -
-    - 604800
     - No
+  * - CAS.Host
+    - CAS server DNS name or IP address.
+    - localhost
+    - No
+  * - CAS.Port
+    - CAS server TCP port number.
+    - 8443
+    - No
+  * - CAS.Service
+    - Service to validate (usually NetXMS web UI URL).
+    - https://127.0.0.1/nxmc
+    - No
+  * - CAS.TrustedCACert
+    - File system path to CAS server trusted CA certificate.
+    -
+    - No
+  * - CAS.ValidateURL
+    - URL for service validation on CAS server.
+    - /cas/serviceValidate
+    - No
+  * - CaseInsensitiveLoginNames
+    - Enable (1) or disable (0) case insensitive login names.
+    - 0
+    - Yes
   * - CheckTrustedNodes
     - Enable (1) or disable (0) checking of trusted nodes list for cross-node data collection (using Proxy Node DCI attribute).
     - 1
     - Yes
+  * - Client.AlarmList.DisplayLimit
+    - Maximum alarm count that will be displayed on :guilabel:`Alarm Browser` page. Alarms that exceed this count will not be shown.
+    - 4096
+    - No
+  * - Client.ObjectBrowser.AutoApplyFilter
+    - Enable (1) or disable (0) object browser''s filter applying as user types (if disabled, user has to press ENTER to apply filter).
+    - 1
+    - No
+  * - Client.ObjectBrowser.FilterDelay
+    - Delay (in milliseconds) between typing in object browser''s filter and applying it to object tree.
+    - 300
+    - No
+  * - Client.ObjectBrowser.MinFilterStringLength
+    - Minimal length of filter string in object browser required for automatic apply.
+    - 1
+    - No
   * - ClientListenerPort
     - The server port for incoming client connections (such as management console).
     - 4701
     - Yes
+  * - ClusterContainerAutoBind
+    - Enable (1) or disable (0)  container auto binding for clusters.
+    - 0
+    - No
+  * - ClusterTemplateAutoApply
+    - Enable (1) or disable (0) template auto apply for clusters.
+    - 0
+    - No
   * - ConditionPollingInterval
     - Interval in seconds between polling (re-evaluating) of condition objects.
     - 60
     - Yes
   * - ConfigurationPollingInterval
-    - Interval in seconds between configuration polls.
+    - Interval in seconds between node configuration polls.
     - 3600
     - Yes
-  * - ConnectionPoolBaseSize
-    - A number of connections to the database created on the server startup.
-    - 5
+  * - DashboardDataExportEnableInterpolation
+    - Enable (1) or disable (0) data interpolation in dashboard data export.
+    - 1
     - Yes
-  * - ConnectionPoolCooldownTime
+  * - DataCollection.OnDCIDelete.TerminateRelatedAlarms
+    - Enable (1) or disable (0) automatic termination of related alarms when data collection item is deleted.
+    - 1
+    - No
+  * - DataCollection.ScriptErrorReportInterval
+    - Minimal interval (seconds) between reporting errors in data collection related script.
+    - 86400
+    - No
+  * - DataCollection.StartupDelay
+    - Enable/disable randomized data collection delays on server startup for more even server load distribution.
+    - 0
+    - Yes
+  * - DBConnectionPoolBaseSize
+    - Number of connections to the database created on the server startup.
+    - 10
+    - Yes
+  * - DBConnectionPoolCooldownTime
     -
     - 300
     - Yes
-  * - ConnectionPoolMaxSize
-    - A maximum number of connections in the connection pool.
-    - 20
+  * - DBConnectionPoolMaxLifetime
+    -
+    - 14400
     - Yes
-  * - DBLockInfo
-    -
-    -
-    -
-  * - DBLockPID
-    -
-    -
-    -
-  * - DBLockStatus
-    -
-    -
-    -
-  * - DefaultCommunityString
-    - System-wide default SNMP community string.
-    - public
+  * - DBConnectionPoolMaxSize
+    - Maximum number of connections in the connection pool.
+    - 30
+    - Yes
+  * - DBWriter.DataQueues
+    - Number of queues for DCI data writer.
+    - 1
+    - Yes
+  * - DBWriter.MaxQueueSize
+    - Maximum size for DCI data writer queue (0 to disable size limit). If writer queue size grows above that threshold any new data will be dropped until queue size drops below threshold again.
+    - 0
+    - No
+  * - DBWriter.MaxRecordsPerStatement
+    - Maximum number of records per one SQL statement for delayed database writes
+    - 100
+    - Yes
+  * - DBWriter.MaxRecordsPerTransaction
+    - Maximum number of records per one transaction for delayed database writes
+    - 1000
+    - Yes
+  * - DefaultAgentCacheMode
+    - Default agent cache mode
+    - Off
+    - Yes
+  * - DefaultAgentProtocolCompressionMode
+    - Default agent protocol compression mode
+    - Enabled
     - No
   * - DefaultConsoleDateFormat
     - Default format to display date in console GUI.
@@ -633,32 +714,40 @@ These parameters can be changed in
     - Default format to display time in a long way in console GUI.
     - HH:mm:ss
     - No
-  * - DefaultDciPollingInterval
+  * - DefaultDCIPollingInterval
     - Default polling interval for newly created DCI (in seconds).
     - 60
     - No
   * - DefaultDciRetentionTime
     - Default retention time for newly created DCI (in days).
-    - 60
+    - 30
     - No
   * - DefaultEncryptionPolicy
     - Set the default encryption policy for communications with agents: 0 - encryption disabled, 1 - allowed, 2 - preferred, 3 - required.
-    - 1
+    - Allowed
     - Yes
   * - DefaultMapBackgroundColor
     - Default background color for new network map objects (as RGB value).
     - 0xffffff
     - No
+  * - DefaultSubnetMaskIPv4
+    - Default mask for synthetic IPv4 subnets.
+    - 24
+    - No
+  * - DefaultSubnetMaskIPv6
+    - Default mask for synthetic IPv6 subnets.
+    - 64
+    - No
   * - DeleteAlarmsOfDeletedObject
-    - Parameter displays if alarms of deleted object should be also removed from database.
+    - Enable (1) or disable (0) automatic alarm removal of an object when it is deleted.
     - 1
     - No
   * - DeleteEmptySubnets
-    - Enable (1) or disable (0) automatic deletion of subnet objects without any nodes within. When enabled, empty subnets will be deleted by housekeeping process.
+    - Enable (1) or disable (0) automatic deletion of subnet objects that have no nodes within. When enabled, empty subnets will be deleted by housekeeping process.
     - 0
     - Yes
   * - DeleteEventsOfDeletedObject
-    - Parameter displays if events of deleted object should be also removed from database.
+    - Enable/disable automatic event removal of an object when it is deleted.
     - 1
     - No
   * - DeleteUnreachableNodesPeriod
@@ -673,33 +762,17 @@ These parameters can be changed in
     -
     - 3
     - No
-  * - DiscoveryPollingInterval
-    - Interval in seconds between passive network discovery polls.
-    - 6400
-    - Yes
-  * - EnableAdminInterface
-    -
-    - 1
-    - Yes
   * - EnableAgentRegistration
     - Enable (1) or disable (0) agents self-registration.
     - 1
     - No
-  * - EnableAuditLog
-    - Enable (1) or disable (0) audit log.
-    - 1
-    - Yes
   * - EnableAlarmSummaryEmails
     - Enable (1) or disable (0) alarm summary emails.
     - 0
     - No
-  * - EnableCheckPointSNMP
-    -
-    - 0
-    - No
-  * - EnableEventStormDetection
-    -
-    - 0
+  * - EnableAuditLog
+    - Enable (1) or disable (0) audit log.
+    - 1
     - Yes
   * - EnableISCListener
     - Enable (1) or disable (0) Inter-Server Communications Listener.
@@ -709,19 +782,15 @@ These parameters can be changed in
     -
     - 0
     - Yes
-  * - EnableMultipleDBConnections
-    - Enable (1) or disable (0) multiple database connections from the |product_name| server. This setting has no effect on SQLite databases.
-    - 1
-    - Yes
-  * - EnableNXSLContainerFunctions
-    - Enable (1) or disable (0) server-side NXSL functions for container management (such as CreateContainer, RemoveContainer, BindObject, UnbindObject).
+  * - EnableReportingServer
+    -
     - 0
     - Yes
   * - EnableSNMPTraps
     - Enable (1) or disable (0) SNMP trap processing. A dedicated thread will be created if set to 1.
     - 1
     - Yes
-  * - EnableSyslogDaemon
+  * - EnableSyslogReceiver
     - Enable (1) or disable (0) receiving of syslog messages.
     - 0
     - Yes
@@ -738,20 +807,28 @@ These parameters can be changed in
     - 0
     - Yes
   * - EscapeLocalCommands
-    -
+    - If enabled (1), TAB and new line characters are replaced by \t \n \r.
     - 0
     - No
   * - EventLogRetentionTime
-    -
+    - Retention time in days for the records in event log. All records older than specified will be deleted by housekeeping process.
     - 90
     - No
-  * - EventStormDuration
-    -
+  * - Events.Correlation.TopologyBased
+    - Enable (1) or disable (0) topology based event correlation.
+    - 1
+    - Yes
+  * - EventStorm.Duration
+    - Time period for events per second to be above threshold that defines event storm condition.
     - 15
     - Yes
-  * - EventStormEventsPerSecond
-    -
-    - 100
+  * - EventStorm.EnableDetection
+    - Enable/disable event storm detection.
+    - 0
+    - Yes
+  * - EventStorm.EventsPerSecond
+    - Threshold for number of events per second that defines event storm condition.
+    - 1000
     - Yes
   * - ExtendedLogQueryAccessControl
     - Enable (1) or disable (0) extended access control in log queries. When enabled, server will check user's access to objects and only select those log records where user has read access to related object. Please note that enabling this option can cause slow and inefficient SQL queries depending on number of objects and actual access right assignment.
@@ -886,12 +963,12 @@ These parameters can be changed in
     - This parameter specifies what should be done while synchronization with deleted from LDAP user/group. 0 - if user should be just deleted from |product_name| DB. 1 - if it should be disabled. If it is chosen to disable user, then on LDAP sync user will be disabled and it’s description will be change on “LDAP entry was deleted.” Afterwards this user/group can be detached from LDAP and enabled if it is required or just deleted manually.
     - 1
     - No
-  * - LockTimeout
-    - ''Unused?''
-    - 60000
-    - Yes
   * - LogAllSNMPTraps
     -
+    - 0
+    - Yes
+  * - LongRunningQueryThreshold
+    - Enables logging of SQL queries that take longer, then specified time (in milliseconds). Queries are logged to server log file on debug level 3. 0 means this function is off.
     - 0
     - Yes
   * - MailEncoding
@@ -918,6 +995,48 @@ These parameters can be changed in
     -
     -
     -
+  * - NetworkDiscovery.ActiveDiscovery.Interval
+    - Interval in seconds between active network discovery polls.
+      **This setting is changed by Network Discovery Configuration GUI**
+    - 7200
+    - Yes
+  * - NetworkDiscovery.ActiveDiscovery.BlockSize
+    - Size of address block to which ICMP ping requests are sent simultaneously during active discovery.
+    - 1024
+    - No
+  * - NetworkDiscovery.ActiveDiscovery.InterBlockDelay
+    - Pause in milliseconds between scanning of blocks during active discovery.
+      Together with BlockSize this allows to slow down active discovery if network equipment treats large number of ICMP requests as flood.
+    - 0
+    - No
+  * - NetworkDiscovery.ActiveDiscovery.Interval
+    - Interval in seconds between active network discovery polls.
+      **This setting is changed by Network Discovery Configuration GUI**
+    - 7200
+    - No
+  * - NetworkDiscovery.ActiveDiscovery.Schedule
+    - Active network discovery poll schedule in cron format.
+      **This setting is changed by Network Discovery Configuration GUI**
+    -
+    - No
+  * - NetworkDiscovery.EnableParallelProcessing
+    - Enable (1) or disable (0) parallel processing of discovered addresses.
+    - 0
+    - No
+  * - NetworkDiscovery.MergeDuplicateNodes
+    - Enable (1) or disable (0) merging of duplicate nodes (that may be created due to parallel processing of discovered addresses).
+    - 0
+    - No
+  * - NetworkDiscovery.PassiveDiscovery.Interval
+    - Interval in seconds between passive network discovery polls.
+      **This setting is changed by Network Discovery Configuration GUI**
+    - 900
+    - No
+  * - NetworkDiscovery.Type
+    - Defines enabled modes of network discovery.
+      **This setting is changed by Network Discovery Configuration GUI**
+    - Disabled
+    - No
   * - NumberOfDatabaseWriters
     - The number of threads used to perform delayed writes to database.
     - 1
@@ -929,6 +1048,14 @@ These parameters can be changed in
   * - NumberOfUpgradeThreads
     - The number of threads used to perform agent upgrades (i.e. maximum number of parallel upgrades).
     - 10
+    - No
+  * - Objects.Nodes.CapabilityExpirationGracePeriod
+    - Grace period (in seconds) for capability expiration after node recovered from unreachable state.
+    - 3600
+    - No
+  * - Objects.Nodes.CapabilityExpirationTime
+    - Time (in seconds) before capability (NetXMS Agent, SNMP, EtherNet/IP, etc) expires if node is not responding for requests via appropriate protocol.
+    - 604800
     - No
   * - OffileDataRelevanceTime
     - Time period in seconds within which received offline data still relevant for threshold validation
@@ -1022,14 +1149,10 @@ These parameters can be changed in
     -
     -
     -
-  * - SMSDriver
-    - Mobile phone driver to be used for sending SMS.
-    - <none>
-    - Yes
-  * - SMSDrvConfig
-    - SMS driver parameters. For ''generic'' driver, it should be the name of COM port device.
+  * - Scheduler.TaskRetentionTime (in seconds)
+    - Period after which non-recurring scheduled tasks (e.g. Maintenance enter / Maintenance leave) are deleted.
+    - 86400
     -
-    - Yes
   * - SMTPFromAddr
     - An address used for sending mail from.
     - netxms@localhost
@@ -1125,6 +1248,14 @@ These parameters can be changed in
     - Retention time in days for records in syslog. All records older than specified will be deleted by housekeeping process.
     - 90
     - No
+  * - ThreadPool.Discovery.BaseSize
+    -
+    - 1
+    - Yes
+  * - ThreadPool.Discovery.MaxSize
+    -
+    - 16
+    - Yes
   * - ThresholdRepeatInterval
     - System-wide interval in seconds for resending threshold violation events. Value of 0 disables event resending.
     - 0
@@ -1235,7 +1366,7 @@ Valid commands are:
    * - reset-system-account
      - Unlock user "system" and reset it's password to default ("netxms").
        Warning: server ("netxmsd") should be stopped while performing password reset operation!
-       See :ref:`password-reset` for detailed procedure. 
+       See :ref:`password-reset` for detailed procedure.
    * - set <name> <value>
      - Set value of server configuration variable
    * - unlock

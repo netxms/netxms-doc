@@ -1626,5 +1626,5 @@ When loaded, PostgreSQL subagent adds the following tables to agent:
      - 	Connection backends on server identified by *id*.
    * - 	PostgreSQL.Locks(*id*)	
      - 	Locks on server identified by *id*.
-   * - 	PostgreSQL.PrepparedTransactions(*id*)	
+   * - 	PostgreSQL.PreparedTransactions(*id*)	
      - 	Prepared transactions on server identified by *id*.

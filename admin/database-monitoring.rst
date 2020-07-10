@@ -1452,19 +1452,19 @@ Following table shows the database server parameters:
      - 	Is the server WAL receiver
    * - 	PostgreSQL.Replication.Lag(*id*)	
      - 	Integer	
-     - 	Replication lag in seconds
+     - 	Replication lag in seconds (from version 10.0)
    * - 	PostgreSQL.Replication.LagBytes(*id*)	
      - 	Float	
-     - 	Replication lag in bytes
+     - 	Replication lag in bytes (from version 10.0)
    * - 	PostgreSQL.Replication.Stanby(*id*)	
      - 	Integer 64-bit	
      - 	Number of WAL senders
    * - 	PostgreSQL.Replication.WALFiles(*id*)	
      - 	Integer 64-bit	
-     - 	Number of the WAL files
+     - 	Number of the WAL files  (from version 10.0)
    * - 	PostgreSQL.Replication.WALSize(*id*)	
      - 	Float	
-     - 	Size of the WAL files
+     - 	Size of the WAL files (from version 10.0)
 
 Following table shows the database parameters:
 
@@ -1555,7 +1555,7 @@ Following table shows the database parameters:
      - 	Cumulative number of deadlocks detected in this database
    * - 	PostgreSQL.Stats.ChecksumFailures(*id*[, *database*])	
      - 	Integer 64-bit	
-     - 	Cumulative number of data page checksum failures detected in this database
+     - 	Cumulative number of data page checksum failures detected in this database (from version 12.0)
    * - 	PostgreSQL.Stats.NumBackends(*id*[, *database*])	
      - 	Integer	
      - 	Number of backends currently connected to this database

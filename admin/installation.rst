@@ -614,30 +614,46 @@ WebUI additional configuration
 Installing web interface on remote system
 -----------------------------------------
 
-By default nxmc.war will try to connect to |product_name| server at address 127.0.0.1. To
-change that, create configuration file called nxmc.properties as following:
+There are few settings available for configuration in WebUI.
 
-.. code-block:: cfg
+  * server - server DNS name or IP
+  * loginFormImage - path to custom login image
+  * useEncryption - if encryption should be used
+  * sessionTimeout - session timeout
 
-  server = 127.0.0.1
-  sessionTimeout = 120
-  enableAdvancedSettings = true
+There are multiple ways to set connection configuration from WebUI to NetXMS server.
+Configuration is check in next order:
 
-Change server property to IP address or host name of your |product_name| server and put
-properties file to class path of your application server. Default locations for
-different servers are following:
+  1. Using JNDI. Environment should be set like nxmc/NAME for example: nxmc/server
 
-**Jetty**
+  2. nxmc.properties properties file in class path of your application server. Should be created in ini format: NAME=VALUE. For example:
+
+    .. code-block:: cfg
+
+      server = 127.0.0.1
+
+    Default locations: 
+
+    **Jetty**
 
 
-**Tomcat**
+    **Tomcat**
 
-Debian default is /usr/share/tomcat9/lib. Other versions and Linux distribution
-may have different location.
+    Debian default is /usr/share/tomcat9/lib. Other versions and Linux distribution
+    may have different location.
 
-**Oracle Weblogic**
+    **Oracle Weblogic**
 
-$WEBLOGIC_HOME/user_projects/domains/YOURDOMAIN
+    $WEBLOGIC_HOME/user_projects/domains/YOURDOMAIN
+
+  3. jvm parameter in format -Dnxmc.NAME=VALUE.  For example: -Dnxmc.server=127.0.0.1
+
+  4. Environment variable NXMC_NAME=VALUE. For example NXMC_server=127.0.0.1
+
+  5. If non of above configuration exists, Web UI tries to resolve "NETXMS_server" DNS name for server connection.
+
+  6. If none of above configuration exists, Web UI uses "127.0.0.1" as a server address. 
+
 
 Custom logo on login screen
 ---------------------------

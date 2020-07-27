@@ -95,7 +95,7 @@ swipeable pages:
   * :guilabel:`Alarms`: here are presented the list of pending alarms (if any)
     for this node, with the possibility to manage them with the following commands:
       * :guilabel:`Actions`:
-        .. empty line needed, otherwise above label becomes bold ..
+
           * :guilabel:`Acknowledge`: acknowledge the alarm.
           * :guilabel:`Sticky acknowledge`: sticky acknowledge the alarm.
           * :guilabel:`Resolve:` resolve the alarm.

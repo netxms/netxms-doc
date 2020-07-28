@@ -327,6 +327,9 @@ Agent configuration file (nxagentd.conf)
    * - EncryptedSharedSecret
      - Agent's shared secret used for remote peer authentication, encrypted using "nxencpasswd -a". If ``RequireAuthentication`` set to no, this parameter has no effect.
      -
+   * - SNMPProxyThreadPoolSize
+     - SNMP proxy thread pool size
+     - 128
    * - SNMPTimeout
      - Timeout in milliseconds for SNMP requests sent by agent
      - 3000

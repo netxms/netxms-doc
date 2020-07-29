@@ -75,12 +75,20 @@ Agent
 
 Agent resource usage is negligible and can be ignored.
 
-Installing on Debian or Ubuntu
+Installing from deb repository
 ==============================
 
-We provide packages for Debian users at http://packages.netxms.org/, which is our
-public APT repository. Packages are signed, and you'll need to install additional
-encryption key for signature verification.
+We host public APT repository http://packages.netxms.org/ for all deb-based distributions (Debian, Ubuntu, Mint, Raspbian, etc.).
+Packages are signed, and you'll need to install additional encryption key for signature verification.
+
+Two components are supported - "main" and "unstable".
+
+Supported URLs (*CODENAME* should be replaced withoutput of `lsb_release -sc`):
+
+  * Debian, LMDE - "deb http://packages.netxms.org/debian CODENAME main"
+  * Ubuntu, Mint - "deb http://packages.netxms.org/ubuntu CODENAME main"
+  * Devuan - "deb http://packages.netxms.org/devuan CODENAME main"
+  * Raspbian - "deb http://packages.netxms.org/raspbian CODENAME main"
 
 Add APT repository
 ------------------
@@ -92,31 +100,24 @@ easy change in repository configuration and encryption keys updated in the featu
 Using netxms-release package
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Install netxms-release-latest.deb package that contain description of |product_name|
-repository (this package support all Debian and Ubuntu systems):
+Download and install netxms-release-latest.deb package, which contain source list file of the repository as well as signing key.
 
-:command:`$ wget http://packages.netxms.org/netxms-release-latest.deb`
+.. code-block:: sh
 
-:command:`$ sudo dpkg -i netxms-release-latest.deb`
-
-Update APT cache:
-
-:command:`sudo apt-get update`
+  wget http://packages.netxms.org/netxms-release-latest.deb
+  sudo dpkg -i netxms-release-latest.deb
+  sudo apt-get update
 
 Manually
 ~~~~~~~~
 
-Add the repository to your sources.list (change "jessie" to correct distro name):
+Add the repository to your sources.list:
 
-:command:`deb http://packages.netxms.org/debian/ jessie main`
+.. code-block:: sh
 
-Fetch and install the GnuPG key:
-
-:command:`wget -q -O - http://packages.netxms.org/netxms.gpg | sudo apt-key add -`
-
-Update APT cache:
-
-:command:`sudo apt-get update`
+  echo "deb http://packages.netxms.org/$(lsb_release -si | tr A-Z a-z) $(lsb_release -sc | tr A-Z a-z) main" > /etc/apt/sources.list.d/netxms.list
+  wget -q -O - http://packages.netxms.org/netxms.gpg | sudo apt-key add -
+  sudo apt-get update
 
 Installing packages
 -------------------
@@ -124,42 +125,50 @@ Installing packages
 Server
 ~~~~~~
 
-To install server use this command:
+Server require two components to function - server itselt (package "netxms-server") and at least one database abstraction layer driver (multuple can be installed at the same time, e.g. for migration purposes).
 
-:command:`apt-get install netxms-server`
-
-Server package does not include server drivers. They should be installed with separate command:
-
-:command:`apt-get install DRIVER_NAME`
-
-Change *DRIVER_NAME* to driver name that you need:
+Provided driver packages:
 
   * netxms-dbdrv-pgsql - PostgreSQL driver
-  * netxms-dbdrv-mysql - MySQL driver
+  * netxms-dbdrv-mariadb - Mariadb driver
+  * netxms-dbdrv-mysql - MySQL driver (not built for Ubuntu 20 / Mint 20)
   * netxms-dbdrv-odbc - unixODBC driver (can be used with DB/2 and Microsoft SQL)
   * netxms-dbdrv-oracle - Oracle driver
 
-Database should be created and initialized after server and driver packages are installed.
-Database creation examples can be found :ref:`there <db_creation>`.
-
-Database initialization command:
+#. Instal required packages (adjust command to match your environment):
 
 .. code-block:: sh
 
-  /usr/local/bin/nxdbmgr init
+  apt-get install netxms-server netxms-dbdrv-pgsql
 
-Server default credentials:
+#. Create user and database (:ref:`examples <db_creation>`).
 
-Login: admin
+#. Modify server configuration file ("/etc/netxmsd.conf" to match your environment.
 
-Password: netxms
+#. Load database schema and default configuration:
+
+.. code-block:: sh
+
+  nxdbmgr init
+
+#. Start server:
+
+.. code-block:: sh
+
+  systemctl start netxms-server
+
+.. note::
+
+  Default credentials - user "admin" with password "netxms".
 
 Agent
 ~~~~~
 
-To install agent use this command:
+Install core agent package ("netxms-agent") and optional subagent packages, if required:
 
-:command:`apt-get install netxms-agent`
+.. code-block:: sh
+
+  apt-get install netxms-agent
 
 Management console
 ~~~~~~~~~~~~~~~~~~

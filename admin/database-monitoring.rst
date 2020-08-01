@@ -1446,7 +1446,7 @@ Following table shows the database server parameters:
      - 	Used connections (%)
    * - 	PostgreSQL.Replication.InRecovery(*id*)	
      - 	String	
-     - 	Is recovery in progress
+     - 	Is recovery in progress (from version 9.6.0)
    * - 	PostgreSQL.Replication.IsReceiver(*id*)	
      - 	String	
      - 	Is the server WAL receiver
@@ -1456,7 +1456,7 @@ Following table shows the database server parameters:
    * - 	PostgreSQL.Replication.LagBytes(*id*)	
      - 	Float	
      - 	Replication lag in bytes (from version 10.0)
-   * - 	PostgreSQL.Replication.Stanby(*id*)	
+   * - 	PostgreSQL.Replication.WALSenders(*id*)	
      - 	Integer 64-bit	
      - 	Number of WAL senders
    * - 	PostgreSQL.Replication.WALFiles(*id*)	

@@ -577,9 +577,9 @@ Open LDAP
    * - LdapUserClass
      - inetOrgPerson
    * - LdapGroupUniqueId
-     -
+     - entryUUID
    * - LdapUserUniqueId
-     -
+     - entryUUID
    * - LdapSyncInterval
      - 1440
 

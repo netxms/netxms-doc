@@ -798,19 +798,26 @@ DCI summary table can be configured in Configuration -> Summary Table.
 
 .. figure:: _images/configure_dci_summary_table.png
 
-In general part:
+General:
 
   - Menu path - path where this summary table can be found. You can use
     ``->`` character pair to create subtree like "Linux->System information".
   - Title - title of view.
 
-In columns part:
+Columns:
 
-  - There are added DCI's shat should be shown on the summary table. Where
-    Name is name of column and DCI Name is parameter of DCI.
+  - This is the list if DCI's that will be shown on the summary table.
+    Name is the name of column and DCI Name is DCI parameter name.
+    Multivalued column is intended to present string DCIs that contain several
+    values devided by specified separator. Each value is presented on a separate line in the column.
+
+Filter:
+  - Filter script is executed on for each node to determine, if that node is included to the summary table.
+    Filter script is defined with help of :term:`NXSL` scripting language.
+
 
 Usage
 -----
 
 After DCI summary table is configured it can be accessed in container
-object(Subnet, container...) menu under "Summary tables".
+object (Subnet, container...) context menu under "Summary tables".

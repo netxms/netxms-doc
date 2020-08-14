@@ -606,11 +606,11 @@ These parameters can be changed in
     - /cas/serviceValidate
     - No
   * - CaseInsensitiveLoginNames
-    - Enable (1) or disable (0) case insensitive login names.
+    - Enable/disable case insensitive login names.
     - 0
     - Yes
   * - CheckTrustedNodes
-    - Enable (1) or disable (0) checking of trusted nodes list for cross-node data collection (using Proxy Node DCI attribute).
+    - Enable/disable checking of trusted nodes list for cross-node data collection (using Proxy Node DCI attribute).
     - 1
     - Yes
   * - Client.AlarmList.DisplayLimit
@@ -618,7 +618,7 @@ These parameters can be changed in
     - 4096
     - No
   * - Client.ObjectBrowser.AutoApplyFilter
-    - Enable (1) or disable (0) object browser''s filter applying as user types (if disabled, user has to press ENTER to apply filter).
+    - Enable/disable object browser''s filter applying as user types (if disabled, user has to press ENTER to apply filter).
     - 1
     - No
   * - Client.ObjectBrowser.FilterDelay
@@ -634,11 +634,11 @@ These parameters can be changed in
     - 4701
     - Yes
   * - ClusterContainerAutoBind
-    - Enable (1) or disable (0)  container auto binding for clusters.
+    - Enable/disable  container auto binding for clusters.
     - 0
     - No
   * - ClusterTemplateAutoApply
-    - Enable (1) or disable (0) template auto apply for clusters.
+    - Enable/disable template auto apply for clusters.
     - 0
     - No
   * - ConditionPollingInterval
@@ -650,11 +650,11 @@ These parameters can be changed in
     - 3600
     - Yes
   * - DashboardDataExportEnableInterpolation
-    - Enable (1) or disable (0) data interpolation in dashboard data export.
+    - Enable/disable data interpolation in dashboard data export.
     - 1
     - Yes
   * - DataCollection.OnDCIDelete.TerminateRelatedAlarms
-    - Enable (1) or disable (0) automatic termination of related alarms when data collection item is deleted.
+    - Enable/disable automatic termination of related alarms when data collection item is deleted.
     - 1
     - No
   * - DataCollection.ScriptErrorReportInterval
@@ -670,11 +670,11 @@ These parameters can be changed in
     - 10
     - Yes
   * - DBConnectionPoolCooldownTime
-    -
+    - Inactivity time (in seconds) after which database connection will be closed.
     - 300
     - Yes
   * - DBConnectionPoolMaxLifetime
-    -
+    - Maximum lifetime (in seconds) for a database connection.
     - 14400
     - Yes
   * - DBConnectionPoolMaxSize
@@ -742,11 +742,11 @@ These parameters can be changed in
     - 64
     - No
   * - DeleteAlarmsOfDeletedObject
-    - Enable (1) or disable (0) automatic alarm removal of an object when it is deleted.
+    - Enable/disable automatic alarm removal of an object when it is deleted.
     - 1
     - No
   * - DeleteEmptySubnets
-    - Enable (1) or disable (0) automatic deletion of subnet objects that have no nodes within. When enabled, empty subnets will be deleted by housekeeping process.
+    - Enable/disable automatic deletion of subnet objects that have no nodes within. When enabled, empty subnets will be deleted by housekeeping process.
     - 0
     - Yes
   * - DeleteEventsOfDeletedObject
@@ -763,22 +763,22 @@ These parameters can be changed in
     - No
   * - DiscoveryFilterFlags
     -
-    - 3
+    - 0
     - No
   * - EnableAgentRegistration
-    - Enable (1) or disable (0) agents self-registration.
+    - Enable/disable agents self-registration.
     - 1
     - No
   * - EnableAlarmSummaryEmails
-    - Enable (1) or disable (0) alarm summary emails.
+    - Enable/disable alarm summary emails.
     - 0
     - No
   * - EnableAuditLog
-    - Enable (1) or disable (0) audit log.
+    - Enable/disable audit log.
     - 1
     - Yes
   * - EnableISCListener
-    - Enable (1) or disable (0) Inter-Server Communications Listener.
+    - Enable/disable Inter-Server Communications Listener.
     - 0
     - Yes
   * - EnableObjectTransactions
@@ -786,15 +786,15 @@ These parameters can be changed in
     - 0
     - Yes
   * - EnableReportingServer
-    -
+    - Enable/disable reporting server
     - 0
     - Yes
   * - EnableSNMPTraps
-    - Enable (1) or disable (0) SNMP trap processing. A dedicated thread will be created if set to 1.
+    - Enable/disable SNMP trap processing. A dedicated thread will be created if set to 1.
     - 1
     - Yes
   * - EnableSyslogReceiver
-    - Enable (1) or disable (0) receiving of syslog messages.
+    - Enable/disable receiving of syslog messages.
     - 0
     - Yes
   * - EnableTimedAlarmAck
@@ -806,7 +806,7 @@ These parameters can be changed in
     - 0
     - Yes
   * - EnableZoning
-    - Enable (1) or disable (0) zoning support.
+    - Enable/disable zoning support.
     - 0
     - Yes
   * - EscapeLocalCommands
@@ -818,7 +818,7 @@ These parameters can be changed in
     - 90
     - No
   * - Events.Correlation.TopologyBased
-    - Enable (1) or disable (0) topology based event correlation.
+    - Enable/disable topology based event correlation.
     - 1
     - Yes
   * - EventStorm.Duration
@@ -834,7 +834,7 @@ These parameters can be changed in
     - 1000
     - Yes
   * - ExtendedLogQueryAccessControl
-    - Enable (1) or disable (0) extended access control in log queries. When enabled, server will check user's access to objects and only select those log records where user has read access to related object. Please note that enabling this option can cause slow and inefficient SQL queries depending on number of objects and actual access right assignment.
+    - Enable/disable extended access control in log queries. When enabled, server will check user's access to objects and only select those log records where user has read access to related object. Please note that enabling this option can cause slow and inefficient SQL queries depending on number of objects and actual access right assignment.
     - 0
     - No
   * - ExternalAuditFacility
@@ -858,17 +858,33 @@ These parameters can be changed in
     - netxmsd-audit
     - Yes
   * - FixedStatusValue
-    -
+    - Value for status propagation if ''StatusPropagationAlgorithm'' server configuration parameter is set to ''2 - Fixed''.
     - 0
     - Yes
+  * - GraceLoginCount
+    - Number of times a user can login if password has been expired.
+    - 5
+    - No
   * - HelpDeskLink
-    -
-    -
-    -
-  * - HouseKeepingInterval
-    - Interval of housekeeper'a running (in seconds). Housekeeper deletes old log lines, old DCI data, cleans removed objects and does VACUUM for PostgreSQL.
-    - 3600
+    - Helpdesk driver name. If ''none'', then no helpdesk driver is in use.
+    - none
     - Yes
+  * - Housekeeper.DisableCollectedDataCleanup
+    - Disable automatic cleanup of collected DCI data during housekeeper run.
+    - 0
+    - No
+  * - Housekeeper.StartTime
+    - Time when housekeeper starts. Housekeeper deletes expired log recored and DCI data as well as cleans removed objects.
+    - 02:00
+    - Yes
+  * - Housekeeper.Throttle.HighWatermark
+    - If database writer queue length (in queue elements) exceeds this number, housekeeper process is paused.
+    - 250000
+    - No
+  * - Housekeeper.Throttle.LowWatermark
+    - If housekeeper got paused due to DB writer queue reaching Housekeeper.Throttle.HighWatermark, it will resume operation when DB writer queue becomes lower then this setting.
+    - 50000
+    - No
   * - ICMP.CollectPollStatistics
     - Collect ICMP poll statistics for all nodes by default. See :ref:`icmp-ping` chapter for information.
     - 1
@@ -889,31 +905,60 @@ These parameters can be changed in
     - Time period for collecting ICMP statistics (in number of polls).
     - 60
     - No
+  * - ImportConfigurationOnStartup
+    - Import configuration (templates, events, object tools, etc) on server startup. Configuration is imported from
+      files located on |product_name| server in share/templates. Missing elements are identified by GUID.
+    - Only missing elements
+    - Yes
+  * - InstancePollingInterval
+    - Instance polling interval (in seconds).
+    - 600
+    - Yes
+  * - InstanceRetentionTime
+    - Default retention time (in days) for missing DCI instances.
+    - 0
+    - Yes
   * - InternalCA
-    - Enable (1) or disable (0) internal certificate authority.
+    - Enable/disable internal certificate authority.
     - 0
     - Yes
   * - IntruderLockoutThreshold
-    -
+    - Number of incorrect password attempts after which a user account is temporarily locked.
     - 0
     - No
   * - IntruderLockoutTime
-    -
+    - Duration of user account temporarily lockout (in minutes) if allowed number of incorrect password attempts was exceeded.
     - 30
     - No
-  * - JobHistoryRetentionTime
-    -
-    - 90
+  * - JiraIssueType
+    - Jira issue type
+    - Task
     - No
+  * - JiraLogin
+    - Jira login
+    - netxms
+    - Yes
+  * - JiraPassword
+    - Jira password
+    -
+    - Yes
+  * - JiraProjectCode
+    - Jira project code
+    - NETXMS
+    - No
+  * - JiraProjectComponent
+    - Jira project component
+    -
+    - No
+  * - JiraServerURL
+    - The URL of Jira server
+    - http://localhost
+    - Yes
   * - KeepAliveInterval
     - Interval in seconds between sending keep alive packets to connected clients.
     - 60
     - Yes
-  * - LdapGroupClass
-    - There is specified which object class represents group objects. If found entry will not be of a user ot group class, it will be just ignored.
-    -
-    - No
-  * - LdapConnectionString
+  * - LDAP.ConnectionString
     - The LdapConnectionString configuration parameter may be a comma- or
       whitespace-separated list of URIs containing only the schema, the host, and the
       port fields. Apart from ldap, other (non-standard) recognized values of the
@@ -922,86 +967,97 @@ These parameters can be changed in
       Format: schema://host:port. For more information refer to :ref:`ldap` chapter.
     - ldap://localhost:389
     - No
-  * - LdapMappingDescription
-    - There should be specified name of attribute that’s value will be used as a user description
+  * - LDAP.GroupClass
+    - Specifies which object class represents group objects. If found entry will not be of a user or group class, it will be ignored.
     -
     - No
-  * - LdapMappingFullName
-    - There should be specified name of attribute that’s value will be used as a user full name
+  * - LDAP.GroupMappingName
+    - The name of an attribute whose value will be used as group's login name
+    -
+    - No
+  * - LDAP.GroupUniqueId
+    - Unique identifier for LDAP group object. If not set, LDAP users are identified by DN.
+    -
+    - No
+  * - LDAP.MappingDescription
+    - The name of an attribute whose value will be used as a user's description.
+    -
+    - No
+  * - LDAP.MappingFullName
+    - The name of an attribute whose value will be used as a user's full name.
     - displayName
     - No
-  * - LdapMappingName
-    - There should be specified name of attribute that’s value will be used as a user login name
-    -
-    - No
-  * - LdapPageSize
-    - Limit of records that can be returned in one search page.
+  * - LDAP.PageSize
+    - The maximum amount of records that can be returned in one search page.
     - 1000
     - No
-  * - LdapSearchBase
-    - The LdapSearchBase configuration parameter is the DN of the entry at which to start the search.
+  * - LDAP.SearchBase
+    - The DN of the entry at which to start the search.
     -
     - No
-  * - LdapSearchFilter
-    - The LdapSearchFilter is a string representation of the filter to apply in the search.
+  * - LDAP.SearchFilter
+    - A string representation of the filter to apply in the search.
     -
     - No
-  * - LdapSyncInterval
-    - This parameter is for setting synchronization interval in minutes between |product_name| server and LDAP server. If synchronization parameter is set to 0 - synchronization will not be done.
+  * - LDAP.SyncInterval
+    - The synchronization interval (in minutes) between the NetXMS server and the LDAP server. If the parameter is set to 0, no synchronization will take place.
     - 0
     - No
-  * - LdapSyncUser
+  * - LDAP.SyncUser
     - User login for LDAP synchronization
     -
     - No
-  * - LdapSyncUserPassword
+  * - LDAP.SyncUserPassword
     - User password for LDAP synchronization
     -
     - No
-  * - LdapUserClass
-    - There is specified which object class represents user objects. If found entry will not be of a user or group class, it will be just ignored.
+  * - LDAP.UserClass
+    - The object class which represents user objects. If the found entry is not of user or group class, it will be ignored.
     -
     - No
-  * - LdapUserDeleteAction
+  * - LDAP.UserDeleteAction
     - This parameter specifies what should be done while synchronization with deleted from LDAP user/group. 0 - if user should be just deleted from |product_name| DB. 1 - if it should be disabled. If it is chosen to disable user, then on LDAP sync user will be disabled and it’s description will be change on “LDAP entry was deleted.” Afterwards this user/group can be detached from LDAP and enabled if it is required or just deleted manually.
     - 1
     - No
-  * - LogAllSNMPTraps
+  * - LDAP.UserMappingName
+    - The name of an attribute whose value will be used as a user's login name.
     -
+    - No
+  * - LDAP.UserUniqueId
+    - Unique identifier for LDAP user object. If not set, LDAP users are identified by DN.
+    -
+    - No
+  * - LogAllSNMPTraps
+    - Log all SNMP traps.
     - 0
     - Yes
   * - LongRunningQueryThreshold
-    - Enables logging of SQL queries that take longer, then specified time (in milliseconds). Queries are logged to server log file on debug level 3. 0 means this function is off.
+    - Threshold in milliseconds to report long running SQL queries (0 to disable). Queries are logged to |product_name| server log file on debug level 3.
     - 0
     - Yes
   * - MailEncoding
     - Encoding for mails generated by |product_name| server.
-    - iso-8859-1
+    - utf8
     - No
-  * - MailBase64Subjects
-    - Encode email subjects using base64. Encoding enabled if non-zero
-    - 0
-    - No
-  * - MaxActiveUploadJobs
+  * - MessageOfTheDay
+    - Message to be shown when a user logs into the console.
     -
-    - 10
-    - Yes
+    - No
   * - MinPasswordLength
     - Default minimum password length for a |product_name| user. The default applied only if per-user setting is not defined.
     - 0
     - No
   * - MinViewRefreshInterval
-    -
-    -
-    -
+    - Minimal refresh interval for object tree and alarm views to avoid frequent redraws when updates arrive from server.
+    - 1000
+    - No
   * - MobileDeviceListenerPort
+    - Listener port for connections from |product_name| mobile agent.
+    - 4747
+    - Yes
+  * - NetworkDeviceDrivers.BlackList
+    - Comma separated list of blacklisted network device drivers.
     -
-    -
-    -
-  * - NetworkDiscovery.ActiveDiscovery.Interval
-    - Interval in seconds between active network discovery polls.
-      **This setting is changed by Network Discovery Configuration GUI**
-    - 7200
     - Yes
   * - NetworkDiscovery.ActiveDiscovery.BlockSize
     - Size of address block to which ICMP ping requests are sent simultaneously during active discovery.
@@ -1023,11 +1079,11 @@ These parameters can be changed in
     -
     - No
   * - NetworkDiscovery.EnableParallelProcessing
-    - Enable (1) or disable (0) parallel processing of discovered addresses.
+    - Enable/disable parallel processing of discovered addresses.
     - 0
     - No
   * - NetworkDiscovery.MergeDuplicateNodes
-    - Enable (1) or disable (0) merging of duplicate nodes (that may be created due to parallel processing of discovered addresses).
+    - Enable/disable merging of duplicate nodes (that may be created due to parallel processing of discovered addresses).
     - 0
     - No
   * - NetworkDiscovery.PassiveDiscovery.Interval
@@ -1040,17 +1096,33 @@ These parameters can be changed in
       **This setting is changed by Network Discovery Configuration GUI**
     - Disabled
     - No
-  * - NumberOfDatabaseWriters
-    - The number of threads used to perform delayed writes to database.
-    - 1
-    - Yes
-  * - NumberOfDataCollectors
-    - The number of threads used for data collection.
-    - 25
-    - Yes
   * - NumberOfUpgradeThreads
     - The number of threads used to perform agent upgrades (i.e. maximum number of parallel upgrades).
     - 10
+    - No
+  * - NXSL.EnableFileIOFunctions
+    - Enable/disable server-side NXSL functions for file I/O (such as OpenFile, DeleteFile, etc.).
+    - 0
+    - Yes
+  * - Objects.Interfaces.DefaultExpectedState
+    - Default expected state for new interface objects.
+    - 1
+    - Yes
+  * - Objects.Interfaces.NamePattern
+    - Custom name pattern for interface objects. This field supports macros. E.g. if set to ``%n%{suffix}``, interface name will be composed from original name and node's custom attribute ``suffix``.
+    -
+    - No
+  * - Objects.Interfaces.UseAliases
+    - Control usage of interface aliases (or descriptions). Possible values are:
+        - 0 - Always use name (Don’t use aliases)
+        - 1 - Use aliases instead of names, when possible
+        - 2 - Concatenate alias and name to form interface object name
+        - 3 - Concatenate name and alias to form interface object name
+    - 0 (Always use name)
+    - No
+  * - Objects.Interfaces.UseIfXTable
+    - Enable/disable the use of SNMP ifXTable instead of ifTable for interface configuration polling. See :ref:`snmp` for more information.
+    - 1
     - No
   * - Objects.Nodes.CapabilityExpirationGracePeriod
     - Grace period (in seconds) for capability expiration after node recovered from unreachable state.
@@ -1060,7 +1132,23 @@ These parameters can be changed in
     - Time (in seconds) before capability (NetXMS Agent, SNMP, EtherNet/IP, etc) expires if node is not responding for requests via appropriate protocol.
     - 604800
     - No
-  * - OffileDataRelevanceTime
+  * - Objects.Nodes.FallbackToLocalResolver
+    - Enable/disable fallback to server''s local resolver if node address cannot be resolved via zone proxy.
+    - 0
+    - No
+  * - Objects.Nodes.ResolveDNSToIPOnStatusPoll
+    - Enable/disable resolve DNS to IP on status poll.
+    - 0
+    - Yes
+  * - Objects.Nodes.ResolveNames
+    - Resolve node name using DNS, SNMP system name, or host name if current node name is it's IP address.
+    - 1
+    - No
+  * - Objects.Nodes.SyncNamesWithDNS
+    - Enable/disable synchronization of node names with DNS on each configuration poll.
+    - 0
+    - No
+  * - OfflineDataRelevanceTime
     - Time period in seconds within which received offline data still relevant for threshold validation
     - 86400
     - Yes
@@ -1080,21 +1168,14 @@ These parameters can be changed in
     - The number of consecutive unsuccessful polls required to declare interface as down.
     - 1
     - Yes
-  * - PollerThreadPoolBaseSize
-    - This parameter represents base thread pool size. From this pool will be taken threads for all types of polls: Status poll,
-      Configuration poll, etc. except DCI collection(:guilabel:`NumberOfDataCollectors`). This is minimal number of threads that will always run.
-    - 10
-    - Yes
-  * - PollerThreadPoolMaxSize
-    - This parameter represents maximum thread pool size till which pool can be increased. From this pool will be taken threads for
-      all types of polls: Status poll, Configuration poll, etc. except DCI collection(:guilabel:`NumberOfDataCollectors`). In case of big load on a server number of threads can be
-      increased till this size. When load come back to normal, number of threads will be automatically decreased to base size.
-    - 250
-    - Yes
   * - ProcessTrapsFromUnmanagedNodes
-    - Enable (1) or disable (0) processing of SNMP traps received from node which is in unmanaged state.
+    - Enable/disable processing of SNMP traps received from node which is in unmanaged state.
     - 0
     - Yes
+  * - RADIUSAuthMethod
+    - RADIUS authentication method to be used (PAP, CHAP, MS-CHAPv1, MS-CHAPv2).
+    - PAP
+    - No
   * - RADIUSNumRetries
     - The number of retries for RADIUS authentication.
     - 5
@@ -1128,113 +1209,128 @@ These parameters can be changed in
     - 3
     - No
   * - ReceiveForwardedEvents
-    - Enable (1) or disable (0) reception of events forwarded by another |product_name| server. Please note that for external event reception ISC listener should be enabled as well.
+    - Enable/disable reception of events forwarded by another |product_name| server. Please note that for external event reception ISC listener should be enabled as well.
     - 0
     - No
-  * - ResolveDNSToIPOnStatusPoll
-    -
-    -
-    -
-  * - ResolveNodeNames
-    -
-    - 1
-    - No
+  * - ReportingServerHostname
+    - The hostname of the reporting server.
+    - localhost
+    - Yes
+  * - ReportingServerPort
+    - The port of the reporting server.
+    - 4710
+    - Yes
   * - RoutingTableUpdateInterval
     - Interval in seconds between reading routing table from node.
     - 300
     - Yes
-  * - RunNetworkDiscovery
-    - Enable (1) or disable (0) automatic network discovery process.
-      ***This setting is change by Network Discovery GUI***
-    - 0
-    - Yes
-  * - ServerID
-    -
-    -
-    -
-  * - Scheduler.TaskRetentionTime (in seconds)
-    - Period after which non-recurring scheduled tasks (e.g. Maintenance enter / Maintenance leave) are deleted.
+  * - Scheduler.TaskRetentionTime
+    - Period (in seconds) after which non-recurring scheduled tasks (e.g. Maintenance enter / Maintenance leave) are deleted.
     - 86400
+    - No
+  * - ServerColor
+    - Identification color for this server. Used in status bar of management console.
     -
-  * - SMTPFromAddr
-    - An address used for sending mail from.
+    - No
+
+  * - ServerCommandOutputTimeout
+    -
+    - 60
+    - No
+
+  * - ServerName
+    - Name of this server. Displayed in status bar of management console.
+    -
+    - No
+  * - SMTP.FromAddr
+    - The address used for sending mail from.
     - netxms@localhost
     - No
-  * - SMTPFromName
-    - A name used for sending mail.
-    - |product_name| Server
+  * - SMTP.FromName
+    - The name used as the sender.
+    - NetXMS Server
     - No
-  * - SMTPPort
+  * - SMTP.LocalHostName
+    - Local host name used in HELO command. If empty then fully qualified name of local system will be used.
+    -
+    - No
+  * - SMTP.Port
     - TCP port for SMTP server.
     - 25
     - No
-  * - SMTPRetryCount
+  * - SMTP.RetryCount
     - Number of retries for sending mail.
     - 1
     - No
-  * - SMTPServer
+  * - SMTP.Server
     - An SMTP server used for sending mail.
     - localhost
     - No
-  * - SNMPRequestTimeout
+  * - SNMP.Discovery.SeparateProbeRequests
+    - Use separate SNMP request for each test OID.
+    - 0
+    - No
+  * - SNMP.RequestTimeout
     - Timeout in milliseconds for SNMP requests sent by |product_name| server.
-    - 2000
+    - 1500
     - Yes
-  * - SNMPTrapLogRetentionTime
-    -
-    -
-    -
-  * - SNMPTrapPort
-    -
-    -
-    -
-  * - SlmPollingInterval
-    - Interval in seconds between business service polls.
-    - 60
+  * - SNMP.TrapLogRetentionTime
+    - The time how long SNMP trap logs are retained.
+    - 90
+    - No
+  * - SNMP.TrapPort
+    - Port used for SNMP traps.
+    - 162
     - Yes
   * - StatusCalculationAlgorithm
-    -
-    - 1
+    - Default alghorithm for calculation object status from it's DCIs, alarms and child objects. Possible values are:
+        - 1 - Most critical
+        - 2 - Single threshold. Threshold value is defined by StatusSingleThreshold parameter.
+        - 3 - Multiple thresholds. Threshold values are defined by StatusThresholds parameter.
+    - 1 - Most critical
     - Yes
   * - StatusPollingInterval
     - Interval in seconds between status polls.
     - 60
     - Yes
   * - StatusPropagationAlgorithm
-    - Algorithm for status propagation (how object's status affects its child object statuses). Possible values are:
-        - 0 - Default
+    - Default algorithm for status propagation (how object's status is affected by it's child object statuses). Possible values are:
         - 1 - Unchanged
-        - 2 - Fixed
-        - 3 - Relative
-        - 4 - Translated
-    - 1
+        - 2 - Fixed. Status value is defined by FixedStatusValue parameter.
+        - 3 - Relative with offset. Offset value is defined by StatusShift parameter.
+        - 4 - Translated. Status translation is defined by StatusTranslation parameter.
+    - 1 - Unchanged
     - Yes
   * - StatusShift
-    -
+    - Status shift value for **Relative** propagation algorithm.
     - 0
     - Yes
   * - StatusSingleThreshold
-    -
+    - Threshold value (in %) for **Single threshold** status calculation algorithm.
     - 75
     - Yes
   * - StatusThresholds
-    -
-    - 503C2814
+    - Threshold values for **Multiple thresholds** status calculation algorithm. Every byte (from left to right) of this hex number express threshold values for warning, minor, major and critical statuses.
+    - 503C2814 (80%, 60%, 40%, 20%)
     - Yes
   * - StatusTranslation
-    -
+    - Values for **Translated** status propagation algorithm. Every byte (form left to right) of this hex number defines status translation for Warning, Minor, Major and Critical statuses. Status values are:
+        - 1 - Warning
+        - 2 - Minor
+        - 3 - Major
+        - 4 - Critical
     - 01020304
     - Yes
   * - StrictAlarmStatusFlow
-    - This parameter describes if alarm status flow should be strict(alarm can be terminated only after it was resolved).
+    - This parameter describes if alarm status flow should be strict (alarm can be terminated only after it was resolved).
     - 0
     - No
   * - SyncInterval
     - Interval in seconds between writing object changes to the database.
     - 60
     - Yes
-  * - SyncNodeNamesWithDNS
-    - Enable (1) or disable (0) synchronization of node names with DNS on each configuration poll.
+  * - SyslogIgnoreMessageTimestamp
+    - Ignore timestamp received in syslog messages and always use server time.
     - 0
     - No
   * - SyslogListenPort
@@ -1243,71 +1339,138 @@ These parameters can be changed in
     - Yes
   * - SyslogNodeMatchingPolicy
     - Node matching policy for built-in syslog daemon. Possible values are:
-        - 0 - syslog message source IP address then hostname
-        - 1 - hostname then syslog message source IP address
+        - 0 - syslog message source IP address, then hostname
+        - 1 - hostname, then syslog message source IP address
     - 0
     - Yes
   * - SyslogRetentionTime
     - Retention time in days for records in syslog. All records older than specified will be deleted by housekeeping process.
     - 90
     - No
+
+
+
+
+  * - ThreadPool.Poller.BaseSize
+    - This parameter represents base thread pool size. From this pool will be taken threads for all types of polls: Status poll,
+      Configuration poll, etc. except DCI collection(:guilabel:`NumberOfDataCollectors`). This is minimal number of threads that will always run.
+    - 10
+    - Yes
+  * - ThreadPool.Poller.MaxSize
+    - This parameter represents maximum thread pool size till which pool can be increased. From this pool will be taken threads for
+      all types of polls: Status poll, Configuration poll, etc. except DCI collection(:guilabel:`NumberOfDataCollectors`). In case of big load on a server number of threads can be
+      increased till this size. When load come back to normal, number of threads will be automatically decreased to base size.
+    - 250
+    - Yes
+
+
+  * - ThreadPool.Agent.BaseSize
+    -
+    -
+    - Yes
+  * - ThreadPool.Agent.MaxSize
+    -
+    -
+    - Yes
+  * - ThreadPool.DataCollector.BaseSize
+    -
+    -
+    - Yes
+  * - ThreadPool.DataCollector.MaxSize
+    -
+    -
+    - Yes
   * - ThreadPool.Discovery.BaseSize
     -
-    - 1
+    -
     - Yes
   * - ThreadPool.Discovery.MaxSize
     -
-    - 16
+    -
     - Yes
+  * - ThreadPool.Main.BaseSize
+    -
+    -
+    - Yes
+  * - ThreadPool.Main.MaxSize
+    -
+    -
+    - Yes
+  * - ThreadPool.Poller.BaseSize
+    -
+    -
+    - Yes
+  * - ThreadPool.Poller.MaxSize
+    -
+    -
+    - Yes
+  * - ThreadPool.Scheduler.BaseSize
+    -
+    -
+    - Yes
+  * - ThreadPool.Scheduler.MaxSize
+    -
+    -
+    - Yes
+  * - ThreadPool.Syncer.BaseSize
+    -
+    -
+    - Yes
+  * - ThreadPool.Syncer.MaxSize
+    -
+    -
+    - Yes
+
+
+
   * - ThresholdRepeatInterval
     - System-wide interval in seconds for resending threshold violation events. Value of 0 disables event resending.
     - 0
     - Yes
   * - TileServerURL
-    -
-    - http://tile.openstreetmap.org/
+    - The base URL for the tile server used to draw maps.
+    - http://tile.netxms.org/osm/
     - No
-  * - TopologyDiscoveryRadius
-    -
-    - 3
-    - No
-  * - TopologyExpirationTime
-    -
+  * - Topology.AdHocRequest.ExpirationTime
+    - Ad-hoc network topology request expiration time. Server will use cached result of previous request if it is newer than given interval.
     - 900
     - No
-  * - TopologyPollingInterval
-    -
+  * - Topology.DefaultDiscoveryRadius
+    - Default number of hops from seed node to be added to topology map.
+    - 5
+    - No
+  * - Topology.PollingInterval
+    - Interval in seconds between topology polls.
     - 1800
     - Yes
+  * - TrapSourcesInAllZones
+    - Enable/disable search of all zones to match trap/syslog source address to node.
+    - 0
+    - Yes
   * - UseDNSNameForDiscoveredNodes
-    - Enable (1) or disable (0) use of DNS name instead of IP address as primary name for newly discovered nodes. If enabled, server will do back resolve of IP address, and then resolve obtained name back to IP address. Only if this IP address will match the original one, DNS name will be used.
+    - Enable/disable use of DNS name instead of IP address as primary name for newly discovered nodes. If enabled, server will do back resolve of IP address, and then resolve obtained name back to IP address. Only if this IP address will match the original one, DNS name will be used.
     - 0
     - No
   * - UseFQDNForNodeNames
-    - Enable (1) or disable (0) use of fully qualified domain names as primary names for newly discovered nodes.
+    - Enable/disable use of fully qualified domain names as primary names for newly discovered nodes.
     - 1
     - Yes
-  * - UseIfXTable
-    - Enable (1) or disable (0) use of SNMP ifXTable instead of ifTable for interface configuration polling.
-      See :ref:`snmp` for more information.
-    - 1
+  * - UserAgent.DefaultMessageRetentionTime
+    - Default user agent message retention time (in minutes).
+    - 10800
     - No
-  * - UseInterfaceAliases
-    - Control usage of interface aliases (or descriptions). Possible values are:
-        - 0 - Don’t use aliases;
-        - 1 - Use aliases instead of names, when possible;
-        - 2 - Concatenate alias and name to form interface object name.
-        - 3 - Concatenate name and alias to form interface object name.
-    - 0
+  * - UserAgent.RetentionTime
+    - User agent message historical data retention time (in days).
+    - 30
     - No
   * - UseSNMPTrapsForDiscovery
     - This parameter defines if trap information should be used for new node discovery.
     - 1
     - Yes
-  * - WindowsConsoleUpgradeURL
-    - URL pointing to the actual version of |product_name| Console for Windows. Console application will try to download new version from this URL, if it detects that upgrade is needed. You can use %version % macro inside the URL to insert actual server version.
-    - http://www.netxms.org/download/netxms-%version%.exe
-    - No
+  * - UseSyslogForDiscovery
+    - Enable/disable use of syslog messages for new node discovery.
+    - 0
+    - Yes
   * - XMPPLogin
     - Login name that will be used for authentication on XMPP server.
     - netxms@localhost

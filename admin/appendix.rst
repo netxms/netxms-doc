@@ -565,15 +565,15 @@ These parameters can be changed in
     - Retention time in days for the records in audit log. All records older than specified will be deleted by housekeeping process.
     - 90
     - No
-  * - BeaconHosts
+  * - Beacon.Hosts
     - Comma-separated list of hosts to be used as beacons for checking |product_name| server network connectivity. Either DNS names or IP addresses can be used. This list is pinged by |product_name| server and if none of the hosts have responded, server considers that connection with network is lost and generates specific event.
     -
     - Yes
-  * - BeaconPollingInterval
+  * - Beacon.PollingInterval
     - Interval in milliseconds between beacon hosts polls.
     - 1000
     - Yes
-  * - BeaconTimeout
+  * - Beacon.Timeout
     - Timeout in milliseconds to consider beacon host unreachable.
     - 1000
     - Yes
@@ -616,6 +616,10 @@ These parameters can be changed in
   * - Client.AlarmList.DisplayLimit
     - Maximum alarm count that will be displayed on :guilabel:`Alarm Browser` page. Alarms that exceed this count will not be shown.
     - 4096
+    - No
+  * - Client.MinViewRefreshInterval
+    - Minimal interval between view refresh in milliseconds (hint for client).
+    - 1000
     - No
   * - Client.ObjectBrowser.AutoApplyFilter
     - Enable/disable object browser''s filter applying as user types (if disabled, user has to press ENTER to apply filter).
@@ -758,11 +762,13 @@ These parameters can be changed in
     - 0
     - Yes
   * - DiscoveryFilter
-    -
+    - Name of discovery filter script from script library.
+      **This setting is changed by Network Discovery Configuration GUI**
     - none
     - No
   * - DiscoveryFilterFlags
-    -
+    - Discovery filter settings.
+      **This setting is changed by Network Discovery Configuration GUI**
     - 0
     - No
   * - EnableAgentRegistration
@@ -781,24 +787,16 @@ These parameters can be changed in
     - Enable/disable Inter-Server Communications Listener.
     - 0
     - Yes
-  * - EnableObjectTransactions
-    -
-    - 0
-    - Yes
   * - EnableReportingServer
     - Enable/disable reporting server
     - 0
-    - Yes
-  * - EnableSNMPTraps
-    - Enable/disable SNMP trap processing. A dedicated thread will be created if set to 1.
-    - 1
     - Yes
   * - EnableSyslogReceiver
     - Enable/disable receiving of syslog messages.
     - 0
     - Yes
   * - EnableTimedAlarmAck
-    -
+    - Enable/disable ability to acknowledge an alarm for a specific time.
     - 1
     - Yes
   * - EnableXMPPConnector
@@ -810,7 +808,7 @@ These parameters can be changed in
     - 0
     - Yes
   * - EscapeLocalCommands
-    - If enabled (1), TAB and new line characters are replaced by \t \n \r.
+    - Enable/disable TAB and new line characters replacement by \t \n \r in execute command on management server action.
     - 0
     - No
   * - EventLogRetentionTime
@@ -1047,10 +1045,6 @@ These parameters can be changed in
     - Default minimum password length for a |product_name| user. The default applied only if per-user setting is not defined.
     - 0
     - No
-  * - MinViewRefreshInterval
-    - Minimal refresh interval for object tree and alarm views to avoid frequent redraws when updates arrive from server.
-    - 1000
-    - No
   * - MobileDeviceListenerPort
     - Listener port for connections from |product_name| mobile agent.
     - 4747
@@ -1168,10 +1162,6 @@ These parameters can be changed in
     - The number of consecutive unsuccessful polls required to declare interface as down.
     - 1
     - Yes
-  * - ProcessTrapsFromUnmanagedNodes
-    - Enable/disable processing of SNMP traps received from node which is in unmanaged state.
-    - 0
-    - Yes
   * - RADIUSAuthMethod
     - RADIUS authentication method to be used (PAP, CHAP, MS-CHAPv1, MS-CHAPv2).
     - PAP
@@ -1232,12 +1222,10 @@ These parameters can be changed in
     - Identification color for this server. Used in status bar of management console.
     -
     - No
-
   * - ServerCommandOutputTimeout
-    -
+    - Time (in seconds) to wait for output of a local command object tool.
     - 60
     - No
-
   * - ServerName
     - Name of this server. Displayed in status bar of management console.
     -
@@ -1278,9 +1266,17 @@ These parameters can be changed in
     - The time how long SNMP trap logs are retained.
     - 90
     - No
-  * - SNMP.TrapPort
+  * - SNMP.Traps.Enable
+    - Enable/disable SNMP trap processing. A dedicated thread will be created if set to 1.
+    - 1
+    - Yes
+  * - SNMP.Traps.ListenerPort
     - Port used for SNMP traps.
     - 162
+    - Yes
+  * - SNMP.Traps.ProcessUnmanagedNodes
+    - Enable/disable processing of SNMP traps received from unmanaged nodes.
+    - 0
     - Yes
   * - StatusCalculationAlgorithm
     - Default alghorithm for calculation object status from it's DCIs, alarms and child objects. Possible values are:
@@ -1347,82 +1343,76 @@ These parameters can be changed in
     - Retention time in days for records in syslog. All records older than specified will be deleted by housekeeping process.
     - 90
     - No
-
-
-
-
+  * - ThreadPool.Agent.BaseSize
+    - This parameter represents base thread pool size for threads that receive data, traps, events, etc from agents.
+      This is minimal number of threads that will always run.
+    - 4
+    - Yes
+  * - ThreadPool.Agent.MaxSize
+    - This parameter represents maximum thread pool size for threads that receive data, traps, events, etc from agents.
+      In case of high load on existing threads server will increase number of threads up to this value. When load come back to normal, number of threads will be automatically decreased to base size.
+    - 4
+    - Yes
+  * - ThreadPool.DataCollector.BaseSize
+    - This parameter represents base thread pool size for data collector threads.
+      This is minimal number of threads that will always run.
+    - 10
+    - Yes
+  * - ThreadPool.DataCollector.MaxSize
+    - This parameter represents maximum thread pool size for data collector threads.
+      In case of high load on existing threads server will increase number of threads up to this value. When load come back to normal, number of threads will be automatically decreased to base size.
+    - 250
+    - Yes
+  * - ThreadPool.Discovery.BaseSize
+    - This parameter represents base thread pool size for network discovery threads.
+      This is minimal number of threads that will always run.
+    - 1
+    - Yes
+  * - ThreadPool.Discovery.MaxSize
+    - This parameter represents maximum thread pool size for network discovery threads.
+      In case of high load on existing threads server will increase number of threads up to this value. When load come back to normal, number of threads will be automatically decreased to base size.
+    - 16
+    - Yes
+  * - ThreadPool.Main.BaseSize
+    - This parameter represents base thread pool size for threads that perform general system tasks.
+      This is minimal number of threads that will always run.
+    - 8
+    - Yes
+  * - ThreadPool.Main.MaxSize
+    - This parameter represents maximum thread pool size for threads that perform general system tasks.
+      In case of high load on existing threads server will increase number of threads up to this value. When load come back to normal, number of threads will be automatically decreased to base size.
+    - 156
+    - Yes
   * - ThreadPool.Poller.BaseSize
-    - This parameter represents base thread pool size. From this pool will be taken threads for all types of polls: Status poll,
-      Configuration poll, etc. except DCI collection(:guilabel:`NumberOfDataCollectors`). This is minimal number of threads that will always run.
+    - This parameter represents base thread pool size for threads that perform all types of polls: Status poll, Configuration poll, etc. except DCI collection.
+      This is minimal number of threads that will always run.
     - 10
     - Yes
   * - ThreadPool.Poller.MaxSize
-    - This parameter represents maximum thread pool size till which pool can be increased. From this pool will be taken threads for
-      all types of polls: Status poll, Configuration poll, etc. except DCI collection(:guilabel:`NumberOfDataCollectors`). In case of big load on a server number of threads can be
-      increased till this size. When load come back to normal, number of threads will be automatically decreased to base size.
+    - This parameter represents maximum thread pool size for threads that perform all types of polls: Status poll, Configuration poll, etc. except DCI collection.
+      In case of high load on existing threads server will increase number of threads up to this value. When load come back to normal, number of threads will be automatically decreased to base size.
     - 250
     - Yes
-
-
-  * - ThreadPool.Agent.BaseSize
-    -
-    -
-    - Yes
-  * - ThreadPool.Agent.MaxSize
-    -
-    -
-    - Yes
-  * - ThreadPool.DataCollector.BaseSize
-    -
-    -
-    - Yes
-  * - ThreadPool.DataCollector.MaxSize
-    -
-    -
-    - Yes
-  * - ThreadPool.Discovery.BaseSize
-    -
-    -
-    - Yes
-  * - ThreadPool.Discovery.MaxSize
-    -
-    -
-    - Yes
-  * - ThreadPool.Main.BaseSize
-    -
-    -
-    - Yes
-  * - ThreadPool.Main.MaxSize
-    -
-    -
-    - Yes
-  * - ThreadPool.Poller.BaseSize
-    -
-    -
-    - Yes
-  * - ThreadPool.Poller.MaxSize
-    -
-    -
-    - Yes
   * - ThreadPool.Scheduler.BaseSize
-    -
-    -
+    - This parameter represents base thread pool size for scheduler threads.
+      This is minimal number of threads that will always run.
+    - 1
     - Yes
   * - ThreadPool.Scheduler.MaxSize
-    -
-    -
+    - This parameter represents maximum thread pool size for scheduler threads.
+      In case of high load on existing threads server will increase number of threads up to this value. When load come back to normal, number of threads will be automatically decreased to base size.
+    - 64
     - Yes
   * - ThreadPool.Syncer.BaseSize
-    -
-    -
+    - This parameter represents base thread pool size for threads that perform object synchronization to the database.
+      This is minimal number of threads that will always run.
+    - 1
     - Yes
   * - ThreadPool.Syncer.MaxSize
-    -
-    -
+    - This parameter represents maximum thread pool size for threads that perform object synchronization to the database.
+      In case of high load on existing threads server will increase number of threads up to this value. When load come back to normal, number of threads will be automatically decreased to base size. Value of 1 will disable pool creation. 
+    - 1
     - Yes
-
-
-
   * - ThresholdRepeatInterval
     - System-wide interval in seconds for resending threshold violation events. Value of 0 disables event resending.
     - 0

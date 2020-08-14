@@ -802,17 +802,20 @@ General:
 
   - Menu path - path where this summary table can be found. You can use
     ``->`` character pair to create subtree like "Linux->System information".
-  - Title - title of view.
+  - Title - title of the summary table.
 
 Columns:
 
   - This is the list if DCI's that will be shown on the summary table.
     Name is the name of column and DCI Name is DCI parameter name.
-    Multivalued column is intended to present string DCIs that contain several
-    values devided by specified separator. Each value is presented on a separate line in the column.
+     - Multivalued column is intended to present string DCIs that contain several
+       values divided by specified separator. Each value is presented on a separate line in the column.
+     - If ``Use regular expression for parameter name matching`` is enabled, a regular expression is specified in ``DCI name`` field.
+       If several DCIs will be matched on a node, only one will be displayed.
+  - Import button allows to select a DCI from existing object.
 
 Filter:
-  - Filter script is executed on for each node to determine, if that node is included to the summary table.
+  - Filter script is executed for each node to determine, if that node should be included in a summary table.
     Filter script is defined with help of :term:`NXSL` scripting language.
 
 

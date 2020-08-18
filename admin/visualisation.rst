@@ -810,9 +810,10 @@ Columns:
     Name is the name of column and DCI Name is DCI parameter name.
      - Multivalued column is intended to present string DCIs that contain several
        values divided by specified separator. Each value is presented on a separate line in the column.
-     - If ``Use regular expression for parameter name matching`` is enabled, a regular expression is specified in ``DCI name`` field.
+     - If **Use regular expression for parameter name matching** is enabled, a regular expression is specified in **DCI name** field.
        If several DCIs will be matched on a node, only one will be displayed.
   - Import button allows to select a DCI from existing object.
+
 
 Filter:
   - Filter script is executed for each node to determine, if that node should be included in a summary table.

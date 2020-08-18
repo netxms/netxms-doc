@@ -1278,6 +1278,14 @@ These parameters can be changed in
     - Enable/disable processing of SNMP traps received from unmanaged nodes.
     - 0
     - Yes
+  * - SNMP.Traps.RateLimit.Duration
+    - Time period (in seconds) for SNMP traps per second to be above threshold that defines SNMP trap flood condition.
+    - 15
+    - No
+  * - SNMP.Traps.RateLimit.Threshold
+    - Threshold for number of SNMP traps per second that defines SNMP trap flood condition. Detection is disabled if 0 is set.
+    - 0
+    - No
   * - StatusCalculationAlgorithm
     - Default alghorithm for calculation object status from it's DCIs, alarms and child objects. Possible values are:
         - 1 - Most critical
@@ -1410,7 +1418,7 @@ These parameters can be changed in
     - Yes
   * - ThreadPool.Syncer.MaxSize
     - This parameter represents maximum thread pool size for threads that perform object synchronization to the database.
-      In case of high load on existing threads server will increase number of threads up to this value. When load come back to normal, number of threads will be automatically decreased to base size. Value of 1 will disable pool creation. 
+      In case of high load on existing threads server will increase number of threads up to this value. When load come back to normal, number of threads will be automatically decreased to base size. Value of 1 will disable pool creation.
     - 1
     - Yes
   * - ThresholdRepeatInterval

@@ -807,6 +807,10 @@ alarms, or actions. You may use the following macros to accomplish this:
      - User tag associated with the event.
    * - ``%v``
      - |product_name| server's version.
+   * - ``%z``
+     - Zone UIN of event source object.
+   * - ``%Z``
+     - Zone name of event source object.
    * - ``%[name]``
      - Value returned by script. You should specify name of the script from script library.
    * - ``%{name}``

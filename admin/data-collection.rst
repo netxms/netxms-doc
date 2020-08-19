@@ -587,10 +587,12 @@ Other options
 Other available options:
 
     - Show last value in object tooltip - shows DCI last value on tooltip that is shown on network maps.
-    - Show last value in object overview - shows DCI last value on :guilabel:`Object Details`->:guilabel:`Overview` page.
+    - Show last value in object overview - shows DCI last value on :guilabel:`Object Details`->\ :guilabel:`Overview` page.
     - Use this DCI for node status calculation - Uses value returned by this DCI as a status, that
       participate in object status calculation. Such kind of DCI should
       return integer number from 0 till 4 representing object status.
+    - Related object - object that is related to collected DCI. Related object can be set by instance discovery filter script 
+      by using `Instance()` function and accessed in NXSL from DCI object. 
 
 
 .. figure:: _images/dci_other_opt_page.png

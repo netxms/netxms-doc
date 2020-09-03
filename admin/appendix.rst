@@ -538,10 +538,6 @@ These parameters can be changed in
     - Schedule for sending alarm summary e-mails in cron format. See :ref:`cron_format` for supported cron format options.
     - 0 0 * * *
     - No
-  * - AllowDirectNotifications
-    - Allow (1) or disallow (0) sending of notification via NetXMS server using nxnotify utility.
-    - 0
-    - No
   * - AllowedCiphers
     - A bitmask for encryption algorithms allowed in the server
       (sum of the values to allow multiple algorithms at once):
@@ -612,7 +608,7 @@ These parameters can be changed in
   * - CheckTrustedNodes
     - Enable/disable checking of trusted nodes list for cross-node data collection (using Proxy Node DCI attribute).
     - 1
-    - Yes
+    - No
   * - Client.AlarmList.DisplayLimit
     - Maximum alarm count that will be displayed on :guilabel:`Alarm Browser` page. Alarms that exceed this count will not be shown.
     - 4096
@@ -689,6 +685,10 @@ These parameters can be changed in
     - Number of queues for DCI data writer.
     - 1
     - Yes
+  * - DBWriter.HouseKeeperInterlock
+    - Controls if server should block background write of collected performance data while housekeeper deletes expired records. Auto enables this feature is server is running on MsSQL database.
+    - Auto
+    - No
   * - DBWriter.MaxQueueSize
     - Maximum size for DCI data writer queue (0 to disable size limit). If writer queue size grows above that threshold any new data will be dropped until queue size drops below threshold again.
     - 0
@@ -746,7 +746,7 @@ These parameters can be changed in
     - SMTP-HTML
     - Yes
   * - DefaultNotificationChannel.SMTP.Text
-    - Default notification channel for SMTP text formatted messages. 
+    - Default notification channel for SMTP text formatted messages.
     - SMTP-Text
     - Yes
   * - DefaultSubnetMaskIPv6
@@ -827,6 +827,14 @@ These parameters can be changed in
     - Enable/disable topology based event correlation.
     - 1
     - Yes
+  * - Events.Processor.PoolSize
+    - Number of threads for parallel event processing.
+    - 1
+    - Yes
+  * - Events.Processor.QueueSelector
+    - Queue selector for parallel event processing. In parallel processing server ensures that events having same queue selector will be processed in one queue.
+    - Yes
+    - %z
   * - EventStorm.Duration
     - Time period for events per second to be above threshold that defines event storm condition.
     - 15
@@ -1105,7 +1113,7 @@ These parameters can be changed in
   * - NXSL.EnableFileIOFunctions
     - Enable/disable server-side NXSL functions for file I/O (such as OpenFile, DeleteFile, etc.).
     - 0
-    - Yes
+    - No
   * - Objects.Interfaces.DefaultExpectedState
     - Default expected state for new interface objects.
     - 1
@@ -1218,6 +1226,10 @@ These parameters can be changed in
     - The port of the reporting server.
     - 4710
     - Yes
+  * - RoamingServer
+    - Enable/disable roaming mode for server (when server can be disconnected from one network and connected to another or IP address of the server can change)
+    - 0
+    - No
   * - RoutingTableUpdateInterval
     - Interval in seconds between reading routing table from node.
     - 300

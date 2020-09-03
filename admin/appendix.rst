@@ -737,10 +737,18 @@ These parameters can be changed in
     - Default background color for new network map objects (as RGB value).
     - 0xffffff
     - No
-  * - DefaultSubnetMaskIPv4
-    - Default mask for synthetic IPv4 subnets.
-    - 24
+  * - DefaultMapBackgroundColor
+    - Default background color for new network map objects (as RGB value).
+    - 0xffffff
     - No
+  * - DefaultNotificationChannel.SMTP.Html
+    - Default notification channel for SMTP HTML formatted messages.
+    - SMTP-HTML
+    - Yes
+  * - DefaultNotificationChannel.SMTP.Text
+    - Default notification channel for SMTP text formatted messages. 
+    - SMTP-Text
+    - Yes
   * - DefaultSubnetMaskIPv6
     - Default mask for synthetic IPv6 subnets.
     - 64
@@ -776,7 +784,7 @@ These parameters can be changed in
     - 1
     - No
   * - EnableAlarmSummaryEmails
-    - Enable/disable alarm summary emails.
+    - Enable/disable alarm summary emails. Summary emails will be sent via notification channel specified in DefaultNotificationChannel.SMTP.Html server configuration parameter.
     - 0
     - No
   * - EnableAuditLog

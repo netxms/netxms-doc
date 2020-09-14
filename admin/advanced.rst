@@ -580,7 +580,7 @@ Objects
 Get multiple objects with filters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Request to get all objects available to this user or to get objects that fulfil
+Request to get all objects available to this user or to get objects that fulfill
 filter requirements and are available to this user.
 
 Request type: **GET**
@@ -590,8 +590,13 @@ Request path: *API_HOME*/objects
 Filter options:
 
     * area=\ *geographical area*
-    * class=\ *class list*
-    * name=\ *pattern*
+    * class=\ *comma-separated class list*
+    * name=\ *pattern or regex, if useRegex=true*
+    * parent=\ *parent object id*
+    * topLevelOnly=\ *boolean - select top level objects only. false by default*
+    * useRegex=\ *boolean - treat name and custom attribute value as regex. false by default*
+    * zone=\ *comma-separated list of zone UINs*
+    * @custom_attribute_name=\ *pattern or regex, if useRegex=true*
 
 Return data:
 
@@ -615,32 +620,44 @@ Alarms
 
 Full scope of currently active alarms can be obtained or object specific list.
 
-All alarms
-^^^^^^^^^^
+Get multiple alarms with filters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Request to get all active alarms available to this user.
+Request to get all active alarms available to this user or to get active alarms that fulfill
+filter requirements and are available to this user.
 
 Request type: **GET**
 
 Request path: *API_HOME*/alarms
 
+Filter options:
+
+    * alarm=\ *list of alarm states. Possible values: outstanding, acknowledged, resolved*
+    * createdBefore=\ *UNIX timestamp*
+    * createdAfter=\ *UNIX timestamp*
+    * objectId=\ *ID or related object*
+    * objectGuid=\ *GUID or related object*
+    * includeChildObjects=\ *boolean. Set to true to get alarms of container child objects*
+    * resolveReferences=\ *resolve IDs into human readable data*
+    * updatedBefore=\ *UNIX timestamp*
+    * updatedAfter=\ *UNIX timestamp*
+
 Return data:
 
-    Will return all active alarms available to this user.
+    Will return filtered active alarms or all active alarms available to user.
 
-All node alarms
-^^^^^^^^^^^^^^^
+Alarm by id
+^^^^^^^^^^^
 
-Request to get all active alarms for exact object identified by ID or GUID.
+Request to get an alarm by it's ID.
 
 Request type: **GET**
 
-Request path: *API_HOME*/alarms/**{object-id}**
+Request path: *API_HOME*/alarms/**{alarm-id}**
 
 Return data:
 
-    Will return all active alarms available to this user for requested node.
-
+    Will return alarm specified by ID.
 
 DCI Data
 ~~~~~~~~

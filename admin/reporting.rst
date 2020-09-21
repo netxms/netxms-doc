@@ -199,7 +199,7 @@ Setup
 3. (Optional)Create logger configuration: conf/logback.xml (sample attached),
    detailed description here: http://logback.qos.ch/manual/configuration.html#syntax
 
-   .. code-block:: xml
+    .. code-block:: xml
 
         <?xml version="1.0" encoding="UTF-8"?>
         <configuration>
@@ -255,9 +255,9 @@ Setup
     instead (connection is maintained by reporting server).
 
 5. Create workspace directory (as set by "workspace" parameter), it will contain both report
-   definitions and intermediate report data (in "output" directory).
+   definitions (in "definitions" directory) and intermediate report data (in "output" directory).
 
-6. Put report definition jars into workspace/definitions/:
+6. Put report definition jars into workspace/definitions/, for example:
 
     .. code-block:: none
 
@@ -273,8 +273,14 @@ Setup
    in GUI - server configuration, or using command line: "nxdbmgr set
    EnableReportingServer 1"), then restart netxmsd.
 
-8. Create additional tables by executing both scripts from
-   https://git.netxms.org/public/netxms.git/tree/refs/heads/develop:/src/java/nxreporting/sql
+8. Create additional tables by executing both scripts for your type of database from sql folder, for example:
+
+    .. code-block:: sh
+        nxdbmgr batch sql/postgres/nxreporting.sql
+        nxdbmgr batch sql/postgres/quartz.sql
+
+  It may be required to comment out "drop table" statements in the beginning of quartz.sql file. 
+
 
 9. Start reporting server:
 

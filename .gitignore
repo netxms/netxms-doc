@@ -1,6 +1,7 @@
 _build
 _build_html
 .DS_Store
+.vscode
 *.swp
 *.pyc
 *.pyo

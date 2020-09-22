@@ -276,6 +276,7 @@ Setup
 8. Create additional tables by executing both scripts for your type of database from sql folder, for example:
 
     .. code-block:: sh
+    
         nxdbmgr batch sql/postgres/nxreporting.sql
         nxdbmgr batch sql/postgres/quartz.sql
 

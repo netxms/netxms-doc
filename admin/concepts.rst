@@ -280,8 +280,14 @@ Event Processing
 |product_name| is event based monitoring system. Events can come from different sources
 (polling processes (status, configuration, discovery, and data collection), :term:`SNMP`
 traps, and directly from external applications via client library).
-All events all are forwarded to |product_name| Event Queue. All events are processed by |product_name|
-Event Processor one-by-one, according to the processing rules defined in
+All events all are forwarded to |product_name| Event Queue. 
+
+|product_name| Event Processor can process events from Event Queue in 
+either sequential or parallel mode. In sequential mode events are processed one-by-one.
+Parallel processing mode allows to process events in several parallel threads, thus 
+increasing processing performance. See :ref:`event-processing` for more information.  
+
+Events in the Event Queue are processed according top rules defined in
 :term:`Event Processing Policy<EPP>`. As a result of event processing, preconfigured
 actions can be executed, and/or event can be shown up as :term:`alarm <Alarm>`.
 

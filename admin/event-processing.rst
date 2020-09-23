@@ -4,6 +4,34 @@
 Event processing
 ################
 
+Introduction
+============
+
+|product_name| is event based monitoring system. Events can come from different sources
+(polling processes (status, configuration, discovery, and data collection), :term:`SNMP`
+traps, from NXSL scripts and directly from external applications via client library).
+All events all are forwarded to |product_name| Event Queue. 
+
+|product_name| Event Processor can process events from Event Queue in 
+either sequential or parallel mode. In sequential mode events are processed one-by-one 
+which guarantees that events will be processed in the same sequence as they arrive
+onto |product_name| server. For installation where a lot of events could be generated
+in a short period of time this mode can be a bottleneck. 
+
+Parallel processing mode allows to process events in several parallel threads, thus 
+allowing to scale horizontally and increasing processing performance. Number of 
+threads for parallel processing is set by :guilabel:`Events.Processor.PoolSize` 
+server configuration parameter. 
+
+Event Processing Rules can read/write persistent storage, create/terminate alarms, 
+can have scripts that are checking other node statuses and care shuld be taken to
+ensure that no race condition would occur when performing parallel processing.
+
+Correct operation is ensured by properly setting :guilabel:`Events.Processor.QueueSelector` 
+server configuration parameter. This parameter contains macros that are expanded when
+an event is created. Events that have same QueueSelector string will be processed 
+one-by-one by one and the same event processing thread, thus ensuring that there will 
+be no race condition between these events. 
 
 Event Processing Policy
 =======================
@@ -22,14 +50,13 @@ matched events.
 
 Each event passes through all rules in the policy, so if it matches more
 than one rule, actions specified in all matched rules will be executed. You can
-change this behavior by setting Stop Processing flag for the rule. If this flag
-is set and rule matched, processing of current event will be stopped.
+change this behavior by setting Stop Processing flag actual the rule. If this flag
+is set for a rule and that rule is matched, processing of current event will be stopped.
 
 You can create and modify :guilabel:`Event Processing Policy` using
 :guilabel:`Event Processing Policy Editor`. To access the
 :guilabel:`Event Processing Policy Editor` window, press ``F4`` or select
 :menuselection:`Tools --> Event Processing Policy` menu.
-
 
 To create event policy right click on entry before or after which new Event
 Processing Policy should appear and select :guilabel:`Insert before` or
@@ -37,7 +64,7 @@ Processing Policy should appear and select :guilabel:`Insert before` or
 
 .. figure:: _images/epp_entity_menue.png
 
-  Edit buttons
+  Event Processing Policy item context menu
 
 To edit Event Processing Policy, filter or action click on icon in right
 corner of an entry, it will open general properties of Event Processing Policy.
@@ -125,9 +152,9 @@ alarm represents something that needs attention of network administrators or
 network control center operators, for example low free disk space on a server.
 
 All alarm events are logged to alarm log. The number of days the server keeps
-an alarm history can be configured by "AlarmHistoryRetentionTime" server
+alarm history can be configured by "AlarmHistoryRetentionTime" server
 configuration parameter. Alarm log can be viewed in "Alarm Log View"(Alt+F8).
-This view give option to query in alarm log required information.
+This view gives option to query for required information from alarm log. 
 
 .. figure:: _images/alarm_log.png
 

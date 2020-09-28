@@ -773,9 +773,6 @@ Persistent Storage variables.
 
 .. figure:: _images/pstorage.png
 
-.. Note::
-    Situations functionality is deprecated. Persistent storage should be used instead.
-
 .. _event-processing-macros:
 
 Macros for Event Processing

@@ -101,8 +101,6 @@ The following system access rights can be granted:
      - Allow user to configure object tools. :ref:`object_tools`
    * - Configure server actions
      - Allow user to configure server actions. :ref:`event-processing`
-   * - Configure situations
-     - Allow user to configure situations. :ref:`event-processing`
    * - Configure SNMP traps
      - Allow user to configure SNMP trap mapping.
    * - Control user sessions

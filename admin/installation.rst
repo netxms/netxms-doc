@@ -227,7 +227,8 @@ Server
      shown. Follow the prompts until the Select Components window opens.
   3. On the Select Components window, select |product_name| Server option and an appropriate
      database client library. You do not have to install database client library
-     from |product_name| package, if it is already installed on the machine.
+     from |product_name| package, if it is already installed on the machine (however, it might 
+     be required to add folder where the client library is installed to system path). 
 
     .. figure:: _images/win_netxms_setup_components.png
 
@@ -261,6 +262,15 @@ Server
   * Enter the desired database name, database user name and password. If you are not
     using ODBC, the wizard will create database and a user for you. If ODBC is used,
     database and user should be created beforehand.
+
+    **MySQL note**
+    Bundled MySQL database drive does not support caching_sha2_password authentication 
+    which is default for MySQL starting from version 8. Either select 
+    Legacy Authentication Method when installing MySQL, or use database driver 
+    installed along with MySQL. 
+    Database driver gets installed when installing MySQL with Server-only option, however these
+    two folders should be included into system path: C:\Program Files\MySQL\MySQL Server 8.0\lib 
+    C:\Program Files\MySQL\MySQL Server 8.0\bin. 
 
     **Microsoft SQL note**:
 
@@ -659,7 +669,7 @@ Configuration is check in next order:
 
   4. Environment variable NXMC_NAME=VALUE. For example NXMC_server=127.0.0.1
 
-  5. If non of above configuration exists, Web UI tries to resolve "NETXMS_server" DNS name for server connection.
+  5. If non of above configuration exists, Web UI tries to resolve "NETXMS_SERVER" DNS name for server connection.
 
   6. If none of above configuration exists, Web UI uses "127.0.0.1" as a server address. 
 

@@ -724,7 +724,8 @@ MySQL
 .. code-block:: sh
 
   echo "CREATE DATABASE netxms;" | mysql -u root -p
-  echo "GRANT ALL on netxms.* to 'netxms'@'localhost' IDENTIFIED BY 'PaSsWd';" | mysql -u root -p
+  echo "CREATE USER 'netxms'@'localhost' IDENTIFIED BY 'PaSsWd';" | mysql -u root -p
+  echo "GRANT ALL on netxms.* to 'netxms'@'localhost';" | mysql -u root -p
 
 
 Configuration file example:

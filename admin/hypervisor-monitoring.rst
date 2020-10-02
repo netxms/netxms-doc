@@ -20,7 +20,7 @@ is defined in separate section for each host.
 Each host configuration should contain connection URL. Login and password parameters are optional. URL creation
 rules for each vitalization solution type can be found `in libvirt documentation <http://libvirt.org/drivers.html>`_.
 
-Not all api functions are supported by all hypervisors in libvirt. See `libvirt API support matrix : <https://libvirt.org/hvsupport.html>`_ for more information.
+Not all api functions are supported by all hypervisors in libvirt. See `libvirt API support matrix <https://libvirt.org/hvsupport.html>`_ for more information.
 
 
 Configuration example

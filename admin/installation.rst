@@ -269,8 +269,9 @@ Server
     Legacy Authentication Method when installing MySQL, or use database driver 
     installed along with MySQL. 
     Database driver gets installed when installing MySQL with Server-only option, however these
-    two folders should be included into system path: C:\Program Files\MySQL\MySQL Server 8.0\lib 
-    C:\Program Files\MySQL\MySQL Server 8.0\bin. 
+    two folders should be included into system path: :file:`C:\\Program Files\\MySQL\\MySQL Server 8.0\\lib` 
+    :file:`C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin`. 
+
 
     **Microsoft SQL note**:
 

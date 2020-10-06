@@ -173,7 +173,8 @@ Install core agent package ("netxms-agent") and optional subagent packages, if r
 Management console
 ~~~~~~~~~~~~~~~~~~
 
-Desktop Management Console:
+Desktop Management Console
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
  1. Download the latest version from http://www.netxms.org/download. You will need
     Linux installer(named nxmc-VERSION-linux-gtk-x64.tar.gz, for example
@@ -187,8 +188,12 @@ Desktop Management Console:
 
  3. Run nxmc file from "/DESTINATION_DIRECTORY".
 
+Desktop management console produces log file .nxmc/data/.metadata/.log in home folder of currently logged user. 
+Inspect this log file if you encounter errors when running the console. 
 
-Web Management Console:
+
+Web Management Console
+^^^^^^^^^^^^^^^^^^^^^^
 
 |product_name| web interface is java based and should be deployed into servlet container to
 run. Minimal supported versions: Jetty 9.3.28, Tomcat 8.5.
@@ -205,6 +210,10 @@ run. Minimal supported versions: Jetty 9.3.28, Tomcat 8.5.
      Tomcat default folder:  /var/lib/tomcat9/webapps
 
      Jetty default folder: $JETTY_HOME/webapps/
+
+Desktop management console produces log file. For Tomcat it's located at 
+ /var/lib/tomcat9/work/Catalina/localhost/nxmc/eclipse/workspace/.metadata/.log. 
+ Inspect this log file if you encounter errors when running the web console. 
 
 
 Installing on Red Hat, Fedora, CentOS or ScientificLinux

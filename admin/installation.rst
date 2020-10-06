@@ -189,7 +189,7 @@ Desktop Management Console
  3. Run nxmc file from "/DESTINATION_DIRECTORY".
 
 
-Desktop management console produces log file .nxmc/data/.metadata/.log in home folder of currently logged user. 
+Desktop management console produces log file :file:`.nxmc/data/.metadata/.log` in home folder of currently logged user. 
 Inspect this log file if you encounter errors when running the console. 
 
 
@@ -213,8 +213,8 @@ run. Minimal supported versions: Jetty 9.3.28, Tomcat 8.5.
      Jetty default folder: $JETTY_HOME/webapps/
 
 
-Desktop management console produces log file. For Tomcat it's located at 
-/var/lib/tomcat9/work/Catalina/localhost/nxmc/eclipse/workspace/.metadata/.log. 
+Web management console produces log file. For Tomcat it's located at 
+:file:`/var/lib/tomcat9/work/Catalina/localhost/nxmc/eclipse/workspace/.metadata/.log.` 
 Inspect this log file if you encounter errors when running the web console. 
 
 

@@ -542,16 +542,12 @@ These parameters can be changed in
     - A bitmask for encryption algorithms allowed in the server
       (sum of the values to allow multiple algorithms at once):
         - 1 - AES256
-        - 2 - Blowfish
+        - 2 - Blowfish-256
         - 4 - IDEA
         - 8 - 3DES
         - 16 - AES128
         - 32 - Blowfish-128
     - 63
-    - Yes
-  * - AllowTrapVarbindsConversion
-    - Allows/disallows conversion of SNMP trap OCTET STRING varbinds into hex strings if they contain non-printable characters.
-    - 1
     - Yes
   * - ApplyDCIFromTemplateToDisabledDCI
     - Set to 1 to apply all DCIs from a template to the node, including disabled ones.
@@ -615,7 +611,7 @@ These parameters can be changed in
     - No
   * - Client.MinViewRefreshInterval
     - Minimal interval between view refresh in milliseconds (hint for client).
-    - 1000
+    - 300
     - No
   * - Client.ObjectBrowser.AutoApplyFilter
     - Enable/disable object browser''s filter applying as user types (if disabled, user has to press ENTER to apply filter).
@@ -797,10 +793,6 @@ These parameters can be changed in
     - Yes
   * - EnableReportingServer
     - Enable/disable reporting server
-    - 0
-    - Yes
-  * - EnableSyslogReceiver
-    - Enable/disable receiving of syslog messages.
     - 0
     - Yes
   * - EnableTimedAlarmAck
@@ -1041,10 +1033,6 @@ These parameters can be changed in
     - Unique identifier for LDAP user object. If not set, LDAP users are identified by DN.
     -
     - No
-  * - LogAllSNMPTraps
-    - Log all SNMP traps.
-    - 0
-    - Yes
   * - LongRunningQueryThreshold
     - Threshold in milliseconds to report long running SQL queries (0 to disable). Queries are logged to |product_name| server log file on debug level 3.
     - 0
@@ -1110,6 +1098,10 @@ These parameters can be changed in
     - The number of threads used to perform agent upgrades (i.e. maximum number of parallel upgrades).
     - 10
     - No
+  * - NXSL.EnableContainerFunctions
+    - 
+    - 
+    - 
   * - NXSL.EnableFileIOFunctions
     - Enable/disable server-side NXSL functions for file I/O (such as OpenFile, DeleteFile, etc.).
     - 0
@@ -1274,6 +1266,10 @@ These parameters can be changed in
     - An SMTP server used for sending mail.
     - localhost
     - No
+  * - SNMP.Traps.AllowVarbindsConversion
+    - Allows/disallows conversion of SNMP trap OCTET STRING varbinds into hex strings if they contain non-printable characters.
+    - 1
+    - No
   * - SNMP.Discovery.SeparateProbeRequests
     - Use separate SNMP request for each test OID.
     - 0
@@ -1282,6 +1278,10 @@ These parameters can be changed in
     - Timeout in milliseconds for SNMP requests sent by |product_name| server.
     - 1500
     - Yes
+  * - SNMP.Traps.LogAll
+    - Log all SNMP traps (even those received from addresses not belonging to any known node).
+    - 0
+    - No
   * - SNMP.TrapLogRetentionTime
     - The time how long SNMP trap logs are retained.
     - 90
@@ -1297,7 +1297,7 @@ These parameters can be changed in
   * - SNMP.Traps.ProcessUnmanagedNodes
     - Enable/disable processing of SNMP traps received from unmanaged nodes.
     - 0
-    - Yes
+    - No
   * - SNMP.Traps.RateLimit.Duration
     - Time period (in seconds) for SNMP traps per second to be above threshold that defines SNMP trap flood condition.
     - 15
@@ -1353,22 +1353,26 @@ These parameters can be changed in
     - Interval in seconds between writing object changes to the database.
     - 60
     - Yes
-  * - SyslogIgnoreMessageTimestamp
+  * - Syslog.EnableListener
+    - Enable/disable receiving of syslog messages.
+    - 0
+    - Yes
+  * - Syslog.IgnoreMessageTimestamp
     - Ignore timestamp received in syslog messages and always use server time.
     - 0
     - No
-  * - SyslogListenPort
+  * - Syslog.ListenPort
     - UDP port used by built-in syslog server.
     - 514
     - Yes
-  * - SyslogNodeMatchingPolicy
+  * - Syslog.NodeMatchingPolicy
     - Node matching policy for built-in syslog daemon. Possible values are:
         - 0 - syslog message source IP address, then hostname
         - 1 - hostname, then syslog message source IP address
     - 0
     - Yes
-  * - SyslogRetentionTime
-    - Retention time in days for records in syslog. All records older than specified will be deleted by housekeeping process.
+  * - Syslog.RetentionTime
+    - Retention time in days for stored syslog messages. All messages older than specified will be deleted by housekeeping process.
     - 90
     - No
   * - ThreadPool.Agent.BaseSize

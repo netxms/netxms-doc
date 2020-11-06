@@ -808,6 +808,7 @@ Columns:
 
   - This is the list if DCI's that will be shown on the summary table.
     Name is the name of column and DCI Name is DCI parameter name.
+
      - Multivalued column is intended to present string DCIs that contain several
        values divided by specified separator. Each value is presented on a separate line in the column.
      - If **Use regular expression for parameter name matching** is enabled, a regular expression is specified in **DCI name** field.

@@ -124,8 +124,8 @@ def setup(app):
     for d in extDirs:
         exclude_patterns.append(d[7:]) # remove 'source/'
 
-    app.add_stylesheet("theme_overrides.css")
-    if product_name is 'NetXMS':
+    app.add_css_file("theme_overrides.css")
+    if product_name == 'NetXMS':
         app.add_config_value('release_type', 'oss', 'env')
     else:
         app.add_config_value('release_type', 'ee', 'env')

@@ -4,7 +4,7 @@ Introduction
 
 This document covers installation, configuration, and use of |product_name|.
 
-.. ifconfig:: release_type is 'oss'
+.. ifconfig:: release_type == 'oss'
 
    |product_name| is an enterprise grade multi-platform modular open source network management
    and monitoring system. It provides comprehensive event management,
@@ -14,7 +14,7 @@ This document covers installation, configuration, and use of |product_name|.
    a wide range of supported platforms. It is licensed under the GNU General Public
    License version 2 as published by the Free Software Foundation.
 
-.. ifconfig:: release_type is not 'oss'
+.. ifconfig:: release_type != 'oss'
 
    |product_name| is an enterprise grade multi-platform modular network management
    and monitoring system. It provides comprehensive event management,
@@ -27,7 +27,7 @@ This document covers installation, configuration, and use of |product_name|.
    This document only covers core platform, product-specific extensions are documented in corresponding manuals.
 
 
-.. ifconfig:: release_type is 'oss'
+.. ifconfig:: release_type == 'oss'
 
   Product Support
   ===============
@@ -65,7 +65,7 @@ The following typographical conventions are used in this manual.
 +----------------------------------+------------------------------------------+
 
 
-.. ifconfig:: release_type is 'oss'
+.. ifconfig:: release_type == 'oss'
 
   Changelog
   =========

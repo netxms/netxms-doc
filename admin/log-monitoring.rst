@@ -22,7 +22,7 @@ For Windows Event Log agent keeps status information in Windows registry. On
 agent start records that were added while the agent was stopped will be parsed.
 
 Log parser also provides some additional statistic information through
-:term:`metric`\ s. More information can be found in :ref:`log-monitoring-parameters` chapter.
+:term:`Metric`\ s. More information can be found in :ref:`log-monitoring-parameters` chapter.
 
 
 
@@ -114,7 +114,7 @@ In the ``<parser>`` tag you can specify the following options:
 |            | log file.                                            |               |
 +------------+------------------------------------------------------+---------------+
 | name       | Parser name that is used in statistic information    | *empty*       |
-|            | :term:`metric`\ s. See                               |               |
+|            | :term:`Metric`\ s. See                               |               |
 |            | :ref:`log-monitoring-parameters`                     |               |
 |            | for more information.                                |               |
 +------------+------------------------------------------------------+---------------+
@@ -707,7 +707,7 @@ Username will be sent to the event as %1, IP address will not be sent, and login
 Log parser parameters
 =====================
 
-Log parser provides some additional statistic information through :term:`metric`\ s.
+Log parser provides some additional statistic information through :term:`Metric`\ s.
 Metrics take name of particular parser as an argument. If name is not set, then file name is used.
 
 Statistic information is reset on agent startup and when log parser policy is reapplied.

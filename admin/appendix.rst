@@ -541,6 +541,7 @@ These parameters can be changed in
   * - AllowedCiphers
     - A bitmask for encryption algorithms allowed in the server
       (sum of the values to allow multiple algorithms at once):
+
         - 1 - AES256
         - 2 - Blowfish-256
         - 4 - IDEA

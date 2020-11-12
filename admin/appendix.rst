@@ -487,7 +487,7 @@ These parameters can be changed in
 :menuselection:`Configuration --> Server Configuration`
 
 .. list-table::
-  :widths: 25 40 15 5
+  :widths: 30 37 10 8
   :header-rows: 1
 
   * - Parameter
@@ -1309,6 +1309,7 @@ These parameters can be changed in
     - No
   * - StatusCalculationAlgorithm
     - Default alghorithm for calculation object status from it's DCIs, alarms and child objects. Possible values are:
+
         - 1 - Most critical
         - 2 - Single threshold. Threshold value is defined by StatusSingleThreshold parameter.
         - 3 - Multiple thresholds. Threshold values are defined by StatusThresholds parameter.
@@ -1320,6 +1321,7 @@ These parameters can be changed in
     - Yes
   * - StatusPropagationAlgorithm
     - Default algorithm for status propagation (how object's status is affected by it's child object statuses). Possible values are:
+
         - 1 - Unchanged
         - 2 - Fixed. Status value is defined by FixedStatusValue parameter.
         - 3 - Relative with offset. Offset value is defined by StatusShift parameter.
@@ -1340,6 +1342,7 @@ These parameters can be changed in
     - Yes
   * - StatusTranslation
     - Values for **Translated** status propagation algorithm. Every byte (form left to right) of this hex number defines status translation for Warning, Minor, Major and Critical statuses. Status values are:
+
         - 1 - Warning
         - 2 - Minor
         - 3 - Major
@@ -1368,6 +1371,7 @@ These parameters can be changed in
     - Yes
   * - Syslog.NodeMatchingPolicy
     - Node matching policy for built-in syslog daemon. Possible values are:
+
         - 0 - syslog message source IP address, then hostname
         - 1 - hostname, then syslog message source IP address
     - 0

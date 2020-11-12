@@ -32,14 +32,25 @@ device attached to the host add line in the following format:
 
  Device = id:port:protocol
 
-where id is a number in range 0 .. 127 which will be used in requests to identify
-device; port is a communication port for serial connection or UPS serial number
-for USB connection; and protocol is a communication protocol used by connected device.
-Protocol can be either APC (for APC devices), BCMXCP (for devices using BCM/XCP
-protocol – for example, HP, Compaq, or PowerWare devices), or USB for USB-attached
-devices. Below is an example of UPS configuration section for two devices attached
-via serial ports, one is APC device (configured as device 0) and one is HP device
-(configured as device 1):
+``id`` is an arbitrary but unique number in range 0 to 127, which is used to
+distinguish multiple UPS devices in further requests.
+
+``device`` is either name of the serial port (e.g. `COM1:` or `/dev/ttyS0`) or
+serial number of the USB device (keyword `ANY` can be used instead of exact serial
+number to select first available).
+
+``protocol`` specify which communication protocol should be used. Supported protocols:
+
+* APC
+* BCMXCP - Some of the HP/Compaq, PowerWare, etc.
+* MEGATEC
+* METASYS
+* MICRODOWELL
+* USB - HID UPS devices (currently Windows only)
+
+
+Sample configuration section for two devices attached via serial ports, one is APC device
+(configured as device 0) and one is HP device (configured as device 1):
 
 .. code-block:: cfg
 
@@ -117,36 +128,6 @@ Most typical approach is to monitor UPS.OnlineStatus for going to 1 or 2, and th
 send notifications to administrators and shutdown affected hosts if needed. You can
 also monitor UPS.EstimatedRuntime parameter for the same purposes if your devices
 support it.
-
-
-Simple Scenario
-===============
-
-Consider the following simple scenario: you have two servers, Node_A and Node_B,
-connected to one UPS device. UPS device is APC Smart UPS 1700, connected with serial
-cable to Node_A on first COM port. Both nodes are running Windows operating system.
-You need to notify administrator if UPS goes to battery power, and shutdown both
-nodes in case of low battery condition. We assume that both nodes have |product_name| agent
-installed.
-To accomplish this, do the following:
-
-**Step 1.**
-
-Configure UPS monitoring subagent on Node_A. Add the following line to main agent's
-config section:
-
-.. code-block:: cfg
-
-  SubAgent = ups.nsm
-
-At the end of configuration file, create UPS subagent configuration section:
-
-.. code-block:: cfg
-
-  # UPS subagent configuration section
-  [UPS]
-  Device = 0:"COM1:":APC
-
 
 SNMP UPS monitoring
 ===================

@@ -1361,6 +1361,10 @@ These parameters can be changed in
     - Enable/disable receiving of syslog messages.
     - 0
     - Yes
+  * - Syslog.EnableStorage
+    - Enable/disable local storage of received syslog messages in |product_name| database.
+    - 1
+    - No
   * - Syslog.IgnoreMessageTimestamp
     - Ignore timestamp received in syslog messages and always use server time.
     - 0
@@ -1498,6 +1502,15 @@ These parameters can be changed in
     - Enable/disable use of syslog messages for new node discovery.
     - 0
     - Yes
+  * - WindowsEvents.EnableStorage
+    - Enable/disable local storage of received Windows events in |product_name| database.
+    - 1
+    - No
+    - Yes
+  * - WindowsEvents.LogRetentionTime
+    - Retention time in days for records in Windows event log. All records older than specified will be deleted by housekeeping process.
+    - 90
+    - No
   * - XMPPLogin
     - Login name that will be used for authentication on XMPP server.
     - netxms@localhost

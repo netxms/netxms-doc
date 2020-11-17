@@ -1506,7 +1506,6 @@ These parameters can be changed in
     - Enable/disable local storage of received Windows events in |product_name| database.
     - 1
     - No
-    - Yes
   * - WindowsEvents.LogRetentionTime
     - Retention time in days for records in Windows event log. All records older than specified will be deleted by housekeeping process.
     - 90

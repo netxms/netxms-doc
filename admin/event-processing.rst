@@ -795,6 +795,8 @@ alarms, or actions. You may use the following macros to accomplish this:
        same event processing policy rule).
    * - ``%c``
      - Event's code.
+   * - ``%E``
+     - List of comma-separated user tags associated with the event.     
    * - ``%g``
      - Globally unique identifier (GUID) of event source object.
    * - ``%i``
@@ -827,8 +829,6 @@ alarms, or actions. You may use the following macros to accomplish this:
    * - ``%T``
      - Event's timestamp as a number of seconds since epoch (as returned by
        `time() <http://linux.die.net/man/2/time>`_ function).
-   * - ``%u``
-     - User tag associated with the event.
    * - ``%v``
      - |product_name| server's version.
    * - ``%z``

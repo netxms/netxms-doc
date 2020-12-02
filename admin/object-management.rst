@@ -959,6 +959,8 @@ The following macros recognized:
      - Unique ID of event source object in decimal form.
    * - ``%n``
      - Name of event source object.
+   * - ``%u``
+     - IP address of event source object for use in URL. Expands into [addr] for IPv6 and addr for IPv4.
    * - ``%U``
      - User name of user that launched the object tool from user interface
    * - ``%v``

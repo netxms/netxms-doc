@@ -504,24 +504,38 @@ Discovery Methods
 The following instance discovery methods are available:
 
 
-================== =========== =================================================
-Method             Input Data  Description
-================== =========== =================================================
-Agent List         List name   Read list from agent and use it's values as
-                               instance names.
-Agent Table        Table name  Read table from agent and use it's instance
-                               column values as instance names. If there are
-                               several instance columns in that table, a
-                               concatenation of values will be used, separated
-                               by ``~~~`` (three tilda characters).
-SNMP Walk - Values Base OID    Do SNMP walk starting from given OID and use
-                               values of returned varbinds as instance names.
-SNMP Walk - OIDs   Base OID    Do SNMP walk starting from given OID and use IDs
-                               of returned varbinds as instance names.
-Script             Script name Instance names are provided by script from script
-                               library. The script should return an array
-                               of instance names.
-================== =========== =================================================
+============================= =============== =================================================
+Method                        Input Data      Description
+============================= =============== =================================================
+Agent List                    List name       Read list from agent and use it's values as
+                                              instance names.
+Agent Table                   Table name      Read table from agent and use it's instance
+                                              column values as instance names. If there are
+                                              several instance columns in that table, a
+                                              concatenation of values will be used, separated
+                                              by ``~~~`` (three tilda characters).
+SNMP Walk - Values            Base OID        Do SNMP walk starting from given OID and use
+                                              values of returned varbinds as instance names.
+SNMP Walk - OIDs              Base OID        Do SNMP walk starting from given OID and use IDs
+                                              of returned varbinds as instance names.
+Script                        Script name     Instance names are provided by script from script
+                                              library. The script should return an array
+                                              of instance names.
+Windows Performance Counters  Path            Each sub-element of given path will be
+                                              considered as separate instance. 
+Web Service                   Definition:path Web service request field contains web service 
+                                              definition name with optional arguments and path 
+                                              to the root element of the document where 
+                                              enumeration will start. Each sub-element of 
+                                              given root element will be 
+                                              considered separate instance.
+Internal Table                Table name      Read |product_name| server internal table 
+                                              and use it's instance column values
+                                              as instance names. If there are
+                                              several instance columns in that table, a
+                                              concatenation of values will be used, separated
+                                              by ``~~~`` (three tilda characters).
+============================= =============== =================================================
 
 
 Instance Filter

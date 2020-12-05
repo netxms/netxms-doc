@@ -90,10 +90,10 @@ Possible server file configuration:
   * - Parameter
     - Description
     - Required
-  * - ServerCACertificate
+  * - TrustedCertificate
     - Your certificate authority certificate or self generated :term:`CA` certificate. If certificate
       chain for server certificate is longer all upper level certificates should be added to
-      configuration file by adding multiple ServerCACertificate entries.
+      configuration file by adding multiple TrustedCertificate entries.
     - Yes
   * - ServerCertificate
     - Certificate issued by certificate authority.
@@ -165,7 +165,7 @@ Add newly created certificates to server configuration (netxmsd.conf file).
 
 .. code-block:: cfg
 
-    ServerCACertificate = /opt/netxms/key/rootCA.crt
+    TrustedCertificate = /opt/netxms/key/rootCA.crt
     ServerCertificate = /opt/netxms/key/server.crt
     ServerCertificateKey = /opt/netxms/key/server.key
 

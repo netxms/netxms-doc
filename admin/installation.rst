@@ -417,12 +417,16 @@ Unattended installation of |product_name| Agent
 
 Windows Agent installer (named nxagent-VERSION.exe, for example nxagent-3.4.178.exe),
 has various command line options for unattended installation. Installation will ignore
-any configuration file options (/CONFIGENTRY, /NOSUBAGENT, /SERVER, /SUBAGENT) if config
-file already exists or if /CENTRALCONFIG option is used. These options are following:
+any configuration file options (/CONFIGENTRY, /NOSUBAGENT, /SERVER, /SUBAGENT, etc) if config
+file already exists or if /CENTRALCONFIG option is used. However, it's possible to 
+delete and recreate the configuration file with /FORCECREATECONFIG command line option. 
+
+
+The options are following:
 
 .. list-table::
    :header-rows: 1
-   :widths: 1 3
+   :widths: 12 30
 
    * - Option
      - Description
@@ -440,6 +444,13 @@ file already exists or if /CENTRALCONFIG option is used. These options are follo
    * - /FILESTORE=path
      - Sets directory to be used for storing files uploaded by management server(s)
        (will be set in configuration file as ``FileStore``).
+   * - /FORCECREATECONFIG
+     - Delete existing agent configuration file and recreate it. However, settings stored by installer
+       in Windows registry will be used, if not explicitly specified by command line parameters. See ``/IGNOREPREVIOUSDATA``.        
+   * - /IGNOREPREVIOUSDATA
+     - Ignore any settings from previous install that are not explicitly specified in current run. This is 
+       related to settings that can be changed when installer is run in GUI mode, e.g. list of selected sub-agents. 
+       These settings are stored in Windows registry. 
    * - /LOCALCONFIG
      - Use local configuration file (it is the default).
    * - /LOG
@@ -450,8 +461,12 @@ file already exists or if /CENTRALCONFIG option is used. These options are follo
        If a file with the specified name already exists it will be overwritten. 
        If the file cannot be created, Setup will abort with an error message.
    * - /LOGFILE=filename
-     - Allows to specify a path/filename to use for the agent log file 
-       (will be set in configuration file as ``LogFile``).
+     - Set agent log file (will be set in configuration file as ``LogFile``).
+   * - /MERGETASKS=”tasknames”
+     - Comma-separated list of tasks for installation. If a task is specified with ! character
+       prior to it's name, it will be deselected. Possible values are ``fspermissions`` - set hardened file system permissions, 
+       ``sessionagent`` - Install session agent, ``useragent`` - Install user support application. 
+       e.g. ``/MERGETASKS="!fspermissions,useragent"``
    * - /NOSUBAGENT=name
      - Disable subagent name
    * - /NOTUNNEL

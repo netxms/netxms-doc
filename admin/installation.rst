@@ -427,25 +427,46 @@ file already exists or if /CENTRALCONFIG option is used. These options are follo
    * - Option
      - Description
    * - /CENTRALCONFIG
-     - Read configuration from server on startup
+     - Enable read configuration from server on startup. See :ref:`agent_configuration_files_on_server` 
+       for more information. 
    * - /CONFIGENTRY=value
-     - It can be used to add any parameter to configuration file during initial install. You can specify it multiple times to add multiple lines. Section names can be added as well.
+     - It can be used to add any parameter to configuration file during initial install. 
+       You can specify it multiple times to add multiple lines. Section names can be added as well.
+   * - /CONFIGINCLUDEDIR=path
+     - Set folder containing additional configuration files 
+       (will be set in configuration file as ``ConfigIncludeDir``).
    * - /DIR=path
-     - Set installation directory (default is C:\\NetXMS)
+     - Set installation directory (default is ``C:\NetXMS``).
+   * - /FILESTORE=path
+     - Sets directory to be used for storing files uploaded by management server(s)
+       (will be set in configuration file as ``FileStore``).
    * - /LOCALCONFIG
-     - Use local configuration file (it is the default)
+     - Use local configuration file (it is the default).
    * - /LOG
-     - Causes Setup to create a log file in the user's TEMP directory detailing file installation and [Run] actions taken during the installation process.
+     - Causes Setup to create a log file in the user's TEMP directory detailing file 
+       installation and [Run] actions taken during the installation process.
+   * - /LOG=filename
+     - Same as /LOG, except it allows to specify a fixed path/filename to use for the log file. 
+       If a file with the specified name already exists it will be overwritten. 
+       If the file cannot be created, Setup will abort with an error message.
+   * - /LOGFILE=filename
+     - Allows to specify a path/filename to use for the agent log file 
+       (will be set in configuration file as ``LogFile``).
    * - /NOSUBAGENT=name
      - Disable subagent name
+   * - /NOTUNNEL
+     - Disable tunnel operation (it is the default)
    * - /SERVER=IP
-     - Set server IP address or host name (will be set in configuration file as MasterServers)
+     - Set server IP address or host name (will be set in configuration file as ``MasterServers``).
    * - /SILENT
      - Don't show installation wizard, only a progress bar
    * - /SUBAGENT=name
-     - Add sub-agent loading directive to configuration file. You can specify this parameter multiple times to add more than one sub-agent. List of possible subagents: :ref:`subagent_list`.
+     - Add sub-agent loading directive to configuration file. You can specify this
+       parameter multiple times to add more than one sub-agent. List of possible subagents: :ref:`subagent_list`.
    * - /SUPPRESSMSGBOXES
-     - Don't ask user anything
+     - Don't ask user anything. Only has an effect when combined with ``/SILENT`` and ``/VERYSILENT``.
+   * - /TUNNEL
+     - Enable tunnel operation to IP address specified with ``/SERVER=``. 
    * - /VERYSILENT
      - Don't show anything
 

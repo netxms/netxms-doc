@@ -343,13 +343,13 @@ already existing object to container use :guilabel:`Bind...` menu item. To remov
 from container, but do not delete it use :guilabel:`Unbind...` menu item.
 
 Using :guilabel:`Manage`/:guilabel:`Unmanage` all nodes will be managed/unmanaged under
-container. Container can be deleted. If deleted container was the only one parent of
-the object, then this object will be also deleted. :guilabel:`Upload file...` will
+container. Container can be deleted. If deleted container was the only parent of
+an object, then this object will be also deleted. :guilabel:`Upload file...` will
 upload file from server to all nodes under container, same as each tool under
 :guilabel:`Tools` menu item will be executed on each node.
 
 :guilabel:`Execute server script`   will open
-:ref:`execute server script view <execute_server_script>`. Were arbitrary script can
+:ref:`execute server script view <execute_server_script>`. Where an arbitrary script can
 be executed. :guilabel:`Geolocation` will show location of container on geographic map.
 
 :guilabel:`Alarms` will open alarm view with all active alarms for all children of this

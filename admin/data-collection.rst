@@ -37,7 +37,7 @@ a data source.
 .. versionadded:: 2.0-M5
     Agent caching mode
 
-By default DCI data is not collected while connection between server and agent is
+By default DCI data is not collected for the time being while connection between server and agent is
 broken as poll request could not get till agent. There is special configuration
 that allows to collect data and store it on agent till connection with server is
 restored and collected data is pushed to the server. This option is available for
@@ -88,7 +88,7 @@ For |product_name| agent and internal parameters it will be parameter name, and 
 SNMP agent it will be an SNMP OID. You can use the :guilabel:`Select` button
 for easier selection of required parameter name.
 
-Available agent parameter names are obtained while :guilabel:`Configuration poll`.
+Available agent parameter names are obtained during :guilabel:`Configuration poll`.
 
 Origin
 ~~~~~~
@@ -656,7 +656,7 @@ Instance Discovery methods. List DCI values can be also obtained with
 Agent caching mode
 ==================
 
-Agent caching mode allows metric data to be obtained while connection between
+Agent caching mode allows metric data to be obtained for the time being while connection between
 server and agent have been broken. This option is available for metrics, table
 metrics and proxy SNMP metrics. Not implemented for proxy SNMP table metrics and
 DCIs with custom schedule. In the absence of connection to the server collected

@@ -180,6 +180,7 @@ performed on agent restart. So to immediately apply new configuration select :gu
 This option will save configuration file and automatically restart the agent.
 If just :guilabel:`Save` is selected, then agent should be manually restarted to apply new configuration.
 
+.. _agent_configuration_files_on_server:
 
 Agent configuration files on server
 -----------------------------------

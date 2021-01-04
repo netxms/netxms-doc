@@ -128,6 +128,12 @@ To specify Windows Event Log, prepend it's name with asterisk (``*``),
 for example ``*System``. Multiples ``<file>`` tags can be used -
 in this case same rules will be applied to all files.
 
+In file and folder names the following macros can be used:
+
+  - Environment variables as %{ENV_VAR_NAME}
+  - `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_ macros (e.g. ``C:\Windows\system32\dhcp\DhcpSrvLog-%a``)
+  - Text inside \` braces will be executed as a command and first line of output will be taken
+
 .. list-table::
    :header-rows: 1
    :widths: 50 200 200

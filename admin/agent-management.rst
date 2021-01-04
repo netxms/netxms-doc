@@ -378,11 +378,11 @@ where uploaded file and folder structure should be placed. After folder
 structure is created files can be added to this structure. On policy apply folders will be
 created if possible and files will be uploaded.
 
-In file and folder names next macro can be used:
+In file and folder names the following macros can be used:
 
   - Environment variables as %{ENV_VAR_NAME}
   - `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_ macros
-  - Text inside \` braces will be executed as a command and first line of result will substitute the command with the braces
+  - Text inside \` braces will be executed as a command and first line of output will be taken
 
 
 Example:

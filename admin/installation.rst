@@ -471,6 +471,8 @@ The options are following:
      - Disable subagent name
    * - /NOTUNNEL
      - Disable tunnel operation (it is the default)
+   * - /REINSTALLSERVICE
+     - Reinstalls Windows service
    * - /SERVER=IP
      - Set server IP address or host name (will be set in configuration file as ``MasterServers``).
    * - /SILENT

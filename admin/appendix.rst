@@ -171,7 +171,8 @@ Agent configuration file (nxagentd.conf)
      - Enable (yes) or disable (no) action execution by agent.
      - yes
    * - EnableArbitraryCommandExecution
-     - Enables server to run any shell command on the agent without specifying it as action in agent's config file.
+     - **Not yet implemented.** Enables server to run any shell command on the agent without specifying it as action in agent's config file. 
+       Enabling this adds **System.Execute** action (and also **System.ExecuteInAllSessions** on Windows). 
      - no
    * - EnabledCiphers
      - Controls what ciphers agent can use for connection encryption. A value for this parameter is a cipher code. To enable more than one cipher, the codes should be summed up.

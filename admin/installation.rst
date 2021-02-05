@@ -155,7 +155,13 @@ Provided driver packages:
 
 .. code-block:: sh
 
-  systemctl start netxms-server
+  systemctl start netxmsd
+
+#. Enable automatic startup of server:
+
+.. code-block:: sh
+
+  systemctl enable netxmsd
 
 .. note::
 
@@ -169,6 +175,18 @@ Install core agent package ("netxms-agent") and optional subagent packages, if r
 .. code-block:: sh
 
   apt-get install netxms-agent
+
+Start agent
+
+.. code-block:: sh
+
+  systemctl start nxagentd
+
+Enable automatic startup of agent
+
+.. code-block:: sh
+
+  systemctl enable nxagentd
 
 Management console
 ~~~~~~~~~~~~~~~~~~

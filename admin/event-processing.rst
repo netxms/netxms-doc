@@ -39,13 +39,25 @@ Event Processing Policy
 Actions taken by event processor for any specific event are determined by a set
 of rules called :guilabel:`Event Processing Policy` (EPP).
 
+:guilabel:`Event Processing Policy` rules are managed using 
+:guilabel:`Event Processing Policy Editor`. To access the
+:guilabel:`Event Processing Policy Editor` window, press ``F4`` or select
+:menuselection:`Tools --> Event Processing Policy` menu.
+
+Only one user of |product_name| server can access :guilabel:`Event Processing 
+Policy Editor` window at a time. Other users will receive ``Component locked`` 
+error message when attempting to open this window. 
+
+Changes made in :guilabel:`Event Processing Policy Editor` are applied at the moment
+when ``Save`` button is clicked. 
+
 .. figure:: _images/event_processing_policy.png
 
    Event Processing Policy Screen
 
 Every rule has two parts - matching part (called :guilabel:`Condition` in the
 rule configuration dialog), which determines if the rule is applicable to an
-event, and action part, which determines actions to be taken for
+event, and action part, which defines actions to be taken for
 matched events.
 
 Each event passes through all rules in the policy, so if it matches more
@@ -54,16 +66,13 @@ change this behavior by setting Stop Processing flag on a rule. If this flag
 is set for a rule and that rule is matched, subsequent rules (with higher rule 
 number) will not be processed.
 
-You can create and modify :guilabel:`Event Processing Policy` rules using
-:guilabel:`Event Processing Policy Editor`. To access the
-:guilabel:`Event Processing Policy Editor` window, press ``F4`` or select
-:menuselection:`Tools --> Event Processing Policy` menu.
+To expand or collapse a rule, double click on its title. 
 
 To create event policy rule, right click on entry before or after which new Event
 Processing Policy should appear and select :guilabel:`Insert before` or
 :guilabel:`Insert after`. Drag and drop can be used for rule reorganization.
 
-.. figure:: _images/epp_entity_menue.png
+.. figure:: _images/epp_context_menu.png
 
   Event Processing Policy item context menu
 
@@ -122,8 +131,8 @@ Properties of Event Processing Policy rule have the following sections:
        to using timer key. This allows cancelling a timer or checking, if its still running
        from NXSL script. 
    * - Action --> Timer Cancellations
-     - List of timers identified by timer keys to cancel. Timers are ran if an action is 
-       delayed or snoozed. 
+     - List of timers to cancel identified by timer keys. This allows to cancel delayed 
+       actions and snooze/blocking timers.
    * - Comments
      - Rule comment which can be multi-line text. The comment is displayed as a name of the rule.
 
@@ -135,10 +144,9 @@ Properties of Event Processing Policy rule have the following sections:
 
 .. figure:: _images/epp_toolbar.png
 
-  Description of EPP toolbar form left to right: save changes, expand all, collapse all, horizontal layout, vertical layout, cut EPP, copy EPP, paset EPP, delete EPP
+  Description of EPP toolbar form left to right: save changes, expand all, collapse all, horizontal layout, vertical layout, cut EPP, copy EPP, paste EPP, delete EPP
 
-
-***After all manipulations are done - save changes by pressing save icon.***
+**After all manipulations are done - save changes by pressing save icon.**
 
 Examples
 --------

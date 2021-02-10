@@ -19,46 +19,47 @@ onto |product_name| server. For installation where a lot of events could be gene
 in a short period of time this mode can be a bottleneck. 
 
 Parallel processing mode allows to process events in several parallel threads, thus 
-allowing to scale horizontally and increasing processing performance. Number of 
+allowing to scale horizontally and to increase processing performance. Number of 
 threads for parallel processing is set by :guilabel:`Events.Processor.PoolSize` 
 server configuration parameter. 
 
-Event Processing Rules can read/write persistent storage, create/terminate alarms, 
-can have scripts that are checking other node statuses and care shuld be taken to
+Event Processing Rules can read/write persistent storage and custom attributes, create/terminate alarms, 
+can run scripts that are checking other node statuses and care should be taken to
 ensure that no race condition would occur when performing parallel processing.
 
 Correct operation is ensured by properly setting :guilabel:`Events.Processor.QueueSelector` 
 server configuration parameter. This parameter contains macros that are expanded when
 an event is created. Events that have same QueueSelector string will be processed 
-one-by-one by one and the same event processing thread, thus ensuring that there will 
+sequentially by one and the same event processing thread, thus ensuring that there will 
 be no race condition between these events. 
 
 Event Processing Policy
 =======================
 
 Actions taken by event processor for any specific event are determined by a set
-of rules called :guilabel:`Event Processing Policy`.
+of rules called :guilabel:`Event Processing Policy` (EPP).
 
 .. figure:: _images/event_processing_policy.png
 
    Event Processing Policy Screen
 
 Every rule has two parts - matching part (called :guilabel:`Condition` in the
-rule configuration dialog), which determines if the rule is appropriate for the
-current event, and action part, which determines actions to be taken for
+rule configuration dialog), which determines if the rule is applicable to an
+event, and action part, which determines actions to be taken for
 matched events.
 
 Each event passes through all rules in the policy, so if it matches more
 than one rule, actions specified in all matched rules will be executed. You can
-change this behavior by setting Stop Processing flag actual the rule. If this flag
-is set for a rule and that rule is matched, processing of current event will be stopped.
+change this behavior by setting Stop Processing flag on a rule. If this flag
+is set for a rule and that rule is matched, subsequent rules (with higher rule 
+number) will not be processed.
 
-You can create and modify :guilabel:`Event Processing Policy` using
+You can create and modify :guilabel:`Event Processing Policy` rules using
 :guilabel:`Event Processing Policy Editor`. To access the
 :guilabel:`Event Processing Policy Editor` window, press ``F4`` or select
 :menuselection:`Tools --> Event Processing Policy` menu.
 
-To create event policy right click on entry before or after which new Event
+To create event policy rule, right click on entry before or after which new Event
 Processing Policy should appear and select :guilabel:`Insert before` or
 :guilabel:`Insert after`. Drag and drop can be used for rule reorganization.
 
@@ -66,17 +67,17 @@ Processing Policy should appear and select :guilabel:`Insert before` or
 
   Event Processing Policy item context menu
 
-To edit Event Processing Policy, filter or action click on icon in right
-corner of an entry, it will open general properties of Event Processing Policy.
+To edit Event Processing Policy's properties, click edit button in right
+corner of an entry, or double-click text in Filter or Action text. 
 
 .. figure:: _images/epp_edit_button.png
 
   Edit buttons
 
-In EPP properties there are following sections:
+Properties of Event Processing Policy rule have the following sections:
 
 .. list-table::
-   :widths: 25 75
+   :widths: 35 65
    :header-rows: 1
 
    * - Section
@@ -86,35 +87,45 @@ In EPP properties there are following sections:
        If checkbox :guilabel:`Rule is disabled` is set, this rule is ignored.
    * - Condition --> Source Objects
      - One or more event's source objects. This list can be left empty, which
-       matches any node, or contain nodes, subnets, or containers. If you
-       specify subnet or container, any node within it will be matched.
+       matches any object, or contain nodes, subnets, containers, clusters, etc...
+       If you specify subnet, container, cluster, rack or chassis, any object 
+       within it will also be matched.
    * - Condition --> Events
      - Event code. This field can be left empty, which matches any event, or
-       list of event codes.
+       contain list of applicable events. 
    * - Condition --> Severity Filter
      - Event's severity. This field contains selection of event severities to
        be matched.
    * - Condition --> Filtering Script
-     - Optional matching script written in NXSL. If this field is empty, no
+     - Optional matching script written in NXSL. If this field is empty 
+       (or only contains comments according to NXSL language specification), no
        additional checks are performed. Otherwise, the event will be considered as
-       matched only if the script returns non-zero (``TRUE``) return code. For
+       matched only if the script returns boolean ``true`` (or other value that is 
+       considered true in NXSL language, e.g. non-zero number or array). For
        more information about |product_name| scripting language please refer to the
        chapter :ref:`scripting` in this manual.
    * - **Action**
-     - Sub-sections of **Action** section determine what actions are performed if an event meets condition.
-       If checkbox :guilabel:`Stop event processing` is set, then subsequent rules (with higher rule number) will not be processed for a given event.
+     - Sub-sections of **Action** section determine what actions are performed if an 
+       event meets all conditions of a rule. If checkbox :guilabel:`Stop event processing` 
+       is set, then subsequent rules (with higher rule number) will not be processed for a 
+       given event. However, actions of given rule will be performed. 
    * - Action --> Alarm
-     - There can be set rules connected with alarm generation. Alarm can be created,
-       resolved or terminated or no action to alarms is done.
+     - Action in regard to alarms. Alarm can be created, resolved or terminated or no action 
+       to alarms is done. See :ref:`generating_and_terminating_alarms` for more information. 
    * - Action --> Persistent Storage
-     - :ref:`nxsl_persistent_storage` action like add/update or delete can be made.
+     - :ref:`nxsl_persistent_storage` action like add/update or delete can be performed.
    * - Action --> Server Actions
-     - Here a list of actions is defined to be executed if condition is met. For action
-       configuration refer to :ref:`actions` chapter.
+     - List of predefined actions to be executed. Action execution could be delayed with 
+       ability to cancel a delayed action later on. Execution of action could be snoozed 
+       for a specified period of time. For action configuration refer to :ref:`actions` chapter.
+       Delayed execution and snoozing is controlled using timers which can be referred 
+       to using timer key. This allows cancelling a timer or checking, if its still running
+       from NXSL script. 
    * - Action --> Timer Cancellations
-     - Here a list of timers is defined that should be canceled if condition is met.
+     - List of timers identified by timer keys to cancel. Timers are ran if an action is 
+       delayed or snoozed. 
    * - Comments
-     - Here a comment can be added. The comment is displayed as a name of the rule.
+     - Rule comment which can be multi-line text. The comment is displayed as a name of the rule.
 
 
 
@@ -302,10 +313,10 @@ To enable Alarm Summary Emails it is required to configure the following server 
 
 Further information on server configuration parameters can be found in :ref:`server_configuration_parameters`.
 
-.. _generating_alarms:
+.. _generating_and_terminating_alarms:
 
-Generating Alarms
------------------
+Generating and Terminating Alarms from EPP
+------------------------------------------
 
 To generate alarms from events, you should edit :guilabel:`Alarm` field in
 appropriate rule of :guilabel:`Event Processing Policy`. Alarm configuration
@@ -380,7 +391,7 @@ you can use macros described in the :ref:`event-processing-macros` chapter.
 Escalation
 ----------
 
-As it was described in :ref:`generating_alarms` chapter there is possibility to generate new
+As it was described in :ref:`generating_and_terminating_alarms` chapter there is possibility to generate new
 event if alarm stay in :guilabel:`Outstanding` state for too long. Escalation is built on
 this option. When alarm was generated, but no action was done from operator in predefined time,
 new event can be generated and this time email or notification (SMS, instant message)

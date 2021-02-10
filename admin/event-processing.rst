@@ -39,22 +39,6 @@ Event Processing Policy
 Actions taken by event processor for any specific event are determined by a set
 of rules called :guilabel:`Event Processing Policy` (EPP).
 
-:guilabel:`Event Processing Policy` rules are managed using 
-:guilabel:`Event Processing Policy Editor`. To access the
-:guilabel:`Event Processing Policy Editor` window, press ``F4`` or select
-:menuselection:`Tools --> Event Processing Policy` menu.
-
-Only one user of |product_name| server can access :guilabel:`Event Processing 
-Policy Editor` window at a time. Other users will receive ``Component locked`` 
-error message when attempting to open this window. 
-
-Changes made in :guilabel:`Event Processing Policy Editor` are applied at the moment
-when ``Save`` button is clicked. 
-
-.. figure:: _images/event_processing_policy.png
-
-   Event Processing Policy Screen
-
 Every rule has two parts - matching part (called :guilabel:`Condition` in the
 rule configuration dialog), which determines if the rule is applicable to an
 event, and action part, which defines actions to be taken for
@@ -66,7 +50,20 @@ change this behavior by setting Stop Processing flag on a rule. If this flag
 is set for a rule and that rule is matched, subsequent rules (with higher rule 
 number) will not be processed.
 
-To expand or collapse a rule, double click on its title. 
+:guilabel:`Event Processing Policy` rules are managed using :guilabel:`Event 
+Processing Policy Editor`. To access the :guilabel:`Event Processing Policy Editor`
+window, press ``F4`` or select :menuselection:`Tools --> Event Processing Policy` menu.
+
+.. figure:: _images/event_processing_policy.png
+
+   Event Processing Policy Screen
+
+To expand or collapse a rule, double click on its title or use ``Expand/collapse`` button
+on the right hand side of rule title. 
+
+Event Processing Policy Editor window toolbar buttons have the following meaning (from 
+left to right): Add new rule, Save changes, Expand all, Collapse all, Horizontal layout, 
+Vertical layout, Cut rule, Copy rule, Paste rule, Delete rule.
 
 To create event policy rule, right click on entry before or after which new Event
 Processing Policy should appear and select :guilabel:`Insert before` or
@@ -82,6 +79,13 @@ corner of an entry, or double-click text in Filter or Action text.
 .. figure:: _images/epp_edit_button.png
 
   Edit buttons
+
+Only one user of |product_name| server can access :guilabel:`Event Processing 
+Policy Editor` window at a time. Other users will receive ``Component locked`` 
+error message when attempting to open this window. 
+
+Changes made in :guilabel:`Event Processing Policy Editor` are applied at the moment
+when ``Save`` button is clicked. 
 
 Properties of Event Processing Policy rule have the following sections:
 
@@ -135,16 +139,6 @@ Properties of Event Processing Policy rule have the following sections:
        actions and snooze/blocking timers.
    * - Comments
      - Rule comment which can be multi-line text. The comment is displayed as a name of the rule.
-
-
-
-.. figure:: _images/epp_properties.png
-
-  Event Processing Policy properties
-
-.. figure:: _images/epp_toolbar.png
-
-  Description of EPP toolbar form left to right: save changes, expand all, collapse all, horizontal layout, vertical layout, cut EPP, copy EPP, paste EPP, delete EPP
 
 **After all manipulations are done - save changes by pressing save icon.**
 

@@ -70,6 +70,12 @@ the same machine as |product_name| server, increase your hardware requirements a
 Link to Excel file that allows roughly estimate the size that will be required for
 database: http://git.netxms.org/public/netxms.git/blob/HEAD:/doc/misc/database_sizing.xlsx
 
+Java
+----
+
+Java is needed for Desktop Management Console (nxmc) and for Web Management Console. 
+Supported Java version are 11 and 15. 
+
 Agent
 -----
 
@@ -194,17 +200,19 @@ Management console
 Desktop Management Console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
- 1. Download the latest version from http://www.netxms.org/download. You will need
+ 1. Make sure you have 64-bit Java version 11 or 15 installed you your system. 
+    Due to limitation of Eclipse platform used to build the Management Console,
+    only x64 build is provided.
+
+ 2. Download the latest version from http://www.netxms.org/download. You will need
     Linux installer(named nxmc-VERSION-linux-gtk-x64.tar.gz, for example
     nxmc-3.4.178-linux-gtk-x64.tar.gz).
-    Due to limitation of Eclipse platform used to build the Management Console,
-    only x64 build is currently provided.
-
- 2. Expand package to your preferred directory using command:
+    
+ 3. Expand package to your preferred directory using command:
 
     :command:`tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DESTINATION_DIRECTORY`
 
- 3. Run nxmc file from "/DESTINATION_DIRECTORY".
+ 4. Run nxmc file from "/DESTINATION_DIRECTORY".
 
 
 Desktop management console produces log file :file:`.nxmc/data/.metadata/.log` in home folder of currently logged user. 
@@ -215,7 +223,7 @@ Web Management Console
 ^^^^^^^^^^^^^^^^^^^^^^
 
 |product_name| web interface is java based and should be deployed into servlet container to
-run. Minimal supported versions: Jetty 9.3.28, Tomcat 8.5.
+run. Minimal supported versions: Jetty 9.3.28, Tomcat 8.5. Supported Java version is 11 or 15. 
 
   1. Install one of servlet containers that support servlet-api version 3.
 

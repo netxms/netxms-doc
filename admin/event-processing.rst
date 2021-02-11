@@ -54,6 +54,13 @@ number) will not be processed.
 Processing Policy Editor`. To access the :guilabel:`Event Processing Policy Editor`
 window, press ``F4`` or select :menuselection:`Tools --> Event Processing Policy` menu.
 
+Only one user of |product_name| server can access :guilabel:`Event Processing 
+Policy Editor` window at a time. Other users will receive ``Component locked`` 
+error message when attempting to open this window. 
+
+Changes made in :guilabel:`Event Processing Policy Editor` are applied at the moment
+when ``Save`` button is clicked. 
+
 .. figure:: _images/event_processing_policy.png
 
    Event Processing Policy Screen
@@ -80,17 +87,10 @@ corner of an entry, or double-click text in Filter or Action text.
 
   Edit buttons
 
-Only one user of |product_name| server can access :guilabel:`Event Processing 
-Policy Editor` window at a time. Other users will receive ``Component locked`` 
-error message when attempting to open this window. 
-
-Changes made in :guilabel:`Event Processing Policy Editor` are applied at the moment
-when ``Save`` button is clicked. 
-
 Properties of Event Processing Policy rule have the following sections:
 
 .. list-table::
-   :widths: 35 65
+   :widths: 30 70
    :header-rows: 1
 
    * - Section

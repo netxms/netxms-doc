@@ -395,14 +395,19 @@ manually, right-click an object in |product_name| console, and select :menuselec
 
 .. figure:: _images/object_custom_attributes.png
 
-
+.. _status-calculation:
 
 Status calculation
 ------------------
 
-Each object has it's own status calculation properties. By default status is calculated
-based on polling results, status of underlying objects, associated alarms and
-status :term:`DCIs<DCI>`. But there can be used different options of status calculation.
+Each object has it's own status calculation properties. Status of an object calculated based on:
+
+   * Polling results
+   * Status of child objects (e.g. interfaces of node, nodes under container)
+   * Active alarms, associated with the object (after an alarm is resolved or terminated, it no longer affects object status)
+   * Value of status :term:`DCIs<DCI>` (DCI that has ``Use this DCI for node status calculation`` property enabled)
+
+There are multiple options for status calculation that can be configured for specific objects or globally. 
 
 Status calculation has two configuration parts:
 
@@ -411,14 +416,14 @@ Status calculation has two configuration parts:
 
 .. figure:: _images/object_status_calculation.png
 
-For status propagation are available next options:
+For status propagation the following options are available:
   - Default - will take global configuration parameter (unchanged by default)
   - Unchanged - will propagate status value without changes
   - Fixed value: Normal, Warning, Minor, Major, Fixed - always will return fixed selected status
   - Relative with offset - will add or remove some number for
   - Severity based - will convert current status based on user configured status mapping table
 
-For status calculation are available next options:
+For status calculation the following options are available:
   - Default - will take global configuration parameter (most critical by default)
   - Most critical - Most critical status will be taken
   - Single threshold (%) - Percentage of objects that should be in status to change status of object

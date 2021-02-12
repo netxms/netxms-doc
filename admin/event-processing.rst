@@ -152,6 +152,18 @@ node named "IPSO" two e-mail actions will be executed.
 
    Example 1
 
+
+.. _events:
+
+Events
+======
+
+
+
+
+
+
+
 .. _alarms:
 
 Alarms
@@ -217,8 +229,8 @@ Possible alarm states:
        some time someone should check this problem. For example, if you have
        problem that cannot be solved until next week, so this alarm can be
        sticky acknowledged for 7 days. After 7 days this problem again will be
-       in outstanding state. This type of acknowledge can be disabled by parameter
-       "EnableTimedAlarmAck" in server configuration view.
+       in outstanding state. This type of acknowledge can be disabled by changing
+       :guilabel:`EnableTimedAlarmAck` server configuration parameter.
    * - Sticky Acknowledged
      - Alarm will remain acknowledged event after new matching events. This can
        be useful when you know that there will be new matching events, but it
@@ -702,11 +714,12 @@ The following drivers are provided by default with |product_name| installation:
      - Notification channel driver for Telegram messenger. Configuration parameters:
 
        * AuthToken
-       * DisableIPv4 - true to disable IPv4 usage
-       * DisableIPv6 - true to disable IPv6 usage
+       * DisableIPv4 - ``true`` to disable IPv4 usage
+       * DisableIPv6 - ``true`` to disable IPv6 usage
+       * ParseMode - Text formatting style: ``Markdown``, ``HTML`` or ``MarkdownV2``. See Telegram API documentation on formatting syntax: https://core.telegram.org/bots/api#formatting-options
        * Proxy - proxy url or ip or full configuration if format [scheme]://[login:password]@IP:[PORT]
        * ProxyPort - proxy port
-       * ProxyType - proxy type: http, https, socks4, socks4a, socks5, socks5h
+       * ProxyType - proxy type: ``http``, ``https``, ``socks4``, ``socks4a``, ``socks5`` or ``socks5h``
        * ProxyUser - proxy user name
        * ProxyPassword - proxy user password
 
@@ -714,7 +727,7 @@ The following drivers are provided by default with |product_name| installation:
 
        It is necessary to create a telegram bot that |product_name| server will use to send messages.
        In order to create a new bot it's necessary to talk to BotFather and get bot authentication token (AUTH_TOKEN).
-       Set authentication token in notification channel configuration, e.g.: AuthToken=1234567890:jdiAiwdisUsWjvKpDenAlDjuqpx
+       Set authentication token in notification channel configuration, e.g.: ``AuthToken=1234567890:jdiAiwdisUsWjvKpDenAlDjuqpx``
 
        The bot can:
 

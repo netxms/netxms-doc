@@ -7,8 +7,7 @@ Data Collection from Web Services
 |product_name| has built-in data collection mechanism using web services,
 allowing to extract data for DCIs from JSON, XML, or plain text responses to
 HTTP requests.
-
-Data collection from web services is done via |produce_name| agent. If zoning is not used (or for Default zone), agent running on NetXMS server is used. If zoning is used, zone proxies are used (and if a zone has no proxies configured, agent on NetXMS server is used as last resort). 
+Data collection from web services is done via |product_name| agent. If zoning is not used (or for Default zone), agent running on NetXMS server is used. If zoning is used, zone proxies are used (and if a zone has no proxies configured, agent on NetXMS server is used as last resort). 
 
 
 Configuring Web Service Data collection

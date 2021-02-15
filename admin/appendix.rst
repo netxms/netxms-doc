@@ -221,6 +221,9 @@ Agent configuration file (nxagentd.conf)
    * - EnableWatchdog
      - Enable (yes) or disable (no) automatic agent restart in case of unexpected shutdown.
      - no
+   * - EnableWebServiceProxy
+     - Enable (yes) or disable (no) web service data collection proxy functionality.
+     - no
    * - ExecTimeout
      - Timeout in milliseconds for external metric execution.
      - 2000

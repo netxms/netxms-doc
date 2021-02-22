@@ -183,6 +183,8 @@ This is the default method for user authentication. Password provided by user
 compared against password stored in |product_name| database.
 
 
+.. _password-policy:
+
 Password Policy
 ~~~~~~~~~~~~~~~
 

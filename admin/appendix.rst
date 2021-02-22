@@ -1160,7 +1160,7 @@ These parameters can be changed in
     - 86400
     - Yes
   * - PasswordComplexity
-    - Set of flags to enforce password complexity (see [[UM::User_Management#Password_Policy|Password Policy]] for more details).
+    - Set of flags to enforce password complexity (see :ref:`password-policy` for more details).
     - 0
     - No
   * - PasswordExpiration

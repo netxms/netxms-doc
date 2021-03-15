@@ -422,7 +422,8 @@ Agent to server connection
 
 This connection requires certificate configuration on server side. More about required actions can be found in
 :ref:`server-tunnel-cert-conf`. Agent requires :guilabel:`ServerConnection` parameter set in agentd.conf file to
-server :term:`DNS` or server IP address.
+server :term:`DNS` or server IP address. It is possible to have several :guilabel:`ServerConnection` parameters in
+the config, in this case agent will establish tunnel connection to multiple servers. 
 
 Right after agent start it will try to connect to the server. On first connect node will be shown in :guilabel:`Agent Tunnels`.
 

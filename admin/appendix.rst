@@ -317,7 +317,7 @@ Agent configuration file (nxagentd.conf)
      - If set to yes, a host connected to an agent will be forced to use encryption, and if encryption is not supported by a remote host, the connection will be dropped. If an agent was compiled without encryption support, this parameter has no effect.
      - no
    * - ServerConnection
-     - IP address or host name of |product_name| server for tunnel agent connection
+     - IP address or host name of |product_name| server for tunnel agent connection. Several such parameters can be present, in this case agent will establish tunnel connection to more then one server. 
      - No defaults
    * - Servers
      - A list of management servers, which have read access to this agent. Both IP addresses and DNS names can be used. Multiple servers can be specified in one line, separated by commas. If this parameter is used more than once, servers listed in all occurrences will have access to agent.

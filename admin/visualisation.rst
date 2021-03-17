@@ -428,6 +428,57 @@ about objects under container.
 
 .. figure:: _images/dashboard_summary_tableW.png
 
+Syslog Monitor
+~~~~~~~~~~~~~~
+Syslog monitor widget. Has additional option to set root object to filter objects what will be shown in monitor. 
+As a root object can be set object itself or container that contains required objects. 
+
+.. figure:: _images/dashboar_syslog_monitor.png
+
+SNMP Trap Monitor
+~~~~~~~~~~~~~~~~~
+SNMP Trap monitor widget. Has additional option to set root object to filter objects what will be shown in monitor.
+As a root object can be set object itself or container that contains required objects. 
+
+.. figure:: _images/dashboard_snmp_trap_monitor.png
+
+Event monitor
+~~~~~~~~~~~~~
+Event monitor widget. Has additional option to set root object to filter objects what will be shown in monitor.
+As a root object can be set object itself or container that contains required objects. 
+
+.. figure:: _images/dashboard_event_monitor.png
+
+Service component map
+~~~~~~~~~~~~~~~~~~~~~
+Map displays hierarchy of objects in :guilabel:`Infrastructure Service` starting from selected root object.
+
+.. figure:: _images/dashboard_service_component_map.png
+
+Rack diagram
+~~~~~~~~~~~~
+Shows rack front, back or both views with object placement in it. 
+
+.. figure:: _images/dashboard_rack_diagram.png
+
+Object tools
+~~~~~~~~~~~~
+Shows buttons with pre configured object tools, that are executed on click.
+
+.. figure:: _images/dashboard_object_tools.png
+
+Object query
+~~~~~~~~~~~~
+
+TODO
+
+Port view
+~~~~~~~~~
+Shows ports schematic with each port status. As a root object can be set object itself 
+or container that contains required objects. 
+
+.. figure:: _images/dashboard_port_view.png
+
 
 Element Property Pages
 ----------------------

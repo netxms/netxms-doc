@@ -433,7 +433,7 @@ Syslog Monitor
 Syslog monitor widget. Has additional option to set root object to filter objects what will be shown in monitor. 
 As a root object can be set object itself or container that contains required objects. 
 
-.. figure:: _images/dashboar_syslog_monitor.png
+.. figure:: _images/dashboard_syslog_monitor.png
 
 SNMP Trap Monitor
 ~~~~~~~~~~~~~~~~~

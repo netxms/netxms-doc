@@ -73,8 +73,10 @@ database: http://git.netxms.org/public/netxms.git/blob/HEAD:/doc/misc/database_s
 Java
 ----
 
-Java is needed for Desktop Management Console (nxmc) and for Web Management Console. 
+Java Runtime Environment (JRE) is needed for Desktop Management Console (nxmc) and for Web Management Console. 
 Supported Java version are 11 and 15. 
+
+Since version 3.8 Desktop Management Console with bundled JRE is provided for Windows. 
 
 Agent
 -----
@@ -131,7 +133,9 @@ Installing packages
 Server
 ~~~~~~
 
-Server require two components to function - server itselt (package "netxms-server") and at least one database abstraction layer driver (multuple can be installed at the same time, e.g. for migration purposes).
+Server require two components to function - server itselt (package "netxms-server") and at least one database abstraction layer driver 
+(multuple can be installed at the same time, e.g. for migration purposes). These database drivers are also used by agent for database 
+monitoring (performing queries to databases). 
 
 Provided driver packages:
 
@@ -200,12 +204,12 @@ Management console
 Desktop Management Console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
- 1. Make sure you have 64-bit Java version 11 or 15 installed you your system. 
-    Due to limitation of Eclipse platform used to build the Management Console,
-    only x64 build is provided.
+Due to limitation of Eclipse platform used to build the Management Console, only x64 build is provided.
 
+ 1. Make sure you have 64-bit Java version 11 or 15 installed you your system. 
+ 
  2. Download the latest version from http://www.netxms.org/download. You will need
-    Linux installer(named nxmc-VERSION-linux-gtk-x64.tar.gz, for example
+    Linux installer (named nxmc-VERSION-linux-gtk-x64.tar.gz, for example
     nxmc-3.4.178-linux-gtk-x64.tar.gz).
     
  3. Expand package to your preferred directory using command:
@@ -412,13 +416,16 @@ Management console
 
 Desktop Management Console:
 
- 1. Download the latest version from http://www.netxms.org/download. You will need
-    Windows archive (named nxmc-VERSION-win32-x64.zip, for example nxmc-3.4.178-win32-x64.zip).
-    Due to limitation of Eclipse platform used to build the Management Console,
-    only x64 build is currently provided.
- 2. Extract zip in preferred directory.
+ 1. Download the latest version from http://www.netxms.org/download. 
+    Since version 3.8 there are three options - 
+    archive (e.g. nxmc-3.8.226-win32-x64.zip), archive with bundled JRE (nxmc-3.8.226-win32-x64-bundled-jre.zip)
+    and installer, which also has JRE bundled (e.g. netxms-client-3.8.166-x64.exe). 
+    If using archive without JRE, make sure you have JRE version 11 or 15 installed. 
+    Due to limitation of Eclipse platform used to build the Management Console, only x64 build is currently provided. 
 
- 3. Run nxmc file from extracted catalog.
+ 2. If using archive version, extract zip in preferred directory. If using installer, launch it and follow the instructions. 
+
+ 3. Run nxmc file from extracted catalog (or launch from Windows Start Menu, if you used the installer). 
 
 Web Management Console:
 
@@ -571,12 +578,21 @@ Installing from sources
 Server
 ------
 
-Since version 2.2.4 encryption support is enforced when building server.
-
   #. Download source archive (netxms-VERSION.tar.gz) from http://www.netxms.org/download/. *VERSION* is used in names instead of an actual version number.
   #. Unpack the archive:
 
         :command:`tar zxvf netxms-VERSION.tar.gz`
+
+  #. Since version 3.8 reporting server is being built along with the sources. This requires maven to be installed on the system. You need Oracle and MS SQL JDBC drivers in your local maven repository. 
+
+        Oracle JDBC driver library can be obtained here: https://download.oracle.com/otn-pub/otn_software/jdbc/199/ojdbc8.jar
+
+        Microsoft SQL JDBC driver library can be obtaine here: https://www.microsoft.com/en-us/download/details.aspx?id=54671 
+        You will need sqljdbc_4.2/enu/jre8/sqljdbc42.jar file from this archive. 
+
+        To install these libraries:
+        :command:`mvn install:install-file -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc4 -Dversion=4.2 -Dpackaging=jar -Dfile=sqljdbc42.jar`
+        :command:`mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar -Dfile=ojdbc8.jar`
 
   #. Change directory to netxms-VERSION and run configure script:
 
@@ -584,7 +600,7 @@ Since version 2.2.4 encryption support is enforced when building server.
 
         :command:`./configure --with-server --with-pgsql --with-agent`
 
-        Most commonly used options (check full list with :command:`./configure --list`):
+        Most commonly used options (check full list with :command:`./configure --help`):
 
         .. list-table::
            :header-rows: 1
@@ -593,7 +609,7 @@ Since version 2.2.4 encryption support is enforced when building server.
            * - Name
              - Description
            * - ``--prefix=DIRECTORY``
-             - Installation prefix, all files go to the specified directory
+             - Installation prefix, all files go to the specified directory (e.g. ``--prefix=/opt/netxms``)
            * - ``--with-server``
              - Build server binaries. You will need to select at least one DB driver as well
            * - ``--with-agent``

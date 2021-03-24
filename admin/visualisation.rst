@@ -431,21 +431,21 @@ about objects under container.
 Syslog Monitor
 ~~~~~~~~~~~~~~
 Syslog monitor widget. Has additional option to set root object to filter objects what will be shown in monitor. 
-As a root object can be set object itself or container that contains required objects. 
+One object or a container that contains required objects can be set as root object. 
 
 .. figure:: _images/dashboard_syslog_monitor.png
 
 SNMP Trap Monitor
 ~~~~~~~~~~~~~~~~~
 SNMP Trap monitor widget. Has additional option to set root object to filter objects what will be shown in monitor.
-As a root object can be set object itself or container that contains required objects. 
+One object or a container that contains required objects can be set as root object. 
 
 .. figure:: _images/dashboard_snmp_trap_monitor.png
 
 Event monitor
 ~~~~~~~~~~~~~
 Event monitor widget. Has additional option to set root object to filter objects what will be shown in monitor.
-As a root object can be set object itself or container that contains required objects. 
+One object or a container that contains required objects can be set as root object. 
 
 .. figure:: _images/dashboard_event_monitor.png
 
@@ -474,8 +474,8 @@ TODO
 
 Port view
 ~~~~~~~~~
-Shows ports schematic with each port status. As a root object can be set object itself 
-or container that contains required objects. 
+Shows ports schematic with each port status. 
+One object or a container that contains required objects can be set as root object. 
 
 .. figure:: _images/dashboard_port_view.png
 

@@ -469,8 +469,60 @@ Shows buttons with pre configured object tools, that are executed on click.
 
 Object query
 ~~~~~~~~~~~~
+Shows columns with filtered objects' information. 
 
-TODO
+Object query has 2 main configurations. :guilabel:`Query` that filterers objects and provide option to create 
+additional information about object in columns and :guilabel:`Object Properties` that lists information that 
+should be shown in table.
+
+''Query''
+
+It is a script that is executed on each object and should return true if object should be displayed in the table 
+and false if it should not. It has special syntax that provides option to calculate additional values for columns 
+in :guilabel:`Object Properties` section. This syntax is optional and usual NXSL script can be used instead.
+
+Syntax:
+
+.. code-block:: json
+
+  with
+    varName = { code or expression }, 
+    varName = { code or expression } 
+    /* Might be as many blocks as required.
+     * varName is a name of the variable where result of a code will be assigned. 
+     * It can be used later in the code in expression or to be displayed in table 
+     * using the same name in the Object Properties part.
+    */
+  expression 
+  /* Short circuit evaluated expression. This expression is executed first and if it contains not yet calculated 
+   * varName then variable is calculated and used in expression. Expression that should result as true or false 
+   * as a sign if this object should be displayed in table or not. No semicolon at the end.
+  */
+
+This page provides option to configure columns that should be used for ordering, 
+refresh interval and record limit. To order column write a coma separated list of attribute named or varNames with
+- sign to order in descending order and with + sign to order in ascending order. 
+
+''Object Properties''
+
+This property page is used to organize required columns and column order in table.
+Each column configuration consists of name of object's attribute or varName defined 
+in Query page, display name used as a name for a column and data type of the column.  
+
+''Example''
+
+This example will show how to filter nodes that only have alarms on them, are not in maintenance mode and show count of 
+critical alarms on the node, order by critical alarm count the list and then by node name.
+
+Configuration:
+
+.. figure:: _images/dashboard_object_query_query.png
+
+.. figure:: _images/dashboard_object_query_object_properties.png
+
+Result:
+
+.. figure:: _images/dashboard_object_query.png
 
 Port view
 ~~~~~~~~~

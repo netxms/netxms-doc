@@ -714,3 +714,8 @@ POST request JSON
 Return data:
 
     Will return adhoc summary table configured accordingly to request json.
+
+Find Object
+===========
+
+Management console has an option to filter objects by defined by user criteria. Filter can be access by :menuitem:`Tools->Find Object`

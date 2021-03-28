@@ -4,6 +4,41 @@
 Installation
 ############
 
+Major changes between releases
+==============================
+
+3.0
+---
+Notification channels introduced as new functionality. SMS configuration automatically moved from server configuration to 
+notification channel depending on old driver with one of next names: AnySMS, DBTable, Dummy, GSM, Kannel, MyMobile, Nexmo, 
+NXAgent, Portech, Slack, SMSEagle, Text2Reach, WebSMS. No manual actions required. 
+
+Flags and dynamic flags moved to NetObject class. Separated node flags set by user and capability flags set by system to 
+flags and capabilities. Numeric values for flags, capabilities and dynamic flags were changed. Will affect only NXSL scripts 
+that checked those flags directly. 
+
+No more available 32 bit version of console. 
+
+Agent always requires encryption unless RequireEncryption parameter explicitly set to off. Might be required to manually add 
+"RequireEncryption" configuration parameter where required to disable encryption. 
+
+Agent policies were merged with templates. Each policy was converted to template. No changes required. 
+
+3.1
+---
+Regexp matching operation in NXSL returns array with capture groups or NULL as result. NXSL objects and arrays in logical 
+expressions are evaluated to TRUE. Might be require some NXSL script adjustments. 
+
+3.6
+---
+In this version "Certificate manager" was removed form server. All CA certificates configuration should be manually moved 
+to "TrustedCertificate" configuration parameter in server configuration file. 
+
+3.7
+---
+Introduced boolean type in NXSL. Comparisons like "func() == 1", where 'func' is a function that returns boolean type, will 
+always result as false as boolean value 'trues' is not equal to 1. Might require fixes in some NXSL scripts. 
+
 Planing
 =======
 

@@ -718,4 +718,18 @@ Return data:
 Find Object
 ===========
 
-Management console has an option to filter objects by defined by user criteria. Filter can be access by :menuitem:`Tools->Find Object`
+Management console has an option to filter objects by defined by user criteria. Filter can be access by :menuselection:`Tools->Find Object`\ .
+Filter can be used in two different modes: filter and query.
+
+Filter
+------
+
+Filter will search object using class filter, zone filter, IP range and search string that will be checked for each object in all it's 
+text fields (name, comments, custom attributes, Location, etc.). 
+
+Query
+-----
+
+There can be written any script that will be executed on all objects and if stript returns true - object will be shown in the resulting 
+table. There can be used the same syntax as for :ref:`dashboards-object-query` Dashboard element, but variables will not be added as 
+additional columns for table in this case. 

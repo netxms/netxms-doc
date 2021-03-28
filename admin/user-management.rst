@@ -311,13 +311,7 @@ certificate used for login on smart card instead of local certificate store.
 
 Certificate management
 ~~~~~~~~~~~~~~~~~~~~~~
-CA certificates can be managed in "Certificate Manager" view.
-
-Certificate can be added, deleted and edited. Edit window allows to change comment and
-to copy the subject of certificate. Certificate subject is one of the ways to link a
-certificate with a user.
-
-.. figure:: _images/certificate_view.png
+CA certificates are searched in the list configured by "TrustedCertificate" configuration parameter in server configuration file.
 
 Link certificate and user
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -335,7 +329,7 @@ Next two fields in combinations:
 
    Certificate mapping method: "Subject"
 
-   Certificate mapping data: the subject of the CA. Can be taken from "Certificate Manager" view.
+   Certificate mapping data: the subject of the CA. 
 
 |
 

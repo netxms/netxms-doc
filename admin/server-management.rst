@@ -9,7 +9,7 @@ Configuration file
 File netxmsd.conf is a configuration file for |product_name| server. It contains
 information necessary for establishing database connection, and some optional
 server parameters. Default location for this file is :file:`/etc/netxmsd.conf`
-on UNIX systems and :file:`InstalationPath\etc\netxmsd.conf on Windows`.
+on UNIX systems and :file:`InstalationPath\etc\netxmsd.conf` on Windows.
 
 The file can contain one or more parameters in *Parameter = Value* form,
 each parameter should be on its own line. Comments can be inserted after "#" sign.

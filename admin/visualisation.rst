@@ -467,6 +467,9 @@ Shows buttons with pre configured object tools, that are executed on click.
 
 .. figure:: _images/dashboard_object_tools.png
 
+
+.. _dashboards-object-query:
+
 Object query
 ~~~~~~~~~~~~
 Shows columns with filtered objects' information. 

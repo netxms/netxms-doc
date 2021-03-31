@@ -39,6 +39,8 @@ to "TrustedCertificate" configuration parameter in server configuration file.
 Introduced boolean type in NXSL. Comparisons like "func() == 1", where 'func' is a function that returns boolean type, will 
 always result as false as boolean value 'trues' is not equal to 1. Might require fixes in some NXSL scripts. 
 
+Regexp matching operation in NXSL returns array with capture groups or false as a result.
+
 Planing
 =======
 

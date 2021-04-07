@@ -46,6 +46,10 @@ always result as false as boolean value 'true' is not equal to 1. Might require 
 
 Regexp matching operation in NXSL returns array with capture groups or false as a result.
 
+3.8
+---
+Minimal Java version for console is Java-11.
+
 Planing
 =======
 

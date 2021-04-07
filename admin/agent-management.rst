@@ -645,6 +645,10 @@ New Metrics will be visible in the :guilabel:`Available parameters` list only af
 restarts (agent reads a configuration file only once on start) and configuration poll,
 so to force it's appearance run :guilabel:`Configuration poll` manually after agent restart.
 
+.. note::
+
+   Since v. 3.5. on Windows platforms UTF-8 encoding should be returned in External Metrics. 
+   
 ExternalParameter/ExternalParameterShellExec
 --------------------------------------------
 

@@ -17,7 +17,7 @@ Flags and dynamic flags moved to NetObject class. Separated node flags set by us
 flags and capabilities. Numeric values for flags, capabilities and dynamic flags were changed. Will affect only NXSL scripts 
 that checked those flags directly. 
 
-No more available 32 bit version of console. 
+32 bit version of management console is not available any more. 
 
 Agent always requires encryption unless RequireEncryption parameter explicitly set to off. Might be required to manually add 
 "RequireEncryption" configuration parameter where required to disable encryption. 
@@ -29,15 +29,20 @@ Agent policies were merged with templates. Each policy was converted to template
 Regexp matching operation in NXSL returns array with capture groups or NULL as result. NXSL objects and arrays in logical 
 expressions are evaluated to TRUE. Might be require some NXSL script adjustments. 
 
+3.5
+---
+External Metrics (ExternalParameter, etc...) expect UTF-8 encoding on Windows. Might need to adjust scripts called
+by external metrics if non-ASCII characters are returned. 
+
 3.6
 ---
-In this version "Certificate manager" was removed form server. All CA certificates configuration should be manually moved 
+In this version "Certificate manager" was removed from server. All CA certificates configuration should be manually moved 
 to "TrustedCertificate" configuration parameter in server configuration file. 
 
 3.7
 ---
 Introduced boolean type in NXSL. Comparisons like "func() == 1", where 'func' is a function that returns boolean type, will 
-always result as false as boolean value 'trues' is not equal to 1. Might require fixes in some NXSL scripts. 
+always result as false as boolean value 'true' is not equal to 1. Might require fixes in some NXSL scripts. 
 
 Regexp matching operation in NXSL returns array with capture groups or false as a result.
 

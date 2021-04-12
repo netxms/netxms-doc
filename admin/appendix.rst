@@ -1790,6 +1790,24 @@ Get value of *Agent.Version* metric from agent at host 10.0.0.2:
 
    nxget 10.0.0.2 Agent.Version
 
+Get list of supported parameters from agent at host 10.0.0.2:
+
+.. code-block:: shell
+
+   nxget 10.0.0.2 -I
+
+Get list of supported lists from agent at host 10.0.0.2:
+
+.. code-block:: shell
+
+   nxget 10.0.0.2 Agent.SupportedLists -l
+
+Get list of supported tables from agent at host 10.0.0.2:
+
+.. code-block:: shell
+
+   nxget 10.0.0.2 Agent.SupportedTables -l
+
 Get value of *Agent.Uptime* and *System.Uptime* parameters in one request, with output in parameter = value form:
 
 .. code-block:: shell

@@ -75,9 +75,7 @@ search in OS subsections of this chapter.
 
 List of possible database drivers:
 
-  * db2.ddr
-  * informix.ddr
-  * mssql.ddr
+  * mssql.ddr Driver for Microsoft SQL database.
   * mysql.ddr Driver for MySQL database.
   * odbc.ddr ODBC connectivity driver (you can connect to MySQL, PostgreSQL, MS SQL, and Oracle via ODBC).
   * oracle.ddr Driver for Oracle database.

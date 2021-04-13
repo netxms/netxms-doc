@@ -544,7 +544,6 @@ Below is list of available |product_name| subagents:
   * :ref:`MQTT <mqtt-subagent>`
   * :ref:`MySQL <mysql-subagent>`
   * :ref:`Network Service Check <netsvc-subagent>`
-  * ODBC Query
   * :ref:`Oracle <oracle-subagent>`
   * Ping
   * :ref:`Port Check <portcheck-subagent>`

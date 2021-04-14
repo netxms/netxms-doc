@@ -108,6 +108,9 @@ Database engines supported by |product_name| server:
    * Microsoft SQL Server 2012, 2014, 2016, 2017
    * SQLite (only for test purposes)
 
+Postges database tuning might be required depending on database size. 
+Increase of ``shared_buffers`` might be needed, rough recommendation is 25% of available RAM. 
+Incread of ``max_locks_per_transaction`` is needed if using TimescaleDB, rough recommendation is 512. 
 
 Database size and load is very hard to predict, because it is dependent on a number of
 monitored nodes and collected parameters. If you plan to install database engine on

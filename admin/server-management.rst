@@ -156,9 +156,9 @@ does not contain any information about file access right assignment or certifica
             [v3_ca]
             basicConstraints = CA:TRUE
 
-    #. Create server certificate
+    #. Create server certificate request
         :command:`openssl req -new -key server.key -out server.csr -config openssl.conf`
-    #. Sign server certificate with root certificate
+    #. Sign server certificate with root CA certificate
         :command:`openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 5000 -extfile openssl.conf -extensions v3_ca`
 
 Add newly created certificates to server configuration (netxmsd.conf file).

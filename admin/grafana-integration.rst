@@ -24,7 +24,7 @@ A running instance Grafana (more information in https://grafana.com/get).
 Installation
 ------------
 
-See https://grafana.com/plugins/radensolutions-netxms-datasource/installation
+See https://grafana.com/grafana/plugins/radensolutions-netxms-datasource/?tab=installation
 
 For installation from source:
 

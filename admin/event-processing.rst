@@ -817,8 +817,9 @@ alarms, or actions. You may use the following macros to accomplish this:
    * - ``%a``
      - IP address of event source object.
    * - ``%A``
-     - Alarm's text (can be used only in actions to put text of alarm from the
-       same event processing policy rule).
+     - Alarm's text. This macro is populated when creating, resolving or terminating alarm in EPP rule. 
+       Macro is available in that EPP rule for persistent storage and server action and in subsequent EPP rules.
+       Prior to version 3.8.314 this macro was available only withing given EPP rule. 
    * - ``%c``
      - Event's code.
    * - ``%E``

@@ -429,6 +429,9 @@ Server configuration file (netxmsd.conf)
   * - DBSchema
     - Schema name
     - not set
+  * - DBSessionSetupSQLScript
+    - Path to a plain text file containing a list of SQL commands which will be executed on every new database connection, including initial connection on server startup. 
+    - Empty string
   * - DBServer
     - Database server (ODBC source name for ODBC driver).
     - localhost
@@ -477,6 +480,9 @@ Server configuration file (netxmsd.conf)
   * - ProcessAffinityMask
     - Sets a processor affinity mask for the netxmsd process (Windows only). A process affinity mask is a bit vector in which each bit represents a logical processor on which the threads of the process are allowed to run. See `this MSDN article <http://msdn.microsoft.com/en-us/library/windows/desktop/ms686223%28v=vs.85%29.aspx>`_ for more details.
     - 0xFFFFFFFF
+  * - StartupSQLScript
+    - Path to a plain text file containing a list of SQL commands which will be executed on server startup. 
+    - Empty string
 
 .. note::
   All boolean parameters accept "Yes/No", "On/Off" and "True/False" values.
@@ -498,6 +504,10 @@ These parameters can be changed in
     - Description
     - Default Value
     - Require Restart
+  * - Agent.RestartWaitTime
+    - Period of time (in seconds) after agent restart for which server will not perform status, congiration, and other polls on the agent. 
+    - 0
+    - No
   * - AgentCommandTimeout
     - Timeout in milliseconds for commands sent to agent. If agent did not respond to command within this time, command considered as failed.
     - 2000
@@ -2362,6 +2372,8 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 Parameters:
   1. Path is the only mandatory argument. It specifies base directory for search.
   2. Pattern - If pattern is given, only files whose names matched against it will be counted.
+     Since version 3.8.314 it's possible to invert the mask by prefixing this parameter with "!". In this case
+     files NOT maching the mask will be counted. 
   3. Recursive - determines if agent should count files in subdirectories. To enable recursion, use values ``1`` or ``true``.
   4. Size filter. If parameter < 0, only files with size less than abs(value) will
      match. If parameter > 0, only files with size greater than value will match.
@@ -3299,7 +3311,7 @@ System.CPU.Count
 
 Data type: Int32
 
-Supported Platforms: Windows, Linux, Solaris, AIX, FreeBSD, NetBSD, OpenBSD
+Supported Platforms: Windows, Linux, Solaris, AIX, FreeBSD, NetBSD, OpenBSD, MacOS
 
 Number of CPUs in the system
 
@@ -3309,7 +3321,7 @@ System.CPU.LoadAvg
 
 Data type: Float
 
-Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD, MacOS
 
 CPU load average for last minute
 
@@ -3321,7 +3333,7 @@ System.CPU.LoadAvg5
 
 Data type: Float
 
-Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD, MacOS
 
 CPU load average for last 5 minutes
 
@@ -3333,7 +3345,7 @@ System.CPU.LoadAvg15
 
 Data type: Float
 
-Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD, MacOS
 
 CPU load average for last 15 minutes
 
@@ -3345,7 +3357,7 @@ System.CPU.Usage
 
 Data type: Float
 
-Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, MacOS
 
 Average CPU usage for last minute (percents, all CPUs)
 
@@ -3357,7 +3369,7 @@ System.CPU.Usage(*)
 
 Data type: Float
 
-Supported Platforms: Windows, Linux, Solaris, AIX
+Supported Platforms: Windows, Linux, Solaris, AIX, MacOS
 
 Parameters:
   1. Zero-based index of CPU.
@@ -3372,7 +3384,7 @@ System.CPU.Usage5
 
 Data type: Float
 
-Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, MacOS
 
 Average CPU usage for last 5 minutes (percents, all CPUs)
 
@@ -3384,7 +3396,7 @@ System.CPU.Usage5(*)
 
 Data type: Float
 
-Supported Platforms: Windows, Linux, Solaris, AIX
+Supported Platforms: Windows, Linux, Solaris, AIX, MacOS
 
 Parameters:
   1. Zero-based index of CPU.
@@ -3399,7 +3411,7 @@ System.CPU.Usage15
 
 Data type: Float
 
-Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, MacOS
 
 Average CPU usage for last 15 minutes (percents, all CPUs)
 
@@ -3411,7 +3423,7 @@ System.CPU.Usage15(*)
 
 Data type: Float
 
-Supported Platforms: Windows, Linux, Solaris, AIX
+Supported Platforms: Windows, Linux, Solaris, AIX, MacOS
 
 Parameters:
   1. Zero-based index of CPU.
@@ -3426,7 +3438,7 @@ System.CPU.Usage.Idle
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Average CPU usage (IDLE) for last minute (percents, all CPUs)
 
@@ -3436,7 +3448,7 @@ System.CPU.Usage.Idle(*)
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Parameters:
   1. Zero-based index of CPU.
@@ -3449,7 +3461,7 @@ System.CPU.Usage5.Idle
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Average CPU usage (IDLE) for last 5 minutes (percents, all CPUs)
 
@@ -3459,7 +3471,7 @@ System.CPU.Usage5.Idle(*)
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Parameters:
   1. Zero-based index of CPU.
@@ -3472,7 +3484,7 @@ System.CPU.Usage15.Idle
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Average CPU usage (IDLE) for last 15 minutes (percents, all CPUs)
 
@@ -3482,7 +3494,7 @@ System.CPU.Usage15.Idle(*)
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Parameters:
   1. Zero-based index of CPU.
@@ -3633,7 +3645,7 @@ System.CPU.Usage.Nice
 
 Data type: Float
 
-Supported Platforms: Linux
+Supported Platforms: Linux, MacOS
 
 Average CPU usage (NICE) for last minute (percents, all CPUs)
 
@@ -3643,7 +3655,7 @@ System.CPU.Usage.Nice(*)
 
 Data type: Float
 
-Supported Platforms: Linux
+Supported Platforms: Linux, MacOS
 
 Parameters:
   1. Zero-based index of CPU.
@@ -3656,7 +3668,7 @@ System.CPU.Usage5.Nice
 
 Data type: Float
 
-Supported Platforms: Linux
+Supported Platforms: Linux, MacOS
 
 Average CPU usage (NICE) for last 5 minutes (percents, all CPUs)
 
@@ -3666,7 +3678,7 @@ System.CPU.Usage5.Nice(*)
 
 Data type: Float
 
-Supported Platforms: Linux
+Supported Platforms: Linux, MacOS
 
 Parameters:
   1. Zero-based index of CPU.
@@ -3679,7 +3691,7 @@ System.CPU.Usage15.Nice
 
 Data type: Float
 
-Supported Platforms: Linux
+Supported Platforms: Linux, MacOS
 
 Average CPU usage (NICE) for last 15 minutes (percents, all CPUs)
 
@@ -3689,7 +3701,7 @@ System.CPU.Usage15.Nice(*)
 
 Data type: Float
 
-Supported Platforms: Linux
+Supported Platforms: Linux, MacOS
 
 Parameters:
   1. Zero-based index of CPU.
@@ -3840,7 +3852,7 @@ System.CPU.Usage.System
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Average CPU usage (SYSTEM) for last minute (percents, all CPUs)
 
@@ -3850,7 +3862,7 @@ System.CPU.Usage.System(*)
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Parameters:
   1. Zero-based index of CPU.
@@ -3863,7 +3875,7 @@ System.CPU.Usage5.System
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Average CPU usage (SYSTEM) for last 5 minutes (percents, all CPUs)
 
@@ -3873,7 +3885,7 @@ System.CPU.Usage5.System(*)
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Parameters:
   1. Zero-based index of CPU.
@@ -3886,7 +3898,7 @@ System.CPU.Usage15.System
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Average CPU usage (SYSTEM) for last 15 minutes (percents, all CPUs)
 
@@ -3896,7 +3908,7 @@ System.CPU.Usage15.System(*)
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Parameters:
   1. Zero-based index of CPU.
@@ -3909,7 +3921,7 @@ System.CPU.Usage.User
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Average CPU usage (USER) for last minute (percents, all CPUs)
 
@@ -3919,7 +3931,7 @@ System.CPU.Usage.User(*)
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Parameters:
   1. Zero-based index of CPU.
@@ -3932,7 +3944,7 @@ System.CPU.Usage5.User
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Average CPU usage (USER) for last 5 minutes (percents, all CPUs)
 
@@ -3942,7 +3954,7 @@ System.CPU.Usage5.User(*)
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Parameters:
   1. Zero-based index of CPU.
@@ -3955,7 +3967,7 @@ System.CPU.Usage15.User
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Average CPU usage (USER) for last 15 minutes (percents, all CPUs)
 
@@ -3965,7 +3977,7 @@ System.CPU.Usage15.User(*)
 
 Data type: Float
 
-Supported Platforms: Linux, AIX
+Supported Platforms: Linux, AIX, MacOS
 
 Parameters:
   1. Zero-based index of CPU.

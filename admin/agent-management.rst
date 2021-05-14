@@ -432,6 +432,13 @@ There are few ways to register agent:
    2. Create node from :guilabel:`Agent Tunnels` view by selecting one or more tunnels and selecting
       :guilabel:`Create node and bind...` menu item.
 
+Debugging
+~~~~~~~~~
+
+In case of errors enable server debug for "agent.tunnel" and "crypto.cert" to level 4 and agent log debug for "tunnel" and "crypto.cert" 
+to level 4. 
+Check for "SYS_TUNNEL_SETUP_ERROR" events on management node. 
+
 Security
 ========
 

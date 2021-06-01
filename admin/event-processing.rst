@@ -582,7 +582,7 @@ The following drivers are provided by default with |product_name| installation:
 
    * - Driver
      - Description
-   * - anysms.ncd
+   * - AnySMS
      - SMS driver for any-sms.biz service (`<http://any-sms.biz>`_). Configuration parameters:
 
        * login (default: user)
@@ -590,7 +590,7 @@ The following drivers are provided by default with |product_name| installation:
        * sender (default: NETXMS)
        * gateway (default: 28)
 
-   * - dbtable.ncd
+   * - DBTable
      - This driver saves notifications to a database. Configuration parameters:
 
        * DBDriver (default: sqlite.ddr)
@@ -603,12 +603,13 @@ The following drivers are provided by default with |product_name| installation:
        * MaxNumberLength (default: 32)
        * QueryTemplate
 
-   * - dummy.ncd
+   * - Dummy
      - Dummy driver for debugging purposes. Does not send any actual notifications
        and only logs them to server log file. This driver has no configuration
        parameters. It is necessary to set debug level to :guilabel:`debug=6` or
        higher to get records in the log file.
-   * - gsm.ncd
+
+   * - GSM
      - Driver for serial or USB attached GSM modems with support for standard GSM AT command set. Configuration parameters:
 
        * BlockSize (default: 8)
@@ -621,7 +622,7 @@ The following drivers are provided by default with |product_name| installation:
        * UseQuotes (1 - use quotes, 0 - do not use quotes, default: 1)
        * WriteDelay (default: 100)
 
-   * - kannel.ncd
+   * - Kannel
      - Driver for Kannel SMS gateway (`<http://www.kannel.org>`_). Configuration parameters:
 
        * login (default: user)
@@ -629,7 +630,7 @@ The following drivers are provided by default with |product_name| installation:
        * host (default: 127.0.0.1)
        * port (default: 13001)
 
-   * - msteams.ncd
+   * - MicfosoftTeams
      - Notification channel driver for Microsoft Teams. Configuration parameters:
 
        * ThemeColor - team color in RGB, default: FF6A00 (optional parameter)
@@ -654,20 +655,20 @@ The following drivers are provided by default with |product_name| installation:
        * Message - message to be sent
 
 
-   * - mymobile.ncd
+   * - MyMobile
      - SMS driver for MyMobile API gateways. Configuration parameters:
 
        * username
        * password
 
-   * - nexmo.ncd
+   * - Nexmo
      - SMS driver for Nexmo gateway. Configuration parameters:
 
        * apiKey (default: key)
        * apiSecret (default: secret)
        * from (default: NetXMS)
 
-   * - nxagent.ncd
+   * - NXAgent
      - Similar to gsm.ncd, but sending is done via GSM modem, attached to |product_name| agent. Configuration parameters:
 
        * hostname (default localhost)
@@ -686,7 +687,7 @@ The following drivers are provided by default with |product_name| installation:
 
        * keyFile - optional parameter. Specify server's key file, if not specified will take default path.
 
-   * - portech.ncd
+   * - Portech
      - Driver for Portech MV-372 and MV-374 GSM gateways (`<https://www.portech.com.tw/p3-product1_1.asp?Pid=14>`_). Configuration parameters:
 
        * host (default: 10.0.0.1)
@@ -695,13 +696,13 @@ The following drivers are provided by default with |product_name| installation:
        * password (default: admin)
        * mode (PDU or TEXT, default: PDU)
 
-   * - slack.ncd
+   * - Slack
      - Driver for slack.com service. Configuration parameters:
 
        * url
        * username
 
-   * - smseagle.ncd
+   * - SMSEagle
      - Driver for SMSEagle Hardware SMS Gateway. Configuration parameters:
 
        * host (default: 127.0.0.1)
@@ -710,7 +711,67 @@ The following drivers are provided by default with |product_name| installation:
        * password (default: password)
        * https (1 - use https, 0 - do not use https)
 
-   * - telegram.ncd
+   * - SMTP
+     - Driver to send notifications using SMTP protocol. 
+
+       * Server (default: localhost)
+       * RetryCount (default: 1)
+       * Port (default: 25)
+       * LocalHostName
+       * FromName (default: NetXMS Server)
+       * FromAddr (default: netxms@localhost)
+       * MailEncoding (default: utf8)
+       * IsHTML (0 - do not use HTML, 1 - use HTML; default: 0)
+
+   * - SNMPTrap
+     - Driver to send notifications as SNMP traps. Driver configuration parameters:
+
+       * Community (default: public)
+       * Port (default: 162)
+       * ProtocolVersion (possible values: 1, 2c, 3; default: 2c)
+
+       Driver configuration parameters applicable to SNMP v3 only:
+
+       * AuthMethod (possible values: none, sha1, sha224, sha256, sha384, sha512; default: none)
+       * AuthPassword
+       * PrivMethod (possible values: none, aes, des; default: none)
+       * PrivPassword
+       * UseInformRequest (default: false) 
+       * UserName (default: netxms)
+
+       Raden Solutions has IANA assigned Private Enterprise Number (57163).
+       MIB files defining the OIDs (RADENSOLUTIONS-SMI.txt and NETXMS-MIB.txt)
+       are included with |product_name| server. It's also possible to use custom 
+       OIDs by setting the following driver configuration parameters:
+
+       * AdditionalDataFieldID (default: .1.3.6.1.4.1.57163.1.1.6.0)
+       * AlarmKeyFieldID (default: .1.3.6.1.4.1.57163.1.1.5.0)
+       * MessageFieldID (default: .1.3.6.1.4.1.57163.1.1.3.0)
+       * SeverityFieldID (default: .1.3.6.1.4.1.57163.1.1.2.0)
+       * SourceFieldID (default: .1.3.6.1.4.1.57163.1.1.1.0)
+       * TimestampFieldID (default: .1.3.6.1.4.1.57163.1.1.4.0)
+       * TrapID (default: .1.3.6.1.4.1.57163.1.0.1)
+
+       Recipient's address should contain host name or IP address the trap is sent to. 
+       Message and subject are sent as separate fields (MessageFieldID and 
+       AdditionalDataFieldID) in the trap message. 
+       In addition to that, if subject contains semicolon-separated key=value 
+       pairs or JSON and the key is from below list, additional fields 
+       with these values will be added to trap message. List of supported keys:
+      
+        * key         - alarm key
+        * source      - source object name
+        * severity    - event severity (integer in range 0..4)
+        * timestamp   - original even timestamp as UNIX time
+
+       E.g. subject could be ``key=%K;source=%n;severity=%s;timestamp=%T``. 
+       Subject field could be generated using NXSL script that is called using 
+       ``%[script_name]`` macro. This is convenient for generating JSON. 
+       
+       JSON data can have more fields in addition to the above mentioned, this
+       allows to send more information in the trap. 
+
+   * - Telegram
      - Notification channel driver for Telegram messenger. Configuration parameters:
 
        * AuthToken
@@ -758,7 +819,7 @@ The following drivers are provided by default with |product_name| installation:
        if |product_name| server is running, it will read data from Telegram API first.
 
 
-   * - text2reach.ncd
+   * - Text2Reach
      - Driver for Text2Reach.com service (`<http://www.text2reach.com>`_). Configuration parameters:
 
        * apikey (default: apikey)
@@ -766,12 +827,12 @@ The following drivers are provided by default with |product_name| installation:
        * unicode (1 or 0, default: 1)
        * blacklist (1 or 0, default: 0)
 
-   * - textfile.ncd
+   * - TextFile
      - Notification driver that writes messages to text file. Configuration parameter:
 
        * filePath (default: /tmp/test.txt)
 
-   * - websms.ncd
+   * - WebSMS
      - Driver for websms.ru service (`<https://websms.ru>`_). Configuration parameters:
 
        * login (default: user)

@@ -69,7 +69,7 @@ You can use ``ExcludeSource=*`` to exclude every source and speficy ``IncludeSou
 
 
 Agent log mesages related to windows event log synchronization are written with tag ``winsyncevent``. 
-For debugging you can add ``DebugTags=winsyncevent:6`` - this will set debug level 6 for that tag. 
+For debugging you can add ``DebugTags=winsyncevent:6`` to agent configuration - this will set debug level 6 for that tag. 
 
 Server Configuration for Event Log Synchronization
 ==================================================
@@ -131,10 +131,11 @@ You can specify exact name or pattern with ``*`` and ``?`` meta characters.
 :guilabel:`Description` contains textual description of the rule. It is printed in parser trace in the log file. 
 
 When a rule is mathed the following actions can be performed:
-- Generate |product_name| event. Event generation is options - it could be useful to have rules that work as exclusion - 
+
+    * Generate |product_name| event. Event generation is options - it could be useful to have rules that work as exclusion - 
   match specific conditions and do not perform any actions. 
-- Break. In this case the following rules will not be processed even if :guilabel:`Process all` is set. 
-- Do not save to database. If this is set, mached Windows Event Log record will not be saved to the database. 
+    * Break. In this case the following rules will not be processed even if :guilabel:`Process all` is set. 
+    * Do not save to database. If this is set, mached Windows Event Log record will not be saved to the database. 
 
 
 Passing parameters to events

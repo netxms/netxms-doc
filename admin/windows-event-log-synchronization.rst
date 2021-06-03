@@ -133,7 +133,7 @@ You can specify exact name or pattern with ``*`` and ``?`` meta characters.
 When a rule is mathed the following actions can be performed:
 
     * Generate |product_name| event. Event generation is options - it could be useful to have rules that work as exclusion - 
-  match specific conditions and do not perform any actions. 
+      match specific conditions and do not perform any actions. 
     * Break. In this case the following rules will not be processed even if :guilabel:`Process all` is set. 
     * Do not save to database. If this is set, mached Windows Event Log record will not be saved to the database. 
 

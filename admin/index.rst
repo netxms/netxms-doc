@@ -23,6 +23,7 @@ Administrator Guide
    operating-system-monitoring
    file-meta-info-monitoring
    log-monitoring
+   windows-event-log-synchronization
    ssh-monitoring
    service-monitoring
    web-services-monitoring
@@ -36,7 +37,6 @@ Administrator Guide
    hypervisor-monitoring
    asterisk-monitoring
    mobile-device-monitoring
-   windows-event-log-synchronization
    topology
    sla
    remote-file-management

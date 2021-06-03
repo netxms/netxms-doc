@@ -674,7 +674,7 @@ Passing parameters to events
 ============================
 
 The log parser can send parameters to events.
-All capture groups will be sent to the event as a parameters. For Windows additional
+All capture groups will be sent to the event as parameters. For Windows additional
 parameters are provided.
 
 +----------+----------------------------------------------------+

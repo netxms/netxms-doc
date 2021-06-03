@@ -132,7 +132,7 @@ You can specify exact name or pattern with ``*`` and ``?`` meta characters.
 
 When a rule is mathed the following actions can be performed:
 
-    * Generate |product_name| event. Event generation is options - it could be useful to have rules that work as exclusion - 
+    * Generate |product_name| event. Event generation is optional - it could be useful to have rules that work as exclusion - 
       match specific conditions and do not perform any actions. 
     * Break. In this case the following rules will not be processed even if :guilabel:`Process all` is set. 
     * Do not save to database. If this is set, mached Windows Event Log record will not be saved to the database. 
@@ -142,8 +142,7 @@ Passing parameters to events
 ============================
 
 The log parser can send parameters to events.
-All capture groups will be sent to the event as a parameters. For Windows additional
-parameters are provided.
+All capture groups will be sent to the event as parameters. 
 
 +----------+----------------------------------------------------+
 | Number   | Description                                        |

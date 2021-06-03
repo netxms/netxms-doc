@@ -76,7 +76,7 @@ When loaded, PORTCHECK subagent adds the following Metrics to node Metric list:
        otherwise 80 will be used.  The *URI* is NOT a URL it is the host header request URI.
        As an example to test URL http://www.netxms.org/index.html enter www.netxms.org:/index.html. *hostHeader* is
        currently not used, but may be the Host option at some point in the request made.
-       Optional argument *regex* is the regular expression to check returned from the request,
+       Optional argument *regex* is PCRE compliant regular expression to check returned from the request,
        otherwise "^HTTP/(1\\.[01]|2) 200 .*" will be used.  Optional argument *timeout* specifies timeout in milliseconds.
    * - ServiceCheck.POP3(\ *target*\ ,\ *username*\ ,\ *password*\ [,\ *timeout*\ )
      - Check that POP3 service is running on *target* and that we are able to login using the supplied *username* and *password*.  Optional argument *timeout* specifies timeout in milliseconds.

@@ -245,8 +245,8 @@ parser behavior if a record matches the regular expression.
 <match> Tag
 -----------
 
-Tag ``<match>`` contains a POSIX regular expression that is used to match log
-records. Parts enclosed in parenthesis can be extracted from log record and
+Tag ``<match>`` contains a PCRE compliant regular expression that is used to match log
+records. Parts enclosed in parenthesis are extracted from log record and
 passed as arguments of generated event. You can use macros defined in
 :ref:`log-monitoring-macros` section. Also, it is possible to define inverted
 match rules (rules when log record considered matching if it does not match
@@ -373,7 +373,7 @@ following:
 +------+--------------------------------------------------------------------------+
 | 16   | Audit Failure                                                            |
 +------+--------------------------------------------------------------------------+
-| 256  | Critical (since 2.0-M4 only on Windows 7/Windows Server 2008 and higher) |
+| 256  | Critical (only on Windows 7/Windows Server 2008 and higher)              |
 +------+--------------------------------------------------------------------------+
 
 

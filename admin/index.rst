@@ -36,6 +36,7 @@ Administrator Guide
    hypervisor-monitoring
    asterisk-monitoring
    mobile-device-monitoring
+   windows-event-log-synchronization
    topology
    sla
    remote-file-management

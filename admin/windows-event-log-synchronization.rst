@@ -24,11 +24,14 @@ Agent configuration to enable Windows Eveng Log Synchronization can be done in t
 Windows Eveng Log Synchronization subagent should be enabled in agent configuration:
 
 .. code-block:: cfg
-SubAgent=wineventsync.nsm
+
+   SubAgent=wineventsync.nsm
+
 
 Logs that should be monitored (Application, Security, etc) are specified in ``WinEventSync`` section:
 
 .. code-block:: cfg
+
    [WinEventSync]
    EventLog=Application
    EventLog=Security
@@ -47,6 +50,7 @@ you will receive all Events except 200 and 202-300.
 To exclude all Event IDs, use ``ExcludeEvent=0-65535``, then you can use ``IncludeEvent`` to select only the IDs you need. 
 
 .. code-block:: cfg
+
    [WinEventSync/Security]
    IncludeEvent=4624-4625
    IncludeEvent=4800-4803
@@ -58,6 +62,7 @@ By default, if no ``IncludeSource`` are ``ExcludeSource`` are given, all sources
 You can use ``ExcludeSource=*`` to exclude every source and speficy ``IncludeSource`` to override the exclude for specific sources. 
 
 .. code-block:: cfg
+
    [WinEventSync/System]
    IncludeSource=Microsoft-Windows-WindowsUpdateClient
    ExcludeSource=*

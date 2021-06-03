@@ -29,10 +29,11 @@ SubAgent=wineventsync.nsm
 Logs that should be monitored (Application, Security, etc) are specified in ``WinEventSync`` section:
 
 .. code-block:: cfg
-[WinEventSync]
-EventLog=Application
-EventLog=Security
-EventLog=System
+   [WinEventSync]
+   EventLog=Application
+   EventLog=Security
+   EventLog=System
+
 
 Per-log configuration is specified in sections named according to log name, e.g. ``WinEventSync/System``. 
 
@@ -46,19 +47,20 @@ you will receive all Events except 200 and 202-300.
 To exclude all Event IDs, use ``ExcludeEvent=0-65535``, then you can use ``IncludeEvent`` to select only the IDs you need. 
 
 .. code-block:: cfg
-[WinEventSync/Security]
-IncludeEvent=4624-4625
-IncludeEvent=4800-4803
-ExcludeEvent=0-65535
+   [WinEventSync/Security]
+   IncludeEvent=4624-4625
+   IncludeEvent=4800-4803
+   ExcludeEvent=0-65535
+
 
 Filtering by Source is done using parameters ``IncludeSource`` and ``ExcludeSource``. 
 By default, if no ``IncludeSource`` are ``ExcludeSource`` are given, all sources in that log will be synchronized.
 You can use ``ExcludeSource=*`` to exclude every source and speficy ``IncludeSource`` to override the exclude for specific sources. 
 
 .. code-block:: cfg
-[WinEventSync/System]
-IncludeSource=Microsoft-Windows-WindowsUpdateClient
-ExcludeSource=*
+   [WinEventSync/System]
+   IncludeSource=Microsoft-Windows-WindowsUpdateClient
+   ExcludeSource=*
 
 
 Agent log mesages related to windows event log synchronization are written with tag ``winsyncevent``. 

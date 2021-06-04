@@ -355,26 +355,28 @@ for syslog monitoring.
 
 Tag ``<level>`` can be used to filter records from Windows Event log by event
 severity level (also called :guilabel:`event type` in older Windows versions).
-Each severity level has it's own code, and to filter by multiple severity
-levels you should specify sum of appropriate codes. Severity level codes are
-following:
+Each severity level has it's own numeric value, and to filter by multiple
+severity levels you should specify sum of appropriate values (bitmask). Severity
+level numerical values are the following:
 
+.. list-table::
+   :header-rows: 1
+   :widths: 80 20
 
-+------+--------------------------------------------------------------------------+
-| Code |  Severity                                                                |
-+======+==========================================================================+
-| 1    | Error                                                                    |
-+------+--------------------------------------------------------------------------+
-| 2    | Warning                                                                  |
-+------+--------------------------------------------------------------------------+
-| 4    | Information                                                              |
-+------+--------------------------------------------------------------------------+
-| 8    | Audit Success                                                            |
-+------+--------------------------------------------------------------------------+
-| 16   | Audit Failure                                                            |
-+------+--------------------------------------------------------------------------+
-| 256  | Critical (only on Windows 7/Windows Server 2008 and higher)              |
-+------+--------------------------------------------------------------------------+
+   * - Severity level
+     - Decimal value
+   * - Error
+     - 1
+   * - Warning
+     - 2
+   * - Information
+     - 4
+   * - Audit Success
+     - 8
+   * - Audit Failure
+     - 16
+   * - Critical (only on Windows 7/Windows Server 2008 and higher) 
+     - 256
 
 
 Some examples:

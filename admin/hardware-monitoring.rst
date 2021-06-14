@@ -8,8 +8,8 @@ Hardware(sensor) monitoring
   * lm-sensors - Can collect data from all sensors that are supported by
     `lm-sensors <http://www.lm-sensors.org/wiki/Devices>`_ drivers on Linux.
   * DS18x20 - This subagent collects temperature data from ds18x20 sensors. Linux only.
-  * RPI - This subagent is created for Raspberry Pi. It can collect data from dht22
-    sensor and get status of any GPO pin.
+  * RPI - This subagent is created for Raspberry Pi. It can collect data from DHT22
+    sensor and get status of any GPIO pin.
 
 lm-sensors
 ==========

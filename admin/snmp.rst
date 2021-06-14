@@ -11,7 +11,7 @@ Various SNMP devices might require special measures to get information, e.g.
 some devices provide additional information for interfaces only under vendor OIDs, etc. 
 To address this, |product_name| provides a concept of SNMP drivers. SNMP driver is detected automatically. 
 
-If SNMP driver was not automatibally detected, it's possible to set it manually by specifying driver name in custom attribute ``snmp.driver`` on a node. 
+If SNMP driver was not automatically detected, it's possible to set it manually by specifying driver name in custom attribute ``snmp.driver`` on a node. 
 
 Possible SNMP driver names are: 
   - AT

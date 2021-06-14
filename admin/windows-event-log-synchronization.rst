@@ -1,7 +1,7 @@
 .. _windows_event_log_synchronization:
 
 =================================
-Windows Eveng Log Synchronization
+Windows Event Log Synchronization
 =================================
 
 |product_name| can collect and centrally store Windows event logs. Collection is
@@ -17,14 +17,14 @@ can be generated.
 Agent Configuration for Event Log Synchronization
 =================================================
 
-Agent configuration to enable Windows Eveng Log Synchronization can be done in
+Agent configuration to enable Windows Event Log Synchronization can be done in
 two ways:
 
 #. In agent's configuration file
 #. Using Agent Configuration policy. For more information see
    :ref:`agent-policies-label`.
 
-Windows Eveng Log Synchronization subagent should be enabled in agent
+Windows Event Log Synchronization subagent should be enabled in agent
 configuration:
 
 .. code-block:: cfg
@@ -43,6 +43,8 @@ Logs that should be monitored (Application, Security, etc) are specified in
    EventLog=System
 
 
+With above configuration all records in the specified logs will be synchronized. 
+It is possible to configure per-log settings to filter only part of records. 
 Per-log configuration is specified in sections named according to log name, e.g.
 ``WinEventSync/System``. 
 

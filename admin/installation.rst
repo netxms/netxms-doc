@@ -46,9 +46,14 @@ always result as false as boolean value 'true' is not equal to 1. Might require 
 
 Regexp matching operation in NXSL returns array with capture groups or false as a result.
 
+Clusters now have configuration poll. If you have configuration poll hook script that is referring to ``$node`` object, this will 
+produce error message in server log each time a configuration poll runs on a cluster. Replace ``$node`` with ``$object`` or
+use condition ``if (classof($object) == "Node")`` or  ``if ($node != null)`` prior to accessing attributes or methods of ``$node``. 
+
 3.8
 ---
-Minimal Java version for console is Java-11.
+Minimal JRE (Java Runtime Environment) version for console is Java-11. 
+
 
 Planing
 =======
@@ -108,9 +113,9 @@ Database engines supported by |product_name| server:
    * Microsoft SQL Server 2012, 2014, 2016, 2017
    * SQLite (only for test purposes)
 
-Postges database tuning might be required depending on database size. 
+Postgres database tuning might be required depending on database size. 
 Increase of ``shared_buffers`` might be needed, rough recommendation is 25% of available RAM. 
-Incread of ``max_locks_per_transaction`` is needed if using TimescaleDB, rough recommendation is 512. 
+Increase of ``max_locks_per_transaction`` is needed if using TimescaleDB, rough recommendation is 512. 
 
 Database size and load is very hard to predict, because it is dependent on a number of
 monitored nodes and collected parameters. If you plan to install database engine on
@@ -140,7 +145,7 @@ Packages are signed, and you'll need to install additional encryption key for si
 
 Two components are supported - "main" and "unstable".
 
-Supported URLs (*CODENAME* should be replaced withoutput of `lsb_release -sc`):
+Supported URLs (*CODENAME* should be replaced with output of `lsb_release -sc`):
 
   * Debian, LMDE - "deb http://packages.netxms.org/debian CODENAME main"
   * Ubuntu, Mint - "deb http://packages.netxms.org/ubuntu CODENAME main"
@@ -182,8 +187,8 @@ Installing packages
 Server
 ~~~~~~
 
-Server require two components to function - server itselt (package "netxms-server") and at least one database abstraction layer driver 
-(multuple can be installed at the same time, e.g. for migration purposes). These database drivers are also used by agent for database 
+Server require two components to function - server itself (package "netxms-server") and at least one database abstraction layer driver 
+(multiple can be installed at the same time, e.g. for migration purposes). These database drivers are also used by agent for database 
 monitoring (performing queries to databases). 
 
 Provided driver packages:
@@ -439,7 +444,7 @@ Agent
    * - Subagent
      - Description
    * - filemgr.nsm
-     - Provides access to spefified folders on monitored host from |product_name| Management Console File Manager.
+     - Provides access to specified folders on monitored host from |product_name| Management Console File Manager.
        Is also being used for distributing Agent Policy configuration files (see :ref:`agent-policies-label`.)
    * - logwatch
      - Allows monitoring log files and Windows Event Log and sending matched events to |product_name| server.

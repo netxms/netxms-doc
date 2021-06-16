@@ -306,7 +306,7 @@ Full list of hooks:
        $node - current object if it is 'Node' class
      - none
    * - Hook\:\:CreateSubnet
-     - Hook that is executed at the ens subnet creation
+     - Hook that is executed after creation of a subnet
      - $node - current node, object of 'Node' class
 
        $1 - current subnet, object of 'Subnet' class
@@ -317,6 +317,29 @@ Full list of hooks:
 
        $interface - current interface, object of 'Interface' type
      - none
+   * - Hook\:\:EventProcessor
+     - Hook that is executed for each event prior to it's processing by Event Processing Policies. 
+       
+     - $object - event source object, one of 'NetObj' subclasses
+
+       $node - event source object if it is 'Node' class
+
+       $event - event being processed (object of 'Event' class)
+     - none
+   * - Hook\:\:AlarmStateChange
+     - Hook that is executed on alarm state change (alarm gets acknowledged, resolved or terminated)
+     - $alarm - alarm being processed (object of 'Alarm' class)
+     - none
+   * - Hook\:\:UnboundTunnelOpened
+     - Hook that is executed when tunnel connection is established, but not bound to a node. 
+     - $tunnel - incoming tunnel information (object of 'Tunnel' class)
+     - none     
+   * - Hook\:\:BoundTunnelOpened
+     - Hook that is executed when tunnel connection bound to a node is established. 
+     - $node - node this tunnel was bound to (object of 'Node' class)
+     
+       $tunnel - incoming tunnel information (object of 'Tunnel' class)
+     - none     
 
 Usually hooks are used for automatic actions that need to be done on node.
 For example automatic remove change of expected state of interface depending

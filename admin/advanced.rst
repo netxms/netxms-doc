@@ -638,6 +638,878 @@ Return data:
 
     Object information identified by provided ID or GUID.
 
+Create object
+^^^^^^^^^^^^^
+
+Request to create new object.
+
+Request type: **POST**
+
+JSON data:
+
+  JSON object can contain fields form 2 filed entities: 
+
+    * :ref:`creation-fields`
+    * :ref:`modification-fields`
+
+  Minimal JSON for node creation under "Infrastructure Services" object:
+
+  .. code-block:: json
+
+      {"objectType": 2, "name":"testNode", "parentId": 2, "primaryName":"10.5.0.12" }
+
+  Minimal JSON for container creation under "Infrastructure Services" object:
+
+  .. code-block:: json
+
+      {"objectType": 5, "name":"New container", "parentId": 2}
+
+Request path: *API_HOME*/objects
+
+Return data:
+
+    New object ID.
+
+  .. code-block:: json
+
+    { "id": 15130 }
+
+Update object
+^^^^^^^^^^^^^
+
+Request to update object.
+
+Request type: **PATCH**
+
+Request path: *API_HOME*/objects/**{object-id}**
+
+JSON data:
+
+  JSON object can contain :ref:`modification-fields`.
+
+  Fields that are not set will not be updated. Array elements will be replaced fully (if new array does not contain old elements - they will be deleted).
+
+  Json to update object's custom attributes (json should contain all custom attributes, attributes that are not part of JSON will be deleted):
+
+  .. code-block:: json
+
+    {
+      "customAttributes": {
+          "test attr2": {
+              "value": "new value"
+          },
+          "test attr": {
+              "value": "new value"
+          }
+      }
+    }
+
+
+Get object by id
+^^^^^^^^^^^^^^^^
+
+Request to delete object.
+
+Request type: **DELETE**
+
+Request path: *API_HOME*/objects/**{object-id}**
+
+Return data:
+
+    Object information identified by provided ID or GUID.
+
+.. _creation-fields:
+
+Creation fields
+^^^^^^^^^^^^^^^
+This list represents all fields that are object creation fields. Note that this is common list for any type of object.
+
+.. list-table::
+   :widths: 21 21 34
+   :header-rows: 1
+
+   * - Field name
+     - Type
+     - Comment
+   * - objectType
+     - Ingeger
+     - Possible options:
+  
+       * SUBNET: 1
+       * NODE: 2
+       * INTERFACE: 3
+       * NETWORK: 4
+       * CONTAINER: 5
+       * ZONE: 6
+       * SERVICEROOT: 7
+       * TEMPLATE: 8
+       * TEMPLATEGROUP: 9
+       * TEMPLATEROOT: 10
+       * NETWORKSERVICE: 11
+       * VPNCONNECTOR: 12
+       * CONDITION: 13
+       * CLUSTER: 14
+       * NETWORKMAPROOT: 19
+       * NETWORKMAPGROUP: 20
+       * NETWORKMAP: 21
+       * DASHBOARDROOT: 22
+       * DASHBOARD: 23
+       * BUSINESSSERVICEROOT: 27
+       * BUSINESSSERVICE: 28
+       * NODELINK: 29
+       * SLMCHECK: 30
+       * MOBILEDEVICE: 31
+       * RACK: 32
+       * ACCESSPOINT: 33
+       * CHASSIS: 35
+       * DASHBOARDGROUP: 36
+       * SENSOR: 37  
+   * - name
+     - String
+     - Object name
+   * - parentId
+     - Long
+     - Parent object id this object to be created under
+   * - comments
+     - String
+     - Object comment
+   * - creationFlags
+     - Ingeger
+     - Bit flags for object creation. Possible options:
+
+       * DISABLE ICMP: 0x0001
+       * DISABLE NXCP: 0x0002
+       * DISABLE SNMP: 0x0004
+       * CREATE UNMANAGED: 0x0008
+       * ENTER MAINTENANCE: 0x0010
+       * AS ZONE PROXY: 0x0020
+       * DISABLE ETHERNET IP: 0x0040
+       * SNMP SETTINGS LOCKED: 0x0080
+       * EXTERNAL GATEWAY: 0x0100
+   * - primaryName
+     - String
+     - Node primary name (IP address or dns name)
+   * - agentPort
+     - Ingeger
+     - Node agent port
+   * - snmpPort
+     - Ingeger
+     - Node SNMP port
+   * - etherNetIpPort
+     - Ingeger
+     - Node ethernetIP port
+   * - sshPort
+     - Ingeger
+     - Node ssh port
+   * - ipAddress
+     - String
+     - Interface IP address
+   * - agentProxyId
+     - Long
+     - Node agent proxy id
+   * - snmpProxyId
+     - Long
+     - Node SNMP proxy id
+   * - etherNetIpProxyId
+     - Long
+     - Node ethernetIP proxy id
+   * - icmpProxyId
+     - Long
+     - Node ICMP proxy id
+   * - sshProxyId
+     - Long
+     - Node ssh proxy id
+   * - mapType
+     - Ingeger
+     - Network map type
+   * - seedObjectIds
+     - Long[]
+     - Network map seed objects
+   * - zoneUIN
+     - Ingeger
+     - Subnet/Node/Zone zone UIN
+   * - serviceType
+     - Ingeger
+     - Network service types: 
+      
+       * CUSTOM: 0
+       * SSH: 1
+       * POP3: 2
+       * SMTP: 3
+       * FTP: 4
+       * HTTP: 5
+       * HTTPS: 6
+       * TELNET: 7
+   * - ipPort
+     - Ingeger
+     - Network Service IP port
+   * - request
+     - String
+     - Network Service request
+   * - response
+     - String
+     - Network Service response
+   * - linkedNodeId
+     - Long
+     - Linked object for Node Link object
+   * - template
+     - Boolean
+     - If service check object is template 
+   * - macAddress
+     - String
+     - Interface or sensor MAC address
+   * - ifIndex
+     - Ingeger
+     - Interface index
+   * - ifType
+     - Ingeger
+     - Interface type
+   * - module
+     - Ingeger
+     - Interface module number
+   * - port
+     - Ingeger
+     - Interface port
+   * - physicalPort
+     - Boolean
+     - IF interface has physical port
+   * - createStatusDci
+     - Boolean
+     - IF status DCI should be created for network service
+   * - deviceId
+     - String
+     - Mobile device ID
+   * - height
+     - Ingeger
+     - Rack height
+   * - controllerId
+     - Long
+     - Chassis controller node id
+   * - sshLogin
+     - String
+     - Node ssh login
+   * - sshPassword
+     - String
+     - Node password
+   * - deviceClass
+     - Ingeger
+     - Sensor device class
+   * - vendor
+     - String
+     - Sensor vendor
+   * - commProtocol
+     - Ingeger
+     - Sensor communication protocol
+   * - xmlConfig
+     - String
+     - Sensor XML config
+   * - xmlRegConfig
+     - String
+     - Sensor XML registration config
+   * - serialNumber
+     - String
+     - Sensor serial number
+   * - deviceAddress
+     - String
+     - Sensor device address
+   * - metaType
+     - String
+     - Sensor meta type
+   * - description
+     - String
+     - Sensor description
+   * - sensorProxy
+     - Long
+     - Sensor proxy node id
+
+
+.. _modification-fields:
+
+Modification fields
+^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :widths: 21 21 34
+   :header-rows: 1
+
+   * - Field name
+     - Type
+     - Comment
+   * - name
+     - String
+     -
+   * - primaryName
+     - String
+     -
+   * - alias
+     - String
+     -
+   * - nameOnMap
+     - String
+     -
+   * - acl
+     - :ref:`AccessListElement <access-list-element-fields>`\ []
+     -
+   * - inheritAccessRights
+     - Boolean
+     -
+   * - customAttributes 
+     - JSON object {String: :ref:`CustomAttribute<custom-attribute-element-fields>`}
+     - Object name is custom attribute name and value is in :ref:`CustomAttribute<custom-attribute-element-fields>` object
+   * - autoBindFilter
+     - String
+     -
+   * - version
+     - Integer
+     -
+   * - description
+     - String
+     -
+   * - agentPort
+     - Integer
+     -
+   * - agentSecret
+     - String
+     -
+   * - agentProxy
+     - Long
+     -
+   * - snmpPort
+     - Integer
+     -
+   * - snmpVersion
+     - String
+     - Node SNMP version:
+      
+       * V1
+       * V2C
+       * V3
+       * DEFAULT
+   * - snmpAuthMethod
+     - Integer
+     -
+   * - snmpPrivMethod
+     - Integer
+     -
+   * - snmpAuthName
+     - String
+     -
+   * - snmpAuthPassword
+     - String
+     -
+   * - snmpPrivPassword
+     - String
+     -
+   * - snmpProxy
+     - Long
+     -
+   * - icmpProxy
+     - Long
+     -
+   * - trustedNodes
+     - Long[]
+     -
+   * - geolocation
+     - :ref:`Geolocation <geolocation-fields>`
+     -
+   * - mapBackground
+     - String
+     - UUID
+   * - mapBackgroundLocation
+     - :ref:`Geolocation <geolocation-fields>`
+     -
+   * - mapBackgroundZoom
+     - Integer
+     -
+   * - mapBackgroundColor
+     - Integer
+     -
+   * - mapImage
+     - String
+     - UUID
+   * - columnCount
+     - Integer
+     -
+   * - script
+     - String
+     -
+   * - activationEvent
+     - Integer
+     -
+   * - deactivationEvent
+     - Integer
+     -
+   * - sourceObject
+     - Long
+     -
+   * - activeStatus
+     - Integer
+     -
+   * - inactiveStatus
+     - Integer
+     -
+   * - drillDownObjectId
+     - Long
+     -
+   * - pollerNode
+     - Long
+     -
+   * - requiredPolls
+     - Integer
+     -
+   * - serviceType
+     - Integer
+     -
+   * - ipProtocol
+     - Integer
+     -
+   * - ipPort
+     - Integer
+     -
+   * - ipAddress
+     - String
+     - Network service IP address
+   * - request
+     - String
+     - Network service IP request
+   * - response
+     - String
+     - Network service IP response
+   * - objectFlags
+     - Integer
+     - Object flags specific for each object. Possible values can be found in NXSL documentation under each object. (Example: `Node flags <https://www.netxms.org/documentation/nxsl-latest/#_constants_6>`_)
+   * - ifXTablePolicy
+     - Integer
+     -
+   * - reportDefinition
+     - String
+     -
+   * - networkList
+     - String[]
+     - IP address list
+   * - statusCalculationMethod
+     - Integer
+     -
+   * - statusPropagationMethod
+     - Integer
+     -
+   * - fixedPropagatedStatus
+     - String
+     - Object status: 
+      
+       * NORMAL
+       * WARNING
+       * MINOR
+       * MAJOR
+       * CRITICAL
+       * UNKNOWN
+       * UNMANAGED
+       * DISABLED
+       * TESTING
+   * - statusShift
+     - Integer
+     -
+   * - statusTransformation
+     - ObjectStatus[]
+     - Object status mapping list. Possible values:
+      
+       * NORMAL
+       * WARNING
+       * MINOR
+       * MAJOR
+       * CRITICAL
+       * UNKNOWN
+       * UNMANAGED
+       * DISABLED
+       * TESTING
+   * - statusSingleThreshold
+     - Integer
+     -
+   * - statusThresholds
+     - Integer[]
+     -
+   * - expectedState
+     - Integer
+     -
+   * - linkColor
+     - Integer
+     -
+   * - connectionRouting
+     - Integer
+     -
+   * - discoveryRadius
+     - Integer
+     -
+   * - height
+     - Integer
+     -
+   * - filter
+     - String
+     -
+   * - peerGatewayId
+     - Long
+     -
+   * - localNetworks
+     - String[]
+     - VPN networks IP adress 
+   * - remoteNetworks
+     - String[]
+     - VPN networks IP adress 
+   * - postalAddress
+     - :ref:`PostalAddress<postal-address-fields>`
+     -
+   * - agentCacheMode
+     - String
+     - Possible values:
+      
+        * DEFAULT
+        * ON
+        * OFF
+   * - agentCompressionMode
+     - String
+     - Possible values:
+      
+        * DEFAULT
+        * ENABLED
+        * DISABLED
+   * - mapObjectDisplayMode
+     - String
+     - Possible values:
+      
+        * ICON
+        * SMALL_LABEL
+        * LARGE_LABEL
+        * STATUS
+        * FLOOR_PLAN
+   * - physicalContainerObjectId
+     - Long
+     -
+   * - rackImageFront
+     - String
+     - UUID
+   * - rackImageRear
+     - String
+     - UUID
+   * - rackPosition
+     - Short
+     -
+   * - rackHeight
+     - Short
+     -
+   * - rackOrientation
+     - String
+     - Possible values:
+      
+        * FILL
+        * FRONT
+        * REAR
+   * - dashboards
+     - Long[]
+     -
+   * - rackNumberingTopBottom
+     - Boolean
+     -
+   * - controllerId
+     - Long
+     -
+   * - chassisId
+     - Long
+     -
+   * - sshProxy
+     - Long
+     -
+   * - sshLogin
+     - String
+     -
+   * - sshPassword
+     - String
+     -
+   * - sshPort
+     - Integer
+     -
+   * - sshKeyId
+     - Integer
+     -
+   * - zoneProxies
+     - Long[]
+     -
+   * - urls
+     - ObjectUrl[]
+     -
+   * - seedObjectIds
+     - Long[]
+     -
+   * - macAddress
+     - String
+     - Sensor mac address
+   * - deviceClass
+     - Integer
+     -
+   * - vendor
+     - String
+     -
+   * - serialNumber
+     - String
+     -
+   * - deviceAddress
+     - String
+     -
+   * - metaType
+     - String
+     -
+   * - sensorProxy
+     - Long
+     -
+   * - xmlConfig
+     - String
+     -
+   * - snmpPorts
+     - String[]
+     -
+   * - responsibleUsers
+     - Long[]
+     -
+   * - isAutoBindEnabled
+     - Boolean
+     -
+   * - isAutoUnbindEnabled
+     - Boolean
+     -
+   * - icmpStatCollectionMode
+     - String
+     - Possible values:
+      
+        * DEFAULT
+        * ON
+        * OFF
+   * - icmpTargets
+     - String[]
+     - ICMP ping targets IP addresses 
+   * - chassisPlacement
+     - String
+     -
+   * - etherNetIPPort
+     - Integer
+     -
+   * - etherNetIPProxy
+     - Long
+     -
+   * - certificateMappingMethod
+     - String
+     - Possible values:
+      
+        * SUBJECT
+        * PUBLIC_KEY
+        * COMMON_NAME
+        * TEMPLATE_ID
+   * - certificateMappingData
+     - String
+     -
+   * - categoryId
+     - Integer
+     -
+   * - geoLocationControlMode
+     - GeoLocationControlMode
+     - Possible values:
+      
+        * NO_CONTROL
+        * RESTRICTED_AREAS
+        * ALLOWED_AREAS
+   * - geoAreas
+     - long[]
+     -
+
+
+.. _geolocation-fields:
+
+GeoLocation fields
+^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+  :widths: 21 21 34
+  :header-rows: 1
+
+  * - Field name
+    - Type
+    - Comment
+  * - type
+    - Integer
+    - Available options:
+     
+      * UNSET: 0
+      * MANUAL: 1
+      * GPS: 2
+      * NETWORK: 3
+  * - latitude
+    - Double
+    -
+  * - longitude
+    - Double
+    -
+  * - accuracy
+    - int
+    -	Location accuracy in meters
+  * - timestamp
+    - Integer
+    - UNIX timestamp
+
+.. _access-list-element-fields:
+
+AccessListElement fields
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+  :widths: 21 21 34
+  :header-rows: 1
+
+  * - Field name
+    - Type
+    - Comment
+  * - userId
+    - Long
+    -
+  * - accessRights
+    - Integer
+    - Bit flag field. Available options:
+     
+      * OBJECT ACCESS READ: 0x00000001
+      * OBJECT ACCESS MODIFY: 0x00000002
+      * OBJECT ACCESS CREATE: 0x00000004
+      * OBJECT ACCESS DELETE: 0x00000008
+      * OBJECT ACCESS READ ALARMS: 0x00000010
+      * OBJECT ACCESS ACL: 0x00000020
+      * OBJECT ACCESS UPDATE ALARMS: 0x00000040
+      * OBJECT ACCESS SEND EVENTS: 0x00000080
+      * OBJECT ACCESS CONTROL: 0x00000100
+      * OBJECT ACCESS TERM ALARMS: 0x00000200
+      * OBJECT ACCESS PUSH DATA: 0x00000400
+      * OBJECT ACCESS CREATE ISSUE: 0x00000800
+      * OBJECT ACCESS DOWNLOAD: 0x00001000
+      * OBJECT ACCESS UPLOAD: 0x00002000
+      * OBJECT ACCESS MANAGE FILES: 0x00004000
+      * OBJECT ACCESS MAINTENANCE: 0x00008000
+      * OBJECT ACCESS READ AGENT: 0x00010000
+      * OBJECT ACCESS READ SNMP: 0x00020000
+      * OBJECT ACCESS SCREENSHOT: 0x00040000
+
+.. _custom-attribute-element-fields:
+
+CustomAttribute fields
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+  :widths: 21 21 34
+  :header-rows: 1
+
+  * - Field name
+    - Type
+    - Comment
+  * - value
+    - String
+    - Attribute value
+  * - flags
+    - Long
+    - Available options:
+     
+      * INHERITABLE: 1
+
+.. _postal-address-fields:
+
+PostalAddress fields
+^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+  :widths: 21 21 34
+  :header-rows: 1
+
+  * - Field name
+    - Type
+    - Comment
+  * - country
+    - String
+    -
+  * - city
+    - String
+    -
+  * - streetAddress
+    - String
+    -
+  * - postcode
+    - String
+    - 
+
+Bind node
+^^^^^^^^^
+
+Request to bind object to container.
+
+Request type: **POST**
+
+JSON data:
+
+  Bind object to object in URL:
+
+  .. code-block:: json
+
+      {"id": 15130}
+
+Request path: *API_HOME*/objects/**{object-id}**/bind
+
+
+Bindto node
+^^^^^^^^^^^
+
+Request to bind object under container.
+
+Request type: **POST**
+
+JSON data:
+
+  Bind object in URL to "Infrastructure service":
+
+  .. code-block:: json
+
+      {"id": 2}
+
+Request path: *API_HOME*/objects/**{object-id}**/bindTo
+
+Unbind node
+^^^^^^^^^^^
+
+Request to unbind object from container.
+
+Request type: **POST**
+
+JSON data:
+
+  Unbind object from container in URL:
+
+  .. code-block:: json
+
+      {"id": 15130}
+
+Request path: *API_HOME*/objects/**{object-id}**/unbind
+
+
+UnbindFrom node
+^^^^^^^^^^^^^^^
+
+Request to unbind object from container.
+
+Request type: **POST**
+
+JSON data:
+
+  Unbind object in URL from "Infrastructure service":
+
+  .. code-block:: json
+
+      {"id": 2}
+
+Request path: *API_HOME*/objects/**{object-id}**/unbindFrom
+
+
+
 Alarms
 ~~~~~~
 

@@ -609,6 +609,22 @@ The following drivers are provided by default with |product_name| installation:
        parameters. It is necessary to set debug level to :guilabel:`debug=6` or
        higher to get records in the log file.
 
+   * - Google chat
+     - Driver to send notifications to Google charts. You need to create 
+       `incoming web hook first <https://developers.google.com/chat/how-tos/webhooks>`_. 
+       Each web hook have it’s own URL, you can either put it as recipient, or setup 
+       mapping in notification channel configuration.
+       
+       Mapping is done in the section "Rooms". 
+      
+       Example:
+
+       .. code-block:: cfg
+
+            [Rooms]
+            RoomName=URL
+            AnotherRoomName=URL
+
    * - GSM
      - Driver for serial or USB attached GSM modems with support for standard GSM AT command set. Configuration parameters:
 

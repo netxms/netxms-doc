@@ -1628,3 +1628,88 @@ Query
 There can be written any script that will be executed on all objects and if stript returns true - object will be shown in the resulting 
 table. There can be used the same syntax as for :ref:`dashboards-object-query` Dashboard element, but variables will not be added as 
 additional columns for table in this case. 
+
+Audit log forwarding
+====================
+
+Syslog
+------
+
+NetXMS allows to forward audit log to another syslog server to have all data in one place. 
+
+Next configuration parameters should be set in order to forward audit log to external syslog server:
+
+.. list-table::
+  :widths: 21 21
+  :header-rows: 1
+
+  * - Name
+    - Description
+  * - ExternalAuditFacility
+    - Syslog facility to be used in audit log records sent to external server.
+  * - ExternalAuditPort
+    - UDP port of external syslog server to send audit records to.
+  * - ExternalAuditServer
+    - External syslog server to send audit records to. If set to "none", external audit logging is disabled.
+  * - ExternalAuditSeverity
+    - Syslog severity to be used in audit log records sent to external server.
+  * - ExternalAuditTag
+    - Syslog tag to be used in audit log records sent to external server.
+
+LEEF
+----
+
+LEEF server module provides functionality to send audit log to IBM Security QRadar. 
+The Log Event Extended Format (LEEF) is a customized event format for IBM Security QRadar. More about it can be found 
+`there <https://www.ibm.com/docs/en/dsm?topic=leef-overview>`_.
+
+LEEF server module should be enabled in server configuraiton file by adding "Module=leef.nxm" line to :file:`netxmsd.conf` file.
+
+Additionaly to module configuration "LEEF" section should be added with required configurations.
+
+.. list-table::
+  :widths: 21 21
+  :header-rows: 1
+
+  * - Name
+    - Description
+  * - Server
+    - Server address
+  * - Port
+    - Server port
+  * - EventCode
+    - LEEF event code
+  * - RFC5424Timestamp
+    - "No" if RFC5424 Timestamp format should not be used (default value is Yes)
+  * - Facility
+    - Facility as facility in syslog
+  * - Severity
+    - Severity as severity in syslog
+  * - Product
+    - LEEF product field, by default will be "NetXMS"
+  * - ProductVersion
+    - LEEF product version field, by default will be server version
+  * - Vendor
+    - LEEF vendor field, default it "Raden Solutions"
+  * - Separator
+    - LEEF separator character as a char or in numeric format: "xHH", where HH is hexdecimal digit
+
+Additional fields can be configured in ExtraData sub section in the same key=value format.
+  
+
+Example:
+
+.. code-block:: cfg
+
+   [LEEF]
+   Server = 127.0.0.1
+   Port = 514
+   Facility = 13
+   Severity = 5
+   EventCode = 
+   Separator = ^
+
+   [LEEF/ExtraData]
+   key = value
+   key2 = value2
+

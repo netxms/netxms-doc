@@ -749,6 +749,7 @@ This list represents all fields that are object creation fields. Note that this 
        * VPNCONNECTOR: 12
        * CONDITION: 13
        * CLUSTER: 14
+       * OBJECT_BUSINESSSERVICE_PROTOTYPE: 15
        * NETWORKMAPROOT: 19
        * NETWORKMAPGROUP: 20
        * NETWORKMAP: 21
@@ -921,12 +922,23 @@ This list represents all fields that are object creation fields. Note that this 
    * - sensorProxy
      - Long
      - Sensor proxy node id
+   * - instanceDiscoveryMethod
+     - Business service instance discovery method     
+     - Possible values:
+      
+        * IDM_AGENT_LIST - 1
+        * IDM_AGENT_TABLE - 2
+        * IDM_SCRIPT - 5
 
 
 .. _modification-fields:
 
 Modification fields
 ^^^^^^^^^^^^^^^^^^^
+
+.. note::
+
+  Starting from version 4 isAutoBindEnabled and isAutoUnbindEnabled replaced by autoBindFlags
 
 .. list-table::
    :widths: 21 21 34
@@ -1269,12 +1281,6 @@ Modification fields
    * - responsibleUsers
      - Long[]
      -
-   * - isAutoBindEnabled
-     - Boolean
-     -
-   * - isAutoUnbindEnabled
-     - Boolean
-     -
    * - icmpStatCollectionMode
      - String
      - Possible values:
@@ -1318,7 +1324,51 @@ Modification fields
    * - geoAreas
      - long[]
      -
-
+   * - instanceDiscoveryMethod
+     - Business service instance discovery method     
+     - Possible values:
+      
+        * IDM_AGENT_LIST - 1
+        * IDM_AGENT_TABLE - 2
+        * IDM_SCRIPT - 5
+   * - instanceDiscoveryData
+     - Business service instance discovery data     
+     - 
+   * - instanceDiscoveryFilter
+     - Business service instance discovery data filtering script     
+     - 
+   * - autoBindFilter2
+     - Second binding script used for DCI binding. Urrently used in business service     
+     - 
+   * - autoBindFlags
+     - Auto bind bit flags     
+     - Firs script is currently used for object bind/unbind, second for dci bind/unbind. Possible values:
+      
+        * First script for auto bind is enabeled - 0x0001
+        * First script for auto unbind is enabeled - 0x0002
+        * Second script for auto bind is enabeled - 0x0004
+        * Second script for auto unbind is enabeled - 0x0008
+   * - objectStatusThreshold
+     - Business service default threshold for auto created object checks    
+     - Possible values:
+      
+        * Default - 0
+        * Warning - 1 
+        * Minor - 2 
+        * Major - 3 
+        * Critical - 4 
+   * - dciStatusThreshold
+     - Business service default threshold for auto created DCI checks    
+     - Possible values:
+      
+        * Default - 0
+        * Warning - 1 
+        * Minor - 2 
+        * Major - 3 
+        * Critical - 4 
+   * - sourceNode
+     - Id of source node for business service instance discovery methods    
+     - 
 
 .. _geolocation-fields:
 
@@ -1508,6 +1558,99 @@ JSON data:
 
 Request path: *API_HOME*/objects/**{object-id}**/unbindFrom
 
+
+Business Services
+~~~~~~~~~~~~~~~~~
+
+Get checks
+^^^^^^^^^^
+
+Request all business service checks
+
+Request type: **GET**
+
+Request path: *API_HOME*/**{object-id}**/checks
+
+Create new check
+^^^^^^^^^^^^^^^^
+
+Create new business service check
+
+Request type: **POST**
+
+Request path: *API_HOME*/**{object-id}**/checks
+
+JSON data:
+
+  Unbind object in URL from "Infrastructure service":
+
+  .. code-block:: json
+
+      {
+          "checkType": "SCRIPT",
+          "description": "Web created script",
+          "script": "return OK;",
+          "objectId": 0,
+          "dciId": 0,
+          "threshold": 0
+       }
+
+
+Update existing check
+^^^^^^^^^^^^^^^^^^^^^
+
+Update existing business service check
+
+Request type: **PUT**
+
+Request path: *API_HOME*/**{object-id}**/checks/**check-id**
+
+JSON data:
+
+  Unbind object in URL from "Infrastructure service":
+
+  .. code-block:: json
+
+      {
+          "checkType": "OBJECT",
+          "description": "Web created script",
+          "script": "return OK;",
+          "objectId": 166,
+          "dciId": 0,
+          "threshold": 0
+      }
+
+
+Update existing check
+^^^^^^^^^^^^^^^^^^^^^
+
+Delete existing business service check
+
+Request type: **DELETE**
+
+Request path: *API_HOME*/**{object-id}**/checks/**check-id**
+
+
+Get tickets
+^^^^^^^^^^^
+
+Get ticket list for given time range. 
+
+Request type: **GET**
+
+Request path: *API_HOME*/**{object-id}**/tickets
+
+Time range can be requested in 2 ways.
+
+First option is back from now with given parameters:
+
+    * timeUnit=\ *Type of time range. Possible values: MINUTE, HOUR, DAY*
+    * timeRage=\ *Range in given units*
+
+Second option is fixe time range:
+
+    * start=\ *UNIX timestamp*
+    * end=\ *UNIX timestamp*
 
 
 Alarms

@@ -1653,6 +1653,27 @@ Second option is fixe time range:
     * end=\ *UNIX timestamp*
 
 
+Get uptime
+^^^^^^^^^^
+
+Get uptime for given time range. 
+
+Request type: **GET**
+
+Request path: *API_HOME*/**{object-id}**/uptime
+
+Time range can be requested in 2 ways.
+
+First option is back from now with given parameters:
+
+    * timeUnit=\ *Type of time range. Possible values: MINUTE, HOUR, DAY*
+    * timeRage=\ *Range in given units*
+
+Second option is fixe time range:
+
+    * start=\ *UNIX timestamp*
+    * end=\ *UNIX timestamp*
+
 Alarms
 ~~~~~~
 

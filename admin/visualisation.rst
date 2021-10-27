@@ -488,7 +488,7 @@ defined as global variables.
 
 Syntax:
 
-.. code-block:: json
+.. code-block::
 
   with
     varName = { code or expression }, 

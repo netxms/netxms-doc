@@ -27,10 +27,10 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 project_author = "Raden Solutions, SIA"
-copyright = '2020, ' + project_author
+copyright = '2021, ' + project_author
 
-version = '3.8'
-release = '3.8.267'
+version = '3.9'
+release = '3.9.178'
 
 exclude_patterns = ['build']
 

@@ -1559,6 +1559,60 @@ JSON data:
 Request path: *API_HOME*/objects/**{object-id}**/unbindFrom
 
 
+Poll object
+^^^^^^^^^^^
+
+Create object poll request
+
+Request type: **POST**
+
+JSON data:
+
+  Unbind object in URL from "Infrastructure service":
+
+  .. code-block:: json
+
+      {"type": "status"}
+
+One of the following poll types:
+
+  * configuration full
+  * configuration
+  * discovery
+  * interface
+  * status
+  * topology
+
+Request path: *API_HOME*/objects/**{object-id}**/polls
+
+Return data:
+
+    Will return UUID of request, that should be used to get request output and request type.
+
+  .. code-block:: json
+
+    { "id": 15130,
+      "type": "status" }
+
+Get object poll data
+^^^^^^^^^^^^^^^^^^^^
+
+Get object poll request data 
+
+Request type: **GET**
+
+Request path: *API_HOME*/objects/**{object-id}**/polls/output/**{reqest-UUID}**
+
+Return data:
+
+    Will return request output data.
+
+  .. code-block:: json
+
+    { "streamId": 0,
+      "completed": false,
+      "message": "Poll request accepted..." }
+
 Business Services
 ~~~~~~~~~~~~~~~~~
 

@@ -1568,8 +1568,6 @@ Request type: **POST**
 
 JSON data:
 
-  Unbind object in URL from "Infrastructure service":
-
   .. code-block:: json
 
       {"type": "status"}
@@ -1601,7 +1599,7 @@ Get object poll request data
 
 Request type: **GET**
 
-Request path: *API_HOME*/objects/**{object-id}**/polls/output/**{reqest-UUID}**
+Request path: *API_HOME*/objects/**{object-id}**/polls/output/**{request-UUID}**
 
 Return data:
 
@@ -1636,7 +1634,7 @@ Request path: *API_HOME*/**{object-id}**/checks
 
 JSON data:
 
-  Unbind object in URL from "Infrastructure service":
+  Create new script business service check:
 
   .. code-block:: json
 
@@ -1661,7 +1659,7 @@ Request path: *API_HOME*/**{object-id}**/checks/**check-id**
 
 JSON data:
 
-  Unbind object in URL from "Infrastructure service":
+  Update existing business service check to object check with object ID "166":
 
   .. code-block:: json
 

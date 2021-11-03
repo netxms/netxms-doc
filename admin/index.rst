@@ -43,6 +43,7 @@ Administrator Guide
    reporting
    image-library
    mobile-console
+   rest-api
    advanced
    schedule
    scripting

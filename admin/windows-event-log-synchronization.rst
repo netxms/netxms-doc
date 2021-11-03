@@ -216,7 +216,7 @@ When a rule is mathed the following actions can be performed:
     * Break. In this case the following rules will not be processed even if
       :guilabel:`Process all` is set. 
     * Do not save to database. If this is set,
-    mached Windows Event Log record will not be saved to the database. 
+      mached Windows Event Log record will not be saved to the database. 
 
 
 Passing parameters to events

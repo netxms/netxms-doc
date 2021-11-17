@@ -493,7 +493,7 @@ Comments
 --------
 
 Each object in :guilabel:`Object Tree` can have comment. Comment can be set in
-Properties of the object.
+Properties of the object. It is possible to use :ref:`macros for event processing<event-processing-macros>` in the comments.
 
 .. figure:: _images/object_comments.png
 

@@ -2365,7 +2365,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 Agent's version
 
 Disk.Avail(*)
-~~~~~~~~~~
+~~~~~~~~~~~~~
 
 TODO
 

@@ -765,7 +765,11 @@ ExternalTable
 -------------
 
 ``ExternalTable`` defines name of the table metric, table metric description, column separator,
-instance column(s) and command. Instance column(s), descriptions and separator are optional.
+instance column(s), polling interval and command. Description, separator, instance column(s) 
+and polling interval are optional. Table can be collectexd per parameter request or by schedule. 
+Second option is usefull when command for table creation os taking long time. To collect table in 
+background and return chased value as DCI table value "PollingInterval" configuration option is required. 
+
 If separator is not specified, default value of ``,`` is used.
 
 Instance column should contain unique identifier for each table row. If several instance columns are used, then
@@ -775,17 +779,36 @@ Command is executed synchronously when this metric is requested by server.
 Each table line is separated with new line symbol. First line in returned text used as a name of the columns
 and all next lines will be used like table data. Parameters from DCI configuration can be provided,
 that will be available like $1, $2, $3..., $9 variables. To accept arguments metric name should contain
-"(*)" symbols after name.
+``(*)`` symbols after name.
 
 .. code-block:: cfg
 
   # Example
 
   # Without DCI parameters
-  ExternalTable=dciName:instanceColumns=columnName;description=description;separator=|:command
+  [ExternalTable/dciName]
+  Command = command
+  Separator = ;
+  InstanceColumns = columnName
+  Description = description
+  PollingInterval = 60
 
   # With DCI parameters
+  [ExternalTable/dciName(*)]
+  Command = echo $1
+
+  # Real example
+  [ExternalTable/test]
+  Command = echo 'a;b;c'
+  Separator = ;
+
+  # Old configuration format
+  ExternalTable=dciName::command
+  ExternalTable=dciName:instanceColumns=columnName;description=description;separator=|:command
   ExternalTable=dciName(*):instanceColumns=columnName;description=description;separator=|:command $1 $2
+  #Old configuration format with background polling 
+  ExternalTable=dciName:instanceColumns=columnName;description=description;separator=|:command;backgroundPolling=yes;pollingInterval=60
+     
 
 Separator supports special macros for separator:
 
@@ -794,6 +817,10 @@ Separator supports special macros for separator:
     * \\s - space
     * \\t - tab
     * \\u115 - unicode character number 115
+    
+    
+.. note::
+   ``backgroundPolling`` configuration should be set to ``true`` or ``yes`` in order to use polling interval with old configuration format.
 
 .. _agent-actions:
 

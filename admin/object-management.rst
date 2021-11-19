@@ -974,6 +974,10 @@ The following macros recognized:
      - Value returned by script. You should specify name of the script from script library.
    * - ``%{name}``
      - Value of custom attribute.
+   * - ``%{name:default_value}``
+     - Value of custom attribute. If such custom attribute does not exists on a particular
+       node, default_value is taken. If custom attribute exists, but has empty value,
+       this empty value is taken.
    * - ``%(name)``
      - Value of input field.
    * - ``%<name>``

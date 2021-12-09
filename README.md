@@ -28,7 +28,7 @@ Components:
 
 -   brew cask install basictex
 -   sudo tlmgr update --self
--   sudo tlmgr install latexmk fncychap titlesec tabulary varwidth framed wrapfig capt-of needspace helvetic courier letltxmacro
+-   sudo tlmgr install latexmk fncychap titlesec tabulary varwidth framed wrapfig capt-of needspace helvetic courier letltxmacro tex-gyre
 
 ## Automatic rebuild and reload
 

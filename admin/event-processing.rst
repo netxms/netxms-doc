@@ -738,6 +738,8 @@ The following drivers are provided by default with |product_name| installation:
        * FromAddr (default: netxms@localhost)
        * MailEncoding (default: utf8)
        * IsHTML (0 - do not use HTML, 1 - use HTML; default: 0)
+       * TLSMode (NONE - No TLS, TLS - Enforced TLS, STARTTLS - Opportunistic TLS; default: NONE)
+       * EnableSSLTrace (true - enable additional SSL Trace logging to server log; default: false)
 
    * - SNMPTrap
      - Driver to send notifications as SNMP traps. Driver configuration parameters:

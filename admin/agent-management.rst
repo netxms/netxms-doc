@@ -641,13 +641,13 @@ be set to :guilabel:`yes`.
 Agent External Metrics
 ======================
 
-Other option to define new Metric that can be collected from node is to use
+Other option to define new metric that can be collected from node is to use
 ``ExternalParameter``/``ExternalParameterShellExec``, or ``ExternalList``, or
 ``ExternalParametersProvider`` configuration parameters to define command that will
-be executed on a node and it's output will be provided as a Metric. This functionality
+be executed on a node and it's output will be provided as a metric. This functionality
 provides flexibility to create your own metrics, lists or table metrics.
 
-New Metrics will be visible in the :guilabel:`Available parameters` list only after agent
+New metrics will be visible in the :guilabel:`Available parameters` list only after agent
 restarts (agent reads a configuration file only once on start) and configuration poll,
 so to force it's appearance run :guilabel:`Configuration poll` manually after agent restart.
 
@@ -659,10 +659,10 @@ ExternalParameter/ExternalParameterShellExec
 --------------------------------------------
 
 ``ExternalParameter`` defines name of the metric and command that is executed synchronously
-when this metric is requested by server. There can be provided parameters from DCI
-configuration, that will be available like $1, $2, $3..., $9 variables. To accept
+when this metric is requested by server. Parameters from  DCI configuration can be provided, 
+these will be available as $1, $2, $3..., $9 variables. To accept
 arguments metric name should contain "(*)" symbols after name. Only first line of
-script output will be given as a result of execution(metric value).
+script output will be given as a result of execution (metric value).
 
 ``ExternalParameterShellExec`` has same meaning as ``ExternalParameter`` and behaves identically on non-Windows systems.
 On Windows systems ``ExternalParameter`` executes specified command using system process execution
@@ -688,10 +688,25 @@ execution timeout or ``ExternalParametersProvider`` can be used.
   ExternalParameter=Name(*):command $1 $2
   ExternalParameterShellExec=Name(*):command $1 $2
 
-  #Real examples
+
+For each parameter two agent metrics are provided - one is ``Name`` as specified in ``ExternalParameter``/``ExternalParameterShellExec`` 
+which provides output of the command (first line only), the other is ``Name.ExitCode`` that provides exit code of the executed command. 
+
+.. code-block:: cfg
+
+  # Real example
   ExternalParameter = Test:echo test
   ExternalParameter = LineCount(*):cat $1 | wc -l
 
+
+.. code-block:: shell
+
+  > nxget localhost Test
+  test
+  > nxget localhost LineCount('somefile.txt')
+  42
+  > nxget localhost LineCount('somefile.txt').ExitCode
+  0
 
 ExternalList
 ------------

@@ -43,108 +43,12 @@ Service monitoring using DCI
 ============================
 
 Second option is to use :term:`DCI` to monitor service. There are 2 subagents that
-provide service monitoring metrics: PortCheck and NetSVC. It is recommended to use
-NetSVC for all curl supported protocols, as it can check not only availability, but
-also response. For unsupported protocols Custom check of PortCheck subagent
-can be used.
+provide service monitoring metrics: NetSVC and PortCheck (deprecated). It is recommended to use
+NetSVC for all `curl supported protocols <https://everything.curl.dev/protocols/curl>`_, as it can check not only availability, but
+also response.
 
-For HTTP services there is also option to use ECS subagent. This subagent has only 3 Metrics. Two
-of them calculate hash and last one measure time.
-
-
-.. _portcheck-subagent:
-
-PortCheck configuration
------------------------
-
-This subagent can be used to check TCP ports and specifically implements checks for
-common services. It is highly recommended to use netsvc subagent especially for
-HTTP and HTTPS monitoring.
-
-When loaded, PORTCHECK subagent adds the following Metrics to node Metric list:
-
-.. list-table::
-   :widths: 100 50
-   :header-rows: 1
-
-   * - Parameter
-     - Description
-   * - ServiceCheck.Custom(\ *target*\ ,\ *port*\ [,\ *timeout*\ ])
-     - Check that TCP *port* is open on *target*. Optional argument *timeout* specifies timeout in milliseconds, if it's not provided, default timeout from ***PORTCHECK** section of agent's configuration file will be used. This is a very simple test that does nothing more than checking if the port is open.
-   * - ServiceCheck.HTTP(\ *target*\ ,[\ *port*\ ],\ *URI*\ ,\ *hostHeader*\ [,\ *regex*\ [,\ *timeout*\ ]])
-     - Check that HTTP service is running on *target*.  Optional argument *port* specifies the port to connect to,
-       otherwise 80 will be used.  The *URI* is NOT a URL it is the host header request URI.
-       As an example to test URL http://www.netxms.org/index.html enter www.netxms.org:/index.html. *hostHeader* is
-       currently not used, but may be the Host option at some point in the request made.
-       Optional argument *regex* is PCRE compliant regular expression to check returned from the request,
-       otherwise "^HTTP/(1\\.[01]|2) 200 .*" will be used.  Optional argument *timeout* specifies timeout in milliseconds.
-   * - ServiceCheck.POP3(\ *target*\ ,\ *username*\ ,\ *password*\ [,\ *timeout*\ )
-     - Check that POP3 service is running on *target* and that we are able to login using the supplied *username* and *password*.  Optional argument *timeout* specifies timeout in milliseconds.
-   * - ServiceCheck.SMTP(\ *target*\ ,\ *toAddress*\ [,\ *timeout*\ ])
-     - Check that SMTP service is running on *target* and that it will accept an e-mail to *toAddress*.  The e-mail will be from noreply@\ *DomainName* using the *DomainName* option in the config file or its default value (see below).  Optional argument *timeout* specifies timeout in milliseconds.
-   * - ServiceCheck.SSH(\ *target*\ [,\ *port*\ [,\ *timeout*\ ]])
-     - Check that SSH service is running on *target*.  Optional argument *port* specifies the port to connect with, otherwise 22 will be used.  Optional argument *timeout* specifies timeout in milliseconds.
-   * - ServiceCheck.Telnet(\ *target*\ [,\ *port*\ [,\ *timeout*\ ]])
-     - Check that Telnet service is running on *target*.  Optional argument *port* specifies the port to connect with, otherwise 23 will be used.  Optional argument *timeout* specifies timeout in milliseconds.
-
-.. note:
-  Parameters in [ ] are optional, when optional parameters are used they should
-  be used without [ ].
-
-
-All of the ServiceCheck.* parameters return the following values:
-
-.. list-table::
-   :widths: 15 50
-   :header-rows: 1
-
-   * - Value
-     - Description
-   * - 0
-     - Success, connection to *target* was established and expected response was received.
-   * - 1
-     - Invalid arguments were passed.
-   * - 2
-     - Cannot connect to *target*.
-   * - 3
-     - Invalid / Unexpected response from *target*.
-
-All configuration parameters related to PORTCHECK subagent should be placed into
-***PORTCHECK** section of agent's configuration file. The following configuration parameters
-are supported:
-
-.. list-table::
-   :widths: 25 20 100 20
-   :header-rows: 1
-
-   * - Parameter
-     - Format
-     - Description
-     - Default value
-   * - DomainName
-     - *string*
-     - Set default domain name for processing. Currently this is only used by SMTP check to set the from e-mail address.
-     - netxms.org
-   * - Timeout
-     - *milliseconds*
-     - Set default response timeout in *milliseconds*.
-     - 3000
-
-Configuration example:
-
-.. code-block:: cfg
-
-   # This sample nxagentd.conf instructs agent to:
-   #   1. Load PORTCHECK subagent
-   #   2. Set domain name for from e-mail to netxms.demo
-   #   3. Default timeout for commands set to 5 seconds (5000 milliseconds)
-
-   MasterServers = netxms.demo
-   SubAgent =  portcheck.nsm
-
-   [portCheck]
-   DomainName = netxms.demo
-   Timeout = 5000
+For HTTP services there is also option to use ECS subagent. This subagent has metrics that
+are capable of hash calculation and time measurement.
 
 
 .. _netsvc-subagent:
@@ -229,3 +133,116 @@ hash. Request timeout for this subagent is 30 seconds.
 
   MasterServers = netxms.demo
   Subagent = ecs.nsm
+
+.. _portcheck-subagent:
+
+PortCheck configuration
+-----------------------
+
+**DEPRECATED: Please use NetSVC instead.**
+
+This subagent can be used to check TCP ports and specifically implements checks for
+common services. It is highly recommended to use netsvc subagent especially for
+HTTP and HTTPS monitoring.
+
+When loaded, PORTCHECK subagent adds the following Metrics to node Metric list:
+
+.. list-table::
+   :widths: 100 50
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+   * - ServiceCheck.Custom(\ *target*\ ,\ *port*\ [,\ *timeout*\ ])
+     - Check that TCP *port* is open on *target*. Optional argument *timeout* specifies timeout in milliseconds, if it's not provided, default timeout 
+       from **[portCheck]** section of agent's configuration file will be used. This is a very simple test that does nothing more than checking if the 
+       port is open.
+   * - ServiceCheck.HTTP(\ *target*\ ,[\ *port*\ ],\ *URI*\ ,\ *hostHeader*\ [,\ *regex*\ [,\ *timeout*\ ]])
+     - Check that HTTP service is running on *target*.  Optional argument *port* specifies the port to connect to,
+       otherwise 80 will be used.  The *URI* is NOT a URL it is the host header request URI.
+       As an example to test URL http://www.netxms.org/index.html enter www.netxms.org:/index.html. *hostHeader* is
+       currently not used, but may be the Host option at some point in the request made.
+       Optional argument *regex* is PCRE compliant regular expression to check returned from the request,
+       otherwise "^HTTP/(1\\.[01]|2) 200 .*" will be used.  Optional argument *timeout* specifies timeout in milliseconds.
+   * - ServiceCheck.HTTPS(\ *target*\ ,[\ *port*\ ],\ *URI*\ ,\ *hostHeader*\ [,\ *regex*\ [,\ *timeout*\ ]])
+     - Check that HTTP service is running on *target* using TLS encrypted connection. Arguments are the same as for ServiceCheck.HTTP parameter.
+   * - ServiceCheck.POP3(\ *target*\ ,\ *username*\ ,\ *password*\ [,\ *port*\ [,\ *timeout*\ ]])
+     - Check that POP3 service is running on *target* and that we are able to login using the supplied *username* and *password*. 
+       Optional argument *port* specifies the port to connect to, otherwise 110 will be used. Optional argument *timeout* specifies 
+       timeout in milliseconds. 
+   * - ServiceCheck.POP3S(\ *target*\ ,\ *username*\ ,\ *password*\ [,\ *port*\ [,\ *timeout*\ ]])
+     - Check that POP3S service is running on *target* and that we are able to login using the supplied *username* and *password*. 
+       Optional argument *port* specifies the port to connect to, otherwise 995 will be used. Optional argument *timeout* specifies 
+       timeout in milliseconds. 
+   * - ServiceCheck.SMTP(\ *target*\ ,\ *toAddress*\ [,\ *port*\ [,\ *timeout*\ ]])
+     - Check that SMTP service is running on *target* and that it will accept an e-mail to *toAddress*.  The e-mail will be from noreply@\ *DomainName* 
+       using the *DomainName* option in agent config file **[portCheck]** section or its default value (see below). Optional argument *port* specifies 
+       the port to connect to, otherwise 25 will be used. Optional argument *timeout* specifies timeout in milliseconds.
+   * - ServiceCheck.SMTPS(\ *target*\ ,\ *toAddress*\ [,\ *port*\ [,\ *timeout*\ ]])
+     - Check that SMTPS service is running on *target* and that it will accept an e-mail to *toAddress*.  The e-mail will be from noreply@\ *DomainName* 
+       using the *DomainName* option in agent config file **[portCheck]** section or its default value (see below). Optional argument *port* specifies 
+       the port to connect to, otherwise 465 will be used. Optional argument *timeout* specifies timeout in milliseconds.   
+   * - ServiceCheck.SSH(\ *target*\ [,\ *port*\ [,\ *timeout*\ ]])
+     - Check that SSH service is running on *target*.  Optional argument *port* specifies the port to connect with, otherwise 22 will be used.  Optional argument *timeout* specifies timeout in milliseconds.
+   * - ServiceCheck.Telnet(\ *target*\ [,\ *port*\ [,\ *timeout*\ ]])
+     - Check that Telnet service is running on *target*.  Optional argument *port* specifies the port to connect with, otherwise 23 will be used.  Optional argument *timeout* specifies timeout in milliseconds.
+
+.. note:
+  Parameters in [ ] are optional, when optional parameters are used they should
+  be used without [ ].
+
+
+All of the ServiceCheck.* parameters return the following values:
+
+.. list-table::
+   :widths: 15 50
+   :header-rows: 1
+
+   * - Value
+     - Description
+   * - 0
+     - Success, connection to *target* was established and expected response was received.
+   * - 1
+     - Invalid arguments were passed.
+   * - 2
+     - Cannot connect to *target*.
+   * - 3
+     - Invalid / Unexpected response from *target*.
+
+All configuration parameters related to PORTCHECK subagent should be placed into
+***PORTCHECK** section of agent's configuration file. The following configuration parameters
+are supported:
+
+.. list-table::
+   :widths: 25 20 100 20
+   :header-rows: 1
+
+   * - Parameter
+     - Format
+     - Description
+     - Default value
+   * - DomainName
+     - *string*
+     - Set default domain name for processing. Currently this is only used by SMTP check to set the from e-mail address.
+     - netxms.org
+   * - Timeout
+     - *milliseconds*
+     - Set default response timeout in *milliseconds*.
+     - 3000
+
+Configuration example:
+
+.. code-block:: cfg
+
+   # This sample nxagentd.conf instructs agent to:
+   #   1. Load PORTCHECK subagent
+   #   2. Set domain name for from e-mail to netxms.demo
+   #   3. Default timeout for commands set to 5 seconds (5000 milliseconds)
+
+   MasterServers = netxms.demo
+   SubAgent =  portcheck.nsm
+
+   [portCheck]
+   DomainName = netxms.demo
+   Timeout = 5000
+

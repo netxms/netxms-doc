@@ -54,7 +54,7 @@ access data of the node object other than script is running for without
 explicit permission. NXSL is interpreted language – scripts first compiled into
 internal representation (similar to byte code in Java), which is then executed
 inside NXSL Virtual Machine. Language syntax and available functions can be
-found in `NXSL documentation <https://www.netxms.org/documentation/nxsl-3.0/>`_.
+found in `NXSL documentation <https://www.netxms.org/documentation/nxsl-latest/>`_.
 
 NXShell
 =======

@@ -7,6 +7,13 @@ Installation
 Major changes between releases
 ==============================
 
+4.0
+---
+
+Incompatible attributes in NXSL DCI class:
+instance now refers to instance value (as in {instance} macro), not instance name as before.
+Instance name can be accessed via attribute "instanceName".
+
 3.0
 ---
 Notification channels introduced as new functionality. SMS configuration automatically moved from server configuration to 

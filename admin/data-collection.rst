@@ -571,14 +571,13 @@ and can return either a binary value or an array.
 If binary value is returned, it has the following meaning:
 ``TRUE`` (to accept instance), ``FALSE`` (to reject instance).
 
-If an array is returned, only first element of the array is obligatory,
-the rest elements are optional (but to include an element, all preceding
-elements should be included). Array structure:
+If an array is returned, then instance is counted as accepted. Only first element 
+of the array is obligatory, the rest elements are optional (but to include an 
+element, all preceding elements should be included). Array structure:
 
 ======================== ==========================================================
 Data type                Description
 ======================== ==========================================================
-Boolean                  ``TRUE`` (accept instance), ``FALSE`` (reject instance).
 String                   Instance name, that will be available as {instance} macro.
 String                   Instance user-readable description, that will be available
                          as {instance-name} macro

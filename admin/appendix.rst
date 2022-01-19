@@ -5281,7 +5281,7 @@ Hardware.StorageDevices
 
 Data type: List of String
 
-Supported Platforms: Linux, Windows, Solaris
+Supported Platforms: Windows
 
 Information about available storage devices
 
@@ -5518,7 +5518,7 @@ Supported Platforms: Linux, Windows, Solaris
    * - Serial Number
      - String
 
-Information about batteries installed on the device
+Hardware information about batteries installed on the device
 
 
 Hardware.MemoryDevices
@@ -5555,8 +5555,40 @@ Supported Platforms: Linux, Windows, Solaris
    * - Serial Number
      - String
 
-Information about available memory devices
+Hardware information about available memory devices
 
+
+Hardware.NetworkAdapters
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Supported Platforms: Linux, Windows
+
+.. list-table::
+   :widths: 10 10
+   :header-rows: 1
+
+   * - Column name
+     - Data type
+   * - Index *
+     - UInt32
+   * - Product
+     - String
+   * - Manufacturer
+     - String
+   * - Description
+     - String
+   * - Type
+     - String
+   * - MAC address
+     - String
+   * - Interface index
+     - UInt32
+   * - Speed 
+     - UInt64
+   * - Availability 
+     - UInt32
+
+Hardware information about available processors
 
 Hardware.Processors
 ~~~~~~~~~~~~~~~~~~~
@@ -5594,13 +5626,13 @@ Supported Platforms: Linux, Windows, Solaris
    * - Serial Number
      - String
 
-Information about available processors
+Hardware information about available processors
 
 
 Hardware.StorageDevices
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Supported Platforms: Windows
+Supported Platforms: Linux, Windows
 
 .. list-table::
    :widths: 10 10
@@ -5629,7 +5661,7 @@ Supported Platforms: Windows
    * - Serial number
      - String
 
-Information about available storage devices
+Hardware information about available storage devices
 
 
 System.ActiveUserSessions

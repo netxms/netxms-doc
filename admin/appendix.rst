@@ -5150,6 +5150,79 @@ Number of seconds since system boot
   On Windows this metric is provided by winperf subagent
 
 
+X509.Certificate.ExpirationDate
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Parameters:
+   1. Path to the certificate file.
+
+Expiration date (YYYY-MM-DD) of X.509 certificate from provided file.
+
+X509.Certificate.ExpirationTime
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: UInt64
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Parameters:
+   1. Path to the certificate file.
+
+Expiration time of X.509 certificate from provided file.
+
+X509.Certificate.ExpiresIn
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: Int32
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Parameters:
+   1. Path to the certificate file.
+
+Days until expiration of X.509 certificate from provided file.
+
+X509.Certificate.Issuer
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Parameters:
+   1. Path to the certificate file.
+
+Issuer of X.509 certificate from provided file.
+
+X509.Certificate.Subject
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Parameters:
+   1. Path to the certificate file.
+
+Subject of X.509 certificate from provided file.
+
+X509.Certificate.TemplateID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Parameters:
+   1. Path to the certificate file.
+
+Template ID of X.509 certificate from provided file.
+
+
 List metrics
 ------------
 

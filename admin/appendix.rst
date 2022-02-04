@@ -4558,6 +4558,81 @@ Supported Platforms: Windows, Linux, AIX, HP-UX, FreeBSD
 
 Percentage of used virtual memory
 
+System.OS.Build
+~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows, Linux, FreeBSD
+
+Operating system build.
+
+.. note::
+  Might be not available on some Linux family platforms.
+
+
+System.OS.LicenseKey
+~~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows
+
+Operating system license key.
+
+
+System.OS.ProductId
+~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows
+
+Operating system ID.
+
+
+System.OS.ProductName
+~~~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows, Linux, AIX, FreeBSD, Solaris
+
+Operating system name.
+
+
+System.OS.ProductType
+~~~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows, Linux, FreeBSD
+
+Operating system type.
+
+.. note::
+  Might be not available on some Linux family platforms.
+
+
+System.OS.ServicePack
+~~~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows, AIX
+
+Operating system service pack.
+
+
+System.OS.Version
+~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows, Linux, AIX, FreeBSD, Solaris
+
+Operating system version.
+
 
 System.PlatformName
 ~~~~~~~~~~~~~~~~~~~

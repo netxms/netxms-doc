@@ -2364,6 +2364,40 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 
 Agent's version
 
+Disk.Avail(*)
+~~~~~~~~~~
+
+TODO
+
+Disk.AvailPerc(*)
+~~~~~~~~~~~~~~~~~
+
+TODO
+
+Disk.Free(*)
+~~~~~~~~~~~~
+
+TODO
+
+Disk.FreePerc(*)
+~~~~~~~~~~~~~~~~
+
+TODO
+
+Disk.Total(*)
+~~~~~~~~~~~~~
+
+TODO
+
+Disk.Used(*)
+~~~~~~~~~~~~
+
+TODO
+
+Disk.UsedPerc(*)
+~~~~~~~~~~~~~~~~
+
+TODO
 
 File.Count(*)
 ~~~~~~~~~~~~~
@@ -2512,6 +2546,15 @@ Parameters:
 
 Available space on file system in bytes
 
+FileSystem.AvailInodes(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+FileSystem.AvailInodesPerc(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
 
 FileSystem.AvailPerc(*)
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -2538,6 +2581,15 @@ Parameters:
 
 Free space on file system in bytes
 
+FileSystem.FreeInodes(*)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+FileSystem.FreeInodesPerc(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
 
 FileSystem.FreePerc(*)
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -2564,6 +2616,10 @@ Parameters:
 
 Total number of bytes on file system
 
+FileSystem.TotalInodes(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
 
 FileSystem.Type(*)
 ~~~~~~~~~~~~~~~~~~~
@@ -2590,6 +2646,15 @@ Parameters:
 
 Used space on file system in bytes
 
+FileSystem.UsedInodes(*)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+FileSystem.UsedInodesPerc(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
 
 FileSystem.UsedPerc(*)
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -2602,6 +2667,266 @@ Parameters:
   1. Mountpoint, device name (linux only) or disk name (for Windows)
 
 Percentage of used space on file system
+
+DRBD.ConnState(*)
+~~~~~~~~~~~~~~~~~
+
+TODO
+
+DRBD.DataState(*)
+~~~~~~~~~~~~~~~~~
+
+TODO
+
+DRBD.DeviceState(*)
+~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+DRBD.PeerDataState(*)
+~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+DRBD.PeerDeviceState(*)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+DRBD.Protocol(*)
+~~~~~~~~~~~~~~~~
+
+TODO
+
+DRBD.Version.API
+~~~~~~~~~~~~~~~~
+
+TODO
+
+DRBD.Version.Driver
+~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+DRBD.Version.Protocol
+~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Baseboard.Manufacturer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Baseboard.Product
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Baseboard.SerialNumber
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Baseboard.Type
+~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Baseboard.Version
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Battery.Capacity(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Battery.Chemistry(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Battery.Location(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Battery.ManufactureDate(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Battery.Manufacturer(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Battery.Name(*)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Battery.SerialNumber(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Battery.Voltage(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.MemoryDevice.Bank(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.MemoryDevice.ConfiguredSpeed(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.MemoryDevice.FormFactor(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.MemoryDevice.Location(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.MemoryDevice.Manufacturer(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.MemoryDevice.MaxSpeed(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.MemoryDevice.PartNumber(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.MemoryDevice.SerialNumber(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.MemoryDevice.Size(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.MemoryDevice.Type(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Processor.Cores(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Processor.CurrentSpeed(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Processor.Family(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Processor.Manufacturer(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Processor.MaxSpeed(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Processor.PartNumber(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Processor.SerialNumber(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Processor.Socket(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Processor.Threads(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Processor.Type(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.Processor.Version(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.System.MachineId
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.System.Manufacturer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.System.Product
+~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.System.ProductCode
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.System.SerialNumber
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.System.Version
+~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hardware.WakeUpEvent
+~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+Hypervisor.Type
+~~~~~~~~~~~~~~~
+
+TODO
+
+Hypervisor.Version
+~~~~~~~~~~~~~~~~~~
+
+TODO
 
 
 Net.Interface.AdminStatus(*)
@@ -2948,6 +3273,20 @@ Supported Platforms: Windows
 
 Version of PDH.DLL (as returned by PdhGetDllVersion() call).
 
+PhysicalDisk.SmartAttr(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+PhysicalDisk.SmartStatus(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+PhysicalDisk.Temperature(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
 
 Process.Count(*)
 ~~~~~~~~~~~~~~~~
@@ -3434,6 +3773,27 @@ Data type: UInt32
 Supported Platforms: Windows
 
 Address space available to applications (MB)
+
+
+System.BIOS.Date
+~~~~~~~~~~~~~~~~
+
+TODO
+
+System.BIOS.Vendor
+~~~~~~~~~~~~~~~~~~
+
+TODO
+
+System.BIOS.Version
+~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+System.ConnectedUsers
+~~~~~~~~~~~~~~~~~~~~~
+
+TODO
 
 
 System.ConnectedUsers
@@ -4125,6 +4485,12 @@ Parameters:
 Average CPU usage (USER) for last 15 minutes (percents, specific CPU)
 
 
+System.CPU.VendorId
+~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+
 System.CurrentTime
 ~~~~~~~~~~~~~~~~~~
 
@@ -4389,6 +4755,27 @@ Supported Platforms: Linux
 Percentage of available physical memory
 
 
+System.Memory.Physical.Buffers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+System.Memory.Physical.BuffersPerc
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+System.Memory.Physical.Cached
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+System.Memory.Physical.CachedPerc
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+
 System.Memory.Physical.Free
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -4557,6 +4944,37 @@ Data type: Float
 Supported Platforms: Windows, Linux, AIX, HP-UX, FreeBSD
 
 Percentage of used virtual memory
+
+System.MsgQueue.Bytes(*)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+System.MsgQueue.BytesMax(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+System.MsgQueue.ChangeTime(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+System.MsgQueue.Messages(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+System.MsgQueue.RecvTime(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
+System.MsgQueue.SendTime(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TODO
+
 
 System.OS.Build
 ~~~~~~~~~~~~~~~
@@ -4894,6 +5312,11 @@ Data type: List of String
 Supported Platforms: Linux, Windows
 
 Currently available input and output devices' names
+
+System.IsVirtual
+~~~~~~~~~~~~~~~~
+
+TODO
 
 
 System.ProcessList

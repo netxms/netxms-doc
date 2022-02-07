@@ -2886,32 +2886,56 @@ TODO
 Hardware.System.MachineId
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: String
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD
+
+Unique machine identifier.
 
 Hardware.System.Manufacturer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: String
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD
+
+System manufacturer.
 
 Hardware.System.Product
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: String
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD
+
+Product name.
 
 Hardware.System.ProductCode
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: String
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD
+
+Product code.
 
 Hardware.System.SerialNumber
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: String
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD
+
+System serial number.
 
 Hardware.System.Version
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: String
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD
+
+System version.
 
 Hardware.WakeUpEvent
 ~~~~~~~~~~~~~~~~~~~~

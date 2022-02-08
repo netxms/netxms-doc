@@ -3297,20 +3297,80 @@ Supported Platforms: Windows
 
 Version of PDH.DLL (as returned by PdhGetDllVersion() call).
 
+PhysicalDisk.Firmware(*)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows
+
+Parameters:
+   1. Physical disk name
+
+Firmware version of of provided hard disk.
+
+PhysicalDisk.Model(*)
+~~~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows
+
+Parameters:
+   1. Physical disk name
+
+Model of provided hard disk.
+
+
+PhysicalDisk.SerialNumber(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows
+
+Parameters:
+   1. Physical disk name
+
+Serial number of provided hard disk.
+
 PhysicalDisk.SmartAttr(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows, Linux
+
+Parameters:
+   1. Physical disk name / path
 
 TODO
 
 PhysicalDisk.SmartStatus(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: Integer
+
+Supported Platforms: Windows, Linux
+
+Parameters:
+   1. Physical disk name / path
+
+Status of provided hard disk reported by SMART.
+
 
 PhysicalDisk.Temperature(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: Integer
+
+Supported Platforms: Windows, Linux
+
+Parameters:
+   1. Physical disk name / path
+
+Temperature of provided hard disk.
+
 
 Process.Count(*)
 ~~~~~~~~~~~~~~~~

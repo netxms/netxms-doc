@@ -4579,8 +4579,11 @@ Average CPU usage (USER) for last 15 minutes (percents, specific CPU)
 System.CPU.VendorId
 ~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: String
 
+Supported Platforms: Windows, Linux, FreeBSD
+
+CPU vendor ID.
 
 System.CurrentTime
 ~~~~~~~~~~~~~~~~~~
@@ -4809,6 +4812,15 @@ Parameters:
 
 Average number of write operations per second on specific device for last minute
 
+
+System.IsVirtual
+~~~~~~~~~~~~~~~~
+
+Data type: Integer
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Virtual system indicator. Returns 1 if system is virtual, 0 if not.
 
 System.KStat(*)
 ~~~~~~~~~~~~~~~
@@ -5543,11 +5555,6 @@ Data type: List of String
 Supported Platforms: Linux, Windows
 
 Currently available input and output devices' names
-
-System.IsVirtual
-~~~~~~~~~~~~~~~~
-
-TODO
 
 
 System.ProcessList

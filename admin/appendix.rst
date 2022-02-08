@@ -4839,7 +4839,7 @@ Available physical memory in bytes
 System.Memory.Physical.AvailablePerc
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Data type: Uint
+Data type: Float
 
 Supported Platforms: Linux
 
@@ -4849,22 +4849,41 @@ Percentage of available physical memory
 System.Memory.Physical.Buffers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: UInt64
+
+Supported Platforms: Linux
+
+Physical memory used for buffers.
+
 
 System.Memory.Physical.BuffersPerc
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: Float
+
+Supported Platforms: Linux
+
+Percentage of physical memory used for buffers.
+
 
 System.Memory.Physical.Cached
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: UInt64
+
+Supported Platforms: Linux
+
+Physical memory used for cache.
+
 
 System.Memory.Physical.CachedPerc
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: Float
+
+Supported Platforms: Linux
+
+Percentage of physical memory used for cache.
 
 
 System.Memory.Physical.Free

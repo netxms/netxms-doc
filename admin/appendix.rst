@@ -5055,35 +5055,83 @@ Supported Platforms: Windows, Linux, AIX, HP-UX, FreeBSD
 
 Percentage of used virtual memory
 
+
 System.MsgQueue.Bytes(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: UInt64
+
+Supported Platforms: Linux, Solaris, AIX, HP-UX
+
+Parameters:
+    1. Queue ID or key
+
+Bytes in provided message queue.
+
 
 System.MsgQueue.BytesMax(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: UInt64
+
+Supported Platforms: Linux, Solaris, AIX, HP-UX
+
+Parameters:
+    1. Queue ID or key
+
+Maximum allowed bytes in provided message queue.
+
 
 System.MsgQueue.ChangeTime(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: UInt64
+
+Supported Platforms: Linux, Solaris, AIX, HP-UX
+
+Parameters:
+    1. Queue ID or key
+
+Provided message queue time of the last change.
+
 
 System.MsgQueue.Messages(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: UInt
+
+Supported Platforms: Linux, Solaris, AIX, HP-UX
+
+Parameters:
+    1. Queue ID or key
+
+Number of messages in provided message queue.
+
 
 System.MsgQueue.RecvTime(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: UInt64
+
+Supported Platforms: Linux, Solaris, AIX, HP-UX
+
+Parameters:
+    1. Queue ID or key
+
+Provided message queue last message receive time.
+
 
 System.MsgQueue.SendTime(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: UInt64
+
+Supported Platforms: Linux, Solaris, AIX, HP-UX
+
+Parameters:
+    1. Queue ID or key
+
+Provided message queue last message send time.
 
 
 System.OS.Build

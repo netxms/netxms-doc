@@ -3862,22 +3862,29 @@ Address space available to applications (MB)
 System.BIOS.Date
 ~~~~~~~~~~~~~~~~
 
-TODO
+Data type: String
+
+Supported Platforms: Windows, Linux, Solaris, FreeBSD
+
+BIOS date.
 
 System.BIOS.Vendor
 ~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: String
+
+Supported Platforms: Windows, Linux, Solaris, FreeBSD
+
+BIOS vendor.
 
 System.BIOS.Version
 ~~~~~~~~~~~~~~~~~~~
 
-TODO
+Data type: String
 
-System.ConnectedUsers
-~~~~~~~~~~~~~~~~~~~~~
+Supported Platforms: Windows, Linux, Solaris, FreeBSD
 
-TODO
+BIOS version.
 
 
 System.ConnectedUsers

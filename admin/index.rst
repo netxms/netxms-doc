@@ -21,7 +21,7 @@ Administrator Guide
    visualisation
    grafana-integration
    operating-system-monitoring
-   file-meta-info-monitoring
+   file-system-monitoring
    log-monitoring
    windows-event-log-synchronization
    ssh-monitoring

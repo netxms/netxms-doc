@@ -20,6 +20,7 @@ monitoring options. This is optional for installation, but it's installation giv
    * Provides file management possibilities on agent.
    * Provides log file monitoring functionality.
 
+.. _agent-configuration-files-label:
 
 Agent configuration files
 =========================

@@ -1,14 +1,45 @@
-.. _file-meta-info-monitoring:
+.. _file-system-monitoring:
 
-=====================
-File meta information
-=====================
+======================
+File System Monitoring
+======================
 
-Monitoring of file system is implemented by OS subagents. Full description of this
-functions can be found :ref:`there <list-of-supported-metrics>`. There is provided
-option to get file hash, creation, last edit and other timestamps, file size and
-number of files in the directory. In this sections will be shown only the most
-commonly used configurations.
+File Monitoring
+===============
+ 
+|product_name| provides a feature to monitor file hash value, last modification time and permissions changes.
+Any changes to those parameters will be detected and reported to the server via events.
+Those events are ``SYS_AGENT_FILE_ADDED``, ``SYS_AGENT_FILE_CHANGED`` and ``SYS_AGENT_FILE_DELETED`` for files creations, alterations and deletions correspondingly.
+
+Specify the path to a file for monitoring by adding ``[FileMonitor]`` section to :ref:`agent-configuration-files-label`. 
+If the path to a directory is specified, then all files in that directory and it's subdirectories will be monitored.
+
+Configuration parameters:
+
+   #. ``Path`` - The path to monitored file. This parameter should be specified once for each file/directory.
+   #. ``Interval`` - Check interval in seconds. This parameter should not be specified multiple times. This parameter is optional and will be set to 6 hours by default.
+
+.. code-block:: cfg
+
+  # Example
+  [FileMonitor]
+  Interval=10800
+  Path=/home/user/file_name
+  Path=/home/user/directory
+
+'FileSystem' Metrics
+====================
+
+Agent metrics for file system monitoring.
+
+Detailed description of available metrics can be found in :ref:`list-of-supported-metrics` section.
+
+'File' Metrics
+==============
+
+Agent metrics for file monitoring.
+
+Detailed description of available metrics can be found in :ref:`list-of-supported-metrics` section.
 
 Examples
 ========

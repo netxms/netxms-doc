@@ -1357,3 +1357,88 @@ POST request JSON
 Return data:
 
     Will return adhoc summary table configured accordingly to request json.
+
+Persistent storage
+------------------
+
+Get all persistent storages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Request to get all persistent storages available to this user.
+
+Request type: **GET**
+
+Request path: *API_HOME*/persistentstorage
+
+Return data:
+
+    Will return all persistent storages in "*key*":"*value*" format.
+
+
+Get persistent storage by key
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Request to get persistent storage value by key.
+
+Request type: **GET**
+
+Request path: *API_HOME*/persistentstorage/**{key}**
+
+Return data:
+
+    Will return corresponding persistent storages value in "value":"*value*" format.
+
+
+Create persistent storage
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Request to create new persistent storage.
+
+Request type: **POST**
+
+JSON data:
+
+   JSON object should contain two fields: key and value.
+
+  .. code-block:: json
+
+      {"key": "a"}
+      {"value": "10"}
+
+Request path: *API_HOME*/persistentstorage
+
+Return data:
+
+    Will return newly created persistent storages in "*key*":"*value*" format.
+
+
+Update persistent storage
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Request to update specified persistent storage value.
+
+Request type: **PUT**
+
+JSON data:
+
+   JSON object should contain one field: new value.
+
+  .. code-block:: json
+
+      {"value": "10"}
+
+Request path: *API_HOME*/persistentstorage/**{key}**
+
+Return data:
+
+    Will return updated persistent storages in "*key*":"*value*" format.
+
+
+Delete persistent storage
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Request to delete persistent storage.
+
+Request type: **DELETE**
+
+Request path: *API_HOME*/persistentstorage/**{key}**

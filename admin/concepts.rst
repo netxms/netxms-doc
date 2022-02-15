@@ -189,6 +189,7 @@ editable attribute – name.
      - Abstract object representing root of your business service tree. System
        can have only one object of this class.
      - - Business Service
+       - Business Service Prototype
    * - Business Service
      - Object representing single business service. Can contain other business
        services or business service prototypes. 

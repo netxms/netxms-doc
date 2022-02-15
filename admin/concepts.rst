@@ -191,18 +191,13 @@ editable attribute – name.
      - - Business Service
    * - Business Service
      - Object representing single business service. Can contain other business
-       services, node links, or service checks.
+       services or business service prototypes. 
      - - Business Service
-       - Node Link
-       - Service Check
-   * - Node Link
-     - Link between node object and business service. Used to simplify creation
-       of node-related service checks.
-     - - Service Check
-   * - Service Check
-     - Object used to check business service state. One business service can
-       contain multiple checks.
-     -
+       - Business Service Prototype
+   * - Business Service Prototype
+     - Prototype from which business service objects are automatically populated. 
+     - 
+
 
 Object status
 -------------

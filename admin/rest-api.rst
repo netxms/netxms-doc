@@ -249,7 +249,7 @@ This list represents all fields that are object creation fields. Note that this 
      - Type
      - Comment
    * - objectType
-     - Ingeger
+     - Integer
      - Possible options:
   
        * SUBNET: 1
@@ -292,7 +292,7 @@ This list represents all fields that are object creation fields. Note that this 
      - String
      - Object comment
    * - creationFlags
-     - Ingeger
+     - Integer
      - Bit flags for object creation. Possible options:
 
        * DISABLE ICMP: 0x0001
@@ -308,16 +308,16 @@ This list represents all fields that are object creation fields. Note that this 
      - String
      - Node primary name (IP address or dns name)
    * - agentPort
-     - Ingeger
+     - Integer
      - Node agent port
    * - snmpPort
-     - Ingeger
+     - Integer
      - Node SNMP port
    * - etherNetIpPort
-     - Ingeger
+     - Integer
      - Node ethernetIP port
    * - sshPort
-     - Ingeger
+     - Integer
      - Node ssh port
    * - ipAddress
      - String
@@ -338,16 +338,16 @@ This list represents all fields that are object creation fields. Note that this 
      - Long
      - Node ssh proxy id
    * - mapType
-     - Ingeger
+     - Integer
      - Network map type
    * - seedObjectIds
      - Long[]
      - Network map seed objects
    * - zoneUIN
-     - Ingeger
+     - Integer
      - Subnet/Node/Zone zone UIN
    * - serviceType
-     - Ingeger
+     - Integer
      - Network service types: 
       
        * CUSTOM: 0
@@ -359,7 +359,7 @@ This list represents all fields that are object creation fields. Note that this 
        * HTTPS: 6
        * TELNET: 7
    * - ipPort
-     - Ingeger
+     - Integer
      - Network Service IP port
    * - request
      - String
@@ -377,16 +377,16 @@ This list represents all fields that are object creation fields. Note that this 
      - String
      - Interface or sensor MAC address
    * - ifIndex
-     - Ingeger
+     - Integer
      - Interface index
    * - ifType
-     - Ingeger
+     - Integer
      - Interface type
    * - module
-     - Ingeger
+     - Integer
      - Interface module number
    * - port
-     - Ingeger
+     - Integer
      - Interface port
    * - physicalPort
      - Boolean
@@ -398,7 +398,7 @@ This list represents all fields that are object creation fields. Note that this 
      - String
      - Mobile device ID
    * - height
-     - Ingeger
+     - Integer
      - Rack height
    * - controllerId
      - Long
@@ -410,13 +410,13 @@ This list represents all fields that are object creation fields. Note that this 
      - String
      - Node password
    * - deviceClass
-     - Ingeger
+     - Integer
      - Sensor device class
    * - vendor
      - String
      - Sensor vendor
    * - commProtocol
-     - Ingeger
+     - Integer
      - Sensor communication protocol
    * - xmlConfig
      - String
@@ -478,10 +478,10 @@ Modification fields
      -
    * - acl
      - :ref:`AccessListElement <access-list-element-fields>`\ []
-     -
+     - inheritAccessRights should be provided in the same request
    * - inheritAccessRights
      - Boolean
-     -
+     - acl should be provided in the same request
    * - customAttributes 
      - JSON object {String: :ref:`CustomAttribute<custom-attribute-element-fields>`}
      - Object name is custom attribute name and value is in :ref:`CustomAttribute<custom-attribute-element-fields>` object
@@ -516,19 +516,19 @@ Modification fields
        * DEFAULT
    * - snmpAuthMethod
      - Integer
-     -
+     - snmpAuthName, snmpAuthPassword, snmpPrivPassword, snmpPrivMethod should be provided in the same request
    * - snmpPrivMethod
      - Integer
-     -
+     - snmpAuthName, snmpAuthPassword, snmpPrivPassword, snmpAuthMethod should be provided in the same request
    * - snmpAuthName
      - String
-     -
+     - snmpAuthPassword, snmpPrivPassword, snmpAuthMethod, snmpPrivMethod should be provided in the same request
    * - snmpAuthPassword
      - String
-     -
+     - snmpAuthName, snmpPrivPassword, snmpAuthMethod, snmpPrivMethod should be provided in the same request
    * - snmpPrivPassword
      - String
-     -
+     - snmpAuthName, snmpAuthPassword, snmpAuthMethod, snmpPrivMethod should be provided in the same request
    * - snmpProxy
      - Long
      -
@@ -543,16 +543,18 @@ Modification fields
      -
    * - mapBackground
      - String
-     - UUID
+     - UUID.
+       
+       mapBackgroundLocation, mapBackgroundLocation, mapBackgroundZoom, mapBackgroundColor should be provided in the same request.
    * - mapBackgroundLocation
      - :ref:`Geolocation <geolocation-fields>`
-     -
+     - mapBackground, mapBackgroundLocation, mapBackgroundZoom, mapBackgroundColor should be provided in the same request.
    * - mapBackgroundZoom
      - Integer
-     -
+     - mapBackground, mapBackgroundLocation, mapBackgroundLocation, mapBackgroundColor should be provided in the same request.
    * - mapBackgroundColor
      - Integer
-     -
+     - mapBackground, mapBackgroundLocation, mapBackgroundLocation, mapBackgroundZoom should be provided in the same request.
    * - mapImage
      - String
      - UUID
@@ -606,7 +608,12 @@ Modification fields
      - Network service IP response
    * - objectFlags
      - Integer
-     - Object flags specific for each object. Possible values can be found in NXSL documentation under each object. (Example: `Node flags <https://www.netxms.org/documentation/nxsl-latest/#_constants_6>`_)
+     - Object flags specific for each object. Possible values can be found in NXSL documentation under each object. (Example: `Node flags <https://www.netxms.org/documentation/nxsl-latest/#_constants_6>`_) 
+       
+       objectFlagsMask should be provided in the same request. 
+   * - objectFlagsMask
+     - Integer
+     - Bitmask that defines which bits in objectFlags will have effect. objectFlags should be provided in the same request.
    * - ifXTablePolicy
      - Integer
      -
@@ -680,10 +687,10 @@ Modification fields
      -
    * - localNetworks
      - String[]
-     - VPN networks IP adress 
+     - VPN networks IP address. remoteNetworks should be provided in the same request.
    * - remoteNetworks
      - String[]
-     - VPN networks IP adress 
+     - VPN networks IP address. localNetworks should be provided in the same request.
    * - postalAddress
      - :ref:`PostalAddress<postal-address-fields>`
      -
@@ -715,16 +722,20 @@ Modification fields
      -
    * - rackImageFront
      - String
-     - UUID
+     - UUID. 
+       
+       rackImageRear, rackPosition, rackHeight, rackOrientation should be provided in the same request.
    * - rackImageRear
      - String
-     - UUID
+     - UUID. 
+       
+       rackImageFront, rackPosition, rackHeight, rackOrientation should be provided in the same request.
    * - rackPosition
      - Short
-     -
+     - rackImageFront, rackImageRear, rackHeight, rackOrientation should be provided in the same request.
    * - rackHeight
      - Short
-     -
+     - rackImageFront, rackImageRear, rackPosition, rackOrientation should be provided in the same request.
    * - rackOrientation
      - String
      - Possible values:
@@ -732,6 +743,8 @@ Modification fields
         * FILL
         * FRONT
         * REAR
+
+       rackImageFront, rackImageRear, rackPosition, rackHeight should be provided in the same request.
    * - dashboards
      - Long[]
      -
@@ -825,9 +838,11 @@ Modification fields
         * PUBLIC_KEY
         * COMMON_NAME
         * TEMPLATE_ID
+
+       certificateMappingData should be provided in the same request. 
    * - certificateMappingData
      - String
-     -
+     - certificateMappingMethod should be provided in the same request. 
    * - categoryId
      - Integer
      -
@@ -855,16 +870,16 @@ Modification fields
      - Business service instance discovery data filtering script     
      - 
    * - autoBindFilter2
-     - Second binding script used for DCI binding. Urrently used in business service     
+     - Second binding script used for DCI binding. Currently used in business service
      - 
    * - autoBindFlags
      - Auto bind bit flags     
-     - Firs script is currently used for object bind/unbind, second for dci bind/unbind. Possible values:
+     - First script is currently used for object bind/unbind, second for dci bind/unbind. Possible values:
       
-        * First script for auto bind is enabeled - 0x0001
-        * First script for auto unbind is enabeled - 0x0002
-        * Second script for auto bind is enabeled - 0x0004
-        * Second script for auto unbind is enabeled - 0x0008
+        * First script for auto bind is enabled - 0x0001
+        * First script for auto unbind is enabled - 0x0002
+        * Second script for auto bind is enabled - 0x0004
+        * Second script for auto unbind is enabled - 0x0008
    * - objectStatusThreshold
      - Business service default threshold for auto created object checks    
      - Possible values:

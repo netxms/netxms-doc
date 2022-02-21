@@ -5078,7 +5078,7 @@ Supported Platforms: Linux, Solaris, AIX, HP-UX
 Parameters:
     1. Queue ID or key
 
-Bytes in provided message queue.
+Bytes in given message queue.
 
 
 System.MsgQueue.BytesMax(*)
@@ -5091,7 +5091,7 @@ Supported Platforms: Linux, Solaris, AIX, HP-UX
 Parameters:
     1. Queue ID or key
 
-Maximum allowed bytes in provided message queue.
+Maximum allowed bytes in given message queue.
 
 
 System.MsgQueue.ChangeTime(*)
@@ -5104,7 +5104,7 @@ Supported Platforms: Linux, Solaris, AIX, HP-UX
 Parameters:
     1. Queue ID or key
 
-Provided message queue time of the last change.
+Time of the last change for given message queue.
 
 
 System.MsgQueue.Messages(*)
@@ -5117,7 +5117,7 @@ Supported Platforms: Linux, Solaris, AIX, HP-UX
 Parameters:
     1. Queue ID or key
 
-Number of messages in provided message queue.
+Number of messages in given message queue.
 
 
 System.MsgQueue.RecvTime(*)
@@ -5130,7 +5130,7 @@ Supported Platforms: Linux, Solaris, AIX, HP-UX
 Parameters:
     1. Queue ID or key
 
-Provided message queue last message receive time.
+Last recieved message time in given message queue.
 
 
 System.MsgQueue.SendTime(*)
@@ -5143,7 +5143,7 @@ Supported Platforms: Linux, Solaris, AIX, HP-UX
 Parameters:
     1. Queue ID or key
 
-Provided message queue last message send time.
+Last sent message time in given message queue.
 
 
 System.OS.Build
@@ -5318,7 +5318,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 Parameters:
    1. Path to the certificate file.
 
-Expiration time of X.509 certificate from provided file.
+Expiration date in UNIX timestamp format.
 
 X509.Certificate.ExpiresIn
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -5729,7 +5729,7 @@ Supported Platforms: Linux, Windows
    * - Availability 
      - UInt32
 
-Hardware information about available processors
+Hardware information about available network adapters
 
 Hardware.Processors
 ~~~~~~~~~~~~~~~~~~~

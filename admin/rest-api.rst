@@ -1361,10 +1361,10 @@ Return data:
 Persistent storage
 ------------------
 
-Get all persistent storages
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Get all persistent storage variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Request to get all persistent storages available to this user.
+Request to get all persistent storage variables available to this user.
 
 Request type: **GET**
 
@@ -1375,8 +1375,8 @@ Return data:
     Will return all persistent storages in "*key*":"*value*" format.
 
 
-Get persistent storage by key
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Get persistent storage variable by key
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Request to get persistent storage value by key.
 
@@ -1389,10 +1389,10 @@ Return data:
     Will return corresponding persistent storages value in "value":"*value*" format.
 
 
-Create persistent storage
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Create persistent storage variable
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Request to create new persistent storage.
+Request to create new persistent storage variable.
 
 Request type: **POST**
 
@@ -1412,10 +1412,10 @@ Return data:
     Will return newly created persistent storages in "*key*":"*value*" format.
 
 
-Update persistent storage
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Update persistent storage variable
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Request to update specified persistent storage value.
+Request to update specified persistent storage variable value.
 
 Request type: **PUT**
 
@@ -1434,10 +1434,10 @@ Return data:
     Will return updated persistent storages in "*key*":"*value*" format.
 
 
-Delete persistent storage
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Delete persistent storage variable
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Request to delete persistent storage.
+Request to delete persistent storage variable.
 
 Request type: **DELETE**
 

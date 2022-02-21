@@ -850,6 +850,17 @@ The following drivers are provided by default with |product_name| installation:
 
        * filePath (default: /tmp/test.txt)
 
+   * - Twilio
+     - Driver for Twilio.com service (`<http://www.twilio.com>`_). Configuration parameters:
+
+       * CallerId - caller ID
+       * SID - account SID (for authentication)
+       * Token - account security token (for authentication)
+       * Voice - voice to be used for Text To Speech (man, woman, alice, or any of the
+         Amazon Polly voices. See here for more information
+         https://www.twilio.com/docs/voice/twiml/say#voice)
+       * UseTTS - true/false, enable or disable Text To Speech (default is false)
+
    * - WebSMS
      - Driver for websms.ru service (`<https://websms.ru>`_). Configuration parameters:
 

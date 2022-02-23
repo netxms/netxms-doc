@@ -7,28 +7,28 @@ Basic Concepts
 Objects
 =======
 
-All network infrastructure monitored by |product_name| inside monitoring system
-represented as a set of :term:`objects <Object>`. Each object
-represents one physical or logical entity (like host or network interface),
-or group of them. Objects are organized into hierarchical structure.
+All monitored network infrastructure is represented as a set of :term:`objects <Object>`
+in |product_name| monitoring system. Each object
+represents one physical or logical entity (e.g. host or network interface),
+or group of them (e.g. subnet, container). Objects are organized into hierarchical structure.
 Each object has it's own access rights. Access rights are applied
-hierarchically on all children of object. For example if it grant :guilabel:`Read`
-access right for user on a :guilabel:`Container`, then user have :guilabel:`Read`
-right on all objects that contains this :guilabel:`Container`.
-Every object has set of attributes; some of them are common
+hierarchically on all children of object. For example if :guilabel:`Read`
+access right is granted to a user on a :guilabel:`Container`, then user has :guilabel:`Read`
+right on all objects that this :guilabel:`Container` contains.
+Every object has set of attributes; some of them exist for all objects
 (like :guilabel:`id` and :guilabel:`name` or :guilabel:`status`),  while other
-depends on object class – for example, only :guilabel:`Node` objects have
+depend on object class – for example, only :guilabel:`Node` objects have
 attribute :guilabel:`SNMP community string`. There are default attributes
-and custom attributes defined either by user or integrated application via
+and custom attributes defined either by user or external application via
 |product_name| API.
 
-|product_name| has eight top level objects – ``Entire Network``, ``Service Root``,
-``Template Root``, ``Policy Root``, ``Network Map Root``, ``Dashboard Root``,
-``Report Root``, and ``Business Service Root``. These objects served as an
-abstract root for appropriate object tree. All top level objects has only one
+|product_name| has six top level objects – ``Entire Network``,
+``Service Root`` (named "Infrastructure Services" after system installation),
+``Template Root``, ``Network Map Root``, ``Dashboard Root`` and
+``Business Service Root``. These objects serve as an
+abstract root for an appropriate object tree. All top level objects have only one
 editable attribute – name.
 
-.. tabularcolumns:: |p{0.2 \textwidth}|p{0.5 \textwidth}|p{0.3 \textwidth}|
 
 .. list-table::
    :widths: 20 50 30
@@ -49,30 +49,34 @@ editable attribute – name.
        without overlapping addresses. Contains appropriate subnet objects.
      - - Subnet
    * - Subnet
-     - Object representing IP subnet. Typically objects of this class created
+     - Object representing IP subnet. Typically objects of this class are created
        automatically by the system to reflect system's knowledge of IP
        topology. The system places Node objects inside an appropriate Subnet
        object based on an interface configuration. Subnet objects have only one
        editable attribute - :guilabel:`Name`.
      - - Node
    * - Node
-     - Object representing physical host or network device(such as routers and switches).
+     - Object representing physical host or network device (such as a router or network switch).
        These objects can be created either manually by administrator or automatically during
        network discovery process. They have a lot of attributes controlling all aspects
        of interaction between |product_name| server and managed node. For example, the attributes
        specify what data must be collected, how node status must be checked, which protocol
-       versions to use etc. Node objects contain one or more interface objects. The system
+       versions to use, etc. Node objects contain one or more interface objects. The system
        creates interface objects automatically during configuration polls.
      - - Interface
+       - Access point
        - Network Service
        - VPN Connector
-   * - Cluster
-     - Object representing cluster consisted of two or more hosts.
-     - - Node
    * - Interface
      - Interface objects represent network interfaces of managed computers and
        devices. These objects created automatically by the system during
        configuration polls or can be created manually by user.
+     -
+   * - Access point
+     - Object representing wireless network access point. A node can have
+       several access points, e.g. 2.4Ghz and 5Ghz, or in case of thin wireless
+       access points managed by a central controller. These objects are created
+       automatically by the system.
      -
    * - Network Service
      - Object representing network service running on a node (like http or
@@ -82,7 +86,7 @@ editable attribute – name.
      -
    * - VPN Connector
      - Object representing VPN tunnel endpoint. Such objects can be created to
-       add VPN tunnels to network topology known y |product_name| server. VPN Connector
+       add VPN tunnels to network topology known to |product_name| server. VPN Connector
        objects are created manually. In case if there is a VPN
        connection linking two different networks open between two firewalls that are
        added to the system as objects, a user can create a VPN Connector object on
@@ -92,26 +96,41 @@ editable attribute – name.
      -
    * - Service Root
      - Abstract object representing root of your infrastructure service tree.
-       System can have only one object of this class.
+       System can have only one object of this class. After system installation
+       it is named "Infrastructure Services".
      - - Cluster
+       - Chassis
        - Condition
        - Container
-       - Mobile Device
        - Node
+       - Sensor
        - Subnet
        - Rack
    * - Container
-     - Grouping object which can contain nodes, subnets, clusters, conditions,
-       or other containers. With help of container objects you can build
+     - Grouping object which can contain any type of objects that Service Root
+       can contain. With help of container objects you can build
        object's tree which represents logical hierarchy of IT services in your
        organization.
      - - Cluster
+       - Chassis
        - Condition
        - Container
-       - Mobile Device
        - Node
+       - Sensor
        - Subnet
        - Rack
+   * - Cluster
+     - Object representing cluster consisting of two or more nodes. 
+     - - Node
+   * - Rack
+     - Object representing a rack. It has the same purpose as container, but
+       allows to configure visual representation of equipment installed in a rack.
+     - - Node
+       - Chassis
+   * - Chassis
+     - Object representing a chassis, e.g. a blade server enclosure. Chassis
+       can be configured as a part of a rack.
+     - - Node
    * - Condition
      - Object representing complicated condition – like "cpu on node1 is
        overloaded and node2 is down for more than 10 minutes". Conditions may
@@ -129,8 +148,7 @@ editable attribute – name.
      - - Template
        - Template Group
    * - Template
-     - Data collection template. See Data Collection section for more
-       information about templates.
+     - Data collection template. 
      - - Mobile Device
        - Node
    * - Network Map Root
@@ -143,42 +161,39 @@ editable attribute – name.
      - - Network Map
        - Network Map Group
    * - Network Map
-     - Preconfigured shematic representation of network or other system.
+     - Network map.
      -
    * - Dashboard Root
      - Abstract object representing root of your dashboard tree.
      - - Dashboard
    * - Dashboard
-     - Preconfigured representation of collected data and objects. Can contain other dashboards.
+     - Dashboard. Can contain other dashboards.
      - - Dashboard
    * - Business Service Root
      - Abstract object representing root of your business service tree. System
        can have only one object of this class.
      - - Business Service
+       - Business Service Prototype
    * - Business Service
      - Object representing single business service. Can contain other business
-       services, node links, or service checks.
+       services or business service prototypes. 
      - - Business Service
-       - Node Link
-       - Service Check
-   * - Node Link
-     - Link between node object and business service. Used to simplify creation
-       of node-related service checks.
-     - - Service Check
-   * - Service Check
-     - Object used to check business service state. One business service can
-       contain multiple checks.
-     -
-   * - Rack
-     - Object representing rack(works like container)
-     - - Node
+       - Business Service Prototype
+   * - Business Service Prototype
+     - Prototype from which business service objects are automatically populated. 
+     - 
 
 Object status
 -------------
 
-Each object has a status. Status of the object calculated based on polling results,
-status of underlying objects, associated alarms and status :term:`DCIs<DCI>`. For some object classes,
-like Report or Template, status is irrelevant. Status for such objects is always :guilabel:`Normal`.
+Each object has a status. Status of an object calculated based on:
+
+   * Polling results
+   * Status of child objects (e.g. interfaces of node, nodes under container)
+   * Active alarms, associated with the object (after an alarm is resolved or terminated, it no longer affects object status)
+   * Value of status :term:`DCIs<DCI>` (DCI that has ``Use this DCI for node status calculation`` property enabled)
+
+For some object classes, like Report or Template, status is irrelevant. Status for such objects is always :guilabel:`Normal`.
 Object's status can be one of the following:
 
 
@@ -231,17 +246,17 @@ Unmanaged status
 ----------------
 
 Objects can be unmanaged. In this status object is not polled, DCIs are not collected,
-no data is updated about object. This status can be used to store data about object
-that temporrary or at permonently unavailabe or not managed.
+no data is updated about object. This status can be used to store data about an object
+that is temporary or permanently unavailable or not managed.
 
 .. _maintenance_mode:
 
-Maintanence mode
+Maintenance mode
 ------------------
 
-This is special status, because it is not included in usual status lit. This
-status prevents event processing for special node. While this status node is
-still polled and DCI data is still collected, but no event is generated.
+This is special status, that's why it is not included in above status list. This
+status prevents event processing for specific node. While this node in maintenance
+mode is still polled and DCI data is still collected, but no event is generated.
 
 Data Collection Items
 =====================

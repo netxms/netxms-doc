@@ -5,7 +5,7 @@ User Interface
 .. note::
    
   One of the goals of |product_name| Management Console is to provide identical user
-  expirience across all supported platforms, including Web Interface.
+  experience across all supported platforms, including Web Interface.
   Screenshots in this particular guide are based on Mac OS X version.
 
 
@@ -17,17 +17,9 @@ Login
    Login Dialog
 
 When Management Console is started, user is presented with login dialog. User
-should enter server host name or IP address, login and password. Optionally,
-user can disable communication-level encryption by deselecting
-:guilabel:`Encrypt Connection` checkbox.
+should enter server host name or IP address, login and password. 
 
-Following options are deprecated and will be removed in the future:
 
-* :guilabel:`Clear session cache before connecting`
-* :guilabel:`Don't cache this session`
-* :guilabel:`Server version should match client version`
-
- 
 Workbench
 =========
 
@@ -44,6 +36,7 @@ title of the window and its item in the shortcut bar is highlighted.
 .. figure:: _images/perspectives.png
 
    Shortcut bar, :guilabel:`Management` perspective is selected
+
 
 Views
 =====
@@ -249,108 +242,31 @@ options to interact with objects:
    Popup menu for object type :term:`Node`
 
 
-Object Types
-------------
-
-============================== ================================================
-|OTEN| Entire Network          Root of IP topology tree. All subnet objects
-                               located under it. Built automatically by the
-                               system and read-only to user.
-|OTSU| Subnet                  Object representing IP subnet. Typically
-                               objects of this class are created automatically
-                               by the system to reflect system's knowledge
-                               of IP topology.
-|OTNO| Node                    Object representing physical host or network
-                               device. These objects can be created either
-                               manually by administrator or automatically
-                               during network discovery process.	
-|OTIS| Infrastructure Services Root of your infrastructure service tree as
-                               defined by administrator.
-|OTCO| Container               Grouping object which can contain
-                               nodes, subnets, clusters, conditions, or other
-                               containers. With help of container objects
-                               administrator can build object's tree which
-                               represents logical hierarchy of IT services
-                               in organization.
-|OTTR| Templates               Root of templates tree.
-|OTTE| Template                Data collection template. See `Data Collection`
-                               section in `Administrator Guide` for more
-                               information.
-|OTPO| Policies                Root of agent configuration policies tree.
-                               See `Agent Configuration Policy` section in
-                               `Administrator Guide` for more information.
-|OTNR| Network Maps            Root of network maps tree.
-|OTNE| Network Map             Network map (structural or Geo), as defined
-                               by administrator.
-|OTDR| Dashboards              Root of dashboards tree.
-|OTDA| Dashboard               Dashboard, as defined by administrator.
-                               See :ref:`dashboards` for more details
-|OTRR| Reports                 Root of reports tree.
-|OTRE| Report                  Single report, as defined by administrator.
-                               See :ref:`reports` for more details.
-|OTBR| Business Services       Root of business services tree.
-|OTBS| Business Service        Single logical business service as defined by
-                               administrator. Provides access to availability
-                               data. See :ref:`business-services` for more
-                               details.
-============================== ================================================
-
-.. |OTEN| image:: _images/icons/entire_network.png
-.. |OTSU| image:: _images/icons/subnet.png
-.. |OTNO| image:: _images/icons/node.png
-.. |OTIS| image:: _images/icons/infrastructure_services.png
-.. |OTCO| image:: _images/icons/container.png
-.. |OTTR| image:: _images/icons/templates.png
-.. |OTTE| image:: _images/icons/template.png
-.. |OTPO| image:: _images/icons/policies.png
-.. |OTNR| image:: _images/icons/network_maps.png
-.. |OTNE| image:: _images/icons/network_map.png
-.. |OTDR| image:: _images/icons/dashboards.png
-.. |OTDA| image:: _images/icons/dashboard.png
-.. |OTRR| image:: _images/icons/reports.png
-.. |OTRE| image:: _images/icons/report.png
-.. |OTBR| image:: _images/icons/business_services.png
-.. |OTBS| image:: _images/icons/business_service.png
-
-
 Object status
 -------------
 
 System track status of each object, which can range from :guilabel:`Minor` to
-:guilabel:`Critical` and show in two places:
+:guilabel:`Critical`. Status is displayed as overlay on icon of each object. 
 
-- Status indicator on the left
-- Icon overlay next to object name
-
-.. figure:: _images/object_browser_status.png
-
-Object status is based on a number of conditions (unless it is changed by
-administrator, highest priority selected):
-
-- Network communication status (:term:`Node` objects only)
-- Pending alarms
-- Child objects status
-
-Possible statuses, sorted by priority:
-
-====== ===========
-Icon   Status
-====== ===========
-|STUN| Unknown
-|STWA| Warning
-|STMI| Minor
-|STMA| Major
-|STCR| Critical
-====== ===========
-
-.. |STUN| image:: _images/icons/status/unknown.png
-.. |STWA| image:: _images/icons/status/warning.png
-.. |STMI| image:: _images/icons/status/minor.png
-.. |STMA| image:: _images/icons/status/major.png
-.. |STCR| image:: _images/icons/status/critical.png
 
 Filtering
 ---------
+
+Above object tree there is filter field that allows to filter objects in the object tree. 
+Filter supports a number of prefix characters that define how search is performed:
+
+====== =================================
+Prefix Status
+====== =================================
+>      Search by IP address part
+^      Search by exact IP address
+#      Search by object ID
+/      Search by comment
+@      Search by zone ID
+====== =================================
+
+Without prefix search is performed by object name.
+
 
 .. figure:: _images/object_browser_filter.png
 
@@ -367,7 +283,7 @@ type of the selected object.
 
 .. figure:: _images/object_details.png
 
-   Additional row of tabs (SNMP-capable router selected in
+   Additional row of tabs (node with |product_name| agent selected in
    :ref:`object-browser`)
 
 Overview
@@ -435,8 +351,8 @@ Last Values
 .. figure:: _images/object_details_lastvalues.png
 
 This view provides access to all collected data, both latest and historical.
-When view is show, it displays latest values, as well as timestamp when each
-record was collected. Threshold column indicates violations for current
+When view is shown, it displays latest values, as well as timestamp when each
+value was collected. Threshold column indicates threshold violations for given
 :term:`DCI`.  User has two options to interact with data:
 
 * Double click on the :term:`DCI` will open line graph view for last hour
@@ -452,7 +368,7 @@ record was collected. Threshold column indicates violations for current
 
 .. figure:: _images/object_details_lastvalues_graph.png
 
-   Line graph build from collected data
+   Line graph built from collected data
 
 Performance Tab
 ---------------
@@ -523,8 +439,7 @@ Dashboards
 
 .. figure:: _images/dashboard.png
 
-   Dashboard showing traffic information from core router, as well as CPU usage
-   from vital nodes
+   Dashboard showing traffic information from core router.
 
 Dashboards are defined by administrator and allow to combine any available
 visualization components with data from multiple sources in order to create
@@ -547,7 +462,7 @@ Business Services
 
 .. figure:: _images/availability.png
 
-   Availability chart and uptime percentage for root Business Service
+   Availability chart and uptime percentage for a system. 
 
 Business Services is a hierarchy of logical services as defined by
 administrator. Each service can represent combined state of multiple elements.
@@ -555,6 +470,3 @@ For each service in the hierarchy, |product_name| calculates availability percen
 and keeps track of all downtime cases. To check availability of any particular
 level, select it in :ref:`object-browser`.
 
-.. figure:: _images/availability_tree.png
-
-   Service dependency tree down to specific nodes

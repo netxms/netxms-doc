@@ -58,9 +58,11 @@ html_show_sphinx = False
 #html_show_copyright = True
 
 # -- Options for LaTeX output ---------------------------------------------
+#    'figure_align': 'H', - to avoid image floating to next page if it does not fit
 latex_elements = {
     'papersize': 'a4paper',
     'pointsize': '8t',
+    'figure_align': 'H',
 }
 
 #latex_elements = {
@@ -141,3 +143,5 @@ epub_theme = 'epub'
 
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html']
+
+

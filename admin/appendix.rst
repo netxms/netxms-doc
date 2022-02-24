@@ -2399,6 +2399,8 @@ Disk.UsedPerc(*)
 
 TODO
 
+.. _file-metrics:
+
 File.Count(*)
 ~~~~~~~~~~~~~
 
@@ -2533,6 +2535,7 @@ Parameters:
 
 File's last modification time in seconds since epoch (1 Jan 1970 00:00:00 UTC)
 
+.. _file-system-metrics:
 
 FileSystem.Avail(*)
 ~~~~~~~~~~~~~~~~~~~

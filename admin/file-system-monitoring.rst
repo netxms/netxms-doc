@@ -4,12 +4,17 @@
 File System Monitoring
 ======================
 
+|product_name| has two options to monitor files: one is to use build in agent file monitoring functionality, that is 
+described in next chapter and another is to create :term:`DCI` that will collect file information and create your own 
+thresholds for collected data. Second approach is describe in :ref:`file-dci-metrics` chapter.
+
 File Monitoring
 ===============
  
-|product_name| provides a feature to monitor file hash value, last modification time and permissions changes.
-Any changes to those parameters will be detected and reported to the server via events.
-Those events are ``SYS_AGENT_FILE_ADDED``, ``SYS_AGENT_FILE_CHANGED`` and ``SYS_AGENT_FILE_DELETED`` for files creations, alterations and deletions correspondingly.
+|product_name| provides a feature to monitor hash value of a file, last modification time and permissions changes.
+One file is added to monitoring any changes to those file parameters will be detected and reported to the server via events.
+Those events are ``SYS_AGENT_FILE_ADDED``, ``SYS_AGENT_FILE_CHANGED`` and ``SYS_AGENT_FILE_DELETED`` for files creations, 
+alterations and deletions correspondingly.
 
 Specify the path to a file for monitoring by adding ``[FileMonitor]`` section to :ref:`agent-configuration-files-label`. 
 If the path to a directory is specified, then all files in that directory and it's subdirectories will be monitored.
@@ -17,7 +22,8 @@ If the path to a directory is specified, then all files in that directory and it
 Configuration parameters:
 
    #. ``Path`` - The path to monitored file. This parameter should be specified once for each file/directory.
-   #. ``Interval`` - Check interval in seconds. This parameter should not be specified multiple times. This parameter is optional and will be set to 6 hours by default.
+   #. ``Interval`` - Check interval in seconds. This parameter should not be specified multiple times. 
+      This parameter is optional and will be set to 6 hours by default.
 
 .. code-block:: cfg
 
@@ -27,28 +33,34 @@ Configuration parameters:
   Path=/home/user/file_name
   Path=/home/user/directory
 
+
+.. _file-dci-metrics:
+
+DCI Metrics for file system monitoring
+======================================
+
 'FileSystem' Metrics
-====================
+--------------------
 
 Agent metrics for file system monitoring.
 
-Detailed description of available metrics can be found in :ref:`list-of-supported-metrics` section.
+Detailed description of available metrics can be found starting from :ref:`FileSystem <file-system-metrics>` metric.
 
 'File' Metrics
-==============
+--------------
 
 Agent metrics for file monitoring.
 
-Detailed description of available metrics can be found in :ref:`list-of-supported-metrics` section.
+Detailed description of available metrics can be found starting from :ref:`File <file-metrics>` metric.
 
 Examples
-========
+--------
 
 In examples will be shown only DCI configuration with threshold. Generated event
 processing options can be found in :ref:`event-processing` chapter.
 
 Example 1
----------
+~~~~~~~~~
 
 In this example will be shown how to check that specific folder exceed specified size.
 
@@ -65,7 +77,7 @@ that returned value should be less than 2 000 000 000 bytes.
   Threshold
 
 Example 2
----------
+~~~~~~~~~
 
 In this example will be configured monitoring that in exact folder exist files that
 was modified less then half an hour ago.

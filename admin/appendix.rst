@@ -3178,9 +3178,11 @@ Number of output packets on interface
 Net.Interface.Speed(*)
 ~~~~~~~~~~~~~~~~~~~~~~
 
+Current interface working speed in bits per second.
+
 Data type: UInt32
 
-Supported Platforms: Windows, Solaris, AIX, HP-UX
+Supported Platforms: Windows, Linux, FreeBSD, Solaris, AIX, HP-UX
 
 Parameters:
   1. Interface name or interface index. Index can be obtained from ``Net.InterfaceList`` list.

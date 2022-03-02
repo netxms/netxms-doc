@@ -483,6 +483,26 @@ Server configuration file (netxmsd.conf)
   * - StartupSQLScript
     - Path to a plain text file containing a list of SQL commands which will be executed on server startup. 
     - Empty string
+  * - ServerCertificate
+    - Path to file of server certificate for agent tunnel connections. This
+      certificate is used to issue agent certificates. ServerCertificate
+      parameter also implies that this certificate is trusted by the server when
+      checking agent certificate validity.
+    - Empty string
+  * - ServerCertificateKey
+    - Private key of server certificate. Can be omitted if key is included in
+      server certificate file.
+    - Empty string
+  * - ServerCertificatePassword
+    - Password of server certificate. Can be omitted if certificate does not use
+      password.
+    - Empty string
+- * - TrustedCertificate
+    - Certificate issued by certificate authority or self-signed CA certificate.
+      If certificate chain for server certificate is longer, all upper level
+      certificates should be added to configuration file by adding multiple
+      TrustedCertificate entries.
+    - Empty string
 
 .. note::
   All boolean parameters accept "Yes/No", "On/Off" and "True/False" values.

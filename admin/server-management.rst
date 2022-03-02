@@ -81,7 +81,7 @@ Certificate can be obtained in two ways:
     1. By sending :term:`CSR` request to your :term:`CA`
     2. Create self signed certificate
 
-Possible server file configuration:
+Settings in server configuration file:
 
 .. list-table::
   :widths: 50 70 60
@@ -91,21 +91,25 @@ Possible server file configuration:
     - Description
     - Required
   * - TrustedCertificate
-    - Your certificate authority certificate or self generated :term:`CA` certificate. If certificate
-      chain for server certificate is longer all upper level certificates should be added to
-      configuration file by adding multiple TrustedCertificate entries.
+    - Certificate issued by certificate authority or self-signed :term:`CA`
+      certificate. If certificate chain for server certificate is longer, all
+      upper level certificates should be added to configuration file by adding
+      multiple TrustedCertificate entries.
     - Yes
   * - ServerCertificate
-    - Certificate issued by certificate authority.
+    - Certificate issued by certificate authority. This certificate is used to
+      issue agent certificates. ServerCertificate parameter also implies that
+      this certificate is trusted by the server when checking agent certificate
+      validity. 
     - Yes
   * - ServerCertificatePassword
-    - Issued certificate password
-    - Can be omitted for non password certificates
+    - Server certificate password.
+    - Can be omitted if certificate does not use password.
   * - ServerCertificateKey
-    - Issued certificate key
+    - Server certificate private key.
     - Can be omitted if key is included in server certificate file.
 
-Possible server variable configuration:
+Server configuration variable settings:
 
 .. list-table::
   :widths: 50 70 60
@@ -128,14 +132,14 @@ Possible server variable configuration:
 Self signed certificate sample
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This manual describes only simplest option: self signed certificate creation without password. It
-does not contain any information about file access right assignment or certificate password configuration.
+This manual describes only simplest option: self signed certificate creation. It
+does not contain any information about file access right assignment.
 
-    #. Create private root key:
+    #. Create private root key (add ``-aes256`` parameter to use password):
         :command:`openssl genrsa -out rootCA.key 2048`
     #. Create self signed root certificate:
         :command:`openssl req -x509 -new -key rootCA.key -days 10000 -out rootCA.crt`
-    #. Create server key
+    #. Create server key (add ``-aes256`` parameter to use password)
         :command:`openssl genrsa -out server.key 2048`
     #. Create :file:`openssl.conf` file. Content of file (dn section should be changed accordingly):
 
@@ -166,6 +170,40 @@ Add newly created certificates to server configuration (netxmsd.conf file).
 .. code-block:: cfg
 
     TrustedCertificate = /opt/netxms/key/rootCA.crt
+    ServerCertificate = /opt/netxms/key/server.crt
+    ServerCertificateKey = /opt/netxms/key/server.key
+
+Reissuing server certificate
+----------------------------
+
+When server certificate validity term is coming to an end or there are some
+security considerations, server certificate can be reissued. There are two
+options - server certificate can be reissued using same root CA or, if you use
+self-signed root CA, it can also be reissued.
+
+To perform a smooth transition from old to new server certificate, old
+certificates can be specified as TrustedCertificate in server configuration
+file. In this case agents with certificates issued based on the old server
+certificate would still be able to connect, but new agent certificates will be
+issued based on the new server certificate.
+
+After all agents will receive agent certificate signed by the new server
+certificate, old certificates can be removed from server configuration file.
+
+Server configuration example if self-signed root CA was reissued:
+
+.. code-block:: cfg
+
+    # ~~~ Old root certificate ~~~
+    TrustedCertificate = /opt/netxms/key/old_rootCA.crt
+
+    # ~~~ Old server certificate ~~~
+    TrustedCertificate = /opt/netxms/key/old_server_certificate.crt
+
+    # ~~~ New root certificate ~~~
+    TrustedCertificate = /opt/netxms/key/rootCA.crt
+
+    # ~~~ New server certificate ~~~
     ServerCertificate = /opt/netxms/key/server.crt
     ServerCertificateKey = /opt/netxms/key/server.key
 

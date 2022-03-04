@@ -1,9 +1,9 @@
 .. _sla:
 
 
-#########################
-Business services and SLA
-#########################
+#################
+Business services
+#################
 
 Introduction
 ============
@@ -19,67 +19,84 @@ used both for internal QA and external Service Level Agreement (SLA)
 monitoring.
 
 
-Services, node links, service checks
-====================================
+Business service object
+=======================
 
-Service
--------
+Business Service
+----------------
 
-Business Services represented with a tree-like hierarchy of nested logical
-services, nodes and service checks. One can think of a service as a container
-consisting of other services, service checks and nodes linked to service
-checks. In |product_name| terminology the last is called node link. For each service in
-the hierarchy, |product_name| calculates availability percentage and keeps track of all
-downtime cases. To check availability at any particular level, select it in the
-:guilabel:`Object Browser` or choose :guilabel:`Availability Chart` from the
-context menu.
+Business Services represented with service checks and a tree-like hierarchy of 
+other business services. For each service in the hierarchy, |product_name| keeps 
+track of all downtime cases so later user can request to calculates availability 
+percentage for required time period. To check availability at any particular level, 
+select Business Service object in the :guilabel:`Object Browser`, choose 
+:guilabel:`Availability` tab and select time period.
 
-
-Node link
----------
-
-Node link is a reference to any node with one or more service checks attached
-to this node.
+Business service contains two NXSL scripts in configuration: for object automatic 
+binding and for DCI automatic binding. Those scripts can be used to automatically 
+populate Business service with recurses that require monitoring. Service checks 
+can be automatically created or removed if "Auto remove" filter option is selected.
 
 Service check
 -------------
 
-Service check is a test whose result is used to define the state of the
-service. A service check may belong to the specific node (node link) or
-directly to the service. A service check object contains NXSL script which
-either returns success (the test result ok) or failure (the service has
-failed). There are the following special variables and constants which can be
+Service check is a test whose result is used to define the state of the service. 
+There can be 3 types of checks: DCI check, object check and NXSL script. Service 
+check can have one of statuses: OK, Failed or Degraded. Degraded status means that 
+object ot DCI status is not Normal, but is less worse then threshold for this check, 
+this state will not change state of business service to failed. 
+
+DCI check
+~~~~~~~~~
+
+DCI check is based on the status of DCI. DCI status is calculated form the status 
+of threshold (if it is active) and severity of active threshold. DCI check has it's 
+own stats threshold starting from which check is counted as failed. Threshold can be 
+set per check or per server in "BusinessServices.Check.Threshold.DataCollection" 
+server configuration variable.
+
+Object check
+~~~~~~~~~~~~
+
+Object check is based on object status. Object check has it's own stats threshold 
+starting from which check is counted as failed. Threshold can be set per check or 
+per server in "BusinessServices.Check.Threshold.Objects" server configuration 
+variable.
+
+NXSL script check 
+~~~~~~~~~~~~~~~~~
+
+NXSL script check either returns success (the test result ok) or failure (the 
+service has failed). For success "true" should be return, and "false" for failure.
+In addition failure reason can be returned form the script, in this case just 
+text with the reason should be returned to fail service check. 
+
+There are the following special variables which can be
 used in NXSL scripts for service checks:
 
-- $node - points to the current node the check is being executed for
-- $reason - the script may set the reason of failure
-- OK - constant, indicates success
-- FAIL - constant, indicates failure
+- $node - points to the current node (if set) the check is being executed for
 
 
-Service check templates
-~~~~~~~~~~~~~~~~~~~~~~~
+Business service prototype
+==========================
 
-To avoid redefinition of the same service check multiple times (for multiple
-nodes) you can create service check templates. The principle behind service
-check template is very similar to :ref:`data-collection-templates`. There are
-two notable differences though:
-
-- A service check template is always applied automatically to every new node
-  (node link) added to the service
-- A service check template is applied to nodes in the current level in the
-  service tree and in all levels below
-
+To avoid redefinition of the same business service multiple times (for multiple
+clients or infrastructure items) you can create business service prototype. The 
+principle behind business service prototype is very similar to DCI instance 
+discovery. There is instance discovery options and script to filter it. Based on 
+investigated instance count and valued business services are created. Further in 
+each business service instance value is available in auto apply scripts for DCI 
+and object. 
 
 Configuration and usage
 =======================
 
 For both configuration and monitoring use :guilabel:`Business Service`
-container in the :guilabel:`Object Browser` view.
+perspective.
 
-.. figure:: _images/1_Object_Browser_Services.png
+.. figure:: _images/Business_Services_Perspective.png
 
-   Object Browser with Services
+   Business service perspective
 
 
 Configuration
@@ -87,38 +104,25 @@ Configuration
 
 To define a new service select :guilabel:`Create business service` from the
 context menu in :guilabel:`Object Browser` and enter the service name. Then
-under newly created service you may want to define other services, checks or
-node links. You can examine or alter properties of the service.
+in newly created service you may want to define checks or define check auto 
+apply scripts in business service properties. 
 
 
-If your service check relies on specific nodes then you need to create node
-links by selecting :guilabel:`Create node link` from the context menu:
+.. figure:: _images/Business_Services_Checks.png
 
-.. figure:: _images/3_Create_Node_Link.png
+   Business service checks
 
-   Create Node Link
-
-One or more service checks must be defined for every node link. Service check
-can be also defined at a business service level. In the latter case it is not
-connected to any particular node and can be used for some general calculations
-(e.g. based on some server stats). To create a check select :guilabel:`Create
-service check` from the context menu, enter the check name and navigate to
-:guilabel:`Script` tab in object properties:
-
-.. figure:: _images/4_Service_Check_Properties.png
-
-   Service Check Properties
-
+Business service prototype is defined the same way, but it is required also 
+Instance Discovery method to be set on the creation. 
 
 Monitoring
 ----------
 
-All business service calculations performed in real time. The system calculates
-uptime values for a day, a week and a month for each business service defined.
-As soon as the uptime value changes it shows in the :guilabel:`Object Details`
-screen for the service:
+Business service availability for exact period can be checked using 
+:guilabel:`Availability` tab. It has predefined time ranges and a date selector 
+for arbitrary date range. It shows as well detailed information about problems 
+occurred for a business service, start time, end time and reason.
 
-.. figure:: _images/5_Availability.png
+.. figure:: _images/Business_Services_Availability.png
 
-Alternatively you can view the availability screen in a slightly different
-format by selecting :guilabel:`Availability chart` from the context menu.
+   Availability pie chart and details

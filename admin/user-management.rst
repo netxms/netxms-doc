@@ -109,8 +109,6 @@ The following system access rights can be granted:
      - Allow user to edit Event Processing Policy. :ref:`event-processing`
    * - Edit server configuration variables
      - Allow user to edit server configuration variables.
-   * - Execute commands via XMPP
-     - Allows user to execute commands via XMPP.
    * - Login as mobile device
      - Allows user to login with help of mobile application.
    * - Manage agent configurations

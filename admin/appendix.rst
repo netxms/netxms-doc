@@ -834,10 +834,6 @@ These parameters can be changed in
     - Enable/disable ability to acknowledge an alarm for a specific time.
     - 1
     - Yes
-  * - EnableXMPPConnector
-    - This parameter displays if XMPP connector should be enabled on a server start. It is required to enable XMPP message sending.
-    - 0
-    - Yes
   * - EnableZoning
     - Enable/disable zoning support.
     - 0
@@ -1544,22 +1540,6 @@ These parameters can be changed in
     - Retention time in days for records in Windows event log. All records older than specified will be deleted by housekeeping process.
     - 90
     - No
-  * - XMPPLogin
-    - Login name that will be used for authentication on XMPP server.
-    - netxms@localhost
-    - Yes
-  * - XMPPPassword
-    - Password that will be used for authentication on XMPP server.
-    - netxms
-    - Yes
-  * - XMPPPort
-    - XMPP connection port
-    - 5222
-    - Yes
-  * - XMPPServer
-    - XMPP connection server
-    - localhost
-    - Yes
 
 
 Bundled Subagents

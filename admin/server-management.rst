@@ -290,21 +290,6 @@ commands like "ldap sync".
 
 .. figure:: _images/server_console.png
 
-Server commands can be executed also through XMPP. To execute server command
-through XMPP should be fulfill next requirements:
-
-  1. Server connection with XMPP should be configured in server configuration variables:
-     :guilabel:`XMPPLogin`, :guilabel:`XMPPPassword`, :guilabel:`XMPPPort`,
-     :guilabel:`XMPPServer`, :guilabel:`EnableXMPPConnector`.
-  2. XMPP user that will send commands should be connected with |product_name| user by pointing
-     it's XMPP name in :guilabel:`XMPP ID` filed of General tab of |product_name| user
-     properties.
-  3. |product_name| user that will execute this commands should also have
-     :guilabel:`Execute commands via XMPP` access right.
-
-Execution is done sending server command like a message to the user defined in
-:guilabel:`XMPPLogin` server configuration variable.
-
 Server commands
 ---------------
 

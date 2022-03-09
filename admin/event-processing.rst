@@ -484,16 +484,6 @@ Server will use :ref:`notification-channels` for actual message sending.
 
 In message text can be used :ref:`event-processing-macros`.
 
-Send XMPP message
-~~~~~~~~~~~~~~~~~
-
-Sends XMPP/Jabber message to one or more recipients. Multiple recipients can be separated by semicolons.
-Required server configuration parameters to send XMPP message: :guilabel:`XMPPLogin`, :guilabel:`XMPPPassword`,
-:guilabel:`XMPPPort`, :guilabel:`XMPPServer`, :guilabel:`EnableXMPPConnector`. For detailed description of
-parameters check :ref:`server_configuration_parameters`.
-
-In message text can be used :ref:`event-processing-macros`.
-
 Execute NXSL script
 ~~~~~~~~~~~~~~~~~~~
 
@@ -867,6 +857,14 @@ The following drivers are provided by default with |product_name| installation:
        * login (default: user)
        * password (default: password)
        * m_fromPhone
+
+   * - XMPP
+     - Driver for XMPP/Jabber messages. Configuration parameters:
+
+       * Server (default: localhost)
+       * Port (default: user)
+       * Login - may or may not contain XMPP domainpart. If no domainpart is specified server name will be added to login. (default: netxms@localhost)  
+       * m_fromPhone (default: 5222)
 
 
 .. _nxsl_persistent_storage:

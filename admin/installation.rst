@@ -74,12 +74,12 @@ However, we test and officially support only some of them.
 Supported platforms for |product_name| server and agent:
 
    * Debian 9 (Stretch), 10 (Buster)
-   * Ubuntu 16.04 LTS (Xenial), 18.04 LTS (Bionic), 20.04 LTS (Focal Fossa)
+   * Ubuntu 18.04 LTS (Bionic), 20.04 LTS (Focal Fossa)
    * Linux Mint 19.3 (Tricia), Linux Mint Debian Edition 4
    * Devuan ASCII
    * Red Hat Enterprise Linux 8
    * CentOS 8
-   * Windows 10, Windows Server 2016, 2019
+   * Windows 11, Windows 10, Windows Server 2016, 2019
    * FreeBSD 12
    * ArchLinux (Latest)
    * AlpineLinux 3.8+
@@ -89,7 +89,7 @@ Supported platforms for |product_name| server and agent:
 Support for the following platforms provided only to customers with active support contract:
 
    * Debian 8 (Jessie)
-   * Ubuntu 14.04 LTS
+   * Ubuntu 16.04 LTS (Xenial)
    * Devuan Jessie
    * Red Hat Enterprise Linux 6, 7
    * CentOS 6, CentOS 7

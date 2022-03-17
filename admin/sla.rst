@@ -80,6 +80,7 @@ service checks:
 - $object - points to the object for which the check is executed
 - $node - points to the current node for which the check is executed. Will be
   null, if the object, for which the check is executed is not a node. 
+- $service - the business service this check belongs to
 
 
 Business service prototype

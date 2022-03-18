@@ -494,10 +494,10 @@ Server configuration file (netxmsd.conf)
       server certificate file.
     - Empty string
   * - ServerCertificatePassword
-    - Password of server certificate. Can be omitted if certificate does not use
+    - Password of server certificate. Can be omitted if certificate does not use 
       password.
     - Empty string
-- * - TrustedCertificate
+  * - TrustedCertificate
     - Certificate issued by certificate authority or self-signed CA certificate.
       If certificate chain for server certificate is longer, all upper level
       certificates should be added to configuration file by adding multiple

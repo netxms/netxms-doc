@@ -675,24 +675,41 @@ event's parameter:
 Passing parameters to events
 ============================
 
-The log parser can send parameters to events.
-All capture groups will be sent to the event as parameters. For Windows additional
-parameters are provided.
+The log parser adds parameters to events. For non-Windows platforms the following parameters are provided:
++----------+-------------------------------------------------------+
+| Number   | Description                                           |
++==========+=======================================================+
+| 1 to n   | Capture groups                                        |
++----------+-------------------------------------------------------+
+| n+1      | Event tag (if set in log parser policy configuration, | 
+|          | otherwise this field is omitted)                      |
++----------+-------------------------------------------------------+
+| n+2      | Repeat count - how many times this rule was matched   |
+|          | previously.                                           |
++----------+-------------------------------------------------------+
+
+For Windows the following parameters are provided:
 
 +----------+----------------------------------------------------+
 | Number   | Description                                        |
 +==========+====================================================+
 | 1 to n   | Capture groups                                     |
 +----------+----------------------------------------------------+
-| n+1      | Windows publisher name                             |
+| n+1      | Event tag (if set in log parser policy             | 
+|          | configuration, otherwise this field is omitted)    |
 +----------+----------------------------------------------------+
-| n+2      | Windows event id                                   |
+| n+2      | Windows publisher name                             |
 +----------+----------------------------------------------------+
-| n+3      | Windows severity                                   |
+| n+3      | Windows event id                                   |
 +----------+----------------------------------------------------+
-| n+4      | Windows record Id                                  |
+| n+4      | Windows severity                                   |
 +----------+----------------------------------------------------+
-| n+5 to k | Windows event strings                              |
+| n+5      | Windows record Id                                  |
++----------+----------------------------------------------------+
+| n+6      | Repeat count - how many times this rule was        |
+|          | matched previously.                                |
++----------+----------------------------------------------------+
+| n+7 to k | Windows event strings                              |
 +----------+----------------------------------------------------+
 
 Consider the following line is received via syslog, or added to a monitored file:

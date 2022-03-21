@@ -838,7 +838,7 @@ The following drivers are provided by default with |product_name| installation:
    * - TextFile
      - Notification driver that writes messages to text file. Configuration parameter:
 
-       * filePath (default: /tmp/test.txt)
+       * OutputFile - path to file.
 
    * - Twilio
      - Driver for Twilio.com service (`<http://www.twilio.com>`_). Configuration parameters:

@@ -1020,10 +1020,10 @@ PostalAddress fields
     - String
     - 
 
-Bind node
-~~~~~~~~~
+Bind object
+~~~~~~~~~~~
 
-Request to bind object to container.
+Request to bind object to container. Container id is specified in URL, object id in JSON.
 
 Request type: **POST**
 
@@ -1038,10 +1038,10 @@ JSON data:
 Request path: *API_HOME*/objects/**{object-id}**/bind
 
 
-Bindto node
-~~~~~~~~~~~
+Bind node to
+~~~~~~~~~~~~
 
-Request to bind object under container.
+Request to bind object under container. Container id is specified in JSON, object id in URL. 
 
 Request type: **POST**
 
@@ -1053,12 +1053,12 @@ JSON data:
 
       {"id": 2}
 
-Request path: *API_HOME*/objects/**{object-id}**/bindTo
+Request path: *API_HOME*/objects/**{object-id}**/bind-to
 
 Unbind node
 ~~~~~~~~~~~
 
-Request to unbind object from container.
+Request to unbind object from container. Container id is specified in URL, object id in JSON.
 
 Request type: **POST**
 
@@ -1076,7 +1076,7 @@ Request path: *API_HOME*/objects/**{object-id}**/unbind
 UnbindFrom node
 ~~~~~~~~~~~~~~~
 
-Request to unbind object from container.
+Request to unbind object from container. Container id is specified in JSON, object id in URL. 
 
 Request type: **POST**
 
@@ -1088,7 +1088,7 @@ JSON data:
 
       {"id": 2}
 
-Request path: *API_HOME*/objects/**{object-id}**/unbindFrom
+Request path: *API_HOME*/objects/**{object-id}**/unbind-from
 
 
 Poll object
@@ -1302,19 +1302,90 @@ Return data:
 
     Will return alarm specified by ID.
 
-DCI Data
+
+Data collection configuration
+-----------------------------
+
+Get data collection configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Request type: **GET**
+
+Request path: *API_HOME*/objects/**{object-id}**/data-collection
+
+Filter options (all are case-insensitive):
+
+    * dciName=\ *text that name should contain*
+    * dciNameRegexp=\ *regular expression for name*
+    * dciDescription=\ *text that description should contain*
+    * dciDescriptionRegexp=\ *regular expression for description*
+
+Return data:
+
+    Will return data collection configuration.
+
+
+Create DCI
+~~~~~~~~~~
+
+Request type: **POST**
+
+Request path: *API_HOME*/objects/**{object-id}**/data-collection
+
+JSON data:
+
+  Create new DCI (name and description are obligatory fields):
+
+  .. code-block:: json
+
+      {
+          "name": "Agent.Version",
+          "description": "Version of agent",
+          "origin": "AGENT",
+          "pollingInterval": "120",
+          "pollingScheduleType": "1",
+          "retentionType": "1",
+          "retentionTime": "60"
+      }
+
+
+Update DCI
+~~~~~~~~~~
+
+Request to get last values of DCI identified by ID for exact object identified by ID or GUID.
+
+Request type: **PUT**
+
+Request path: *API_HOME*/objects/**{object-id}**/data-collection/**{dci-id}**
+
+JSON data:
+
+  Update existing DCI setting custom polling interval and custom retention time
+  (name and description are obligatory fields):
+
+  .. code-block:: json
+
+      {
+          "name": "Agent.Version",
+          "description": "Version of agent",
+          "pollingInterval": "120",
+          "pollingScheduleType": "1",
+          "retentionType": "1",
+          "retentionTime": "60"
+      }
+
+
+DCI data
 --------
 
-There are 2 options to get DCI last values. First is to get last values for one DCI and the second one is to create adhoc summary table with required values for all nodes under container.
-
-DCI last values
-~~~~~~~~~~~~~~~
+DCI values
+~~~~~~~~~~
 
 Request to get last values of DCI identified by ID for exact object identified by ID or GUID.
 
 Request type: **GET**
 
-Request path: *API_HOME*/objects/**{object-id}**/datacollection/**{dci-id}**/values
+Request path: *API_HOME*/objects/**{object-id}**/data-collection/**{dci-id}**/values
 
 Filter options:
 
@@ -1325,7 +1396,69 @@ Filter options:
 
 Return data:
 
-    Will return last values for requested node and DCI limited by filters.
+    Will return DCI values for requested node limited by filters.
+
+
+DCI last value
+~~~~~~~~~~~~~~
+
+Request to get last value of DCI identified by ID for exact object identified by ID or GUID.
+
+Request type: **GET**
+
+Request path: *API_HOME*/objects/**{object-id}**/data-collection/**{dci-id}**/last-values
+
+Filter options:
+
+    * rowsAsObjects=\ *true or false. Determines how table DCI is returned*
+
+Return data:
+
+    Will return last value of DCI.
+
+
+Object last values
+~~~~~~~~~~~~~~~~~~
+
+Request to get DCI last values of object.
+
+Request type: **GET**
+
+Request path: *API_HOME*/objects/**{object-id}**/last-values
+
+Filter options (all are case-insensitive):
+
+    * dciName=\ *text that name should contain*
+    * dciNameRegexp=\ *regular expression for name*
+    * dciDescription=\ *text that description should contain*
+    * dciDescriptionRegexp=\ *regular expression for description*
+
+Return data:
+
+    Will return DCI last values of object.
+
+
+Query last values
+~~~~~~~~~~~~~~~~~
+
+Request type: **GET**
+
+Request path: *API_HOME*/objects/**{object-id}**/data-collection//query?query=**{filter string}**
+
+Filter string options:
+    * NOT *negation of following filtering parameter*
+    * Description
+    * GUID
+    * Id
+    * Name
+    * PollingInterval
+    * RetentionTime
+    * SourceNode
+
+Example filter string:
+
+    Name:FileSystem.UsedPerc PollingInterval:60
+
 
 Adhoc summary table
 ~~~~~~~~~~~~~~~~~~~
@@ -1334,7 +1467,7 @@ Option to get last values for multiple nodes(for all nodes under provided contai
 
 Request type: **POST**
 
-Request path: *API_HOME*/summaryTable/adHoc
+Request path: *API_HOME*/summary-table/ad-hoc
 
 POST request JSON
 
@@ -1358,6 +1491,50 @@ Return data:
 
     Will return adhoc summary table configured accordingly to request json.
 
+Object tools
+------------
+
+List of available object tools
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Request to object tools available to specified object.
+
+Request type: **GET**
+
+Request path: *API_HOME*/objects/**{object-id}**/object-tools
+
+
+Execute object tool
+~~~~~~~~~~~~~~~~~~
+
+Request to object tools available to specified object.
+
+Request type: **POST**
+
+Request path: *API_HOME*/objects/**{object-id}**/object-tools
+
+JSON data:
+
+  .. code-block:: json
+
+      toolData:{
+          "id": "1234",
+          "inputFields":[
+            "field1": "value1",
+            "field2": "1000"
+          ] 
+      }
+
+Return data:
+
+    Will return JSON with UUID and toolId. UUID can be supplied to this endpoint (with GET request)
+    to view object tool output:
+    *API_HOME*/objects/**{object-id}**/object-tools/output/**{uuid}**. With POST
+    request to the same endpoint execution of object tool can be stopped. 
+
+
+
+
 Persistent storage
 ------------------
 
@@ -1368,7 +1545,7 @@ Request to get all persistent storage variables available to this user.
 
 Request type: **GET**
 
-Request path: *API_HOME*/persistentstorage
+Request path: *API_HOME*/persistent-storage
 
 Return data:
 
@@ -1382,7 +1559,7 @@ Request to get persistent storage value by key.
 
 Request type: **GET**
 
-Request path: *API_HOME*/persistentstorage/**{key}**
+Request path: *API_HOME*/persistent-storage/**{key}**
 
 Return data:
 
@@ -1442,3 +1619,22 @@ Request to delete persistent storage variable.
 Request type: **DELETE**
 
 Request path: *API_HOME*/persistentstorage/**{key}**
+
+
+User agent notifications
+------------------------
+
+TODO
+
+
+Push data
+---------
+
+TODO
+
+
+Predefined graphs
+-----------------
+
+TODO
+

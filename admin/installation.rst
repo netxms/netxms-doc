@@ -61,6 +61,10 @@ use condition ``if (classof($object) == "Node")`` or  ``if ($node != null)`` pri
 ---
 Minimal JRE (Java Runtime Environment) version for console is Java-11. 
 
+4.0
+---
+Several WEB API endpoints were renamed, e.g. *API_HOME*/summaryTable/adHoc became *API_HOME*/summary-table/ad-hoc.
+
 
 Planing
 =======

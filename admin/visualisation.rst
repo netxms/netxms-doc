@@ -83,7 +83,13 @@ There can be configured:
       * Manhattan - line with automatic bend points
       * Bend points - bend point can be done manually with double click on the line (can be used to do dual link)
    * Data Source(there can be configured DCI values and text near them that will be displayed on a link)
-      * For each Data Source can be configured: Data collection item,  name,  java format string(like "Text: %.4f", syntax http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax),  in case of table DCI also column and instance
+      * For each Data Source can be configured: Data collection item,  name,
+        format string, in case of table DCI also column and instance. Java
+        format string syntax is used, e.g. "Text: %.4f", syntax description is
+        available here:
+        http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax.
+        Additionally "%*s" syntax is supported - it converts the value using
+        multipliers. 
 
 Example of DCI data displayed on a link:
 
@@ -115,7 +121,9 @@ on a map.
    * Text color
    * If border should be shown and it's color
    * Data Source - there can be configured DCI values and text near them that will be displayed
-      * For each Data Source can be configured: Data collection item,  name,  format string(like "Text: %.4f"),  in case of table DCI also column and instance
+      * For each Data Source can be configured: Data collection item,  name,
+        format string (e.g. "Text: %.4f" or "Text: %*s"),  in case of table DCI also column and
+        instance
 
 More examples:
 

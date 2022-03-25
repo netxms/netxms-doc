@@ -550,6 +550,12 @@ The following object access rights can be granted:
      - Allow user to upload files to this node(from paths defined by filemng subagent)
    * - Manage files
      - Allow user to move, rename, delete files from this node(from paths defined by filemng subagent)
+   * - Control maintenance mode
+     - 
+   * - Take screenshot
+     - 
+   * - Edit maintenance journal
+     - Allow user to add or edit maintenance journal entries for this object.
 
 
 
@@ -563,6 +569,37 @@ Object details view provides main information about object. Each object has
 Subnet
 ------
 
+Maintenance Journal
+===================
+
+All nodes, sensors, clusters, racks, chassis and containers have a maintenance journal feature that allows creating maintenance notes about the object.
+Maintenance journal view provides a list of journal entries on the chosen objects and it's children (i.e. nodes of the container or chassis of the rack).
+
+Journal entries are displayed in the table format consisting of seven columns:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Column name
+     - Description
+   * - ID
+     - Maintenance journal entry ID. ID is unique for all entries of all journals.
+   * - Object
+     - The name of the object that the entry belongs to.
+   * - Author
+     - The name of the user that created the entry.
+   * - Last edited by
+     - The name of the user that edited the entry last.
+   * - Description
+     - Maintenance journal entry text.
+   * - Creation time
+     - Entry creation time.
+   * - Modification time
+     - Entry last modification time.
+
+Users that have read access on the object can read it's maintenance journal. 
+To add or edit entries :guilabel:`Edit maintenance journal` access right is required.
 
 .. _object_tools:
 

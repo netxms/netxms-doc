@@ -601,6 +601,9 @@ Journal entries are displayed in the table format consisting of seven columns:
 Users that have read access on the object can read it's maintenance journal. 
 To add or edit entries :guilabel:`Edit maintenance journal` access right is required.
 
+Old entries will be deleted automatically by the housekeeper process in 5 years by default. This value is determined by the
+:guilabel:`MaintenanceJournal.RetentionTime` server parameter. Note that this parameter specifies retention time in days.
+
 .. _object_tools:
 
 Object Tools

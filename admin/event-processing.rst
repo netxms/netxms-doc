@@ -559,6 +559,9 @@ about driver initialization or sending error.
 
 .. figure:: _images/notification_channels.png
 
+Most errors during message sending cause one to be dropped. However, sometimes server will try to resend a message.
+Error types that allow messages to be sent once again are defined by the driver. Number of retries is specified by
+:guilabel:`NotificationChannels.MaxRetryCount` server parameter and equals 3 by default.
 
 Drivers
 ~~~~~~~

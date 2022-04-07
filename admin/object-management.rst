@@ -518,39 +518,47 @@ The following object access rights can be granted:
 
    * - Access Right
      - Description
-   * - Access control
-     - Modify access control list for this object. Please note that user with
-       this access right can grant any other access rights to own account.
-   * - Acknowledge alarms
-     - Acknowledge alarms with this object as source.
-   * - Control
-     - For node objects, execute object tools of type :guilabel:`Remote
-       Command`.
-   * - Create child objects
-     - Create child objects (or bind existing) under this object.
-   * - Create helpdesk tickets
-     - Create ticket in external helpdesk system
-   * - Delete
-     - Delete this object.
-   * - Modify
-     - Modify object's properties (except access control).
-   * - Push data
-     - Push data for DCIs on this object.
    * - Read
      - View object in the tree and read it's information. For node objects,
        read access allows to view collected DCI data.
+   * - Read agent data
+     -
+   * - Read SNMP data
+     -
+   * - Modify
+     - Modify object's properties (except access control).
+   * - Create child objects
+     - Create child objects (or bind existing) under this object.
+   * - Delete
+     - Delete this object.
+   * - Control
+     - For node objects, execute object tools of type :guilabel:`Remote
+       Command`.
    * - Send events
      - Send events on behalf of this object.
-   * - Terminate alarms
-     - Terminate alarms with this object as source.
    * - View alarms
      - View alarms with this object as source.
-   * - Download file
-     - Allow user to download files from this node (from paths defined by filemng subagent). This access right is also checked when downloading or tail of file is done from object tools.
-   * - Upload file
-     - Allow user to upload files to this node(from paths defined by filemng subagent)
+   * - Update alarms
+     - Add comments to alarms, acknowledge alarms with this object as source.
+   * - Terminate alarms
+     - Terminate alarms with this object as source.
+   * - Create helpdesk tickets
+     - Create ticket in external helpdesk system
+   * - Push data
+     - Push data for DCIs on this object.
+   * - Access control
+     - Modify access control list for this object. Please note that user with
+       this access right can grant any other access rights to own account.
+   * - Download files
+     - Allow user to download files from this node (from paths defined by filemng subagent settings in agent configuration file). This access right is also checked when downloading or tail of file is done from object tools.
+   * - Upload files
+     - Allow user to upload files to this node (to paths defined by filemng subagent settings in agent configuration file). 
    * - Manage files
-     - Allow user to move, rename, delete files from this node(from paths defined by filemng subagent)
+     - Allow user to move, rename, delete files on this node (in paths defined by filemng subagent settings in agent configuration file).
+   * - Control maintenance mode
+     - 
+   * - Take screenshot
+     - Allow user to take screenshot of this node's screen (Windows only). 
 
 
 

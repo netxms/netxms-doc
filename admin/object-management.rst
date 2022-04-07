@@ -497,6 +497,7 @@ Properties of the object. It is possible to use :ref:`macros for event processin
 
 .. figure:: _images/object_comments.png
 
+.. _object-access-control:
 
 Access control
 --------------

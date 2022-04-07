@@ -24,10 +24,13 @@ Users
 
 - Unique identifier
 - Unique login name
-- First name
-- Last name
+- Full name
+- Email
+- Phone number
 - Description
-- Authentication method
+- System Access Rights configuration
+- Authentication method configuration
+- TOTP configuration
 - Password
 - Certificate
 
@@ -37,19 +40,13 @@ Not all attributes are mandatory.
 Superuser
 ~~~~~~~~~
 
-.. note::
-
-    Before version 2.1-M0 there was only 1 default user ``admin`` with user ID 0 and
-    access to everything by default. After version 2.1-M0 admin was made a normal user which
-    can be deleted or disabled. As a default user with access to everything was created
-    ``system`` user, that by default is disabled.
-
 |product_name| has built-in superuser with ID ``0``, which always has full access to
 the system. Default login name for superuser is ``system``. By default user is
 disabled. Superuser account can be renamed or disabled/enabled, but cannot be deleted.
 
 System user can be used to correct access rights to object, that exists, but
-none has access to it.
+no user has access to it.
+
 
 Groups
 ------
@@ -76,13 +73,11 @@ list cannot be edited.
 System Access Rights
 --------------------
 
-|product_name| has 2 types of access rights access rights per system that are
-described in this section and per object.
+|product_name| has two types of access rights: system access rights described in
+this chapter and :ref:`object access rights<object-access-control>`.
 
 System access rights used to grant access to system-wide configuration (like
 :ref:`event-processing`) and functions (like agent registration).
-
-.. figure:: _images/user_access_rights.png
 
 The following system access rights can be granted:
 
@@ -96,7 +91,7 @@ The following system access rights can be granted:
    * - Access server console
      - Allow user to access server's debug console. :ref:`server-debug-console`
    * - Configure event templates
-     - Allow user to configure event templates. :ref:`event-processing`
+     - Allow user to add, edit and delete event templates. :ref:`event-processing`
    * - Configure object tools
      - Allow user to configure object tools. :ref:`object_tools`
    * - Configure server actions
@@ -109,40 +104,66 @@ The following system access rights can be granted:
      - Allow user to edit Event Processing Policy. :ref:`event-processing`
    * - Edit server configuration variables
      - Allow user to edit server configuration variables.
+   * - External tool integration account
+     - 
+   * - Import configuration
+     - Allows user to import configuration from file
+   * - Initiate TCP proxy sessions
+     - Allow to use functionality that allows to forward TCP connections inside
+       the connection between NetXMS server and agent. 
    * - Login as mobile device
-     - Allows user to login with help of mobile application.
+     - Allows user to login via mobile application.
    * - Manage agent configurations
      - Allow user to create, edit and delete agent configurations stored on
        server. :ref:`stored-agent-configurations-label`
    * - Manage all scheduled tasks
-     - Allow user to create, edit and delete all :ref:`schedule`.
+     - Allow user to create, edit and delete all :ref:`schedule`, including system ones. 
    * - Manage DCI summary table
      - Allows user to manage DCI summary table. :ref:`dci-summary-table-label`
+   * - Manage geographical areas
+     - Allows user to manage geographical areas
    * - Manage image library
      - Allows user to manage image library. :ref:`image-library`
    * - Manage mapping tables
-     - Allows user to manage mapping tables.
+     - Allows user to create, edit and delete mapping tables.
+   * - Manage object categories
+     - Allows user to create, edit and delete object categories.
+   * - Manage object queries
+     - Allows user to create, edit and delete saved object queries.
    * - Manage own scheduled tasks
      - Allow user to create new and modify :ref:`schedule` created by the user.
    * - Manage packages
      - Allow user to install, remove, and deploy server agent packages. :ref:`agent-remote-update`
+   * - Manage persistent storage
+     - Allows user to create, edit and delete persistent storage records
+   * - Manage script library
+     - Allows user to add, edit, rename and delete scripts in script library. 
    * - Manage server files
      - Allow user to upload files to server and delete files stored on server. :ref:`server-files-label`
-   * - Manage script library
-     - Allow user to manage scripts in Script Library.
+   * - Manage SSH keys
+     - Allows user to generate, import, edit and delete SSH keys. 
+   * - Manage two-factor authentication methods
+     - Allows user to configure system-wide two-factor authentication settings. 
+   * - Manage user support application notifications
+     - Allows to send, list and delete notifications that are being sent via
+       user support application.
+   * - Manage user scheduled tasks
+     - Allow user to create, edit and delete user-created :ref:`schedule` (not
+       system scheduled tasks).
    * - Manage users
      - Allow user to manage user accounts. Please note that user having this
        access right granted can modify own account to get any other system
        right granted.
-   * - Manage user scheduled tasks
-     - Allow user to create, edit and delete user`s :ref:`schedule`.
+   * - Manage web service definitions
+     - Allow user to manage system-wide definitions of web services. 
    * - Read server files
      - Allow user to read files stored on server and upload to agents (user
        still needs appropriate object rights for upload). :ref:`server-files-label`
-   * - Register agents
-     - Allow user to register |product_name| agents.
+   * - Manage agent tunnels
+     - Allow user to list, bind and unbind agent tunnels.
    * - Reporting server access
-     - Allow user to access the Reporting server configuration. :ref:`reporting`
+     - Allow user to execute report generation, view generated reports, schedule
+       report generation. :ref:`reporting`
    * - Schedule file upload
      - Allow user to schedule server file upload to an agent. :ref:`schedule`
    * - Schedule object maintenance
@@ -150,13 +171,12 @@ The following system access rights can be granted:
    * - Schedule script execution
      - Allow user to schedule script execution. :ref:`schedule`
    * - Send notifications
-     - Allow user to send notifications via |product_name| server. This access right has no
-       effect unless server configuration variable ``AllowDirectNotifications`` set to
-       ``1``.
+     - Allow user to send manual notifications via |product_name| server. 
    * - Unlink helpdesk tickets
      - Allow user to unlink alarm from external helpdesk system :ref:`helpdesk-integration`.
-   * - View all alarms
+   * - View all alarm categories
      - Allow user to view all alarms generated by Event Processing Policy rules.
+       If this is off, user will only see alarms for categories he/she has access to.  
    * - View audit log
      - Allow user to view audit log.
    * - View event log
@@ -165,6 +185,8 @@ The following system access rights can be granted:
      - Allow user to view configured event templates.
    * - View SNMP trap log
      - Allow user to view SNMP trap log.
+   * - View syslog
+     - Allow user to syslog.
 
 By granting the :guilabel:`View all alarms` access right, the user (or members of the group)
 will have access to view all generated alarms. Should it be required to configure alarm viewing access
@@ -353,6 +375,48 @@ for the expanation of mentioned parameter meaning.
 
 Changes to these configuration variables becomes effective immediately and does
 not require |product_name| server restart.
+
+
+Two-factor authentication
+-------------------------
+
+In addition to above authentication methods, two-factor authentication using
+`TOTP <https://en.wikipedia.org/wiki/Time-based_one-time_password>`_
+or via notification channel can be set up. 
+
+TOTP configuration is done in two places - in system-wide :guilabel:`Two-factor
+authentication methods` and in properties of specific users. 
+
+First of all it's necessary to configure a method in :guilabel:`Two-factor
+authentication methods`. For TOTP select driver name :guilabel:`TOTP`, no driver
+configuration is necessary. For notification channel select driver name
+:guilabel:`Message` and in driver configuration the name of notification channel
+should be specified, e.g.:
+
+.. code-block:: cfg
+
+    ChannelName=NotificationChannelName
+  
+
+The second step is to add two-factor authentication method in properties of a
+user. 
+
+For message method it's necessary to specify recipient for the message. This
+concludes the configuration - on login the user will receive a message with
+numeric code. 
+
+For TOTP method no additional configuration is necessary. On the following login
+user will be presented with a dialog containing qr code and secret as text.
+After entering the secret into TOTP application in will generate numeric code
+that should be entered to confirm TOTP initialization. 
+
+To repeat initialization it's possible to perform reset for TOTP method in user
+properties. After that on next login of the user the dialog with qr code and
+secret will be presented again. 
+
+It is possible to specify several two-factor authentication methods, in this
+case user will be presented a menu on login, allowing to choose which method to
+use. 
 
 
 .. _ldap:

@@ -107,7 +107,7 @@ The following system access rights can be granted:
    * - External tool integration account
      - Allow external software user authentication using |product_name| user accounts via :ref:`rest-api`.
    * - Import configuration
-     - Allows user to import configuration from file
+     - Allow user to import configuration from file. Dashboard import is not restricted by this access right.
    * - Initiate TCP proxy sessions
      - Allow to use functionality that allows to forward TCP connections inside
        the connection between NetXMS server and agent. 

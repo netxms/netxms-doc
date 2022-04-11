@@ -105,7 +105,7 @@ The following system access rights can be granted:
    * - Edit server configuration variables
      - Allow user to edit server configuration variables.
    * - External tool integration account
-     - 
+     - Allow external software user authentication using |product_name| user accounts via :ref:`rest-api`.
    * - Import configuration
      - Allows user to import configuration from file
    * - Initiate TCP proxy sessions

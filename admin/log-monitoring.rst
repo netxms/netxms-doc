@@ -282,25 +282,28 @@ This regular expression will match any line not containing character sequence ``
 
 Possible attributes for tag ``<match>``:
 
-+----------------+------------------------------------------------------+---------------+
-| Option         | Description                                          | Default value |
-+================+======================================================+===============+
-| invert         | If this option set to ``true``, it will be matched   | false         |
-|                | any line that does not contain matching expression.  |               |
-+----------------+------------------------------------------------------+---------------+
-| repeatCount    | The number of times expression should be matched to  | 0             |
-|                | generate event. It this option set to ``0``, event   |               |
-|                | will be generated immediately on expression match.   |               |
-+----------------+------------------------------------------------------+---------------+
-| repeatInterval | The time interval during which the expression should | 0             |
-|                | be matched. It this option set to ``0``, event will  |               |
-|                | be generated immediately on expression match.        |               |
-+----------------+------------------------------------------------------+---------------+
-| reset          | If this option set to ``true``, it will set to zero  | true          |
-|                | match repeat count. So if while ``repeatInterval``   |               |
-|                | expression have been matched ``repeatCount`` times+1 |               |
-|                | it will not generate second event.                   |               |
-+----------------+------------------------------------------------------+---------------+
++----------------+----------------------------------------------------------+---------------+
+| Option         | Description                                              | Default value |
++================+==========================================================+===============+
+| invert         | If this option set to ``true``, it will be matched       | false         |
+|                | any line that does not contain matching expression.      |               |
++----------------+----------------------------------------------------------+---------------+
+| repeatCount    | The number of times expression should be matched         | 0             |
+|                | within specified time interval to generate event.        |               |
+|                | Actual count is passed to generated event as parameter.  |               |
+|                | Setting this option to  ``0`` disables this              |               |
+|                | functionality, event will be generated immediately       |               |
+|                | on expression match.                                     |               |
++----------------+----------------------------------------------------------+---------------+
+| repeatInterval | The time interval during which the expression should     | 1             |
+|                | be matched specified number of times.                    |               |
+|                |                                                          |               |
++----------------+----------------------------------------------------------+---------------+
+| reset          | If this option set to ``true``, the count will be reset  | true          |
+|                | on expression match. In order to generate next event,    |               |
+|                | ``repeatCount`` number of matches should be accumulated  |               |
+|                | again within ``repeatInterval`` time.                    |               |
++----------------+----------------------------------------------------------+---------------+
 
 
 <id> Tag

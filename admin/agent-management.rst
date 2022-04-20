@@ -400,7 +400,6 @@ User support application policy
 -------------------------------
 
 
-
 Agent registration
 ==================
 
@@ -413,31 +412,136 @@ Server to agent connection
 There are few ways to register agent:
    1. To enter it manually by creating a node
    2. Run the network discovery and enter the range of IP addresses.
-   3. Register agent on management server ``nxagentd -r <addr>``,  where <addr> is the IP address of server.
-      To register agents using this option :guilabel:`EnableAgentRegistration` server configuration parameter should be set to 1.
+   3. Register agent on management server ``nxagentd -r <addr>``,  where <addr>
+      is the IP address of server. To register agents using this option
+      :guilabel:`EnableAgentRegistration` server configuration parameter should
+      be set to 1.
 
 .. _agent-to-server-agent-conf-label:
 
 Agent to server connection
 --------------------------
 
-This connection requires certificate configuration on server side. More about required actions can be found in
-:ref:`server-tunnel-cert-conf`. Agent requires :guilabel:`ServerConnection` parameter set in agentd.conf file to
-server :term:`DNS` or server IP address. It is possible to have several :guilabel:`ServerConnection` parameters in
-the config, in this case agent will establish tunnel connection to multiple servers. 
+This connection requires certificate configuration on server side. More about
+required actions can be found in :ref:`server-tunnel-cert-conf`. Server address
+to which the agent should connect is specified in agent configuration file.
+There are two options:
 
-Right after agent start it will try to connect to the server. On first connect node will be shown in :guilabel:`Agent Tunnels`.
+ServerConnection parameter
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:guilabel:`ServerConnection` parameter set in agentd.conf file to server
+:term:`DNS` or server IP address. It's also possible to specify port number
+separated by colon, e.g.:
+
+.. code-block:: cfg
+
+    ServerConnection=monitoring.example.com
+    ServerConnection=192.168.77.77:1234
+
+
+ServerConnection section
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+:guilabel:`ServerConnection` section is set in agentd.conf. This allows to
+specify additional parameters, e.g.:
+
+.. code-block:: cfg
+
+    [ServerConnection]
+    Hostname=192.168.77.77
+    Port=4703
+    CertificateFile=/etc/cert/agent_certificate.crt
+    ServerCertificateFingerprint=E6:5A:5D:37:22......FC:EF:EA:4B:22
+
+The following parameters are supported in :guilabel:`ServerConnection` section:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - Parameter
+     - Description
+   * - Hostname
+     - Server :term:`DNS` or server IP address
+   * - Port
+     - Port number
+   * - CertificateId
+     - Id of Certificate in Certificate Store (Windows only). E.g.:
+       :guilabel:`template:1.5.3.76.23.45.6.23.4235.56234.234`
+   * - CertificateFile
+     - Agent certificate file.
+   * - Password
+     - Certificate password
+   * - ServerCertificateFingerprint
+     - Fingerprint to verify server certificate. Setting this parameter forces
+       verification of server certificate.
+
+Using :guilabel:`CertificateId` or :guilabel:`CertificateFile` allows to provide
+agent certificate manually, not by auto-generation by |product_name| server.
+
+It is possible to have several :guilabel:`ServerConnection` parameters or
+sections in the config, in this case agent will establish tunnel connection to
+multiple servers.
+
+In addition to :guilabel:`ServerConnection` it's necessary to set
+:guilabel:`MasterServers`, :guilabel:`ControlServers` or :guilabel:`Servers`
+parameter to configure what access rights server has to this agent.
+
+Agent can validate certificate chain, when connecting to server. This is
+configured in agent configuration file, e.g.:
+
+.. code-block:: cfg
+
+    TrustedRootCertificate=/etc/cert/root_cert.crt
+    TrustedRootCertificate=/etc/cert/root_certs
+    VerifyServerCertificate=yes
+   
+:guilabel:`TrustedRootCertificate` can point to either certificate file or a
+folder with certificates. Several :guilabel:`TrustedRootCertificate` parameters
+can be specified. For Windows system agent loads certificates from Certificate Store. 
+For non-Windows systems a number of default certificate locations are automatically
+loaded by agent: 
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - Path
+     - OS where this path is used
+   * - /etc/ssl/certs
+     - Ubuntu, Debian, and many other Linux distros
+   * - /usr/local/share/certs
+     - FreeBSD
+   * - /etc/pki/tls/certs
+     - Fedora/RHEL
+   * - /etc/openssl/certs
+     - NetBSD
+   * - /var/ssl/certs
+     - AIX
+
+If :guilabel:`ServerCertificateFingerprint` is specified for a server, server
+certificate is always verified, disregarding the
+:guilabel:`VerifyServerCertificate` value. 
+
+
+Agent registration on server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Right after agent start it will try to connect to the server. On first connect
+node will be shown in :guilabel:`Agent Tunnels`.
 
 There are few ways to register agent:
-   1. To enter it manually by creating a node and then binding tunnel to already created node.
-   2. Create node from :guilabel:`Agent Tunnels` view by selecting one or more tunnels and selecting
-      :guilabel:`Create node and bind...` menu item.
+   1. To enter it manually by creating a node and then binding tunnel to already
+      created node.
+   2. Create node from :guilabel:`Agent Tunnels` view by selecting one or more
+      tunnels and selecting :guilabel:`Create node and bind...` menu item.
 
 Debugging
 ~~~~~~~~~
 
-In case of errors enable server debug for "agent.tunnel" and "crypto.cert" to level 4 and agent log debug for "tunnel" and "crypto.cert" 
-to level 4. 
+In case of errors enable server debug for "agent.tunnel" and "crypto.cert" to
+level 4 and agent log debug for "tunnel" and "crypto.cert" to level 4.
 Check for "SYS_TUNNEL_SETUP_ERROR" events on management node. 
 
 Security

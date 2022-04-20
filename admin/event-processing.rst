@@ -309,6 +309,10 @@ Alarm Summary Emails
 It is possible to schedule emails which contain a summary of all currently active alarms, similar
 to what can be seen in the Alarm Browser.
 
+Summary emails are sent through SMTP notification channel with HTML formatting. It should be first 
+configured in :ref:`notification-channels` configuration and then it's name should be set in 
+"DefaultNotificationChannel.SMTP.Html" server configuration parameter.
+
 To enable Alarm Summary Emails it is required to configure the following server parameters:
 
 .. list-table::
@@ -316,14 +320,11 @@ To enable Alarm Summary Emails it is required to configure the following server 
    :header-rows: 1
 
    * - Name
-   * - SMTPFromAddr
-   * - SMTPFromName
-   * - SMTPPort
-   * - SMTPRetryCount
-   * - SMTPServer
+   * - DefaultNotificationChannel.SMTP.Html
    * - EnableAlarmSummaryEmails
    * - AlarmSummaryEmailSchedule
    * - AlarmSummaryEmailRecipients
+
 
 Further information on server configuration parameters can be found in :ref:`server_configuration_parameters`.
 

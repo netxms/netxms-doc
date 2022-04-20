@@ -7,6 +7,14 @@ Installation
 Major changes between releases
 ==============================
 
+4.1
+---
+
+CreateDCI NXSL method changed. In new version last two parameter (polling interval and retention time) should 
+be set to null instead of 0 to have default value in DCI configuration. 
+
+NXSL decimal numbers written with leading zeros will NOT be interpreted as octal. 
+
 4.0
 ---
 

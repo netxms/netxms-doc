@@ -1505,7 +1505,7 @@ Request path: *API_HOME*/objects/**{object-id}**/object-tools
 
 
 Execute object tool
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 Request to object tools available to specified object.
 
@@ -1517,13 +1517,15 @@ JSON data:
 
   .. code-block:: json
 
-      toolData:{
+    {
+      "toolData":{
           "id": "1234",
-          "inputFields":[
+          "inputFields":{
             "field1": "value1",
             "field2": "1000"
-          ] 
+          } 
       }
+    }
 
 Return data:
 

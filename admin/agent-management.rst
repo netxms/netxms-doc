@@ -390,9 +390,9 @@ Example:
 
   .. figure:: _images/policy_file_delivery.png
 
-.. note:
-  File delivery policy uses :ref:`File Manager<agent_file_managment>` to uplad files
-  so :guilabel:`filemgr` subagnt should be loaded and root folders should be defined
+.. note::
+  File delivery policy uses :ref:`File manager<agent_file_mngmnt>` to upload files
+  so :guilabel:`filemgr` subagent should be loaded and root folders should be defined
   to provide write access to folders.
 
 

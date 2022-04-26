@@ -1,16 +1,16 @@
 .. _service-monitoring:
 
-==================
-Service monitoring
-==================
+==========================
+Network Service monitoring
+==========================
 
 There are two options to add service monitoring: the first one is to add it through
 menu option :guilabel:`Create Network Service...` as an object with the status
 that will be propagated on a node, and the second one is to add it's monitoring as
 DCI.
 
-Network Service
-===============
+Network Service Object
+======================
 
 Object representing network service running on a node (like http or
 ssh), which is accessible online (via TCP IP). Network Service objects
@@ -39,8 +39,8 @@ required to be sure that state have changed.
 
 .. figure:: _images/network_service_properties.png
 
-Service monitoring using DCI
-============================
+Network service monitoring using DCI
+====================================
 
 Second option is to use :term:`DCI` to monitor service. There are 2 subagents that
 provide service monitoring metrics: NetSVC and PortCheck (deprecated). It is recommended to use
@@ -59,7 +59,7 @@ NetSVC configuration
 This subagent can be used to check network services supported by libcurl. More
 information about syntax can be found here: http://curl.haxx.se/docs/manpage.html.
 
-This subagent will add this Metrics to node Metric list:
+This subagent will add this metrics to available metrics list:
 
 .. list-table::
    :widths: 50 100
@@ -67,16 +67,24 @@ This subagent will add this Metrics to node Metric list:
 
    * - Parameter
      - Description
-   * - Service.Check(\ *URL*\[, \ *regex*\])
+   * - NetworkService.Check(\ *URL*\[\[, \ *regex*\], \ *options*\])
      - Check if data retrieved from *ULR* matches regular expression \ *regex*\.
        \ *regex*\ can be omitted, it that case "^HTTP/(1\\.[01]|2) 200 .*" will be used.
+       \ *options*\ is optional string parameter, it can contain one or several space-separated options:
 
-.. note:
+         - *verify-host* - verify that host name from URL match one from certificate (CURLOPT_SSL_VERIFYHOST = 2). This is default behavior of libcurl. 
+         - *no-verify-host* - do not verify that host name from URL match one from certificate (CURLOPT_SSL_VERIFYHOST = 0)
+         - *verify-peer* - verify peer certificate (overrides subagent configuration setting)
+         - *no-verify-peer* - do not verify peer certificate (overrides subagent configuration setting)
+         - *follow-location* - follow any location: header that the server sends as part of an HTTP header in a 3xx response
+
+
+.. note::
   Parameter(s) in [ ] are optional, when optional parameter(s) are used they should
   be used without [ ].
 
 
-Service.Check parameter returns the following values:
+Service.Check metric returns the following values:
 
 .. list-table::
    :widths: 15 50

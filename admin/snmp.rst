@@ -47,7 +47,8 @@ Possible SNMP driver names are:
   - SAF-INTEGRA-B
   - SYMBOL-WS
   - TB
-  - UBNT
+  - UBNT-EDGESW
+  - UBNT-AIRMAX
   - WESTERSTRAND
 
 

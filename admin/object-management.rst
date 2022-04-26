@@ -107,7 +107,7 @@ also collected(like metrics).
 
 If zones are enabled, then zone can be changed using :guilabel:`Change zone...` item.
 :guilabel:`File manager` will open agent file manager view. By default
-this view will be empty, to configure it refer to :ref:`agent_file_managment` chapter.
+this view will be empty, to configure it refer to :ref:`agent_file_mngmnt` chapter.
 :guilabel:`Upload file` can be used to upload file from server to node. This action can be
 applied simultaneously to all nodes.
 

@@ -2,7 +2,7 @@
 Remote file management
 ######################
 
-.. _agent_file_managment:
+.. _agent_file_mngmnt:
 
 Agent file management
 =====================
@@ -111,7 +111,7 @@ one with help of 'Ctrl' key) and in object menu selecting :guilabel:`Upload file
 
 Job configuration:
  - File that should be uploaded on the agent(s).
- - Remote file path(If destination will not be set then as a destination will be taken from agent's config parameter 'FileStore'). If path is set agent will check if there is access to this folder. Access is configured by :guilabel:`filemgr` subagent, check :ref:`agent_file_managment`.
+ - Remote file path(If destination will not be set then as a destination will be taken from agent's config parameter 'FileStore'). If path is set agent will check if there is access to this folder. Access is configured by :guilabel:`filemgr` subagent, check :ref:`agent_file_mngmnt`.
  - Job can be created "on hold". This mean that job will be created, but not started. After creation it can be manually started selecting job in :guilabel:`Server Jobs` view and clicking :guilabel:`Unhold`.
  - Other option is to schedule file upload job. It can scheduled to be executed once at exact time (:guilabel:`One time execution`) or to be executed according to schedule(:guilabel:`Cron schedule`). See :ref:`cron_format` for supported cron format options.
 

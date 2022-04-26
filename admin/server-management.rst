@@ -109,6 +109,16 @@ Settings in server configuration file:
     - Server certificate private key.
     - Can be omitted if key is included in server certificate file.
 
+There are additional option to configure separate certificates for agent certificate issuing 
+and for connection. If there is no need to issue certificates (they are externally provisioned) 
+only connection certificate is required.
+
+Connection certificate settings: TunnelCertificate, TunnelCertificateKey, TunnelCertificatePassword
+Issuing certificate settings: InternalCACertificate, InternalCACertificateKey, InternalCACertificatePassword
+
+  .. note::
+    If ServerCertificate settings are set it will be fall back option for TunnelCertificate and InternalCACertificate
+
 Server configuration variable settings:
 
 .. list-table::

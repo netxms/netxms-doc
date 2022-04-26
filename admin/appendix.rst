@@ -567,6 +567,19 @@ Server configuration file (netxmsd.conf)
   * - FullCrashDumps
     - Write full crash dump instead of minidump (Windows only)
     - no
+  * - InternalCACertificate
+    - Path to file of server CA certificate. This certificate is used to issue 
+      agent certificates. InternalCACertificate parameter also implies that this 
+      certificate is trusted by the server when checking agent certificate validity.
+    - Empty string
+  * - InternalCACertificateKey
+    - Private key of server CA certificate. Can be omitted if key is included in
+      server certificate file.
+    - Empty string
+  * - InternalCACertificatePassword
+    - Password of server CA certificate. Can be omitted if certificate does not use 
+      password.
+    - Empty string
   * - LibraryDirectory
     - Defines location of library folder where drivers(ndd files) are stored. It's highly recommended not to use this parameter.
     -
@@ -622,6 +635,17 @@ Server configuration file (netxmsd.conf)
       If certificate chain for server certificate is longer, all upper level
       certificates should be added to configuration file by adding multiple
       TrustedCertificate entries.
+    - Empty string
+  * - TunnelCertificate
+    - Path to file of server certificate for agent tunnel connections. 
+    - Empty string
+  * - TunnelCertificateKey
+    - Private key of server tunnel certificate. Can be omitted if key is included in
+      server certificate file.
+    - Empty string
+  * - TunnelCertificatePassword
+    - Password of server tunnel certificate. Can be omitted if certificate does not use 
+      password.
     - Empty string
 
 .. note::

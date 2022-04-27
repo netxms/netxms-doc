@@ -1,7 +1,7 @@
 .. _service-monitoring:
 
 ==========================
-Network Service monitoring
+Network Service Monitoring
 ==========================
 
 There are two options to add service monitoring: the first one is to add it through
@@ -59,7 +59,7 @@ NetSVC configuration
 This subagent can be used to check network services supported by libcurl. More
 information about syntax can be found here: http://curl.haxx.se/docs/manpage.html.
 
-This subagent will add this metrics to available metrics list:
+This subagent will add this metric to list of metrics available on agent:
 
 .. list-table::
    :widths: 50 100

@@ -605,6 +605,37 @@ This command will add 3 lines at the end of generated config file:
     [FILEMGR]
     RootFolder=C:\
 
+
+Unattended uninstallation of |product_name| Agent
+-------------------------------------------------
+
+Uninstaller application is named unins???.exe and located in agent folder (C:\NetXMS by default). 
+The following options are supported:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 12 30
+
+   * - Option
+     - Description
+   * - /SILENT
+     - Don't show uninstallation wizard, only a progress bar
+   * - /VERYSILENT
+     - Don't show anything
+   * - /LOG
+     - Causes to create a log file in the user's TEMP directory.
+   * - /LOG=filename
+     - Same as /LOG, except it allows to specify a fixed path/filename to use for the log file. 
+   * - /SUPPRESSMSGBOXES
+     - Don't ask user anything. Only has an effect when combined with ``/SILENT`` and ``/VERYSILENT``.
+   * - /NORESTART
+     - Instructs the uninstaller not to reboot even if it's necessary.
+
+Example:
+
+:command:`unins000.exe /SUPPRESSMSGBOXES /VERYSILENT /NORESTART`
+
+
 Install on Android
 ==================
 

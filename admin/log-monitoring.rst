@@ -25,7 +25,6 @@ Log parser also provides some additional statistic information through
 :term:`Metric`\ s. More information can be found in :ref:`log-monitoring-parameters` chapter.
 
 
-
 Agent Configuration for Log Monitoring
 ======================================
 
@@ -121,10 +120,15 @@ In the ``<parser>`` tag you can specify the following options:
 <file> Tag
 ==========
 
-In the ``<file>`` tag you should specify log file to apply this parser to.
-To specify Windows Event Log, prepend it's name with asterisk (``*``),
-for example ``*System``. Multiples ``<file>`` tags can be used -
-in this case same rules will be applied to all files.
+In the ``<file>`` tag you should specify full path of log file to apply this
+parser to. To specify Windows Event Log, prepend it's name with asterisk
+(``*``), for example ``*System``. Multiple ``<file>`` tags can be used - in this
+case same rules will be applied to all files.
+
+In the ``<file>`` tag it's possible to use wildcards. Wildcards can be used in
+file name, not in directory names in the path. Two wildcard characters are
+supported: ``*`` - represents zero, one or multiple characters. ``?`` -
+represents any single character.
 
 In file and folder names the following macros can be used:
 

@@ -40,6 +40,7 @@ Administrator Guide
    topology
    sla
    remote-file-management
+   package-manager
    reporting
    image-library
    mobile-console

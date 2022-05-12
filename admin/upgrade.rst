@@ -307,14 +307,5 @@ Agent
 Centralized agent upgrade
 =========================
 
-Steps to update agent remotely:
-   1. Download |product_name| agent installer from http://www.netxms.org/download/
-   2. Download the appropriate NPI file for your agent installer(NPI file is just a reference to actual package file. You should have it as well in the same directory as NPI file.)
-   3. Open "Package Manager"
-
-      .. figure:: _images/package_manager.png
-
-   4. Chose "Install new package..."
-   5. Browse for NPI file
-   6. When new package appeared - right click on it and chose "Deploy to managed nodes..."
-   7. Select the nodes you want to upgrade by holding CTRL key
+You can use  :ref:`package_mngr` functionality to perform centralized upgrade of
+|product_name| agents. 

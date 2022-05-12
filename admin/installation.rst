@@ -112,10 +112,12 @@ Support for the following platforms provided only to customers with active suppo
    * Solaris 11 (agent only)
    * HP-UX 11.31 (agent only)
 
+
 Server hardware
 ---------------
 
 Minimal requirements: Core 2 duo 1GHz, 1024MB RAM, 1GB disk space.
+
 
 Database
 --------
@@ -143,6 +145,7 @@ the same machine as |product_name| server, increase your hardware requirements a
 Link to Excel file that allows roughly estimate the size that will be required for
 database: http://git.netxms.org/public/netxms.git/blob/HEAD:/doc/misc/database_sizing.xlsx
 
+
 Java
 ----
 
@@ -151,10 +154,12 @@ Supported Java version are 11 and 15.
 
 Since version 3.8 Desktop Management Console with bundled JRE is provided for Windows. 
 
+
 Agent
 -----
 
 Agent resource usage is negligible and can be ignored.
+
 
 Installing from deb repository
 ==============================
@@ -171,12 +176,14 @@ Supported URLs (*CODENAME* should be replaced with output of `lsb_release -sc`):
   * Devuan - "deb http://packages.netxms.org/devuan CODENAME main"
   * Raspbian - "deb http://packages.netxms.org/raspbian CODENAME main"
 
+
 Add APT repository
 ------------------
 
 There are two options to add APT repository: by hand or using netxms-release
 package. Use of the release package is strongly encouraged because it allow
 easy change in repository configuration and encryption keys updated in the feature.
+
 
 Using netxms-release package
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -189,6 +196,7 @@ Download and install netxms-release-latest.deb package, which contain source lis
   sudo dpkg -i netxms-release-latest.deb
   sudo apt-get update
 
+
 Manually
 ~~~~~~~~
 
@@ -199,6 +207,7 @@ Add the repository to your sources.list:
   echo "deb http://packages.netxms.org/$(lsb_release -si | tr A-Z a-z) $(lsb_release -sc | tr A-Z a-z) main" > /etc/apt/sources.list.d/netxms.list
   wget -q -O - http://packages.netxms.org/netxms.gpg | sudo apt-key add -
   sudo apt-get update
+
 
 Installing packages
 -------------------
@@ -250,6 +259,7 @@ Provided driver packages:
 
   Default credentials - user "admin" with password "netxms".
 
+
 Agent
 ~~~~~
 
@@ -270,6 +280,7 @@ Enable automatic startup of agent
 .. code-block:: sh
 
   systemctl enable nxagentd
+
 
 Management console
 ~~~~~~~~~~~~~~~~~~
@@ -325,6 +336,7 @@ Installing on Red Hat, Fedora, CentOS or ScientificLinux
 ========================================================
 
 RPM packages are not released at the moment. Please refer to section :ref:`Installing from source <install_from_sources>`.
+
 
 Installing on Windows
 =====================
@@ -432,6 +444,7 @@ Login: admin
 
 Password: netxms
 
+
 Agent
 -----
 
@@ -484,6 +497,7 @@ For more information about subagents, please refer to :ref:`subagent_list`.
 
   4. Follow the prompts to complete the installation.
 
+
 Management console
 ------------------
 
@@ -517,6 +531,7 @@ installation via the installer:
 
   3. After installation procedure is finished check that WEB GUI is available at
      http://SERVER_IP:SERVER_PORT/nxmc/
+
 
 Unattended installation of |product_name| Agent
 -----------------------------------------------
@@ -609,7 +624,7 @@ This command will add 3 lines at the end of generated config file:
 Unattended uninstallation of |product_name| Agent
 -------------------------------------------------
 
-Uninstaller application is named unins???.exe and located in agent folder (C:\NetXMS by default). 
+Uninstaller application is named unins???.exe and located in agent folder (``C:\NetXMS`` by default). 
 The following options are supported:
 
 .. list-table::
@@ -675,6 +690,7 @@ found in under main menu, parameters section.
 
 
 .. _install_from_sources:
+
 
 Installing from sources
 =======================
@@ -814,6 +830,7 @@ Agent
 
        /usr/local/bin/nxagentd -d
 
+
 Customizing the compilation process
 ===================================
 
@@ -822,6 +839,7 @@ Adding additional compiler or linker flags
 ------------------------------------------
 
 (e.g. fixing atomics)
+
 
 WebUI additional configuration
 ==============================
@@ -892,6 +910,7 @@ Default login is "admin" with password "netxms". On first login, user will be re
 If required, password can be reset back to default using :ref:`nxdbmgr utility <password-reset>`.
 
 .. _db_creation:
+
 
 Database creation examples
 ==========================

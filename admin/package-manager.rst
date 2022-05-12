@@ -1,8 +1,8 @@
+.. _package_mngr:
+
 ##################
 Package management
 ##################
-
-.. _package_mngr:
 
 Introduction
 ============
@@ -70,7 +70,7 @@ The following types of package files are supported by package management:
      - `Command` contains additional parameters passed to /usr/bin/rpm
    * - NetXMS Package Info
      - .npi
-     - Deprecated type of file with metadata for NetXMS Agent Package. 
+     - Deprecated type of metadata file for NetXMS Agent Package. 
    * - Compressed TAR Archive
      - .tgz, .tar.gz
      - `Command` is optional. If specified, it defines path the archive should

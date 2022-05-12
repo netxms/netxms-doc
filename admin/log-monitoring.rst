@@ -96,7 +96,8 @@ Parser definition file is an XML document with the following structure:
 
 .. note::
 
-    Entire ``<macros>`` section can be omitted. Empty ``<rule>`` tag will match any line (like <rule> <match>.*</match> </rule>).
+    Entire ``<macros>`` section can be omitted. Empty ``<rule>`` tag will match
+    any line (like <rule> <match>.*</match> </rule>).
 
 Global Parser Options
 =====================
@@ -109,9 +110,6 @@ In the ``<parser>`` tag you can specify the following options:
 | processAll | If this option set to ``1``, parser will always pass | 0             |
 |            | log record through all rules. If this option set to  |               |
 |            | ``0``, processing will stop after first match.       |               |
-+------------+------------------------------------------------------+---------------+
-| trace      | Trace level for writing debug information to agent   | 0             |
-|            | log file.                                            |               |
 +------------+------------------------------------------------------+---------------+
 | name       | Parser name that is used in statistic information    | *empty*       |
 |            | :term:`Metric`\ s. See                               |               |
@@ -232,7 +230,7 @@ Each rule is placed inside it's own ``<rule>`` tag. Each rule can have additiona
      - Name of the context this rule belongs to. If this option is set, rule will be processed only if given context was already activated with <context> tag in one of the rules processed earlier (it can be either same line or one of the previous lines).
      - *empty*
    * - name
-     - Name of rule that is used in trace
+     - Name of rule
      - *empty*
 
 Inside the ``<rule>`` section there are the following additional tags:
@@ -551,7 +549,7 @@ used as a synonym for ``<level>`` tag for Windows Event Log monitoring.
 <description> Tag
 -----------------
 
-Tag ``<description>`` contains textual description of the rule, which will be shown in parser trace.
+Tag ``<description>`` contains textual description of the rule.
 
 
 <event> Tag

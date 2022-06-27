@@ -72,7 +72,7 @@ This module provide integration between |product_name| and JIRA.
 
 Required |product_name| configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-For |product_name| is required to configure server parameters(they should be created by user)
+For |product_name| is required to configure server parameters
 and restart the server.
 
 .. list-table::
@@ -83,20 +83,31 @@ and restart the server.
      - Description
    * - HelpDeskLink
      - For JIRA integration should be set to “jira.hdlink” (without quotes)
-   * - JiraIssueType
+   * - Jira.IssueType
      - Name of the JIRA issue type, which will be used by |product_name|.
        Sample value: “Task” (without quotes)
-   * - JiraLogin
+   * - Jira.Login
      - Login of the JIRA user(This user should exist in JIRA system with with
        permissions to create issues in project(JiraProjectCode) and comment
        on own issues)
-   * - JiraPassword
+   * - Jira.Password
      - Password of the JIRA user
-   * - JiraProjectCode
+   * - Jira.ProjectCode
      - Project Key in JIRA. (Project should exist)
-   * - JiraServerURL
+   * - Jira.ProjectComponent
+     - Jira project component. (Project should exist)
+   * - Jira.ResolvedStatus
+     - Comma separated list of issue status codes indicating that issue is resolved. Default is “Done”.
+   * - Jira.ServerURL
      - URL of JIRA installation. Example: “http://localhost:8080/jira”. Please note,
        that trailing slash (“/”) should be removed!
+   * - Jira.Webhook.Path
+     - Path part of Jira webhook URL (must start with /). Example: “/jira-webhook”. 
+   * - Jira.Webhook.Port
+     - Jira webhook listener port (0 to disable webhook). Default: “8008”. 
+
+.. note::
+    Starting form 4.1.283 |product_name| version Webhook can be used for Jira to |product_name| integration. Not a jira plugin. 
 
 If all configuration was successfully done after rester in console should be present:
 

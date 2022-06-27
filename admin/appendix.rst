@@ -1111,29 +1111,41 @@ These parameters can be changed in
     - Duration of user account temporarily lockout (in minutes) if allowed number of incorrect password attempts was exceeded.
     - 30
     - No
-  * - JiraIssueType
+  * - Jira.IssueType
     - Jira issue type
     - Task
     - No
-  * - JiraLogin
+  * - Jira.Login
     - Jira login
     - netxms
-    - Yes
-  * - JiraPassword
+    - No
+  * - Jira.Password
     - Jira password
     -
-    - Yes
-  * - JiraProjectCode
+    - No
+  * - Jira.ProjectCode
     - Jira project code
     - NETXMS
     - No
-  * - JiraProjectComponent
+  * - Jira.ProjectComponent
     - Jira project component
     -
     - No
-  * - JiraServerURL
+  * - Jira.ResolvedStatus
+    - Comma separated list of issue status codes indicating that issue is resolved.
+    -
+    - No
+  * - Jira.ServerURL
     - The URL of Jira server
     - http://localhost
+    - No
+  * - Jira.Webhook.Path
+    - Path part of Jira webhook URL (must start with /).
+    - /jira-webhook
+    - Yes
+  * - Jira.Webhook.Port
+    - Jira webhook listener port (0 to disable webhook).
+    - 8008
     - Yes
   * - KeepAliveInterval
     - Interval in seconds between sending keep alive packets to connected clients.

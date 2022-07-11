@@ -22,6 +22,38 @@ Incompatible attributes in NXSL DCI class:
 instance now refers to instance value (as in {instance} macro), not instance name as before.
 Instance name can be accessed via attribute "instanceName".
 
+Several WEB API endpoints were renamed, e.g. *API_HOME*/summaryTable/adHoc became *API_HOME*/summary-table/ad-hoc.
+
+3.8
+---
+Minimal JRE (Java Runtime Environment) version for console is Java-11. 
+
+3.7
+---
+Introduced boolean type in NXSL. Comparisons like "func() == 1", where 'func' is a function that returns boolean type, will 
+always result as false as boolean value 'true' is not equal to 1. Might require fixes in some NXSL scripts. 
+
+Regexp matching operation in NXSL returns array with capture groups or false as a result.
+
+Clusters now have configuration poll. If you have configuration poll hook script that is referring to ``$node`` object, this will 
+produce error message in server log each time a configuration poll runs on a cluster. Replace ``$node`` with ``$object`` or
+use condition ``if (classof($object) == "Node")`` or  ``if ($node != null)`` prior to accessing attributes or methods of ``$node``. 
+
+3.6
+---
+In this version "Certificate manager" was removed from server. All CA certificates configuration should be manually moved 
+to "TrustedCertificate" configuration parameter in server configuration file. 
+
+3.5
+---
+External Metrics (ExternalParameter, etc...) expect UTF-8 encoding on Windows. Might need to adjust scripts called
+by external metrics if non-ASCII characters are returned. 
+
+3.1
+---
+Regexp matching operation in NXSL returns array with capture groups or NULL as result. NXSL objects and arrays in logical 
+expressions are evaluated to TRUE. Might be require some NXSL script adjustments. 
+
 3.0
 ---
 Notification channels introduced as new functionality. SMS configuration automatically moved from server configuration to 
@@ -38,41 +70,6 @@ Agent always requires encryption unless RequireEncryption parameter explicitly s
 "RequireEncryption" configuration parameter where required to disable encryption. 
 
 Agent policies were merged with templates. Each policy was converted to template. No changes required. 
-
-3.1
----
-Regexp matching operation in NXSL returns array with capture groups or NULL as result. NXSL objects and arrays in logical 
-expressions are evaluated to TRUE. Might be require some NXSL script adjustments. 
-
-3.5
----
-External Metrics (ExternalParameter, etc...) expect UTF-8 encoding on Windows. Might need to adjust scripts called
-by external metrics if non-ASCII characters are returned. 
-
-3.6
----
-In this version "Certificate manager" was removed from server. All CA certificates configuration should be manually moved 
-to "TrustedCertificate" configuration parameter in server configuration file. 
-
-3.7
----
-Introduced boolean type in NXSL. Comparisons like "func() == 1", where 'func' is a function that returns boolean type, will 
-always result as false as boolean value 'true' is not equal to 1. Might require fixes in some NXSL scripts. 
-
-Regexp matching operation in NXSL returns array with capture groups or false as a result.
-
-Clusters now have configuration poll. If you have configuration poll hook script that is referring to ``$node`` object, this will 
-produce error message in server log each time a configuration poll runs on a cluster. Replace ``$node`` with ``$object`` or
-use condition ``if (classof($object) == "Node")`` or  ``if ($node != null)`` prior to accessing attributes or methods of ``$node``. 
-
-3.8
----
-Minimal JRE (Java Runtime Environment) version for console is Java-11. 
-
-4.0
----
-Several WEB API endpoints were renamed, e.g. *API_HOME*/summaryTable/adHoc became *API_HOME*/summary-table/ad-hoc.
-
 
 Planing
 =======

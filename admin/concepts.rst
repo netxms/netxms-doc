@@ -321,9 +321,13 @@ performed with different intervals:
 +====================+==============================================================================================+
 | Status             | Determine current status of an object                                                        |
 +--------------------+----------------------------------------------------------------------------------------------+
-| ICMP               | Ping nodes and gather response time statistics                                               |
+| ICMP               | Ping nodes and gather response time statistics (cannot be executed by hands)                 |
 +--------------------+----------------------------------------------------------------------------------------------+
 | Configuration      | Determine current configuration of an object (list of interfaces, supported protocols, etc.) |
+|                    | By default executes auto bind scripts for templates and containers, use                      |
+|                    | "Objects.AutobindOnConfigurationPoll" server configuration variable to disable.              |
++--------------------+----------------------------------------------------------------------------------------------+
+| Configuration full | Same as usual configuration poll but sets all capabilitie lags to No and rechecks them.      |
 +--------------------+----------------------------------------------------------------------------------------------+
 | Topology           | Gather information related to network topology                                               |
 +--------------------+----------------------------------------------------------------------------------------------+
@@ -332,6 +336,10 @@ performed with different intervals:
 | Instance Discovery | Verify all DCIs created by instance discovery process                                        |
 +--------------------+----------------------------------------------------------------------------------------------+
 | Network Discovery  | Searches for new nodes by polling information about neighbor IP addresses from known nodes   |
++--------------------+----------------------------------------------------------------------------------------------+
+| Interface          | Searches for new nodes by polling information about neighbor IP addresses from known nodes   |
++--------------------+----------------------------------------------------------------------------------------------+
+| Automatic Binding  | Checks if Containers and Teplates need to bind or unbind nodes.                              |
 +--------------------+----------------------------------------------------------------------------------------------+
 
 .. _basic-concepts-dci:

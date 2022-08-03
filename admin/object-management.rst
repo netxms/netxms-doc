@@ -793,6 +793,8 @@ URL
      - Is used when usual name is too long for display.
    * - Disable Object Tool
      - If chosen, tool is not shown in node menu.
+   * - Run in container context
+     - If this option is selected, then tool will run only for selected container, not affecting children nodes.
 
 
 Local Command
@@ -834,6 +836,8 @@ to execute command on web page receiver's machine.
      - Is used when usual name is too long for display.
    * - Disable Object Tool
      - If chosen, tool is not shown in node menu.
+   * - Run in container context
+     - If this option is selected, then tool will run only for selected container, not affecting children nodes.
 
 Server Command
 ~~~~~~~~~~~~~~
@@ -869,6 +873,8 @@ Server Command
      - Is used when usual name is too long for display.
    * - Disable Object Tool
      - If chosen, tool is not shown in node menu.
+   * - Run in container context
+     - If this option is selected, then tool will run only for selected container, not affecting children nodes.
 
 
 Download File
@@ -945,6 +951,8 @@ This tool provide full range of capabilities that are available thought NXSL scr
      - Is used when usual name is too long for display.
    * - Disable Object Tool
      - If chosen, tool is not shown in node menu.
+   * - Run in container context
+     - If this option is selected, then tool will run only for selected container, not affecting children nodes.
 
 
 

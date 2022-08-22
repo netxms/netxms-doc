@@ -71,4 +71,4 @@ The following typographical conventions are used in this manual.
   =========
 
   Complete change log for each product release is available at
-  `<http://www.netxms.org/download/ChangeLog>`_.
+  `<https://github.com/netxms/changelog/blob/master/ChangeLog>`_.

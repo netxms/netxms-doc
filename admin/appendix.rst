@@ -607,6 +607,12 @@ Server configuration file (netxmsd.conf)
   * - Module
     - Additional server module to be loaded at server startup. To load multiple modules, add additional Module parameters.
     - No default value
+  * - PeerNode
+    - IP address of peer node in high availability setup. If there is lock in 
+      the database with this address indicated, server process will communicate
+      to agent and server on that address to check if server is not running
+      and will remove database lock.
+    - No default value
   * - PerfDataStorageDriver
     -
     -

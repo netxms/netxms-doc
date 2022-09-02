@@ -1295,14 +1295,14 @@ These parameters can be changed in
     - 
     - 
     - 
+  * - NXSL.EnableFileIOFunctions
+    - Enable/disable server-side NXSL functions for file I/O (such as OpenFile, DeleteFile, etc.).
+    - 0
+    - No
   * - Objects.AutobindOnConfigurationPoll
     - Enable/disable automatic object binding on configuration polls.
     - 1
     - No
-  * - Objects.Interfaces.DefaultExpectedState
-    - Default expected state for new interface objects.
-    - 1
-    - Yes
   * - Objects.Interfaces.DefaultExpectedState
     - Default expected state for new interface objects.
     - 1

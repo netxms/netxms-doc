@@ -4,8 +4,8 @@
 Network Service Monitoring
 ==========================
 
-There are two options to add service monitoring: the first one is to add it through
-menu option :guilabel:`Create Network Service...` as an object with the status
+There are two options to add service monitoring: the first one is to add it through node
+menu option :guilabel:`Create --> Create Network Service...` as an object with the status
 that will be propagated on a node, and the second one is to add it's monitoring as
 DCI.
 

@@ -7,12 +7,31 @@ Upgrade
 Upgrading on Debian or Ubuntu
 =============================
 
-Upgrading packages
-------------------
+Upgrading server and agent
+--------------------------
 
-To update all |product_name| packages run command:
+ 1. It's recommended to check database for possible inconsistencies
+    prior to the upgrade. To do this, stop the server and run command:
 
-:command:`apt-get update && apt-get upgrade`
+    :command:`nxdbmgr check`
+
+    Proceed to the next step only if database checker does not report any errors!
+
+ 2. To update |product_name| server and agent packages run command:
+
+    :command:`apt-get update && apt-get upgrade`
+
+    During package upgrade database schema should be upgraded as well and 
+    |product_name| server would start automatically. However, in some cases 
+    (e.g. if database engine packages were also upgraded) automatic database
+    upgrade may not happen. If this is the case, |product_name| server won't
+    get started and it's log would show, e.g.: ``Your database has format
+    version 41.07, but server is compiled for version 41.18``. To upgrade
+    the database, run command:
+
+    :command:`nxdbmgr upgrade`
+
+    Once database upgrade is complete, start the server. 
 
 
 Management console
@@ -32,19 +51,20 @@ Desktop Management Console:
 
 Web Management Console:
 
-  1. Download latest version of WAR file from Web Interface Binaries section
+  1. Download latest version of WAR file from Web Interface Binaries section 
      http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
      nxmc-1.2.17.war).
 
   2. Replace old WAR file with the new one.
 
+     Sometimes it's possible that new WAR file is not detected and previous
+     version of WAR continues to run. In this case stop servlet container, 
+     delete the WAR file. Then start servlet container and copy the war
+     file to webapps directory. 
+
 
 Upgrading on Red Hat, Fedora, CentOS or ScientificLinux
 =======================================================
-
-
-Adding our YUM repository
--------------------------
 
 Upgrading
 ---------
@@ -149,6 +169,11 @@ Web Management Console:
 
   2. Replace old WAR file with the new one.
 
+     Sometimes it's possible that new WAR file is not detected and previous
+     version of WAR continues to run. In this case stop servlet container, 
+     delete the WAR file. Then start servlet container and copy the war
+     file to webapps directory. 
+
 
 Upgrading on Windows
 ====================
@@ -220,7 +245,13 @@ Web Management Console:
      http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
      nxmc-1.2.17.war).
 
-  2. Replace old WAR file with the new one. Default path: INSTALLATION_DIR\webapps.
+  2. Replace old WAR file with the new one. Default path: ``INSTALLATION_DIR\\webapps``.
+
+     Sometimes it's possible that new WAR file is not detected and previous
+     version of WAR continues to run. In this case stop servlet container, 
+     delete the WAR file. Then start servlet container and copy the war
+     file to webapps directory. 
+
 
 Generic upgrade using source tarball
 ====================================

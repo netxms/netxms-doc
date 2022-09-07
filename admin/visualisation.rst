@@ -307,13 +307,6 @@ Pie chart.
 
 .. figure:: _images/dashboard_pie_chartW.png
 
-Tube chart
-~~~~~~~~~~
-
-Tube chart.
-
-.. figure:: _images/dashboard_tube_chartW.png
-
 Status Chart
 ~~~~~~~~~~~~
 
@@ -395,13 +388,6 @@ Pie Chart for Table DCI
 Pie chart built from data collected via single table DCI.
 
 .. figure:: _images/dashboard_table_pie_chartW.png
-
-Tube Chart for Table DCI
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Tube chart built from data collected via single table DCI.
-
-.. figure:: _images/dashboard_table_tube_chartW.png
 
 Separator
 ~~~~~~~~~
@@ -562,8 +548,7 @@ Chart
 
 :guilabel:`Chart` page is available for all chart type elements: Bar Chart, Bar
 Chart for Table DCI, Dial Chart, Line Chart, Pie Chart, Pie Chart for Table
-DCI, Tube Chart, and Tube Chart for Table DCI. It defines basic properties of a
-chart.
+DCI. It defines basic properties of a chart.
 
 .. figure:: _images/ChartElementConfig.png
 
@@ -571,7 +556,7 @@ Data Sources
 ~~~~~~~~~~~~
 
 :guilabel:`Data sources` page is available for all DCI based elements: Bar
-Chart, Dial Chart, Line Chart, Pie Chart, and Tube Chart. Here you can define
+Chart, Dial Chart, Line Chart and Pie Chart. Here you can define
 what DCIs should be used as data sources for the chart. Up to 16 DCIs can be
 added to a single chart. You can configure multiple properties for each data
 source. To edit data source, either double click on appropriate item in the

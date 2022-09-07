@@ -39,6 +39,25 @@ So when node becomes unreachable, either SYS_NODE_DOWN or SYS_NODE_UNREACHABLE e
 How topology information is built
 =================================
 
+**FDB.** From FDB table we take ports where only one mac address is present - this means that something is directly connected. 
+If this device is present in |product_name| and it's mac address is known (we have agent on it, SNMP, or some other agent on 
+that network communicated to that device and has IP-MAC pair in ARP table) - we have a peer. 
+
+**LLDP.** So if we have another switch connected, that switch is sending LLDP packets, the switch that we are polling receives 
+these packets and saves information in LLDP table. 
+We read this table and we know that there's a device with some LLDP ID connected to port X of our device. But we also need 
+|product_name| to read that device via SNMP, in this case LLDP ID will be read and we will be able to match. 
+
+**CDP.** Similar to LLDP. 
+
+**STP** table on a switch has limited information - only about peers that are on the way to root LLDP switch. But we read that 
+and can get peers from there. 
+
+Interfaces tab has :guilabel:`Peer Discovery Protocol`` column which tells, how peer information was obtained. 
+
+For debug you can set debug tags poll.topology, topo.*, topology.* to level 7 - there will be some information in server log 
+when topology poll is executed.
+
 
 Find where node is connected
 ============================

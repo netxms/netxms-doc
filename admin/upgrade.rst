@@ -81,7 +81,7 @@ Server
 
     :command:`$ cd netxms-1.2.15`
 
-    :command:`$ sh ./configure --with-server --with-mysql`
+    :command:`$ sh ./configure --enable-release-build --with-server --with-mysql`
 
     Be sure to include all options that were used at installation time.
 
@@ -128,7 +128,7 @@ Agent
 
     :command:`cd netxms-1.2.15`
 
-    :command:`sh ./configure --with-agent`
+    :command:`sh ./configure --enable-release-build --with-agent`
 
     Be sure to include all options that were used at installation time.
 
@@ -268,7 +268,7 @@ Server
 
     :command:`$ cd netxms-1.2.15`
 
-    :command:`$ sh ./configure --with-server --with-mysql`
+    :command:`$ sh ./configure --enable-release-build --with-server --with-mysql`
 
     Be sure to include all options that were used at installation time.
 
@@ -315,7 +315,7 @@ Agent
 
     :command:`cd netxms-1.2.15`
 
-    :command:`sh ./configure --with-agent`
+    :command:`sh ./configure --enable-release-build --with-agent`
 
     Be sure to include all options that were used at installation time.
 

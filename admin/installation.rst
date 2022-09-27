@@ -715,7 +715,7 @@ Server
 
         :command:`cd netxms-VERSION`
 
-        :command:`./configure --with-server --with-pgsql --with-agent`
+        :command:`./configure --enable-release-build --with-server --with-pgsql --with-agent`
 
         Most commonly used options (check full list with :command:`./configure --help`):
 
@@ -783,7 +783,7 @@ Agent
 
         :command:`cd netxms-VERSION`
 
-        :command:`./configure --with-agent`
+        :command:`./configure --enable-release-build --with-agent`
 
         Most commonly used options (check full list with :command:`./configure --list`):
 

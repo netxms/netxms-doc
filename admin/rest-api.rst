@@ -1406,7 +1406,7 @@ Request to get last value of DCI identified by ID for exact object identified by
 
 Request type: **GET**
 
-Request path: *API_HOME*/objects/**{object-id}**/data-collection/**{dci-id}**/last-values
+Request path: *API_HOME*/objects/**{object-id}**/data-collection/**{dci-id}**/last-value
 
 Filter options:
 

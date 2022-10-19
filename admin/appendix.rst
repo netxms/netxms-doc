@@ -191,6 +191,12 @@ Agent configuration file (nxagentd.conf)
        DebugTags parameters or write them coma separated (like
        ``proc.spexec:8,tunnel.*:4,db.conn:6``).
      -
+   * - DefaultExecutionTimeout
+     - Timeout in milliseconds for external metric and external command
+       execution. This value will be used for external metrics and external
+       commands if ``ExternalCommandTimeout`` or ``ExternalMetricTimeout`` not
+       set explicitly.
+     - 2000
    * - DisableIPv4
      - Disables (yes) or enables(no) IPv4 support.
      - no
@@ -269,8 +275,13 @@ Agent configuration file (nxagentd.conf)
        functionality.
      - no
    * - ExecTimeout
-     - Timeout in milliseconds for external metric execution.
-     - 2000
+     - Deprecated, replaced by ``DefaultExecutionTimeout``
+     - 
+   * - ExternalCommandTimeout
+     - External process execution timeout for external commands (actions) in
+       milliseconds. Value of ``DefaultExecutionTimeout`` will be used if this
+       parameter is not set.
+     - 
    * - ExternalList
      - Add list handled by external command. To add multiple parameters, you
        should use multiple``ExternalList`` entries.
@@ -280,28 +291,48 @@ Agent configuration file (nxagentd.conf)
        Should have same value as ``ExternalSubagent`` parameter in external
        subagent configuration file.
      - No defaults
-   * - ExternalParameter
-     - Adds metric handled by external command. To add multiple parameters, you
-       should use multiple ``ExternalParameter`` entries. On Windows platform
+   * - ExternalMetric
+     - Adds metric handled by external command. To add multiple metrics, you
+       should use multiple ``ExternalMetric`` entries. On Windows platform
        system process execution API's CreateProcess() is used to run the
        command, it will search in PATH, but the command should be with file
        extension, e.g. ``command.exe``.
      - No defaults
-   * - ExternalParameterShellExec
-     - ExternalParameterShellExec has same meaning as ExternalParameter with
-       exception that agent will use shell to execute specified command instead
-       of system process execution API. This difference presented only on
-       Windows system, on other systems ExternalParameter and
-       ExternalParameterShellExec behaves identically.
+   * - ExternalMetricProvider
+     - Specifies external command and execution interval after semicolon (:).
+       External command returns a number of metrics and their values. Metrics
+       are cached by the agent and returned to server per request. Command
+       should return data in *metric=value* format each pair in new line.
      - No defaults
-   * - ExternalParametersProvider
-     - Adds list of metrics that are cached by the agent and returned to server
-       per request. Metrics should be returned in *metric=value* format each
-       pair in new line.
-     - No defaults
-   * - ExternalParameterProviderTimeout
-     - Timeout in seconds for external parameters provider execution
+   * - ExternalMetricProviderTimeout
+     - Timeout in seconds for external metric provider execution
      - 30
+   * - ExternalMetricShellExec
+     - ExternalMetricShellExec has same meaning as ExternalMetric with exception
+       that agent will use shell to execute specified command instead of system
+       process execution API. This difference presented only on Windows system,
+       on other systems ExternalMetric and ExternalMetricShellExec behaves
+       identically.
+     - No defaults
+   * - ExternalMetricTimeout
+     - Timeout in milliseconds for external metrics. Value of
+       ``DefaultExecutionTimeout`` will be used if this parameter is not set.
+     - 
+   * - ExternalParameter
+     - Deprecated, replaced by ``ExternalMetric``
+     - 
+   * - ExternalParameterProvider
+     - Deprecated, replaced by ``ExternalMetricProvider``
+     - 
+   * - ExternalParametersProvider
+     - Deprecated, replaced by ``ExternalMetricProvider``
+     - 
+   * - ExternalParameterProviderTimeout
+     - Deprecated, replaced by ``ExternalMetricProviderTimeout``
+     - 
+   * - ExternalParameterShellExec
+     - Deprecated, replaced by ``ExternalMetricShellExec``
+     - 
    * - ExternalSubagent
      - ID of external subagent. Should be same as ``ExternalMasterAgent`` in
        master agent configuration file.

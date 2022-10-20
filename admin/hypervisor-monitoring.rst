@@ -55,7 +55,7 @@ Parameters
 
 .. list-table::
    :header-rows: 1
-   :widths: 50 30 200
+   :widths: 50 20 30
 
    * - Metric
      - Type
@@ -105,7 +105,7 @@ Tables
 
 .. list-table::
    :header-rows: 1
-   :widths: 50 200
+   :widths: 50 50
 
    * - Metric
      - Description
@@ -131,7 +131,7 @@ Lists
 
 .. list-table::
    :header-rows: 1
-   :widths: 50 200
+   :widths: 50 50
 
    * - Metric
      - Description

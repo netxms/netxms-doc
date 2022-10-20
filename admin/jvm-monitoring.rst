@@ -13,7 +13,9 @@ Parameters
 
 .. list-table::
    :header-rows: 1
-   :widths: 50 30 200
+   :widths: 50 20 30
+   :class: longtable
+
 
    * - Metric
      - Type

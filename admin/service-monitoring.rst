@@ -158,6 +158,8 @@ When loaded, PORTCHECK subagent adds the following Metrics to node Metric list:
 .. list-table::
    :widths: 100 50
    :header-rows: 1
+   :class: longtable
+
 
    * - Parameter
      - Description

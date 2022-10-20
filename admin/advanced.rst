@@ -192,8 +192,8 @@ Configure workflow in JIRA:
   1. Create new Workflow Schema if required
   2. Copy existing or create new Workflow
   3. Assign Workflow to the project, where |product_name| will create issues
-  4. Modify transitions to call plugin’s post-function and change related alarm in
-     |product_name|
+  4. Modify transitions to call plugin’s post-function and change related alarm
+     in |product_name|
 
     a. Click on a “cog” icon on a transition and select “View Post Functions”:
 
@@ -224,17 +224,18 @@ Tickets are created from from alarms manually. To create ticket user should have
 "Create helpdesk tickets" access for required objects.
 
 Steps to create ticket:
-  1. Right click on alarm in |product_name| and select “Create ticket in helpdesk system”:
+  1. Right click on alarm in |product_name| and select “Create ticket in
+     helpdesk system”:
 
      .. figure:: _images/jira_create_ticket.png
 
-  2. In a moment, issue will be created and Helpdesk ID will be show in corresponding
-     column:
+  2. In a moment, issue will be created and Helpdesk ID will be show in
+     corresponding column:
 
      .. figure:: _images/jira_helpdesk_ID.png
 
-  3. Right click on the alarm and select “Show helpdesk ticket in web browser” to
-     navigate to the issue in JIRA:
+  3. Right click on the alarm and select “Show helpdesk ticket in web browser”
+     to navigate to the issue in JIRA:
 
      .. figure:: _images/jira_ticket_show.png
 
@@ -244,9 +245,9 @@ Hooks
 =====
 
 Sometimes it is required to add some additional functionality after poll, object
-creation or other action - for this purpose hooks were created.
-Hook is manually created script in :guilabel:`Script Library` that is executed
-at a special condition like end of the poll or interface creation.
+creation or other action - for this purpose hooks were created. Hook is manually
+created script in :guilabel:`Script Library` that is executed at a special
+condition like end of the poll or interface creation.
 
 More about poll types and purposes can be found :ref:`there <concepts_polling>`
 and about script creation :ref:`there <scripting>`.
@@ -258,9 +259,11 @@ Example: Hook\:\:ConfigurationPoll
 
 Full list of hooks:
 
+
 .. list-table::
    :header-rows: 1
-   :widths: 70 70 70 70
+   :widths: 30 30 30 20
+   :class: longtable
 
    * - Hook name
      - Description
@@ -327,7 +330,8 @@ Full list of hooks:
        $interface - current interface, object of 'Interface' type
      - none
    * - Hook\:\:EventProcessor
-     - Hook that is executed for each event prior to it's processing by Event Processing Policies. 
+     - Hook that is executed for each event prior to it's processing by Event
+       Processing Policies. 
        
      - $object - event source object, one of 'NetObj' subclasses
 
@@ -336,23 +340,29 @@ Full list of hooks:
        $event - event being processed (object of 'Event' class)
      - none
    * - Hook\:\:AlarmStateChange
-     - Hook that is executed on alarm state change (alarm gets acknowledged, resolved or terminated)
+     - Hook that is executed on alarm state change (alarm gets acknowledged,
+       resolved or terminated)
      - $alarm - alarm being processed (object of 'Alarm' class)
      - none
    * - Hook\:\:UnboundTunnelOpened
-     - Hook that is executed when tunnel connection is established, but not bound to a node. 
+     - Hook that is executed when tunnel connection is established, but not
+       bound to a node. 
      - $tunnel - incoming tunnel information (object of 'Tunnel' class)
      - none     
    * - Hook\:\:BoundTunnelOpened
-     - Hook that is executed when tunnel connection bound to a node is established. 
+     - Hook that is executed when tunnel connection bound to a node is
+       established. 
      - $node - node this tunnel was bound to (object of 'Node' class)
      
        $tunnel - incoming tunnel information (object of 'Tunnel' class)
      - none     
    * - Hook\:\:LDAPSynchronization
-     - Hook executed for each LDAP record (user or group) during LDAP synchronization. 
-     - $ldapObject - LDAP object being synchronized (object of 'LDAPObject' class)
-     - true/false - boolean - whether processing of this LDAP record should continue
+     - Hook executed for each LDAP record (user or group) during LDAP
+       synchronization. 
+     - $ldapObject - LDAP object being synchronized (object of 'LDAPObject'
+       class)
+     - true/false - boolean - whether processing of this LDAP record should
+       continue
    * - Hook\:\:Login
      - Hook executed prior to user login
      - $user - user object (object of 'User' class)
@@ -360,9 +370,11 @@ Full list of hooks:
        $session - session object (object of 'ClientSession' class)
      - true/false - boolean - whether login for this session should continue
 
+
 Usually hooks are used for automatic actions that need to be done on node.
 For example automatic remove change of expected state of interface depending
 on some external parameters.
+
 
 Troubleshooting
 ===============

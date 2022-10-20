@@ -139,7 +139,7 @@ If system name is omitted local system is assumed. If system name is the only ar
 
 .. list-table::
    :header-rows: 1
-   :widths: 50 30 200
+   :widths: 50 10 40
 
    * - Metric
      - Type
@@ -319,7 +319,7 @@ If system name is omitted local system is assumed. If system name is the only ar
 
 .. list-table::
    :header-rows: 1
-   :widths: 50 200
+   :widths: 50 50
    
    * - Metric
      - Description
@@ -343,7 +343,7 @@ If system name is omitted local system is assumed. If system name is the only ar
 
 .. list-table::
    :header-rows: 1
-   :widths: 50 200
+   :widths: 50 50
 
    * - Metric
      - Description

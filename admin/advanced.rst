@@ -295,19 +295,17 @@ Full list of hooks:
        $1 - current interface, object of 'Interface' type
      - true/false - boolean - whether interface should be created
    * - Hook\:\:AcceptNewNode
-     - Hook that is executed on a new node add. This script should return 1 if
-       node should be added. In case if script returns nothing or something other
-       than 1 - node will not be added.
+     - Hook that is executed on a new node add. 
      - $ipAddr - IP address of the node being processed
 
        $ipNetMask - netmask of the node being processed
 
        $macAddr - MAC address of the node being processed
 
-       $zoneId - zone ID of the node being processed
+       $zoneUIN - zone UIN of the node being processed
      - true/false - boolean - whether node should be created
    * - Hook\:\:DiscoveryPoll
-     - Hook that is executed at the ens of discovery poll
+     - Hook that is executed at the end of discovery poll
      - $node - current node, object of 'Node' type
      - none
    * - Hook\:\:PostObjectCreate
@@ -317,13 +315,13 @@ Full list of hooks:
        $node - current object if it is 'Node' class
      - none
    * - Hook\:\:CreateSubnet
-     - Hook that is executed after creation of a subnet
+     - Hook that is executed on subnet creation
      - $node - current node, object of 'Node' class
 
        $1 - current subnet, object of 'Subnet' class
      - true/false - boolean - whether subnet should be created
    * - Hook\:\:UpdateInterface
-     - Hook that is executed at the ens of interface update
+     - Hook that is executed at the end of interface update
      - $node - current node, object of 'Node' type
 
        $interface - current interface, object of 'Interface' type
@@ -351,6 +349,16 @@ Full list of hooks:
      
        $tunnel - incoming tunnel information (object of 'Tunnel' class)
      - none     
+   * - Hook\:\:LDAPSynchronization
+     - Hook executed for each LDAP record (user or group) during LDAP synchronization. 
+     - $ldapObject - LDAP object being synchronized (object of 'LDAPObject' class)
+     - true/false - boolean - whether processing of this LDAP record should continue
+   * - Hook\:\:Login
+     - Hook executed prior to user login
+     - $user - user object (object of 'User' class)
+
+       $session - session object (object of 'ClientSession' class)
+     - true/false - boolean - whether login for this session should continue
 
 Usually hooks are used for automatic actions that need to be done on node.
 For example automatic remove change of expected state of interface depending

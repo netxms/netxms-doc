@@ -29,8 +29,8 @@ master_doc = 'index'
 project_author = "Raden Solutions, SIA"
 copyright = '2021, ' + project_author
 
-version = '4.0'
-release = '4.0.2092'
+version = '4.1'
+release = '4.1.420'
 
 exclude_patterns = ['build']
 

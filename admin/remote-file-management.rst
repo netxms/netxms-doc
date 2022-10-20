@@ -25,7 +25,7 @@ subagent and configure accessible paths. It provides
 possibility to upload, download, delete, move and rename files.
 
 All configuration parameters related to filemng subagent should be placed
-into **\*filemgr** section of agent's configuration file.
+into **[filemgr]** section of agent's configuration file.
 The following configuration parameters are supported:
 
 +------------+----------------------------------------------+

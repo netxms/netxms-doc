@@ -61,13 +61,13 @@ Sample configuration section for two devices attached via serial ports, one is A
 
 
 Once UPS subagent is configured, you can start to monitor UPS devices status via
-parameters provided by it:
+metrics provided by it:
 
 .. list-table::
    :header-rows: 1
    :widths: 50 30 200
 
-   * - Parameter
+   * - Metric Name
      - Type
      - Meaning
    * - UPS.BatteryLevel(*)
@@ -122,12 +122,12 @@ parameters provided by it:
      - Internal device temperature.
 
 
-Please note that not all parameters supported by all UPS devices. Many old or simple
-models will support only basic things like UPS.OnlineStatus parameter.
-Most typical approach is to monitor UPS.OnlineStatus for going to 1 or 2, and then
-send notifications to administrators and shutdown affected hosts if needed. You can
-also monitor UPS.EstimatedRuntime parameter for the same purposes if your devices
-support it.
+Please note that not all metrics are supported by all UPS devices. Many old or
+simple models will support only basic things like UPS.OnlineStatus metric. Most
+typical approach is to monitor UPS.OnlineStatus for going to 1 or 2, and then
+send notifications to administrators and shutdown affected hosts if needed. You
+can also monitor UPS.EstimatedRuntime metric for the same purposes if your
+devices support it.
 
 SNMP UPS monitoring
 ===================

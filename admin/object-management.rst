@@ -1144,9 +1144,9 @@ Predefined Object Tools
      - Agent List
      - Show list of lists supported by agent
      - |product_name| agent should be available
-   * - :menuselection:`&Info->&Agent->Supported &parameters`
+   * - :menuselection:`&Info->&Agent->Supported &metrics`
      - Agent List
-     - Show list of parameters supported by agent
+     - Show list of metrics supported by agent
      - |product_name| agent should be available
    * - :menuselection:`&Info->&Agent->Supported &tables`
      - Agent List

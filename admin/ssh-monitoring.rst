@@ -29,7 +29,7 @@ Only first line of the output is stored as DCI value. For numeric data type outp
 
 .. figure:: _images/ssh_monitoring_dci_properties.png
 
-There's also ``SSH.Command(*)`` parameter of origin ``NetXMS Agent`` that works in a similar way,
+There's also ``SSH.Command(*)`` metric of origin ``NetXMS Agent`` that works in a similar way,
 but target and credentials are specified as arguments. It's also necessary to manually specify Source node,
 otherwise agent of the monitored node will be used for establishing ssh connection.
 
@@ -37,7 +37,7 @@ otherwise agent of the monitored node will be used for establishing ssh connecti
    :widths: 100 50
    :header-rows: 1
 
-   * - Parameter
+   * - Metric Name
      - Description
    * - SSH.Command(\ *target*\ ,\ *login*\ ,\ *password*\ ,\ *command*\ ,\ *[pattern]*\ ,\ *[ssh_key_id]*\)
      - ``%{node_primary_ip}`` macro can be used to specify node's primary IP address as *target*.

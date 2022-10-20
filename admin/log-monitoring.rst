@@ -734,22 +734,22 @@ Username will be sent to the event as %1, IP address will not be sent, and login
 
 .. _log-monitoring-parameters:
 
-Log parser parameters
-=====================
+Log parser metrics
+==================
 
 Log parser provides some additional statistic information through :term:`Metric`\ s.
 Metrics take name of particular parser as an argument. If name is not set, then file name is used.
 
 Statistic information is reset on agent startup and when log parser policy is reapplied.
 
-Available parameters:
+Available metrics:
 
 
 .. list-table::
    :widths: 15 150
    :header-rows: 1
 
-   * - Name
+   * - Metric Name
      - Description
    * - LogWatch.Parser.Status(*name*)
      - Parser *name* status
@@ -758,14 +758,14 @@ Available parameters:
    * - LogWatch.Parser.ProcessedRecords(*name*)
      - Number of records processed by parser *name*
 
-Available list parameters:
+Available lists:
 
 
 .. list-table::
    :widths: 15 150
    :header-rows: 1
 
-   * - Name
+   * - List Name
      - Description
    * - LogWatch.ParserList
      - List of parser names. If no name is defined then parser file name will be used.

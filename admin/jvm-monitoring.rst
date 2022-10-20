@@ -8,8 +8,8 @@ JMX functionality.
 Metrics
 =======
 
-Parameters
-----------
+Single-value Metrics
+--------------------
 
 .. list-table::
    :header-rows: 1

@@ -46,7 +46,7 @@ to "TrustedCertificate" configuration parameter in server configuration file.
 
 3.5
 ---
-External Metrics (ExternalParameter, etc...) expect UTF-8 encoding on Windows. Might need to adjust scripts called
+External Metrics (ExternalMetric, etc...) expect UTF-8 encoding on Windows. Might need to adjust scripts called
 by external metrics if non-ASCII characters are returned. 
 
 3.1
@@ -136,7 +136,7 @@ Increase of ``shared_buffers`` might be needed, rough recommendation is 25% of a
 Increase of ``max_locks_per_transaction`` is needed if using TimescaleDB, rough recommendation is 512. 
 
 Database size and load is very hard to predict, because it is dependent on a number of
-monitored nodes and collected parameters. If you plan to install database engine on
+monitored nodes and collected metrics. If you plan to install database engine on
 the same machine as |product_name| server, increase your hardware requirements accordingly.
 
 Link to Excel file that allows roughly estimate the size that will be required for

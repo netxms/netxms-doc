@@ -15,7 +15,7 @@ monitoring options. This is optional for installation, but it's installation giv
    * Proxy functionality: agent can be used as a proxy to reach agents on hosts not directly accessible by |product_name| server
    * :term:`SNMP` proxy: agent can be used as a proxy to reach remote SNMP devices
    * :term:`SNMP Trap` proxy: agent can be used as a proxy to get messages from remote SNMP device
-   * Extensible: you can add new parameters very easy using configuration option like ``ExternalParameter`` or by writing your own subagents
+   * Extensible: you can add new metrics very easy using configuration option like ``ExternalMetric`` or by writing your own subagents
    * Easy upgrade - you can upgrade all agents at once from console
    * Provides file management possibilities on agent.
    * Provides log file monitoring functionality.
@@ -747,61 +747,74 @@ Agent External Metrics
 ======================
 
 Other option to define new metric that can be collected from node is to use
-``ExternalParameter``/``ExternalParameterShellExec``, or ``ExternalList``, or
-``ExternalParametersProvider`` configuration parameters to define command that will
-be executed on a node and it's output will be provided as a metric. This functionality
-provides flexibility to create your own metrics, lists or table metrics.
+``ExternalMetric``/``ExternalMetricShellExec``, or ``ExternalList``, or
+``ExternalMetricProvider`` configuration parameters to define a command that
+will be executed on a node and it's output will be provided as a metric. This
+functionality provides flexibility to create your own metrics, lists or table
+metrics.
 
-New metrics will be visible in the :guilabel:`Available parameters` list only after agent
-restarts (agent reads a configuration file only once on start) and configuration poll,
-so to force it's appearance run :guilabel:`Configuration poll` manually after agent restart.
+New metrics will be visible in the :guilabel:`Available metrics` list only after
+agent restart (agent reads its configuration files only once on start) and
+subsequent configuration poll, so to force it's appearance run
+:guilabel:`Configuration poll` manually after agent restart.
 
 .. note::
 
-   Since v. 3.5. on Windows platforms UTF-8 encoding should be returned in External Metrics. 
-   
-ExternalParameter/ExternalParameterShellExec
+   On Windows platforms UTF-8 encoding should be returned in External Metrics. 
+
+
+ExternalMetric/ExternalMetricShellExec
 --------------------------------------------
 
-``ExternalParameter`` defines name of the metric and command that is executed synchronously
-when this metric is requested by server. Parameters from  DCI configuration can be provided, 
-these will be available as $1, $2, $3..., $9 variables. To accept
-arguments metric name should contain "(*)" symbols after name. Only first line of
-script output will be given as a result of execution (metric value).
+``ExternalMetric`` defines name of the metric and command that is executed
+synchronously when this metric is requested by the server. Parameters from DCI
+configuration can be provided, these will be available as $1, $2, $3..., $9
+variables. To accept parameters metric name should contain "(*)" symbols after
+name. Only first line of command output will be given as a result of execution
+(metric's value).
 
-``ExternalParameterShellExec`` has same meaning as ``ExternalParameter`` and behaves identically on non-Windows systems.
-On Windows systems ``ExternalParameter`` executes specified command using system process execution
-API's CreateProcess() function. It will search in PATH, but the command should be with file extension, e.g. ``command.exe``.
-``ExternalParameterShellExec`` will use shell to execute specified command on Windows.
+``ExternalMetricShellExec`` has same meaning as ``ExternalMetric`` and
+behaves identically on non-Windows systems. On Windows systems
+``ExternalMetric`` executes specified command using system process execution
+API's CreateProcess() function. It will search in PATH, but the command should
+be with file extension, e.g. ``command.exe``. ``ExternalMetricShellExec``
+will use shell to execute specified command on Windows.
 
-To add multiple parameters, you should use multiple
-``ExternalParameter``/``ExternalParameterShellExec`` entries.
+To add multiple metrics, you should use multiple
+``ExternalMetric``/``ExternalMetricShellExec`` entries.
 
-As this commands are executed synchronously, long commands may cause timeout. In this
-case ``ExecTimeout`` configuration parameter can be set to change external parameter
-execution timeout or ``ExternalParametersProvider`` can be used.
+As these commands are executed synchronously, long-executing commands may cause
+timeout. There are two timeouts - one on the agent side (controlled by
+``ExternalMetricTimeout`` in agent's configuration file) and generic timeout for
+all requests to agent (controlled by `AgentCommandTimeout` in server's
+configuration file). It's strongly not recommended to increase server timeout to
+more then a few seconds because this may lead to performance issues due to
+poller threads spending too much time on timeouts.
+``ExternalMetricProvider`` can be used to handle long-executing commands. 
 
 .. code-block:: cfg
 
   # Example
 
   # Without DCI parameters
-  ExternalParameter=Name:command
-  ExternalParameterShellExec=Name:command
+  ExternalMetric=Name:command
+  ExternalMetricShellExec=Name:command
 
   # With DCI parameters
-  ExternalParameter=Name(*):command $1 $2
-  ExternalParameterShellExec=Name(*):command $1 $2
+  ExternalMetric=Name(*):command $1 $2
+  ExternalMetricShellExec=Name(*):command $1 $2
 
 
-For each parameter two agent metrics are provided - one is ``Name`` as specified in ``ExternalParameter``/``ExternalParameterShellExec`` 
-which provides output of the command (first line only), the other is ``Name.ExitCode`` that provides exit code of the executed command. 
+For each metric configured two agent metrics are provided - one is ``Name`` as
+specified in ``ExternalMetric``/``ExternalMetricShellExec`` which provides
+output of the command (first line only), the other is ``Name.ExitCode`` that
+provides exit code of the executed command. 
 
 .. code-block:: cfg
 
   # Real example
-  ExternalParameter = Test:echo test
-  ExternalParameter = LineCount(*):cat $1 | wc -l
+  ExternalMetric = Test:echo test
+  ExternalMetric = LineCount(*):cat $1 | wc -l
 
 
 .. code-block:: shell
@@ -817,10 +830,10 @@ ExternalList
 ------------
 
 ``ExternalList`` defines name of the list metric and command that is executed
-synchronously when this metric is requested by server. There can be provided parameters
-from DCI configuration, that will be available like $1, $2, $3..., $9 variables. To
-accept arguments metric name should contain "(*)" symbols after name. Lines of list
-are separated with new line.
+synchronously when this metric is requested by server. Parameters from DCI
+configuration can be provided, these will be available as $1, $2, $3..., $9
+variables. To accept parameters metric name should contain "(*)" symbols after
+name. Lines of the list are separated by new line character.
 
 .. code-block:: cfg
 
@@ -833,67 +846,72 @@ are separated with new line.
   ExternalList=Name(*):command $1 $2
 
 
-ExternalParametersProvider
+ExternalMetricProvider
 --------------------------
 
-``ExternalParametersProvider`` defines command(script) and execution interval in seconds. Defined
-script will be executed as per interval and agent will cache parameter list. When server
-will request one of provided parameters it's value will be read from the agent cache.
-Main purpose is to provide data from long-running processes, or return multiple
-values at once.
+``ExternalMetricProvider`` defines command (script) and execution interval in
+seconds. Defined script will be executed regularly and agent will cache list of
+metrics along with their values. When server will request one of provided
+metrics, it's value will be read from the agent cache. Main purpose is to
+provide data from long-running processes, or retrieve multiple values by running
+a command only once.
 
-Script should print one or more "Parameter=Value" pairs to standard output. Multiple
-pairs should be separated by new line. If parameter takes argument, it should be
-included in "Parameter(...)".
+Script should print one or more "Metric=Value" pairs to standard output. Multiple
+pairs should be separated by new line. If metric takes a parameter, it should be
+included in "Metric(...)".
 
 Example of the script:
 
 .. code-block:: shell
 
   #!/bin/sh
-  echo 'Parameter1=Value1'
-  echo 'Parameter2=Value2'
-  echo 'ParameterWithArgs(AAA)=Value3'
-  echo 'ParameterWithArgs(BBB)=Value4'
+  echo 'Metric1=Value1'
+  echo 'Metric2=Value2'
+  echo 'MetricWithParams(parameter)=Value3'
+  echo 'MetricWithParams(another_parameter)=Value4'
 
 Example of agent configuration:
 
 .. code-block:: cfg
 
   #Example
-  ExternalParametersProvider=PATH_TO_PROVIDER_SCRIPT:POLL_TIME_IN_SECONDS
+  ExternalMetricProvider=PATH_TO_PROVIDER_SCRIPT:EXECUTION_INTERVAL_IN_SECONDS
 
   #Example (run /tmp/test.sh every 5 seconds)
-  ExternalParametersProvider=/tmp/test.sh:5
+  ExternalMetricProvider=/tmp/test.sh:5
 
 ExternalTable
 -------------
 
-``ExternalTable`` defines table that is provided by agent and how it can be obtained. Table can be collectexd per 
-parameter request or by schedule. Second option is usefull when command for table creation os taking long time. 
-To collect table in  background and return chased value as DCI table value "PollingInterval" configuration option is required. 
+``ExternalTable`` defines table that is provided by agent and how it can be
+obtained. Table can be collected synchronously when requested by the server or
+regularly in the background (in this case server gets cached data). Second
+option is useful when command for table creation is taking a long time to avoid
+timeout. To collect table in the background "PollingInterval" configuration
+option is required.
 
-Command is executed synchronously when this metric is requested by server or is taken form cash if "PollingInterval" 
-configuration option is set.
-Each table line is separated with new line symbol. First line in returned text used as a name of the columns
-and all next lines will be used like table data. Parameters from DCI configuration can be provided,
-that will be available like $1, $2, $3..., $9 variables. To accept arguments metric name should contain
-``(*)`` symbols after name.
+Each table line is separated with new line symbol. First line in returned text
+should contain name of columns, subsequent lines contain table data. Parameters
+from DCI configuration can be provided, these will be available like $1, $2,
+$3..., $9 variables. To accept parameters metric name should contain ``(*)``
+symbols after name.
 
 
 .. list-table::
    :header-rows: 1
-   :widths: 50 20 200
+   :widths: 20 10 70
 
    * - Name
      - Required
      - Description
    * - Command
      - Yes
-     - Result of this command execution will be used as a value for table DCI. First row is used as column names.
+     - Result of this command execution will be used as a value for table DCI.
+       First row is used as column names.
    * - Separator
      - No
-     - Symbol that will be used as a separator for columns. If separator is not specified, default value of ``,`` is used.
+     - Symbol that will be used as a separator for columns. If separator is not
+       specified, default value of ``,`` is used.
         
         .. note:: 
             Separator supports special macros for separator:
@@ -909,20 +927,23 @@ that will be available like $1, $2, $3..., $9 variables. To accept arguments met
      - Comma separated instance column list. 
          
          .. note:: 
-          Instance column should contain unique identifier for each table row. If several instance columns are used, then
-          combination of these columns should be unique. This is necessary for building graphs and for correct threshold 
-          violation event generation. Row number is used if instance column is not set. 
+             Instance column should contain unique identifier for each table
+             row. If several instance columns are used, then combination of
+             these columns should be unique. This is necessary for building
+             graphs and for correct threshold violation event generation. Row
+             number is used if instance column is not set. 
 
    * - Description
      - No
      - Table DCI description that will be shown in table DCI selector. 
    * - PollingInterval
      - No
-     - Interval that is used to poll table in the background. Will be collected per request if this parameter is omitted. 
+     - Interval that is used to poll table in the background. Table will be
+       collected synchronously (per request) if this parameter is omitted. 
    * - ColumnType
      - No
-     - Data type of the column. Is set in format columnName:dataTypeName. If column does not have type int32 is used by 
-       default. 
+     - Data type of the column. Is set in format columnName:dataTypeName. If
+       column does not have type int32 is used by default. 
 
        Possible options:
          * int32

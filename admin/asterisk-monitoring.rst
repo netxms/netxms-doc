@@ -131,10 +131,10 @@ Local system and remote system (named **Remote1**) on address 10.0.0.1 with one 
 Metrics
 =======
 
-Parameters
-----------
+Single-value metrics
+--------------------
 
-All parameters accept system name as first argument. Name for default local system is **LOCAL**.
+All metrics accept system name as first argument. Name for default local system is **LOCAL**.
 If system name is omitted local system is assumed. If system name is the only argument braces can be omitted as well.
 
 .. list-table::

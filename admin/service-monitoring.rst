@@ -65,7 +65,7 @@ This subagent will add this metric to list of metrics available on agent:
    :widths: 50 100
    :header-rows: 1
 
-   * - Parameter
+   * - Metric Name
      - Description
    * - NetworkService.Check(\ *URL*\[\[, \ *regex*\], \ *options*\])
      - Check if data retrieved from *ULR* matches regular expression \ *regex*\.
@@ -128,7 +128,7 @@ hash. Request timeout for this subagent is 30 seconds.
    :widths: 50 100
    :header-rows: 1
 
-   * - Parameter
+   * - Metric Name
      - Description
    * - ECS.HttpSHA1(\ *URL*\ )
      - Calculates SHA1 hash of provided URL
@@ -153,7 +153,7 @@ This subagent can be used to check TCP ports and specifically implements checks 
 common services. It is highly recommended to use netsvc subagent especially for
 HTTP and HTTPS monitoring.
 
-When loaded, PORTCHECK subagent adds the following Metrics to node Metric list:
+When loaded, PORTCHECK subagent adds the following metrics to node Metric list:
 
 .. list-table::
    :widths: 100 50
@@ -161,7 +161,7 @@ When loaded, PORTCHECK subagent adds the following Metrics to node Metric list:
    :class: longtable
 
 
-   * - Parameter
+   * - Metric Name
      - Description
    * - ServiceCheck.Custom(\ *target*\ ,\ *port*\ [,\ *timeout*\ ])
      - Check that TCP *port* is open on *target*. Optional argument *timeout* specifies timeout in milliseconds, if it's not provided, default timeout 
@@ -202,7 +202,7 @@ When loaded, PORTCHECK subagent adds the following Metrics to node Metric list:
   be used without [ ].
 
 
-All of the ServiceCheck.* parameters return the following values:
+All of the ServiceCheck.* metrics return the following values:
 
 .. list-table::
    :widths: 15 50

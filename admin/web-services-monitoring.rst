@@ -43,7 +43,7 @@ and keep the actual URL in node's custom attribute ``url``.
 DCI Configuration
 -----------------
 
-DCI configuration provides DCI origin "web service". Parameter name for this
+DCI configuration provides DCI origin "web service". Metric name for this
 origin contains web service definition name with optional arguments and path to
 document element that has to be retrieved (or PCRE compliant regex with one capture group for
 text responses).

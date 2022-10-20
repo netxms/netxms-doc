@@ -298,7 +298,9 @@ Full list of hooks:
        $1 - current interface, object of 'Interface' type
      - true/false - boolean - whether interface should be created
    * - Hook\:\:AcceptNewNode
-     - Hook that is executed on a new node add. 
+     - This hook is executed by discovery process, after a new node is found and
+       it's checked that no node with give IP address is present in the system
+       and before any network discovery filters.
      - $ipAddr - IP address of the node being processed
 
        $ipNetMask - netmask of the node being processed

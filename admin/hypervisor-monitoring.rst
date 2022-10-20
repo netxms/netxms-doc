@@ -47,11 +47,11 @@ and **test** connection details are described in section **vmgr:test**.
    Url = test:///default
 
 
-Metrics
-=======
+Provided Metrics
+================
 
-Parameters
-----------
+Single-value Metrics
+--------------------
 
 .. list-table::
    :header-rows: 1

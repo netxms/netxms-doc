@@ -17,13 +17,13 @@ Oracle
 ======
 
 |product_name| subagent for Oracle DBMS monitoring (further referred to as Oracle subagent) monitors
-one or more instances of Oracle databases and reports various database-related parameters.
+one or more instances of Oracle databases and reports various database-related metrics.
 
-All parameters available from Oracle subagent are collected or calculated once per minute thus it's
-recommended to set DCI poll interval for these items to 60 seconds or more. All parameters are
+All metrics available from Oracle subagent are collected or calculated once per minute thus it's
+recommended to set DCI poll interval for these items to 60 seconds or more. All metrics are
 obtained or derived from the data available in Oracle's data dictionary tables and views through
 regular select queries. Oracle subagent does not monitor any of the metrics related to lower level
-database layers, such as database processes. Monitoring of such parameters can be achieved through
+database layers, such as database processes. Monitoring of such metrics can be achieved through
 the standard |product_name| functionality.
 
 Pre-requisites
@@ -124,13 +124,13 @@ Sample Oracle subagent configuration file in INI format:
    Password = "mypass123"
 
 
-Parameters
-----------
+Metrics
+-------
 
-When loaded, Oracle subagent adds the following parameters to agent (all parameters require database ID as first argument):
+When loaded, Oracle subagent adds the following metrics to agent (all metrics require database ID as first argument):
 
 +---------------------------------------------------------+------------------------------------------------------------------------------+
-| Parameter                                               | Description                                                                  |
+| Metric                                                  | Description                                                                  |
 +=========================================================+==============================================================================+
 | Oracle.CriticalStats.AutoArchivingOff(*dbid*)           | Archive logs enabled but auto archiving off (YES/NO)                         |
 +---------------------------------------------------------+------------------------------------------------------------------------------+
@@ -289,7 +289,7 @@ When loaded, Oracle subagent adds the following tables to agent:
 DB2
 ===
 
-|product_name| subagent for DB2 monitoring is designed to provide a way to extract various parameters
+|product_name| subagent for DB2 monitoring is designed to provide a way to extract various metrics
 known as Data Collection Items (DCI) from an instance or several instances of DB2 database.
 
 Configuration
@@ -414,13 +414,13 @@ As you can see, the parameters are the same as the ones from the INI configurati
 declaration must be placed under the ``db2sub`` tag and enclosed in the ``db2`` tag. The ``db2`` tag
 must have a numerical id which has to be a positive integer greater than 0.
 
-Provided parameters
-~~~~~~~~~~~~~~~~~~~
+Provided metrics
+~~~~~~~~~~~~~~~~
 
 To get a DCI from the subagent, you need to specify the id from the ``db2`` entry in the XML
 configuration file (in case of INI configuration, the id will be **1**). To specify the id, you
-need to add it enclosed in brackets to the name of the parameter that is being requested (e.g.,
-``db2.parameter.to.request(**1**)``). In the example, the parameter ``db2.parameter.to.request``
+need to add it enclosed in brackets to the name of the metric that is being requested (e.g.,
+``db2.metric.to.request(**1**)``). In the example, the metric ``db2.metric.to.request``
 from the database with the id **1** will be returned.
 
 .. list-table::
@@ -805,9 +805,9 @@ MongoDB
 .. versionadded:: 2.0-M3
 
 |product_name| subagent for MongoDB monitoring. Monitors one or more instances of MongoDB databases and
-reports various database-related parameters.
+reports various database-related metrics.
 
-All parameters available from MongoDB subagent gathered or calculated once per minute thus it's
+All metrics available from MongoDB subagent gathered or calculated once per minute thus it's
 recommended to set DCI poll interval for these items to 60 seconds or more. It is supposed that
 only databases with same version are monitored by one agent.
 
@@ -830,22 +830,22 @@ Configuration file
 .. todo:
   Add description of configuration string for connection to database.
 
-Parameters
-----------
+Metrics
+-------
 
-There are 2 types of parameters: serverStatus parameters, that are generated from response on a subagent start
+There are 2 types of metrics: serverStatus metrics, that are generated from response on a subagent start
 and predefined for database status.
 
-Description of serverStatus parameters can be found there: `serverStatus <http://docs.mongodb.org/manual/reference/command/serverStatus/>`_.
-In this type of DCI should be given id of server from where parameter should be taken.
+Description of serverStatus metrics can be found there: `serverStatus <http://docs.mongodb.org/manual/reference/command/serverStatus/>`_.
+In this type of DCI should be given id of server from where the metric should be taken.
 
-Description of database status parameters can be found there: `dbStats <http://docs.mongodb.org/master/reference/command/dbStats/>`_.
+Description of database status metrics can be found there: `dbStats <http://docs.mongodb.org/master/reference/command/dbStats/>`_.
 
 .. list-table::
    :widths: 50 100
    :header-rows: 1
 
-   * - Parameter
+   * - Metric
      - Description
    * - MongoDB.collectionsNum(*id*,\ *databaseName*)
      - Contains a count of the number of collections in that database.
@@ -876,7 +876,7 @@ List
    :widths: 50 100
    :header-rows: 1
 
-   * - Parameter
+   * - Metric
      - Description
    * - MongoDB.ListDatabases(*id*)
      - Returns list of databases existing on this server
@@ -888,14 +888,14 @@ Informix
 ========
 
 |product_name| subagent for Informix (further referred to as Informix subagent)
-monitors one or more Informix databases and reports database-related parameters.
+monitors one or more Informix databases and reports database-related metrics.
 
-All parameters available from Informix subagent are collected or calculated once
+All metrics available from Informix subagent are collected or calculated once
 per minute, thus its recommended to set DCI poll interval for these items to 60
-seconds or more. All parameters are obtained or derived from the data available
+seconds or more. All metrics are obtained or derived from the data available
 in Informix system catalogs. Informix subagent does not monitor any of the metrics
 related to lower level database layers, such as database processes. Monitoring of
-such parameters can be achieved through the standard |product_name| functionality.
+such metrics can be achieved through the standard |product_name| functionality.
 
 Pre-requisites
 --------------
@@ -972,20 +972,21 @@ Configuration example in XML format:
    </config>
 
 
-Provided parameters
-~~~~~~~~~~~~~~~~~~~
+Provided metrics
+~~~~~~~~~~~~~~~~
 
-To get a DCI from the subagent, you need to specify the id from the ``informix`` entry in
-configuration file. To specify the id, you need to add it enclosed in brackets to
-the name of the parameter that is being requested (e.g., ``informix.parameter.to.request(**1**)``).
-In the example, the parameter ``informix.parameter.to.request``
-from the database with the id **1** will be returned.
+To get a metric from the subagent, you need to specify the id from the
+``informix`` entry in configuration file. To specify the id, you need to add it
+enclosed in brackets to the name of the metric that is being requested (e.g.,
+``informix.metric.to.request(**1**)``). In the example, the metric
+``informix.metric.to.request`` from the database with the id **1** will be
+returned.
 
 .. list-table::
    :widths: 40 20 20 70
    :header-rows: 1
 
-   * - Parameter
+   * - Metric
      - Arguments
      - Return type
      - Description
@@ -1025,7 +1026,7 @@ MySQL
 =====
 
 |product_name| subagent for MySQL monitoring. Monitors one or more instances of MySQL databases and
-reports various database-related parameters.
+reports various database-related metrics.
 
 MySQL subagent requires MySQL driver to be available in the system.
 
@@ -1102,14 +1103,14 @@ Multi database configuration example:
     Server = 127.0.0.1
 
 
-Provided parameters
--------------------
+Provided metrics
+----------------
 
 .. list-table::
    :widths: 50 100
    :header-rows: 1
 
-   * - Parameter
+   * - Metric
      - Description
    * - MySQL.Connections.Aborted(*id*)
      - aborted connections
@@ -1251,7 +1252,7 @@ PostgreSQL
 ==========
 
 |product_name| subagent for PostgreSQL monitoring. Monitors one or more instances of PostgeSQL servers and
-reports various database-related parameters.
+reports various database-related metrics.
 
 PostgreSQL subagent requires PostgreSQL driver to be available in the system.
 
@@ -1260,7 +1261,7 @@ Pre-requisites
 
 A PostgreSQL user with **CONNECT** right to al least one database on the server.
 
-If the **PostgreSQL.DatabaseSize** parameter should be monitored the user must have the **CONNECT** right to other databases on the server too.
+If the **PostgreSQL.DatabaseSize** metric should be monitored the user must have the **CONNECT** right to other databases on the server too.
 
 
 Starting from the PostgreSQL version 10, the user must have the he role **pg_monitor** assigned.
@@ -1353,25 +1354,25 @@ Multi server configuration example:
     Password = encPassword
 
 
-Parameters
-----------
+Provided Metrics 
+----------------
 
-When loaded, PostgreSQL subagent adds two types of parameters to the agent.
+When loaded, PostgreSQL subagent adds two types of metrics to the agent.
 
-Database server parameters  are common for all databases on the server. These parameters require one argument which is server id from the configuration.
+Database server metrics are common for all databases on the server. These metrics require one argument which is server id from the configuration.
 
-Database parameters  are independent for each database on the server. These parameters require to arguments. The first one is server id from the configuration the second one is name of the database.
+Database metrics are independent for each database on the server. These metrics require two arguments. The first one is server id from the configuration the second one is name of the database.
 If the second argument is missing the name of the maintenance database from the configuration is used.
 
 Alternatively, these two arguments can be specified as one argument in following format: *datanase_name@server_id*. This format is returned by the PostgreSQL.AllDatabases list.
 
-Following table shows the database server parameters:
+Following table shows the database server metrics:
 
 .. list-table::
    :widths: 50 20 100
    :header-rows: 1
 
-   * - 	Parameter
+   * - 	Metric
      - 	Type
      - 	Description
    * - 	PostgreSQL.IsReachable(*id*)
@@ -1465,13 +1466,13 @@ Following table shows the database server parameters:
      - 	Float
      - 	Size of the WAL files (from version 10.0)
 
-Following table shows the database parameters:
+Following table shows the database metrics:
 
 .. list-table::
    :widths: 50 20 100
    :header-rows: 1
 
-   * - 	Parameter
+   * - 	Metric
      - 	Type
      - 	Description
    * - 	PostgreSQL.DBConnections.Active(*id*[, *database*])

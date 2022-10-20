@@ -410,10 +410,10 @@ are periodically scanned using ICMP echo requests.
 Instance discovery
 ------------------
 
-|product_name| can create parameters for :term:`Data Collection Item <DCI>` automatically.
-Instance discovery collects information about node instances like disk mountpoints,
-device list, etc. and automatically creates or removes :term:`DCIs <DCI>` with
-obtained data.
+|product_name| can create metrics names for :term:`Data Collection Item <DCI>`
+automatically. Instance discovery collects information about node instances like
+disk mountpoints, device list, etc. and automatically creates or removes
+:term:`DCIs <DCI>` with obtained data.
 
 
 Security

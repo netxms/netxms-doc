@@ -59,10 +59,10 @@ should produce meaningful output (see example below).
 Parameters
 ----------
 
-When loaded, lm_sensors subagent adds the following parameters:
+When loaded, lm_sensors subagent adds the following metrics:
 
 +---------------------------------------+-----------------------------------------------------------------------------------------------------+
-| Parameter                             | Description                                                                                         |
+| Metric                                | Description                                                                                         |
 +=======================================+=====================================================================================================+
 | LMSensors.Value(*chip*, *label*)      | Current value returned by hardware sensor                                                           |
 +---------------------------------------+-----------------------------------------------------------------------------------------------------+
@@ -117,14 +117,14 @@ DS18x20
 This subagent collects temperature from DS18x20 sensor. Subagent available for Linux
 only. To use this subagent 1-Wire driver should be installed.
 
-Parameters
-----------
+Metrics
+-------
 
 .. list-table::
    :header-rows: 1
    :widths: 50 30 200
 
-   * - Parameter
+   * - Metric
      - Type
      - Meaning
    * - Sensor.Temperature(*)
@@ -168,14 +168,14 @@ RPI
 
 This subagent collects data from Raspberry Pi DHT22 sensor and status of GPIO pins.
 
-Parameters
-----------
+Metrics
+-------
 
 .. list-table::
    :header-rows: 1
    :widths: 90 30 200
 
-   * - Parameter
+   * - Metric
      - Type
      - Meaning
    * - GPIO.PinState(pinNumber)

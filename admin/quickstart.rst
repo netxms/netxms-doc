@@ -321,7 +321,7 @@ menu. And select from drop-down menu :guilabel:`New parameter`.
 CPU usage
 ---------
 
-Add CPU usage metric from agent parameters:
+Add CPU usage metric from agent metrics:
 
   1. Check that as origin is selected |product_name| Agent.
   2. Click on :guilabel:`Select` button
@@ -329,7 +329,7 @@ Add CPU usage metric from agent parameters:
 
   .. figure:: _images/quickstart_search_cpu.png
 
-    Parameter Selection
+    Metric Selection
 
   .. figure:: _images/quickstart_general_cpu.png
 
@@ -348,7 +348,7 @@ Add CPU usage metric from agent parameters:
 
   8. Click :guilabel:`OK`
 
-Add CPU usage metric from SNMP parameters:
+Add CPU usage metric from SNMP metrics:
 
   1. Check that as origin is selected |product_name| Agent.
   2. Click on :guilabel:`Select` button

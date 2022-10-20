@@ -1878,11 +1878,11 @@ Syntax:
 
 .. code-block:: shell
 
-   nxget [options] host [parameter [parameter ...]]
+   nxget [options] host [metric [metric ...]]
 
 Where *host* is the name or IP address of the host running |product_name| agent; and
-*parameter* is a parameter, list or table name, depending on given options. By default,
-nxget will attempt to retrieve the value of only one given parameter, unless *-b* option is given.
+*metric* is a metric, list or table name, depending on given options. By default,
+nxget will attempt to retrieve the value of only one given metric, unless *-b* option is given.
 
 Valid options for nxget
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -1991,7 +1991,7 @@ Get list of supported tables from agent at host 10.0.0.2:
 
    nxget 10.0.0.2 Agent.SupportedTables -l
 
-Get value of *Agent.Uptime* and *System.Uptime* parameters in one request, with output in parameter = value form:
+Get value of *Agent.Uptime* and *System.Uptime* metrics in one request, with output in metric = value form:
 
 .. code-block:: shell
 
@@ -2003,7 +2003,7 @@ Get agent configuration file from agent at host 10.0.0.2:
 
    nxget –C 10.0.0.2
 
-Get value of *System.PlatformName* parameter from agent at host 10.0.0.2, connecting via proxy agent at 172.16.1.1:
+Get value of *System.PlatformName* metric from agent at host 10.0.0.2, connecting via proxy agent at 172.16.1.1:
 
 .. code-block:: shell
 
@@ -2183,7 +2183,7 @@ Data type: Unsigned Integer
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
-Cumulative counter of requests with errors in processing (others than unsupported parameters)
+Cumulative counter of requests with errors in processing (others than unsupported metrics)
 
 
 Agent.GeneratedTraps
@@ -2515,7 +2515,7 @@ Data type: Unsigned Integer
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
-Cumulative counter of requests for unsupported parameters
+Cumulative counter of requests for unsupported metrics
 
 
 Agent.Uptime

@@ -23,12 +23,12 @@ data polling queue. First available data collector will pick up the request and
 gather information from the node according to DCI configuration. If a new value
 was received successfully, it's being stored in the database, and thresholds
 are checked. After threshold checking, data collector is ready for processing
-new request. Processing of a newly received parameter value is outlined on the
+new request. Processing of a newly received metric value is outlined on the
 figure below.
 
 .. figure:: _images/dci_param_proc.png
 
-   Newly received parameter processing
+   Newly received metric processing
 
 It is also possibility to push data to server. If DCI source is set to
 :guilabel:`Push`, server just waits for new values instead of polling from
@@ -57,7 +57,7 @@ Data collection for a node can be configured using management console. To open
 data collection configuration window, right-click on node object in
 :guilabel:`Object Browser` or on a :guilabel:`Network Map`, and click
 :guilabel:`Data Collection Configuration`. You will see the list of configured data
-collection items. From here, you can add new or change existing parameters to
+collection items. From here, you can add new or change existing metrics to
 monitor. Right click on the item will open pop-up menu with all possible
 actions.
 
@@ -76,19 +76,19 @@ Description
 
 Description is a free-form text string describing DCI. It is not used by the
 server and is intended for better information understanding by operators. If
-you use the :guilabel:`Select` button to choose a parameter from the list,
-description field will be filled automatically.
+you use the :guilabel:`Select` button to choose a metric from the list,
+description field will be filled in automatically.
 
 
-Parameter
-~~~~~~~~~
+Metric
+~~~~~~
 
-Name of the parameter of interest, used for making a request to target node.
-For |product_name| agent and internal parameters it will be parameter name, and for
+Name of the metric of interest, used for making a request to target node.
+For |product_name| agent and internal metrics it will be metric name, and for
 SNMP agent it will be an SNMP OID. You can use the :guilabel:`Select` button
-for easier selection of required parameter name.
+for easier selection of required metric name.
 
-Available agent parameter names are obtained during :guilabel:`Configuration poll`.
+Available agent metric names are obtained during :guilabel:`Configuration poll`.
 
 Origin
 ~~~~~~
@@ -123,7 +123,7 @@ Origin of data (method of obtaining data). Possible origins are:
      - Data is obtained by subcribing to MQTT broker topics. 
    * - Network Device Driver
      - Some SNMP drivers (NET-SNMP, RITTAL as of |product_name| v. 3.8) provide
-       parameters for data collection. E.g. NET-SNMP provides information about
+       metrics for data collection. E.g. NET-SNMP provides information about
        storage this way. 
 
 
@@ -137,12 +137,12 @@ a NXSL script launced on the server.
 Data Type
 ~~~~~~~~~
 
-Data type for the parameter. Can be one of the following: :guilabel:`Integer`,
+Data type for the metric. Can be one of the following: :guilabel:`Integer`,
 :guilabel:`Unsigned Integer`, :guilabel:`64-bit Integer`, :guilabel:`64-bit
 Unsigned Integer`, :guilabel:`Float` (floating point number), or
 :guilabel:`String`. Selected data type affects collected data processing - for
 example, you cannot use operations like ``less than`` or ``greater than`` on
-strings. If you select parameter from the list using the :guilabel:`Select`
+strings. If you select metric from the list using the :guilabel:`Select`
 button, correct data type will be set automatically.
 
 Source node
@@ -200,7 +200,7 @@ Status
 :guilabel:`Disabled`, :guilabel:`Not Supported`. Server will collect data only
 if the status is :guilabel:`Active`. If you wish to stop data collection
 without removing :term:`DCI` configuration and collected data, the
-:guilabel:`Disabled` status can be set manually. If requested parameter is not
+:guilabel:`Disabled` status can be set manually. If requested metric is not
 supported by target node, the :guilabel:`Not Supported` status is set by the
 server.
 
@@ -257,11 +257,11 @@ Aggregation options:
 Data Transformations
 --------------------
 
-In simplest case, |product_name| server collects values of specified parameters and
+In simplest case, |product_name| server collects values of specified metrics and
 stores them in the database. However, you can also specify various
 transformations for original value. For example, you may be interested in a
-delta value, not in a raw value of some parameter. Or, you may want to have
-parameter value converted from bytes to kilobytes. All transformations will
+delta value, not in a raw value of some metric. Or, you may want to have
+metric's value converted from bytes to kilobytes. All transformations will
 take place after receiving new value and before threshold processing.
 
 Data transformation consists of two steps. On the first step, delta calculation
@@ -274,7 +274,7 @@ None                No delta calculation performed. This is the default
                     setting for newly created DCI.
 Simple              Resulting value will be calculated as a difference
                     between current raw value and previous raw value.
-                    By raw value is meant the parameter value
+                    By raw value is meant the metric's value
                     originally received from host.
 Average per second  Resulting value will be calculated as a difference
                     between current raw value and previous raw value,
@@ -452,7 +452,7 @@ start with ``DC_``.
 The system will pass the following seven parameters to all events generated as a
 reaction to threshold violation:
 
-#. Parameter name (DCI's name attribute)
+#. Metric name (DCI's name attribute)
 #. DCI description
 #. Threshold value
 #. Actual value
@@ -478,7 +478,7 @@ text, you can use message template like this:
 For events generated on threshold's return to inactive state (default event is
 ``SYS_THRESHOLD_REARMED``), parameter list is different:
 
-#. Parameter name (DCI's name attribute)
+#. Metric name (DCI's name attribute)
 #. DCI description
 #. Unique DCI identifier
 #. Instance (DCI's instance attribute)
@@ -644,8 +644,8 @@ about DCI configuration or usage.
 
 .. _dci-push-parameters-label:
 
-Push parameters
-===============
+Push metrics
+============
 
 |product_name| gives you ability to push DCI values when you need it instead of polling
 them on specific time intervals. To be able to push data to the server, you
@@ -727,7 +727,7 @@ Templates
 What is template
 ----------------
 
-Often you have a situation when you need to collect same parameters from
+Often you have a situation when you need to collect same metrics from
 different nodes. Such configuration making may easily fall into repeating one
 action many times. Things may became even worse when you need to change
 something in already configured DCIs on all nodes - for example, increase
@@ -749,8 +749,8 @@ template object itself, all DCIs created on nodes from this template will be
 deleted as well.
 
 Please note that you can apply an unlimited number of templates to a node - so
-you can create individual templates for each group of parameters (for example,
-generic performance parameters, MySQL parameters, network counters, etc.) and
+you can create individual templates for each group of metrics (for example,
+generic performance metrics, MySQL metrics, network counters, etc.) and
 combine them, as you need.
 
 

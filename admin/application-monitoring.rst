@@ -24,7 +24,7 @@ are supported by |product_name| server :ref:`link to supported database list<sup
 
 This type of Metrics provide DBQuery subagent. This subagent has 2 types of Metrics:
 one that periodically executes SQL queries and returns results and error
-codes as Metric parameters and second execute queries by Metric request(synchronously).
+codes as Metric parameters and second execute queries by Metric request (synchronously).
 SQL queries are specified in the agent configuration. Background query can be also
 executed per request. Synchronously executed query can have parameters that are
 passes to it by DCI configuration.
@@ -35,13 +35,13 @@ passes to it by DCI configuration.
 For time consuming SQL requests it is highly recommended to use background execution.
 Heavy SQL can cause request timeout for synchronous execution.
 
-Parameters
-----------
+Metrics
+-------
 
-When loaded, DBQuery subagent adds the following parameters to agent:
+When loaded, DBQuery subagent adds the following metrics to agent:
 
 +----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| Parameter                              | Description                                                                                                |
+| Metric                                 | Description                                                                                                |
 +========================================+============================================================================================================+
 | DB.Query(*dbid*,\ *query*)             | Result of immediate execution of the query *query* in database identified by *dbid*. Database with given   |
 |                                        | name must be defined in configuration file.                                                                |
@@ -57,7 +57,7 @@ When loaded, DBQuery subagent adds the following parameters to agent:
 | *queryName*                            | Result of immediate execution of query defined in agent config file with name *queryName*.                 |
 +----------------------------------------+------------------------------------------------------------------------------------------------------------+
 | *queryName*\ (\ *param1*, *param2*...) | Result of immediate execution of query defined in agent config file with name *queryName* like             |
-|                                        | ConfigurableQuery parameter. Where *param1*, *param2*... are parameters to bind into defined query.        |
+|                                        | ConfigurableQuery metric. Where *param1*, *param2*... are parameters to bind into defined query.           |
 +----------------------------------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -77,7 +77,7 @@ When loaded, DBQuery subagent adds the following tables to agent:
 | *queryName*                            | Result of immediate execution of query defined in agent config file with name *queryName*.                 |
 +----------------------------------------+------------------------------------------------------------------------------------------------------------+
 | *queryName*\ (\ *param1*, *param2*...) | Result of immediate execution of query defined in agent config file with name *queryName* like             |
-|                                        | ConfigurableQuery parameter. Where *param1*, *param2*... are parameters to bind into defined query.        |
+|                                        | ConfigurableQuery metric. Where *param1*, *param2*... are parameters to bind into defined query.           |
 +----------------------------------------+------------------------------------------------------------------------------------------------------------+
 
 Configuration file

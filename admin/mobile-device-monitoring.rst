@@ -20,7 +20,7 @@ are not collected by server, but pushed from mobile agent.
    :widths: 50 100
    :header-rows: 1
 
-   * - Parameter
+   * - Metric Name
      - Description
    * - MobileDevice.BattaryLevel
      - Battery charging level in percents.

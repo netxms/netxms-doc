@@ -32,7 +32,7 @@ have ``ping.nsm`` subagent enabled.
 
 Results of ICMP response statistic collection for primary IP address are visible
 in :guilabel:`Object Details -> Overview` and are available as internal
-parameters:
+metrics:
 
 * ICMP.ResponseTime.Average
 * ICMP.PacketLoss
@@ -41,7 +41,7 @@ parameters:
 * ICMP.ResponseTime.Min
 
 Results of ICMP response statistic collection for additional targets and
-interfaces are available as internal parameters:
+interfaces are available as internal metrics:
 
 * ICMP.ResponseTime.Average(*)
 * ICMP.PacketLoss(*)
@@ -49,11 +49,11 @@ interfaces are available as internal parameters:
 * ICMP.ResponseTime.Max(*)
 * ICMP.ResponseTime.Min(*)
 
-For example, ``ICMP.PacketLoss(8.8.8.8)`` internal parameter will provide packet
+For example, ``ICMP.PacketLoss(8.8.8.8)`` internal metric will provide packet
 loss for target with IP address 8.8.8.8.
 
 No historical data is stored by default. It's necessary to configure DCIs using
-above mentioned internal parameters to store historical data.
+above mentioned internal metric to store historical data.
 
 
 Ping subagent
@@ -76,7 +76,7 @@ Metrics requested by server
      - Description
    * - Icmp.Ping(*target*, *timeout*, *psize*, *dontfragmentflag*, *retrycount*)
      - ICMP ping response time from *target*. Agent will send echo request as
-       soon as it receives request for parameter's value, and will return
+       soon as it receives request for metric's value, and will return
        response time for that particular request. 
 
        Arguments:
@@ -100,10 +100,10 @@ Metrics requested by server
        Please note that while metrics scheduled by agent just return result of
        background ping process, this metric waits for actual ping completion and
        then returns the result. Because of this behavior, it is not recommended
-       to use **Icmp.Ping** parameter for regular monitoring, only for
+       to use **Icmp.Ping** metric for regular monitoring, only for
        occasional tests. For instant monitoring, you should configure targets
        for background ping and use **Icmp.AvgPingTime** or **Icmp.LastPingTime**
-       parameters to retrieve results.
+       metrics to retrieve results.
 
 
 Metrics scheduled by the agent

@@ -681,6 +681,7 @@ Passing parameters to events
 ============================
 
 The log parser adds parameters to events. For non-Windows platforms the following parameters are provided:
+
 +----------+-------------------------------------------------------+
 | Number   | Description                                           |
 +==========+=======================================================+

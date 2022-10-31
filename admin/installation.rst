@@ -7,6 +7,12 @@ Installation
 Major changes between releases
 ==============================
 
+4.2
+---
+
+NXSL functions 'AgentExecuteAction' and 'AgentExecuteActionWithOutput' renamed to 'AgentExecuteCommand' and 
+'AgentExecuteCommandWithOutput'.
+
 4.1
 ---
 

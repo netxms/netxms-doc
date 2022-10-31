@@ -123,8 +123,8 @@ Database
 
 Database engines supported by |product_name| server:
 
-   * PostgreSQL 9.5, 9.6, 10, 11, 12, 13
-   * PostgreSQL with TimescaleDB 11, 12, 13
+   * PostgreSQL 9.5, 9.6, 10, 11, 12, 13, 14
+   * PostgreSQL with TimescaleDB 11, 12, 13, 14
    * MySQL 5.6, 5.7, 8.0
    * MariaDB 10.1, 10.2, 10.3, 10.4
    * Oracle 12c, 18c, 19c

@@ -637,7 +637,7 @@ The following drivers are provided by default with |product_name| installation:
        * host (default: 127.0.0.1)
        * port (default: 13001)
 
-   * - MicfosoftTeams
+   * - MicrosoftTeams
      - Notification channel driver for Microsoft Teams. Configuration parameters:
 
        * ThemeColor - team color in RGB, default: FF6A00 (optional parameter)

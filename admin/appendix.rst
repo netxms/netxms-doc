@@ -305,7 +305,8 @@ Agent configuration file (nxagentd.conf)
        should return data in *metric=value* format each pair in new line.
      - No defaults
    * - ExternalMetricProviderTimeout
-     - Timeout in seconds for external metric provider execution
+     - Timeout in seconds for external metric provider and background-polled
+       external table execution
      - 30
    * - ExternalMetricShellExec
      - ExternalMetricShellExec has same meaning as ExternalMetric with exception

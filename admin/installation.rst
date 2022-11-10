@@ -88,8 +88,8 @@ However, we test and officially support only some of them.
 
 Supported platforms for |product_name| server and agent:
 
-   * Debian 9 (Stretch), 10 (Buster)
-   * Ubuntu 18.04 LTS (Bionic), 20.04 LTS (Focal Fossa)
+   * Debian 9 (Stretch), 10 (Buster), 11 (Bullseye)
+   * Ubuntu 18.04 LTS (Bionic), 20.04 LTS (Focal Fossa), 22.04 LTS (Jammy Jellyfish)
    * Linux Mint 19.3 (Tricia), Linux Mint Debian Edition 4
    * Devuan ASCII
    * Red Hat Enterprise Linux 8
@@ -314,9 +314,9 @@ Web Management Console
 ^^^^^^^^^^^^^^^^^^^^^^
 
 |product_name| web interface is java based and should be deployed into servlet container to
-run. Minimal supported versions: Jetty 9.3.28, Tomcat 8.5. Supported Java version is 11 or 15. 
+run. Minimal supported versions: Jetty 10, Tomcat 9. Supported Java version is 11 or 15. 
 
-  1. Install one of servlet containers that support servlet-api version 3.
+  1. Install one of servlet containers that support servlet-api version 4.
 
   2. Download latest version of WAR file from Web Interface Binaries section
      http://www.netxms.org/download/ (named nxmc-VERSION.war, for example

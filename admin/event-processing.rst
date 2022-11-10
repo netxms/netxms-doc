@@ -661,6 +661,15 @@ The following drivers are provided by default with |product_name| installation:
        * Recipient name - channel name defined in :guilabel:`Channels` section or incoming webhook URL
        * Message - message to be sent
 
+   * - MQTT
+     - Driver for sending messages to MQTT broker. Sending is done by
+       |product_name| server process. When sending, MQTT topic is specified in
+       recipient field, value in message body field. Configuration parameters:
+
+       * hostname (default: 127.0.0.1)
+       * port (defalut: 1883)
+       * login 
+       * password 
 
    * - MyMobile
      - SMS driver for MyMobile API gateways. Configuration parameters:

@@ -856,6 +856,9 @@ metrics, it's value will be read from the agent cache. Main purpose is to
 provide data from long-running processes, or retrieve multiple values by running
 a command only once.
 
+Timeout for command execution is defined by `ExternalMetricProviderTimeout`
+parameter in agent configuration file. 
+
 Script should print one or more "Metric=Value" pairs to standard output. Multiple
 pairs should be separated by new line. If metric takes a parameter, it should be
 included in "Metric(...)".
@@ -889,6 +892,9 @@ regularly in the background (in this case server gets cached data). Second
 option is useful when command for table creation is taking a long time to avoid
 timeout. To collect table in the background "PollingInterval" configuration
 option is required.
+
+Timeout for background operation is defined by `ExternalMetricProviderTimeout`
+parameter in agent configuration file. 
 
 Each table line is separated with new line symbol. First line in returned text
 should contain name of columns, subsequent lines contain table data. Parameters

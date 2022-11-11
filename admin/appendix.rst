@@ -159,7 +159,7 @@ Agent configuration file (nxagentd.conf)
    * - CreateCrashDumps
      - Enable (yes) or disable (no) creation of agent's crash dumps. Windows
        only
-     - no
+     - yes
    * - DataDirectory
      - Directory where additional agent files (log file monitoring policy files,
        agent configuration policy files, user agent configuration, local agent

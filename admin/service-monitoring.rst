@@ -84,7 +84,7 @@ This subagent will add this metric to list of metrics available on agent:
   be used without [ ].
 
 
-Service.Check metric returns the following values:
+NetworkService.Check metric returns the following values:
 
 .. list-table::
    :widths: 15 50
@@ -106,7 +106,7 @@ HTTP check example:
 
 .. code-block:: cfg
 
-   Service.Check(https://inside.test.ru/,^HTTP/(1\\.[01]|2) 200 .*)
+   NetworkService.Check(https://inside.test.ru/,^HTTP/(1\\.[01]|2) 200 .*)
 
 "^HTTP/(1\\.[01]|2) 200 .*" - this is default value and can be omitted in the expression.
 

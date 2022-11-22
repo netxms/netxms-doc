@@ -111,3 +111,55 @@ from cached data is returned to server.
 successful retrieved document parsed into tree form and values of requested
 elements returned to server. No additional configuration should be required on
 agent side.
+
+
+Examples
+========
+
+This example will show how to use the same web service json otput for instances and 
+then to collect data. 
+
+So we assume that configuration is already done and we have web service with 
+"WebService1" name, that returns next json:
+
+.. code-block:: json 
+
+   [
+      {
+         "name": "Object1",
+         "status": "Online",
+         "position": "Front"
+      },
+      {
+         "name": "Object2",
+         "position": "Back"
+      },
+      {
+         "name": "Object3",
+         "status": "Ofline",
+         "position": "Front"
+      }
+   ]
+
+Form this JSON we want to get separate DCI with each object, that will collect 
+status if exist and will set status to Ofline if object does not contain status 
+parameter. 
+
+DCI will have next configuration:
+
+   * Instance discovery method: Web Service
+   * Web service request: WebService1:[.[].name]
+     
+     This will create array with names, each name will be takes as an instance:
+
+          .. code-block:: json 
+
+             ["Object1", "Object2", "Object3"]
+
+   * Origin: Web service
+   * Metric: (.[] | select(.name == "{instance}").status ) // "failed"
+     
+     This configuration will get status for object with name like {instance} 
+     (will be replaced by real name on instance discovery) and will return 
+     "failed" if this object does not contain status. 
+     

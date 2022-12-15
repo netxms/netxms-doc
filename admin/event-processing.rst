@@ -712,6 +712,14 @@ The following drivers are provided by default with |product_name| installation:
        * password (default: admin)
        * mode (PDU or TEXT, default: PDU)
 
+   * - Shell
+     - Driver executes shell commands on the server. Configuration parameter:
+
+       * Command
+
+       In the command ${recipient}, ${subject} and ${text} macros will be
+       correspondingly replaced with values of recipient, subject and text. 
+
    * - Slack
      - Driver for slack.com service. Configuration parameters:
 

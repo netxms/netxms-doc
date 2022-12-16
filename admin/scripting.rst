@@ -24,7 +24,11 @@ Scripts from Script Library can be accessed as:
   3. executed from server console "execute `scriptName`\ "
   4. executed as post action for pols - then script name should start from "`Hook::`\ " and then
      should be name of poll like "Hook::ConfigurationPoll".
+  5. executed form "Script" source DCI
 
+
+.. note::
+   All parameters provided to script are accessible via $ARGS array.
 
 .. _execute_server_script:
 
@@ -36,6 +40,9 @@ and afterwards saved, can be taken from the script library, can be used modified
 script library and afterwards saved or saved as. If this view is opened on a node, then in the
 script is available ``$node`` variable with node object.
 
+.. note::
+   All parameters provided to script are accessible via $ARGS array.
+   
 .. figure:: _images/execute_server_script.png
 
 NXSL

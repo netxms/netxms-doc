@@ -48,5 +48,6 @@ Administrator Guide
    advanced
    schedule
    scripting
+   high-availability-setup
    appendix
    glossary

@@ -204,7 +204,7 @@ Compiling MIBs
 
 .. code-block:: shell
 
-  nxmibc -d /usr/share/netxms/mibs -o /usr/share/netxms/mibs/netxms.mib
+  nxmibc -d /usr/share/netxms/mibs -o /var/lib/netxms/netxms.mib
 
 Parameters recognized by nxmibc:
 

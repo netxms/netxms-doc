@@ -164,19 +164,16 @@ Agent
 Agent resource usage is negligible and can be ignored.
 
 
-Installing from deb repository
+Installing from DEB repository
 ==============================
 
-We host public APT repository http://packages.netxms.org/ for all deb-based distributions (Debian, Ubuntu, Mint, Raspbian, etc.).
+We host public APT repository at http://packages.netxms.org/ for most deb-based distributions (Debian, Ubuntu, Mint, Raspbian, etc.).
 Packages are signed, and you'll need to install additional encryption key for signature verification.
-
-Two components are supported - "main" and "unstable".
 
 Supported URLs (*CODENAME* should be replaced with output of `lsb_release -sc`):
 
   * Debian, LMDE - "deb http://packages.netxms.org/debian CODENAME main"
   * Ubuntu, Mint - "deb http://packages.netxms.org/ubuntu CODENAME main"
-  * Devuan - "deb http://packages.netxms.org/devuan CODENAME main"
   * Raspbian - "deb http://packages.netxms.org/raspbian CODENAME main"
 
 
@@ -335,11 +332,26 @@ Web management console produces log file. For Tomcat it's located at
 Inspect this log file if you encounter errors when running the web console. 
 
 
-Installing on Red Hat, Fedora, CentOS or ScientificLinux
-========================================================
+Installing from RPM repository
+==============================
 
-RPM packages are not released at the moment. Please refer to section :ref:`Installing from source <install_from_sources>`.
+We provide RPM packages for RHEL7/8 and Fedora36/37, both amd64 and aarch64.
+If you need build for another system, please contact us for support or check this section: :ref:`Installing from source <install_from_sources>`.
 
+RHEL7 / RHEL8 repository is at https://packages.netxms.org/epel/.
+
+Fedora 36/27 repository  is at https://packages.netxms.org/fedora/.
+
+Complete repository file and signing key is available in each corresponding root.
+
+Add repository
+------------------------
+
+DNF provide simple way to add repository:
+
+   dnf config-manager --add-repo https://packages.netxms.org/epel/netxms.repo
+
+Once added, you can install any package with "dnf install" (e.g. "dnf install netxms-agent").
 
 Installing on Windows
 =====================

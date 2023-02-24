@@ -325,7 +325,7 @@ polling process hook script is being executed.
 
    * - Type
      - Purpose
-     - Interval configuration variable
+     - Interval server configuration variable
      - Hook script
    * - Status
      - Determine current status of an object 
@@ -339,8 +339,8 @@ polling process hook script is being executed.
      - Objects.ConfigurationPollingInterval
      - Hook::ConfigurationPoll
    * - Configuration (full)
-     - Same as usual configuration poll but sets all capability flags to No and
-       rechecks them. (can only be executed manually)
+     - Same as usual configuration poll but resets previously detected
+       capabilities and detects them again. (can only be executed manually)
      - 
      -
    * - Interface Names
@@ -374,6 +374,12 @@ polling process hook script is being executed.
      - Searches for new nodes by polling information about neighbor IP addresses from known nodes
      - NetworkDiscovery.PassiveDiscovery.Interval
      - Hook::DiscoveryPoll
+
+
+Polling intervals can be set for specific objects by adding a custom attribute named
+``SysConfig:nnn`` where ``nnn`` is the name of server configuration variable e.g.:
+``SysConfig:Objects.ConfigurationPollingInterval``. 
+
 
 
 .. _basic-concepts-dci:

@@ -304,6 +304,7 @@ important enough to show up as alarm.
 
    Event flow inside the monitoring system
 
+
 .. _concepts_polling:
 
 Polling
@@ -312,35 +313,68 @@ Polling
 For some type of objects |product_name| server start gathering status and
 configuration information as soon as they are added to the system. These object
 types are: nodes, access points, conditions, clusters, business services, zones
-(if a zone has more then one proxy, proxy health check is being performed).
-This process called *polling*. There are multiple polling types, usually
-performed with different intervals:
+(if a zone has more then one proxy, proxy health check is being performed). This
+process called *polling*. There are multiple polling types, each having specific
+execution intervals (set by server configuration variables). In the end of
+polling process hook script is being executed. 
 
-+--------------------+----------------------------------------------------------------------------------------------+
-| Type               | Purpose                                                                                      |
-+====================+==============================================================================================+
-| Status             | Determine current status of an object                                                        |
-+--------------------+----------------------------------------------------------------------------------------------+
-| ICMP               | Ping nodes and gather response time statistics (cannot be executed manually)                 |
-+--------------------+----------------------------------------------------------------------------------------------+
-| Configuration      | Determine current configuration of an object (list of interfaces, supported protocols, etc.) |
-|                    | By default executes auto bind scripts for templates and containers, use                      |
-|                    | "Objects.AutobindOnConfigurationPoll" server configuration variable to disable.              |
-+--------------------+----------------------------------------------------------------------------------------------+
-| Configuration full | Same as usual configuration poll but sets all capabilitie flags to No and rechecks them.     |
-+--------------------+----------------------------------------------------------------------------------------------+
-| Topology           | Gather information related to network topology                                               |
-+--------------------+----------------------------------------------------------------------------------------------+
-| Routing            | Gather information about IP routing                                                          |
-+--------------------+----------------------------------------------------------------------------------------------+
-| Instance Discovery | Verify all DCIs created by instance discovery process                                        |
-+--------------------+----------------------------------------------------------------------------------------------+
-| Network Discovery  | Searches for new nodes by polling information about neighbor IP addresses from known nodes   |
-+--------------------+----------------------------------------------------------------------------------------------+
-| Interface Names    | Updates names of the interfaces                                                              |
-+--------------------+----------------------------------------------------------------------------------------------+
-| Automatic Binding  | Checks if Containers and Teplates need to bind or unbind nodes.                              |
-+--------------------+----------------------------------------------------------------------------------------------+
+
+.. list-table::
+   :widths: 15 25 40 20
+   :header-rows: 1
+
+   * - Type
+     - Purpose
+     - Interval configuration variable
+     - Hook script
+   * - Status
+     - Determine current status of an object 
+     - Objects.StatusPollingInterval
+     - Hook::StatusPoll
+   * - Configuration
+     - Determine current configuration of an object (list of interfaces,
+       supported protocols, etc.) By default executes auto bind scripts for
+       templates and containers, use "Objects.AutobindOnConfigurationPoll"
+       server configuration variable to disable.
+     - Objects.ConfigurationPollingInterval
+     - Hook::ConfigurationPoll
+   * - Configuration (full)
+     - Same as usual configuration poll but sets all capability flags to No and
+       rechecks them. (can only be executed manually)
+     - 
+     -
+   * - Interface Names
+     - Updates names of the interfaces. This operation also happens during
+       Configuration Poll. (can only be executed manually)
+     - 
+     -
+   * - Topology
+     - Gather information related to network link layer topology   
+     - Topology.PollingInterval
+     - Hook::TopologyPoll
+   * - Routing
+     - Gather information about IP routing (cannot be executed manually)  
+     - Topology.RoutingTableUpdateInterval
+     - 
+   * - ICMP
+     - Ping nodes and gather response time statistics (cannot be executed
+       manually)
+     - ICMP.PollingInterval
+     -
+   * - Instance Discovery
+     - Perform Instance Discovery to add/remove DCIs
+     - DataCollection.InstancePollingInterval
+     - Hook::InstancePoll
+   * - Automatic Binding
+     - Checks and bind or unbind Containers, Templates and Context Dashboards to
+       nodes according to auto-bind script. 
+     - Objects.AutobindPollingInterval
+     - 
+   * - Network Discovery
+     - Searches for new nodes by polling information about neighbor IP addresses from known nodes
+     - NetworkDiscovery.PassiveDiscovery.Interval
+     - Hook::DiscoveryPoll
+
 
 .. _basic-concepts-dci:
 

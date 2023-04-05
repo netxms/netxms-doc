@@ -648,7 +648,6 @@ Below is list of available |product_name| subagents:
   * Database Query
   * :ref:`DS18x20 <ds18x20-subagent>`
   * File Manager
-  * :ref:`ECS <ecs-subagent>`
   * :ref:`Informix <informix-subagent>`
   * :ref:`Java <java-subagent>`
   * :ref:`lm-sensors <hardware-monitoring>`
@@ -658,7 +657,6 @@ Below is list of available |product_name| subagents:
   * :ref:`Network Service Check <netsvc-subagent>`
   * :ref:`Oracle <oracle-subagent>`
   * Ping
-  * :ref:`Port Check <portcheck-subagent>`
   * :ref:`Raspberry Pi <rpi-subagent>`
   * :ref:`UPS <ups-monitoring>`
   * Windows Performance

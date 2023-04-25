@@ -51,7 +51,7 @@ else:
     html_theme = 'sphinx_rtd_theme'
 
 #html_logo = '_images/logo.png'
-html_favicon = 'favicon.ico'
+html_favicon = '../favicon.ico'
 html_static_path = ['_static']
 html_show_sourcelink = False
 html_show_sphinx = False

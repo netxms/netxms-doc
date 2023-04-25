@@ -1,9 +1,10 @@
-_build
-_build_html
-.DS_Store
-.vscode
-*.swp
+*.mo
 *.pyc
 *.pyo
-*.mo
+*.swp
+.DS_Store
+.venv
 .vscode
+.vscode
+_build
+_build_html

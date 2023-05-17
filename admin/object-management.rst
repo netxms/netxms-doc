@@ -114,8 +114,8 @@ applied simultaneously to all nodes.
 :guilabel:`Take screenshot` for now halfway implemented functionality. For now screenshot can
 be taken only from Windows machines.
 
-Description of :guilabel:`Edit agent's configuration` functionality can be found in :ref:`edit_agent_configuration_remotely`
-chapter.
+Description of :guilabel:`Edit agent's configuration` functionality can be found
+in :ref:`edit_agent_configuration_remotely` chapter.
 
 Poll options:
 
@@ -268,10 +268,13 @@ be organized accordingly. Cluster object provides option to aggregate collected 
 cluster nodes. More about data aggregation can be found there: :ref:`data-agregation`.
 
 Besides default property pages cluster has also:
- - :guilabel:`Cluster Resources` - there can be configured IP resources of the cluster. Further on :guilabel:`Cluster` view of :guilabel:`Object Details` will be shown current owner of resources
+ - :guilabel:`Cluster Resources` - there can be configured IP resources of the
+   cluster. Further on :guilabel:`Cluster` view of :guilabel:`Object Details`
+   will be shown current owner of resources
  - :guilabel:`Cluster Networks`
  - :guilabel:`Poling`
- - :guilabel:`Dashboards` - there dashboard can be associated with object, so on right click associated dashboards will be displayed in the list
+ - :guilabel:`Dashboards` - there dashboard can be associated with object, so on
+   right click associated dashboards will be displayed in the list
  - :guilabel:`External Resources`
  - :guilabel:`Location`
  - :guilabel:`Map Appearance`
@@ -386,12 +389,14 @@ Object can be accessed by this ID.
 Custom attributes
 -----------------
 
-Every object can have custom attributes defined either by user or integrated application
-via |product_name| API. Custom attributes distinguished by names (an attribute name can contain up
-to 127 printable characters), and have string values of unlimited length. However, if you wish
-to access custom attributes in :term:`NXSL` scripts as properties of node object, you should name them
-conforming to NXSL identifier naming constraints. To create or change value of custom attribute
-manually, right-click an object in |product_name| console, and select :menuselection:`Properties --> Custom Attributes tab`.
+Every object can have custom attributes defined either by user or integrated
+application via |product_name| API. Custom attributes distinguished by names (an
+attribute name can contain up to 127 printable characters), and have string
+values of unlimited length. However, if you wish to access custom attributes in
+:term:`NXSL` scripts as properties of node object, you should name them
+conforming to NXSL identifier naming constraints. To create or change value of
+custom attribute manually, right-click an object in |product_name| console, and
+select :menuselection:`Properties --> Custom Attributes tab`.
 
 .. figure:: _images/object_custom_attributes.png
 
@@ -404,15 +409,21 @@ Each object has it's own status calculation properties. Status of an object calc
 
    * Polling results
    * Status of child objects (e.g. interfaces of node, nodes under container)
-   * Active alarms, associated with the object (after an alarm is resolved or terminated, it no longer affects object status)
-   * Value of status :term:`DCIs<DCI>` (DCI that has ``Use this DCI for node status calculation`` property enabled)
+   * Active alarms, associated with the object (after an alarm is resolved or
+     terminated, it no longer affects object status)
+   * Value of status :term:`DCIs<DCI>` (DCI that has ``Use this DCI for node
+     status calculation`` property enabled)
 
-There are multiple options for status calculation that can be configured for specific objects or globally. 
+There are multiple options for status calculation that can be configured for
+specific objects or globally. 
 
 Status calculation has two configuration parts:
 
    - status propagation - the way how status from object is pushed to upper objects;
-   - status calculation - the way how object is calculating it's status based on statuses propagated by children objects. Once child object status is calculated most critical status is taken from status of underlying objects, associated alarms and status :term:`DCIs<DCI>`.
+   - status calculation - the way how object is calculating it's status based on
+     statuses propagated by children objects. Once child object status is
+     calculated most critical status is taken from status of underlying objects,
+     associated alarms and status :term:`DCIs<DCI>`.
 
 .. figure:: _images/object_status_calculation.png
 
@@ -486,14 +497,16 @@ If "Multiple thresholds" is selected and configuration is next:
  - Major 25
  - Critical 35
 
-In this case status of Container will be Major as bot thresholds for Minor and Major are reached and most critical from them is taken.
+In this case status of Container will be Major as bot thresholds for Minor and
+Major are reached and most critical from them is taken.
 
 
 Comments
 --------
 
 Each object in :guilabel:`Object Tree` can have comment. Comment can be set in
-Properties of the object. It is possible to use :ref:`macros for event processing<event-processing-macros>` in the comments.
+Properties of the object. It is possible to use :ref:`macros for event
+processing<event-processing-macros>` in the comments.
 
 .. figure:: _images/object_comments.png
 
@@ -550,11 +563,16 @@ The following object access rights can be granted:
      - Modify access control list for this object. Please note that user with
        this access right can grant any other access rights to own account.
    * - Download files
-     - Allow user to download files from this node (from paths defined by filemng subagent settings in agent configuration file). This access right is also checked when downloading or tail of file is done from object tools.
+     - Allow user to download files from this node (from paths defined by
+       filemngr subagent settings in agent configuration file). This access right
+       is also checked when downloading or tail of file is done from object
+       tools.
    * - Upload files
-     - Allow user to upload files to this node (to paths defined by filemng subagent settings in agent configuration file). 
+     - Allow user to upload files to this node (to paths defined by filemngr
+       subagent settings in agent configuration file). 
    * - Manage files
-     - Allow user to move, rename, delete files on this node (in paths defined by filemng subagent settings in agent configuration file).
+     - Allow user to move, rename, delete files on this node (in paths defined
+       by filemngr subagent settings in agent configuration file).
    * - Control maintenance mode
      - 
    * - Take screenshot
@@ -633,7 +651,8 @@ This tool will execute command on an agent node and will show it's output if
    * - Command generates output
      - If this option is selected then command execution will open a window with it's output.
    * - This tool requires confirmation before execution
-     - If chosen a Yes/No pop-up with text from "Confirmation message" field will be shown before execution of tool.
+     - If chosen a Yes/No pop-up with text from "Confirmation message" field
+       will be shown before execution of tool.
    * - Confirmation message
      - Contains message that will be shown in confirmation pop-up.
    * - Show this tool in node commands
@@ -952,7 +971,8 @@ This tool provide full range of capabilities that are available thought NXSL scr
    * - Disable Object Tool
      - If chosen, tool is not shown in node menu.
    * - Run in container context
-     - If this option is selected, then tool will run only for selected container, not affecting children nodes.
+     - If this option is selected, then tool will run only for selected
+       container, not affecting children nodes.
 
 
 
@@ -961,8 +981,9 @@ This tool provide full range of capabilities that are available thought NXSL scr
 Macro Substitution
 ------------------
 
-Action, file download, local command, and URL tool types allows macro substitution. Any string starting with percent sign considered macro name and is expanded.
-The following macros recognized:
+Action, file download, local command, and URL tool types allows macro
+substitution. Any string starting with percent sign considered macro name and is
+expanded. The following macros recognized:
 
 .. list-table::
    :widths: 25 75
@@ -982,19 +1003,24 @@ The following macros recognized:
    * - ``%n``
      - Name of event source object.
    * - ``%u``
-     - IP address of event source object for use in URL. Expands into [addr] for IPv6 and addr for IPv4.
+     - IP address of event source object for use in URL. Expands into [addr] for
+       IPv6 and addr for IPv4.
    * - ``%U``
      - User name of user that launched the object tool from user interface
    * - ``%v``
      - |product_name| server's version.
    * - ``%[name]``
-     - Value returned by script. You should specify name of the script from script library.
+     - Value returned by script. You should specify name of the script from
+       script library. It's possible to specify script entry point separating it
+       by ``/``, e.g. to call a function named ``calculate``:
+       ``%[name/calculate]``. Script parameters can be specified in brackets,
+       e.g.: ``%[name(123,"A textual parameter")]``
    * - ``%{name}``
      - Value of custom attribute.
    * - ``%{name:default_value}``
-     - Value of custom attribute. If such custom attribute does not exists on a particular
-       node, default_value is taken. If custom attribute exists, but has empty value,
-       this empty value is taken.
+     - Value of custom attribute. If such custom attribute does not exists on a
+       particular node, default_value is taken. If custom attribute exists, but
+       has empty value, this empty value is taken.
    * - ``%(name)``
      - Value of input field.
    * - ``%<name>``
@@ -1002,7 +1028,8 @@ The following macros recognized:
    * - ``%%``
      - Insert ``%`` character.
 
-If object tool called from alarm's pop-up menu the following additional macros are available:
+If object tool called from alarm's pop-up menu the following additional macros
+are available:
 
 .. list-table::
    :widths: 25 75
@@ -1059,7 +1086,8 @@ There are 5 types of filtering. Show object tool:
   2. if node supports SNMP
   3. if node SNMP OID matches with provided string
   4. if nodes OS matches provided comma separated regular expression list
-  5. if provided :term:`template <Template>` name matches provided comma separated regular expression list
+  5. if provided :term:`template <Template>` name matches provided comma
+     separated regular expression list
 
 .. figure:: _images/obj_tool_filter.png
 
@@ -1093,9 +1121,9 @@ response message.
 Input fields
 ~~~~~~~~~~~~
 
-There is option to add input fields for object tool commands. This fields are defined on the
-:guilabel:`Input fields` view and added to command in ``%(name)`` format. More about formats
-can be found in :ref:`object_tools_macro` chapter.
+There is option to add input fields for object tool commands. This fields are
+defined on the :guilabel:`Input fields` view and added to command in ``%(name)``
+format. More about formats can be found in :ref:`object_tools_macro` chapter.
 
 Input field can be one of this types:
 
@@ -1110,7 +1138,8 @@ Input field can be one of this types:
 Predefined Object Tools
 -----------------------
 
-|product_name| is delivered with a number of predefined Object Tools. Here is the list of them:
+|product_name| is delivered with a number of predefined Object Tools. Here is
+the list of them:
 
 .. list-table::
    :widths: 35 25 70 30

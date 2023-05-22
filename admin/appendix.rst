@@ -1862,8 +1862,9 @@ nxdevcfg
 nxencpasswd
 -----------
 
-This tool can be used to encrypt passwords stored
-in server and agent configuration files.
+This tool can be used to obfuscate passwords stored in server and agent
+configuration files as well as various places in the system, e.g. ssh passwords,
+notification channel passwords, etc.
 
 nxevent
 -------

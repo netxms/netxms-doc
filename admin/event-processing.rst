@@ -744,7 +744,11 @@ The following drivers are provided by default with |product_name| installation:
        * FromName (default: NetXMS Server)
        * IsHTML (no - do not use HTML, yes - use HTML; default: no)
        * Login (default: none)
-       * Password (default: none)       
+       * Password (default: none). Passwords encrypted by
+         :ref:`nxencpasswd-tools-label` are supported. If password provided by
+         your email service is 44- or 88-character base64 string, it will be
+         interpreted as password encrypter by ``nxencpasswd``, in this case
+         encrypt password provided by your email service with ``nxencpasswd``.
        * Port (default: 25 if TLSMode=NONE, 465 if TLSMode=TLS))
        * Server (default: localhost)
        * TLSMode (NONE - No TLS, TLS - Enforced TLS, STARTTLS - Opportunistic TLS; default: NONE)

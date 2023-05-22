@@ -736,18 +736,18 @@ The following drivers are provided by default with |product_name| installation:
        * https (1 - use https, 0 - do not use https)
 
    * - SMTP
-     - Driver to send notifications using SMTP protocol. 
+     - Driver to send notifications using SMTP protocol. Encryption and
+       authentication are supported. Driver is using libcurl library to send
+       emails. Mail encoding is always utf8. 
 
-       * Server (default: localhost)
-       * RetryCount (default: 1)
-       * Port (default: 25)
-       * LocalHostName
-       * FromName (default: NetXMS Server)
        * FromAddr (default: netxms@localhost)
-       * MailEncoding (default: utf8)
-       * IsHTML (0 - do not use HTML, 1 - use HTML; default: 0)
+       * FromName (default: NetXMS Server)
+       * IsHTML (no - do not use HTML, yes - use HTML; default: no)
+       * Login (default: none)
+       * Password (default: none)       
+       * Port (default: 25 if TLSMode=NONE, 465 if TLSMode=TLS))
+       * Server (default: localhost)
        * TLSMode (NONE - No TLS, TLS - Enforced TLS, STARTTLS - Opportunistic TLS; default: NONE)
-       * EnableSSLTrace (true - enable additional SSL Trace logging to server log; default: false)
 
    * - SNMPTrap
      - Driver to send notifications as SNMP traps. Driver configuration parameters:

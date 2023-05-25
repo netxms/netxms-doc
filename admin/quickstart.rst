@@ -5,9 +5,10 @@
 Quick start
 ###########
 
-In this section will be described basic configuration that should be done
-after server and agent clean install. Also will be shown monitoring configuration
-for some common metrics like CPU of FS.
+In this section will be described basic configuration that should be done after
+server and agent clean install. Also will be shown monitoring configuration for
+some common metrics like CPU of FS.
+
 
 Default Credentials
 ===================
@@ -18,15 +19,18 @@ Login: admin
 
 Password: netxms
 
+
 Basic agent configuration
 =========================
 
-Minimal configuration that should be set for agent is server address and path
-to log file. Action differ depending on a platform where agent is installed.
-On Windows systems configuration file is automatically generated and populated
-by installer, on UNIX systems it should be created/edited manually.
+Minimal configuration that should be set for agent is server address and path to
+log file. Action differ depending on a platform where agent is installed. On
+Windows systems configuration file is automatically generated and populated by
+installer, on UNIX systems it should be created/edited manually.
 
-Minimal required configuration is done for agent.
+See below for editing agent configuration file on Windows and UNIX/Linux
+platforms. 
+
 
 Windows
 -------
@@ -35,7 +39,8 @@ In case if while installation MasterServer was set correctly no action is
 required from user.
 
 Automatically generated configuration file can be found there:
-:file:`installation directory\\etc\\nxagentd.conf`.
+:file:`installation directory\\etc\\nxagentd.conf` (by default
+:file:`C:\\NetXMS\\etc\\nxagentd.conf`.)
 
 Configuration file for Windows should look like this:
 
@@ -47,11 +52,13 @@ Configuration file for Windows should look like this:
     MasterServers = 127.0.0.1
     LogFile = {syslog}
 
+
 UNIX/Linux
 ----------
 
-After agent is installed on a UNIX/Linux system it is required to create/edit file
-:file:`/etc/nxagentd.conf`. This file should contain at least this information:
+After agent is installed on a UNIX/Linux system it is required to create/edit
+file :file:`/etc/nxagentd.conf`. This file should contain at least this
+information:
 
 .. code-block:: cfg
 
@@ -65,69 +72,33 @@ After agent is installed on a UNIX/Linux system it is required to create/edit fi
 Basic server tuning
 ===================
 
-Server has 2 types of configuration: configuration file parameters and server
+Server has two types of configuration: configuration file parameters and server
 configuration variables.
 
-For server configuration file minimal requirements are path to log file, database
-driver name and all required credentials depending on database. Location and
-required actions depends on what OS is used. More about OS specific configuration
-search in OS subsections of this chapter.
+For server configuration file minimal requirements are path to log file,
+database driver name and all required credentials depending on database.
+Location and required actions depends on what OS is used. More about OS specific
+configuration search in OS subsections of this chapter.
 
 List of possible database drivers:
 
-  * mssql.ddr Driver for Microsoft SQL database.
-  * mysql.ddr Driver for MySQL database.
-  * odbc.ddr ODBC connectivity driver (you can connect to MySQL, PostgreSQL, MS SQL, and Oracle via ODBC).
-  * oracle.ddr Driver for Oracle database.
-  * pgsql.ddr Driver for PostgreSQL database.
-  * sqlite.ddr Driver for embedded SQLite database.
+  * ``mssql`` Driver for Microsoft SQL database.
+  * ``mysql`` Driver for MySQL database.
+  * ``odbc`` ODBC connectivity driver (you can connect to MySQL, PostgreSQL, MS SQL, and Oracle via ODBC).
+  * ``oracle`` Driver for Oracle database.
+  * ``pgsql`` Driver for PostgreSQL database.
+  * ``sqlite`` Driver for embedded SQLite database.
 
-There are quite a few important server parameters to be set right after installation.
-These parameters are accessible through the :guilabel:`Server Configuration` window
-in the console. To open it, click on :menuselection:`Configuration --> Server Configuration`.
-To edit a setting, double click on the row in the table or right-click and select
-:guilabel:`Edit`. The following parameters may need to be changed:
+See below for editing server configuration file on Windows and UNIX/Linux platforms. 
 
-.. tabularcolumns:: |p{0.4 \textwidth}|p{0.6 \textwidth}|
-
-================================ ==============================================
-Parameter                        Description
-================================ ==============================================
-``PollerThreadPoolMaxSize``      This parameter represents maximum thread pool
-                                 size. From this pool will be taken threads for
-                                 all types of polls: Status
-                                 poll, Configuration poll, etc. In case of
-                                 big load on a server number of threads will be
-                                 increased till this size. When load come back
-                                 to normal, number of threads will be
-                                 automatically decreased to base size.
-                                 If you plan to monitor large number of hosts
-                                 increase this parameter from the default value
-                                 to approximately 1/5 of host count.
-``PollerThreadPoolBaseSize``     This parameter represents base thread pool
-                                 size. From this pool will be taken threads for
-                                 all types of polls: Status
-                                 poll, Configuration poll, etc. This is minimal
-                                 number of threads that will always run.
-                                 If you plan to monitor large number of hosts
-                                 increase this parameter from the default value
-                                 to approximately 1/10 of host count.
-``NumberOfDataCollectors``       If you plan to monitor large number of hosts,
-                                 to approximately 1/10 – 1/5 of host number.
-                                 Use larger value if you plan to gather many
-                                 DCIs from each host.
-``EnableSyslogDaemon``           Set this parameter to 1 if you want to
-                                 enable |product_name| built-in syslog server.
-================================ ==============================================
-
-Minimal required configuration is done for server.
 
 Windows
 -------
 
 For Windows systems this information is added to configuration file while
-installation procedure. It can be check that all data was set correctly
-in this file: :file:`'installation directory'\\etc\\netxmsd.conf`.
+installation procedure. It can be check that all data was set correctly in this
+file: :file:`'installation directory'\\etc\\netxmsd.conf` (by default
+:file:`C:\\NetXMS\\etc\\netxmsd.conf`.)
 
 Example of sample Windows configuration for mysql:
 
@@ -163,30 +134,47 @@ Configuration file example for oracle database:
   LogFile = /var/log/netxmsd
 
 
-SMTP
-====
+Server configuration variables
+------------------------------
 
-SMTP configuration is done to create actions that will send e-mails on
-defined events. This configuration is done through the
-:guilabel:`Server Configuration` window in the console. To open it, click
-on :menuselection:`Configuration --> Server Configuration`. To edit a
-setting, double click on the row in the table or right-click and select
-:guilabel:`Edit`. The following parameters may need to be changed:
+There are quite a few important server parameters to be set right after
+installation. These parameters are accessible through the :guilabel:`Server
+Configuration` window in the management client. To open it, click on
+:menuselection:`Configuration --> Server Configuration`. To edit a setting,
+double click on the row in the table or right-click and select :guilabel:`Edit`.
+The following parameters may need to be changed:
 
 .. tabularcolumns:: |p{0.4 \textwidth}|p{0.6 \textwidth}|
 
 ================================ ==============================================
 Parameter                        Description
 ================================ ==============================================
-``SMTPFromAddr``                 Address that will be shown as a sender address
-                                 when notification from |product_name| will come.
-``SMTPFromName``                 Name that will be shown as a sender name
-                                 when notification from |product_name| will come.
-``SMTPRetryCount``               Number of retries that |product_name| will try to do
-                                 in case if message sending will fail.
-``SMTPServer``                   Server IP address or DNS name where |product_name|
-                                 will send request for message dispatch.
+``PollerThreadPoolMaxSize``      This parameter represents maximum thread pool
+                                 size. This pool provides threads for
+                                 all types of polls: Status
+                                 poll, Configuration poll, etc. In case of
+                                 big load on a server number of threads will be
+                                 increased up to this size. When load come back
+                                 to normal, number of threads will be
+                                 automatically decreased down to base size.
+                                 If you plan to monitor large number of hosts, 
+                                 increase this parameter from the default value
+                                 to approximately 1/5 of host count.
+``PollerThreadPoolBaseSize``     This parameter represents base thread pool
+                                 size. This is minimal
+                                 number of threads that will always run.
+                                 If you plan to monitor large number of hosts
+                                 increase this parameter from the default value
+                                 to approximately 1/10 of host count.
+``NumberOfDataCollectors``       If you plan to monitor large number of hosts,
+                                 increase this number
+                                 to approximately 1/10 – 1/5 of host count.
+                                 Use larger value if you plan to gather many
+                                 DCIs from each host.
+``EnableSyslogDaemon``           Set this parameter to 1 if you want to
+                                 enable |product_name| built-in syslog server.
 ================================ ==============================================
+
 
 .. _quick_start_credentials_SNMP:
 
@@ -197,6 +185,7 @@ For :term:`SNMP` can be configured some default values for authorization. It is
 required if you will have many :term:`SNMP` devices with similar credentials.
 
 This information is set on :guilabel:`Network Discovery` view.
+
 
 SNMP Communities
 ----------------
@@ -211,36 +200,68 @@ SNMP USM Credentials
 In this section you can add SNMP version 3 credentials to be tested during
 connection to the SNMP device that requires authorization.
 
+
+Notification channels
+=====================
+
+Various ways how to send notifications - email, messengers, SMS, etc are
+configured via Notification Channels. This allows to create actions that will
+send notification on defined events. 
+
+Notification channels are configured on :menuselection:`Configuration -->
+Notification Channels`. Each channel has textual configuration, e.g. for SNMP
+driver configuration may look like this:
+
+.. code-block:: cfg
+
+  Server=smtp.example.com
+  FromAddr=netxms@example.com
+  FromName=NetXMS Server
+  IsHTML=no
+  TLSmode=TLS
+  Login=smtp-username
+  Password=password
+
+
+Information about notification channel configuration parameters is available
+here: :ref:`notification-channels`. 
+
+
 Actions and Alarms
 ==================
 
-In this section will be shown how to configure alarm and email notifications
-generation on predefined SYS_THRESHOLD_REACHED event. And alarm resolve on
-SYS_THRESHOLD_REARMED event.
+In this section will be shown how to configure alarm and notification channel
+notifications generation on predefined SYS_THRESHOLD_REACHED event and alarm
+resolution on SYS_THRESHOLD_REARMED event.
 
-First it should be created :guilabel:`Send E-Mail` action in
-:guilabel:`Action Configuration` view. There we will set recipient of e-mail,
-subject and body of e-mail. In body of e-mail will be used
-:ref:`event-processing-macros`. It means that when message will be sent, macros
-"%n" will be substituted with name of the node and "%m" will be substituted with
-event message. Value of event message is personal for each event and can be found in
-event description.
+Once a notification channel is configured, an action is created in
+:menuselection:`Configuration --> Actions`. Recipient address is specified in
+action's properties, it's possible to set several recipients separated by
+semicolon (``;``). Subject and message fields support
+:ref:`event-processing-macros` - this means that when message will be sent,
+macros "%n" will be substituted with name of the node and "%m" will be
+substituted with event message. Value of event message is specific for each
+event and can be found in event template (:menuselection:`Configuration -->
+Event Templates`).
 
-.. figure:: _images/send_email_action.png
+.. figure:: _images/action_send_notification.png
 
-Next step is to add processing policies. It is done in
-:guilabel:`Event Processing Policy` view. We will add this rules before all other rules
-as it it is planed that this rules will be most commonly used ones.
+Next step is to configure event processing policies. It is done in
+:menuselection:`Configuration --> Event Processing Policy`. A number of rules is
+included out-of-the-box, including rules that react to SYS_THRESHOLD_REACHED and
+SYS_THRESHOLD_REARMED events. In these rules we will add email sending action
+that we have configured above. 
 
-It should be added rule that will send email and create Alarm on SYS_THRESHOLD_REACHED
-rule from any node. In alarm message is added key that will be used in alarm
-resolve. Key is combined from text id "SYS_THRESHOLD_REACHED\ _", id of DCI and
-ID of node. This should be enough to resolve correct alarm. After that should be
-created one more rule for alarm resolve with the same key as for alarm creation.
-After all configuration is done :guilabel:`Event Processing Policy` view should be
+Alarm created by the rule for SYS_THRESHOLD_REACHED has a key which is composed
+from "SYS_THRESHOLD_REACHED\ _" text, id of DCI and ID of node. This allows to
+resolve or terminate alarms automatically - for example rule for
+SYS_THRESHOLD_REARMED automatically terminates alarm using the key. 
+
+After all configuration is done :guilabel:`Event Processing Policy` should be
 saved.
 
 .. figure:: _images/quickstart_epp.png
+
 
 Passive discovery
 =================
@@ -263,6 +284,7 @@ In our configuration we will not use filter to add all node available on our
 network and turn on option to use SNMP trap source address for discovery.
 After all configuration is done remember to save it.
 
+
 Notes
 -----
 
@@ -281,6 +303,7 @@ following requirements:
 - All your network devices credentials(community string and password for v3)
   should be added to default credential list in :guilabel:`Network Discovery`
   view.
+
 
 Manually add node
 =================
@@ -302,6 +325,7 @@ will be placed into appropriate subnets automatically. As soon as you add a new
 node to the system, |product_name| server will start regular polling to determine the
 node status.
 
+
 Add DCI thresholds
 ==================
 
@@ -317,6 +341,7 @@ event generation based on collected data.
 
 To add DCI for a node open :guilabel:`Data Collection Configuration` view from object
 menu. And select from drop-down menu :guilabel:`New parameter`.
+
 
 CPU usage
 ---------

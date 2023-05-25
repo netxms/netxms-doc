@@ -5,9 +5,9 @@
 Quick start
 ###########
 
-In this section will be described basic configuration that should be done after
-server and agent clean install. Also will be shown monitoring configuration for
-some common metrics like CPU of FS.
+In this section will describe basic configuration to be performed after server
+and agent clean install. Configuration for monitoring some common metrics like
+CPU usage of file system free space will also be shown.
 
 
 Default Credentials

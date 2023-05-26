@@ -329,7 +329,7 @@ generation and termination based on events. This chapter describes data
 collection and event generation based on collected data.
 
 To add DCI for a node select the node, open :guilabel:`Data Collection` tab and
-click ➕ button on the toolbar.
+click ``+`` button on the toolbar.
 
 
 CPU usage

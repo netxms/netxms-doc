@@ -7,31 +7,34 @@ Event processing
 Introduction
 ============
 
-|product_name| is event based monitoring system. Events can come from different sources
-(polling processes (status, configuration, discovery, and data collection), :term:`SNMP`
-traps, from NXSL scripts and directly from external applications via client library).
-All events all are forwarded to |product_name| Event Queue. 
+|product_name| is event based monitoring system. Events can come from different
+sources - polling processes (status, configuration, discovery), data collection,
+:term:`SNMP` traps, from NXSL scripts and directly from external applications
+via client library. All events are forwarded to |product_name| Event Queue. 
 
-|product_name| Event Processor can process events from Event Queue in 
-either sequential or parallel mode. In sequential mode events are processed one-by-one 
-which guarantees that events will be processed in the same sequence as they arrive
-onto |product_name| server. For installation where a lot of events could be generated
+|product_name| Event Processor can process events from Event Queue in either
+sequential or parallel mode. In sequential mode events are processed one-by-one
+which guarantees that events will be processed in the same sequence as they
+arrive into the queur. For installation where a lot of events could be generated
 in a short period of time this mode can be a bottleneck. 
 
-Parallel processing mode allows to process events in several parallel threads, thus 
-allowing to scale horizontally and to increase processing performance. Number of 
-threads for parallel processing is set by :guilabel:`Events.Processor.PoolSize` 
-server configuration parameter. 
+Parallel processing mode allows to process events in several parallel threads,
+thus allowing to scale horizontally and to increase processing performance.
+Number of threads for parallel processing is set by
+:guilabel:`Events.Processor.PoolSize` server configuration parameter. 
 
-Event Processing Rules can read/write persistent storage and custom attributes, create/terminate alarms, 
-can run scripts that are checking other node statuses and care should be taken to
-ensure that no race condition would occur when performing parallel processing.
+Event Processing Rules can read/write persistent storage and custom attributes,
+create/terminate alarms, can run scripts that are checking other node statuses
+and care should be taken to ensure that no race condition would occur when
+performing parallel processing.
 
-Correct operation is ensured by properly setting :guilabel:`Events.Processor.QueueSelector` 
-server configuration parameter. This parameter contains macros that are expanded when
-an event is created. Events that have same QueueSelector string will be processed 
-sequentially by one and the same event processing thread, thus ensuring that there will 
-be no race condition between these events. 
+Correct operation is ensured by properly setting
+:guilabel:`Events.Processor.QueueSelector` server configuration parameter. This
+parameter contains macros that are expanded when an event is created. Events
+that have same QueueSelector string will be processed sequentially by one and
+the same event processing thread, thus ensuring that there will be no race
+condition between these events. 
+
 
 Event Processing Policy
 =======================
@@ -50,9 +53,9 @@ change this behavior by setting Stop Processing flag on a rule. If this flag
 is set for a rule and that rule is matched, subsequent rules (with higher rule 
 number) will not be processed.
 
-:guilabel:`Event Processing Policy` rules are managed using :guilabel:`Event 
-Processing Policy Editor`. To access the :guilabel:`Event Processing Policy Editor`
-window, press ``F4`` or select :menuselection:`Tools --> Event Processing Policy` menu.
+:guilabel:`Event Processing Policy` rules are managed using :guilabel:`Event
+Processing Policy Editor` available in :guilabel:`Configuration --> Event
+Processing Policy`. 
 
 Only one user of |product_name| server can access :guilabel:`Event Processing 
 Policy Editor` window at a time. Other users will receive ``Component locked`` 
@@ -747,11 +750,11 @@ The following drivers are provided by default with |product_name| installation:
        * Password (default: none). Passwords encrypted by
          :ref:`nxencpasswd-tools-label` are supported. If password provided by
          your email service is 44- or 88-character base64 string, it will be
-         interpreted as password encrypter by ``nxencpasswd``, in this case
+         interpreted as a password encrypted by ``nxencpasswd``, in this case
          encrypt password provided by your email service with ``nxencpasswd``.
-       * Port (default: 25 if TLSMode=NONE, 465 if TLSMode=TLS))
+       * Port (default: 465 if TLSMode=TLS, 25 otherwise))
        * Server (default: localhost)
-       * TLSMode (NONE - No TLS, TLS - Enforced TLS, STARTTLS - Opportunistic TLS; default: NONE)
+       * TLSMode (NONE - No TLS (default), TLS - Enforced TLS, STARTTLS - Opportunistic TLS)
 
    * - SNMPTrap
      - Driver to send notifications as SNMP traps. Driver configuration parameters:

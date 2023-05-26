@@ -176,31 +176,6 @@ Parameter                        Description
 ================================ ==============================================
 
 
-.. _quick_start_credentials_SNMP:
-
-SNMP Defaults
-=============
-
-For :term:`SNMP` can be configured some default values for authorization. It is
-required if you will have many :term:`SNMP` devices with similar credentials.
-
-This information is set on :guilabel:`Network Discovery` view.
-
-
-SNMP Communities
-----------------
-
-In this section you can add SNMP community strings to be tested during
-connection to the SNMP device that requires authorization.
-
-
-SNMP USM Credentials
---------------------
-
-In this section you can add SNMP version 3 credentials to be tested during
-connection to the SNMP device that requires authorization.
-
-
 Notification channels
 =====================
 
@@ -230,15 +205,15 @@ here: :ref:`notification-channels`.
 Actions and Alarms
 ==================
 
-In this section will be shown how to configure alarm and notification channel
-notifications generation on predefined SYS_THRESHOLD_REACHED event and alarm
-resolution on SYS_THRESHOLD_REARMED event.
+In this section we will configure alarm automatic creation and termination and
+message sending via a notification channel on predefined SYS_THRESHOLD_REACHED
+and SYS_THRESHOLD_REARMED events.
 
-Once a notification channel is configured, an action is created in
+Given that a notification channel is configured, we can create an action in
 :menuselection:`Configuration --> Actions`. Recipient address is specified in
 action's properties, it's possible to set several recipients separated by
 semicolon (``;``). Subject and message fields support
-:ref:`event-processing-macros` - this means that when message will be sent,
+:ref:`event-processing-macros` - in below example when message will be sent,
 macros "%n" will be substituted with name of the node and "%m" will be
 substituted with event message. Value of event message is specific for each
 event and can be found in event template (:menuselection:`Configuration -->
@@ -263,6 +238,21 @@ saved.
 .. figure:: _images/quickstart_epp.png
 
 
+.. _quick_start_credentials_SNMP:
+
+SNMP Defaults
+=============
+
+If you have a number of :term:`SNMP` devices with same credentials on your
+network, you can configure default community strings and authorization
+credentials. This information is set in :guilabel:`Configuration -> Network
+Credentials`.
+
+When performing configuration poll, provided commynity strings, USM credentials
+and network ports will be tried sequentially until a combination that allows
+comminication with a device is found. 
+
+
 Passive discovery
 =================
 
@@ -270,11 +260,11 @@ It is recommended to enable passive discovery when it is required to add all nod
 in local network. In case if |product_name| server has access to switches and routers
 via SNMP, all devices in network will be added automatically by discovery process.
 
-To enable passive network discovery open :guilabel:`Network Discovery` view.
-There in :guilabel:`General` section select :guilabel:`Passive only` option and
-check that all default SNMP credentials are set as described in
-:ref:`quick_start_credentials_SNMP` section. Other options that can be set
-depending on requirements:
+To enable passive network discovery open :guilabel:`Configuration --> Network
+Discovery`. There in :guilabel:`General` section select :guilabel:`Passive only`
+option. Network discovery will be using default SNMP credentials that were
+discussed above in :ref:`quick_start_credentials_SNMP` section. Other options
+that can be set depending on requirements:
 
   * Option to use SNMP trap source for further network discovery
   * Option to set filer that will define rules for not adding nodes to
@@ -291,29 +281,28 @@ Notes
 If you have enabled automatic network discovery, wait for initial network
 discovery completion. This process can take time, depending on size and
 complexity of your network. For large networks, we recommend that you let
-|product_name| run over night to gather the majority of network information available.
-You can watch discovery progress in a real time using |product_name| Management
-Console. Go to :guilabel:`Object Browser` or open default network map and see
-for new devices and networks.
+|product_name| run over night to gather the majority of network information
+available. Once devices are discovered, they appear under appropriate subnets in
+the :guilabel:`Network` perspective. 
 
 Please note that for successful network discovery your network must meet the
 following requirements:
 
 - |product_name| server must have access to switches and routers via SNMP.
-- All your network devices credentials(community string and password for v3)
-  should be added to default credential list in :guilabel:`Network Discovery`
-  view.
+- All your network devices credentials (community string and credentials for
+  SNMP v3) should be added to default credential list in :guilabel:`Network
+  Credentials`.
 
 
 Manually add node
 =================
 
-If the automatic network discovery does not detect all of your hosts or
-devices, or you decide not to use network discovery at all, you may need to
-manually add monitored nodes to the system. The easiest way to accomplish this
-is to right-click on :guilabel:`Infrastructure Services` in the
-:guilabel:`Objects` pane and select :guilabel:`Create node`. You will be
-presented with the following dialog window:
+If the automatic network discovery does not detect all of your hosts or devices,
+or you decide not to use network discovery at all, you may need to manually add
+monitored nodes to the system. The easiest way to accomplish this is to
+right-click on :guilabel:`Infrastructure Services` in the
+:guilabel:`Infrastructure` perspective and select :guilabel:`Create node`. You
+will be presented with the following dialog window:
 
 .. figure:: _images/create_node.png
 
@@ -326,21 +315,21 @@ node to the system, |product_name| server will start regular polling to determin
 node status.
 
 
-Add DCI thresholds
-==================
+Data Collection items
+=====================
 
-In this section is described how to configure CPU usage monitoring using agent metric and
-using SNMP metric and interface incoming traffic. There will be also shown threshold
-configuration for each DCI. This threshold will generate SYS_THRESHOLD_REACHED event
-when defined condition is meet and SYS_THRESHOLD_REARMED when collected data exists
-range of condition.
+In this section we will add data collection items (DCIs) for CPU usage
+monitoring and interface incoming traffic via |product_name| agent or SNMP.
+Threshold configuration for these DCIs will be shown. This threshold will
+generate SYS_THRESHOLD_REACHED event when defined condition is met and
+SYS_THRESHOLD_REARMED when collected data value returns to normal.
 
-Earlier we already described how to configure email notifications and alarm generation,
-resolve based on this events. In this chapter is described data collection and
-event generation based on collected data.
+Earlier we already described how to configure notification sending and alarm
+generation and termination based on events. This chapter describes data
+collection and event generation based on collected data.
 
-To add DCI for a node open :guilabel:`Data Collection Configuration` view from object
-menu. And select from drop-down menu :guilabel:`New parameter`.
+To add DCI for a node select the node, open :guilabel:`Data Collection` tab and
+click ➕ button on the toolbar.
 
 
 CPU usage
@@ -349,7 +338,8 @@ CPU usage
 Add CPU usage metric from agent metrics:
 
   1. Check that as origin is selected |product_name| Agent.
-  2. Click on :guilabel:`Select` button
+  2. Click on :guilabel:`Select` button - list of available agent metrics will
+     open. Note: this list is populated on configuration poll. 
   3. Type in the input box "CPU"
 
   .. figure:: _images/quickstart_search_cpu.png
@@ -377,7 +367,7 @@ Add CPU usage metric from SNMP metrics:
 
   1. Check that as origin is selected |product_name| Agent.
   2. Click on :guilabel:`Select` button
-  3. Type in the input box ".1.3.6.1.4.1.9.9.109.1.1.1.1.4"(this OID can may be not
+  3. Type in the input box ".1.3.6.1.4.1.9.9.109.1.1.1.1.4" (this OID can may be not
      available for some devices)
   4. Click :guilabel:`Walk`
 
@@ -411,17 +401,18 @@ Add CPU usage metric from SNMP metrics:
   10. Click :guilabel:`OK`
 
 
-Now you configured data collection of metric :guilabel:`System.CPU.Usage` that
-will be collected every 60 seconds, data will be stored for 30 days, with 1 threshold
+Now you configured data collection of metric for CPU usage that will be
+collected every 60 seconds, data will be stored for 30 days, with 1 threshold
 that will be activated when CPU usage is mote than 85%.
 
 
 Interface traffic
 -----------------
 
-There is shortcut to create all required DCIs for interface traffic. Select interfaces
-for which should be created traffic collection DCIs and select from drop-down menu
-:guilabel:`Create data collection items`. There can be created automatically all
-required DCIs by selecting required checkbooks.
+There is shortcut to create all required DCIs for interface traffic for nodes
+where you have either |product_name| agent or SNMP. Select interfaces for which
+should be created traffic collection DCIs and select :guilabel:`Create data
+collection items` from context menu. Select checkboxes for the metrics that you
+need - DCIs will be created automatically.
 
 .. figure:: _images/quickstart_create_trafic_dci.png

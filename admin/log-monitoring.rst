@@ -183,7 +183,9 @@ In file and folder names the following macros can be used:
        The file is also parsed on agent startup and when log parsing policy is
        reapplied.
      - 0
-
+   * - followSymlinks
+     - Follow symlinks.
+     - 0
 
 .. _log-monitoring-macros:
 

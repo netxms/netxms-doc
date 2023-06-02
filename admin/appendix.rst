@@ -919,7 +919,7 @@ Configuration`
     - No
   * - BusinessServices.Check.AutobindClassFilter
     - Class filter for automatic creation of business service checks.
-    - AccessPoint,Cluster,Interface,NetworkService,Node
+    - AccessPoint, Cluster, Interface, NetworkService, Node
     - No
   * - BusinessServices.Check.Threshold.DataCollection
     - Default threshold for business DCI service checks
@@ -1233,10 +1233,6 @@ Configuration`
     - Time period for collecting ICMP statistics (in number of polls).
     - 60
     - No
-  * - InternalCA
-    - Enable/disable internal certificate authority.
-    - false
-    - Yes
   * - Jira.IssueType
     - Jira issue type
     - Task
@@ -1481,7 +1477,9 @@ Configuration`
     - No
   * - NetworkDiscovery.UseDNSNameForDiscoveredNodes
     - Enable/disable the use of DNS name instead of IP address as primary name
-      for newly discovered nodes.
+      for newly discovered nodes. If enabled, server will do back resolve of IP
+      address, and then resolve obtained name back to IP address. Only if this
+      IP address will match the original one, DNS name will be used.
     - false
     - No
   * - NetworkDiscovery.UseFQDNForNodeNames
@@ -1515,11 +1513,35 @@ Configuration`
   * - NXSL.EnableFileIOFunctions
     - Enable/disable server-side NXSL functions for file I/O (such as OpenFile,
       DeleteFile, etc.).
-    - 0
+    - false
+    - No
+  * - Objects.AccessPoints.ContainerAutoBind
+    - Enable/disable container auto binding for access points. 
+    - false
+    - No
+  * - Objects.AccessPoints.TemplateAutoApply
+    - Enable/disable template auto apply for access points. 
+    - false
+    - No
+  * - Objects.Assets.AllowDeleteIfLinked
+    - Enable/disable deletion of linked assets. 
+    - false
     - No
   * - Objects.AutobindOnConfigurationPoll
     - Enable/disable automatic object binding on configuration polls.
-    - 1
+    - true
+    - No
+  * - Objects.AutobindPollingInterval
+    - Interval in seconds between automatic object binding polls. 
+    - 3600
+    - No
+  * - Objects.Clusters.ContainerAutoBind
+    - Enable/disable container auto binding for clusters.
+    - false
+    - No
+  * - Objects.Clusters.TemplateAutoApply
+    - Enable/disable template auto apply for clusters.
+    - false
     - No
   * - Objects.Conditions.PollingInterval
     - Interval in seconds between polling (re-evaluating) of condition objects.
@@ -1529,14 +1551,6 @@ Configuration`
     - Interval in seconds between configuration polls.
     - 3600
     - Yes
-  * - Objects.Clusters.ContainerAutoBind
-    - Enable/disable container auto binding for clusters.
-    - 0
-    - No
-  * - Objects.Clusters.TemplateAutoApply
-    - Enable/disable template auto apply for clusters.
-    - 0
-    - No
   * - Objects.DeleteUnreachableNodesPeriod
     - Delete nodes which were unreachable for a number of days specified by this
       parameter. If this parameter is set to 0 then unreachable nodes will never
@@ -1549,8 +1563,13 @@ Configuration`
     - Yes
   * - Objects.Interfaces.DefaultExpectedState
     - Default expected state for new interface objects.
-    - 1
-    - Yes
+    - AUTO
+    - No
+  * - Objects.Interfaces.Enable8021xStatusPoll
+    - Globally enable or disable checking of 802.1x port state during status
+      poll. 
+    - true
+    - No
   * - Objects.Interfaces.NamePattern
     - Custom name pattern for interface objects. This field supports macros.
       E.g. if set to ``%n%{suffix}``, interface name will be composed from
@@ -1563,12 +1582,20 @@ Configuration`
         - 1 - Use aliases instead of names, when possible
         - 2 - Concatenate alias and name to form interface object name
         - 3 - Concatenate name and alias to form interface object name
-    - 0 (Always use name)
+    - Don't use aliases
     - No
   * - Objects.Interfaces.UseIfXTable
     - Enable/disable the use of SNMP ifXTable instead of ifTable for interface
       configuration polling. See :ref:`snmp` for more information.
-    - 1
+    - true
+    - No
+  * - Objects.MobileDevices.ContainerAutoBind
+    - Enable/disable container auto binding for mobile devices. 
+    - false
+    - No
+  * - Objects.MobileDevices.TemplateAutoApply
+    - Enable/disable template auto apply for mobile devices. 
+    - false
     - No
   * - Objects.NetworkMaps.DefaultBackgroundColor
     - Default background color for new network map objects (as RGB value).
@@ -1587,31 +1614,109 @@ Configuration`
   * - Objects.Nodes.FallbackToLocalResolver
     - Enable/disable fallback to server''s local resolver if node address cannot
       be resolved via zone proxy.
-    - 0
+    - false
     - No
   * - Objects.Nodes.ResolveDNSToIPOnStatusPoll
     - Enable/disable resolve DNS to IP on status poll.
+    - Never
+    - No
+  * - Objects.Nodes.ResolveDNSToIPOnStatusPoll.Interval
+    - Number of status polls between resolving primary host name to IP, if
+      Objects.Nodes.ResolveDNSToIPOnStatusPoll set to "Always".
     - 0
-    - Yes
+    - No
   * - Objects.Nodes.ResolveNames
     - Resolve node name using DNS, SNMP system name, or host name if current
       node name is it's IP address.
-    - 1
+    - true
+    - No
+  * - Objects.Nodes.Resolver.AddressFamilyHint
+    - Address family hint for node DNS name resolver.
+    - None
     - No
   * - Objects.Nodes.SyncNamesWithDNS
     - Enable/disable synchronization of node names with DNS on each
       configuration poll.
-    - 0
-    - No
-  * - Objects.Security.CheckTrustedObjects
-    - Enable/disable checking of trusted nodes list for cross-node data
-      collection (using Proxy Node DCI attribute).
     - false
     - No
+  * - Objects.PollCountForStatusChange
+    - The number of consecutive unsuccessful polls required to declare interface
+      as down.
+    - 1
+    - Yes
+  * - Objects.ResponsibleUsers.AllowedTags
+    - Allowed tags for responsible users (Comma-separated list).
+    - 
+    - No
+  * - Objects.Security.CheckTrustedObjects
+    - Enable/disable trusted objects checks for cross-object access. 
+    - false
+    - No
+  * - Objects.Sensors.ContainerAutoBind
+    - Enable/disable container auto binding for sensors. 
+    - false
+    - No
+  * - Objects.Sensors.TemplateAutoApply
+    - Enable/disable template auto apply for sensors. 
+    - false
+    - No
+  * - Objects.StatusCalculation.CalculationAlgorithm
+    - Default alghorithm for calculation object status from it's DCIs, alarms
+      and child objects. Possible values are:
+
+        - Most critical
+        - Single threshold. Threshold value is defined by
+          StatusSingleThreshold parameter.
+        - Multiple thresholds. Threshold values are defined by
+          StatusThresholds parameter.
+    - Most critical
+    - Yes
   * - Objects.StatusCalculation.FixedStatusValue
     - Value for status propagation if ''StatusPropagationAlgorithm'' server
       configuration parameter is set to ''2 - Fixed''.
     - 0
+    - Yes
+  * - Objects.StatusCalculation.PropagationAlgorithm
+    - Default algorithm for status propagation (how object's status is affected
+      by it's child object statuses). Possible values are:
+
+        - Unchanged
+        - Fixed. Status value is defined by FixedStatusValue parameter.
+        - Relative with offset. Offset value is defined by StatusShift
+          parameter.
+        - Translated. Status translation is defined by StatusTranslation
+          parameter.
+    - Unchanged
+    - Yes
+  * - Objects.StatusCalculation.Shift
+    - Status shift value for **Relative** propagation algorithm.
+    - 0
+    - Yes
+  * - Objects.StatusCalculation.SingleThreshold
+    - Threshold value (in %) for **Single threshold** status calculation
+      algorithm.
+    - 75
+    - Yes
+  * - Objects.StatusCalculation.Thresholds
+    - Threshold values for **Multiple thresholds** status calculation algorithm.
+      Every byte (from left to right) of this hex number express threshold
+      values for warning, minor, major and critical statuses.
+    - 503C2814 (80%, 60%, 40%, 20%)
+    - Yes
+  * - Objects.StatusCalculation.Translation
+    - Values for **Translated** status propagation algorithm. Every byte (from
+      left to right) of this hex number defines status translation for Warning,
+      Minor, Major and Critical statuses. Status values are:
+
+        - 1 - Warning
+        - 2 - Minor
+        - 3 - Major
+        - 4 - Critical
+    - 01020304
+    - Yes
+  * - Objects.StatusPollingInterval
+    - Interval in seconds between status polls.
+    - 60
     - Yes
   * - Objects.Subnets.DefaultSubnetMaskIPv4
     - Default mask for synthetic IPv6 subnets.
@@ -1627,59 +1732,43 @@ Configuration`
       process.
     - false
     - Yes
-  * - PasswordComplexity
-    - Set of flags to enforce password complexity (see :ref:`password-policy`
-      for more details).
-    - 0
-    - No
-  * - PasswordExpiration
-    - Password expiration time in days. If set to 0, password expiration is
-      disabled.
-    - 0
-    - No
-  * - PasswordHistoryLength
-    - Number of previous passwords to keep. Users are not allowed to set
-      password if it matches one from previous passwords list.
-    - 0
-    - No
-  * - PollCountForStatusChange
-    - The number of consecutive unsuccessful polls required to declare interface
-      as down.
-    - 1
+  * - Objects.SyncInterval
+    - Interval in seconds between writing object changes to the database.
+    - 60
     - Yes
-  * - RADIUSAuthMethod
+  * - RADIUS.AuthMethod
     - RADIUS authentication method to be used (PAP, CHAP, MS-CHAPv1, MS-CHAPv2).
     - PAP
     - No
-  * - RADIUSNumRetries
+  * - RADIUS.NumRetries
     - The number of retries for RADIUS authentication.
     - 5
     - No
-  * - RADIUSPort
+  * - RADIUS.Port
     - Port number used for connection to primary RADIUS server.
     - 1645
     - No
-  * - RADIUSSecondaryPort
+  * - RADIUS.SecondaryPort
     - Port number used for connection to secondary RADIUS server.
     - 1645
     - No
-  * - RADIUSSecondarySecret
+  * - RADIUS.SecondarySecret
     - Shared secret used for communication with secondary RADIUS server.
     - netxms
     - No
-  * - RADIUSSecondaryServer
+  * - RADIUS.SecondaryServer
     - Host name or IP address of secondary RADIUS server.
     - none
     - No
-  * - RADIUSSecret
+  * - RADIUS.Secret
     - Shared secret used for communication with primary RADIUS server.
     - netxms
     - No
-  * - RADIUSServer
+  * - RADIUS.Server
     - Host name or IP address of primary RADIUS server.
     - none
     - No
-  * - RADIUSTimeout
+  * - RADIUS.Timeout
     - Timeout in seconds for requests to RADIUS server
     - 3
     - No
@@ -1694,16 +1783,6 @@ Configuration`
   * - ReportingServer.Port
     - The port of the reporting server.
     - 4710
-    - Yes
-  * - RoamingServer
-    - Enable/disable roaming mode for server (when server can be disconnected
-      from one network and connected to another or IP address of the server can
-      change)
-    - 0
-    - No
-  * - RoutingTableUpdateInterval
-    - Interval in seconds between reading routing table from node.
-    - 300
     - Yes
   * - Scheduler.TaskRetentionTime
     - Period (in seconds) after which non-recurring scheduled tasks (e.g.
@@ -1722,6 +1801,15 @@ Configuration`
         - 32 - Blowfish-128
     - 63
     - Yes
+  * - Server.Color
+    - Identification color for this server. Used in status bar of management
+      console.
+    -
+    - No
+  * - Server.CommandOutputTimeout
+    - Time (in seconds) to wait for output of a local command object tool.
+    - 60
+    - No
   * - Server.EscapeLocalCommands
     - Enable/disable TAB and new line characters replacement by \t \n \r in
       execute command on management server action.
@@ -1736,6 +1824,20 @@ Configuration`
   * - Server.MessageOfTheDay
     - Message to be shown when a user logs into the console.
     -
+    - No
+  * - ServerName
+    - Name of this server. Displayed in status bar of management console.
+    -
+    - No
+  * - Server.RoamingMode
+    - Enable/disable roaming mode for server (when server can be disconnected
+      from one network and connected to another or IP address of the server can
+      change)
+    - true
+    - No
+  * - Server.Security.2FA.TrustedDeviceTTL
+    - TTL (in seconds) for 2FA trusted device. 
+    - 0
     - No
   * - Server.Security.CaseInsensitiveLoginNames
     - Enable/disable case insensitive login names.
@@ -1768,53 +1870,72 @@ Configuration`
       applied only if per-user setting is not defined.
     - 0
     - No
-  * - ServerColor
-    - Identification color for this server. Used in status bar of management
-      console.
-    -
+  * - Server.Security.PasswordComplexity
+    - Set of flags to enforce password complexity (see :ref:`password-policy`
+      for more details).
+    - 0
     - No
-  * - ServerCommandOutputTimeout
-    - Time (in seconds) to wait for output of a local command object tool.
-    - 60
+  * - Server.Security.PasswordExpiration
+    - Password expiration time in days. If set to 0, password expiration is
+      disabled.
+    - 0
     - No
-  * - ServerName
-    - Name of this server. Displayed in status bar of management console.
-    -
+  * - Server.Security.PasswordHistoryLength
+    - Number of previous passwords to keep. Users are not allowed to set
+      password if it matches one from previous passwords list.
+    - 0
     - No
-  * - SNMP.Traps.AllowVarbindsConversion
-    - Allows/disallows conversion of SNMP trap OCTET STRING varbinds into hex
-      strings if they contain non-printable characters.
-    - 1
+  * - Server.Security.RestrictLocalConsoleAccess
+    - If enabled, restrict access to local server console (via nxagm command
+      line tool) only to authenticated users with server console access rights.
+    - true
+    - No
+  * - SNMP.Codepage
+    - Default server SNMP codepage
+    - 
     - No
   * - SNMP.Discovery.SeparateProbeRequests
     - Use separate SNMP request for each test OID.
     - 0
     - No
+  * - SNMP.EngineId
+    - Server SNMP engine ID. 
+    - 80:00:DF:4B:05:20:10:08:04:02:01:00
+    - Yes
   * - SNMP.RequestTimeout
     - Timeout in milliseconds for SNMP requests sent by |product_name| server.
     - 1500
     - Yes
-  * - SNMP.Traps.LogAll
-    - Log all SNMP traps (even those received from addresses not belonging to
-      any known node).
-    - 0
-    - No
-  * - SNMP.TrapLogRetentionTime
-    - The time how long SNMP trap logs are retained.
-    - 90
+  * - SNMP.RetryCount
+    - Number of retries for SNMP requests sent by NetXMS server.
+    - 3
+    - Yes
+  * - SNMP.Traps.AllowVarbindsConversion
+    - Allows/disallows conversion of SNMP trap OCTET STRING varbinds into hex
+      strings if they contain non-printable characters.
+    - 1
     - No
   * - SNMP.Traps.Enable
     - Enable/disable SNMP trap processing. A dedicated thread will be created if
-      set to 1.
-    - 1
+      set to true.
+    - true
     - Yes
   * - SNMP.Traps.ListenerPort
     - Port used for SNMP traps.
     - 162
     - Yes
+  * - SNMP.Traps.LogAll
+    - Log all SNMP traps (even those received from addresses not belonging to
+      any known node).
+    - false
+    - No
+  * - SNMP.TrapLogRetentionTime
+    - The time (in days) how long SNMP trap logs are retained.
+    - 90
+    - No
   * - SNMP.Traps.ProcessUnmanagedNodes
     - Enable/disable processing of SNMP traps received from unmanaged nodes.
-    - 0
+    - false
     - No
   * - SNMP.Traps.RateLimit.Duration
     - Time period (in seconds) for SNMP traps per second to be above threshold
@@ -1826,63 +1947,18 @@ Configuration`
       condition. Detection is disabled if 0 is set.
     - 0
     - No
-  * - StatusCalculationAlgorithm
-    - Default alghorithm for calculation object status from it's DCIs, alarms
-      and child objects. Possible values are:
-
-        - 1 - Most critical
-        - 2 - Single threshold. Threshold value is defined by
-          StatusSingleThreshold parameter.
-        - 3 - Multiple thresholds. Threshold values are defined by
-          StatusThresholds parameter.
-    - 1 - Most critical
+  * - SNMP.Traps.SourcesInAllZones
+    - Search all zones to match trap/syslog source address to node. 
+    - false
     - Yes
-  * - StatusPollingInterval
-    - Interval in seconds between status polls.
-    - 60
-    - Yes
-  * - StatusPropagationAlgorithm
-    - Default algorithm for status propagation (how object's status is affected
-      by it's child object statuses). Possible values are:
-
-        - 1 - Unchanged
-        - 2 - Fixed. Status value is defined by FixedStatusValue parameter.
-        - 3 - Relative with offset. Offset value is defined by StatusShift
-          parameter.
-        - 4 - Translated. Status translation is defined by StatusTranslation
-          parameter.
-    - 1 - Unchanged
-    - Yes
-  * - StatusShift
-    - Status shift value for **Relative** propagation algorithm.
-    - 0
-    - Yes
-  * - StatusSingleThreshold
-    - Threshold value (in %) for **Single threshold** status calculation
-      algorithm.
-    - 75
-    - Yes
-  * - StatusThresholds
-    - Threshold values for **Multiple thresholds** status calculation algorithm.
-      Every byte (from left to right) of this hex number express threshold
-      values for warning, minor, major and critical statuses.
-    - 503C2814 (80%, 60%, 40%, 20%)
-    - Yes
-  * - StatusTranslation
-    - Values for **Translated** status propagation algorithm. Every byte (form
-      left to right) of this hex number defines status translation for Warning,
-      Minor, Major and Critical statuses. Status values are:
-
-        - 1 - Warning
-        - 2 - Minor
-        - 3 - Major
-        - 4 - Critical
-    - 01020304
-    - Yes
-  * - SyncInterval
-    - Interval in seconds between writing object changes to the database.
-    - 60
-    - Yes
+  * - Syslog.AllowUnknownSources
+    - Enable or disable processing of syslog messages from unknown sources. 
+    - false
+    - No
+  * - Syslog.Codepage
+    - Default server syslog codepage. 
+    - 
+    - No    
   * - Syslog.EnableListener
     - Enable/disable receiving of syslog messages.
     - 0
@@ -1890,11 +1966,11 @@ Configuration`
   * - Syslog.EnableStorage
     - Enable/disable local storage of received syslog messages in |product_name|
       database.
-    - 1
+    - true
     - No
   * - Syslog.IgnoreMessageTimestamp
     - Ignore timestamp received in syslog messages and always use server time.
-    - 0
+    - false
     - No
   * - Syslog.ListenPort
     - UDP port used by built-in syslog server.
@@ -1903,9 +1979,9 @@ Configuration`
   * - Syslog.NodeMatchingPolicy
     - Node matching policy for built-in syslog daemon. Possible values are:
 
-        - 0 - syslog message source IP address, then hostname
-        - 1 - hostname, then syslog message source IP address
-    - 0
+        - IP,then hostname - syslog message source IP address, then hostname
+        - Hostname,then IP - hostname, then syslog message source IP address
+    - IP,then hostname
     - Yes
   * - Syslog.RetentionTime
     - Retention time in days for stored syslog messages. All messages older than
@@ -1916,7 +1992,7 @@ Configuration`
     - This parameter represents base thread pool size for threads that receive
       data, traps, events, etc from agents. This is minimal number of threads
       that will always run.
-    - 4
+    - 32
     - Yes
   * - ThreadPool.Agent.MaxSize
     - This parameter represents maximum thread pool size for threads that
@@ -1924,7 +2000,7 @@ Configuration`
       existing threads server will increase number of threads up to this value.
       When load come back to normal, number of threads will be automatically
       decreased to base size.
-    - 4
+    - 256
     - Yes
   * - ThreadPool.DataCollector.BaseSize
     - This parameter represents base thread pool size for data collector
@@ -1941,14 +2017,14 @@ Configuration`
   * - ThreadPool.Discovery.BaseSize
     - This parameter represents base thread pool size for network discovery
       threads. This is minimal number of threads that will always run.
-    - 1
+    - 8
     - Yes
   * - ThreadPool.Discovery.MaxSize
     - This parameter represents maximum thread pool size for network discovery
       threads. In case of high load on existing threads server will increase
       number of threads up to this value. When load come back to normal, number
       of threads will be automatically decreased to base size.
-    - 16
+    - 64
     - Yes
   * - ThreadPool.Main.BaseSize
     - This parameter represents base thread pool size for threads that perform
@@ -1962,7 +2038,7 @@ Configuration`
       server will increase number of threads up to this value. When load come
       back to normal, number of threads will be automatically decreased to base
       size.
-    - 156
+    - 256
     - Yes
   * - ThreadPool.Poller.BaseSize
     - This parameter represents base thread pool size for threads that perform
@@ -2017,22 +2093,9 @@ Configuration`
     - Interval in seconds between topology polls.
     - 1800
     - Yes
-  * - TrapSourcesInAllZones
-    - Enable/disable search of all zones to match trap/syslog source address to
-      node.
-    - 0
-    - Yes
-  * - UseDNSNameForDiscoveredNodes
-    - Enable/disable use of DNS name instead of IP address as primary name for
-      newly discovered nodes. If enabled, server will do back resolve of IP
-      address, and then resolve obtained name back to IP address. Only if this
-      IP address will match the original one, DNS name will be used.
-    - 0
-    - No
-  * - UseFQDNForNodeNames
-    - Enable/disable use of fully qualified domain names as primary names for
-      newly discovered nodes.
-    - 1
+  * - Topology.RoutingTableUpdateInterval
+    - Interval in seconds between reading routing table from node.
+    - 300
     - Yes
   * - UserAgent.DefaultMessageRetentionTime
     - Default user agent message retention time (in minutes).
@@ -2045,7 +2108,7 @@ Configuration`
   * - WindowsEvents.EnableStorage
     - Enable/disable local storage of received Windows events in |product_name|
       database.
-    - 1
+    - true
     - No
   * - WindowsEvents.LogRetentionTime
     - Retention time in days for records in Windows event log. All records older

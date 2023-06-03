@@ -729,13 +729,13 @@ These parameters can be changed in :menuselection:`Configuration --> Server
 Configuration`
 
 .. list-table::
-  :widths: 30 37 10 8
+  :widths: 30 37 8 4
   :header-rows: 1
 
   * - Parameter
     - Description
     - Default Value
-    - Require Restart
+    - Restart Required
   * - ActionExecutionLog.RetentionTime
     - Retention time in days for the records in server action execution log. All
       records older then specified will be deleted by housekeeping process. 
@@ -1160,8 +1160,8 @@ Configuration`
     - Queue selector for parallel event processing. In parallel processing
       server ensures that events having same queue selector will be processed in
       one queue.
-    - Yes
     - %z
+    - Yes
   * - Events.ReceiveForwardedEvents
     - Enable/disable reception of events forwarded by another |product_name|
       server. Please note that for external event reception ISC listener should

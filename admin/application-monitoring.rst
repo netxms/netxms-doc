@@ -124,15 +124,17 @@ Database connection options
 +=======================+===========+==================================================+
 | **dbname**            | optional  | Database name.                                   |
 +-----------------------+-----------+--------------------------------------------------+
+| **DBDriverOptions**   | optional  | Additional driver-specific parameters.           |
++-----------------------+-----------+--------------------------------------------------+
 | **driver**            | mandatory | Database driver name. Available drivers are:     |
-|                       |           | - db2.ddr                                        |
-|                       |           | - informix.ddr                                   |
-|                       |           | - mssql.ddr                                      |
-|                       |           | - mysql.ddr                                      |
-|                       |           | - odbc.ddr                                       |
-|                       |           | - oracle.ddr                                     |
-|                       |           | - pgsql.ddr                                      |
-|                       |           | - sqlite.ddr                                     |
+|                       |           | - db2                                            |
+|                       |           | - informix                                       |
+|                       |           | - mssql                                          |
+|                       |           | - mysql                                          |
+|                       |           | - odbc                                           |
+|                       |           | - oracle                                         |
+|                       |           | - pgsql                                          |
+|                       |           | - sqlite                                         |
 +-----------------------+-----------+--------------------------------------------------+
 | **encryptedPassword** | optional  | Database password in encrypted form (use         |
 |                       |           | :ref:`nxencpasswd-tools-label` command line tool |
@@ -141,11 +143,15 @@ Database connection options
 +-----------------------+-----------+--------------------------------------------------+
 | **id**                | mandatory | Database connection ID which will be used to     |
 |                       |           | identify this connection in configuration and    |
-|                       |           | parameters.                                      |
+|                       |           | data collection metrics.                         |
 +-----------------------+-----------+--------------------------------------------------+
 | **login**             | optional  | Login name.                                      |
 +-----------------------+-----------+--------------------------------------------------+
-| **password**          | optional  | Database password in clear text form.            |
+| **password**          | optional  | Database password. Remember to enclose password  |
+|                       |           | in double quotes ("password") if it contains     |
+|                       |           | # character. This parameter automatically        |
+|                       |           | detects and accepts password encrypted with      |
+|                       |           | :ref:`nxencpasswd-tools-label` tool.             |
 +-----------------------+-----------+--------------------------------------------------+
 | **server**            | optional  | Database server name or IP address.              |
 +-----------------------+-----------+--------------------------------------------------+

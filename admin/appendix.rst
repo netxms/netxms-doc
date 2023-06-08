@@ -574,8 +574,11 @@ Server configuration file (netxmsd.conf)
   * - DBEncryptedPassword
     - Hashed password, as produced by "nxencpass"
     - none
-  * - DBDrvParams
+  * - DBDriverOptions
     - Additional driver-specific parameters.
+    - Empty string
+  * - DBDrvParams
+    - Deprecated, replaced by ``DBDriverOptions``
     - Empty string
   * - DBLogin
     - Database user name.

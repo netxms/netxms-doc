@@ -7,7 +7,7 @@ SSH monitoring
 SSH configuration
 -----------------
 
-NetXMS can execute commands via SSH connection and save the output as DCI values.
+|product_name| can execute commands via SSH connection and save the output as DCI values.
 
 SSH connection are always established via agent. For this to work, ``ssh.nsm`` subagent should be enabled in agent config file.
 

@@ -241,6 +241,9 @@ Agent configuration file (nxagentd.conf)
    * - EnableProxy
      - Enable (yes) or disable (no) agent proxy functionality.
      - no
+   * - EnableModbusProxy
+     - Enable (yes) or disable (no) Modbus-TCP proxy functionality.
+     - no
    * - EnablePushConnector
      - Enables named pipe / unix socket used by the agent to receive data sent
        by nxapush command line tool.

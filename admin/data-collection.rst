@@ -11,13 +11,25 @@ How data collection works
 =========================
 
 Every node can have many data collection items configured (see
-:ref:`basic-concepts-dci` for detailed description). |product_name| server has a set of
-threads dedicated to data collection, called `Data Collectors`, used to gather
-information from the nodes according to :term:`DCI` configuration. You can
-control how many data collectors will run simultaneously, by changing server
+:ref:`basic-concepts-dci` for detailed description). |product_name| server has a
+set of threads dedicated to data collection, called `Data Collectors`, used to
+gather information from the nodes according to :term:`DCI` configuration. You
+can control how many data collectors will run simultaneously, by changing server
 configuration parameter ``NumberOfDataCollectors``.
 
-All configured DCIs are checked for polling requirement every second and
+All configured DCIs are checked for polling requirement every second
+Main information about node(:guilabel:`Object Details`) can be supplemented with
+DCI information displayed as text(last value) on :guilabel:`Object Details`->
+:guilabel:`Overview` page or in graph way on :guilabel:`Object
+Details`->:guilabel:`Performance` tab.
+
+DCI representation in text way can be configured on
+:ref:`dci-othe-options-label`. Next will be described only graph DCI
+representation configuration on :guilabel:`Performance` tab of :guilabel:`Object
+Details`.
+
+Multiple DCIs can be grouped in one graph. To group them use the same group name
+in "Group" field. and
 if DCI needs to be polled, appropriate polling request is placed into internal
 data polling queue. First available data collector will pick up the request and
 gather information from the node according to DCI configuration. If a new value
@@ -34,19 +46,16 @@ It is also possibility to push data to server. If DCI source is set to
 :guilabel:`Push`, server just waits for new values instead of polling from
 a data source.
 
-.. versionadded:: 2.0-M5
-    Agent caching mode
-
-By default DCI data is not collected for the time being while connection between server and agent is
-broken as poll request could not get till agent. There is special configuration
-that allows to collect data and store it on agent till connection with server is
-restored and collected data is pushed to the server. This option is available for
-metrics, table metrics and proxy SNMP metrics. Not implemented for proxy SNMP table
-metrics and DCIs with custom schedule. In case of this configuration agent stores DCI
-configuration locally and does all metric collection and dispatch on its own. DCI
-configuration is synchronized on connect, DCI configuration change or SNMP proxy
-server change. Information about configuration options can be found here:
-:ref:`offline-data-collection`.
+By default DCI data is not collected for the time being while connection between
+server and agent is broken as poll request could not get till agent. There is
+special configuration that allows to collect data and store it on agent till
+connection with server is restored and collected data is pushed to the server.
+This option is available for metrics, table metrics and proxy SNMP metrics. Not
+implemented for proxy SNMP table metrics and DCIs with custom schedule. In case
+of this configuration agent stores DCI configuration locally and does all metric
+collection and dispatch on its own. DCI configuration is synchronized on
+connect, DCI configuration change or SNMP proxy server change. Information about
+configuration options can be found here: :ref:`offline-data-collection`.
 
 .. _dci-configuration:
 
@@ -56,8 +65,8 @@ DCI configuration
 Data collection for a node can be configured using management console. To open
 data collection configuration window, right-click on node object in
 :guilabel:`Object Browser` or on a :guilabel:`Network Map`, and click
-:guilabel:`Data Collection Configuration`. You will see the list of configured data
-collection items. From here, you can add new or change existing metrics to
+:guilabel:`Data Collection Configuration`. You will see the list of configured
+data collection items. From here, you can add new or change existing metrics to
 monitor. Right click on the item will open pop-up menu with all possible
 actions.
 
@@ -125,12 +134,13 @@ Origin of data (method of obtaining data). Possible origins are:
      - Some SNMP drivers (NET-SNMP, RITTAL as of |product_name| v. 3.8) provide
        metrics for data collection. E.g. NET-SNMP provides information about
        storage this way. 
-
+   * - Modbus
+     - Data is collected via Modbus-TCP industrial protocol.
 
 :guilabel:`Push Agent` origin is different from all others, because it
 represents DCIs whose values are pushed to server by external program (usually
-via :ref:`nxapush-label` or :ref:`nxpush-label` command line tool) instead of being
-polled by the server based on the schedule. Values can also be pushed from
+via :ref:`nxapush-label` or :ref:`nxpush-label` command line tool) instead of
+being polled by the server based on the schedule. Values can also be pushed from
 a NXSL script launced on the server. 
 
 
@@ -167,9 +177,12 @@ significant increase of your database size and possible performance degradation.
 
 Can be selected one of options:
 
-    - :guilabel:`Fixed intervals (default)` - default value will be taken from :guilabel:`DefaultDCIPollingInterval` server configuration parameter.
-    - :guilabel:`Fixed intervals (custom)` - value entered on the DCI properties page will be taken.
-    - :guilabel:`Use advanced scheduling` - schedules configured in :guilabel:`Advanced Schedule` page will be used
+    - :guilabel:`Fixed intervals (default)` - default value will be taken from
+      :guilabel:`DefaultDCIPollingInterval` server configuration parameter.
+    - :guilabel:`Fixed intervals (custom)` - value entered on the DCI properties
+      page will be taken.
+    - :guilabel:`Use advanced scheduling` - schedules configured in
+      :guilabel:`Advanced Schedule` page will be used
 
 
 Storage
@@ -183,14 +196,18 @@ degradation.
 
 Possible options:
 
-    - :guilabel:`Use default retention time` - default value will be taken from :guilabel:`DefaultDCIRetentionTime` server configuration parameter.
-    - :guilabel:`Use default retention time` - value entered on the DCI properties page will be taken.
-    - :guilabel:`Do not save collected data to database` - will not save collected data to database, but will store last value in memory
+    - :guilabel:`Use default retention time` - default value will be taken from
+      :guilabel:`DefaultDCIRetentionTime` server configuration parameter.
+    - :guilabel:`Use default retention time` - value entered on the DCI
+      properties page will be taken.
+    - :guilabel:`Do not save collected data to database` - will not save
+      collected data to database, but will store last value in memory
 
-Last option is used when it is required to show latest (every 1 second collected) data on Dashboard, but
-it is too much data to store in database. So 2 DCI configurations are created.
-One to store historical data collected once per minute and the second one, that is not stored in database, but
-is collected every second and up to date displayed on dashboards.
+Last option is used when it is required to show latest (every 1 second
+collected) data on Dashboard, but it is too much data to store in database. So 2
+DCI configurations are created. One to store historical data collected once per
+minute and the second one, that is not stored in database, but is collected
+every second and up to date displayed on dashboards.
 
 
 Status
@@ -589,14 +606,18 @@ NetObj                   .. versionadded:: 3.0.0
 Performance tab
 ---------------
 
-Main information about node(:guilabel:`Object Details`) can be supplemented with DCI
-information displayed as text(last value) on :guilabel:`Object Details`->
-:guilabel:`Overview` page or in graph way on :guilabel:`Object Details`->:guilabel:`Performance` tab.
+Main information about node(:guilabel:`Object Details`) can be supplemented with
+DCI information displayed as text(last value) on :guilabel:`Object Details`->
+:guilabel:`Overview` page or in graph way on :guilabel:`Object
+Details`->:guilabel:`Performance` tab.
 
-DCI representation in text way can be configured on :ref:`dci-othe-options-label`. Next will be described only
-graph DCI representation configuration on :guilabel:`Performance` tab of :guilabel:`Object Details`.
+DCI representation in text way can be configured on
+:ref:`dci-othe-options-label`. Next will be described only graph DCI
+representation configuration on :guilabel:`Performance` tab of :guilabel:`Object
+Details`.
 
-Multiple DCIs can be grouped in one graph. To group them use the same group name in "Group" field.
+Multiple DCIs can be grouped in one graph. To group them use the same group name
+in "Group" field.
 
 
 .. figure:: _images/dci_performance_tab_page.png
@@ -606,10 +627,12 @@ Multiple DCIs can be grouped in one graph. To group them use the same group name
 Access Control
 --------------
 
-This page provides access control management option to each DCI. If no user set, then access rights are
-inherited from node. So any user that is able to read node is able to see last value of this DCI and user
-that is able to modify node is able to change and see DCI configuration.  When list is not empty,
-then both access to node and access to DCI are check on DCI configuration or value request.
+This page provides access control management option to each DCI. If no user set,
+then access rights are inherited from node. So any user that is able to read
+node is able to see last value of this DCI and user that is able to modify node
+is able to change and see DCI configuration.  When list is not empty, then both
+access to node and access to DCI are check on DCI configuration or value
+request.
 
 .. figure:: _images/dci_access_control_page.png
 
@@ -622,13 +645,16 @@ Other options
 
 Other available options:
 
-    - Show last value in object tooltip - shows DCI last value on tooltip that is shown on network maps.
-    - Show last value in object overview - shows DCI last value on :guilabel:`Object Details`->\ :guilabel:`Overview` page.
-    - Use this DCI for node status calculation - Uses value returned by this DCI as a status, that
-      participate in object status calculation. Such kind of DCI should
-      return integer number from 0 till 4 representing object status.
-    - Related object - object that is related to collected DCI. Related object can be set by instance discovery filter script 
-      by using `Instance()` function and accessed in NXSL from DCI object. 
+    - Show last value in object tooltip - shows DCI last value on tooltip that
+      is shown on network maps.
+    - Show last value in object overview - shows DCI last value on
+      :guilabel:`Object Details`->\ :guilabel:`Overview` page.
+    - Use this DCI for node status calculation - Uses value returned by this DCI
+      as a status, that participate in object status calculation. Such kind of
+      DCI should return integer number from 0 till 4 representing object status.
+    - Related object - object that is related to collected DCI. Related object
+      can be set by instance discovery filter script by using `Instance()`
+      function and accessed in NXSL from DCI object. 
 
 
 .. figure:: _images/dci_other_opt_page.png
@@ -638,8 +664,8 @@ Other available options:
 Comments
 --------
 
-This configuration part can be used for free for text comments. To make additional notes
-about DCI configuration or usage.
+This configuration part can be used for free for text comments. To make
+additional notes about DCI configuration or usage.
 
 
 .. _dci-push-parameters-label:
@@ -647,15 +673,16 @@ about DCI configuration or usage.
 Push metrics
 ============
 
-|product_name| gives you ability to push DCI values when you need it instead of polling
-them on specific time intervals. To be able to push data to the server, you
-should take the following steps:
+|product_name| gives you ability to push DCI values when you need it instead of
+polling them on specific time intervals. To be able to push data to the server,
+you should take the following steps:
 
 #. Set your DCI's origin to Push Agent and configure other properties as usual,
    excluding polling interval which is meaningless in case of pushed data.
 #. Create separate user account or pick an existing one and give "Push Data"
    access right on the DCI owning node to that user.
-#. Use :ref:`nxapush-label` or :ref:`nxpush-label` utility or client API for pushing data.
+#. Use :ref:`nxapush-label` or :ref:`nxpush-label` utility or client API for
+   pushing data.
 
 
 DCI types
@@ -665,12 +692,12 @@ List DCIs
 ---------
 
 Usually DCIs have scalar values. A list DCI is a special DCI which returns a
-list of values. List DCIs are mostly used by |product_name| internally (to get the list
-of network interfaces during the configuration poll, for example) but can also
-be utilized by user in some occasions. |product_name| Management Console does not
-support list DCIs directly but their names are used as input parameters for
-Instance Discovery methods. List DCI values can be also obtained with
-:command:`nxget` command line utility (e.g. for use in scripts).
+list of values. List DCIs are mostly used by |product_name| internally (to get
+the list of network interfaces during the configuration poll, for example) but
+can also be utilized by user in some occasions. |product_name| Management
+Console does not support list DCIs directly but their names are used as input
+parameters for Instance Discovery methods. List DCI values can be also obtained
+with :command:`nxget` command line utility (e.g. for use in scripts).
 
 
 .. _offline-data-collection:
@@ -678,19 +705,21 @@ Instance Discovery methods. List DCI values can be also obtained with
 Agent caching mode
 ==================
 
-Agent caching mode allows metric data to be obtained for the time being while connection between
-server and agent have been broken. This option is available for metrics, table
-metrics and proxy SNMP metrics. Not implemented for proxy SNMP table metrics and
-DCIs with custom schedule. In the absence of connection to the server collected
-data is stored on agent, when connection is restored it is sent to server.
-Detailed description can be found there: :ref:`how_data_collection`.
+Agent caching mode allows metric data to be obtained for the time being while
+connection between server and agent have been broken. This option is available
+for metrics, table metrics and proxy SNMP metrics. Not implemented for proxy
+SNMP table metrics and DCIs with custom schedule. In the absence of connection
+to the server collected data is stored on agent, when connection is restored it
+is sent to server. Detailed description can be found there:
+:ref:`how_data_collection`.
 
 Agent side cache is configurable globally, on node level, and on DCI level. By
 default it's off.
 
-All collected data goes thought all transformations and thresholds only when it comes to server.
-To prevent generation of old events it can be set :guilabel:`OffileDataRelivanceTime` configuration
-variable to time period in seconds within which received offline data still relevant for threshold
+All collected data goes thought all transformations and thresholds only when it
+comes to server. To prevent generation of old events it can be set
+:guilabel:`OffileDataRelivanceTime` configuration variable to time period in
+seconds within which received offline data still relevant for threshold
 validation. By default it is set to 1 day.
 
 .. versionadded:: 2.0-M5
@@ -700,9 +729,14 @@ Configuration
 -------------
 
 It can be configured:
-  - globally - set configuration parameter :guilabel:`DefaultAgentCacheMode` to :guilabel:`on` or :guilabel:`off`.
-  - on node level - :guilabel:`Agent cache mode` can be changed to :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use global settings) in node properties on :guilabel:`Polling` page
-  - on DCI level - :guilabel:`Agent cache mode` can be changed to :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use node level settings) in DCI properties on :guilabel:`General` page
+  - globally - set configuration parameter :guilabel:`DefaultAgentCacheMode` to
+    :guilabel:`on` or :guilabel:`off`.
+  - on node level - :guilabel:`Agent cache mode` can be changed to
+    :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use global settings)
+    in node properties on :guilabel:`Polling` page
+  - on DCI level - :guilabel:`Agent cache mode` can be changed to
+    :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use node level
+    settings) in DCI properties on :guilabel:`General` page
 
 
 .. _last-values:

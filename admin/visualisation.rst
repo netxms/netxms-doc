@@ -477,8 +477,8 @@ should be shown in table.
 It is a script that is executed on each object and should return true if object should be displayed in the table 
 and false if it should not. It has special syntax that provides option to calculate additional values for columns 
 in :guilabel:`Object Properties` section. This syntax is optional and usual NXSL script can be used instead. Usual 
-NXSL script should return true if node should be shown and false if not, additional self calculated columns can be 
-defined as global variables. 
+NXSL script should return true or map (where key is column name and value is value for this column) if node should 
+be shown and false if not, additional self calculated columns can be defined as global variables. 
 
 Syntax:
 

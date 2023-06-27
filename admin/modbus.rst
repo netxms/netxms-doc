@@ -71,14 +71,21 @@ Modbus metric examples:
 
 
   ``0x2A``
+
   Read holding register at address 2A hexadecimal (42 decimal), interpret as uint16. 
 
+
   ``input:8``
+
   Read input register at address 8 decimal, interpret as uint16. 
 
+
   ``10|int16``
+
   Read holding register at address 10 decimal, interpret as int16. 
 
-| ``input:55|float`` 
+
+  ``input:55|float`` 
+  
   Read two input registers starting from 55 decimal, interpret as float with
   ABCD byte order.

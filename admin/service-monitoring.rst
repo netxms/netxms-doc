@@ -46,6 +46,8 @@ Network service monitoring using DCI
 Second option is to use :term:`DCI` to monitor service. Service monitoring
 metrics are provided by NetSVC subagent. 
 
+More about URL options caon be found there: https://curl.se/docs/url-syntax.html
+
 This subagent will add the following metrics to list of metrics available on
 agent:
 

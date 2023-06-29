@@ -2538,6 +2538,7 @@ In this chapter will be described Agent and OS Subagent provided metrics.
 Single value metrics
 --------------------
 
+
 Agent.AcceptedConnections
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2567,6 +2568,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 
 Number of active connections to agent
 
+
 Agent.AuthenticationFailures
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2576,6 +2578,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 
 Cumulative counter of failed AUTH commands (due to invalid secret)
 
+
 Agent.ConfigurationServer
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2584,6 +2587,7 @@ Data type: String
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Configuration server address set on agent startup.
+
 
 Agent.FailedRequests
 ~~~~~~~~~~~~~~~~~~~~
@@ -3003,6 +3007,16 @@ Parameters:
 
 Number of files in directory
 
+The following macros are supported in path and pattern parameters:
+
+  - Environment variables as ${ENV_VAR_NAME}
+  - `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_
+    macros
+  - Text inside \` braces will be executed as a command and first line of output
+    will be taken (only for servers which are in MasterServers in agent
+    configuration file)
+
+
 File.FolderCount(*)
 ~~~~~~~~~~~~~~~~~~~
 
@@ -3021,6 +3035,7 @@ Parameters:
 
 Number of folders in directory
 
+
 File.Hash.CRC32(*)
 ~~~~~~~~~~~~~~~~~~
 
@@ -3032,6 +3047,15 @@ Parameters:
   1. Path - it specifies path to file
 
 CRC32 hash of given file
+
+The following macros are supported in path parameter:
+
+  - Environment variables as ${ENV_VAR_NAME}
+  - `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_
+    macros
+  - Text inside \` braces will be executed as a command and first line of output
+    will be taken (only for servers which are in MasterServers in agent
+    configuration file)
 
 
 File.Hash.MD5(*)
@@ -3046,6 +3070,15 @@ Parameters:
 
 MD5 hash of given file
 
+The following macros are supported in path parameter:
+
+  - Environment variables as ${ENV_VAR_NAME}
+  - `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_
+    macros
+  - Text inside \` braces will be executed as a command and first line of output
+    will be taken (only for servers which are in MasterServers in agent
+    configuration file)
+
 
 File.Hash.SHA1(*)
 ~~~~~~~~~~~~~~~~~
@@ -3058,6 +3091,15 @@ Parameters:
   1. Path - it specifies path to file
 
 SHA1 hash of given file
+
+The following macros are supported in path parameter:
+
+  - Environment variables as ${ENV_VAR_NAME}
+  - `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_
+    macros
+  - Text inside \` braces will be executed as a command and first line of output
+    will be taken (only for servers which are in MasterServers in agent
+    configuration file)
 
 
 File.Size(*)
@@ -3078,6 +3120,15 @@ Parameters:
 
 Size in bytes of single file or all files in given directory.
 
+The following macros are supported in path and pattern parameters:
+
+  - Environment variables as ${ENV_VAR_NAME}
+  - `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_
+    macros
+  - Text inside \` braces will be executed as a command and first line of output
+    will be taken (only for servers which are in MasterServers in agent
+    configuration file)
+
 
 File.Time.Access(*)
 ~~~~~~~~~~~~~~~~~~~
@@ -3090,6 +3141,15 @@ Parameters:
   1. Path - it specifies path to file
 
 File's last access time in seconds since epoch (1 Jan 1970 00:00:00 UTC)
+
+The following macros are supported in path parameter:
+
+  - Environment variables as ${ENV_VAR_NAME}
+  - `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_
+    macros
+  - Text inside \` braces will be executed as a command and first line of output
+    will be taken (only for servers which are in MasterServers in agent
+    configuration file)
 
 
 File.Time.Change(*)
@@ -3104,6 +3164,15 @@ Parameters:
 
 File's last status change time in seconds since epoch (1 Jan 1970 00:00:00 UTC)
 
+The following macros are supported in path parameter:
+
+  - Environment variables as ${ENV_VAR_NAME}
+  - `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_
+    macros
+  - Text inside \` braces will be executed as a command and first line of output
+    will be taken (only for servers which are in MasterServers in agent
+    configuration file)
+
 
 File.Time.Modify(*)
 ~~~~~~~~~~~~~~~~~~~
@@ -3116,6 +3185,44 @@ Parameters:
   1. Path - it specifies path to file
 
 File's last modification time in seconds since epoch (1 Jan 1970 00:00:00 UTC)
+
+The following macros are supported in path parameter:
+
+  - Environment variables as ${ENV_VAR_NAME}
+  - `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_
+    macros
+  - Text inside \` braces will be executed as a command and first line of output
+    will be taken (only for servers which are in MasterServers in agent
+    configuration file)
+
+
+File.Type(*)
+~~~~~~~~~~~~~~~~~~~
+
+Data type: Unsigned Integer
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Parameters:
+  1. Path - it specifies path to file
+
+Type of a file or directory. Returns one of the following values:
+
+  - 0 - file does not exist
+  - 1 - file is a directory
+  - 2 - file is a device
+  - 3 - file is a regular file
+  - 4 - file is of other type
+
+The following macros are supported in path parameter:
+
+  - Environment variables as ${ENV_VAR_NAME}
+  - `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_
+    macros
+  - Text inside \` braces will be executed as a command and first line of output
+    will be taken (only for servers which are in MasterServers in agent
+    configuration file)
+
 
 .. _file-system-metrics:
 
@@ -3131,15 +3238,18 @@ Parameters:
 
 Available space on file system in bytes
 
+
 FileSystem.AvailInodes(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 FileSystem.AvailInodesPerc(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 FileSystem.AvailPerc(*)
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -3166,15 +3276,18 @@ Parameters:
 
 Free space on file system in bytes
 
+
 FileSystem.FreeInodes(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 FileSystem.FreeInodesPerc(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 FileSystem.FreePerc(*)
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -3201,10 +3314,12 @@ Parameters:
 
 Total number of bytes on file system
 
+
 FileSystem.TotalInodes(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 FileSystem.Type(*)
 ~~~~~~~~~~~~~~~~~~~
@@ -3231,15 +3346,18 @@ Parameters:
 
 Used space on file system in bytes
 
+
 FileSystem.UsedInodes(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 FileSystem.UsedInodesPerc(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 FileSystem.UsedPerc(*)
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -3253,220 +3371,264 @@ Parameters:
 
 Percentage of used space on file system
 
+
 DRBD.ConnState(*)
 ~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 DRBD.DataState(*)
 ~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 DRBD.DeviceState(*)
 ~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 DRBD.PeerDataState(*)
 ~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 DRBD.PeerDeviceState(*)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 DRBD.Protocol(*)
 ~~~~~~~~~~~~~~~~
 
 TODO
 
+
 DRBD.Version.API
 ~~~~~~~~~~~~~~~~
 
 TODO
+
 
 DRBD.Version.Driver
 ~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 DRBD.Version.Protocol
 ~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.Baseboard.Manufacturer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.Baseboard.Product
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.Baseboard.SerialNumber
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.Baseboard.Type
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.Baseboard.Version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.Battery.Capacity(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.Battery.Chemistry(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.Battery.Location(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.Battery.ManufactureDate(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.Battery.Manufacturer(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.Battery.Name(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.Battery.SerialNumber(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.Battery.Voltage(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.MemoryDevice.Bank(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.MemoryDevice.ConfiguredSpeed(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.MemoryDevice.FormFactor(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.MemoryDevice.Location(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.MemoryDevice.Manufacturer(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.MemoryDevice.MaxSpeed(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.MemoryDevice.PartNumber(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.MemoryDevice.SerialNumber(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.MemoryDevice.Size(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.MemoryDevice.Type(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.Processor.Cores(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.Processor.CurrentSpeed(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.Processor.Family(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.Processor.Manufacturer(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.Processor.MaxSpeed(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.Processor.PartNumber(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.Processor.SerialNumber(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.Processor.Socket(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.Processor.Threads(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.Processor.Type(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hardware.Processor.Version(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hardware.System.MachineId
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3477,6 +3639,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD
 
 Unique machine identifier.
 
+
 Hardware.System.Manufacturer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3485,6 +3648,7 @@ Data type: String
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD
 
 System manufacturer.
+
 
 Hardware.System.Product
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -3495,6 +3659,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD
 
 Product name.
 
+
 Hardware.System.ProductCode
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3503,6 +3668,7 @@ Data type: String
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD
 
 Product code.
+
 
 Hardware.System.SerialNumber
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3513,6 +3679,7 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD
 
 System serial number.
 
+
 Hardware.System.Version
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3522,15 +3689,18 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD
 
 System version.
 
+
 Hardware.WakeUpEvent
 ~~~~~~~~~~~~~~~~~~~~
 
 TODO
 
+
 Hypervisor.Type
 ~~~~~~~~~~~~~~~
 
 TODO
+
 
 Hypervisor.Version
 ~~~~~~~~~~~~~~~~~~
@@ -3884,6 +4054,7 @@ Supported Platforms: Windows
 
 Version of PDH.DLL (as returned by PdhGetDllVersion() call).
 
+
 PhysicalDisk.Firmware(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3895,6 +4066,7 @@ Parameters:
    1. Physical disk name
 
 Firmware version of of provided hard disk.
+
 
 PhysicalDisk.Model(*)
 ~~~~~~~~~~~~~~~~~~~~~
@@ -3921,6 +4093,7 @@ Parameters:
 
 Serial number of provided hard disk.
 
+
 PhysicalDisk.SmartAttr(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3932,6 +4105,7 @@ Parameters:
    1. Physical disk name / path
 
 TODO
+
 
 PhysicalDisk.SmartStatus(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4506,6 +4680,7 @@ CPU load average for last minute
 .. note::
   On Windows this metric is provided by winperf subagent
 
+
 System.CPU.LoadAvg5
 ~~~~~~~~~~~~~~~~~~~
 
@@ -4517,6 +4692,7 @@ CPU load average for last 5 minutes
 
 .. note::
   On Windows this metric is provided by winperf subagent
+
 
 System.CPU.LoadAvg15
 ~~~~~~~~~~~~~~~~~~~~
@@ -4530,6 +4706,7 @@ CPU load average for last 15 minutes
 .. note::
   On Windows this metric is provided by winperf subagent
 
+
 System.CPU.Usage
 ~~~~~~~~~~~~~~~~
 
@@ -4541,6 +4718,7 @@ Average CPU usage for last minute (percents, all CPUs)
 
 .. note::
   On Windows this metric is provided by winperf subagent
+
 
 System.CPU.Usage(*)
 ~~~~~~~~~~~~~~~~~~~
@@ -4557,6 +4735,7 @@ Average CPU usage for last minute (percents, specific CPU)
 .. note::
   On Windows this metric is provided by winperf subagent
 
+
 System.CPU.Usage5
 ~~~~~~~~~~~~~~~~~
 
@@ -4568,6 +4747,7 @@ Average CPU usage for last 5 minutes (percents, all CPUs)
 
 .. note::
   On Windows this metric is provided by winperf subagent
+
 
 System.CPU.Usage5(*)
 ~~~~~~~~~~~~~~~~~~~~
@@ -4584,6 +4764,7 @@ Average CPU usage for last 5 minutes (percents, specific CPU)
 .. note::
   On Windows this metric is provided by winperf subagent
 
+
 System.CPU.Usage15
 ~~~~~~~~~~~~~~~~~~
 
@@ -4595,6 +4776,7 @@ Average CPU usage for last 15 minutes (percents, all CPUs)
 
 .. note::
   On Windows this metric is provided by winperf subagent
+
 
 System.CPU.Usage15(*)
 ~~~~~~~~~~~~~~~~~~~~~
@@ -4610,6 +4792,7 @@ Average CPU usage for last 15 minutes (percents, specific CPU)
 
 .. note::
   On Windows this metric is provided by winperf subagent
+
 
 System.CPU.Usage.Idle
 ~~~~~~~~~~~~~~~~~~~~~
@@ -6179,6 +6362,7 @@ Table metrics
   Columns marked with * are instance columns (primary keys). 
   Such columns (or combination of columns) are designated to uniquely identify each table record.
 
+
 FileSystem.Volumes
 ~~~~~~~~~~~~~~~~~~
 
@@ -6317,6 +6501,7 @@ Supported Platforms: Linux, Windows
      - UInt32
 
 Hardware information about available network adapters
+
 
 Hardware.Processors
 ~~~~~~~~~~~~~~~~~~~
@@ -6512,6 +6697,7 @@ Supported Platforms: Linux, Windows, Solaris, AIX, FreeBSD
      - String
 
 Running processes information
+
 
 System.Services
 ~~~~~~~~~~~~~~~

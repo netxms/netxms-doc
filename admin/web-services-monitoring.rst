@@ -6,8 +6,10 @@ Data Collection from Web Services
 
 |product_name| has built-in data collection mechanism using web services,
 allowing to extract data for DCIs from JSON, XML, or plain text responses to
-HTTP requests.
-Data collection from web services is done via |product_name| agent. If zoning is not used (or for Default zone), agent running on NetXMS server is used. If zoning is used, zone proxies are used (and if a zone has no proxies configured, agent on NetXMS server is used as last resort). 
+HTTP requests. Data collection from web services is done via |product_name|
+agent. If zoning is not used (or for Default zone), agent running on NetXMS
+server is used. If zoning is used, zone proxies are used (and if a zone has no
+proxies configured, agent on NetXMS server is used as last resort). 
 
 
 Configuring Web Service Data collection
@@ -16,7 +18,9 @@ Configuring Web Service Data collection
 Agent configuration
 -------------------
 
-Starting from version 3.8 of |product_name| agent data collection from web services is disabled by default. To enable it, add ``EnableWebServiceProxy=yes`` to agent configuration file and restart the agent.
+Starting from version 3.8 of |product_name| agent data collection from web
+services is disabled by default. To enable it, add ``EnableWebServiceProxy=yes``
+to agent configuration file and restart the agent.
 
 Web service definitions
 -----------------------
@@ -43,10 +47,10 @@ and keep the actual URL in node's custom attribute ``url``.
 DCI Configuration
 -----------------
 
-DCI configuration provides DCI origin "web service". Metric name for this
-origin contains web service definition name with optional arguments and path to
-document element that has to be retrieved (or PCRE compliant regex with one capture group for
-text responses).
+DCI configuration provides DCI origin "web service". Metric name for this origin
+contains web service definition name with optional arguments and path to
+document element that has to be retrieved (or PCRE compliant regex with one
+capture group for text responses).
 
 For example:
    * ``WebService1:/system/cpu/usage``
@@ -62,10 +66,10 @@ For text response, first capture group of regular expression is returned.
 Instance discovery
 ------------------
 
-For web service discovery “Web Service” instance discovery method can be used. 
-It  accepts web service name with optional arguments and path to the root element of the 
-document where enumeration will start. Each sub-element of given root element will be considered 
-separate instance.
+For web service discovery “Web Service” instance discovery method can be used.
+It  accepts web service name with optional arguments and path to the root
+element of the document where enumeration will start. Each sub-element of given
+root element will be considered separate instance.
 
 For example:
    * ``WebService1:/system/cpu`` will enumerate all elements under "/system/cpu"

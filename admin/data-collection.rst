@@ -131,11 +131,11 @@ Origin of data (method of obtaining data). Possible origins are:
    * - MQTT
      - Data is obtained by subcribing to MQTT broker topics. 
    * - Network Device Driver
-     - Some SNMP drivers (NET-SNMP, RITTAL as of |product_name| v. 3.8) provide
-       metrics for data collection. E.g. NET-SNMP provides information about
-       storage this way. 
+     - Some SNMP drivers (e.g. NET-SNMP, RITTAL) provide metrics for data
+       collection. E.g. NET-SNMP provides information about storage this way. 
    * - Modbus
-     - Data is collected via Modbus-TCP industrial protocol.
+     - Data is collected via Modbus-TCP industrial protocol. See :ref:`modbus`
+       for more information. 
 
 :guilabel:`Push Agent` origin is different from all others, because it
 represents DCIs whose values are pushed to server by external program (usually

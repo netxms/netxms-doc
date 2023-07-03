@@ -7,154 +7,129 @@ Application monitoring
 Process monitoring
 ==================
 
-Platform subagents support process monitoring. Process metrics have "Process.*" format.
-Metrics differ between different OS. Detailed description of each metric can be found
-in :ref:`list-of-supported-metrics`.
+Platform subagents support process monitoring. Process metrics have "Process.*"
+format. Metrics differ between different OS. Detailed description of each metric
+can be found in :ref:`list-of-supported-metrics`.
 
 .. _dbquery:
 
 Application Database Monitoring
 ===============================
 
-For application database monitoring can be used database monitoring subagents or
+For application database monitoring you can use database monitoring subagents or
 database query subagents. Information about database monitoring subagents can be
-found :ref:`there<database-monitoring>`. In this chapter will be described only
-DBQuery subagents usage and configuration. This subagent supports all databases that
-are supported by |product_name| server :ref:`link to supported database list<supported-db-list>`.
+found in :ref:`database-monitoring`. This chapter discusses only DBQuery
+subagents configuration and usage. 
 
-This type of Metrics provide DBQuery subagent. This subagent has 2 types of Metrics:
-one that periodically executes SQL queries and returns results and error
-codes as Metric parameters and second execute queries by Metric request (synchronously).
-SQL queries are specified in the agent configuration. Background query can be also
-executed per request. Synchronously executed query can have parameters that are
-passes to it by DCI configuration.
+DBQuery subagent has 2 types of query execution: background - that periodically
+executes SQL query and provides result and error code as metrics and
+synchronous, when query is executed by request. Background query, however, can
+be also executed per request. Synchronously executed query can have parameters
+that are supplied along with requested metric. SQL queries are specified in the
+agent configuration or a full query can be supplied via ``DB.Query()`` metric. 
 
-.. versionadded:: 2.5
-   Synchronously executed queries
+For time consuming SQL requests it is highly recommended to use background
+execution. Heavy SQL can cause request timeout for synchronous execution.
 
-For time consuming SQL requests it is highly recommended to use background execution.
-Heavy SQL can cause request timeout for synchronous execution.
-
-Metrics
--------
-
-When loaded, DBQuery subagent adds the following metrics to agent:
-
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| Metric                                 | Description                                                                                                |
-+========================================+============================================================================================================+
-| DB.Query(*dbid*,\ *query*)             | Result of immediate execution of the query *query* in database identified by *dbid*. Database with given   |
-|                                        | name must be defined in configuration file.                                                                |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| DB.QueryResult(*name*)                 | Last result of execution of the query *name*. Query with given name must be defined in configuration file. |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| DB.QueryStatus(*name*)                 | Status of last execution of the query *name*. Query with given name must be defined in configuration file. |
-|                                        | Value returned is native SQL error code.                                                                   |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| DB.QueryStatusText(*name*)             | Status of last execution of the query *name* as a text. Query with given name must be defined              |
-|                                        | in configuration file.                                                                                     |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| *queryName*                            | Result of immediate execution of query defined in agent config file with name *queryName*.                 |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| *queryName*\ (\ *param1*, *param2*...) | Result of immediate execution of query defined in agent config file with name *queryName* like             |
-|                                        | ConfigurableQuery metric. Where *param1*, *param2*... are parameters to bind into defined query.           |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-
-
-Tables
-------
-
-When loaded, DBQuery subagent adds the following tables to agent:
-
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| Table                                  | Description                                                                                                |
-+========================================+============================================================================================================+
-| DB.Query(*dbid*,\ *query*)             | Result of immediate execution of the query *query* in database identified by *dbid*. Database with given   |
-|                                        | name must be defined in configuration file.                                                                |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| DB.QueryResult(*name*)                 | Last result of execution of the query *name*. Query with given name must be defined in configuration file. |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| *queryName*                            | Result of immediate execution of query defined in agent config file with name *queryName*.                 |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
-| *queryName*\ (\ *param1*, *param2*...) | Result of immediate execution of query defined in agent config file with name *queryName* like             |
-|                                        | ConfigurableQuery metric. Where *param1*, *param2*... are parameters to bind into defined query.           |
-+----------------------------------------+------------------------------------------------------------------------------------------------------------+
 
 Configuration file
 ------------------
 
-All configuration parameters related to DBQuery subagent should be placed into **\*DBQUERY** section of agent's configuration file.
-The following configuration parameters are supported:
+General configuration parameters related to DBQuery subagent are set in
+**[DBQUERY]** section of agent's configuration file. The following parameters
+are supported:
 
 .. list-table::
    :header-rows: 1
-   :widths: 25 50 200
+   :widths: 42 52 100
 
    * - Parameter
      - Format
      - Description
+   * - AllowEmptyResultSet
+     - yes or no
+     - If set to ``yes`` (default), agent returns empty metric value if database
+       returns empty result. If set to ``no``, agents returns error in case if
+       query returns empty result. 
    * - Database
-     - semicolon separated option list
-     - Define new database connection (See database connection options section below).
+     - Semicolon-separated option list
+     - Database connection information. **Deprecated, specify database
+       connection parameters in [DBQUERY/Databases/id] sections**
    * - Query
      - *name*:*dbid*:*interval*:*query*
-     - Define new query. This parameter can be specified multiple times to define multiple queries.
-       Fields in query definition have the following meaning:
+     - Define query scheduled for background execution. Can be specified
+       multiple times to define multiple queries. Fields in query definition
+       have the following meaning:
 
-        - *name*     Query name which will be used in parameters to retrieve collected data.
-        - *dbid*     Database ID (defined by Database parameter)
-        - *interval* Polling interval in seconds.
-        - *query*    SQL query to be executed.
+        - *name* - Query name which will be used in metrics to retrieve
+          collected data.
+        - *dbid* - Database connection ID
+        - *interval* - Polling interval in seconds.
+        - *query* - SQL query to be executed.
    * - ConfigurableQuery
      - *name*:*dbid*:*description*:*query*
-     - Define new query. This parameter can be specified multiple times to define
-       multiple queries. Fields in query definition have the following meaning:
+     - Define query for synchronous execution. Can be specified multiple times
+       to define multiple queries. Fields in query definition have the following
+       meaning:
 
-        - *name*        Query name which will be used in parameters to retrieve collected data.
-        - *dbid*        Database ID (defined by Database parameter)
-        - *description* Description that will be shown in agents parameter description.
-        - *query*       SQL query to be executed.
+        - *name* - Query name which will be used in metrics to retrieve
+          collected data.
+        - *dbid* - Database connection ID
+        - *description* - Description that will be shown in agents parameter
+          description.
+        - *query* - SQL query to be executed. Bind variables are supported,
+          question mark (``?``) placeholders in the query will be substituted
+          with parameters supplied along with requested metric. 
 
 
-Database connection options
----------------------------
+Database connection parameters are set in separate sections named
+**[DBQUERY/Databases/id]** where ``id`` is database connection id used to
+identify this connection in configuration parameters and agent metrics. The
+following parameters are supported:
 
-+-----------------------+-----------+--------------------------------------------------+
-| Name                  | Status    | Description                                      |
-+=======================+===========+==================================================+
-| **dbname**            | optional  | Database name.                                   |
-+-----------------------+-----------+--------------------------------------------------+
-| **DBDriverOptions**   | optional  | Additional driver-specific parameters.           |
-+-----------------------+-----------+--------------------------------------------------+
-| **driver**            | mandatory | Database driver name. Available drivers are:     |
-|                       |           | - db2                                            |
-|                       |           | - informix                                       |
-|                       |           | - mssql                                          |
-|                       |           | - mysql                                          |
-|                       |           | - odbc                                           |
-|                       |           | - oracle                                         |
-|                       |           | - pgsql                                          |
-|                       |           | - sqlite                                         |
-+-----------------------+-----------+--------------------------------------------------+
-| **encryptedPassword** | optional  | Database password in encrypted form (use         |
-|                       |           | :ref:`nxencpasswd-tools-label` command line tool |
-|                       |           | to encrypt passwords). This option takes         |
-|                       |           | precedence over **password** option.             |
-+-----------------------+-----------+--------------------------------------------------+
-| **id**                | mandatory | Database connection ID which will be used to     |
-|                       |           | identify this connection in configuration and    |
-|                       |           | data collection metrics.                         |
-+-----------------------+-----------+--------------------------------------------------+
-| **login**             | optional  | Login name.                                      |
-+-----------------------+-----------+--------------------------------------------------+
-| **password**          | optional  | Database password. Remember to enclose password  |
-|                       |           | in double quotes ("password") if it contains     |
-|                       |           | # character. This parameter automatically        |
-|                       |           | detects and accepts password encrypted with      |
-|                       |           | :ref:`nxencpasswd-tools-label` tool.             |
-+-----------------------+-----------+--------------------------------------------------+
-| **server**            | optional  | Database server name or IP address.              |
-+-----------------------+-----------+--------------------------------------------------+
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 25 100
+
+   * - Name
+     - Status
+     - Description
+   * - **name** 
+     - optional
+     - Database name
+   * - **DBDriverOptions**
+     - optional
+     - Additional driver-specific parameters
+   * - **driver** 
+     - mandatory
+     - Database driver name. Available drivers are: 
+
+        - db2
+        - informix
+        - mssql
+        - mysql
+        - odbc
+        - oracle
+        - pgsql
+        - sqlite        
+   * - **encryptedPassword**
+     - optional
+     - Database password in encrypted form (use :ref:`nxencpasswd-tools-label`
+       command line tool to encrypt passwords). This option takes precedence
+       over **password** option
+   * - **login** 
+     - optional
+     - Login name
+   * - **password**
+     - optional
+     - Database password. Remember to enclose password in double quotes
+       ("password") if it contains # character. This parameter automatically
+       detects and accepts password encrypted with
+       :ref:`nxencpasswd-tools-label` tool.
+   * - **server**
+     - optional
+     - Database server name or IP address.
 
 
 Configuration Example
@@ -162,21 +137,84 @@ Configuration Example
 
 .. code-block:: cfg
 
-   # This sample nxagentd.conf instructs agent to:
-   #   1. load DBQuery subagent
-   #   2. Define two databases - db1 (Oracle) and db2 (MySQL).
-   #   3. Execute query "SELECT f1 FROM table1" in database db1 every 60 seconds
-   #   4. Execute query "SELECT f1 FROM table2 WHERE f2 LIKE ':%'" on DSN2 every 15 seconds
-
    MasterServers = netxms.demo
    SubAgent = dbquery.nsm
 
-   *DBQUERY
-   Database = id=db1;driver=oracle.ddr;server=10.0.0.2;login=netxms;encryptedPassword=H02kxYckADXCpgp+8SvHuMKmCn7xK8e4wqYKfvErx7g=
-   Database = id=db2;driver=mysql.ddr;server=10.0.0.4;dbname=test_db;login=netxms;password=netxms1
+   [DBQUERY]
+   # Query1 will be executed every 60 seconds (be can be also executed on-demand via metric "query1"):
    Query = query1:db1:60:SELECT f1 FROM table1
-   Query = query2:db2:15:SELECT f1 FROM table2 WHERE f2 LIKE ':%'
-   ConfigurableQuery = query3:db2:Comment in param:SELECT name FROM images WHERE name like ?
+
+   # Query2 will be executed on demand, one parameter should be supplied along with the metric
+   ConfigurableQuery = query2:db1:This query requires one parameter:SELECT f1 FROM table2 WHERE f2 LIKE ?
+   
+   [DBQUERY/Databases/db1]
+   driver=pgsql
+   server=10.0.0.4
+   login=netxms
+   password=netxms1
+   name=test_db
+
+
+Metrics
+-------
+
+When loaded, DBQuery subagent adds the following metrics to agent:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 50 100
+
+   * - Metric
+     - Description
+   * - DB.Query(*dbid*,\ *query*)
+     - Result of immediate execution of the query *query* in database identified
+       by *dbid*. Database with given name must be defined in configuration
+       file.
+   * - DB.QueryResult(*name*) 
+     - Last result of execution of the query *name*. Query with given name must
+       be defined in configuration file.
+   * - DB.QueryStatus(*name*) 
+     - Status of last execution of the query *name*. Query with given name must
+       be defined in configuration file. Value returned is native SQL error
+       code. 
+   * - DB.QueryStatusText(*name*)
+     - Status of last execution of the query *name* as a text. Query with given
+       name must be defined in configuration file.
+   * - *queryName*  
+     - Result of immediate execution of query *queryName* defined in agent
+       config file with ``Query=...``.
+   * - *queryName*\ (\ *param1*, *param2*...)
+     - Result of immediate execution of query *queryName* defined in agent
+       config file with ``ConfigurableQuery=...``. Optional parameters *param1*,
+       *param2*... will be used as bind variables in the query. 
+     
+
+Tables
+------
+
+When loaded, DBQuery subagent adds the following tables to agent:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 50 100
+
+   * - Table
+     - Description
+   * - DB.Query(*dbid*,\ *query*)
+     - Result of immediate execution of the query *query* in database identified
+       by *dbid*. Database with given name must be defined in configuration
+       file
+   * - DB.QueryResult(*name*)
+     - Last result of execution of the query *name*. Query with given name must
+       be defined in configuration file
+   * - *queryName*
+     - Result of immediate execution of query *queryName* defined in agent
+       config file with ``Query=...``.
+   * - *queryName*\ (\ *param1*, *param2*...)
+     - Result of immediate execution of query *queryName* defined in agent
+       config file with ``ConfigurableQuery=...``. Optional parameters *param1*,
+       *param2*... will be used as bind variables in the query. 
+
 
 
 

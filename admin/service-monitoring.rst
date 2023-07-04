@@ -114,19 +114,25 @@ agent:
            within headers and body of the web page. If set to *false*, *pattern*
            is matched in web page body only. 
          - *pattern* - regular expression to match. 
-         - *response-code* - web server response code to match. 
-         - *verify-host* - *true* (default) - verify that host name from URL
-           matches one from certificate (CURLOPT_SSL_VERIFYHOST = 2); *false* -
-           do not verify that host name from URL match one from certificate
-           (CURLOPT_SSL_VERIFYHOST = 0)
-         - *verify-peer* - *true* (default) - verify peer certificate; *false* -
-           do not verify peer certificate.      
+         - *response-code* - web server response code to match.     
 
        Parameters supported for *smtp* and *smtps* schemes:
 
          - *to* - test email will be sent to this address. Obligatory parameter
          - *from* - test email will be sent from this address. Optional
            parameter, default value depends on configuration of NetSVC subagent. 
+
+       Parameters supported for all schemas except *ssh*, *telnet*, *tcp*:
+
+         - *verify-host* - *true* (default) - verify that host name from URL
+           matches one from certificate (CURLOPT_SSL_VERIFYHOST = 2); *false* -
+           do not verify that host name from URL match one from certificate
+           (CURLOPT_SSL_VERIFYHOST = 0)
+         - *verify-peer* - *true* (default) - verify peer certificate; *false* -
+           do not verify peer certificate.  
+         - *tlsMode* - TLS mode that should be used. One of: *none*, *try*, *always*
+         - *login* - login
+         - *password* - password (can be encrypted by :ref:`nxencpasswd-tools-label` tool)
 
        Metric returns one of the following values:
 
@@ -224,7 +230,7 @@ Examples
 
 | ``NetworkService.Status(tcp://netxms.org:88, timeout=2000)``
 | Returns 2 (Timeout) as it was not possible to establish TCP connection to port
-  88. Waits for 2 seconds according to *timeout* that we have specified. 
+  1.  Waits for 2 seconds according to *timeout* that we have specified. 
 
 | ``NetworkService.ResponseTime(https://www.google.com)``
 | Returns time in milliseconds it took to fully retrieve the web page from the

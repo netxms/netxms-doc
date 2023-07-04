@@ -130,7 +130,7 @@ agent:
            (CURLOPT_SSL_VERIFYHOST = 0)
          - *verify-peer* - *true* (default) - verify peer certificate; *false* -
            do not verify peer certificate.  
-         - *tlsMode* - TLS mode that should be used. One of: *none*, *try*, *always*
+         - *tls-mode* - TLS mode that should be used. One of: *none*, *try*, *always*
          - *login* - login
          - *password* - password (can be encrypted by :ref:`nxencpasswd-tools-label` tool)
 

@@ -1153,7 +1153,7 @@ Request all business service checks
 
 Request type: **GET**
 
-Request path: *API_HOME*/**{object-id}**/checks
+Request path: *API_HOME*/objects/**{object-id}**/checks
 
 Create new check
 ~~~~~~~~~~~~~~~~
@@ -1162,7 +1162,7 @@ Create new business service check
 
 Request type: **POST**
 
-Request path: *API_HOME*/**{object-id}**/checks
+Request path: *API_HOME*/objects/**{object-id}**/checks
 
 JSON data:
 
@@ -1187,7 +1187,7 @@ Update existing business service check
 
 Request type: **PUT**
 
-Request path: *API_HOME*/**{object-id}**/checks/**check-id**
+Request path: *API_HOME*/objects/**{object-id}**/checks/**check-id**
 
 JSON data:
 
@@ -1205,14 +1205,14 @@ JSON data:
       }
 
 
-Update existing check
+Delete existing check
 ~~~~~~~~~~~~~~~~~~~~~
 
 Delete existing business service check
 
 Request type: **DELETE**
 
-Request path: *API_HOME*/**{object-id}**/checks/**check-id**
+Request path: *API_HOME*/objects/**{object-id}**/checks/**check-id**
 
 
 Get tickets
@@ -1222,7 +1222,7 @@ Get ticket list for given time range.
 
 Request type: **GET**
 
-Request path: *API_HOME*/**{object-id}**/tickets
+Request path: *API_HOME*/objects/**{object-id}**/tickets
 
 Time range can be requested in 2 ways.
 
@@ -1244,7 +1244,7 @@ Get uptime for given time range.
 
 Request type: **GET**
 
-Request path: *API_HOME*/**{object-id}**/uptime
+Request path: *API_HOME*/objects/**{object-id}**/uptime
 
 Time range can be requested in 2 ways.
 

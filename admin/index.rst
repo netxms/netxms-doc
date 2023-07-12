@@ -39,6 +39,7 @@ Administrator Guide
    asterisk-monitoring
    mobile-device-monitoring
    topology
+   assets
    sla
    remote-file-management
    package-manager

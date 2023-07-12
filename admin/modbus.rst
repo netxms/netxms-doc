@@ -14,7 +14,7 @@ proxy mode.
 To enable agent operation as Modbus proxy, add ``EnableModbusProxy=yes`` to
 agent configuration file and restart the agent.
 
-Metric for Mosbus data collection items has special format denoting type of
+Metric for Modbus data collection items has special format denoting type of
 Modbus unit id, register type, register address and the way how obtained data
 should be interpreted:
 

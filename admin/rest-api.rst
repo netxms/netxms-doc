@@ -35,7 +35,7 @@ Localhost address will be used if no address was set. Server configuration examp
 
    .. code-block:: cfg
 
-        netxms.server.address=sever.office.radensolutions.com
+        netxms.server.address=server.office.radensolutions.com
 
 If the server is running on a non-standard port, specify it with the following property:
 

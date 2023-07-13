@@ -31,11 +31,11 @@ Configuration of information attributes which are present in assets is performed
 in :guilabel:`Configuration -> Asset management schema`. The schema is global. 
 
 To add a new attribute, select :guilabel:`New attribute...` from context menu or
-click + button on the toolbar.
+click + button on the toolbar. Asset attribute property editor would open:
 
 .. figure:: _images/assets_attribute_properties_1.png
 
-General page of asses attribute properties has the following information:
+General page of asset attribute properties has the following information:
 
 * Name - Should be unique and conform to NXSL naming convention. This name is
   used when accessing asset information from scripts.

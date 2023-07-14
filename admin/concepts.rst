@@ -69,45 +69,6 @@ editable attribute – name.
        object based on an interface configuration. Subnet objects have only one
        editable attribute - :guilabel:`Name`.
      - - Node
-   * - Node
-     - Object representing physical host or network device (such as a router or network switch).
-       These objects can be created either manually by administrator or automatically during
-       network discovery process. They have a lot of attributes controlling all aspects
-       of interaction between |product_name| server and managed node. For example, the attributes
-       specify what data must be collected, how node status must be checked, which protocol
-       versions to use, etc. Node objects contain one or more interface objects. The system
-       creates interface objects automatically during configuration polls.
-     - - Interface
-       - Access point
-       - Network Service
-       - VPN Connector
-   * - Interface
-     - Interface objects represent network interfaces of managed computers and
-       devices. These objects created automatically by the system during
-       configuration polls or can be created manually by user.
-     -
-   * - Access point
-     - Object representing wireless network access point. A node can have
-       several access points, e.g. 2.4Ghz and 5Ghz, or in case of thin wireless
-       access points managed by a central controller. These objects are created
-       automatically by the system.
-     -
-   * - Network Service
-     - Object representing network service running on a node (like http or
-       ssh), which is accessible online (via TCP IP). Network Service objects
-       are always created manually. Currently, the system works with the following
-       protocols - HTTP, POP3, SMTP, Telnet, SSH and Custom protocol type.
-     -
-   * - VPN Connector
-     - Object representing VPN tunnel endpoint. Such objects can be created to
-       add VPN tunnels to network topology known to |product_name| server. VPN Connector
-       objects are created manually. In case if there is a VPN
-       connection linking two different networks open between two firewalls that are
-       added to the system as objects, a user can create a VPN Connector object on
-       each of the firewall objects and link one to another. The network topology will
-       now show that those two networks are connected and the system will take this
-       condition into account during problem analysis and event correlation.
-     -
    * - Service Root
      - Abstract object representing root of your infrastructure service tree.
        System can have only one object of this class. After system installation
@@ -154,6 +115,45 @@ editable attribute – name.
        configured in Server Configuration Variables as ConditionPollingInterval
        with default value 60 seconds.
      -
+   * - Node
+     - Object representing physical host or network device (such as a router or network switch).
+       These objects can be created either manually by administrator or automatically during
+       network discovery process. They have a lot of attributes controlling all aspects
+       of interaction between |product_name| server and managed node. For example, the attributes
+       specify what data must be collected, how node status must be checked, which protocol
+       versions to use, etc. Node objects contain one or more interface objects. The system
+       creates interface objects automatically during configuration polls.
+     - - Interface
+       - Access point
+       - Network Service
+       - VPN Connector
+   * - Interface
+     - Interface objects represent network interfaces of managed computers and
+       devices. These objects created automatically by the system during
+       configuration polls or can be created manually by user.
+     -
+   * - Access point
+     - Object representing wireless network access point. A node can have
+       several access points, e.g. 2.4Ghz and 5Ghz, or in case of thin wireless
+       access points managed by a central controller. These objects are created
+       automatically by the system.
+     -
+   * - Network Service
+     - Object representing network service running on a node (like http or
+       ssh), which is accessible online (via TCP IP). Network Service objects
+       are always created manually. Currently, the system works with the following
+       protocols - HTTP, POP3, SMTP, Telnet, SSH and Custom protocol type.
+     -
+   * - VPN Connector
+     - Object representing VPN tunnel endpoint. Such objects can be created to
+       add VPN tunnels to network topology known to |product_name| server. VPN Connector
+       objects are created manually. In case if there is a VPN
+       connection linking two different networks open between two firewalls that are
+       added to the system as objects, a user can create a VPN Connector object on
+       each of the firewall objects and link one to another. The network topology will
+       now show that those two networks are connected and the system will take this
+       condition into account during problem analysis and event correlation.
+     -
    * - Template Root
      - Abstract object representing root of your template tree.
      - - Template
@@ -167,12 +167,23 @@ editable attribute – name.
        for more information about templates.
      - - Mobile Device
        - Node
+   * - Asset Root
+     - Abstract object representing root of hardware asset management tree.
+     - - Asset
+       - Asset group
+   * - Asset Group
+     - Grouping object which can contain assets or other asset group.
+     - - Asset
+       - Asset group
+   * - Asset
+     - Hardware management asset
+     -
    * - Network Map Root
      - Abstract object representing root of your network map tree.
      - - Network Map
        - Network Map Group
    * - Network Map Group
-     - Grouping object which can contain network maps or other network map
+     - Grouping object which can contain network maps or other network map groups
        groups.
      - - Network Map
        - Network Map Group
@@ -182,6 +193,11 @@ editable attribute – name.
    * - Dashboard Root
      - Abstract object representing root of your dashboard tree.
      - - Dashboard
+       - Dashboard Group
+   * - Dashboard Group
+     - Grouping object which can contain dashboards or other dashboard group
+     - - Dashboard
+       - Dashboard Group
    * - Dashboard
      - Dashboard. Can contain other dashboards.
      - - Dashboard

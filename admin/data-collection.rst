@@ -141,7 +141,7 @@ Origin of data (method of obtaining data). Possible origins are:
 represents DCIs whose values are pushed to server by external program (usually
 via :ref:`nxapush-label` or :ref:`nxpush-label` command line tool) instead of
 being polled by the server based on the schedule. Values can also be pushed from
-a NXSL script launced on the server. 
+a NXSL script launched on the server. 
 
 
 Data Type
@@ -152,11 +152,11 @@ Data type for the metric. Can be one of the following: :guilabel:`Integer`,
 Unsigned Integer`, :guilabel:`Float` (floating point number), or
 :guilabel:`String`. Selected data type affects collected data processing - for
 example, you cannot use operations like ``less than`` or ``greater than`` on
-strings. If you select metric from the list using the :guilabel:`Select`
-button, correct data type will be set automatically.
+strings. If you select metric from the list using the :guilabel:`Select` button,
+correct data type will be set automatically.
 
-Source node
-~~~~~~~~~~~
+Source node override
+~~~~~~~~~~~~~~~~~~~~
 
 Source node of metrics collection. This can be used when other node provides
 information about this node. In this way collected data can be collected and
@@ -177,12 +177,14 @@ significant increase of your database size and possible performance degradation.
 
 Can be selected one of options:
 
-    - :guilabel:`Fixed intervals (default)` - default value will be taken from
+    - :guilabel:`Server default interval` - default value will be taken from
       :guilabel:`DefaultDCIPollingInterval` server configuration parameter.
-    - :guilabel:`Fixed intervals (custom)` - value entered on the DCI properties
-      page will be taken.
-    - :guilabel:`Use advanced scheduling` - schedules configured in
-      :guilabel:`Advanced Schedule` page will be used
+    - :guilabel:`Custom interval` - Allows to enter a custom value. This field
+      support macro resolution, so e.g. you can use %{polling_interval:600}
+      macro that will take value of ``polling_interval`` custom attribute or 600
+      if such custom attribute is not present on the node. 
+    - :guilabel:`Advanced scheduling` - schedules configured in
+      :guilabel:`Advanced Schedule` page will be used.
 
 
 Storage
@@ -196,10 +198,12 @@ degradation.
 
 Possible options:
 
-    - :guilabel:`Use default retention time` - default value will be taken from
+    - :guilabel:`Server default` - default value will be taken from
       :guilabel:`DefaultDCIRetentionTime` server configuration parameter.
-    - :guilabel:`Use default retention time` - value entered on the DCI
-      properties page will be taken.
+    - :guilabel:`Custom` - Allows to enter a custom value. This field support
+      macro resolution, so e.g. you can use %{storage_period:30} macro that will
+      take value of ``storage_period`` custom attribute or 30 if such custom
+      attribute is not present on the node. 
     - :guilabel:`Do not save collected data to database` - will not save
       collected data to database, but will store last value in memory
 
@@ -209,6 +213,8 @@ DCI configurations are created. One to store historical data collected once per
 minute and the second one, that is not stored in database, but is collected
 every second and up to date displayed on dashboards.
 
+    - :guilabel:`Save only changed values` - if enabled, value is saved to the
+      database only if it differs from last saved value. 
 
 Status
 ~~~~~~
@@ -653,8 +659,8 @@ Other available options:
       as a status, that participate in object status calculation. Such kind of
       DCI should return integer number from 0 till 4 representing object status.
     - Related object - object that is related to collected DCI. Related object
-      can be set by instance discovery filter script by using `Instance()`
-      function and accessed in NXSL from DCI object. 
+      can be set by instance discovery filter script and accessed in NXSL from
+      DCI object. 
 
 
 .. figure:: _images/dci_other_opt_page.png

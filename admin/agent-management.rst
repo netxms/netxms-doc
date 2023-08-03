@@ -963,6 +963,11 @@ symbols after name.
 
   # Example
 
+# Simple example
+  [ExternalTable/test]
+  Command = echo 'col1;col2;col3\na;b;c'
+  Separator = ;
+
   # Without DCI parameters
   [ExternalTable/dciName]
   Command = command
@@ -975,13 +980,9 @@ symbols after name.
 
   # With DCI parameters
   [ExternalTable/dciName(*)]
-  Command = echo $1
+  Command = cat /folder/with/my/files/$1
 
-  # Real example
-  [ExternalTable/test]
-  Command = echo 'a;b;c'
-  Separator = ;
-
+  
   # Old configuration format
   ExternalTable=dciName::command
   ExternalTable=dciName:instanceColumns=columnName;description=description;separator=|:command

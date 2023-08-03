@@ -472,49 +472,164 @@ first, and use this event in the threshold configuration. |product_name| has som
 preconfigured events that are intended to be used with thresholds. Their names
 start with ``DC_``.
 
-The system will pass the following seven parameters to all events generated as a
-reaction to threshold violation:
+The system will pass the following parameters to events generated as a
+reaction to single-value DCI threshold violation:
 
-#. Metric name (DCI's name attribute)
-#. DCI description
-#. Threshold value
-#. Actual value
-#. Unique DCI identifier
-#. Instance (DCI's instance attribute)
-#. Repeat flag
+.. list-table::
+   :widths: 10 20 60
+   :header-rows: 1
 
-And those on table threshold violation:
+   * - Parameter number
+     - Named parameter
+     - Description
+   * - 1
+     - dciName
+     - Data collection item name
+   * - 2
+     - dciDescription
+     - Data collection item description
+   * - 3
+     - thresholdValue
+     - Threshold value
+   * - 4
+     - currentValue
+     - Current value (e.g. average for several samples for averaging threshold)
+       that is compared to threshold value
+   * - 5
+     - dciId
+     - Data collection item ID
+   * - 6
+     - instance
+     - Instance
+   * - 7
+     - isRepeatedEvent
+     - Repeat flag
+   * - 8
+     - dciValue
+     - Last collected DCI value
+   * - 9
+     - operation
+     - Threshold's operation code
+   * - 10
+     - function
+     - Threshold's function code
+   * - 11
+     - pollCount
+     - Threshold's required poll count
+   * - 12
+     - thresholdDefinition
+     - Threshold's textual definition
 
-#. Table DCI name
-#. Table DCI description
-#. Table DCI ID
-#. Table row
-#. Instance
 
-For example, if you are creating a custom event that is intended to be
-generated when file system is low on free space, and wish to include file
-system name, actual free space, and threshold's value into event's message
-text, you can use message template like this:
+Event parameters can be accessed by number of by name via macros to form event
+message. For example, if you are creating a custom event that is intended to be
+generated when file system is low on free space, and wish to include file system
+name, actual free space, and threshold's value into event's message text, you
+can use message template like this:
 
-  ``File system %6 has only %4 bytes of free space (threshold: %3 bytes)``
+  ``File system %<instance> has only %<currentValue> bytes of free space
+  (threshold: %<thresholdValue> bytes)``
+
+
+For table threshold violation the following parameters are passed to generated
+events:
+
+.. list-table::
+   :widths: 10 20 60
+   :header-rows: 1
+
+   * - Parameter number
+     - Named parameter
+     - Description
+   * - 1
+     - 
+     - Table DCI name
+   * - 2
+     - 
+     - Table DCI description
+   * - 3
+     - 
+     - Table DCI ID
+   * - 4
+     - 
+     - Table row
+   * - 5
+     - 
+     - Instance
+
 
 For events generated on threshold's return to inactive state (default event is
-``SYS_THRESHOLD_REARMED``), parameter list is different:
+``SYS_THRESHOLD_REARMED``), event parameter list is different:
 
-#. Metric name (DCI's name attribute)
-#. DCI description
-#. Unique DCI identifier
-#. Instance (DCI's instance attribute)
-#. Threshold value
-#. Actual value
+.. list-table::
+   :widths: 10 20 60
+   :header-rows: 1
 
-And those on table threshold rearm:
+   * - Parameter number
+     - Named parameter
+     - Description
+   * - 1
+     - dciName
+     - Data collection item name
+   * - 2
+     - dciDescription
+     - Data collection item description
+   * - 3
+     - dciId
+     - Data collection item ID
+   * - 4
+     - instance
+     - Instance
+   * - 5
+     - thresholdValue
+     - Threshold value
+   * - 6
+     - currentValue
+     - Current value (e.g. average for several samples for averaging threshold)
+       that is compared to threshold value
+   * - 7
+     - dciValue
+     - Last collected DCI value
+   * - 8
+     - operation
+     - Threshold's operation code
+   * - 9
+     - function
+     - Threshold's function code
+   * - 10
+     - pollCount
+     - Threshold's required poll count
+   * - 11
+     - thresholdDefinition
+     - Threshold's textual definition
 
-#. Table DCI name
-#. Table DCI description
-#. Table DCI ID
-#. Table row
-#. Instance
+
+For table DCI threshold rearm the following parameters are passed to generated
+events:
+
+.. list-table::
+   :widths: 10 20 60
+   :header-rows: 1
+
+   * - Parameter number
+     - Named parameter
+     - Description
+   * - 1
+     - 
+     - Table DCI name
+   * - 2
+     - 
+     - Table DCI description
+   * - 3
+     - 
+     - Table DCI ID
+   * - 4
+     - 
+     - Table row
+   * - 5
+     - 
+     - Instance
+
 
 Instance
 --------
@@ -544,8 +659,9 @@ Instance discovery creates 2 macros for substitution:
 
     DCI configuration instance discovery property page
 
-Discovery Methods
-~~~~~~~~~~~~~~~~~
+
+Instance Discovery Methods
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following instance discovery methods are available:
 

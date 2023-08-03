@@ -653,7 +653,7 @@ discovery method and optionally filter script.
 Instance discovery creates 2 macros for substitution:
 
     - {instance} - instance name
-    - {instance-name} - instance user readable description
+    - {instance-name} - instance user-readable description
 
 .. figure:: _images/dci_instance_page.png
 
@@ -666,46 +666,61 @@ Instance Discovery Methods
 The following instance discovery methods are available:
 
 
-============================= =============== =================================================
-Method                        Input Data      Description
-============================= =============== =================================================
-Agent List                    List name       Read list from agent and use it's values as
-                                              instance names.
-Agent Table                   Table name      Read table from agent and use it's instance
-                                              column values as instance names. If there are
-                                              several instance columns in that table, a
-                                              concatenation of values will be used, separated
-                                              by ``~~~`` (three tilda characters).
-SNMP Walk - Values            Base OID        Do SNMP walk starting from given OID and use
-                                              values of returned varbinds as instance names.
-SNMP Walk - OIDs              Base OID        Do SNMP walk starting from given OID and use IDs
-                                              of returned varbinds as instance names.
-Script                        Script name     Instance names are provided by script from script
-                                              library. The script should return an array
-                                              of instance names.
-Windows Performance Counters  Path            Each sub-element of given path will be
-                                              considered as separate instance. 
-Web Service                   Definition:path Web service request field contains web service 
-                                              definition name with optional arguments and path 
-                                              to the root element of the document where 
-                                              enumeration will start. Each sub-element of 
-                                              given root element will be 
-                                              considered separate instance.
-Internal Table                Table name      Read |product_name| server internal table 
-                                              and use it's instance column values
-                                              as instance names. If there are
-                                              several instance columns in that table, a
-                                              concatenation of values will be used, separated
-                                              by ``~~~`` (three tilda characters).
-============================= =============== =================================================
+
+.. list-table::
+   :widths: 25 15 60
+   :header-rows: 1
+
+   * - Method
+     - Input Data
+     - Description
+   * - Agent List
+     - List name
+     - Read list from agent and use it's values as instance names.
+   * - Agent Table
+     - Table name
+     - Read table from agent and use it's instance column values as instance
+       names. If there are several instance columns in that table, a
+       concatenation of values will be used, separated by ``~~~`` (three tilda
+       characters).
+   * - SNMP Walk - Values
+     - Base OID
+     - Do SNMP walk starting from given OID and use values of returned varbinds
+       as instance names.
+   * - SNMP Walk - OIDs
+     - Base OID
+     - Do SNMP walk starting from given OID and use IDs of returned varbinds as
+       instance names.
+   * - Script
+     - Script name
+     - Instance names are provided by script from script library. The script
+       should return an array (with elements representing instance names) or a
+       map (keys represent instance names and values represent user-readable
+       description)
+   * - Windows Performance Counters
+     - Path
+     - Each sub-element of given path will be considered as separate instance. 
+   * - Web Service
+     - Definition:path
+     - Web service request field contains web service definition name with
+       optional arguments and path to the root element of the document where
+       enumeration will start. Each sub-element of given root element will be
+       considered separate instance.
+   * - Internal Table
+     - Table name
+     - Read |product_name| server internal table and use it's instance column
+       values as instance names. If there are several instance columns in that
+       table, a concatenation of values will be used, separated by ``~~~``
+       (three tilda characters).
 
 
-Instance Filter
-~~~~~~~~~~~~~~~
+Instance Discovery Filter Script
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can optionally filter out unneeded instances and transform instance names
-using filtering script written in NXSL. Script will be called for each instance
-and can return either a binary value or an array.
+You can optionally filter out unneeded instances, transform instance names and
+add user-readable description using filtering script written in NXSL. Script
+will be called for each instance and can return either a binary value or an
+array.
 
 If binary value is returned, it has the following meaning:
 ``TRUE`` (to accept instance), ``FALSE`` (to reject instance).
@@ -720,8 +735,7 @@ Data type                Description
 String                   Instance name, that will be available as {instance} macro.
 String                   Instance user-readable description, that will be available
                          as {instance-name} macro
-NetObj                   .. versionadded:: 3.0.0
-                           Object connected with this :term:`DCI`
+NetObj                   Object connected with this :term:`DCI`
 ======================== ==========================================================
 
 
@@ -745,6 +759,7 @@ in "Group" field.
 .. figure:: _images/dci_performance_tab_page.png
 
     DCI configuration instance discovery property page
+
 
 Access Control
 --------------

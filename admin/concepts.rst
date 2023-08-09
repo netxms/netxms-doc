@@ -95,7 +95,8 @@ editable attribute – name.
        - Subnet
        - Rack
    * - Cluster
-     - Object representing cluster consisting of two or more nodes. See
+     - Pseudo-object defining any process: technological or logical that aggregates 
+       information from several separate nodes. See
        :ref:`Cluster monitoring<cluster-monitoring>` for more information.
      - - Node
    * - Rack
@@ -145,9 +146,9 @@ editable attribute – name.
        protocols - HTTP, POP3, SMTP, Telnet, SSH and Custom protocol type.
      -
    * - VPN Connector
-     - Object representing VPN tunnel endpoint. Such objects can be created to
-       add VPN tunnels to network topology known to |product_name| server. VPN Connector
-       objects are created manually. In case if there is a VPN
+     - Object representing VPN tunnel endpoint, is used for interfaceless tunnels (like ipsec). 
+       Such objects can be created to add VPN tunnels to network topology known to |product_name| 
+       server. VPN Connector objects are created manually. In case if there is a VPN
        connection linking two different networks open between two firewalls that are
        added to the system as objects, a user can create a VPN Connector object on
        each of the firewall objects and link one to another. The network topology will

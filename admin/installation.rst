@@ -349,9 +349,14 @@ Add repository
 
 DNF provide simple way to add repository:
 
-   dnf config-manager --add-repo https://packages.netxms.org/epel/netxms.repo
+.. code-block:: sh
 
-Once added, you can install any package with "dnf install" (e.g. "dnf install netxms-agent").
+   # RHEL and compatible
+   dnf config-manager --add-repo https://packages.netxms.org/epel/netxms.repo
+   # Fedora
+   dnf config-manager --add-repo https://packages.netxms.org/fedora/netxms.repo
+
+Once added, you can install any package with ``dnf install`` (e.g. ``dnf install netxms-agent``).
 
 Installing on Windows
 =====================

@@ -991,6 +991,16 @@ alarms, or actions. You may use the following macros to accomplish this:
        value will be converted to 0).
    * - ``%<name>``
      - Event's parameter with given name.
+   * - ``%<{format-specifier}name>``
+     - Formatted event's parameter with given name. This is applicable to DCI
+       value and threshold value parameters. ``format-specifier`` is
+       comma-separated list supporting the following options:
+         - ``units`` - add measurement units from DCI's properties. For
+           :guilabel:`Epoch` time and :guilabel:`Uptime` this will also convert
+           the value.  
+         - ``u`` - same as ``units``
+         - ``multipliers`` - display values with multipliers (e.g. 1230000 becomes 1.23 M)
+         - ``m`` - same as ``multipliers``
    * - ``%1`` - ``%99``
      - Event's parameter number 1 .. 99.
    * - ``%%``
@@ -1008,16 +1018,3 @@ following notations:
 +--------+--------------------------------+
 | ``\\`` | Backslash character            |
 +--------+--------------------------------+
-
-Event's parameter with given name
----------------------------------
-
-Threshold reached/rearmed named parameters:
-  * %<dciId>
-  * %<dciName>
-  * %<dciDescription>
-  * %<thresholdValue>
-  * %<currentValue>
-  * %<instance>
-  * %<isRepeatedEvent> - set only for DCI reached events
-  * %<dciValue>

@@ -7,6 +7,11 @@ Installation
 Major changes between releases
 ==============================
 
+4.4
+---
+Minimal JRE (Java Runtime Environment) version for management client is Java-17. 
+
+
 4.2
 ---
 
@@ -32,7 +37,7 @@ Several WEB API endpoints were renamed, e.g. *API_HOME*/summaryTable/adHoc becam
 
 3.8
 ---
-Minimal JRE (Java Runtime Environment) version for console is Java-11. 
+Minimal JRE (Java Runtime Environment) version for management client is Java-11. 
 
 3.7
 ---
@@ -88,13 +93,14 @@ However, we test and officially support only some of them.
 
 Supported platforms for |product_name| server and agent:
 
-   * Debian 9 (Stretch), 10 (Buster), 11 (Bullseye)
+   * Debian 10 (Buster), 11 (Bullseye), 12 (Bookworm)
    * Ubuntu 18.04 LTS (Bionic), 20.04 LTS (Focal Fossa), 22.04 LTS (Jammy Jellyfish)
-   * Linux Mint 19.3 (Tricia), Linux Mint Debian Edition 4
+   * Linux Mint 19.3 (Tricia), 20.3 (Una), 21.2 (Victoria)
+   * Linux Mint Debian Edition 4
    * Devuan ASCII
    * Red Hat Enterprise Linux 8
    * CentOS 8
-   * Windows 11, Windows 10, Windows Server 2016, 2019
+   * Windows 11, Windows 10, Windows Server 2016, 2019, 2022
    * FreeBSD 12
    * ArchLinux (Latest)
    * AlpineLinux 3.8+

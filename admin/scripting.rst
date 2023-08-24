@@ -5,45 +5,6 @@
 Scripting
 #########
 
-Scripting library
-=================
-
-:guilabel:`Script Library` is used to store scripts that can be afterwards executed as macros,
-part of other script or just from server console. Scripts can be added, deleted and modified in
-in this view.
-
-.. figure:: _images/script_library.png
-
-
-Usage
------
-
-Scripts from Script Library can be accessed as:
-  1. a macros $[\ `scriptName`\ ]
-  2. used in other script in format: "use `scriptName`\ "
-  3. executed from server console "execute `scriptName`\ "
-  4. executed as post action for pols - then script name should start from "`Hook::`\ " and then
-     should be name of poll like "Hook::ConfigurationPoll".
-  5. executed form "Script" source DCI
-
-
-.. note::
-   All parameters provided to script are accessible via $ARGS array.
-
-.. _execute_server_script:
-
-Execute Server Script
-=====================
-
-This view allows to execute arbitrary script. Script can be manually created just before execution,
-and afterwards saved, can be taken from the script library, can be used modified script from the
-script library and afterwards saved or saved as. If this view is opened on a node, then in the
-script is available ``$node`` variable with node object.
-
-.. note::
-   All parameters provided to script are accessible via $ARGS array.
-   
-.. figure:: _images/execute_server_script.png
 
 NXSL
 ====
@@ -62,6 +23,69 @@ explicit permission. NXSL is interpreted language – scripts first compiled int
 internal representation (similar to byte code in Java), which is then executed
 inside NXSL Virtual Machine. Language syntax and available functions can be
 found in `NXSL documentation <https://www.netxms.org/documentation/nxsl-latest/>`_.
+
+List of places where NXSL scripting is used
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  - Script library
+  - DCI transformation scripts
+  - DCI instance filter script
+  - DCI scripted threshold
+  - Container autobind script
+  - Template autobind script
+  - SNMP trap transformation script
+  - EPP filter script
+  - EPP inline script actions
+  - Map object filter script
+  - Dashboard scripted chart
+  - Dashboard status indicator
+  - Business service scripted check
+  - Business service instance filter script
+  - Asset attribute auto fill script
+  - Object query
+
+
+Scripting library
+-----------------
+
+:guilabel:`Script Library` is used to store scripts that can be afterwards executed as macros,
+part of other script or just from server console. Scripts can be added, deleted and modified in
+in this view.
+
+.. figure:: _images/script_library.png
+
+
+Usage
+~~~~~
+
+Scripts from Script Library can be accessed as:
+  1. a macros $[\ `scriptName`\ ]
+  2. used in other script in format: "use `scriptName`\ "
+  3. executed from server console "execute `scriptName`\ "
+  4. executed as post action for pols - then script name should start from "`Hook::`\ " and then
+     should be name of poll like "Hook::ConfigurationPoll".
+  5. executed form "Script" source DCI
+
+
+.. note::
+   All parameters provided to script are accessible via $ARGS array.
+
+.. _execute_server_script:
+
+
+Execute Server Script
+---------------------
+
+This view allows to execute arbitrary script. Script can be manually created just before execution,
+and afterwards saved, can be taken from the script library, can be used modified script from the
+script library and afterwards saved or saved as. If this view is opened on a node, then in the
+script is available ``$node`` variable with node object.
+
+.. note::
+   All parameters provided to script are accessible via $ARGS array.
+   
+.. figure:: _images/execute_server_script.png
+
 
 NXShell
 =======

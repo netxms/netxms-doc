@@ -31,18 +31,24 @@ List of places where NXSL scripting is used
   - DCI transformation scripts
   - DCI instance filter script
   - DCI scripted threshold
-  - Container autobind script
-  - Template autobind script
+  - DCI summary table object filter script
+  - Container, template, cluster auto-bind script
   - SNMP trap transformation script
   - EPP filter script
   - EPP inline script actions
   - Map object filter script
+  - Map link styling script
   - Dashboard scripted chart
   - Dashboard status indicator
+  - Context dashboard auto-bind script
   - Business service scripted check
-  - Business service instance filter script
+  - Business service DCI auto apply script
+  - Business service object auto apply script  
+  - Business service prototype instance filter script
   - Asset attribute auto fill script
   - Object query
+  - Agent configuration filter script
+  - Condition status calculation script
 
 
 Scripting library

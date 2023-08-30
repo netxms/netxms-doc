@@ -974,7 +974,7 @@ MySQL
 
 .. code-block:: sh
 
-  echo "CREATE DATABASE netxms;" | mysql -u root -p
+  echo "CREATE DATABASE netxms CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" | mysql -u root -p
   echo "CREATE USER 'netxms'@'localhost' IDENTIFIED BY 'PaSsWd';" | mysql -u root -p
   echo "GRANT ALL on netxms.* to 'netxms'@'localhost';" | mysql -u root -p
 

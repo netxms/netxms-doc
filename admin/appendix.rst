@@ -661,6 +661,9 @@ Server configuration file (netxmsd.conf)
         value defined by MaxLogSize parameter).
 
     - 2
+  * - MaxClientSessions
+    - Maximum number of client sessions. 
+    - 256
   * - MaxLogSize
     - Maximum log file size in bytes, used only if ``LogRotationMode`` is set to
       2

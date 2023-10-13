@@ -67,29 +67,46 @@ To remove the link:
 
 **Link properties:**
 
-Select line, right click and select "Properties".
+Select link line, right click and select "Properties".
 
 
-There can be configured:
-   * Line name
-   * Line comments shown near each connected object
+The following properties can be configured:
+   * Link name 
+   * Connector names (shown on the link line near each connected object)
    * Line color
       * Default - grey
-      * Based on object status - object should be selected
+      * Based on object status - object(s) should be selected
       * Custom color
    * Routing algorithm
-      * Map Default - will be taken default selection for whole map
+      * Map Default - algorithm selected in map properties will be used
       * Direct - straight line without bend points
       * Manhattan - line with automatic bend points
-      * Bend points - bend point can be done manually with double click on the line (can be used to do dual link)
-   * Data Source(there can be configured DCI values and text near them that will be displayed on a link)
-      * For each Data Source can be configured: Data collection item,  name,
-        format string, in case of table DCI also column and instance. Java
-        format string syntax is used, e.g. "Text: %.4f", syntax description is
-        available here:
+      * Bend points - bend point can be added manually with double click on the
+        line
+   * Label position - defines position of label containing link name and DCI
+     values on the link. 50 means middle of the link. 
+   * Data Source (allows to configure DCI values and text near them that will be
+     displayed on a link)
+      * For each Data Source can be configured: Data collection item, name,
+        format string, in case of table DCI also column and instance. If format
+        string is not provided, default formatting including multipliers and
+        measurement units is used. 
+        
+        Java format string syntax is used, e.g. ``Text: %.4f``, syntax description
+        is available here:
         http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax.
-        Additionally "%*s" syntax is supported - it converts the value using
-        multipliers. 
+
+        Additional format specifier can be provided in curly brackets after
+        ``%`` sign to display multipliers and measurement units, e.g.
+        ``%{units,multipliers}f``. Format specifier is comma-separated list
+        supporting the following options:
+          - ``units`` - add measurement units from DCI's properties. For
+            :guilabel:`Epoch` time and :guilabel:`Uptime` this will also convert
+            the value.  
+          - ``u`` - same as ``units``
+          - ``multipliers`` - display values with multipliers (e.g. 1230000
+            becomes 1.23 M)
+          - ``m`` - same as ``multipliers``
 
 Example of DCI data displayed on a link:
 

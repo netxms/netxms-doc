@@ -1034,7 +1034,7 @@ alarms, or actions. You may use the following macros to accomplish this:
      - Custom message text. Can be set in filtering script by setting
        ``CUSTOM_MESSAGE`` variable.
    * - ``%n``
-     - Name of event source object or name of interface for intefrace macro
+     - Name of event source object or name of interface for interface macro
        expansion.
    * - ``%N``
      - Event's name.
@@ -1068,9 +1068,9 @@ alarms, or actions. You may use the following macros to accomplish this:
      - Value of custom attribute.
    * - ``%{name:default_value}``
      - Value of custom attribute. If such custom attribute does not exists on a
-       particular node, default_value is taken. If custom attribute exists, but
-       has empty value, this empty value is taken (if this macro is used
-       somewhere, where it's value is converted to numeric value - e.g. as
+       particular node, ``default_value`` is taken. If custom attribute exists,
+       but has empty value, this empty value is taken (if this macro is used in
+       a place where its value is converted to numeric value - e.g. as
        threshold value for a numeric DCI - then empty value will be converted to
        0).
    * - ``%<name>``

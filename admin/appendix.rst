@@ -4058,17 +4058,45 @@ Supported Platforms: Windows
 Version of PDH.DLL (as returned by PdhGetDllVersion() call).
 
 
+PhysicalDisk.Capacity(*)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: Unsigned Integer 64-bit
+
+Supported Platforms: Linux, Windows
+
+Parameters:
+   1. Physical disk name. Run ``smartctl --scan`` (on Linux) or
+      ``C:\NetXMS\bin\smartctl.exe --scan`` (on Windows) to see list of
+      available disk names. 
+
+Capacity in bytes of provided hard disk.
+
+
+PhysicalDisk.DeviceType(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Linux, Windows
+
+Parameters:
+   1. Physical disk name
+
+Device type of provided hard disk.
+
+
 PhysicalDisk.Firmware(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Data type: String
 
-Supported Platforms: Windows
+Supported Platforms: Linux, Windows
 
 Parameters:
    1. Physical disk name
 
-Firmware version of of provided hard disk.
+Firmware version of provided hard disk.
 
 
 PhysicalDisk.Model(*)
@@ -4076,7 +4104,7 @@ PhysicalDisk.Model(*)
 
 Data type: String
 
-Supported Platforms: Windows
+Supported Platforms: Linux, Windows
 
 Parameters:
    1. Physical disk name
@@ -4084,12 +4112,38 @@ Parameters:
 Model of provided hard disk.
 
 
+PhysicalDisk.PowerCycles(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: Unsigned integer
+
+Supported Platforms: Linux, Windows
+
+Parameters:
+   1. Physical disk name
+
+Number of power cycles of provided hard disk.
+
+
+PhysicalDisk.PowerOnTime(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: Unsigned integer
+
+Supported Platforms: Linux, Windows
+
+Parameters:
+   1. Physical disk name
+
+Power on time of provided hard disk.
+
+
 PhysicalDisk.SerialNumber(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Data type: String
 
-Supported Platforms: Windows
+Supported Platforms: Linux, Windows
 
 Parameters:
    1. Physical disk name
@@ -4102,12 +4156,11 @@ PhysicalDisk.SmartAttr(*)
 
 Data type: String
 
-Supported Platforms: Windows, Linux
+Supported Platforms: Linxu, Windows
 
 Parameters:
-   1. Physical disk name / path
-
-TODO
+   1. Physical disk name
+   2. SMART attribute name
 
 
 PhysicalDisk.SmartStatus(*)
@@ -4115,10 +4168,10 @@ PhysicalDisk.SmartStatus(*)
 
 Data type: Integer
 
-Supported Platforms: Windows, Linux
+Supported Platforms: Linux, Windows
 
 Parameters:
-   1. Physical disk name / path
+   1. Physical disk name
 
 Status of provided hard disk reported by SMART.
 
@@ -4128,10 +4181,10 @@ PhysicalDisk.Temperature(*)
 
 Data type: Integer
 
-Supported Platforms: Windows, Linux
+Supported Platforms: Linux, Windows
 
 Parameters:
-   1. Physical disk name / path
+   1. Physical disk name
 
 Temperature of provided hard disk.
 

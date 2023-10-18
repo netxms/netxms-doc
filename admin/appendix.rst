@@ -196,7 +196,7 @@ Agent configuration file (nxagentd.conf)
        execution. This value will be used for external metrics and external
        commands if ``ExternalCommandTimeout`` or ``ExternalMetricTimeout`` not
        set explicitly.
-     - 2000
+     - 5000
    * - DisableIPv4
      - Disables (yes) or enables(no) IPv4 support.
      - no
@@ -753,7 +753,7 @@ Configuration`
   * - Agent.CommandTimeout
     - Timeout in milliseconds for commands sent to agent. If agent did not
       respond to command within this time, command considered as failed.
-    - 2000
+    - 4000
     - Yes
   * - DefaultAgentCacheMode
     - Default agent cache mode

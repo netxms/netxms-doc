@@ -170,6 +170,9 @@ When loaded, DBQuery subagent adds the following metrics to agent:
      - Result of immediate execution of the query *query* in database identified
        by *dbid*. Database with given name must be defined in configuration
        file.
+   * - DB.QueryExecutionTime(*name*) 
+     - Last execution duration in milliseconds of the query *name*. Query with
+       given name must be defined in configuration file.
    * - DB.QueryResult(*name*) 
      - Last result of execution of the query *name*. Query with given name must
        be defined in configuration file.

@@ -352,8 +352,8 @@ Network Map
 Custom Widget
 ~~~~~~~~~~~~~
 
-Custom widget provided by third party console plugin. This options allows to
-add widget from third party loaded plugin.
+Custom widget provided by third party management client plugin. This options
+allows to add widget from third party loaded plugin.
 
 Get Map
 ~~~~~~~
@@ -690,7 +690,7 @@ This configuration will be rendered into this layout:
 Dashboard Rotation
 ------------------
 
-To create configuration when console displays multiple dashboards one by one in
+To create configuration when management client displays multiple dashboards one by one in
 a loop, follow these steps:
 
 - Create all dashboards you want to show

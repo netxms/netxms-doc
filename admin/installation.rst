@@ -75,7 +75,7 @@ Flags and dynamic flags moved to NetObject class. Separated node flags set by us
 flags and capabilities. Numeric values for flags, capabilities and dynamic flags were changed. Will affect only NXSL scripts 
 that checked those flags directly. 
 
-32 bit version of management console is not available any more. 
+32 bit version of management client is not available any more. 
 
 Agent always requires encryption unless RequireEncryption parameter explicitly set to off. Might be required to manually add 
 "RequireEncryption" configuration parameter where required to disable encryption. 
@@ -158,10 +158,10 @@ database: http://git.netxms.org/public/netxms.git/blob/HEAD:/doc/misc/database_s
 Java
 ----
 
-Java Runtime Environment (JRE) is needed for Desktop Management Console (nxmc) and for Web Management Console. 
+Java Runtime Environment (JRE) is needed for Desktop Management Client (nxmc) and for Web Management Client. 
 Supported Java version are 11 and 15. 
 
-Since version 3.8 Desktop Management Console with bundled JRE is provided for Windows. 
+Since version 3.8 Desktop Management Client with bundled JRE is provided for Windows. 
 
 
 Agent
@@ -288,19 +288,19 @@ Enable automatic startup of agent
   systemctl enable nxagentd
 
 
-Management console
-~~~~~~~~~~~~~~~~~~
+Management Client
+~~~~~~~~~~~~~~~~~
 
-Desktop Management Console
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Desktop Management Client
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Due to limitation of Eclipse platform used to build the Management Console, only x64 build is provided.
+Due to limitation of Eclipse platform used to build the Management Client, only x64 build is provided.
 
- 1. Make sure you have 64-bit Java version 11 or 15 installed you your system. 
+ 1. Make sure you have 64-bit Java version 17 installed you your system. 
  
  2. Download the latest version from http://www.netxms.org/download. You will need
     Linux installer (named nxmc-VERSION-linux-gtk-x64.tar.gz, for example
-    nxmc-3.4.178-linux-gtk-x64.tar.gz).
+    nxmc-4.4.3-linux-gtk-x64.tar.gz).
     
  3. Expand package to your preferred directory using command:
 
@@ -309,21 +309,22 @@ Due to limitation of Eclipse platform used to build the Management Console, only
  4. Run nxmc file from "/DESTINATION_DIRECTORY".
 
 
-Desktop management console produces log file :file:`.nxmc/data/.metadata/.log` in home folder of currently logged user. 
-Inspect this log file if you encounter errors when running the console. 
+Desktop management client produces log file :file:`.nxmc/data/.metadata/.log` in
+home folder of currently logged user. Inspect this log file if you encounter
+errors when running the client. 
 
 
-Web Management Console
-^^^^^^^^^^^^^^^^^^^^^^
+Web Management Client
+^^^^^^^^^^^^^^^^^^^^^
 
 |product_name| web interface is java based and should be deployed into servlet container to
-run. Minimal supported versions: Jetty 10, Tomcat 9. Supported Java version is 11 or 15. 
+run. Minimal supported versions: Jetty 10, Tomcat 9. Supported Java version is 17. 
 
   1. Install one of servlet containers that support servlet-api version 4.
 
   2. Download latest version of WAR file from Web Interface Binaries section
      http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
-     nxmc-3.4.178.war).
+     nxmc-4.4.3.war).
 
   3. Copy nxmc.war to webapps directory, in a few seconds it will be autodeployed and
      available at http://SERVER_IP:SERVER_PORT/nxmc/
@@ -333,9 +334,9 @@ run. Minimal supported versions: Jetty 10, Tomcat 9. Supported Java version is 1
      Jetty default folder: $JETTY_HOME/webapps/
 
 
-Web management console produces log file. For Tomcat it's located at 
+Web management client produces log file. For Tomcat it's located at 
 :file:`/var/lib/tomcat9/work/Catalina/localhost/nxmc/eclipse/workspace/.metadata/.log.` 
-Inspect this log file if you encounter errors when running the web console. 
+Inspect this log file if you encounter errors when running the web client. 
 
 
 Installing from RPM repository
@@ -502,7 +503,7 @@ Agent
    * - Subagent
      - Description
    * - filemgr.nsm
-     - Provides access to specified folders on monitored host from |product_name| Management Console File Manager.
+     - Provides access to specified folders on monitored host from |product_name| Management Client File Manager.
        Is also being used for distributing Agent Policy configuration files (see :ref:`agent-policies-label`.)
    * - logwatch
      - Allows monitoring log files and Windows Event Log and sending matched events to |product_name| server.
@@ -524,23 +525,23 @@ For more information about subagents, please refer to :ref:`subagent_list`.
   4. Follow the prompts to complete the installation.
 
 
-Management console
-------------------
+Management Client
+-----------------
 
-Desktop Management Console:
+Desktop Management Client:
 
  1. Download the latest version from http://www.netxms.org/download. 
     Since version 3.8 there are three options - 
     archive (e.g. nxmc-3.8.226-win32-x64.zip), archive with bundled JRE (nxmc-3.8.226-win32-x64-bundled-jre.zip)
     and installer, which also has JRE bundled (e.g. netxms-client-3.8.166-x64.exe). 
     If using archive without JRE, make sure you have JRE version 11 or 15 installed. 
-    Due to limitation of Eclipse platform used to build the Management Console, only x64 build is currently provided. 
+    Due to limitation of Eclipse platform used to build the Management Client, only x64 build is currently provided. 
 
  2. If using archive version, extract zip in preferred directory. If using installer, launch it and follow the instructions. 
 
  3. Run nxmc file from extracted catalog (or launch from Windows Start Menu, if you used the installer). 
 
-Web Management Console:
+Web Management Client:
 
 Windows have two options: one is to manually install .war file into servlet container and
 the second one is to use netxms-webui-VERSION-x64.exe installer. Installer will
@@ -549,7 +550,7 @@ installation via the installer:
 
   1. Download the latest version from http://www.netxms.org/download. You will need
      Windows installer netxms-webui-VERSION-x64.exe (e.g.: netxms-webui-4.3.178-x64.exe).
-     Due to limitation of Eclipse platform used to build the Management Console,
+     Due to limitation of Eclipse platform used to build the Management Client,
      only x64 build is currently provided.
 
   2. Run the installer package on your server machine. Installation wizard will be
@@ -680,10 +681,10 @@ Example:
 Install on Android
 ==================
 
-Console
--------
+Client
+------
 
-To install Android console download netxms-console-VERSION.apk (example:
+To install Android client download netxms-console-VERSION.apk (example:
 netxms-console-3.4.178.apk) file from http://www.netxms.org/download page. Check that
 installation of applications from unknown sources is allowed in security settings of
 your phone. Run this installer on required device.

@@ -802,8 +802,6 @@ from the database with the id **1** will be returned.
 MongoDB
 =======
 
-.. versionadded:: 2.0-M3
-
 |product_name| subagent for MongoDB monitoring. Monitors one or more instances of MongoDB databases and
 reports various database-related metrics.
 

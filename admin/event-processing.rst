@@ -251,7 +251,8 @@ Possible alarm states:
    * - Terminated
      - Inactive alarm. When problem is solved, network administrator can
        terminate alarm. This will remove alarm from active alarms list and it
-       will not be seen in console, but alarm record will remain in database.
+       will not be seen in Management Client, but alarm record will remain in
+       database.
 
 
 There are 2 types of alarm state flows: strict and not strict. This option can
@@ -576,8 +577,6 @@ most critical alarm.
 
 Notification channels
 ---------------------
-
-.. versionadded:: 3.0.0
 
 |product_name| supports concept of notification channel drivers to provide SMS
 and instant message sending functionality. Role of notification channel driver

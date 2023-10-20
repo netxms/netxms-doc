@@ -62,7 +62,7 @@ configuration options can be found here: :ref:`offline-data-collection`.
 DCI configuration
 =================
 
-Data collection for a node can be configured using management console. To open
+Data collection for a node can be configured using management client. To open
 data collection configuration window, right-click on node object in
 :guilabel:`Object Browser` or on a :guilabel:`Network Map`, and click
 :guilabel:`Data Collection Configuration`. You will see the list of configured
@@ -832,7 +832,7 @@ Usually DCIs have scalar values. A list DCI is a special DCI which returns a
 list of values. List DCIs are mostly used by |product_name| internally (to get
 the list of network interfaces during the configuration poll, for example) but
 can also be utilized by user in some occasions. |product_name| Management
-Console does not support list DCIs directly but their names are used as input
+Client does not support list DCIs directly but their names are used as input
 parameters for Instance Discovery methods. List DCI values can be also obtained
 with :command:`nxget` command line utility (e.g. for use in scripts).
 
@@ -859,8 +859,6 @@ comes to server. To prevent generation of old events it can be set
 seconds within which received offline data still relevant for threshold
 validation. By default it is set to 1 day.
 
-.. versionadded:: 2.0-M5
-    Agent caching mode.
 
 Configuration
 -------------

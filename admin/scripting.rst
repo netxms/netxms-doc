@@ -55,7 +55,7 @@ Scripting library
 -----------------
 
 :guilabel:`Script Library` is used to store scripts that can be afterwards executed as macros,
-part of other script or just from server console. Scripts can be added, deleted and modified in
+part of other script or from debug server console. Scripts can be added, deleted and modified in
 in this view.
 
 .. figure:: _images/script_library.png
@@ -67,7 +67,7 @@ Usage
 Scripts from Script Library can be accessed as:
   1. a macros $[\ `scriptName`\ ]
   2. used in other script in format: "use `scriptName`\ "
-  3. executed from server console "execute `scriptName`\ "
+  3. executed from server debug console "execute `scriptName`\ "
   4. executed as post action for pols - then script name should start from "`Hook::`\ " and then
      should be name of poll like "Hook::ConfigurationPoll".
   5. executed form "Script" source DCI

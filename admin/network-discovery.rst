@@ -35,7 +35,7 @@ parameters can be found :ref:`here <server_configuration_parameters>`.
 Configuring Network Discovery
 =============================
 
-To change network discovery settings, go to main menu of management console and
+To change network discovery settings, go to main menu of management client and
 choose :menuselection:`Configuration --> Network Discovery`. Configuration form
 will open:
 

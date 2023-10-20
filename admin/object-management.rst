@@ -8,7 +8,7 @@ Object management
 Object browser
 ==============
 
-:guilabel:`Object browser` is a view in in :term:`Management Console`. It
+:guilabel:`Object browser` is a view in in :term:`Management Client`. It
 presents all existing :term:`objects <Object>` as a hierarchical structure.
 Overall description of objects can be found in concepts part:
 :ref:`concept_object`.
@@ -414,7 +414,7 @@ attribute name can contain up to 127 printable characters), and have string
 values of unlimited length. However, if you wish to access custom attributes in
 :term:`NXSL` scripts as properties of node object, you should name them
 conforming to NXSL identifier naming constraints. To create or change value of
-custom attribute manually, right-click an object in |product_name| console, and
+custom attribute manually, right-click an object in |product_name| client, and
 select :menuselection:`Properties --> Custom Attributes tab`.
 
 .. figure:: _images/object_custom_attributes.png
@@ -875,10 +875,10 @@ Local Command
 ~~~~~~~~~~~~~
 
 :guilabel:`Local Command` tool will execute command on the node, where
-Desktop Management Console is running and will show it's output if
+Desktop Management Client is running and will show it's output if
 :guilabel:`Command generates output` option is enabled.
 
-This tool type is not visible from Web Console as it is not possible
+This tool type is not visible from Web Client as it is not possible
 to execute command on web page receiver's machine.
 
 .. figure:: _images/obj_tool_local_command.png

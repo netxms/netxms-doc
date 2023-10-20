@@ -44,9 +44,6 @@ Agent to server connection is a :term:`TLS` tunnel carrying virtual server to ag
 Server configuration can be separated into two parts: initial configuration (certificate generation and
 configuration) and node binding.
 
-.. versionadded:: 2.2.3
-    Tunnel automatic action options
-
 Server provide option to configure automatic options on new unbound tunnel connection. Once new unbound
 tunnel connection comes to server - idle timeout counter starts for this connection. If nothing done
 while :guilabel:`AgentTunnels.UnboundTunnelTimeout` time, automatic action selected in
@@ -292,7 +289,7 @@ netxmsd commandline options
 Server debug console
 ====================
 
-Server debug console can be opened in Java console. It can be found in
+Server debug console can be opened in Management Client. It can be found in
 :menuselection:`Tools -> Server Console`.
 
 It can be used to check debug messages or to execute one of server

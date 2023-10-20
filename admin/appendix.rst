@@ -1000,7 +1000,7 @@ Configuration`
     - Yes
   * - Client.ListenerPort
     - The server port for incoming client connections (such as management
-      console).
+      client).
     - 4701
     - Yes
   * - Client.MinViewRefreshInterval
@@ -1812,7 +1812,7 @@ Configuration`
     - Yes
   * - Server.Color
     - Identification color for this server. Used in status bar of management
-      console.
+      client.
     -
     - No
   * - Server.CommandOutputTimeout
@@ -1831,11 +1831,11 @@ Configuration`
     - Only missing elements
     - Yes
   * - Server.MessageOfTheDay
-    - Message to be shown when a user logs into the console.
+    - Message to be shown when a user logs into the client.
     -
     - No
   * - ServerName
-    - Name of this server. Displayed in status bar of management console.
+    - Name of this server. Displayed in status bar of management client.
     -
     - No
   * - Server.RoamingMode
@@ -1895,8 +1895,9 @@ Configuration`
     - 0
     - No
   * - Server.Security.RestrictLocalConsoleAccess
-    - If enabled, restrict access to local server console (via nxagm command
-      line tool) only to authenticated users with server console access rights.
+    - If enabled, restrict access to local server debug console (via nxagm
+      command line tool) only to authenticated users with server debug console
+      access rights.
     - true
     - No
   * - SNMP.Codepage

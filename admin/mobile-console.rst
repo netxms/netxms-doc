@@ -1,13 +1,13 @@
 .. _mobile-console:
 
-##############
-Mobile Console
-##############
+#############
+Mobile Client
+#############
 
 
 .. Used version on wiki:  14:17, 7 September 2014‎ Marco Incalcaterra
 
-|product_name| mobile console is a monitoring tool for Android devices running version 2.2.
+|product_name| mobile client is a monitoring tool for Android devices running version 2.2.
 and later.
 
 Currently, only a small subset of the functions present in the Desktop/Web edition
@@ -34,10 +34,10 @@ Here you can see how appears the main window and the underneath levels.
 
 From the main window it is possible to get access to the following menu items:
 
-  * :guilabel:`Settings`: select this item to configure the console.
+  * :guilabel:`Settings`: select this item to configure the client.
   * :guilabel:`Reconnect`: select this item to force a reconnection to the server to gather new
     collected data.
-  * :guilabel:`Disconnect & Exit`: select this item to stop the console and exit from the app.
+  * :guilabel:`Disconnect & Exit`: select this item to stop the client and exit from the app.
 
 Underneath levels have menu that are context dependent, a detailed description can be
 found in each section.
@@ -70,7 +70,7 @@ Dashboard
 Dashboards are defined by administrator and allow to combine any available
 visualization components with data from multiple sources in order to create
 high-level views to see network (or parts of it) health at a glance. Not all
-elements are currently available for the mobile console, dashboards are properly
+elements are currently available for the mobile client, dashboards are properly
 refreshed according to their schedule. Due to dashboard size, keep in mind that
 Smartphones cannot be the best device to show them, a tablet is much more suitable
 device. Here an example:
@@ -86,7 +86,7 @@ by |product_name| are represented as a set of objects. Each object represents on
 logical entity, or group of them). Objects can be organized into hierarchical
 structure, the Nodes section is used to explore them. In the right bottom corner
 of the icon there is a symbol that indicates the status of the node/container
-following the same symbology used on the desktop console. Clicking on a container
+following the same symbology used on the desktop client. Clicking on a container
 will show the items inside, continuing to click up to an object will show a set of
 swipeable pages:
 
@@ -142,7 +142,7 @@ Graphics
 ========
 
 Predefined graphics are defined by administrator and can be used to view collected
-data in a graphical form (as a line chart). Currently, the mobile console doesn’t
+data in a graphical form (as a line chart). Currently, the mobile client doesn’t
 autorefresh the content of the graphic selected. Here an example of a predefined
 graphs:
 
@@ -161,7 +161,7 @@ or by getting it directly from a node via the “Find Switch port” command.
 Settings
 ========
 
-This section is used to configure the behavior of the console.
+This section is used to configure the behavior of the client.
 
 
 Global settings

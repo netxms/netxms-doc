@@ -84,8 +84,8 @@ Folder menu
 ~~~~~~~~~~~
 
  - Upload file... : uploads local file to selected folder in view
- - Upload folder... : uploads local folder to selected folder in view (not supported on web console)
- - Download... : download folder to selected folder on local computer (on web console will be advised to save as a zip of the selected folder)
+ - Upload folder... : uploads local folder to selected folder in view (not supported on web client)
+ - Download... : download folder to selected folder on local computer (on web client will be advised to save as a zip of the selected folder)
  - Rename : renames folder
  - Delete : deletes folder and all it's content
  - Refresh this folder : refreshes content of selected folder in view

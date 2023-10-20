@@ -80,10 +80,10 @@ Glossary
     System :term:`container <Container>` which can be used by Administrator to
     define logical structure of the network.
 
-  Management Console
+  Management Client
     |product_name| user interface. Available in form of `rich client
-    <http://en.wikipedia.org/wiki/Fat_client>`_ for both desktop and mobile or
-    as web service.
+    <http://en.wikipedia.org/wiki/Rich_client>`_ for both desktop and mobile or
+    as web user interface.
 
   Metric
     One entity of collected data

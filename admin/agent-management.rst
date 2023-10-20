@@ -8,7 +8,7 @@ Introduction
 |product_name| agent is daemon or service that runs on a :term:`node<Node>` to provide additional
 monitoring options. This is optional for installation, but it's installation gives following advantages:
 
-   * Centralized configuration - you can change configuration of agent from management console; if needed, you can even store agent configs on |product_name| server
+   * Centralized configuration - you can change configuration of agent from management client; if needed, you can even store agent configs on |product_name| server
    * More secure: communications between |product_name| server and agent can be encrypted, additional authentication on agent can be configured
    * TCP instead of UDP is used for communications with agent - this can help in case of slow and poor quality links
    * Remote command execution - agents can be used to execute commands on managed systems as a reaction to certain events
@@ -16,7 +16,7 @@ monitoring options. This is optional for installation, but it's installation giv
    * :term:`SNMP` proxy: agent can be used as a proxy to reach remote SNMP devices
    * :term:`SNMP Trap` proxy: agent can be used as a proxy to get messages from remote SNMP device
    * Extensible: you can add new metrics very easy using configuration option like ``ExternalMetric`` or by writing your own subagents
-   * Easy upgrade - you can upgrade all agents at once from console
+   * Easy upgrade - you can upgrade all agents at once from management client
    * Provides file management possibilities on agent.
    * Provides log file monitoring functionality.
 
@@ -198,8 +198,6 @@ it did not exist). When agent can't connect to server or server hasn't found rig
 the agent is started with old configuration file. In case if agent configuration file does not
 exist and it is not possible to get new one from the server - agent fails to start.
 
-.. versionadded:: 1.2.15
-
 **Doesn't work with tunnel agent connection**
 
 Configuration
@@ -288,7 +286,7 @@ template is removed from a node, the policy is automatically undeployed from nod
 
 Policies get deployed / undeployed:
   - On node configuration poll.
-  - When list of Agent Policies is closed in the management console. If
+  - When list of Agent Policies is closed in the management client. If
     a node is down at that moment, next attempt will happen on configuration poll.
   - When template is applied or removed from a node. If a node is down at that
     moment, next attempt will happen on configuration poll.

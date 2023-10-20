@@ -424,8 +424,6 @@ use.
 Integration with LDAP
 =====================
 
-.. versionadded:: 1.2.15
-
 |product_name| can perform one-way synchronization of users and groups with external LDAP server. User list replica is refreshed automatically.
 
 Already existing |product_name| users or groups will not be modified during initial synchronization (e.g. user "admin" or group "Everyone").
@@ -505,7 +503,7 @@ Server parameters controlling LDAP synchronization:
 
 ``* Required fields``
 
-Synchronization also can be done manually with `ldapsync` or just `ldap` command in server console.
+Synchronization also can be done manually with `ldapsync` or just `ldap` command in server debug console.
 
 
 LDAP users/groups relationships with native |product_name| users/groups
@@ -523,7 +521,7 @@ LDAP configuration debugging
 ----------------------------
 
 If users are not synchronized the reason can be found by running manually `ldapsync` or just `ldap`
-command in server console on debug lever 4.
+command in server debug console on debug lever 4.
 
 Log when LDAP sync passed correctly:
 
@@ -642,10 +640,10 @@ Open LDAP
 Managing User Accounts
 ======================
 
-All |product_name| user accounts can be managed from :guilabel:`User Manager` view
-available at :menuselection:`Configuration --> User Manager` in |product_name| Console.
-Only users with granted system right :guilabel:`Manage users` can access
-:guilabel:`User Manager`.
+All |product_name| user accounts can be managed from :guilabel:`User Manager`
+view available at :menuselection:`Configuration --> User Manager` in
+|product_name| Management Client. Only users with granted system right
+:guilabel:`Manage users` can access :guilabel:`User Manager`.
 
 - To create new user account, select :guilabel:`Create new user` from view menu or context menu.
 - To create new group, select :guilabel:`Create new group` from view menu or context menu.

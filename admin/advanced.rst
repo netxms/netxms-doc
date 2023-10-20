@@ -59,7 +59,7 @@ Integration with external HelpDesk
 ----------------------------------
 
 |product_name| provides possibility to create issues in external helpdesk system
-directly from |product_name| management console, based on pending alarms. In this
+directly from |product_name| management client, based on pending alarms. In this
 situation |product_name| and external helpdesk system will have synchronized
 issue workflow.
 
@@ -107,7 +107,7 @@ and restart the server.
      - Jira webhook listener port (0 to disable webhook). Default: “8008”. 
 
 .. note::
-    Starting form 4.1.283 |product_name| version Webhook can be used for Jira to |product_name| integration. Not a jira plugin. 
+    Starting from version 4.1.283 |product_name| version Webhook can be used for Jira to |product_name| integration. Not a jira plugin. 
 
 If all configuration was successfully done after rester in console should be present:
 
@@ -419,7 +419,7 @@ Force Crash Dump Creation
 
 It is possible to force creation of crash dump. To do that you'll need access
 to server debug console. You can access it using ``nxadm`` tool or via
-:menuselection:`Tools --> Server Console` menu in management console. Once in
+:menuselection:`Tools --> Server Console` menu in management client. Once in
 server debug console, you can run command ``dump`` or ``raise access``. First
 command works only on Windows and will produce process dump without stopping
 it. Second command will cause access violation exception which will lead to
@@ -448,17 +448,15 @@ container, template auto apply and other automatic actions.
 
 .. _autologin:
 
-Autologin for Management Console
-================================
+Autologin for Management Client
+===============================
 
-.. versionadded:: 1.2.9
+It is possible to connect management client (nxmc) or web management client to
+server automatically without login dialog. This chapter describes additional
+command line options and URL parameters for that.
 
-Starting from version 1.2.4, it is possible to connect management console (nxmc)
-or web management console to server automatically without login dialog. This chapter
-describes additional command line options and URL parameters for that.
-
-Desktop Console
----------------
+Desktop Management Client
+-------------------------
 
 .. list-table::
    :header-rows: 1
@@ -477,14 +475,14 @@ Desktop Console
    * - -server=address
      - Set server name or IP address
 
-For example, to connect management console to server 10.0.0.2 as user guest with empty password, use command
+For example, to connect management client to server 10.0.0.2 as user guest with empty password, use command
 
 .. code-block:: abap
 
     nxmc -auto -server=10.0.0.2 -login=guest
 
-Web Console
------------
+Web Management Client
+---------------------
 
 .. list-table::
    :header-rows: 1
@@ -525,7 +523,7 @@ open dashboard called "SystemOverview", use URL
 Find Object
 ===========
 
-Management console has an option to filter objects by defined by user criteria. Filter can be access by :menuselection:`Tools->Find Object`\ .
+Management client has an option to filter objects by defined by user criteria. Filter can be access by :menuselection:`Tools->Find Object`\ .
 Filter can be used in two different modes: filter and query.
 
 Filter

@@ -173,6 +173,9 @@ When loaded, DBQuery subagent adds the following metrics to agent:
    * - DB.QueryExecutionTime(*name*) 
      - Last execution duration in milliseconds of the query *name*. Query with
        given name must be defined in configuration file.
+
+       .. versionadded:: 4.4.3
+        
    * - DB.QueryResult(*name*) 
      - Last result of execution of the query *name*. Query with given name must
        be defined in configuration file.

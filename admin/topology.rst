@@ -63,7 +63,7 @@ Find where node is connected
 ============================
 
 It is possible to find switch port where any given node is connected (sometimes
-called "connection point" in management console). To find out node's connection
+called "connection point" in management client). To find out node's connection
 point, right-click on node object, and select :guilabel:`Find switch port` in
 pop-up menu. Message box with search results will pop up, and if port is found,
 search results view will be opened (or updated if already open). Search results

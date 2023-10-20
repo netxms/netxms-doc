@@ -34,26 +34,26 @@ Upgrading server and agent
     Once database upgrade is complete, start the server. 
 
 
-Management console
-~~~~~~~~~~~~~~~~~~
+Management client
+~~~~~~~~~~~~~~~~~
 
-Desktop Management Console:
+Desktop Management Client:
 
  1. Download the latest version from http://www.netxms.org/download. You will need
-    Linux installer(named nxmc-VERSION-linux-gtk-x86.tar.gz or
-    nxmc-VERSION-linux-gtk-x64.tar.gz, for example nxmc-1.2.17-linux-gtk-x64.tar.gz).
+    Linux installer (named nxmc-VERSION-linux-gtk-x86.tar.gz or
+    nxmc-VERSION-linux-gtk-x64.tar.gz, for example nxmc-4.4.3-linux-gtk-x64.tar.gz).
 
- 2. Extract and replace old management console with the new one.
+ 2. Extract and replace old management client with the new one.
 
     :command:`tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DIRECTORY`
 
  3. Run nxmc file from extracted catalog.
 
-Web Management Console:
+Web Management Client:
 
   1. Download latest version of WAR file from Web Interface Binaries section 
      http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
-     nxmc-1.2.17.war).
+     nxmc-4.4.3.war).
 
   2. Replace old WAR file with the new one.
 
@@ -146,26 +146,26 @@ Agent
 
     :command:`$ /usr/local/bin/nxagentd -d`
 
-Management console
-~~~~~~~~~~~~~~~~~~
+Management Client
+~~~~~~~~~~~~~~~~~
 
-Desktop Management Console:
+Desktop Management Client:
 
  1. Download the latest version from http://www.netxms.org/download. You will need
     Linux installer(named nxmc-VERSION-linux-gtk-x86.tar.gz or
-    nxmc-VERSION-linux-gtk-x64.tar.gz, for example nxmc-1.2.17-linux-gtk-x64.tar.gz).
+    nxmc-VERSION-linux-gtk-x64.tar.gz, for example nxmc-4.4.3-linux-gtk-x64.tar.gz).
 
- 2. Extract and replace old management console with the new one.
+ 2. Extract and replace old management client with the new one.
 
     :command:`tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DIRECTORY`
 
  3. Run nxmc file from extracted catalog.
 
-Web Management Console:
+Web Management Client:
 
   1. Download latest version of WAR file from Web Interface Binaries section
      http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
-     nxmc-1.2.17.war).
+     nxmc-4.4.3.war).
 
   2. Replace old WAR file with the new one.
 
@@ -218,32 +218,32 @@ However, if you decide to upgrade agent manually, it can be done in just a few s
 
   1. Download the latest version from http://www.netxms.org/download, if you don't
      have it. You will need Windows Agent installer (named nxagent-VERSION.exe or
-     nxagent-VERSION-x64.exe, for example nxagent-1.2.0.exe).
+     nxagent-VERSION-x64.exe, for example nxagent-4.4.3.exe).
 
   2. Run |product_name| agent installer and follow the prompts. Normally, you will not need
      to change any settings on installation wizard dialog windows. Alternatively, you
      can run installer with /SILENT option to disable any prompts:
 
-      :command:`C:\Download> nxagent-1.2.0.exe /SILENT`
+      :command:`C:\Download> nxagent-4.4.3.exe /SILENT`
 
-Management console
-~~~~~~~~~~~~~~~~~~
+Management Client
+~~~~~~~~~~~~~~~~~
 
-Desktop Management Console:
+Desktop Management Client:
 
  1. Download the latest version from http://www.netxms.org/download. You will need
     Windows installer(named nxmc-VERSION-win32-x86.zip or
-    nxmc-VERSION-win32-x64.zip, for example nxmc-1.2.17-win32-x64.zip).
+    nxmc-VERSION-win32-x64.zip, for example nxmc-4.4.3-win32-x64.zip).
 
  2. Replace old old folder with content of the zip.
 
  3. Run nxmc.exe file from extracted catalog.
 
-Web Management Console:
+Web Management Client:
 
   1. Download latest version of WAR file from Web Interface Binaries section
      http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
-     nxmc-1.2.17.war).
+     nxmc-4.4.3.war).
 
   2. Replace old WAR file with the new one. Default path: ``INSTALLATION_DIR\\webapps``.
 

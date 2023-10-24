@@ -235,9 +235,9 @@ Provided driver packages:
 
 #. Instal required packages (adjust command to match your environment):
 
-.. code-block:: sh
+   .. code-block:: sh
 
-  apt-get install netxms-server netxms-dbdrv-pgsql
+     apt-get install netxms-server netxms-dbdrv-pgsql
 
 #. Create user and database (:ref:`examples <db_creation>`).
 
@@ -245,21 +245,40 @@ Provided driver packages:
 
 #. Load database schema and default configuration:
 
-.. code-block:: sh
+   .. code-block:: sh
 
-  nxdbmgr init
+     nxdbmgr init
 
 #. Start server:
 
-.. code-block:: sh
+   .. code-block:: sh
 
-  systemctl start netxmsd
+     systemctl start netxmsd
 
 #. Enable automatic startup of server:
 
-.. code-block:: sh
+   .. code-block:: sh
 
-  systemctl enable netxmsd
+     systemctl enable netxmsd
+
+#. If database engine is running on the same system, add ordering dependency for
+   database into netxmsd systemd unit override file. This will ensure database
+   shutdown only after netxmsd process completion on system shutdown/restart. To
+   add the dependency e.g. for Postgres database, run:
+
+   .. code-block:: sh
+
+     systemctl edit netxmsd
+   
+   and add the following lines:
+
+   .. code-block:: sh
+
+     [Unit]
+     After=network.target postgresql.service
+
+   After editing run ``systemctl daemon-reload`` to reload systemd
+   configuration. 
 
 .. note::
 

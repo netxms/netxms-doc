@@ -1011,10 +1011,20 @@ alarms, or actions. You may use the following macros to accomplish this:
    * - ``%A``
      - Alarm's text. This macro is populated when creating, resolving or
        terminating alarm in EPP rule. Macro is available in that EPP rule for
-       persistent storage and server action and in subsequent EPP rules. Prior
-       to version 3.8.314 this macro was available only withing given EPP rule. 
+       persistent storage and server action and in subsequent EPP rules.
+       
+       .. versionchanged:: 3.8.314
+       In previous version this macro was available only withing given EPP rule. 
    * - ``%c``
      - Event's code.
+   * - ``%C``
+     - Comment of event source object. 
+
+       .. versionadded:: 4.4.3
+   * - ``%D``
+     - Comment of Data Collection Item (only for threshold violation events)
+       
+       .. versionadded:: 4.4.3
    * - ``%E``
      - List of comma-separated user tags associated with the event.     
    * - ``%g``
@@ -1028,19 +1038,22 @@ alarms, or actions. You may use the following macros to accomplish this:
      - Alarm's key (can be used only in actions to put text of alarm from the
        same event processing policy rule).
    * - ``%L``
-     - Object alias
+     - Alias of event source object.
+       
+       .. versionadded:: 4.4.3
    * - ``%m``
      - Event's message text (meaningless in event template).
    * - ``%M``
      - Custom message text. Can be set in filtering script by setting
        ``CUSTOM_MESSAGE`` variable.
    * - ``%n``
-     - Name of event source object or name of interface for interface macro
-       expansion.
+     - Name of event source object. Name of interface when interface name is
+       generated using macros.
    * - ``%N``
      - Event's name.
    * - ``%s``
      - Event's severity code as number. Possible values are:
+
          - 0 - :guilabel:`Normal`
          - 1 - :guilabel:`Warning`
          - 2 - :guilabel:`Minor`
@@ -1080,6 +1093,7 @@ alarms, or actions. You may use the following macros to accomplish this:
      - Formatted event's parameter with given name. This is applicable to DCI
        value and threshold value parameters. ``format-specifier`` is
        comma-separated list supporting the following options:
+
          - ``units`` - add measurement units from DCI's properties. For
            :guilabel:`Epoch` time and :guilabel:`Uptime` this will also convert
            the value.  

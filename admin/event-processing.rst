@@ -1027,6 +1027,8 @@ alarms, or actions. You may use the following macros to accomplish this:
    * - ``%K``
      - Alarm's key (can be used only in actions to put text of alarm from the
        same event processing policy rule).
+   * - ``%L``
+     - Object alias
    * - ``%m``
      - Event's message text (meaningless in event template).
    * - ``%M``

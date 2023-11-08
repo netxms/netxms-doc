@@ -1001,6 +1001,7 @@ information like event source, severity, or parameter in your event texts,
 alarms, or actions. You may use the following macros to accomplish this:
 
 .. list-table::
+   :widths: 35 65
    :header-rows: 1
    :class: longtable
 
@@ -1079,14 +1080,33 @@ alarms, or actions. You may use the following macros to accomplish this:
        ``%[name/calculate]``. Script parameters can be specified in brackets,
        e.g.: ``%[name(123,"A textual parameter")]``
    * - ``%{name}``
-     - Value of custom attribute.
+     - Value of custom attribute. Expansion is attempted in the following order:
+
+        #. If macro is called in DCI context (in a field in DCI properties or when
+           processing threshold violation event), custom attribute
+           ``name::instance`` is taken, where ``instance`` is instance of a DCI.
+        #. If above custom attribute is not found, ``name`` custom attribute is
+           taken. 
+       
+       If custom attribute exists, but has empty value, this empty value is
+       taken (if this macro is used in a place where its value is converted to
+       numeric value - e.g. as threshold value for a numeric DCI - then empty
+       value will be converted to 0).
    * - ``%{name:default_value}``
-     - Value of custom attribute. If such custom attribute does not exists on a
-       particular node, ``default_value`` is taken. If custom attribute exists,
-       but has empty value, this empty value is taken (if this macro is used in
-       a place where its value is converted to numeric value - e.g. as
-       threshold value for a numeric DCI - then empty value will be converted to
-       0).
+     - Value of custom attribute. Expansion is attempted in the following order:
+
+         #. If macro is called in DCI context (in a field in DCI properties or
+            when processing threshold violation event), custom attribute
+            ``name::instance`` is taken, where ``instance`` is instance of a
+            DCI.
+         #. If above custom attribute is not found, ``name`` custom attribute is
+            taken.
+         #. If above custom attribute is not found, ``default_value`` is taken. 
+       
+       If custom attribute exists, but has empty value, this empty value is
+       taken (if this macro is used in a place where its value is converted to
+       numeric value - e.g. as threshold value for a numeric DCI - then empty
+       value will be converted to 0).
    * - ``%<name>``
      - Event's parameter with given name.
    * - ``%<{format-specifier}name>``

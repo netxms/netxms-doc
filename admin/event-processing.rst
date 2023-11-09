@@ -1082,9 +1082,10 @@ alarms, or actions. You may use the following macros to accomplish this:
    * - ``%{name}``
      - Value of custom attribute. Expansion is attempted in the following order:
 
-        #. If macro is called in DCI context (in a field in DCI properties or when
-           processing threshold violation event), custom attribute
-           ``name::instance`` is taken, where ``instance`` is instance of a DCI.
+        #. If information about a DCI is available during expansion (when
+           processing threshold violation event or if macro is used in a field
+           in DCI properties), custom attribute ``name::instance`` is taken,
+           where ``instance`` is instance of a DCI.
         #. If above custom attribute is not found, ``name`` custom attribute is
            taken. 
        
@@ -1095,10 +1096,10 @@ alarms, or actions. You may use the following macros to accomplish this:
    * - ``%{name:default_value}``
      - Value of custom attribute. Expansion is attempted in the following order:
 
-         #. If macro is called in DCI context (in a field in DCI properties or
-            when processing threshold violation event), custom attribute
-            ``name::instance`` is taken, where ``instance`` is instance of a
-            DCI.
+         #. If information about a DCI is available during expansion (when
+            processing threshold violation event or if macro is used in a field
+            in DCI properties), custom attribute ``name::instance`` is taken,
+            where ``instance`` is instance of a DCI.
          #. If above custom attribute is not found, ``name`` custom attribute is
             taken.
          #. If above custom attribute is not found, ``default_value`` is taken. 

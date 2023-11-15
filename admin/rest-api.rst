@@ -1124,6 +1124,7 @@ Return data:
     { "id": 15130,
       "type": "status" }
 
+
 Get object poll data
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -1142,6 +1143,27 @@ Return data:
     { "streamId": 0,
       "completed": false,
       "message": "Poll request accepted..." }
+
+
+Change object zone
+~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.4.4
+
+Request to move object to new zone. Zone UIN is specified in JSON, object id in URL. 
+
+Request type: **POST**
+
+JSON data:
+
+  Move object specified in URL to "Default" zone:
+
+  .. code-block:: json
+
+      {"zoneUIN": 0}
+
+Request path: *API_HOME*/objects/**{object-id}**/change-zone
+
 
 Business Services
 -----------------

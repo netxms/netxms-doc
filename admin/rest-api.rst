@@ -1671,6 +1671,7 @@ JSON data:
         value : "Value"
       }
 
+
    Or, alternatively using node and DCI name:
   .. code-block:: json
 
@@ -1679,6 +1680,7 @@ JSON data:
         dciName : "DCI name",
         value : "Value"
       }
+
 
    To send value for several DCIs JSON object should contain an array:
 

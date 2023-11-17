@@ -1651,10 +1651,53 @@ User agent notifications
 TODO
 
 
-Push data
----------
+Push DCI data
+-------------
 
-TODO
+Request to push values for one or multiple DCIs. Node and DCI can be specified
+either by id or by name. If both id and name are provided, id has priority. 
+
+Request type: **POST**
+
+JSON data:
+
+   To send value for one DCI JSON object should contain the following:
+
+  .. code-block:: json
+
+      {
+        nodeId : 10,
+        dciId : 20,
+        value : "Value"
+      }
+
+   Or, alternatively using node and DCI name:
+  .. code-block:: json
+
+      {
+        nodeName : "Node name",
+        dciName : "DCI name",
+        value : "Value"
+      }
+
+   To send value for several DCIs JSON object should contain an array:
+
+  .. code-block:: json
+
+      [
+        {
+          nodeId : 10,
+          dciId : 20,
+          value : "Value"
+        },
+        {
+          nodeName : "Node name",
+          dciName : "DCI name",
+          value : "Value"
+        }
+      ]
+
+Request path: *API_HOME*/pushData
 
 
 Predefined graphs

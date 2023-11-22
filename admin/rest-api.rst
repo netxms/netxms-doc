@@ -1117,7 +1117,7 @@ Request path: *API_HOME*/objects/**{object-id}**/polls
 
 Return data:
 
-    Will return UUID of request, that should be used to get request output and request type.
+  Will return UUID of request, that should be used to get request output and request type.
 
   .. code-block:: json
 
@@ -1136,7 +1136,7 @@ Request path: *API_HOME*/objects/**{object-id}**/polls/output/**{request-UUID}**
 
 Return data:
 
-    Will return request output data.
+  Will return request output data.
 
   .. code-block:: json
 
@@ -1599,7 +1599,7 @@ Request type: **POST**
 
 JSON data:
 
-   JSON object should contain two fields: key and value.
+  JSON object should contain two fields: key and value.
 
   .. code-block:: json
 
@@ -1622,7 +1622,7 @@ Request type: **PUT**
 
 JSON data:
 
-   JSON object should contain one field: new value.
+  JSON object should contain one field: new value.
 
   .. code-block:: json
 
@@ -1661,41 +1661,42 @@ Request type: **POST**
 
 JSON data:
 
-   To send value for one DCI JSON object should contain the following:
+  To send value for one DCI JSON object should contain the following:
 
   .. code-block:: json
 
       {
-        nodeId : 10,
-        dciId : 20,
-        value : "Value"
+        "nodeId" : 10,
+        "dciId" : 20,
+        "value" : "Value"
       }
 
 
-   Or, alternatively using node and DCI name:
+  Or, alternatively using node and DCI names:
+
   .. code-block:: json
 
       {
-        nodeName : "Node name",
-        dciName : "DCI name",
-        value : "Value"
+        "nodeName" : "Node name",
+        "dciName" : "DCI name",
+        "value" : "Value"
       }
 
 
-   To send value for several DCIs JSON object should contain an array:
+  To send value for several DCIs JSON object should contain an array:
 
   .. code-block:: json
 
       [
         {
-          nodeId : 10,
-          dciId : 20,
-          value : "Value"
+          "nodeId" : 10,
+          "dciId" : 20,
+          "value" : "Value"
         },
         {
-          nodeName : "Node name",
-          dciName : "DCI name",
-          value : "Value"
+          "nodeName" : "Node name",
+          "dciName" : "DCI name",
+          "value" : "Value"
         }
       ]
 

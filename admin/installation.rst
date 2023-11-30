@@ -361,12 +361,12 @@ Inspect this log file if you encounter errors when running the web client.
 Installing from RPM repository
 ==============================
 
-We provide RPM packages for RHEL7/8 and Fedora36/37, both amd64 and aarch64.
+We provide RPM packages for RHEL and Fedora, both amd64 and aarch64.
 If you need build for another system, please contact us for support or check this section: :ref:`Installing from source <install_from_sources>`.
 
-RHEL7 / RHEL8 repository is at https://packages.netxms.org/epel/.
+RHEL repository is at https://packages.netxms.org/epel/.
 
-Fedora 36/27 repository  is at https://packages.netxms.org/fedora/.
+Fedora repository is at https://packages.netxms.org/fedora/.
 
 Complete repository file and signing key is available in each corresponding root.
 
@@ -383,6 +383,7 @@ DNF provide simple way to add repository:
    dnf config-manager --add-repo https://packages.netxms.org/fedora/netxms.repo
 
 Once added, you can install any package with ``dnf install`` (e.g. ``dnf install netxms-agent``).
+
 
 Installing on Windows
 =====================

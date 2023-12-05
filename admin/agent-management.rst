@@ -961,7 +961,7 @@ symbols after name.
 
   # Example
 
-# Simple example
+  # Simple example
   [ExternalTable/test]
   Command = echo 'col1;col2;col3\na;b;c'
   Separator = ;

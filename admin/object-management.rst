@@ -1054,6 +1054,69 @@ are available thought NXSL scripting.
        container, not affecting children nodes.
 
 
+Properties
+----------
+
+.. _object_tools_filter:
+
+Filter
+~~~~~~
+
+Filters are used to chose on which nodes to show object tool.
+There are 5 types of filtering. Show object tool:
+
+  1. if agent available on a node
+  2. if node supports SNMP
+  3. if node SNMP OID matches with provided string
+  4. if nodes OS matches provided comma separated regular expression list
+  5. if provided :term:`template <Template>` name matches provided comma
+     separated regular expression list
+
+.. figure:: _images/obj_tool_filter.png
+
+.. _object_tools_access_control:
+
+Access Control
+~~~~~~~~~~~~~~
+
+In :guilabel:`Access Control` tab can be defined which users or groups can
+execute this action. If the list is empty, only administrator will be able
+to execute this action.
+
+.. figure:: _images/obj_tool_access_control.png
+
+Columns
+~~~~~~~
+
+:guilabel:`Columns` tab is used only for :guilabel:`Agent List` and
+:guilabel:`SNMP Table` object tool types.
+
+For :guilabel:`SNMP Table` it describes name and type of matching OID from
+response message.
+
+
+.. figure:: _images/obj_tool_columns1.png
+
+.. figure:: _images/obj_tool_columns2.png
+
+.. _object_tools_input_fields:
+
+Input fields
+~~~~~~~~~~~~
+
+There is option to add input fields for object tool commands. This fields are
+defined on the :guilabel:`Input fields` view and added to command in ``%(name)``
+format. More about formats can be found in :ref:`object_tools_macro` chapter.
+
+Input field can be one of this types:
+
+    - Text
+    - Password
+    - Number
+
+.. figure:: _images/object_tools_input_fields.png
+
+
 .. _object_tools_macro:
 
 Macro Substitution
@@ -1149,67 +1212,6 @@ For any unknown macro name system will try to read custom attribute
 with given name (attribute search is case sensitive). If attribute
 with given name not found, empty string will be inserted.
 
-Properties
-----------
-
-.. _object_tools_filter:
-
-Filter
-~~~~~~
-
-Filters are used to chose on which nodes to show object tool.
-There are 5 types of filtering. Show object tool:
-
-  1. if agent available on a node
-  2. if node supports SNMP
-  3. if node SNMP OID matches with provided string
-  4. if nodes OS matches provided comma separated regular expression list
-  5. if provided :term:`template <Template>` name matches provided comma
-     separated regular expression list
-
-.. figure:: _images/obj_tool_filter.png
-
-.. _object_tools_access_control:
-
-Access Control
-~~~~~~~~~~~~~~
-
-In :guilabel:`Access Control` tab can be defined which users or groups can
-execute this action. If the list is empty, only administrator will be able
-to execute this action.
-
-.. figure:: _images/obj_tool_access_control.png
-
-Columns
-~~~~~~~
-
-:guilabel:`Columns` tab is used only for :guilabel:`Agent List` and
-:guilabel:`SNMP Table` object tool types.
-
-For :guilabel:`SNMP Table` it describes name and type of matching OID from
-response message.
-
-
-.. figure:: _images/obj_tool_columns1.png
-
-.. figure:: _images/obj_tool_columns2.png
-
-.. _object_tools_input_fields:
-
-Input fields
-~~~~~~~~~~~~
-
-There is option to add input fields for object tool commands. This fields are
-defined on the :guilabel:`Input fields` view and added to command in ``%(name)``
-format. More about formats can be found in :ref:`object_tools_macro` chapter.
-
-Input field can be one of this types:
-
-    - Text
-    - Password
-    - Number
-
-.. figure:: _images/object_tools_input_fields.png
 
 .. _object_tools_predefined:
 

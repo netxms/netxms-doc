@@ -2991,6 +2991,28 @@ TODO
 
 .. _file-metrics:
 
+File.Content(*)
+~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
+
+Parameters:
+    1. Path - it specifies path to file
+
+Returns first line of file content (but no more then 255 characters).
+
+The following macros are supported in path and pattern parameters:
+
+  - Environment variables as ${ENV_VAR_NAME}
+  - `strftime(3C) <http://www.unix.com/man-page/opensolaris/3c/strftime/>`_
+    macros
+  - Text inside \` braces will be executed as a command and first line of output
+    will be taken (only for servers which are in MasterServers in agent
+    configuration file)
+
+
 File.Count(*)
 ~~~~~~~~~~~~~
 

@@ -21,27 +21,28 @@ have almost the same functionality and the same user interface.
 Objects
 =======
 
-All monitored network infrastructure is represented as a set of :term:`objects <Object>`
-in |product_name| monitoring system. Each object
-represents one physical or logical entity (e.g. host or network interface),
-or group of them (e.g. subnet, container). Objects are organized into hierarchical structure.
-Each object has it's own access rights. Access rights are applied
-hierarchically on all children of object. For example if :guilabel:`Read`
-access right is granted to a user on a :guilabel:`Container`, then user has :guilabel:`Read`
-right on all objects that this :guilabel:`Container` contains.
-Every object has set of attributes; some of them exist for all objects
-(like :guilabel:`id` and :guilabel:`name` or :guilabel:`status`),  while other
-depend on object class – for example, only :guilabel:`Node` objects have
-attribute :guilabel:`SNMP community string`. There are default attributes
-and custom attributes defined either by user or external application via
+All monitored network infrastructure is represented as a set of :term:`objects
+<Object>` in |product_name| monitoring system. Each object represents one
+physical or logical entity (e.g. host or network interface), or group of them
+(e.g. subnet, container). Objects are organized into hierarchical structure.
+Each object has it's own access rights. Access rights are applied hierarchically
+on all children of object. For example if :guilabel:`Read` access right is
+granted to a user on a :guilabel:`Container`, then user has :guilabel:`Read`
+right on all objects that this :guilabel:`Container` contains. 
+
+Every object has set of attributes; some of them exist for all objects (like
+:guilabel:`id` and :guilabel:`name` or :guilabel:`status`), while other depend
+on object class – for example, only :guilabel:`Node` objects have attribute
+:guilabel:`SNMP community string`. In addition to the above mentioned
+attributes, it's possible to define custom attributes. This can be done by user
+in the Management Client, from NXSL script or by external application via
 |product_name| API.
 
-|product_name| has six top level objects – ``Entire Network``,
-``Service Root`` (named "Infrastructure Services" after system installation),
-``Template Root``, ``Network Map Root``, ``Dashboard Root`` and
-``Business Service Root``. These objects serve as an
-abstract root for an appropriate object tree. All top level objects have only one
-editable attribute – name.
+|product_name| has seven top level objects – ``Entire Network``, ``Service
+Root`` (named "Infrastructure Services" after system installation), ``Template
+Root``, ``Asset Root``, ``Network Map Root``, ``Dashboard Root`` and ``Business
+Service Root``. These objects serve as an abstract root for an appropriate
+object tree. All top level objects have only one editable attribute – name.
 
 
 .. list-table::

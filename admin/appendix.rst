@@ -3001,7 +3001,8 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 Parameters:
     1. Path - it specifies path to file
 
-Returns first line of file content (but no more then 255 characters).
+Returns first line of file content (but no more then 255 characters). Only servers 
+which are in MasterServers in agent configuration file have access to this metric. 
 
 The following macros are supported in path and pattern parameters:
 

@@ -65,16 +65,22 @@ Usage
 ~~~~~
 
 Scripts from Script Library can be accessed as:
-  1. a macros $[\ `scriptName`\ ]
-  2. used in other script in format: "use `scriptName`\ "
-  3. executed from server debug console "execute `scriptName`\ "
-  4. executed as post action for pols - then script name should start from "`Hook::`\ " and then
-     should be name of poll like "Hook::ConfigurationPoll".
-  5. executed form "Script" source DCI
+  1. a macros %[\ `scriptName`\ ]
+  2. used in action of type "Execute NXSL script"
+  3. executed from DCIs with "Script" source
+  4. functions can be called from other scripts either by using "import
+     `scriptName`\ " and calling functions by name, or without import, by
+     calling "\ `scriptName`::`functionName`\ "
+  5. executed from server debug console "execute `scriptName`\ "
+  6. scripts having name starting with "`Hook::`\ " are executed automatically,
+     e.g. "Hook::ConfigurationPoll" is being run on each node's configuration
+     poll
 
 
 .. note::
-   All parameters provided to script are accessible via $ARGS array.
+   All parameters provided to script are accessible via $ARGS array. The other 
+   option to use parameters is to specify `main()` function in the script and 
+   define parameters in it's definition. 
 
 .. _execute_server_script:
 

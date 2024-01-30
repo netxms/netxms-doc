@@ -286,7 +286,7 @@ Agent configuration file (nxagentd.conf)
        parameter is not set.
      - 
    * - ExternalList
-     - Add list handled by external command. To add multiple parameters, you
+     - Add list handled by external command. To add multiple lists, you
        should use multiple``ExternalList`` entries.
      - No defaults
    * - ExternalMasterAgent

@@ -896,10 +896,12 @@ Installing web interface on remote system
 
 There are few settings available for configuration in WebUI.
 
-  * server - server DNS name or IP
+  * autoLoginOnReload - autologin on page reload in browser (default: true)
+  * enableCompression - enable protocol compression between Web UI and server process (default: true)
   * loginFormImage - path to custom login image
-  * useEncryption - if encryption should be used
-  * sessionTimeout - session timeout
+  * loginFormImageBackground - colour of background around custom login image
+  * loginFormImageMargins - margins in px around custom login image (default: 10)
+  * server - server DNS name or IP (default: 127.0.0.1)
 
 There are multiple ways to set connection configuration from WebUI to NetXMS server.
 Configuration is check in next order:
@@ -919,7 +921,7 @@ Configuration is check in next order:
 
     **Tomcat**
 
-    Debian default is /usr/share/tomcat9/lib. Other versions and Linux distribution
+    Debian and Ubuntu default is /usr/share/tomcat9/lib. Other versions and Linux distribution
     may have different location.
 
     **Oracle Weblogic**

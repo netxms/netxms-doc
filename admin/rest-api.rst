@@ -28,20 +28,24 @@ Setup
 
 1. Download netxms-websvc-VERSION.war (example: netxms-websvc-2.2.15.war) file from http://www.netxms.org/download page.
 2. Copy the downloaded .war file to your web server.
-3. Create a :file:`nxapisrv.properties` file and place it in the property file location of your
-   web server and specify the |product_name| Server address with the property.
 
-Localhost address will be used if no address was set. Server configuration example:
+By default localhost address is used to connect to |product_name| Server. To specify server address or other parameters, 
+create a :file:`nxapisrv.properties` file and place it in the property file location of your web server. 
+File should have parameters in ini format: NAME=VALUE. The following parameters are supported:
+
+   * netxms.server.address
+   * netxms.server.enableCompression
+   * netxms.server.port
+   * netxms.server.useEncryption
+   * session.timeout
+
+Server configuration example:
 
    .. code-block:: cfg
 
         netxms.server.address=server.office.radensolutions.com
+        netxms.server.port=44701
 
-If the server is running on a non-standard port, specify it with the following property:
-
-  .. code-block:: cfg
-
-    netxms.server.port=
 
 Implemented functionality
 =========================

@@ -39,7 +39,7 @@ File should have parameters in ini format: NAME=VALUE. The following parameters 
    * netxms.server.useEncryption
    * session.timeout
 
-Server configuration example:
+Configuration example:
 
    .. code-block:: cfg
 

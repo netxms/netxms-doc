@@ -186,6 +186,10 @@ In file and folder names the following macros can be used:
    * - followSymlinks
      - Follow symlinks.
      - 0
+   * - removeEscapeSequences
+     - Remove `ANSI escape sequences
+       <https://en.wikipedia.org/wiki/ANSI_escape_code>`_ when reading file.
+     - 0
 
 .. _log-monitoring-macros:
 

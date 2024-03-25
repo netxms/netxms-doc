@@ -7,6 +7,12 @@ Installation
 Major changes between releases
 ==============================
 
+5.0
+---
+
+Abort and other runtime errors in the script DCI will set DCI to an error state. (Before version 5.0, DCI changed its state to unsupported.)
+Importing the dashboard configuration exported from the previous version of NetXMS will not upgrade the script syntax to the 5.0 format.
+
 4.4
 ---
 Minimal JRE (Java Runtime Environment) version for management client is Java-17. 

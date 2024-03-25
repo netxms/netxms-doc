@@ -5435,14 +5435,34 @@ Supported Platforms: Windows, Linux, FreeBSD
 
 CPU vendor ID.
 
+
 System.CurrentTime
 ~~~~~~~~~~~~~~~~~~
 
 Data type: Float
 
-Supported Platforms: Linux, AIXF
+Supported Platforms: Windows, Linux
 
 Current system time
+
+
+System.CurrentTime.ISO8601.Local
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows, Linux
+
+Current system local time in ISO 8601 format
+
+System.CurrentTime.ISO8601.UTC
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows, Linux
+
+Current system UTC time in ISO 8601 format
 
 System.HandleCount
 ~~~~~~~~~~~~~~~~~~
@@ -6121,6 +6141,26 @@ Data type: UInt32
 Supported Platforms: Windows, Linux, AIX, FreeBSD, NetBSD
 
 Total number of threads in system
+
+
+System.TimeZone 
+~~~~~~~~~~~~~~~
+
+Data type: String
+
+Supported Platforms: Windows, Linux
+
+System time zone offset and name
+
+
+System.TimeZoneOffset
+~~~~~~~~~~~~~~~~~~~~~
+
+Data type: Int32
+
+Supported Platforms: Windows, Linux
+
+System time zone offset from UTC time
 
 
 System.Uname

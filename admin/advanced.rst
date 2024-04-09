@@ -637,8 +637,9 @@ folder, where ``<DataDirectory>`` is path to server data directory (see
 information). Multiple scripts can be present in the mentioned folder. 
 
 Two types of scripts are supported: 
-   * SQL (files with .sql extension) - each line of the file is interpreted as
-     SQL query that would be executed. 
+   * SQL (files with .sql extension) - file containing SQL queries. SQL query
+     can take multiple lines, end of query is denoted with semicolon (``;``)
+     character
    * NXSL (files with .nxsl extension) - file contains :term:`NXSL` script. In
      addition to all standard NXSL functionality, ``SQLQuery()`` NXSL function
      is supported, allowing SQL query execution to the database. 

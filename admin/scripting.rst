@@ -49,6 +49,7 @@ List of places where NXSL scripting is used
   - Object query
   - Agent configuration filter script
   - Condition status calculation script
+  - Custom housekeeping scripts (see :ref:`custom-housekeeping-scripts`)
 
 
 Scripting library

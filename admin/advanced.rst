@@ -623,3 +623,29 @@ Example:
    key = value
    key2 = value2
 
+
+.. _custom-housekeeping-scripts:
+
+Custom housekeeping scripts
+===========================
+
+To customize housekeeper operations it's possible to use custom scripts. Scripts
+are executed in the end of housekeeping process. Due to security considerations
+scrips are stored on server file system in ``<DataDirectory>/housekeeper``
+folder, where ``<DataDirectory>`` is path to server data directory (see
+``DataDirectory`` parameter in :ref:`server_configuration_file` for more
+information). Multiple scripts can be present in the mentioned folder. 
+
+Two types of scripts are supported: 
+   * SQL (files with .sql extension) - each line of the file is interpreted as
+     SQL query that would be executed. 
+   * NXSL (files with .nxsl extension) - file contains :term:`NXSL` script. In
+     addition to all standard NXSL functionality, ``SQLQuery()`` NXSL function
+     is supported, allowing SQL query execution to the database. 
+
+To implement custom deletion of DCI and Table DCI data built-in deletion of this
+data can be disabled by setting server configuration parameter
+``Housekeeper.DisableCollectedDataCleanup``.
+
+
+

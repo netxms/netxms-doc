@@ -395,7 +395,7 @@ polling process hook script is being executed.
 
 
 Polling intervals can be set for specific objects by adding a custom attribute named
-``SysConfig:nnn`` where ``nnn`` is the name of server configuration variable e.g.:
+``SysConfig:nnn``, where ``nnn`` is the name of server configuration variable e.g.:
 ``SysConfig:Objects.ConfigurationPollingInterval``. 
 
 

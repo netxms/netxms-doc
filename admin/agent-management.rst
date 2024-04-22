@@ -817,9 +817,9 @@ provides exit code of the executed command.
 
   > nxget localhost Test
   test
-  > nxget localhost LineCount('somefile.txt')
+  > nxget localhost 'LineCount(somefile.txt)'
   42
-  > nxget localhost LineCount('somefile.txt').ExitCode
+  > nxget localhost 'LineCount(somefile.txt).ExitCode'
   0
 
 ExternalList

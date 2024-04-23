@@ -39,7 +39,6 @@ This document covers installation, configuration, and use of |product_name|.
     * `Issue tracker <https://dev.raden.solutions/projects/netxms/>`_
     * `Facebook <https://www.facebook.com/netxms>`_
     * `Twitter <https://twitter.com/netxms>`_
-    * `IRC channel <irc://irc.freenode.net/#netxms>`_
 
   Priority support for |product_name| is provided by
   `Raden Solutions <http://www.radensolutions.com/>`_

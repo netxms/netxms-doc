@@ -591,13 +591,83 @@ have different access level. It is preferred to use MasterServers. There are 3 l
 of access for an agent:
 
    1. MasterServers - full access.
-   2. ControlServers - can read data and execute predefined actions, but cannot change
-      config nor install policies.
-   3. Servers - read only access. (Is default for tunneled agent connection if other server level is not defined)
+   2. ControlServers - can read data and execute predefined actions and make screenshots
+   3. Servers - read only access. (Is default for tunneled agent connection if
+      other server level is not defined)
 
-In case if server IP is not listed in one of this parameters agent will not enable
-connection with server in server to agent connection or will set access level
-to :guilabel:`Servers` if tunnel connection is used.
+In case if server IP is not listed in one of this parameters agent will not
+enable connection with server in server to agent connection or will set access
+level to :guilabel:`Servers` if tunnel connection is used.
+
+Detailed list of functionality available to above mentioned access levels is the
+following:
+
+
+.. list-table::
+   :widths: 70 10 10 10
+   :header-rows: 1
+
+   * - Functionality
+     - MasterServers
+     - ControlServers
+     - Servers
+   * - Read metrics, lists and table metrics
+     - X 
+     - X
+     - X
+   * - Web service, modbus, SNMP trap, syslog, tftp proxy operation (also requires enabling specific proxy type in agent configuration file)
+     - X
+     - X
+     - X
+   * - Execute actions defined in agent configuration files or configuration policies
+     - X
+     - X
+     - 
+   * - Take screenshots
+     - X
+     - X
+     - 
+   * - Edit agent main configuration file
+     - X
+     - 
+     - 
+   * - Remote agent upgrade
+     - X
+     - 
+     - 
+   * - Install software packages
+     - X
+     - 
+     - 
+   * - Deploy/undeploy agent policies
+     - X
+     - 
+     - 
+   * - File manager – all write operations, e.g. file or folder creation, deletion, etc. (also requires enabling file manager and specifying root folder in agent configuration file)
+     - X
+     - 
+     - 
+   * - Sending notifications via user support application
+     - X
+     - 
+     - 
+   * - Running commands inside ` braces for File.* metrics and in log file monitoring
+     - X
+     - 
+     - 
+   * - Use of File.Content() metric
+     - X
+     - 
+     - 
+   * - SNMP.ScanAddressRange() and TCP.ScanAddressRange() lists (also requires EnableProxy = yes in agent configuration file)
+     - X
+     - 
+     - 
+   * - Agent, SNMP and TCP proxy operation (also requires enabling specific proxy type in agent configuration file)
+     - X
+     - 
+     - 
+
 
 Shared secret
 -------------

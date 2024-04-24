@@ -586,7 +586,7 @@ If required, this process can also be automated by NXShell. More information:
 Server access levels
 --------------------
 
-Depending on how server's IP address (or domain) is added to in nxagentd.conf, it will
+Depending on how server's IP address (or domain name) is added to in nxagentd.conf, it will
 have different access level. It is preferred to use MasterServers. There are 3 levels
 of access for an agent:
 

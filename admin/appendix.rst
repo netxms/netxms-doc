@@ -2992,7 +2992,7 @@ TODO
 .. _file-metrics:
 
 File.Content(*)
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 Data type: String
 

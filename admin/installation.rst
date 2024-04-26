@@ -18,6 +18,102 @@ Aditionally loaded mib files will not work. They should be uploaded again in :gu
 Starting form version 5.0, the MIB compilation file extension changed to ".mib" and the already compiled MIB file extension is ".cmib". The default MIB file location has 
 changed to $HOME/share/netxms/mibs/, and user aditional MIB files should be loaded in :guilabel:`Configuration` --> :guilabel:`SNMP MIB files`. 
 
+Class 'TIME' renamed as 'DateTime'. Created Math, Base64, Crypto, Net, and IO modules, and functions moved under them. Most used functions left as deprecated, but others were just renamed. The next table shows the full rename list (functions that were just renamed and do not have deprecated versions):
+
+
+.. list-table::
+   :header-rows: 1
+   :widths: 100 100 100
+
+   * - Old name
+     - Old name
+     - Type
+   * - TIME
+     - DateTime
+     - class
+   * - asin
+     - Math::Asin
+     - function
+   * - acos
+     - Math::Acos
+     - function
+   * - atan
+     - Math::Atan
+     - function
+   * - atan2
+     - Math::Atan2
+     - function
+   * - cosh
+     - Math::Cosh
+     - function
+   * - exp
+     - Math::Exp
+     - function
+   * - exp
+     - Math::Exp
+     - function
+   * - gethostbyaddr
+     - Net::ResolveAddress
+     - function
+   * - gethostbyname
+     - Net::ResolveHostname
+     - function
+   * - log
+     - Math::Log
+     - function
+   * - log10
+     - Math::Log10
+     - function
+   * - md5
+     - Crypto::MD5
+     - function
+   * - md5
+     - Crypto::MD5
+     - function
+   * - sha1
+     - Crypto::SHA1
+     - function
+   * - sha256
+     - Crypto::SHA256
+     - function
+   * - sinh
+     - Math::Sinh
+     - function
+   * - tanh
+     - Math::Tanh
+     - function
+   * - weierstrass
+     - Math::Weierstrass
+     - function
+   * - decode
+     - Base64::Decode
+     - function
+   * - encode
+     - Base64::Encode
+     - function     
+   * - CopyFile
+     - IO::CopyFile
+     - function     
+   * - CreateDirectory
+     - IO::CreateDirectory
+     - function
+   * - DeleteFile
+     - IO::DeleteFile
+     - function
+   * - FileAccess
+     - IO::FileAccess
+     - function
+   * - OpenFile
+     - IO::OpenFile
+     - function
+   * - RemoveDirectory
+     - IO::RemoveDirectory
+     - function
+   * - RenameFile
+     - IO::RenameFile
+     - function
+
+
 4.4
 ---
 Minimal JRE (Java Runtime Environment) version for management client is Java-17. 

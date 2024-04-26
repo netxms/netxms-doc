@@ -36,7 +36,6 @@ File should have parameters in ini format: NAME=VALUE. The following parameters 
    * netxms.server.address
    * netxms.server.enableCompression
    * netxms.server.port
-   * netxms.server.useEncryption
    * session.timeout
 
 Configuration example:

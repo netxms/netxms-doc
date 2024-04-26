@@ -11,7 +11,12 @@ Major changes between releases
 ---
 
 Abort and other runtime errors in the script DCI will set DCI to an error state. (Before version 5.0, DCI changed its state to unsupported.)
+
 Importing the dashboard configuration exported from the previous version of NetXMS will not upgrade the script syntax to the 5.0 format.
+
+Aditionally loaded mib files will not work. They should be uploaded again in :guilabel:`Configuration` --> :guilabel:`SNMP MIB files` configuration view. 
+Starting form version 5.0, the MIB compilation file extension changed to ".mib" and the already compiled MIB file extension is ".cmib". The default MIB file location has 
+changed to $HOME/share/netxms/mibs/, and user aditional MIB files should be loaded in :guilabel:`Configuration` --> :guilabel:`SNMP MIB files`. 
 
 4.4
 ---

@@ -194,8 +194,22 @@ MIBs to allow you to select OID and see its description (for example when
 selecting SNMP data for DCI collection). You do not need to compile new
 MIBs if you are OK with direct input of OID.
 
+Manage User MIBs
+----------------
+
+To add additional MIBs go to :guilabel:`Configuration` --> :guilabel:`SNMP MIB files`. 
+Upload mib files with extension **.mib** and hit compile button. MIB compilation log will 
+be visible in :guilabel:`Output` tab and warnings/errors will be added to 
+:guilabel:`Error Log` tab. Afret MIB files are succesfully compiled all opened clients  
+automatically dowload new version form server. 
+
+.. figure:: _images/SNMP_MIB_files.png
+
+For versions older 5.0
+----------------------
+
 Compiling MIBs
---------------
+~~~~~~~~~~~~~~
 
  - Change suffix of your new MIB file to .txt
  - Copy your MIB file to /usr/share/netxms/mibs
@@ -220,7 +234,7 @@ Parameters recognized by nxmibc:
     -z        : Compress output file
 
 Troubleshooting
----------------
+~~~~~~~~~~~~~~~
 
 If nxmibc fails, it may be caused by syntax or import errors in your MIB.
 Try to check it with smilint (part of net-snmp package) and correct any

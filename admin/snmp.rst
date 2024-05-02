@@ -329,8 +329,8 @@ In our case they could be:
 
   Table Columns configuration 
 
-Another option to add columns is to click :guilabel:`Query...` button. Automatic table columns qery is 
-done by SNMP Walk on Metric OID where column patr is cut out.
+Another option to add columns is to click :guilabel:`Query...` button. Automatic table columns query is 
+done by SNMP Walk on Metric OID where column part is cut out.
 
 .. figure:: _images/dci_query_table.png
 

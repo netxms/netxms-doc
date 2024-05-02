@@ -18,6 +18,8 @@ Aditionally loaded mib files will not work. They should be uploaded again in :gu
 Starting form version 5.0, the MIB compilation file extension changed to ".mib" and the already compiled MIB file extension is ".cmib". The default MIB file location has 
 changed to $HOME/share/netxms/mibs/, and user aditional MIB files should be loaded in :guilabel:`Configuration` --> :guilabel:`SNMP MIB files`. 
 
+Default format of SNMP OID changes to format without leading dot. Potentially can break some scripts that use SNMP OID strings compare. 
+
 Class 'TIME' renamed as 'DateTime'. Created Math, Base64, Crypto, Net, and IO modules, and functions moved under them. Most used functions left as deprecated, but others were just renamed. The next table shows the full rename list (functions that were just renamed and do not have deprecated versions):
 
 
@@ -45,9 +47,6 @@ Class 'TIME' renamed as 'DateTime'. Created Math, Base64, Crypto, Net, and IO mo
      - function
    * - cosh
      - Math::Cosh
-     - function
-   * - exp
-     - Math::Exp
      - function
    * - exp
      - Math::Exp

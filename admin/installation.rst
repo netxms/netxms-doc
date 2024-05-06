@@ -20,6 +20,35 @@ changed to $HOME/share/netxms/mibs/, and user aditional MIB files should be load
 
 Default format of SNMP OID changes to format without leading dot. Potentially can break some scripts that use SNMP OID strings compare. 
 
+NXSL syntax major changes:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 300 100 100
+
+   * - Description
+     - Old example
+     - New example
+   * - String concatination change from '.' to '..'
+     - variable = "Text first part " . "text second part";
+     - variable = "Text first part " .. "text second part";
+   * - Dereference changed form '->' to '.'
+     - equals = $node->getInterface($5) == variable->interfaceAttribute;
+     - equals = $node.getInterface($5) == variable.interfaceAttribute;
+   * - Use '[]' to initialize array instade of '%()'
+     - a = %(1,2,3);
+     - a = [1,2,3];
+   * - Use safe dereference '?.' instade of '@'
+     - customAttributeValue = test@$node;
+     - customAttributeValue = $node?.test;
+   * - Use 'import' keyword instade of 'use' for librarrie import
+     - use ToolBox;
+     - import ToolBox;
+   * - Use 'function' keyword instade of 'sub' for function defenition
+     - sub EnumerateNodes(obj, level)
+     - function EnumerateNodes(obj, level)
+
+
 Class 'TIME' renamed as 'DateTime'. Created Math, Base64, Crypto, Net, and IO modules, and functions moved under them. Most used functions left as deprecated, but others were just renamed. The next table shows the full rename list (functions that were just renamed and do not have deprecated versions):
 
 
@@ -28,7 +57,7 @@ Class 'TIME' renamed as 'DateTime'. Created Math, Base64, Crypto, Net, and IO mo
    :widths: 100 100 100
 
    * - Old name
-     - Old name
+     - New name
      - Type
    * - TIME
      - DateTime

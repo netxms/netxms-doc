@@ -54,11 +54,9 @@ object tree. All top level objects have only one editable attribute – name.
      - Description
      - Valid Child Objects
    * - Entire Network
-     - Abstract object representing root of IP topology tree. All zone and
-       subnet objects located under it. System can have only one object of this
-       class.
-     - - Zone (if zoning enabled)
-       - Subnet (if zoning disabled)
+     - Abstract object representing root of IP topology tree. All zone are
+       located under it. System can have only one object of this class.
+     - - Zone
    * - Zone
      - Object representing group of (usually interconnected) IP networks
        without overlapping addresses. Contains appropriate subnet objects.
@@ -77,11 +75,25 @@ object tree. All top level objects have only one editable attribute – name.
      - - Cluster
        - Chassis
        - Condition
+       - Collector
        - Container
+       - Mobile Device
        - Node
-       - Sensor
-       - Subnet
        - Rack
+       - Sensor
+       - Wireless Domain
+   * - Collector
+     - Object similar to container, but with data collection capabilities.
+     - - Cluster
+       - Chassis
+       - Condition
+       - Collector
+       - Container
+       - Mobile Device
+       - Node
+       - Rack
+       - Sensor
+       - Wireless Domain
    * - Container
      - Grouping object which can contain any type of objects that Service Root
        can contain. With help of container objects you can build
@@ -90,11 +102,13 @@ object tree. All top level objects have only one editable attribute – name.
      - - Cluster
        - Chassis
        - Condition
+       - Collector
        - Container
+       - Mobile Device
        - Node
-       - Sensor
-       - Subnet
        - Rack
+       - Sensor
+       - Wireless Domain
    * - Cluster
      - Pseudo-object defining any process: technological or logical that aggregates 
        information from several separate nodes. See
@@ -126,19 +140,12 @@ object tree. All top level objects have only one editable attribute – name.
        versions to use, etc. Node objects contain one or more interface objects. The system
        creates interface objects automatically during configuration polls.
      - - Interface
-       - Access point
        - Network Service
        - VPN Connector
    * - Interface
      - Interface objects represent network interfaces of managed computers and
        devices. These objects created automatically by the system during
        configuration polls or can be created manually by user.
-     -
-   * - Access point
-     - Object representing wireless network access point. A node can have
-       several access points, e.g. 2.4Ghz and 5Ghz, or in case of thin wireless
-       access points managed by a central controller. These objects are created
-       automatically by the system.
      -
    * - Network Service
      - Object representing network service running on a node (like http or
@@ -156,6 +163,21 @@ object tree. All top level objects have only one editable attribute – name.
        now show that those two networks are connected and the system will take this
        condition into account during problem analysis and event correlation.
      -
+   * - Sensor
+     - Logical object with data collection capabilities. |product_name| does not
+       perform direct network communication with sensor, but data is collected
+       by some other means, e.g. using MQTT protocol. 
+     - 
+   * - Wireless Domain
+     - Object representing wireless network, made up from one or several
+       wireless controllers (represented by nodes with Wireless Controller
+       capability) and thin access points.
+     - - Access point
+       - Node
+   * - Access point
+     - Object representing thin wireless access point managed by a central
+       controller. These objects are created automatically by the system.
+     -
    * - Template Root
      - Abstract object representing root of your template tree.
      - - Template
@@ -167,8 +189,12 @@ object tree. All top level objects have only one editable attribute – name.
    * - Template
      - Data collection template. See :ref:`Data collection<data-collection>` section
        for more information about templates.
-     - - Mobile Device
+     - - Acces point
+       - Collector
+       - Cluster
+       - Mobile Device
        - Node
+       - Sensor
    * - Asset Root
      - Abstract object representing root of hardware asset management tree.
      - - Asset

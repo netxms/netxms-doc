@@ -10,17 +10,20 @@ Major changes between releases
 5.0
 ---
 
-Abort and other runtime errors in the script DCI will set DCI to an error state. (Before version 5.0, DCI changed its state to unsupported.)
+Aditionally loaded mib files will not work. They should be uploaded again in
+:guilabel:`Configuration` --> :guilabel:`SNMP MIB files` configuration view.
+Starting form version 5.0, the MIB compilation file extension changed to ".mib"
+and the already compiled MIB file extension is ".cmib". The default MIB file
+location has changed to $HOME/share/netxms/mibs/, and user aditional MIB files
+should be loaded in :guilabel:`Configuration` --> :guilabel:`SNMP MIB files`. 
 
-Importing the dashboard configuration exported from the previous version of NetXMS will not upgrade the script syntax to the 5.0 format.
+Default format of SNMP OID changes to format without leading dot. Potentially
+can break some scripts that use SNMP OID strings compare. 
 
-Aditionally loaded mib files will not work. They should be uploaded again in :guilabel:`Configuration` --> :guilabel:`SNMP MIB files` configuration view. 
-Starting form version 5.0, the MIB compilation file extension changed to ".mib" and the already compiled MIB file extension is ".cmib". The default MIB file location has 
-changed to $HOME/share/netxms/mibs/, and user aditional MIB files should be loaded in :guilabel:`Configuration` --> :guilabel:`SNMP MIB files`. 
-
-Default format of SNMP OID changes to format without leading dot. Potentially can break some scripts that use SNMP OID strings compare. 
-
-NXSL syntax major changes:
+NXSL syntax has changed. During upgrade existing scripts should get
+automatically converted. If you need to manually convert a script, this could be
+done via nxscript command line utility (`nxscript -5 script-file.nxsl`). NXSL
+syntax major changes:
 
 .. list-table::
    :header-rows: 1
@@ -35,21 +38,24 @@ NXSL syntax major changes:
    * - Dereference changed form '->' to '.'
      - equals = $node->getInterface($5) == variable->interfaceAttribute;
      - equals = $node.getInterface($5) == variable.interfaceAttribute;
-   * - Use '[]' to initialize array instade of '%()'
+   * - Use '[]' to initialize array instead of '%()'
      - a = %(1,2,3);
      - a = [1,2,3];
-   * - Use safe dereference '?.' instade of '@'
+   * - Use safe dereference '?.' instead of '@'
      - customAttributeValue = test@$node;
      - customAttributeValue = $node?.test;
-   * - Use 'import' keyword instade of 'use' for librarrie import
+   * - Use 'import' keyword instead of 'use' for librarrie import
      - use ToolBox;
      - import ToolBox;
-   * - Use 'function' keyword instade of 'sub' for function defenition
+   * - Use 'function' keyword instead of 'sub' for function definition
      - sub EnumerateNodes(obj, level)
      - function EnumerateNodes(obj, level)
 
 
-Class 'TIME' renamed as 'DateTime'. Created Math, Base64, Crypto, Net, and IO modules, and functions moved under them. Most used functions left as deprecated, but others were just renamed. The next table shows the full rename list (functions that were just renamed and do not have deprecated versions):
+Class 'TIME' renamed as 'DateTime'. Created Math, Base64, Crypto, Net, and IO
+modules, and functions moved under them. Most used functions left as deprecated,
+but others were just renamed. Below table shows the full rename list
+(functions that were just renamed and do not have deprecated versions):
 
 
 .. list-table::
@@ -140,6 +146,12 @@ Class 'TIME' renamed as 'DateTime'. Created Math, Base64, Crypto, Net, and IO mo
    * - RenameFile
      - IO::RenameFile
      - function
+
+Abort and other runtime errors in the script DCI will set DCI to an error state.
+(Before version 5.0, DCI changed its state to unsupported.)
+
+Importing the dashboard configuration exported from the previous version of
+NetXMS will not upgrade the script syntax to the 5.0 format.
 
 
 4.4

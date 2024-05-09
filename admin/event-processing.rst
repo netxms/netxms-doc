@@ -99,17 +99,39 @@ Properties of Event Processing Policy rule have the following sections:
    * - Section
      - Description
    * - **Condition**
-     - Sub-sections of **Condition** section determine, if the rule is
-       applicable to a particular event. If checkbox :guilabel:`Rule is
-       disabled` is set, this rule is ignored.
-   * - Condition --> Source Objects
-     - One or more event's source objects. This list can be left empty, which
-       matches any object, or contain nodes, subnets, containers, clusters,
-       etc... If you specify subnet, container, cluster, rack or chassis, any
-       object within it will also be matched.
+     - Sub-sections of **Condition** section determine if the rule is applicable
+       to a particular event. If checkbox :guilabel:`Rule is disabled` is set,
+       this rule is ignored. Checkbox :guilabel:`Accept correlated events`
+       defines, if events, which are correlated to another events should be
+       processed (e.g. when when node is in maintenance, all node events are
+       correlated to the maintenance event).
    * - Condition --> Events
      - Event code. This field can be left empty, which matches any event, or
-       contain list of applicable events. 
+       contain list of applicable events. :guilabel:`Inverse rule` checkbox
+       allows to react to all events except to thouse listed. 
+   * - Condition --> Source Objects
+     - Source objects and exclusions lists allow to specify for which objects
+       this rule is applicable. If source objects list is empty, rule would
+       match any object. 
+       
+       Multiple objects can be specified in the lists. If you
+       specify subnet, container, collector, cluster, rack or chassis, any
+       object within it will also be matched.
+       
+       If one and the same object is present both in source objects and
+       exclusions, exclusions list has priority. E.g. you can specify a
+       container in source objects and one specific node from that container in
+       exclusions list - rule would match all nodes from that container except
+       that one specified node. 
+     
+       :guilabel:`Inverse rule` checkbox allows to invert the logic, so objects
+       that would be mathed by given combination of source objects and
+       exclusions will not be matched and vice versa.      
+   * - Condition --> Time Filter
+     - Allows to specify time frames when rule should be matched. Time frames
+       allow to specify time range, days of week, days of month and months. Days
+       of month are specified as comma-separated lists of days or ranges, e.g.
+       `1,3,5,20-25`. Letter `L` denotes last day of month.        
    * - Condition --> Severity Filter
      - Event's severity. This field contains selection of event severities to be
        matched.
@@ -121,6 +143,10 @@ Properties of Event Processing Policy rule have the following sections:
        that is considered true in NXSL language, e.g. non-zero number or array).
        For more information about |product_name| scripting language please refer
        to the chapter :ref:`scripting` in this manual.
+
+       **Note**\ : Script execution is a blocking operation - event processor
+       will wait for the script to complete. Make sure that script is written in
+       a way that it would execute quickly.
    * - **Action**
      - Sub-sections of **Action** section determine what actions are performed
        if an event meets all conditions of a rule. If checkbox :guilabel:`Stop
@@ -131,8 +157,18 @@ Properties of Event Processing Policy rule have the following sections:
      - Action in regard to alarms. Alarm can be created, resolved or terminated
        or no action to alarms is done. See
        :ref:`generating_and_terminating_alarms` for more information. 
+   * - Action --> Downtime Control
+     - Allows to add records to ``downtime_log`` table in the DB which can later
+       be used to generate downtime report using the reporting engine. Downtime
+       tag allows to specify several types of downtime for one and the same
+       object. When closing a downtime record, system will search for open
+       record with same downtime tag. Downtime tag is 15 characters in length,
+       macros are not supported in this field. 
    * - Action --> Persistent Storage
      - :ref:`nxsl_persistent_storage` action like add/update or delete can be
+       performed.
+   * - Action --> Custom Attributes
+     - Actions with :ref:`custom_attributes` like add/update or delete can be
        performed.
    * - Action --> Server Actions
      - List of predefined actions to be executed. Action execution could be
@@ -142,6 +178,14 @@ Properties of Event Processing Policy rule have the following sections:
        snoozing is controlled using timers which can be referred to using timer
        key. This allows cancelling a timer or checking, if its still running
        from NXSL script. 
+   * - Action --> Script
+     - Script writen in NXSL. 
+       
+       **Note**\ : Script execution is a blocking operation - event processor
+       will wait for the script to complete. Make sure that script is written in
+       a way that it would execute quickly. If you need to execute a
+       long-running script, create `Execute NXSL script action` and execute it
+       from EPP rule. 
    * - Action --> Timer Cancellations
      - List of timers to cancel identified by timer keys. This allows to cancel
        delayed actions and snooze/blocking timers.

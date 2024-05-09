@@ -22,7 +22,7 @@ can break some scripts that use SNMP OID strings compare.
 
 NXSL syntax has changed. During upgrade existing scripts should get
 automatically converted. If you need to manually convert a script, this could be
-done via nxscript command line utility (`nxscript -5 script-file.nxsl`). NXSL
+done via nxscript command line utility (``nxscript -5 script-file.nxsl``). NXSL
 syntax major changes:
 
 .. list-table::

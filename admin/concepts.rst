@@ -24,7 +24,11 @@ Objects
 All monitored network infrastructure is represented as a set of :term:`objects
 <Object>` in |product_name| monitoring system. Each object represents one
 physical or logical entity (e.g. host or network interface), or group of them
-(e.g. subnet, container). Objects are organized into hierarchical structure.
+(e.g. subnet, container). Objects are organized into hierarchical structure. An
+object can have several parents, e.g. a node can belong to multiple containers,
+subnets and templates. Structure can be modified either manually or
+automatically with the help of Auto-bind scripts. 
+
 Each object has it's own access rights. Access rights are applied hierarchically
 on all children of object. For example if :guilabel:`Read` access right is
 granted to a user on a :guilabel:`Container`, then user has :guilabel:`Read`
@@ -187,8 +191,10 @@ object tree. All top level objects have only one editable attribute – name.
      - - Template
        - Template Group
    * - Template
-     - Data collection template. See :ref:`Data collection<data-collection>` section
-       for more information about templates.
+     - Data collection and agent policy template. See :ref:`Data
+       collection<data-collection>` section for more information about
+       templates. If an object is a child of a template, this means that teplate
+       is applied to that object. 
      - - Acces point
        - Collector
        - Cluster

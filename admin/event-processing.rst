@@ -494,14 +494,20 @@ configuration.
 
 After the action is added, it can be edited to add delay time and timer key.
 This option can be used to prevent notification sending in case if problem
-solved quickly enough. Key is a free form string that support
-:ref:`macro<event-processing-macros>` and delay is the delay time in seconds
+solved quickly enough. Key is a free form string that supports
+:ref:`macros<event-processing-macros>` and delay is the delay time in seconds
 before action is executed.
 
-The next example shows the configuration for the situation when there is no need
-to notify anyone if node went down and back up in just a minute.
+The following example shows the configuration for the situation when there is no
+need to notify anyone if node went down and back up in less then 5 minutes.
 
 .. figure:: _images/delayed_action.png
+
+
+If, in adddition, we want to send notification when node goes up, but only if
+notification about node down was sent: 
+
+.. figure:: _images/delayed_action_2.png
 
 
 Escalation

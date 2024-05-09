@@ -405,6 +405,8 @@ class and ID, and changed object name. Each object has unique ID in the system.
 Object can be accessed by this ID.
 
 
+.. _custom_attributes:
+
 Custom attributes
 -----------------
 

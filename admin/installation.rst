@@ -358,7 +358,7 @@ Add the repository to your sources.list:
 .. code-block:: sh
 
   echo "deb http://packages.netxms.org/$(lsb_release -si | tr A-Z a-z) $(lsb_release -sc | tr A-Z a-z) main" > /etc/apt/sources.list.d/netxms.list
-  wget -q -O - http://packages.netxms.org/netxms.gpg | sudo apt-key add -
+  wget -q -O - https://packages.netxms.org/netxms-keyring.gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/netxms-keyring.gpg
   sudo apt-get update
 
 

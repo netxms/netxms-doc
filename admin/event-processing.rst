@@ -125,7 +125,7 @@ Properties of Event Processing Policy rule have the following sections:
        that one specified node. 
      
        :guilabel:`Inverse rule` checkbox allows to invert the logic, so objects
-       that would be mathed by given combination of source objects and
+       that would be matched by given combination of source objects and
        exclusions will not be matched and vice versa.      
    * - Condition --> Time Filter
      - Allows to specify time frames when rule should be matched. Time frames

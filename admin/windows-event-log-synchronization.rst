@@ -208,7 +208,7 @@ specify exact name or pattern with ``*`` and ``?`` meta characters.
 :guilabel:`Description` contains textual description of the rule. It is printed
 in parser trace in the log file. 
 
-When a rule is mathed the following actions can be performed:
+When a rule is matched the following actions can be performed:
 
     * Generate |product_name| event. Event generation is optional - it could be
       useful to have rules that work as exclusion - 

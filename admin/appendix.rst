@@ -4484,6 +4484,32 @@ Parameters:
 Total execution time in kernel mode for process
 
 
+Process.MemoryUsage(*)
+~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: Float
+
+Supported Platforms: Windows, Linux, Solaris, AIX, FreeBSD
+
+Parameters:
+  1. Process name
+  2. Function - is the function that is used to measure data in case if there are more
+     than one process with given name. By default it is used sum function. This
+     parameter can have this options:
+
+        - min - minimal value among all processes named proc
+        - max - maximal value among all processes named proc
+        - avg - average value for all processes named proc
+        - sum - sum of values for all processes named proc
+  3. Optional parameter that accepts process's command line regular expression, that
+     should match cmd argument. If not set it means "match any".
+  4. Optional parameter that accepts process's owner username regular expression. If not set it means "match any".
+  5. Optional parameter that accepts process's main window title regular expression.
+     If not set it means "match any". Process's window title can be checked only on Windows platform.
+     
+Percentage of total physical memory used by process
+
+
 Process.PageFaults(*)
 ~~~~~~~~~~~~~~~~~~~~~
 

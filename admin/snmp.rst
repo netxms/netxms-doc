@@ -263,7 +263,7 @@ like the one below:
   :stub-columns: 1
   :header-rows: 1
 
-  * - .1.3.6.1.2.1.2.2.1
+  * - 1.3.6.1.2.1.2.2.1
     - .1
     - .2
     - .3
@@ -292,8 +292,8 @@ In this table the columns are **YYY** numbers (that are usually single numbers i
 
 .. topic:: Example
 
-  So, in order to get the "lo" value we should request ".1.3.6.1.2.1.2.2.1.2.1", 
-  where ".1.3.6.1.2.1.2.2.1" represent **XXX**, ".2" (the value in the column where "lo" 
+  So, in order to get the "lo" value we should request "1.3.6.1.2.1.2.2.1.2.1", 
+  where "1.3.6.1.2.1.2.2.1" represent **XXX**, ".2" (the value in the column where "lo" 
   is situated) represents the **YYY** and ".1" (the value in the row where "lo" is situated) 
   represents the **NNN**.
 
@@ -319,10 +319,10 @@ As for the columns — each of those you'd like to monitor should then be added 
 
 In our case they could be:
 
-  1. Add index column .1.3.6.1.2.1.2.2.1.1
-  2. Add description .1.3.6.1.2.1.2.2.1.2
-  3. Add Physical address .1.3.6.1.2.1.2.2.1.6
-  4. Add MTU .1.3.6.1.2.1.2.2.1.4...
+  1. Add index column 1.3.6.1.2.1.2.2.1.1
+  2. Add description 1.3.6.1.2.1.2.2.1.2
+  3. Add Physical address 1.3.6.1.2.1.2.2.1.6
+  4. Add MTU 1.3.6.1.2.1.2.2.1.4...
 
 
 .. figure:: _images/dci_columns_snmp_table.png
@@ -345,7 +345,7 @@ done by SNMP Walk on Metric OID where column part is cut out.
   :stub-columns: 1
   :header-rows: 1
 
-  * - .1.3.6.1.2.1.4.35.1
+  * - 1.3.6.1.2.1.4.35.1
     - .4
     - .5
     - .6

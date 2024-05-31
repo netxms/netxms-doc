@@ -144,36 +144,36 @@ Configuration` window in the management client. To open it, click on
 double click on the row in the table or right-click and select :guilabel:`Edit`.
 The following parameters may need to be changed:
 
-.. tabularcolumns:: |p{0.4 \textwidth}|p{0.6 \textwidth}|
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
 
-================================ ==============================================
-Parameter                        Description
-================================ ==============================================
-``PollerThreadPoolMaxSize``      This parameter represents maximum thread pool
-                                 size. This pool provides threads for
-                                 all types of polls: Status
-                                 poll, Configuration poll, etc. In case of
-                                 big load on a server number of threads will be
-                                 increased up to this size. When load come back
-                                 to normal, number of threads will be
-                                 automatically decreased down to base size.
-                                 If you plan to monitor large number of hosts, 
-                                 increase this parameter from the default value
-                                 to approximately 1/5 of host count.
-``PollerThreadPoolBaseSize``     This parameter represents base thread pool
-                                 size. This is minimal
-                                 number of threads that will always run.
-                                 If you plan to monitor large number of hosts
-                                 increase this parameter from the default value
-                                 to approximately 1/10 of host count.
-``NumberOfDataCollectors``       If you plan to monitor large number of hosts,
-                                 increase this number
-                                 to approximately 1/10 – 1/5 of host count.
-                                 Use larger value if you plan to gather many
-                                 DCIs from each host.
-``EnableSyslogDaemon``           Set this parameter to 1 if you want to
-                                 enable |product_name| built-in syslog server.
-================================ ==============================================
+   * - Parameter
+     - Description
+   * - ``ThreadPool.Poller.MaxSize``
+     - This parameter represents maximum thread pool size. This pool provides
+       threads for all types of polls: Status poll, Configuration poll, etc. In
+       case of big load on a server number of threads will be increased up to
+       this size. When load come back to normal, number of threads will be
+       automatically decreased down to base size. If you plan to monitor large
+       number of hosts, increase this parameter from the default value to
+       approximately 1/5 of host count.
+   * - ``ThreadPool.Poller.BaseSize``
+     - This parameter represents base thread pool size. This is minimum number
+       of threads that will always run. If you plan to monitor large number of
+       hosts increase this parameter from the default value to approximately
+       1/10 of host count.
+   * - ``ThreadPool.DataCollector.MaxSize``
+     - Maximum number of threads that perform data collection. If you plan to
+       monitor large number of hosts, increase this number to approximately 1/5
+       of host count. Use larger value if you plan to gather many DCIs
+       from each host.
+   * - ``ThreadPool.DataCollector.BaseSize``
+     - Minimum number of data collection threads what will always run. For large
+       number of hosts increase to approximately 1/10 of host count. 
+   * - ``Syslog.EnableListener``
+     - Set this parameter to ``True`` if you want to enable |product_name|
+       built-in syslog server.
 
 
 Notification channels

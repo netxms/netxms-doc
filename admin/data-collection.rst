@@ -1059,9 +1059,10 @@ created DCI with the following description:
 
   ``My IP address is 10.0.0.1``
 
-Please note that if you change something in the node, name for example, these
-changes will not be reflected automatically in DCI texts generated from macros.
-However, they will be updated if you reapply template to the node.
+Please note that if you change something in the node, name for example, changes
+will not be reflected automatically in DCI texts generated from these macros.
+However, they will be updated if you reapply template to the node or on
+housekeeper run. 
 
 
 Working with collected data

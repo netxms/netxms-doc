@@ -5,17 +5,35 @@ Agent management
 Introduction
 ============
 
-|product_name| agent is daemon or service that runs on a :term:`node<Node>` to provide additional
-monitoring options. This is optional for installation, but it's installation gives following advantages:
+|product_name| agent is daemon or service that runs on a :term:`node<Node>` to
+provide additional monitoring options. This is optional for installation, but
+it's installation gives following advantages:
 
-   * Centralized configuration - you can change configuration of agent from management client; if needed, you can even store agent configs on |product_name| server
-   * More secure: communications between |product_name| server and agent can be encrypted, additional authentication on agent can be configured
-   * TCP instead of UDP is used for communications with agent - this can help in case of slow and poor quality links
-   * Remote command execution - agents can be used to execute commands on managed systems as a reaction to certain events
-   * Proxy functionality: agent can be used as a proxy to reach agents on hosts not directly accessible by |product_name| server
-   * :term:`SNMP` proxy: agent can be used as a proxy to reach remote SNMP devices
-   * :term:`SNMP Trap` proxy: agent can be used as a proxy to get messages from remote SNMP device
-   * Extensible: you can add new metrics very easy using configuration option like ``ExternalMetric`` or by writing your own subagents
+   * Centralized configuration - you can change configuration of agent from
+     management client; if needed, you can even store agent configs on
+     |product_name| server
+   * More secure: communications between |product_name| server and agent is
+     encrypted by default, additional authentication on agent can be configured
+   * TCP instead of UDP is used for communications with agent - this can help in
+     case of slow and poor quality links
+   * Remote command execution - agents can be used to execute commands on
+     managed systems as a reaction to certain events
+   * Proxy functionality: agent can be used as a proxy to reach agents on hosts
+     not directly accessible by |product_name| server
+   * :term:`SNMP` proxy: agent can be used as a proxy to reach remote SNMP
+        devices
+   * :term:`SNMP Trap` proxy: agent can be used as a proxy to get messages from
+        remote SNMP device
+   * :term:`syslog` proxy: agent can be used as a proxy to get syslog messages from
+        remote devices
+   * :term:`Modbus` proxy: agent can be used as a proxy to reach remote Modbus
+        devices
+   * :term:`Web service` proxy: agent can be used as a proxy to reach remote web
+        services
+   * :term:`TCP` proxy: agent can be used to establish connection to TCP port on remote
+        devices, e.g. to access web UI on a device 
+   * Extensible: you can add new metrics very easy using configuration option
+     like ``ExternalMetric`` or by writing your own subagents
    * Easy upgrade - you can upgrade all agents at once from management client
    * Provides file management possibilities on agent.
    * Provides log file monitoring functionality.

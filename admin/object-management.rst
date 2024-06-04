@@ -854,6 +854,15 @@ URL
        tool purpose.
    * - URL
      - URL that should be passed to browser to be opened.
+   * - TCP tunnel
+     - If enabled, on object tool execution management client will open a local
+       port and establish tunnel via the server and via a proxy agent. Proxy
+       should have ``EnableTCPProxy=yes`` in it's configuration file. The
+       following macros can be used in URL field: 
+
+       - ``${local-address}`` - local IP address
+       - ``${local-port}`` - local port number
+
    * - This tool requires confirmation before execution
      - If chosen, before execution of tool will be shown Yes/No pop-up with text
        from "Confirmation message" field.
@@ -899,6 +908,15 @@ to execute command on web page receiver's machine.
        tool purpose.
    * - Command
      - Command that should be executed on a local machine
+   * - TCP tunnel
+     - If enabled, on object tool execution management client will open a local
+       port and establish tunnel via the server and via a proxy agent. Proxy
+       should have ``EnableTCPProxy=yes`` in it's configuration file. The
+       following macros can be used in command field: 
+
+       - ``${local-address}`` - local IP address
+       - ``${local-port}`` - local port number
+
    * - Command generated output
      - If this option is selected, then command execution will open a window
        with output of the command.
@@ -1126,7 +1144,7 @@ Macro Substitution
 
 Action, file download, local command, and URL tool types allows macro
 substitution. Any string starting with percent sign considered macro name and is
-expanded. The following macros recognized:
+expanded. The following macros are recognized:
 
 .. list-table::
    :widths: 25 75
@@ -1146,8 +1164,8 @@ expanded. The following macros recognized:
    * - ``%n``
      - Name of event source object.
    * - ``%u``
-     - IP address of event source object for use in URL. Expands into [addr] for
-       IPv6 and addr for IPv4.
+     - IP address of event source object for use in URL. Expands into ``[addr]`` for
+       IPv6 and ``addr`` for IPv4.
    * - ``%U``
      - User name of user that launched the object tool from user interface
    * - ``%v``
@@ -1168,6 +1186,10 @@ expanded. The following macros recognized:
      - Value of input field.
    * - ``%<name>``
      - Parameter with given name.
+   * - ``${local-address}``
+     - Local IP address for TCP tunnel 
+   * - ``${local-port}``
+     - local port number for TCP tunnel
    * - ``%%``
      - Insert ``%`` character.
 

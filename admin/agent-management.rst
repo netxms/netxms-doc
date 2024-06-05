@@ -21,17 +21,17 @@ it's installation gives following advantages:
    * Proxy functionality: agent can be used as a proxy to reach agents on hosts
      not directly accessible by |product_name| server
    * :term:`SNMP` proxy: agent can be used as a proxy to reach remote SNMP
-        devices
+     devices
    * :term:`SNMP Trap` proxy: agent can be used as a proxy to get messages from
-        remote SNMP device
-   * :term:`syslog` proxy: agent can be used as a proxy to get syslog messages from
-        remote devices
-   * :term:`Modbus` proxy: agent can be used as a proxy to reach remote Modbus
-        devices
-   * :term:`Web service` proxy: agent can be used as a proxy to reach remote web
-        services
-   * :term:`TCP` proxy: agent can be used to establish connection to TCP port on remote
-        devices, e.g. to access web UI on a device 
+     remote SNMP device
+   * :term:`Syslog` proxy: agent can be used as a proxy to get syslog messages from
+     remote devices
+   * Modbus TCP proxy: agent can be used as a proxy to reach remote devices via
+     Modbus TCP protocol
+   * Web service proxy: agent can be used as a proxy to reach remote web
+     services
+   * TCP proxy: agent can be used to establish connection to TCP port on remote
+     devices, e.g. to access web UI on a device 
    * Extensible: you can add new metrics very easy using configuration option
      like ``ExternalMetric`` or by writing your own subagents
    * Easy upgrade - you can upgrade all agents at once from management client

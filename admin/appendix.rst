@@ -266,9 +266,11 @@ Agent configuration file (nxagentd.conf)
      - no
    * - EnableTCPProxy
      - Enable TCP proxy functionality that allows to forward TCP connections
-       inside the connection between |product_name| server and agent. This can
-       be used in Object Tools of the Management Client. An example utility
-       called TcpProxyApp that forwards local ports is also provided.
+       inside the connection between |product_name| server and agent. Connection
+       can be established from Management Client when using URL and Local
+       Command Object Tools. It's also possible to use this functionality from
+       third party applications, Java utility called TcpProxyApp that forwards
+       local ports is provided as an example.
      - no
    * - EnableWatchdog
      - Enable (yes) or disable (no) automatic agent restart in case of

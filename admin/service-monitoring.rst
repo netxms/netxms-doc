@@ -9,6 +9,9 @@ menu option :guilabel:`Create --> Create Network Service...` as an object with t
 that will be propagated on a node, and the second one is to add it's monitoring as
 DCI.
 
+In both cases monitoring is done by the help of |product_name| agent. In agent's 
+configuration file `NetSVC` subagent should be enabled. 
+
 Network Service Object
 ======================
 
@@ -31,11 +34,11 @@ responding, it's status will be changed to CRITICAL. It is possible to create a
 
 .. figure:: _images/create_network_service.png
 
-In default configuration request is done with the help of NetSVC subagent on the
-server node. If it should be done through different node is should be changed in
-it's properties after service creation by selecting Poller node. There is also
-possibility to set number of polls that is required to be sure that state have
-changed.
+In default configuration request is done with the help of |product_name| agent
+(by it's NetSVC subagent) on the server node. If it should be done through
+different node is should be changed in it's properties after service creation by
+selecting Poller node. There is also possibility to set number of polls that is
+required to be sure that state have changed.
 
 .. figure:: _images/network_service_properties.png
 
@@ -44,9 +47,12 @@ Network service monitoring using DCI
 ====================================
 
 Second option is to use :term:`DCI` to monitor service. Service monitoring
-metrics are provided by NetSVC subagent. 
+metrics are provided |product_name| agent (by it's NetSVC subagent). DCIs should
+either be created on the node where agent is running, or they can be created on
+another node and the node with agent can be specified in `Source node override`
+in DCI's properties. 
 
-More about URL options caon be found there: https://curl.se/docs/url-syntax.html
+More about URL options can be found there: https://curl.se/docs/url-syntax.html
 
 This subagent will add the following metrics to list of metrics available on
 agent:

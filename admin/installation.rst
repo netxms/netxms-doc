@@ -445,13 +445,13 @@ Start agent
 
 .. code-block:: sh
 
-  systemctl start nxagentd
+  systemctl start netxms-agent
 
 Enable automatic startup of agent
 
 .. code-block:: sh
 
-  systemctl enable nxagentd
+  systemctl enable netxms-agent
 
 
 Management Client

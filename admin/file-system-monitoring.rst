@@ -39,19 +39,19 @@ Configuration parameters:
 DCI Metrics for file system monitoring
 ======================================
 
-'FileSystem' Metrics
+'FileSystem.*' Metrics
 --------------------
 
-Agent metrics for file system monitoring.
+Metrics with prefix 'FileSystem' are used to monitor file system. They provide information about free and user space, inode information, etc.
 
-Detailed description of available metrics can be found starting from :ref:`FileSystem <file-system-metrics>` metric.
+Full list of available metrics can be found in :ref:`FileSystem.* <file-system-metrics>` section.
 
-'File' Metrics
+'File.*' Metrics
 --------------
 
-Agent metrics for file monitoring.
+Metrics with prefix 'File' are used to monitor files. They provide information about file size, count, modification time, etc.
 
-Detailed description of available metrics can be found starting from :ref:`File <file-metrics>` metric.
+Full list of available metrics can be found in :ref:`File.* <file-metrics>` section.
 
 Examples
 --------

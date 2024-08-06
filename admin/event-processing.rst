@@ -1063,9 +1063,11 @@ alarms, or actions. You may use the following macros to accomplish this:
      - Alarm's text. This macro is populated when creating, resolving or
        terminating alarm in EPP rule. Macro is available in that EPP rule for
        persistent storage and server action and in subsequent EPP rules.
-       
+
        .. versionchanged:: 3.8.314
-       In previous version this macro was available only withing given EPP rule. 
+
+       Prior to 3.8.314 this macro was available only withing given EPP rule.
+
    * - ``%c``
      - Event's code.
    * - ``%C``

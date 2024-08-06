@@ -71,7 +71,7 @@ Select link line, right click and select "Properties".
 
 
 The following properties can be configured:
-   * Link name 
+   * Link name
    * Connector names (shown on the link line near each connected object)
    * Line color
       * Default - grey
@@ -84,29 +84,31 @@ The following properties can be configured:
       * Bend points - bend point can be added manually with double click on the
         line
    * Label position - defines position of label containing link name and DCI
-     values on the link. 50 means middle of the link. 
+     values on the link. 50 means middle of the link.
    * Data Source (allows to configure DCI values and text near them that will be
-     displayed on a link)
-      * For each Data Source can be configured: Data collection item, name,
-        format string, in case of table DCI also column and instance. If format
-        string is not provided, default formatting including multipliers and
-        measurement units is used. 
-        
-        Java format string syntax is used, e.g. ``Text: %.4f``, syntax description
-        is available here:
-        http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax.
+     displayed on a link).
+   * For each Data Source can be configured: Data collection item, name,
+     format string, in case of table DCI also column and instance. If format
+     string is not provided, default formatting including multipliers and
+     measurement units is used.
 
-        Additional format specifier can be provided in curly brackets after
-        ``%`` sign to display multipliers and measurement units, e.g.
-        ``%{units,multipliers}f``. Format specifier is comma-separated list
-        supporting the following options:
-          - ``units`` - add measurement units from DCI's properties. For
-            :guilabel:`Epoch` time and :guilabel:`Uptime` this will also convert
-            the value.  
-          - ``u`` - same as ``units``
-          - ``multipliers`` - display values with multipliers (e.g. 1230000
-            becomes 1.23 M)
-          - ``m`` - same as ``multipliers``
+     Java format string syntax is used, e.g. ``Text: %.4f``, syntax description
+     is available here:
+     http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax.
+
+     Additional format specifier can be provided in curly brackets after
+     ``%`` sign to display multipliers and measurement units, e.g.
+     ``%{units,multipliers}f``.
+
+     Format specifier is comma-separated list supporting the following options:
+
+       - ``units`` - add measurement units from DCI's properties. For
+         :guilabel:`Epoch` time and :guilabel:`Uptime` this will also convert
+         the value.
+       - ``u`` - same as ``units``
+       - ``multipliers`` - display values with multipliers (e.g. 1230000
+         becomes 1.23 M)
+       - ``m`` - same as ``multipliers``
 
 Example of DCI data displayed on a link:
 
@@ -441,22 +443,22 @@ about objects under container.
 
 Syslog Monitor
 ~~~~~~~~~~~~~~
-Syslog monitor widget. Has additional option to set root object to filter objects what will be shown in monitor. 
-One object or a container that contains required objects can be set as root object. 
+Syslog monitor widget. Has additional option to set root object to filter objects what will be shown in monitor.
+One object or a container that contains required objects can be set as root object.
 
 .. figure:: _images/dashboard_syslog_monitor.png
 
 SNMP Trap Monitor
 ~~~~~~~~~~~~~~~~~
 SNMP Trap monitor widget. Has additional option to set root object to filter objects what will be shown in monitor.
-One object or a container that contains required objects can be set as root object. 
+One object or a container that contains required objects can be set as root object.
 
 .. figure:: _images/dashboard_snmp_trap_monitor.png
 
 Event monitor
 ~~~~~~~~~~~~~
 Event monitor widget. Has additional option to set root object to filter objects what will be shown in monitor.
-One object or a container that contains required objects can be set as root object. 
+One object or a container that contains required objects can be set as root object.
 
 .. figure:: _images/dashboard_event_monitor.png
 
@@ -468,7 +470,7 @@ Map displays hierarchy of objects in :guilabel:`Infrastructure Service` starting
 
 Rack diagram
 ~~~~~~~~~~~~
-Shows rack front, back or both views with object placement in it. 
+Shows rack front, back or both views with object placement in it.
 
 .. figure:: _images/dashboard_rack_diagram.png
 
@@ -483,53 +485,53 @@ Shows buttons with pre configured object tools, that are executed on click.
 
 Object query
 ~~~~~~~~~~~~
-Shows columns with filtered objects' information. 
+Shows columns with filtered objects' information.
 
-Object query has 2 main configurations. :guilabel:`Query` that filterers objects and provide option to create 
-additional information about object in columns and :guilabel:`Object Properties` that lists information that 
+Object query has 2 main configurations. :guilabel:`Query` that filterers objects and provide option to create
+additional information about object in columns and :guilabel:`Object Properties` that lists information that
 should be shown in table.
 
 **Query**
 
-It is a script that is executed on each object and should return true if object should be displayed in the table 
-and false if it should not. It has special syntax that provides option to calculate additional values for columns 
-in :guilabel:`Object Properties` section. This syntax is optional and usual NXSL script can be used instead. Usual 
-NXSL script should return true or map (where key is column name and value is value for this column) if node should 
-be shown and false if not, additional self calculated columns can be defined as global variables. 
+It is a script that is executed on each object and should return true if object should be displayed in the table
+and false if it should not. It has special syntax that provides option to calculate additional values for columns
+in :guilabel:`Object Properties` section. This syntax is optional and usual NXSL script can be used instead. Usual
+NXSL script should return true or map (where key is column name and value is value for this column) if node should
+be shown and false if not, additional self calculated columns can be defined as global variables.
 
 Syntax:
 
 .. code-block::
 
   with
-    varName = { code or expression }, 
-    varName = { code or expression } 
+    varName = { code or expression },
+    varName = { code or expression }
     /* Might be as many blocks as required.
-     * varName is a name of the variable where result of a code will be assigned. 
-     * It can be used later in the code in expression or to be displayed in table 
+     * varName is a name of the variable where result of a code will be assigned.
+     * It can be used later in the code in expression or to be displayed in table
      * using the same name in the Object Properties part.
     */
-  expression 
-  /* Short circuit evaluated expression. This expression is executed first and if it contains not yet calculated 
-   * varName then variable is calculated and used in expression. Expression that should result as true or false 
+  expression
+  /* Short circuit evaluated expression. This expression is executed first and if it contains not yet calculated
+   * varName then variable is calculated and used in expression. Expression that should result as true or false
    * as a sign if this object should be displayed in table or not. No semicolon at the end.
   */
 
-This page provides option to configure columns that should be used for ordering, 
+This page provides option to configure columns that should be used for ordering,
 refresh interval and record limit. To order column write a coma separated list of attribute named or varNames with
-- sign to order in descending order and with + sign to order in ascending order. 
+- sign to order in descending order and with + sign to order in ascending order.
 
 **Object Properties**
 
 This property page is used to organize required columns and column order in table.
-Each column configuration consists of name of object's attribute or varName defined 
-in Query page, display name used as a name for a column and data type of the column.  
+Each column configuration consists of name of object's attribute or varName defined
+in Query page, display name used as a name for a column and data type of the column.
 
 **Example**
 
-This example will show how to filter nodes that only have alarms on them, are not in maintenance mode and show count of 
-critical alarms on the node, order by critical alarm count the list and then by node name. Example shows two different 
-options how to write the same script so only one of them should be used. 
+This example will show how to filter nodes that only have alarms on them, are not in maintenance mode and show count of
+critical alarms on the node, order by critical alarm count the list and then by node name. Example shows two different
+options how to write the same script so only one of them should be used.
 
 Configuration:
 
@@ -551,8 +553,8 @@ Result:
 
 Port view
 ~~~~~~~~~
-Shows ports schematic with each port status. 
-One object or a container that contains required objects can be set as root object. 
+Shows ports schematic with each port status.
+One object or a container that contains required objects can be set as root object.
 
 .. figure:: _images/dashboard_port_view.png
 

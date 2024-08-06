@@ -40,14 +40,14 @@ DCI Metrics for file system monitoring
 ======================================
 
 'FileSystem.*' Metrics
---------------------
+----------------------
 
 Metrics with prefix 'FileSystem' are used to monitor file system. They provide information about free and user space, inode information, etc.
 
 Full list of available metrics can be found in :ref:`FileSystem.* <file-system-metrics>` section.
 
 'File.*' Metrics
---------------
+----------------
 
 Metrics with prefix 'File' are used to monitor files. They provide information about file size, count, modification time, etc.
 

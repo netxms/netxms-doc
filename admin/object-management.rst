@@ -320,9 +320,8 @@ Besides default property pages condition has also:
    - :guilabel:`Script` tab is used to write script that will calculate if
      condition should be activated or deactivated.
    - :guilabel:`Map Appearance` tab defines images that will be used to display
-     this
-      object on a :term:`Network Map` and drill-down object (object that will be
-      opened when double click on this object on :term:`Network Map`).
+     this object on a :term:`Network Map` and drill-down object (object that will be
+     opened when double click on this object on :term:`Network Map`).
    - :guilabel:`Trusted Nodes` is used to define object list that
       have access to this object from the script.
 
@@ -347,9 +346,8 @@ Besides default property pages condition has also:
      :ref:`there<automatic-bind>`
    - :guilabel:`Location`  is used to configure location of the node
    - :guilabel:`Map Appearance` tab defines images that will be used to display
-     this
-      object on a :term:`Network Map` and drill-down object (object that will be
-      opened when double
+     this object on a :term:`Network Map` and drill-down object (object that will be
+     opened when double
 click on this object on :term:`Network Map`).
    - :guilabel:`Trusted Nodes` is used to define object list that
       have access to this object from the script.

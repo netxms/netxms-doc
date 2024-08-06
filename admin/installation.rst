@@ -241,11 +241,11 @@ However, we test and officially support only some of them.
 Supported platforms for |product_name| server and agent:
 
    * Debian 10 (Buster), 11 (Bullseye), 12 (Bookworm)
-   * Ubuntu 18.04 LTS (Bionic), 20.04 LTS (Focal Fossa), 22.04 LTS (Jammy Jellyfish)
+   * Ubuntu 18.04 LTS (Bionic), 20.04 LTS (Focal Fossa), 22.04 LTS (Jammy Jellyfish), 24.04 ( Noble )
    * Linux Mint 19.3 (Tricia), 20.3 (Una), 21.2 (Victoria)
    * Linux Mint Debian Edition 4
    * Devuan ASCII
-   * Red Hat Enterprise Linux 8
+   * Red Hat Enterprise Linux 8, 9
    * CentOS 8
    * Windows 11, Windows 10, Windows Server 2016, 2019, 2022
    * FreeBSD 12
@@ -282,7 +282,7 @@ Database
 
 Database engines supported by |product_name| server:
 
-   * PostgreSQL 9.5, 9.6, 10, 11, 12, 13, 14
+   * PostgreSQL 9.5, 9.6, 10, 11, 12, 13, 14, 16
    * PostgreSQL with TimescaleDB 11, 12, 13, 14
    * MySQL 5.6, 5.7, 8.0
    * MariaDB 10.1, 10.2, 10.3, 10.4
@@ -376,9 +376,9 @@ Provided driver packages:
 
   * netxms-dbdrv-pgsql - PostgreSQL driver
   * netxms-dbdrv-mariadb - Mariadb driver
-  * netxms-dbdrv-mysql - MySQL driver (not built for Ubuntu 20 / Mint 20)
+  * netxms-dbdrv-mysql - MySQL driver, currently under development (not built for Ubuntu 20 / Mint 20)
   * netxms-dbdrv-odbc - unixODBC driver (can be used with DB/2 and Microsoft SQL)
-  * netxms-dbdrv-oracle - Oracle driver
+  * netxms-dbdrv-oracle - Oracle driver, currently under development ( requires Oracle client installation )
 
 #. Instal required packages (adjust command to match your environment):
 
@@ -466,7 +466,7 @@ Due to limitation of Eclipse platform used to build the Management Client, only 
  
  2. Download the latest version from http://www.netxms.org/download. You will need
     Linux installer (named nxmc-VERSION-linux-gtk-x64.tar.gz, for example
-    nxmc-4.4.3-linux-gtk-x64.tar.gz).
+    nxmc-5.0.6-linux-gtk-x64.tar.gz).
     
  3. Expand package to your preferred directory using command:
 
@@ -484,13 +484,13 @@ Web Management Client
 ^^^^^^^^^^^^^^^^^^^^^
 
 |product_name| web interface is java based and should be deployed into servlet container to
-run. Minimal supported versions: Jetty 10, Tomcat 9. Supported Java version is 17. 
+run. Minimal supported versions: Jetty 10, Tomcat 9. Supported Java version is 17, but is found to be working with later versions, for example 21. 
 
   1. Install one of servlet containers that support servlet-api version 4.
 
   2. Download latest version of WAR file from Web Interface Binaries section
      http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
-     nxmc-4.4.3.war).
+     nxmc-5.0.6.war).
 
   3. Copy nxmc.war to webapps directory, in a few seconds it will be autodeployed and
      available at http://SERVER_IP:SERVER_PORT/nxmc/
@@ -531,6 +531,148 @@ DNF provide simple way to add repository:
 
 Once added, you can install any package with ``dnf install`` (e.g. ``dnf install netxms-agent``).
 
+
+Installing packages
+-------------------
+
+Server
+~~~~~~
+
+Server require two components to function - server itself (package "netxms-server") and at least one database abstraction layer driver 
+(multiple can be installed at the same time, e.g. for migration purposes). These database drivers are also used by agent for database 
+monitoring (performing queries to databases). 
+
+Provided driver packages:
+
+  * netxms-dbdrv-pgsql - PostgreSQL driver
+  * netxms-dbdrv-mariadb - Mariadb driver
+  * netxms-dbdrv-mysql - MySQL driver, currently under development (not built for Ubuntu 20 / Mint 20)
+  * netxms-dbdrv-odbc - unixODBC driver (can be used with DB/2 and Microsoft SQL)
+  * netxms-dbdrv-oracle - Oracle driver ( requires Oracle client installation )
+
+#. Instal required packages (adjust command to match your environment):
+
+   .. code-block:: sh
+
+     dnf install netxms-server netxms-dbdrv-pgsql
+
+#. Create user and database (:ref:`examples <db_creation>`).
+
+#. Modify server configuration file ("/etc/netxmsd.conf" to match your environment.
+
+#. Load database schema and default configuration:
+
+   .. code-block:: sh
+
+     nxdbmgr init
+
+#. Start server:
+
+   .. code-block:: sh
+
+     systemctl start netxms-server.service
+
+#. Enable automatic startup of server:
+
+   .. code-block:: sh
+
+     systemctl enable netxms-server.service
+
+#. If database engine is running on the same system, add ordering dependency for
+   database into netxmsd systemd unit override file. This will ensure database
+   shutdown only after netxmsd process completion on system shutdown/restart. To
+   add the dependency e.g. for Postgres database, run:
+
+   .. code-block:: sh
+
+     systemctl edit netxmsd
+   
+   and add the following lines:
+
+   .. code-block:: sh
+
+     [Unit]
+     After=network.target postgresql.service
+
+   After editing run ``systemctl daemon-reload`` to reload systemd
+   configuration. 
+
+.. note::
+
+  Default credentials - user "admin" with password "netxms".
+
+
+Agent
+~~~~~
+
+Install core agent package ("netxms-agent") and optional subagent packages, if required:
+
+.. code-block:: sh
+
+  apt-get install netxms-agent
+
+Start agent
+
+.. code-block:: sh
+
+  systemctl start netxms-agent
+
+Enable automatic startup of agent
+
+.. code-block:: sh
+
+  systemctl enable netxms-agent
+
+
+Management Client
+~~~~~~~~~~~~~~~~~
+
+Desktop Management Client
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Due to limitation of Eclipse platform used to build the Management Client, only x64 build is provided.
+
+ 1. Make sure you have 64-bit Java version 17 installed you your system. 
+ 
+ 2. Download the latest version from http://www.netxms.org/download. You will need
+    Linux installer (named nxmc-VERSION-linux-gtk-x64.tar.gz, for example
+    nxmc-5.0.6-linux-gtk-x64.tar.gz).
+    
+ 3. Expand package to your preferred directory using command:
+
+    :command:`tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DESTINATION_DIRECTORY`
+
+ 4. Run nxmc file from "/DESTINATION_DIRECTORY".
+
+
+Desktop management client produces log file :file:`.nxmc/data/.metadata/.log` in
+home folder of currently logged user. Inspect this log file if you encounter
+errors when running the client. 
+
+
+Web Management Client
+^^^^^^^^^^^^^^^^^^^^^
+
+|product_name| web interface is java based and should be deployed into servlet container to
+run. Minimal supported versions: Jetty 10, Tomcat 9. Supported Java version is 17, but is found to be working with later versions, for example 21. 
+
+  1. Install one of servlet containers that support servlet-api version 4.
+
+  2. Download latest version of WAR file from Web Interface Binaries section
+     http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
+     nxmc-5.0.6.war).
+
+  3. Copy nxmc.war to webapps directory, in a few seconds it will be autodeployed and
+     available at http://SERVER_IP:SERVER_PORT/nxmc/
+
+     Tomcat default folder:  /var/lib/tomcat9/webapps
+
+     Jetty default folder: $JETTY_HOME/webapps/
+
+
+Web management client produces log file. For Tomcat it's located at 
+:file:`/var/lib/tomcat9/work/Catalina/localhost/nxmc/eclipse/workspace/.metadata/.log.` 
+Inspect this log file if you encounter errors when running the web client. 
 
 Installing on Windows
 =====================
@@ -1111,7 +1253,7 @@ If required, password can be reset back to default using :ref:`nxdbmgr utility <
 Database creation examples
 ==========================
 
-This chapter provides some database creation SQL examples.
+This chapter provides some database creation SQL examples. Please consult relevant database documentation for initial install.
 
 PostgreSQL
 ----------

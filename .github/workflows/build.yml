@@ -1,0 +1,36 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip python3-virtualenv latexmk texlive-latex-extra
+
+      - name: Set up Python virtual environment
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: Build HTML
+        run: |
+          source venv/bin/activate
+          make html
+
+      - name: Build PDF
+        run: |
+          source venv/bin/activate
+          make pdf

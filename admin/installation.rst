@@ -241,7 +241,7 @@ However, we test and officially support only some of them.
 Supported platforms for |product_name| server and agent:
 
    * Debian 10 (Buster), 11 (Bullseye), 12 (Bookworm)
-   * Ubuntu 18.04 LTS (Bionic), 20.04 LTS (Focal Fossa), 22.04 LTS (Jammy Jellyfish), 24.04 ( Noble )
+   * Ubuntu 18.04 LTS (Bionic), 20.04 LTS (Focal Fossa), 22.04 LTS (Jammy Jellyfish), 24.04 (Noble)
    * Linux Mint 19.3 (Tricia), 20.3 (Una), 21.2 (Victoria)
    * Linux Mint Debian Edition 4
    * Devuan ASCII
@@ -282,8 +282,8 @@ Database
 
 Database engines supported by |product_name| server:
 
-   * PostgreSQL 9.5, 9.6, 10, 11, 12, 13, 14, 16
-   * PostgreSQL with TimescaleDB 11, 12, 13, 14
+   * PostgreSQL 9.5, 9.6, 10, 11, 12, 13, 14, 15, 16
+   * PostgreSQL with TimescaleDB 11, 12, 13, 14, 15, 16
    * MySQL 5.6, 5.7, 8.0
    * MariaDB 10.1, 10.2, 10.3, 10.4
    * Oracle 12c, 18c, 19c
@@ -376,9 +376,9 @@ Provided driver packages:
 
   * netxms-dbdrv-pgsql - PostgreSQL driver
   * netxms-dbdrv-mariadb - Mariadb driver
-  * netxms-dbdrv-mysql - MySQL driver, currently under development (not built for Ubuntu 20 / Mint 20)
+  * netxms-dbdrv-mysql - MySQL driver (not built for Ubuntu 20 / Mint 20)
   * netxms-dbdrv-odbc - unixODBC driver (can be used with DB/2 and Microsoft SQL)
-  * netxms-dbdrv-oracle - Oracle driver, currently under development ( requires Oracle client installation )
+  * netxms-dbdrv-oracle - Oracle driver ( requires Oracle client installation )
 
 #. Instal required packages (adjust command to match your environment):
 
@@ -464,15 +464,9 @@ Due to limitation of Eclipse platform used to build the Management Client, only 
 
  1. Make sure you have 64-bit Java version 17 installed you your system. 
  
- 2. Download the latest version from http://www.netxms.org/download. You will need
-    Linux installer (named nxmc-VERSION-linux-gtk-x64.tar.gz, for example
-    nxmc-5.0.6-linux-gtk-x64.tar.gz).
-    
- 3. Expand package to your preferred directory using command:
+ 2. Download the latest .jar file from http://www.netxms.org/download, for example nxmc-5.0.6-standalone.jar.
 
-    :command:`tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DESTINATION_DIRECTORY`
-
- 4. Run nxmc file from "/DESTINATION_DIRECTORY".
+ 3. Run .jar file using java, for example java -jar nxmc-xxx.jar .
 
 
 Desktop management client produces log file :file:`.nxmc/data/.metadata/.log` in
@@ -484,7 +478,7 @@ Web Management Client
 ^^^^^^^^^^^^^^^^^^^^^
 
 |product_name| web interface is java based and should be deployed into servlet container to
-run. Minimal supported versions: Jetty 10, Tomcat 9. Supported Java version is 17, but is found to be working with later versions, for example 21. 
+run. Minimal supported versions: Jetty 10, Tomcat 9. Supported Java version is 17 or later. 
 
   1. Install one of servlet containers that support servlet-api version 4.
 
@@ -609,7 +603,7 @@ Install core agent package ("netxms-agent") and optional subagent packages, if r
 
 .. code-block:: sh
 
-  apt-get install netxms-agent
+  dnf install netxms-agent
 
 Start agent
 
@@ -634,15 +628,9 @@ Due to limitation of Eclipse platform used to build the Management Client, only 
 
  1. Make sure you have 64-bit Java version 17 installed you your system. 
  
- 2. Download the latest version from http://www.netxms.org/download. You will need
-    Linux installer (named nxmc-VERSION-linux-gtk-x64.tar.gz, for example
-    nxmc-5.0.6-linux-gtk-x64.tar.gz).
-    
- 3. Expand package to your preferred directory using command:
+ 2. Download the latest .jar file from http://www.netxms.org/download, for example nxmc-5.0.6-standalone.jar.
 
-    :command:`tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DESTINATION_DIRECTORY`
-
- 4. Run nxmc file from "/DESTINATION_DIRECTORY".
+ 3. Run .jar file using java, for example java -jar nxmc-xxx.jar .
 
 
 Desktop management client produces log file :file:`.nxmc/data/.metadata/.log` in

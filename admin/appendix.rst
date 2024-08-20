@@ -6726,6 +6726,68 @@ Supported Platforms: Linux, Windows
 Hardware information about available storage devices
 
 
+Net.Wireguard.Interfaces
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Supported Platforms: Linux, BSD, Mac OS X
+
+.. list-table::
+   :widths: 10 10
+   :header-rows: 1
+
+   * - Column name
+     - Data type
+   * - NAME *
+     - String
+   * - PUBLIC_KEY
+     - String
+   * - LISTEN_PORT
+     - UInt32
+
+Example output:
+
+::
+
+  | NAME | PUBLIC_KEY                                   | LISTEN_PORT |
+  | gw   | eWfYktu1DjurgOUfCiBOfbiduddfmLiS1D+smdBj+28= | 51820       |
+
+
+
+Net.Wireguard.Peers
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Supported Platforms: Linux, BSD, Mac OS X
+
+.. list-table::
+   :widths: 10 10
+   :header-rows: 1
+
+   * - Column name
+     - Data type
+   * - INTERFACE
+     - String
+   * - PEER_PUBLIC_KEY *
+     - String
+   * - ENDPOINT
+     - String
+   * - ALLOWED_IPS
+     - String
+   * - HANDSHAKE_TIMESTAMP
+     - UInt64
+   * - RX
+     - UInt64
+   * - TX
+     - UInt64
+
+Example output:
+
+::
+
+  | INTERFACE | PEER_PUBLIC_KEY                              | ENDPOINT                                       | ALLOWED_IPS    | HANDSHAKE_TIMESTAMP | RX   | TX   |
+  | gw        | BWEY+dXnkkhl836PVpkDaAwImnFeCQogfZrnVz1Svmo= | [fd42:5c39:7438:816b:216:3eff:fed3:fd0a]:10687 | 192.168.1.2/32 | 1722296581          | 3676 | 1012 |
+  | gw        | TN77lQm65yIJIKWGJyWwFSfa8QCuLYasap5m0x+/CBM= | 10.107.72.157:6802                             | 192.168.2.2/32 | 1722296582          | 3676 | 1012 |
+
+
 System.ActiveUserSessions
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 

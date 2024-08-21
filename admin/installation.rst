@@ -400,13 +400,13 @@ Provided driver packages:
 
    .. code-block:: sh
 
-     systemctl start netxmsd
+     systemctl start netxms-server
 
 #. Enable automatic startup of server:
 
    .. code-block:: sh
 
-     systemctl enable netxmsd
+     systemctl enable netxms-server
 
 #. If database engine is running on the same system, add ordering dependency for
    database into netxmsd systemd unit override file. This will ensure database
@@ -415,7 +415,7 @@ Provided driver packages:
 
    .. code-block:: sh
 
-     systemctl edit netxmsd
+     systemctl edit netxms-server
    
    and add the following lines:
 

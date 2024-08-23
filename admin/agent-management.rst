@@ -743,6 +743,7 @@ Below is list of available |product_name| subagents:
   * :ref:`Network Service Check <netsvc-subagent>`
   * :ref:`Oracle <oracle-subagent>`
   * Ping
+  * :ref:`Postgres <postgres-subagent>`
   * :ref:`Raspberry Pi <rpi-subagent>`
   * :ref:`UPS <ups-monitoring>`
   * Windows Performance

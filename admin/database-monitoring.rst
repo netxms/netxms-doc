@@ -4,12 +4,13 @@
 Database monitoring
 ===================
 
-There are several subagents for database monitoring: DB2, Informix, Oracle, MySQL, MongoDB.
-Below we will describe how to configure and use these subagents. Besides it's also
-possible to monitor other types of databases supported by |product_name|
-server(:ref:`link to supported database list<supported-db-list>`) using database query
-subagent as these databases support receiving performance parameters using queries.
-This subagent details are described in :ref:`dbquery` chapter.
+There are several :ref:`subagents <subagent_list>` for database monitoring: DB2,
+Informix, Oracle, MySQL, MongoDB, PostgreSQL. Below we will describe how to configure and
+use these subagents. Besides it's also possible to monitor other types of
+databases supported by |product_name| server(:ref:`link to supported database
+list<supported-db-list>`) using database query subagent as these databases
+support receiving performance parameters using queries. This subagent details
+are described in :ref:`dbquery` chapter.
 
 .. _oracle-subagent:
 

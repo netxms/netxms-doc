@@ -5,27 +5,29 @@ Database monitoring
 ===================
 
 There are several :ref:`subagents <subagent_list>` for database monitoring: DB2,
-Informix, Oracle, MySQL, MongoDB, PostgreSQL. Below we will describe how to configure and
-use these subagents. Besides it's also possible to monitor other types of
-databases supported by |product_name| server(:ref:`link to supported database
-list<supported-db-list>`) using database query subagent as these databases
-support receiving performance parameters using queries. This subagent details
-are described in :ref:`dbquery` chapter.
+Informix, Oracle, MySQL, MongoDB, PostgreSQL. Below we will describe how to
+configure and use these subagents. Besides it's also possible to monitor other
+types of databases supported by |product_name| server(:ref:`link to supported
+database list<supported-db-list>`) using database query subagent as these
+databases support receiving performance parameters using queries. This subagent
+details are described in :ref:`dbquery` chapter.
 
 .. _oracle-subagent:
 
 Oracle
 ======
 
-|product_name| subagent for Oracle DBMS monitoring (further referred to as Oracle subagent) monitors
-one or more instances of Oracle databases and reports various database-related metrics.
+|product_name| subagent for Oracle DBMS monitoring (further referred to as
+Oracle subagent) monitors one or more instances of Oracle databases and reports
+various database-related metrics.
 
-All metrics available from Oracle subagent are collected or calculated once per minute thus it's
-recommended to set DCI poll interval for these items to 60 seconds or more. All metrics are
-obtained or derived from the data available in Oracle's data dictionary tables and views through
-regular select queries. Oracle subagent does not monitor any of the metrics related to lower level
-database layers, such as database processes. Monitoring of such metrics can be achieved through
-the standard |product_name| functionality.
+All metrics available from Oracle subagent are collected or calculated once per
+minute thus it's recommended to set DCI poll interval for these items to 60
+seconds or more. All metrics are obtained or derived from the data available in
+Oracle's data dictionary tables and views through regular select queries. Oracle
+subagent does not monitor any of the metrics related to lower level database
+layers, such as database processes. Monitoring of such metrics can be achieved
+through the standard |product_name| functionality.
 
 Pre-requisites
 --------------
@@ -46,7 +48,7 @@ Configuration file
 
 Oracle subagent can be configured using XML configuration file (usually created
 as separate file in configuration include directory), or in simplified INI format,
-usually in main agent configuration file.
+in main agent configuration file (nxagentd.conf).
 
 Database definition supports the following parameters:
 
@@ -59,30 +61,35 @@ Database definition supports the following parameters:
      - Description
      - Default value
    * - Id
-     - Database identifier. It will be used to address this database in parameters.
+     - Database identifier. It will be used to address this database in
+       parameters.
      -
    * - TnsName
      - Database TNS name or connection string.
      -
    * - ConnectionTTL
-     - Time in seconds. When this time gets elapsed, connection to the DB is closed and reopened again.
+     - Time in seconds. When this time gets elapsed, connection to the DB is
+       closed and reopened again.
      - 3600
    * - Username
      - User name for connecting to database.
      -
    * - Password
-     - Database user password. When using INI format, remember to enclose password in double quotes ("password") if it contains # character.
-       This parameter automatically detects and accepts password encrypted with :ref:`nxencpasswd-tools-label` tool.
+     - Database user password. When using INI format, remember to enclose
+       password in double quotes ("password") if it contains # character. This
+       parameter automatically detects and accepts password encrypted with
+       :ref:`nxencpasswd-tools-label` tool.
      -
    * - EncryptedPassword
-     - Database user password encrypted with :ref:`nxencpasswd-tools-label` tool. DEPRECATED. Use Password instead.
+     - Database user password encrypted with :ref:`nxencpasswd-tools-label`
+       tool. DEPRECATED. Use Password instead.
      -
 
 
-XML configuration allows to specify multiple databases in the **oracle** section.
-Each database description must be surrounded by database tags with the **id** attribute.
-It can be any unique integer and instructs the Oracle subagent about the order in
-which database sections will be processed.
+XML configuration allows to specify multiple databases in the **oracle**
+section. Each database description must be surrounded by database tags with the
+**id** attribute. It can be any unique integer and instructs the Oracle subagent
+about the order in which database sections will be processed.
 
 Sample Oracle subagent configuration file in XML format:
 
@@ -111,8 +118,9 @@ Sample Oracle subagent configuration file in XML format:
    </config>
 
 
-You can specify only one database when using INI configuration format. If you need
-to monitor multiple databases from same agent, you should use configuration file in XML format.
+You can specify only one database when using INI configuration format. If you
+need to monitor multiple databases from same agent, you should use configuration
+file in XML format.
 
 Sample Oracle subagent configuration file in INI format:
 
@@ -296,10 +304,11 @@ known as Data Collection Items (DCI) from an instance or several instances of DB
 Configuration
 -------------
 
-DB2 subagent can be configured in two ways. The first one would be a simple INI file and the
-second one would be an XML configuration file. Please note that to use the XML configuration,
-you first need to declare the XML file in the DB2 section of the INI configuration file. The
-details are below.
+DB2 subagent configuration is specified in agent configuration file
+(nxagentd.conf). Configuration can be done in two ways, the first one would be a
+simple INI file and the second one would be an XML configuration file. Please
+note that to use the XML configuration, you first need to declare the XML file
+in the DB2 section of the INI configuration file. The details are below.
 
 
 Database definition supports the following parameters:
@@ -326,12 +335,15 @@ Database definition supports the following parameters:
      -
    * - Password
      - string
-     - The password for the database to connect to. When using INI format, remember to enclose password in double quotes ("password") if it contains # character.
-       This parameter automatically detects and accepts password encrypted with :ref:`nxencpasswd-tools-label` tool.
+     - The password for the database to connect to. When using INI format,
+       remember to enclose password in double quotes ("password") if it contains
+       # character. This parameter automatically detects and accepts password
+       encrypted with :ref:`nxencpasswd-tools-label` tool.
      -
    * - EncryptedPassword
      - string
-     - Database user password encrypted with :ref:`nxencpasswd-tools-label` tool. DEPRECATED. Use Password instead.
+     - Database user password encrypted with :ref:`nxencpasswd-tools-label`
+       tool. DEPRECATED. Use Password instead.
      -
    * - QueryInterval
      - seconds
@@ -339,7 +351,8 @@ Database definition supports the following parameters:
      - 60
    * - ReconnectInterval
      - seconds
-     - The interval to try to reconnect to the database if the connection was lost or could not be established
+     - The interval to try to reconnect to the database if the connection was
+       lost or could not be established
      - 30
 
 
@@ -360,8 +373,8 @@ Sample DB2 subagent configuration file in INI format:
 
 XML configuration allows the monitoring of several database instances.
 
-To be able to use the XML configuration file, you first need to specify the file to use in the
-DB2 section of the INI file. The syntax is as follows:
+To be able to use the XML configuration file, you first need to specify the file
+to use in the DB2 section of the INI file. The syntax is as follows:
 
 .. code-block:: cfg
 
@@ -411,18 +424,20 @@ The XML configuration file itself should look like this:
        </db2sub>
    </config>
 
-As you can see, the parameters are the same as the ones from the INI configuration. Each database
-declaration must be placed under the ``db2sub`` tag and enclosed in the ``db2`` tag. The ``db2`` tag
-must have a numerical id which has to be a positive integer greater than 0.
+As you can see, the parameters are the same as the ones from the INI
+configuration. Each database declaration must be placed under the ``db2sub`` tag
+and enclosed in the ``db2`` tag. The ``db2`` tag must have a numerical id which
+has to be a positive integer greater than 0.
 
 Provided metrics
 ~~~~~~~~~~~~~~~~
 
-To get a DCI from the subagent, you need to specify the id from the ``db2`` entry in the XML
-configuration file (in case of INI configuration, the id will be **1**). To specify the id, you
-need to add it enclosed in brackets to the name of the metric that is being requested (e.g.,
-``db2.metric.to.request(**1**)``). In the example, the metric ``db2.metric.to.request``
-from the database with the id **1** will be returned.
+To get a DCI from the subagent, you need to specify the id from the ``db2``
+entry in the XML configuration file (in case of INI configuration, the id will
+be **1**). To specify the id, you need to add it enclosed in brackets to the
+name of the metric that is being requested (e.g.,
+``db2.metric.to.request(**1**)``). In the example, the metric
+``db2.metric.to.request`` from the database with the id **1** will be returned.
 
 .. list-table::
    :widths: 40 20 20 70
@@ -551,7 +566,8 @@ from the database with the id **1** will be returned.
    * - DB2.Table.Rid.Pending(*)
      - Database id
      - DCI_DT_INT
-     - The number of tables that use large row Ids but not all indexes have been rebuilt yet
+     - The number of tables that use large row Ids but not all indexes have been
+       rebuilt yet
    * - DB2.Table.Slot.Large(*)
      - Database id
      - DCI_DT_INT
@@ -563,7 +579,8 @@ from the database with the id **1** will be returned.
    * - DB2.Table.Slot.Pending(*)
      - Database id
      - DCI_DT_INT
-     - The number of tables that use large slots but there has not yet been an offline table reorganization or table truncation operation
+     - The number of tables that use large slots but there has not yet been an
+       offline table reorganization or table truncation operation
    * - DB2.Table.DictSize(*
      - Database id
      - DCI_DT_INT64
@@ -695,51 +712,64 @@ from the database with the id **1** will be returned.
    * - DB2.Table.Data.Gbp.LogicalReads(*)
      - Database id
      - DCI_DT_INT64
-     - The number of times that a group buffer pool (GBP) page is requested from the GBP
+     - The number of times that a group buffer pool (GBP) page is requested from
+       the GBP
    * - DB2.Table.Data.Gbp.PhysicalReads(*)
      - Database id
      - DCI_DT_INT64
-     - The number of times that a group buffer pool (GBP) page is read into the local buffer pool (LBP)
+     - The number of times that a group buffer pool (GBP) page is read into the
+       local buffer pool (LBP)
    * - DB2.Table.Data.Gbp.InvalidPages(*)
      - Database id
      - DCI_DT_INT64
-     - The number of times that a group buffer pool (GBP) page is requested from the GBP when the version stored in the local buffer pool (LBP) is invalid
+     - The number of times that a group buffer pool (GBP) page is requested from
+       the GBP when the version stored in the local buffer pool (LBP) is invalid
    * - DB2.Table.Data.Lbp.PagesFound(*)
      - Database id
      - DCI_DT_INT64
-     - The number of times that a data page is present in the local buffer pool (LBP)
+     - The number of times that a data page is present in the local buffer pool
+       (LBP)
    * - DB2.Table.Data.Lbp.IndepPagesFound(*)
      - Database id
      - DCI_DT_INT64
-     - The number of group buffer pool (GBP) independent pages found in a local buffer pool (LBP)
+     - The number of group buffer pool (GBP) independent pages found in a local
+       buffer pool (LBP)
    * - DB2.Table.Xda.LogicalReads(*)
      - Database id
      - DCI_DT_INT64
-     - The number of data pages for XML storage objects (XDA) that are logically read from the buffer pool
+     - The number of data pages for XML storage objects (XDA) that are logically
+       read from the buffer pool
    * - DB2.Table.Xda.PhysicalReads(*)
      - Database id
      - DCI_DT_INT64
-     - The number of data pages for XML storage objects (XDA) that are physically read
+     - The number of data pages for XML storage objects (XDA) that are
+       physically read
    * - DB2.Table.Xda.Gbp.LogicalReads(*)
      - Database id
      - DCI_DT_INT64
-     - The number of times that a data page for an XML storage object (XDA) is requested from the group buffer pool (GBP)
+     - The number of times that a data page for an XML storage object (XDA) is
+       requested from the group buffer pool (GBP)
    * - DB2.Table.Xda.Gbp.PhysicalReads(*)
      - Database id
      - DCI_DT_INT64
-     - The number of times that a group buffer pool (GBP) dependent data page for an XML storage object (XDA) is read into the local buffer pool (LBP)
+     - The number of times that a group buffer pool (GBP) dependent data page
+       for an XML storage object (XDA) is read into the local buffer pool (LBP)
    * - DB2.Table.Xda.Gbp.InvalidPages(*)
      - Database id
      - DCI_DT_INT64
-     - The number of times that a page for an XML storage objects (XDA) is requested from the group buffer pool (GBP) because the version in the local buffer pool (LBP) is invalid
+     - The number of times that a page for an XML storage objects (XDA) is
+       requested from the group buffer pool (GBP) because the version in the
+       local buffer pool (LBP) is invalid
    * - DB2.Table.Xda.Lbp.PagesFound(*)
      - Database id
      - DCI_DT_INT64
-     - The number of times that an XML storage objects (XDA) page is present in the local buffer pool (LBP)
+     - The number of times that an XML storage objects (XDA) page is present in
+       the local buffer pool (LBP)
    * - DB2.Table.Xda.Gbp.IndepPagesFound(*)
      - Database id
      - DCI_DT_INT64
-     - The number of group buffer pool (GBP) independent XML storage object (XDA) pages found in the local buffer pool (LBP)
+     - The number of group buffer pool (GBP) independent XML storage object
+       (XDA) pages found in the local buffer pool (LBP)
    * - DB2.Table.DictNum(*)
      - Database id
      - DCI_DT_INT64
@@ -763,7 +793,8 @@ from the database with the id **1** will be returned.
    * - DB2.Table.Col.LogicalReads(*)
      - Database id
      - DCI_DT_INT
-     - The number of column-organized pages that are logically read from the buffer pool
+     - The number of column-organized pages that are logically read from the
+       buffer pool
    * - DB2.Table.Col.PhysicalReads(*)
      - Database id
      - DCI_DT_INT
@@ -771,27 +802,34 @@ from the database with the id **1** will be returned.
    * - DB2.Table.Col.Gbp.LogicalReads(*)
      - Database id
      - DCI_DT_INT
-     - The number of times that a group buffer pool (GBP) dependent column-organized page is requested from the GBP
+     - The number of times that a group buffer pool (GBP) dependent
+       column-organized page is requested from the GBP
    * - DB2.Table.Col.Gbp.PhysicalReads(*)
      - Database id
      - DCI_DT_INT
-     - The number of times that a group buffer pool (GBP) dependent column-organized page is read into the local buffer pool (LBP) from disk
+     - The number of times that a group buffer pool (GBP) dependent
+       column-organized page is read into the local buffer pool (LBP) from disk
    * - DB2.Table.Col.Gbp.InvalidPages(*)
      - Database id
      - DCI_DT_INT
-     - The number of times that a column-organized page is requested from the group buffer pool (GBP) when the page in the local buffer pool (LBP) is invalid
+     - The number of times that a column-organized page is requested from the
+       group buffer pool (GBP) when the page in the local buffer pool (LBP) is
+       invalid
    * - DB2.Table.Col.Lbp.PagesFound(*)
      - Database id
      - DCI_DT_INT
-     - The number of times that a column-organized page is present in the local buffer pool (LBP)
+     - The number of times that a column-organized page is present in the local
+       buffer pool (LBP)
    * - DB2.Table.Col.Gbp.IndepPagesFound(*)
      - Database id
      - DCI_DT_INT
-     - The number of group buffer pool (GBP) independent column-organized pages found in the local buffer pool (LBP)
+     - The number of group buffer pool (GBP) independent column-organized pages
+       found in the local buffer pool (LBP)
    * - DB2.Table.ColsReferenced(*)
      - Database id
      - DCI_DT_INT
-     - The number of columns referenced during the execution of a section for an SQL statement
+     - The number of columns referenced during the execution of a section for an
+       SQL statement
    * - DB2.Table.SectionExecutions(*)
      - Database id
      - DCI_DT_INT
@@ -803,25 +841,26 @@ from the database with the id **1** will be returned.
 MongoDB
 =======
 
-|product_name| subagent for MongoDB monitoring. Monitors one or more instances of MongoDB databases and
-reports various database-related metrics.
+|product_name| subagent for MongoDB monitoring. Monitors one or more instances
+of MongoDB databases and reports various database-related metrics.
 
-All metrics available from MongoDB subagent gathered or calculated once per minute thus it's
-recommended to set DCI poll interval for these items to 60 seconds or more. It is supposed that
-only databases with same version are monitored by one agent.
+All metrics available from MongoDB subagent gathered or calculated once per
+minute thus it's recommended to set DCI poll interval for these items to 60
+seconds or more. It is supposed that only databases with same version are
+monitored by one agent.
 
 Building mongodb subagent
 -------------------------
 
-Use ``--with-mongodb=/path/to/mongoc driver`` parameter to include MongoDB subagent in build. Was tested with
-mongo-c-driver-1.1.0.
+Use ``--with-mongodb=/path/to/mongoc driver`` parameter to include MongoDB
+subagent in build. Was tested with mongo-c-driver-1.1.0.
 
 Agent Start
 -----------
 
-While start of subagent at least one database should be up and running. Otherwise subagent will not start.
-On start subagent requests serverStatus to get list of possible DCI. This list may vary from version to version
-of MongoDB.
+While start of subagent at least one database should be up and running.
+Otherwise subagent will not start. On start subagent requests serverStatus to
+get list of possible DCI. This list may vary from version to version of MongoDB.
 
 Configuration file
 ------------------
@@ -832,13 +871,15 @@ Configuration file
 Metrics
 -------
 
-There are 2 types of metrics: serverStatus metrics, that are generated from response on a subagent start
-and predefined for database status.
+There are 2 types of metrics: serverStatus metrics, that are generated from
+response on a subagent start and predefined for database status.
 
-Description of serverStatus metrics can be found there: `serverStatus <http://docs.mongodb.org/manual/reference/command/serverStatus/>`_.
-In this type of DCI should be given id of server from where the metric should be taken.
+Description of serverStatus metrics can be found there: `serverStatus
+<http://docs.mongodb.org/manual/reference/command/serverStatus/>`_. In this type
+of DCI should be given id of server from where the metric should be taken.
 
-Description of database status metrics can be found there: `dbStats <http://docs.mongodb.org/master/reference/command/dbStats/>`_.
+Description of database status metrics can be found there: `dbStats
+<http://docs.mongodb.org/master/reference/command/dbStats/>`_.
 
 .. list-table::
    :widths: 50 100
@@ -849,23 +890,29 @@ Description of database status metrics can be found there: `dbStats <http://docs
    * - MongoDB.collectionsNum(*id*,\ *databaseName*)
      - Contains a count of the number of collections in that database.
    * - MongoDB.objectsNum(*id*,\ *databaseName*)
-     - Contains a count of the number of objects (i.e. documents) in the database across all collections.
+     - Contains a count of the number of objects (i.e. documents) in the
+       database across all collections.
    * - MongoDB.avgObjSize(*id*,\ *databaseName*)
      - The average size of each document in bytes.
    * - MongoDB.dataSize(*id*,\ *databaseName*)
-     - The total size in bytes of the data held in this database including the padding factor.
+     - The total size in bytes of the data held in this database including the
+       padding factor.
    * - MongoDB.storageSize(*id*,\ *databaseName*)
-     - The total amount of space in bytes allocated to collections in this database for document storage.
+     - The total amount of space in bytes allocated to collections in this
+       database for document storage.
    * - MongoDB.numExtents(*id*,\ *databaseName*)
-     - Contains a count of the number of extents in the database across all collections.
+     - Contains a count of the number of extents in the database across all
+       collections.
    * - MongoDB.indexesNum(*id*,\ *databaseName*)
-     - Contains a count of the total number of indexes across all collections in the database.
+     - Contains a count of the total number of indexes across all collections in
+       the database.
    * - MongoDB.indexSize(*id*,\ *databaseName*)
      - The total size in bytes of all indexes created on this database.
    * - MongoDB.fileSize(*id*,\ *databaseName*)
      - The total size in bytes of the data files that hold the database.
    * - MongoDB.nsSizeMB(*id*,\ *databaseName*)
-     - The total size of the namespace files (i.e. that end with .ns) for this database.
+     - The total size of the namespace files (i.e. that end with .ns) for this
+       database.
 
 
 List
@@ -904,10 +951,10 @@ A database user must have access rights to Informix system catalog tables.
 Configuration
 -------------
 
-You can specify multiple databases in the informix section. Each database
-description must be surrounded by database tags with the id attribute. Id can be
-any unique integer, it instructs the Informix subagent about the order in which
-database sections will be processed.
+You can specify multiple databases in the [informix] section of agent
+configuration file. Each database description must be surrounded by database
+tags with the id attribute. Id can be any unique integer, it instructs the
+Informix subagent about the order in which database sections will be processed.
 
 Each database definition supports the following parameters:
 
@@ -927,8 +974,10 @@ Each database definition supports the following parameters:
    * - DBLogin
      - User name for connecting to database.
    * - DBPassword
-     - The password for the database to connect to. When using INI format, remember to enclose password in double quotes ("password") if it contains # character.
-       This parameter automatically detects and accepts password encrypted with :ref:`nxencpasswd-tools-label` tool.
+     - The password for the database to connect to. When using INI format,
+       remember to enclose password in double quotes ("password") if it contains
+       # character. This parameter automatically detects and accepts password
+       encrypted with :ref:`nxencpasswd-tools-label` tool.
 
 
 Configuration example in INI format:
@@ -1024,19 +1073,20 @@ returned.
 MySQL
 =====
 
-|product_name| subagent for MySQL monitoring. Monitors one or more instances of MySQL databases and
-reports various database-related metrics.
+|product_name| subagent for MySQL monitoring. Monitors one or more instances of
+MySQL databases and reports various database-related metrics.
 
 MySQL subagent requires MySQL driver to be available in the system.
 
 Configuration
 -------------
 
-You can specify one or multiple databases in the MySQL section. In case of single database
-definition simply set all required parameters under ``[mysql]`` section. In multi database
-configuration define each database under ``mysql/databases/<name>`` section with unique
-``<name>`` for each database. If no id provided ``<name>`` of the section will be used as a
-database id.
+Configuration of MySQL subagent is done in agent configuration file
+(nxagentd.conf). One or multiple MySQL server instances can be specified. In
+case of single database definition simply set all required parameters under
+``[mysql]`` section. In multi database configuration define each database under
+``mysql/databases/<name>`` section with unique ``<name>`` for each database. If
+no id provided ``<name>`` of the section will be used as a database id.
 
 
 Each database definition supports the following parameters:
@@ -1050,7 +1100,8 @@ Each database definition supports the following parameters:
      - Default value
    * - Id
      - Database identifier. It will be used to address this database in parameters.
-     - localdb - for single DB definition; last part of section name - for multi database definition
+     - localdb - for single DB definition; last part of section name - for multi
+       database definition
    * - Database
      - Database name. This is a name of MySQL DSN.
      - information_schema
@@ -1058,14 +1109,17 @@ Each database definition supports the following parameters:
      - Name or IP of the MySQL server.
      - 127.0.0.1
    * - ConnectionTTL
-     - Time in seconds. When this time gets elapsed, connection to the DB is closed and reopened again.
+     - Time in seconds. When this time gets elapsed, connection to the DB is
+       closed and reopened again.
      - 3600
    * - Login
      - User name for connecting to database.
      - netxms
    * - Password
-     - Database user password. When using INI format, remember to enclose password in double quotes ("password") if it contains # character.
-       This parameter automatically detects and accepts password encrypted with :ref:`nxencpasswd-tools-label` tool.
+     - Database user password. When using INI format, remember to enclose
+       password in double quotes ("password") if it contains # character. This
+       parameter automatically detects and accepts password encrypted with
+       :ref:`nxencpasswd-tools-label` tool.
      -
 
 
@@ -1250,22 +1304,23 @@ Provided metrics
 PostgreSQL
 ==========
 
-|product_name| subagent for PostgreSQL monitoring. Monitors one or more instances of PostgeSQL servers and
-reports various database-related metrics.
+|product_name| subagent for PostgreSQL monitoring. Monitors one or more
+instances of PostgeSQL servers and reports various database-related metrics.
 
 PostgreSQL subagent requires PostgreSQL driver to be available in the system.
 
 Pre-requisites
 --------------
 
-A PostgreSQL user with **CONNECT** right to al least one database on the server.
+A PostgreSQL user with **CONNECT** right to at least one database on the server.
 
-If the **PostgreSQL.DatabaseSize** metric should be monitored the user must have the **CONNECT** right to other databases on the server too.
+If the **PostgreSQL.DatabaseSize** metric should be monitored the user must have
+the **CONNECT** right to other databases on the server too.
 
 
-Starting from the PostgreSQL version 10, the user must have the he role **pg_monitor** assigned.
-
-Required role can be assigned to user with the following query:
+Starting from the PostgreSQL version 10, the user must have the the role
+**pg_monitor** assigned. Required role can be assigned to user with the
+following query:
 
 .. code-block:: sql
 
@@ -1277,12 +1332,15 @@ Where *user* is the user configured in PostgreSQL subagent for database access.
 Configuration
 -------------
 
-You can specify one or multiple PostgreSQL server instances in the PostgreSQL section. In case of single server
-definition simply set all required parameters under ``[pgsql]`` section. In multi server
-configuration define each server instance under ``pgsql/servers/<name>`` section with unique
-``<name>`` for each server. If no id provided ``<name>`` of the section will be used as a server id.
+Configuration of PostgreSQL subagent is done in agent configuration file
+(nxagentd.conf). One or multiple PostgreSQL server instances can be specified.
+In case of single server definition simply set all required parameters under
+``[pgsql]`` section. In multi server configuration define each server instance
+under ``pgsql/servers/<name>`` section with unique ``<name>`` for each server.
+If no id provided ``<name>`` of the section will be used as a server id.
 
-It is not necessary to configure connections to more than one database on the same PostgreSQL server instance.
+It is not necessary to configure connections to more than one database on the
+same PostgreSQL server instance.
 
 Each server definition supports the following parameters:
 
@@ -1294,20 +1352,24 @@ Each server definition supports the following parameters:
      - Description
      - Default value
    * - Id
-     - Server identifier. It will be used to address this server connection in parameters.
+     - Server identifier. It will be used to address this server connection in
+       parameters.
      - localdb - for single server definition
 
        last part of section name - for multi server definition
    * - Database
-     - Maintenance database name. This is a name of the database on the server the subagent is connected to.
+     - Maintenance database name. This is a name of the database on the server
+       the subagent is connected to.
      - postgres
    * - Server
      - Name or IP of the PostgreSQL server.
 
-       If the sever uses differnt than default port (5432) the *:port* must be added to the server name or IP.
+       If the sever uses differnt than default port (5432) the *:port* must be
+       added to the server name or IP.
      - 127.0.0.1
    * - ConnectionTTL
-     - Time in seconds. When this time gets elapsed, connection to the DB is closed and reopened again.
+     - Time in seconds. When this time gets elapsed, connection to the DB is
+       closed and reopened again.
      - 3600
    * - Login
      - User name for connecting to database.
@@ -1315,9 +1377,11 @@ Each server definition supports the following parameters:
    * - Password
      - Database user password.
 
-       When using INI format, remember to enclose password in double quotes ("password") if it contains # character.
+       When using INI format, remember to enclose password in double quotes
+       ("password") if it contains # character.
 
-       This parameter automatically detects and accepts password encrypted with :ref:`nxencpasswd-tools-label` tool.
+       This parameter automatically detects and accepts password encrypted with
+       :ref:`nxencpasswd-tools-label` tool.
      -
 
 
@@ -1359,12 +1423,17 @@ Provided Metrics
 
 When loaded, PostgreSQL subagent adds two types of metrics to the agent.
 
-Database server metrics are common for all databases on the server. These metrics require one argument which is server id from the configuration.
+Database server metrics are common for all databases on the server. These
+metrics require one argument which is server id from the configuration.
 
-Database metrics are independent for each database on the server. These metrics require two arguments. The first one is server id from the configuration the second one is name of the database.
-If the second argument is missing the name of the maintenance database from the configuration is used.
+Database metrics are independent for each database on the server. These metrics
+require two arguments. The first one is server id from the configuration the
+second one is name of the database. If the second argument is missing the name
+of the maintenance database from the configuration is used.
 
-Alternatively, these two arguments can be specified as one argument in following format: *datanase_name@server_id*. This format is returned by the PostgreSQL.AllDatabases list.
+Alternatively, these two arguments can be specified as one argument in following
+format: *datanase_name@server_id*. This format is returned by the
+PostgreSQL.AllDatabases list.
 
 Following table shows the database server metrics:
 
@@ -1425,13 +1494,16 @@ Following table shows the database server metrics:
      - 	Cumulative number of scheduled checkpoints that have been performed
    * - 	PostgreSQL.BGWriter.CheckpointSyncTime(*id*)
      - 	Float
-     - 	Total amount of time that has been spent in the portion of checkpoint processing where files are synchronized to disk, in milliseconds
+     - 	Total amount of time that has been spent in the portion of checkpoint
+       	processing where files are synchronized to disk, in milliseconds
    * - 	PostgreSQL.BGWriter.CheckpointWriteTime(*id*)
      - 	Float
-     - 	Total amount of time that has been spent in the portion of checkpoint processing where files are written to disk, in milliseconds
+     - 	Total amount of time that has been spent in the portion of checkpoint
+       	processing where files are written to disk, in milliseconds
    * - 	PostgreSQL.BGWriter.MaxWrittenClean(*id*)
      - 	Integer 64-bit
-     - 	Cumulative number of times the background writer stopped a cleaning scan because it had written too many buffers
+     - 	Cumulative number of times the background writer stopped a cleaning scan
+       	because it had written too many buffers
    * - 	PostgreSQL.GlobalConnections.AutovacuumMax(*id*)
      - 	Integer
      - 	Maximal number of autovacuum backends
@@ -1489,10 +1561,13 @@ Following table shows the database metrics:
      - 	Number of backends for this database waiting for a new client command
    * - 	PostgreSQL.DBConnections.IdleInTransaction(*id*[, *database*])
      - 	Integer
-     - 	Number of backends for this database in a transaction, but is not currently executing a query
+     - 	Number of backends for this database in a transaction, but is not
+       	currently executing a query
    * - 	PostgreSQL.DBConnections.IdleInTransactionAborted(*id*[, *database*])
      - 	Integer
-     - 	Number of backends for this database in a transaction, but is not currently executing a query and one of the statements in the transaction caused an error
+     - 	Number of backends for this database in a transaction, but is not
+       	currently executing a query and one of the statements in the transaction
+       	caused an error
    * - 	PostgreSQL.DBConnections.OldestXID(*id*[, *database*])
      - 	Integer
      - 	Age of the oldest XID
@@ -1531,22 +1606,26 @@ Following table shows the database metrics:
      - 	Total number of locks for this database
    * - 	PostgreSQL.Stats.BlkWriteTime(*id*[, *database*])
      - 	Float
-     - 	Cumulative time spent writing data file blocks by backends in this database, in milliseconds
+     - 	Cumulative time spent writing data file blocks by backends in this
+       	database, in milliseconds
    * - 	PostgreSQL.Stats.BlockReadTime(*id*[, *database*])
      - 	Float
-     - 	Cumulative time spent reading data file blocks by backends in this database, in milliseconds
+     - 	Cumulative time spent reading data file blocks by backends in this
+       	database, in milliseconds
    * - 	PostgreSQL.Stats.BlocksRead(*id*[, *database*])
      - 	Integer 64-bit
      - 	Cumulative number of disk blocks read in this database
    * - 	PostgreSQL.Stats.BloksHit(*id*[, *database*])
      - 	Integer 64-bit
-     - 	Cumulative number of times disk blocks were found already in the buffer cache
+     - 	Cumulative number of times disk blocks were found already in the buffer
+       	cache
    * - 	PostgreSQL.Stats.CacheHitRatio(*id*[, *database*])
      - 	Float
      - 	Query cache hit ratio (%)
    * - 	PostgreSQL.Stats.Conflicts(*id*[, *database*])
      - 	Integer 64-bit
-     - 	Cumulative number of queries canceled due to conflicts with recovery in this database (stanby servers only)
+     - 	Cumulative number of queries canceled due to conflicts with recovery in
+       	this database (stanby servers only)
    * - 	PostgreSQL.Stats.DatabaseSize(*id*[, *database*])
      - 	Integer 64-bit
      - 	Disk space used by the database
@@ -1555,7 +1634,8 @@ Following table shows the database metrics:
      - 	Cumulative number of deadlocks detected in this database
    * - 	PostgreSQL.Stats.ChecksumFailures(*id*[, *database*])
      - 	Integer 64-bit
-     - 	Cumulative number of data page checksum failures detected in this database (from version 12.0)
+     - 	Cumulative number of data page checksum failures detected in this
+       	database (from version 12.0)
    * - 	PostgreSQL.Stats.NumBackends(*id*[, *database*])
      - 	Integer
      - 	Number of backends currently connected to this database
@@ -1606,7 +1686,8 @@ When loaded, PostgreSQL subagent adds the following lists to agent:
    * - 	PostgreSQL.Databases(*id*)
      - 	All databases on server identified by *id*.
    * - 	PostgreSQL.AllDatabases
-     - 	All databases on configured servers. The format of the list items is *datanase_name@server_id*.
+     - 	All databases on configured servers. The format of the list items is
+       	*datanase_name@server_id*.
    * - 	PostgreSQL.DataTags(*id*)
      - 	All data tags for server identified by *id*. Used only for internal diagnostics.
 

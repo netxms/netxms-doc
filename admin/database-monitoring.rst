@@ -1328,11 +1328,12 @@ Single server configuration example:
     Subagent=pgsql.nsm
 
     [pgsql]
-    Id=db1
+    Id=production
+    Server = 10.0.3.5
     Database = database1
     Login = user
     Password = password
-
+    
 
 Multi server configuration example:
 
@@ -1340,17 +1341,17 @@ Multi server configuration example:
 
     Subagent=pgsql.nsm
 
-    [pgsql/servers/mynetxms]
-    ID=monitor
-    Database = netxms
+    [pgsql/servers/production]
+    Server = 10.0.3.5
+    Database = database1
     Login = user
     Password = password
-    Server = netxms.demo
 
-
-    [pgsql/servers/local]
+    [pgsql/servers/testing]
+    Server = 10.0.3.6
+    Database = test_database
     Login = user
-    Password = encPassword
+    Password = password
 
 
 Provided Metrics 

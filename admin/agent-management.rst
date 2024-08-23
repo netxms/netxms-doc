@@ -731,7 +731,7 @@ Below is list of available |product_name| subagents:
 
   * :ref:`Asterisk <asterisk-monitoring>`
   * :ref:`DB2 <db2-subagent>`
-  * Database Query
+  * :ref:`Database Query <dbquery>`
   * :ref:`DS18x20 <ds18x20-subagent>`
   * File Manager
   * :ref:`Informix <informix-subagent>`
@@ -743,7 +743,7 @@ Below is list of available |product_name| subagents:
   * :ref:`Network Service Check <netsvc-subagent>`
   * :ref:`Oracle <oracle-subagent>`
   * Ping
-  * :ref:`Postgres <postgres-subagent>`
+  * :ref:`Postgres <pgsql-subagent>`
   * :ref:`Raspberry Pi <rpi-subagent>`
   * :ref:`UPS <ups-monitoring>`
   * Windows Performance

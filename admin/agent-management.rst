@@ -724,15 +724,16 @@ Subagents
 Subagents are used to extend agent functionality. |product_name| subagent are
 libraries that are loaded by agent. 
 
-On Linux systems, where agent is installed from packages some subagents are
-provided in separate packages (e.g. netxms-agent-mqtt) to avoid pulling
+On Linux systems, where agent is installed from packages, some subagents are
+provided in separate packages (e.g. ``netxms-agent-mqtt``) to avoid pulling
 unnecessary dependencies on systems where specific functionality is not needed.
-Subagents that do not require dependencies are shipped in netxms-agent package. 
+Subagents that do not require dependencies are shipped in ``netxms-agent``
+package. 
 
 On Windows all available subagents are shipped in agent installer. 
 
 Subagents are enabled by adding corresponding line in agent configuration file
-(example: "Subagent=dbquery"). 
+(for example: ``SubAgent=dbquery``). 
 
 Below is list of available |product_name| subagents:
 
@@ -771,7 +772,7 @@ Below is list of available |product_name| subagents:
 Java subagent
 -------------
 
-This is a special type of subagent, that allows to load Java plugins(subagents written using Java language).
+This is a special type of subagent, that allows to load Java plugins (subagents written using Java language).
 Java subagent does not provide any functionality by itself.
 
 There are several configuration parameters that are supported by Java subagent. None of them is mandatory.

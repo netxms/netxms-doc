@@ -47,10 +47,10 @@ Network service monitoring using DCI
 ====================================
 
 Second option is to use :term:`DCI` to monitor service. Service monitoring
-metrics are provided |product_name| agent (by it's NetSVC subagent). DCIs should
-either be created on the node where agent is running, or they can be created on
-another node and the node with agent can be specified in `Source node override`
-in DCI's properties. 
+metrics are provided |product_name| agent (by it's NetSVC 
+:ref:`subagent <subagent_list>`). DCIs should either be created on the node 
+where agent is running, or they can be created on another node and the node with
+agent can be specified in `Source node override` in DCI's properties. 
 
 More about URL options can be found there: https://curl.se/docs/url-syntax.html
 

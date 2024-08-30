@@ -721,32 +721,47 @@ in configuration file in encrypted way.
 
 Subagents
 =========
-Subagents are used to extend agent functionality. |product_name| subagent are libraries that are loaded by agent.
-By default all subagents are included in agent build. Subagent may be not included in build
-only if on time of the build there were no required libraries for subagent build. To enable
-subagent is require just to add line in main agent configuration file (example: "Subagent=dbquery.nsm").
-More about configuration and usage of subagents will be described in monitoring chapters.
+Subagents are used to extend agent functionality. |product_name| subagent are
+libraries that are loaded by agent. 
+
+On Linux systems, where agent is installed from packages some subagents are
+provided in separate packages (e.g. netxms-agent-mqtt) to avoid pulling
+unnecessary dependencies on systems where specific functionality is not needed.
+Subagents that do not require dependencies are shipped in netxms-agent package. 
+
+On Windows all available subagents are shipped in agent installer. 
+
+Subagents are enabled by adding corresponding line in agent configuration file
+(example: "Subagent=dbquery"). 
 
 Below is list of available |product_name| subagents:
 
+  * Bind9
   * :ref:`Asterisk <asterisk-monitoring>`
   * :ref:`DB2 <db2-subagent>`
-  * :ref:`Database Query <dbquery>`
+  * :ref:`Database Query (dbquery) <dbquery>`
   * :ref:`DS18x20 <ds18x20-subagent>`
-  * File Manager
+  * File Manager (filemgr)
+  * gps
   * :ref:`Informix <informix-subagent>`
   * :ref:`Java <java-subagent>`
+  * Linux (automatically loaded on Linux systems)
+  * :ref:`Log file and Windows event log monitoring (logwatch) <log-monitoring>`
   * :ref:`lm-sensors <hardware-monitoring>`
   * :ref:`MongoDB <mongodb-subagent>`
   * :ref:`MQTT <mqtt-subagent>`
   * :ref:`MySQL <mysql-subagent>`
-  * :ref:`Network Service Check <netsvc-subagent>`
+  * :ref:`Network Service Check (netSVC) <netsvc-subagent>`
   * :ref:`Oracle <oracle-subagent>`
-  * Ping
+  * ICMP Ping (ping)
   * :ref:`Postgres <pgsql-subagent>`
   * :ref:`Raspberry Pi <rpi-subagent>`
+  * sms
+  * :ref:`ssh <ssh-monitoring>`
   * :ref:`UPS <ups-monitoring>`
-  * Windows Performance
+  * :ref:`Windows event log syncronization (wineventsync) <windows_event_log_synchronization>`
+  * WinNT (Automatically loaded on Windows systems)
+  * Windows Performance (winperf)
   * WMI
   * XEN
 

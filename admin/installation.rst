@@ -7,6 +7,12 @@ Installation
 Major changes between releases
 ==============================
 
+5.1
+---
+
+NXSL changes: node attribute 'ipAddr' is deprecated, newly added 'ipAddress'
+attribute should be used instead. 
+
 5.0
 ---
 

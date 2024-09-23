@@ -816,7 +816,7 @@ install Jetty and copy .war file into required folder. Below will be described
 installation via the installer:
 
   1. Download the latest version from http://www.netxms.org/download. You will need
-     Windows installer netxms-webui-VERSION-x64.exe (e.g.: netxms-webui-4.3.178-x64.exe).
+     Windows installer netxms-webui-VERSION-x64.exe (e.g.: netxms-webui-5.0.8-x64.exe).
      Due to limitation of Eclipse platform used to build the Management Client,
      only x64 build is currently provided.
 
@@ -830,7 +830,7 @@ installation via the installer:
 Unattended installation of |product_name| Agent
 -----------------------------------------------
 
-Windows Agent installer (named nxagent-VERSION.exe, for example nxagent-3.4.178.exe),
+Windows Agent installer (named nxagent-VERSION.exe, for example nxagent-5.0.8-x64.exe),
 has various command line options for unattended installation. Installation will ignore
 any configuration file options (/CONFIGENTRY, /NOSUBAGENT, /SERVER, /SUBAGENT, etc) if config
 file already exists or if /CENTRALCONFIG option is used. However, it's possible to 
@@ -904,7 +904,7 @@ The options are following:
 
 Example:
 
-:command:`nxagent-3.4.178.exe /VERYSILENT /SUPPRESSMSGBOXES /SERVER=10.0.0.1 /SUBAGENT=UPS /SUBAGENT=FILEMGR /CONFIGENTRY=ZoneUIN=15 /CONFIGENTRY=[FILEMGR] /CONFIGENTRY=RootFolder=C:\\`
+:command:`nxagent-5.0.8-x64.exe /VERYSILENT /SUPPRESSMSGBOXES /SERVER=10.0.0.1 /SUBAGENT=UPS /SUBAGENT=FILEMGR /CONFIGENTRY=ZoneUIN=15 /CONFIGENTRY=[FILEMGR] /CONFIGENTRY=RootFolder=C:\\`
 
 This command will add 3 lines at the end of generated config file:
 

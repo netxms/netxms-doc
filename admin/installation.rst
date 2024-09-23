@@ -706,7 +706,9 @@ Server
     :guilabel:`Create database and database user before initialization` option.
   * Enter the desired database name, database user name and password. 
 
-    **MySQL note**
+
+    **MySQL note**:
+
     Bundled MySQL database drive does not support caching_sha2_password authentication 
     which is default for MySQL starting from version 8. Either select 
     Legacy Authentication Method when installing MySQL, or use database driver 
@@ -723,6 +725,7 @@ Server
     login, user with which you are logged in to Windows should have administrative rights
     to the database server. If you use asterisk as DB login, you should run |product_name| Server
     service as a user with appropriate rights to the database.
+
 
     **Oracle note**:
 

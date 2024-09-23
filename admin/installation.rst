@@ -676,7 +676,7 @@ Server
 
   1. Download the latest version from http://www.netxms.org/download.
      You will need Windows installer (named netxms-VERSION-x64.exe, e.g.
-     netxms-server-3.4.178-x64.exe). Please note that in
+     netxms-server-5.0.8-x64.exe). Please note that in
      following steps VERSION will be used as a substitution for an actual version
      number.
   2. Run the installer package on your server machine. Installation wizard will be
@@ -694,30 +694,17 @@ Server
 
     .. figure:: _images/win_netxms_setup_additional_tasks.png
 
-  4. Follow the prompts until Ready to Install window opens.
 
-  5. On Ready to Install window, check whether everything is correct, then press the Install button.
-
-  6. After copying files, Server Configuration Wizard will open:
-
-    .. figure:: _images/win_server_config_step1.png
-
-    Press the Next button to start |product_name| server configuration.
-
-  7. Database selection window will open:
+  
+   5. Database selection window will open:
 
     .. figure:: _images/win_server_config_step2.png
 
-  * Select the desired database engine and driver. For most databases, you will have
-    two drivers available – native and ODBC. Please note that if you select ODBC, you
-    will have to manually configure ODBC source.
-  * Enter the name of database server or ODBC source.
+  * Select the desired database type. Enter the name of database server.
   * In DBA login name and DBA password fields, enter database administrator’s login
     name and password. You have to fill these fields only if you have chosen
-    :guilabel:`Create new database option`.
-  * Enter the desired database name, database user name and password. If you are not
-    using ODBC, the wizard will create database and a user for you. If ODBC is used,
-    database and user should be created beforehand.
+    :guilabel:`Create database and database user before initialization `option.
+  * Enter the desired database name, database user name and password. 
 
     **MySQL note**
     Bundled MySQL database drive does not support caching_sha2_password authentication 
@@ -740,6 +727,16 @@ Server
     **Oracle note**:
 
     We recommend to use native database driver (oracle.ddr).
+
+  6. On Ready to Install window, check whether everything is correct, then press the Install button.
+
+  7. After copying files, Server Configuration Wizard will open:
+
+    .. figure:: _images/win_server_config_step1.png
+
+    Press the Next button to start |product_name| server configuration.
+
+  
 
   9. On the next window, enter address of your SMTP server. |product_name| will use it to send
      notification e-mails.

@@ -799,8 +799,8 @@ Desktop Management Client:
 
  1. Download the latest version from http://www.netxms.org/download. 
     Since version 3.8 there are three options - 
-    archive (e.g. nxmc-3.8.226-win32-x64.zip), archive with bundled JRE (nxmc-3.8.226-win32-x64-bundled-jre.zip)
-    and installer, which also has JRE bundled (e.g. netxms-client-3.8.166-x64.exe). 
+    archive (e.g. nxmc-5.0.8-win32-x64.zip), archive with bundled JRE (nxmc-5.0.8-win32-x64-bundled-jre.zip)
+    and installer, which also has JRE bundled (e.g. netxms-client-5.0.8-x64.exe). 
     If using archive without JRE, make sure you have JRE version 11 or 15 installed. 
     Due to limitation of Eclipse platform used to build the Management Client, only x64 build is currently provided. 
 

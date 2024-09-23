@@ -703,7 +703,7 @@ Server
   * Select the desired database type. Enter the name of database server.
   * In DBA login name and DBA password fields, enter database administrator’s login
     name and password. You have to fill these fields only if you have chosen
-    :guilabel:`Create database and database user before initialization `option.
+    :guilabel:`Create database and database user before initialization` option.
   * Enter the desired database name, database user name and password. 
 
     **MySQL note**

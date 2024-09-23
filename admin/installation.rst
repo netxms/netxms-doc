@@ -730,40 +730,7 @@ Server
 
   6. On Ready to Install window, check whether everything is correct, then press the Install button.
 
-  7. After copying files, Server Configuration Wizard will open:
-
-    .. figure:: _images/win_server_config_step1.png
-
-    Press the Next button to start |product_name| server configuration.
-
-  
-
-  9. On the next window, enter address of your SMTP server. |product_name| will use it to send
-     notification e-mails.
-
-  10. Then next window will prompt you for logging method. Either check Event Log or
-      select file, and press the Next button.
-
-  11. Windows service configuration window will appear:
-
-    .. figure:: _images/win_server_config_step6.png
-
-    In most situations, you can run |product_name| server under Local System account. You may
-    need to run it under specific account if you are using Microsoft SQL database and
-    Windows authentication, or for security reasons.
-
-  12. Windows service dependency window will appear:
-
-    .. figure:: _images/win_server_config_step7.png
-
-    If you have database engine running on same server, you can find it in service
-    list and mark, so |product_name| server's service will depend on database service and
-    service startup order will be correct.
-
-  13. Follow the prompts until server configuration will be complete. After successful
-  server configuration, installation will be finished, and you will have |product_name| server
-  up and running.
-
+  7. After install, start Netxms client and connect with below listed credentials
 
 Server default credentials:
 
@@ -777,7 +744,7 @@ Agent
 
   1. Download the latest version from http://www.netxms.org/download, if you don't
      have it. You will need Windows Agent installer (named nxagent-VERSION.exe or
-     nxagent-VERSION-x64.exe, for example nxagent-3.4.178.exe).
+     nxagent-VERSION-x64.exe, for example nxagent-5.0.8-x64.exe).
 
   2. Run the installer package on target server. Installation wizard will be shown.
      Follow the prompts until the |product_name| Server window opens:

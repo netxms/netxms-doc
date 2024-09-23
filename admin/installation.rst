@@ -676,7 +676,7 @@ Server
 
   1. Download the latest version from http://www.netxms.org/download.
      You will need Windows installer (named netxms-VERSION-x64.exe, e.g.
-     netxms-server-3.4.178-x64.exe). Please note that in
+     netxms-server-5.0.8-x64.exe). Please note that in
      following steps VERSION will be used as a substitution for an actual version
      number.
   2. Run the installer package on your server machine. Installation wizard will be
@@ -694,30 +694,17 @@ Server
 
     .. figure:: _images/win_netxms_setup_additional_tasks.png
 
-  4. Follow the prompts until Ready to Install window opens.
 
-  5. On Ready to Install window, check whether everything is correct, then press the Install button.
-
-  6. After copying files, Server Configuration Wizard will open:
-
-    .. figure:: _images/win_server_config_step1.png
-
-    Press the Next button to start |product_name| server configuration.
-
-  7. Database selection window will open:
+  
+   5. Database selection window will open:
 
     .. figure:: _images/win_server_config_step2.png
 
-  * Select the desired database engine and driver. For most databases, you will have
-    two drivers available – native and ODBC. Please note that if you select ODBC, you
-    will have to manually configure ODBC source.
-  * Enter the name of database server or ODBC source.
+  * Select the desired database type. Enter the name of database server.
   * In DBA login name and DBA password fields, enter database administrator’s login
     name and password. You have to fill these fields only if you have chosen
-    :guilabel:`Create new database option`.
-  * Enter the desired database name, database user name and password. If you are not
-    using ODBC, the wizard will create database and a user for you. If ODBC is used,
-    database and user should be created beforehand.
+    :guilabel:`Create database and database user before initialization `option.
+  * Enter the desired database name, database user name and password. 
 
     **MySQL note**
     Bundled MySQL database drive does not support caching_sha2_password authentication 
@@ -741,32 +728,9 @@ Server
 
     We recommend to use native database driver (oracle.ddr).
 
-  9. On the next window, enter address of your SMTP server. |product_name| will use it to send
-     notification e-mails.
+  6. On Ready to Install window, check whether everything is correct, then press the Install button.
 
-  10. Then next window will prompt you for logging method. Either check Event Log or
-      select file, and press the Next button.
-
-  11. Windows service configuration window will appear:
-
-    .. figure:: _images/win_server_config_step6.png
-
-    In most situations, you can run |product_name| server under Local System account. You may
-    need to run it under specific account if you are using Microsoft SQL database and
-    Windows authentication, or for security reasons.
-
-  12. Windows service dependency window will appear:
-
-    .. figure:: _images/win_server_config_step7.png
-
-    If you have database engine running on same server, you can find it in service
-    list and mark, so |product_name| server's service will depend on database service and
-    service startup order will be correct.
-
-  13. Follow the prompts until server configuration will be complete. After successful
-  server configuration, installation will be finished, and you will have |product_name| server
-  up and running.
-
+  7. After install, start Netxms client and connect with below listed credentials
 
 Server default credentials:
 
@@ -780,7 +744,7 @@ Agent
 
   1. Download the latest version from http://www.netxms.org/download, if you don't
      have it. You will need Windows Agent installer (named nxagent-VERSION.exe or
-     nxagent-VERSION-x64.exe, for example nxagent-3.4.178.exe).
+     nxagent-VERSION-x64.exe, for example nxagent-5.0.8-x64.exe).
 
   2. Run the installer package on target server. Installation wizard will be shown.
      Follow the prompts until the |product_name| Server window opens:
@@ -835,8 +799,8 @@ Desktop Management Client:
 
  1. Download the latest version from http://www.netxms.org/download. 
     Since version 3.8 there are three options - 
-    archive (e.g. nxmc-3.8.226-win32-x64.zip), archive with bundled JRE (nxmc-3.8.226-win32-x64-bundled-jre.zip)
-    and installer, which also has JRE bundled (e.g. netxms-client-3.8.166-x64.exe). 
+    archive (e.g. nxmc-5.0.8-win32-x64.zip), archive with bundled JRE (nxmc-5.0.8-win32-x64-bundled-jre.zip)
+    and installer, which also has JRE bundled (e.g. netxms-client-5.0.8-x64.exe). 
     If using archive without JRE, make sure you have JRE version 11 or 15 installed. 
     Due to limitation of Eclipse platform used to build the Management Client, only x64 build is currently provided. 
 
@@ -852,7 +816,7 @@ install Jetty and copy .war file into required folder. Below will be described
 installation via the installer:
 
   1. Download the latest version from http://www.netxms.org/download. You will need
-     Windows installer netxms-webui-VERSION-x64.exe (e.g.: netxms-webui-4.3.178-x64.exe).
+     Windows installer netxms-webui-VERSION-x64.exe (e.g.: netxms-webui-5.0.8-x64.exe).
      Due to limitation of Eclipse platform used to build the Management Client,
      only x64 build is currently provided.
 
@@ -866,7 +830,7 @@ installation via the installer:
 Unattended installation of |product_name| Agent
 -----------------------------------------------
 
-Windows Agent installer (named nxagent-VERSION.exe, for example nxagent-3.4.178.exe),
+Windows Agent installer (named nxagent-VERSION.exe, for example nxagent-5.0.8-x64.exe),
 has various command line options for unattended installation. Installation will ignore
 any configuration file options (/CONFIGENTRY, /NOSUBAGENT, /SERVER, /SUBAGENT, etc) if config
 file already exists or if /CENTRALCONFIG option is used. However, it's possible to 
@@ -940,7 +904,7 @@ The options are following:
 
 Example:
 
-:command:`nxagent-3.4.178.exe /VERYSILENT /SUPPRESSMSGBOXES /SERVER=10.0.0.1 /SUBAGENT=UPS /SUBAGENT=FILEMGR /CONFIGENTRY=ZoneUIN=15 /CONFIGENTRY=[FILEMGR] /CONFIGENTRY=RootFolder=C:\\`
+:command:`nxagent-5.0.8-x64.exe /VERYSILENT /SUPPRESSMSGBOXES /SERVER=10.0.0.1 /SUBAGENT=UPS /SUBAGENT=FILEMGR /CONFIGENTRY=ZoneUIN=15 /CONFIGENTRY=[FILEMGR] /CONFIGENTRY=RootFolder=C:\\`
 
 This command will add 3 lines at the end of generated config file:
 

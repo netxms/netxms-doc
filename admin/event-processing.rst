@@ -547,18 +547,12 @@ permission to run this command.
 As the :guilabel:`Remote Host` can be used hostname or object name(int format:
 ``@objectName``). Second option allows action execution on node behind proxy.
 
-Send e-mail
-~~~~~~~~~~~
-
-Send email to one or more recipients. This can be configured in Notification channels section described below and appropriate action created in Actions for further use in EPP.
-Driver configuration parameters are detailed in Drivers section.
-
-In message text can be used :ref:`event-processing-macros`.
 
 Send notification
 ~~~~~~~~~~~~~~~~~
 
-Send notification, e.g. SMS, MicrosoftTeams, to one or more recipients. Similar to e-mail configuration above, required notification channel needs to be added in Notification channels section with parameters described in Drivers section below. Then, appropriate action created in Actions for further use in EPP.
+Send notification, e.g. SMS, MicrosoftTeams, e-mail etc, to one or more recipients. This can be configured in Notification channels section described below and appropriate action created in Actions section and then available for use in EPP.
+Driver configuration parameters are detailed in Drivers section.
 
 In message text can be used :ref:`event-processing-macros`.
 

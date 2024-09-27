@@ -547,24 +547,16 @@ permission to run this command.
 As the :guilabel:`Remote Host` can be used hostname or object name(int format:
 ``@objectName``). Second option allows action execution on node behind proxy.
 
-Send e-mail
-~~~~~~~~~~~
-
-Send email to one or more recipients. Multiple recipients can be separated by
-semicolons. Required server configuration parameters to send emails:
-``SMTPFromAddr``, ``SMTPFromName``, ``SMTPRetryCount``, ``SMTPServer``. For
-detailed description of parameters check :ref:`server_configuration_parameters`.
-
-In message text can be used :ref:`event-processing-macros`.
 
 Send notification
 ~~~~~~~~~~~~~~~~~
 
-Send notification, e.g. SMS, to one or more recipients. Multiple recipients can
-be separated by semicolons. Server will use :ref:`notification-channels` for
-actual message sending.
+Send notification, e.g. SMS, MicrosoftTeams, e-mail etc, to one or more recipients. This can be configured in Notification channels section described below and appropriate action created in Actions section and then available for use in EPP.
+Driver configuration parameters are detailed in Drivers section.
 
 In message text can be used :ref:`event-processing-macros`.
+
+.. figure:: _images/event_processing_notification.png
 
 Execute NXSL script
 ~~~~~~~~~~~~~~~~~~~

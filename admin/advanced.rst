@@ -681,7 +681,7 @@ section.
   * - Hostname
     - Hostname. Default is `localhost`.
   * - MaxCacheWaitTime
-    - Maximum time in ms, how long records can wait before caches being flushed.
+    - Maximum time in ms before cache being flushed.
       Default is `30000`.
   * - Password
     - Password. 

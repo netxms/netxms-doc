@@ -569,13 +569,16 @@ Next configuration parameters should be set in order to forward audit log to ext
 LEEF
 ----
 
-LEEF server module provides functionality to send audit log to IBM Security QRadar. 
-The Log Event Extended Format (LEEF) is a customized event format for IBM Security QRadar. More about it can be found 
-`there <https://www.ibm.com/docs/en/dsm?topic=leef-overview>`_.
+LEEF server module provides functionality to send audit log to IBM Security
+QRadar. The Log Event Extended Format (LEEF) is a customized event format for
+IBM Security QRadar. More about it can be found `there
+<https://www.ibm.com/docs/en/dsm?topic=leef-overview>`_.
 
-LEEF server module should be enabled in server configuraiton file by adding "Module=leef.nxm" line to :file:`netxmsd.conf` file.
+LEEF server module should be enabled in server configuraiton file by adding
+"Module=leef.nxm" line to :file:`netxmsd.conf` file.
 
-Additionaly to module configuration "LEEF" section should be added with required configurations.
+Additionally to module configuration "LEEF" section should be added with
+required configurations.
 
 .. list-table::
   :widths: 21 21
@@ -602,9 +605,11 @@ Additionaly to module configuration "LEEF" section should be added with required
   * - Vendor
     - LEEF vendor field, default it "Raden Solutions"
   * - Separator
-    - LEEF separator character as a char or in numeric format: "xHH", where HH is hexdecimal digit
+    - LEEF separator character as a char or in numeric format: "xHH", where HH
+      is hexdecimal digit
 
-Additional fields can be configured in ExtraData sub section in the same key=value format.
+Additional fields can be configured in ExtraData sub section in the same
+key=value format.
   
 
 Example:
@@ -648,5 +653,61 @@ To implement custom deletion of DCI and Table DCI data built-in deletion of this
 data can be disabled by setting server configuration parameter
 ``Housekeeper.DisableCollectedDataCleanup``.
 
+Fanout drivers
+===============
+
+|product_name| has concept of fanout driver, which enable collected data sending
+to an additional database. 
+
+InfluxDB
+--------
+
+To enable InfluxDB fanout driver, add ``PerfDataStorageDriver=influxdb`` to
+:file:`netxmsd.conf` file. Driver configuration is specified in ``[InfluxDB]``
+section.
+
+.. list-table::
+  :widths: 10 10
+  :header-rows: 1
+
+  * - Name
+    - Description
+  * - Bucket
+    - Bucket name. 
+  * - EnableUnsignedType
+    - Enable (true) or disable (false) unsigned data type. Default: `false`.
+  * - Database
+    - Database name. Default value is `netxms`.
+  * - Hostname
+    - Hostname. Default is `localhost`.
+  * - MaxCacheWaitTime
+    - Maximum time in ms, how long records can wait before caches being flushed.
+      Default is `30000`.
+  * - Password
+    - Password. 
+  * - Port
+    - Network port number
+  * - Protocol
+    - Options are: `udp`, `api-v1` and `api-v2`. Default it `udp`.
+  * - QueueFlushThreshold
+    - Cache will be flushed when reaching this size (in bytes). Default: `32768`
+  * - Queues
+    - Number of queues for parallel operation. Default: `1`.
+  * - QueueSizeLimit
+    - Upper limit on queue size in bytes. If queue reaches this size, data will
+      be dropped. Default: `4194304`.
+  * - Token
+    - Authentication token.
 
 
+Configuration example:
+
+.. code-block:: cfg
+
+   PerfDataStorageDriver=influxdb
+
+   [InfluxDB]
+   Protocol=api-v2
+   Organization=netxms
+   Bucket=netxms
+   Token=MJzXfwcNm7uEu4mL31S-iVjZ-DJO9pPbCuDl90XotOS3TyY9VkVMoDr5o4u4w8opucyZ2-MwcrpfC2zymbcj2Q==

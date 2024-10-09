@@ -19,7 +19,7 @@ For text log files, agent keeps status information about monitored files in
 memory only. This means that if the agent was stopped for a period of time,
 lines that were added to log file during that time will not be parsed.
 
-For Windows Event Log agent keeps status information in Windows registry. On
+For Windows Event Log, agent can keep status information in Windows registry. This function should be explicitly enabled by setting ProcessOfflineEvents = true in LogWatch section. On
 agent start records that were added while the agent was stopped will be parsed.
 
 Log parser also provides some additional statistic information through

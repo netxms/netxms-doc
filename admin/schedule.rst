@@ -44,6 +44,21 @@ Parameters:
 
    1. Server script name
 
+
+.. _schedule_package_deploy:
+
+Package deploy
+================
+
+Task is named :guilabel:`Agent.DeployPackage`. This task schedules package deployment via agent which has been created in Configuration -> Packages section. Task handler Agent.DeployPackage expects parameter string as set of key=value entries separated by semicolons. Currently only one key is supported - "package".
+
+Parameters:
+
+   1. Package ID
+
+.. figure:: _images/scheduler_config_view.png
+.. figure:: _images/scheduler_package_view.png
+
 .. _schedule_maintenance:
 
 Maintenance

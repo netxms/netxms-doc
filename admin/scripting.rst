@@ -107,29 +107,29 @@ NxShell is based on Jython and provide access to |product_name| Java API using i
 shell. NxShell is build as single jar file, which includes all required libraries.
 
 Download: http://www.netxms.org/download/nxshell-VERSION.jar
-(example: http://www.netxms.org/download/nxshell-1.2.13.jar)
+(example: http://www.netxms.org/download/nxshell-5.0.8.jar)
 
-Usage
+Usage for .jar file
 -----
 
 There are two options of this jar usage:
 
   1. it can be started as interactive shell;
 
-     :command:`java -jar nxshell-1.2.15.jar`
+     :command:`java -jar nxshell-5.0.8.jar`
 
   2. it can be started with the script name as a first parameter. Then it will just
      execute this script and exit. Example:
 
-     :command:`java -jar nxshell-1.2.15.jar test.py`
+     :command:`java -jar nxshell-5.0.8.jar test.py`
 
 When NxShell is started, it tries to get server IP, login and password from Java
 properties. In interactive mode, user will be asked for details, otherwise
 default values will be used.
 
-Start as interactive shell, with IP and Login provided (password will be asked):
+Start as interactive shell, with IP and Login provided:
 
-:command:`java -Dnetxms.server=127.0.0.1 -Dnetxms.login=admin -jar nxshell-1.2.15.jar`
+:command:`java -Dnetxms.server=127.0.0.1 -Dnetxms.login=admin -Dnetxms.password=netxms -jar nxshell-5.0.8.jar`
 
 Properties
 ~~~~~~~~~~
@@ -145,6 +145,34 @@ netxms.login            admin
 netxms.password         netxms
 netxms.encryptSession   true
 ======================= ================
+
+Usage for binary file
+-----
+
+nxshell binary gets installed in $NETXMS_HOME directory, for example /usr/bin/nxshell.
+As of version 5.1, nxshell launcher accepts command line -r or --properties= for providing path to 
+nxshell properties file.
+
+~# nxshell -h
+NetXMS Interactive Shell  Version 5.1.0-rc320
+Copyright (c) 2006-2024 Raden Solutions
+
+Usage: nxshell [OPTIONS] [script]
+
+Options:
+  -C, --classpath <path>      Additional Java class path.
+  -D, --debug                 Show additional debug output (use twice for extra output).
+  -h, --help                  Display this help message.
+  -H, --host <hostname>       Specify host name or IP address. Could be in host:port form.
+  -j, --jre <path>            Specify JRE location.
+  -n, --no-sync               Do not synchronize objects on connect.
+  -p, --port <port>           Specify TCP port for connection. Default is 4701.
+  -P, --password <password>   Specify user's password. Default is empty.
+  -r, --properties <file>	  File with additional Java properties.
+  -t, --token <token>         Login to server using given authentication token.
+  -u, --user <user>           Login to server as user. Default is "admin".
+  -v, --version               Display version information.
+
 
 Scripting
 ---------

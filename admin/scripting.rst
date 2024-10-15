@@ -103,50 +103,10 @@ script is available ``$node`` variable with node object.
 NXShell
 =======
 
-NxShell is based on Jython and provide access to |product_name| Java API using interactive
-shell. NxShell is build as single jar file, which includes all required libraries.
+NxShell binary comes with server distribution suite and can be run from shell or crontab.
 
-Download: http://www.netxms.org/download/nxshell-VERSION.jar
-(example: http://www.netxms.org/download/nxshell-5.0.8.jar)
 
-Usage for .jar file
------
-
-There are two options of this jar usage:
-
-  1. it can be started as interactive shell;
-
-     :command:`java -jar nxshell-5.0.8.jar`
-
-  2. it can be started with the script name as a first parameter. Then it will just
-     execute this script and exit. Example:
-
-     :command:`java -jar nxshell-5.0.8.jar test.py`
-
-When NxShell is started, it tries to get server IP, login and password from Java
-properties. In interactive mode, user will be asked for details, otherwise
-default values will be used.
-
-Start as interactive shell, with IP and Login provided:
-
-:command:`java -Dnetxms.server=127.0.0.1 -Dnetxms.login=admin -Dnetxms.password=netxms -jar nxshell-5.0.8.jar`
-
-Properties
-~~~~~~~~~~
-
-These properties should be set with JVM's "-D" option. Please make sure that all
-"-D" options are before "-jar".
-
-======================= ================
-Parameter               Default Value
-======================= ================
-netxms.server           127.0.0.1
-netxms.login            admin
-netxms.password         netxms
-netxms.encryptSession   true
-======================= ================
-
-Usage for binary file
+Usage 
 -----
 
 nxshell binary gets installed in $NETXMS_HOME directory, for example /usr/bin/nxshell.

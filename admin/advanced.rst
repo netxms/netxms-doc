@@ -711,3 +711,22 @@ Configuration example:
    Organization=netxms
    Bucket=netxms
    Token=MJzXfwcNm7uEu4mL31S-iVjZ-DJO9pPbCuDl90XotOS3TyY9VkVMoDr5o4u4w8opucyZ2-MwcrpfC2zymbcj2Q==
+
+
+Details of operation
+~~~~~~~~~~~~~~~~~~~~
+
+Field key is made from DCI's metric name (except for SNMP and internal "Dummy"
+DCIs where description is used). Space characters are removed, `:-.,#`
+characters are replaced with `_`, `\\` is replaced with `/`.
+
+Empty DCI values are not sent. 
+
+If custom attribute named `ignore_influxdb` (with any value) exists on a node,
+this node will be excluded from export. Also, if a DCI has Related Object set to
+an interface and this interface has `ignore_influxdb` custom attribute, this
+DCI will be ignored.
+
+If there is custom attribute on the node or on related object with name starting
+with `tag_`, it's name (excluding `tag_` part) and value will be used as tag.
+There can be several such custom attributes.

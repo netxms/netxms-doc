@@ -6727,7 +6727,7 @@ Hardware information about available storage devices
 
 
 Net.Wireguard.Interfaces
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Supported Platforms: Linux, BSD, Mac OS X
 

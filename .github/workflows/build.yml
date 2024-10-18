@@ -28,9 +28,9 @@ jobs:
       - name: Build HTML
         run: |
           source venv/bin/activate
-          make html
+          make html SPHINXOPTS="-W"
 
       - name: Build PDF
         run: |
           source venv/bin/activate
-          make pdf
+          make pdf SPHINXOPTS="-W"

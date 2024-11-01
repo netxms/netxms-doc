@@ -233,10 +233,23 @@ that use MQTT protocol for communication. The subagent can be used to connect to
 existing MQTT brokers, listen to user specified topics, map posted data to metrics
 and generate events.
 
+There are two ways how to set up data collection for MQTT. 
+
+One approach is to specify MQTT topic - agent metric mapping in agent
+configuration file. In this case DCIs are created with origin `NetXMS Agent`. 
+
+The other approach is to use `MQTT` origin in DCI properties. Metric has the
+following format `broker_name:mqtt_topic`, where `broker_name` is name specified
+in agent configuration file. Agent which performs MQTT data collection is
+selected automatically. If node is in a zone, zone proxy is used. If MQTT proxy
+is specified in node's properties, that would be used. With this approach there
+is no need to specify specify metrics in agent configuration file - when server
+requests mqtt topic for the first time, agent subscribes to that topic. 
+
 Configuration file
 ------------------
 
-These are the necessary configuration sections and parameters for the MQTT subagent:
+These are configuration sections and parameters for the MQTT subagent:
 
 .. list-table::
 	:header-rows: 1
@@ -253,14 +266,26 @@ These are the necessary configuration sections and parameters for the MQTT subag
 	* - [MQTT/Brokers/broker_name/Events]
 	  - ``EVENT_NAME``
 	  - String
-	  - This section is for specifying MQTT topic and event matching
+	  - This section is optional and allows to specify event that would be generated when MQTT topic gets new value
 	* - [MQTT/Brokers/broker_name/Metrics]
 	  - ``Metric.Name``
 	  - Dot separated string
-	  - This section is for mapping data posted to MQTT topics to metrics
+	  - This section is optional and sets mapping of data posted to MQTT topics to agent metrics
+
 
 Configuration example
 ---------------------
+
+.. code-block:: cfg
+
+	SubAgent = mqtt.nsm
+
+  [MQTT/Brokers/Local]
+  Hostname = 10.10.10.3
+
+
+Configuration example with metric and event configuration
+---------------------------------------------------------
 
 .. code-block:: cfg
 

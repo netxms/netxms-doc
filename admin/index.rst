@@ -37,7 +37,6 @@ Administrator Guide
    jvm-monitoring
    hypervisor-monitoring
    asterisk-monitoring
-   mobile-device-monitoring
    topology
    assets
    sla

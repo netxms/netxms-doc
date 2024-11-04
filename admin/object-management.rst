@@ -189,36 +189,6 @@ Neighbors` will show all IP neighbors of this node.
 Configuration view<dci-configuration>`, that is used to configure collected
 :term:`metrics <Metric>` from node.
 
-Mobile Device
--------------
-
-Mobile device objects are added manually. More information about required
-configuration to monitor mobile devices can be found there:
-:ref:`monitoring-mobile-device`.
-
-Property pages:
-
-Mobile Device object has only default property page configuration.
-
-Menu items:
-
-Each phone object can be managed/unmanaged and deleted. In unmanaged state
-:term:`metrics <Metric>` of this device are not collected and no pols are
-scheduled. When mobile object is deleted all it's data is also deleted. No
-history data will be left.
-
-:guilabel:`Execute server script` will open :ref:`execute server script view
-<execute_server_script>` where arbitrary script can be executed.
-:guilabel:`Geolocation History` will open view were will be shown history of
-displacement of this device. From the menu can be selected the period to show on
-history map. :guilabel:`Geolocation` will show last known location of this
-device. :guilabel:`Alarms` menu item will open view with all subnet nodes'
-alarms.
-
-:guilabel:`Last values` will open :ref:`Last Values view<last-values>`.
-:guilabel:`Data Collection Configuration` will open :ref:`Data Collection
-Configuration view<dci-configuration>`, that is used to configure collected
-:term:`metrics <Metric>` from node.
 
 Rack
 ----

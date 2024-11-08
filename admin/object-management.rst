@@ -125,9 +125,9 @@ screenshot can be taken only from Windows machines.
 install is detected. 
 In order to take advantage of this feature, one should add EnableTCPProxy = yes in agent configuration
 on remote node followed by agent restart. Run Configuration Poll 
-on the node you want to VNC to. Target VNC may require loopback connection to be enabled as well as firewall setting adjusted.
+on the node you want to VNC to. Target VNC may require loopback connection to be enabled as well as firewall settings adjusted.
 In cases when there is no agent installed on remote node, but VNC is present, we can use agent on NetXMS 
-server agent or agent serving as zone proxy. In this scenario one would need to add EnableTCPProxy = yes in agent configuration on server or
+server or agent serving as zone proxy. In this scenario, one would need to add EnableTCPProxy = yes in agent configuration on server or
 on agent that acts like proxy for zone.
 Your NetXMS user should have "Initiate TCP proxy sessions" system access right. In addition, in object tree user should have "Control" access rights to that node. 
 

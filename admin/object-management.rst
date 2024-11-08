@@ -121,6 +121,11 @@ This action can be applied simultaneously to all nodes.
 :guilabel:`Take screenshot` for now halfway implemented functionality. For now
 screenshot can be taken only from Windows machines.
 
+:guilabel:`Remote control` option will appear for Windows nodes where VNC install is detected. 
+In order to take advantage of this feature, one should add EnableTCPProxy = yes in agent configuration
+on both remote and server agents followed by agent restarts. Run a Configuration Poll 
+on the node you want to VNC to. Target VNC may require loopback connection to be enabled.
+
 Description of :guilabel:`Edit agent's configuration` functionality can be found
 in :ref:`edit_agent_configuration_remotely` chapter.
 

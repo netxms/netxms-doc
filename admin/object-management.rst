@@ -121,6 +121,16 @@ This action can be applied simultaneously to all nodes.
 :guilabel:`Take screenshot` for now halfway implemented functionality. For now
 screenshot can be taken only from Windows machines.
 
+:guilabel:`Remote control` option will appear for nodes where `VNC <https://en.wikipedia.org/wiki/VNC>`_ 
+install is detected. 
+In order to take advantage of this feature, one should add EnableTCPProxy = yes in agent configuration
+on remote node followed by agent restart. Run Configuration Poll 
+on the node you want to VNC to. Target VNC may require loopback connection to be enabled as well as firewall settings adjusted.
+In cases when there is no agent installed on remote node, but VNC is present, we can use agent on NetXMS 
+server or agent serving as zone proxy. In this scenario, one would need to add EnableTCPProxy = yes in agent configuration on server or
+on agent that acts like proxy for zone.
+Your NetXMS user should have "Initiate TCP proxy sessions" system access right. In addition, in object tree user should have "Control" access rights to that node. 
+
 Description of :guilabel:`Edit agent's configuration` functionality can be found
 in :ref:`edit_agent_configuration_remotely` chapter.
 

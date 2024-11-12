@@ -9,7 +9,6 @@ User Guide
    introduction
    basic-concepts
    management-console
-   mobile-console
    objects
    topology
    glossary

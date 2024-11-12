@@ -5,12 +5,12 @@ Glossary
 .. glossary::
    :sorted:
 
+   View
+      A portion of application window displaying some information and allowing
+      user interaction
+
    View Stack
       Multiple views combined into single one, with tab navigation on top of it
-
-   Trim Stack
-      :term:`View Stack` in minimized state, represented as a set of buttons,
-      one for each View in the stack
 
    Metric
       One entity of collected data

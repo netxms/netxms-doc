@@ -408,7 +408,6 @@ will not get deleted since they have parent.
 :guilabel:`Logs` will open alarm/event/trap view options with all active alarms for all children
 of this circuit. 
 
-.. _automatic-bind:
 
 Automatic bind option
 

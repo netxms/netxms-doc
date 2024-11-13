@@ -327,9 +327,8 @@ Besides default property pages condition has also:
    - :guilabel:`Location`  is used to configure location of the node
    - :guilabel:`Map Appearance` tab defines images that will be used to display
      this object on a :term:`Network Map` and drill-down object (object that will be
-     opened when double
-click on this object on :term:`Network Map`).
-   - :guilabel:`Trusted Nodes` is used to define object list that
+     opened when double click on this object on :term:`Network Map`).
+   - :guilabel:`Trusted Objects` is used to define object list that
       have access to this object from the script.
 
 Menu items:
@@ -348,14 +347,12 @@ deleted. :guilabel:`Upload file...` will upload file from server to all nodes
 under container, same as each tool under :guilabel:`Tools` menu item will be
 executed on each node.
 
-:guilabel:`Execute server script`   will open :ref:`execute server script view
+:guilabel:`Execute script`   will open :ref:`execute server script view
 <execute_server_script>`. Where an arbitrary script can be executed.
 :guilabel:`Geolocation` will show location of container on geographic map.
 
-:guilabel:`Alarms` will open alarm view with all active alarms for all children
-of this container. :guilabel:`802.1x port state` will open table with port
-authentication states of all devices that are under this container. This
-information can be exported to CSV.
+:guilabel:`Logs` will open alarm/event/trap view options with all active alarms for all children
+of this container. 
 
 .. _automatic-bind:
 
@@ -371,6 +368,58 @@ There can be defined if script should be used for automatic binding, if script
 should be used for node unbinding and can be written script it selves.
 
 This script will be executed each configuration poll of each node.
+
+
+Circuit
+---------
+
+Circuits can be created in Infrastructure Services tree. Existing node interfaces can be 
+added to containers by using Bind operation, and removed by using
+Unbind operation. This object will generate events when state of undertlying interface changes, 
+and being an event source it will be able to have alarms on it. Reference of multiple 
+interfaces will allow to use this object to represent different types of network services 
+beyond  - multilink interfaces, links between sites, virtual circuits, etc. Circuits and interfaces inside
+them can be moved by :guilabel:`Move to another container` menu item or using
+drag&drop.
+
+Besides default property pages condition has also:
+   - :guilabel:`Automatic bind` about this functionality can be found
+     :ref:`there<automatic-bind>`
+   - :guilabel:`Map Appearance` tab defines images that will be used to display
+     this object on a :term:`Network Map` and drill-down object (object that will be
+     opened when double click on this object on :term:`Network Map`).
+   - :guilabel:`Trusted Objects` is used to define object list that
+      have access to this object from the script.
+
+Menu items:
+
+In case if
+it is required to add already existing interface to circuit use
+:guilabel:`Bind...` menu item. To remove nodeinterface from circuit, but do not delete
+it use :guilabel:`Unbind...` menu item. Option :guilabel:`Link to asset...` can link circuit to Asset group
+
+Using :guilabel:`Manage`/:guilabel:`Unmanage` all nodes will be
+managed/unmanaged under circuit. Circuit can be deleted, but interfaces 
+will not get deleted since they have parent. 
+
+:guilabel:`Execute script`   will open :ref:`execute server script view
+<execute_server_script>`. Where an arbitrary script can be executed.
+
+:guilabel:`Logs` will open alarm/event/trap view options with all active alarms for all children
+of this circuit. 
+
+.. _automatic-bind:
+
+Automatic bind option
+
+For each circuit can be configured automatic binding rules. This can be done
+in :guilabel:`Automatic Bind Rules` tab of container properties.
+
+There can be defined if script should be used for automatic binding, if script
+should be used for node unbinding and can be written script it selves.
+
+This script will be executed each configuration poll of each node.
+
 
 Common object properties
 ========================

@@ -104,8 +104,7 @@ object tree. All top level objects have only one editable attribute – name.
        - Wireless Domain
    * - Cluster
      - Pseudo-object defining any process: technological or logical that aggregates 
-       information from several separate nodes. See
-       :ref:`Cluster monitoring<cluster-monitoring>` for more information.
+       information from several separate nodes. 
      - - Node
    * - Circuit
      - Reference of multiple interfaces will allow to use this object to represent different 

@@ -728,6 +728,14 @@ The following drivers are provided by default with |product_name| installation:
        * host (default: 127.0.0.1)
        * port (default: 13001)
 
+   * - Mattermost
+     - Mattermost online chat service driver. Configuration parameters:
+
+       * AuthToken ( required, example: f6ern7edy3ma9gtg9zdhaks9aw )
+       * Color
+       * Footer
+       * ServerURL ( required, example: your.mattermost.server.fqdn )
+       * UseAttachments
    * - MicrosoftTeams
      - Notification channel driver for Microsoft Teams. Configuration
        parameters:

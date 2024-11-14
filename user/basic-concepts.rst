@@ -183,8 +183,7 @@ object tree. All top level objects have only one editable attribute – name.
      - - Template
        - Template Group
    * - Template
-     - Data collection and agent policy template. See :ref:`Data
-       collection<data-collection>` section for more information about
+     - Data collection and agent policy template. See admin guide for more information about
        templates. If an object is a child of a template, this means that teplate
        is applied to that object. 
      - - Acces point
@@ -252,7 +251,7 @@ Each object has a status. Status of an object calculated based on:
    * Active alarms, associated with the object (after an alarm is resolved or terminated, it no longer affects object status)
    * Value of status :term:`DCIs<DCI>` (DCI that has ``Use this DCI for node status calculation`` property enabled)
 
-There are multiple options for status calculation, see :ref:`status-calculation` for more information.
+There are multiple options for status calculation, see admin guide for more information.
 
 For some object classes, like Report or :term:`Template`, status is irrelevant. Status for such objects is always :guilabel:`Normal`.
 Object's status can be one of the following:

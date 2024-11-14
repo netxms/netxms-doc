@@ -30,6 +30,8 @@ Node's zone can be changed using :guilabel:`Change zone...` menu item.
 file` can be used to upload file from server to node. This action can be applied
 simultaneously to multiple nodes.
 
+:guilabel:`Remote control` allows to access remote node via VNC.
+
 :guilabel:`Take screenshot` takes screenshot. Requires |product_name| agent to
 be installed on the node. Currently screenshot can be taken only from Windows
 machines.
@@ -45,17 +47,19 @@ on a node. The following options are available:
    * - Poll Name
      - Description
    * - Status
-     -
+     - Determine current status of an object
    * - Configuration
-     -
+     - Determine current configuration of an object (list of interfaces,
+       supported protocols, etc.) By default executes auto bind scripts for
+       templates and containers, use "Objects.AutobindOnConfigurationPoll"
+       server configuration variable to disable.
    * - Configuration (full)
-     -
+     - Same as usual configuration poll but resets previously detected
+       capabilities and detects them again. (can only be executed manually)
    * - Instance discovery
-     -
-   * - Instance names
-     -
+     - Perform Instance Discovery to add/remove DCIs
    * - Topology
-     -
+     - Gather information related to network link layer topology
 
 Under :guilabel:`Tools` menu are available predefined object tools that will be
 executed on selected node. More about object tool configuration can be found

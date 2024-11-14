@@ -253,7 +253,7 @@ Each object has a status. Status of an object calculated based on:
 
 There are multiple options for status calculation, see admin guide for more information.
 
-For some object classes, like Report or :term:`Template`, status is irrelevant. Status for such objects is always :guilabel:`Normal`.
+For some object classes, like Report or Template, status is irrelevant. Status for such objects is always :guilabel:`Normal`.
 Object's status can be one of the following:
 
 

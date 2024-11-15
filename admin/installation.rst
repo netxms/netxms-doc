@@ -313,12 +313,12 @@ Database
 
 Database engines supported by |product_name| server:
 
-   * PostgreSQL 9.5, 9.6, 10, 11, 12, 13, 14, 15, 16
-   * PostgreSQL with TimescaleDB 11, 12, 13, 14, 15, 16
+   * PostgreSQL 9.5, 9.6, 10, 11, 12, 13, 14, 15, 16, 17
+   * PostgreSQL with TimescaleDB 11, 12, 13, 14, 15, 16, 17
    * MySQL 5.6, 5.7, 8.0
    * MariaDB 10.1, 10.2, 10.3, 10.4
    * Oracle 12c, 18c, 19c
-   * Microsoft SQL Server 2012, 2014, 2016, 2017
+   * Microsoft SQL Server 2012, 2014, 2016, 2017, 2022
    * SQLite (only for test purposes)
 
 Postgres database tuning might be required depending on database size. 

@@ -811,6 +811,27 @@ List of available java plugins:
   * JMX
   * Bind9
 
+
+.. _WMI-subagent:
+
+WMI subagent
+-------------
+
+Configuration example:
+
+.. code-block:: cfg
+
+   MasterServers = netxms.demo
+   SubAgent=wmi.nsm
+
+Provides access to WMI data via WMI class queries. In below example, DCI :guilabel:`New table ...` is created 
+with NetXMS Agent as Origin and WMI query as Metric
+
+
+.. figure:: _images/wmi_example.png
+
+The result is a table with approprite WMI data.
+
 Load of subagent as separate process
 ------------------------------------
 

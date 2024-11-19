@@ -62,8 +62,9 @@ object tree. All top level objects have only one editable attribute – name.
      - Abstract object representing root of your infrastructure service tree.
        System can have only one object of this class. After system installation
        it is named "Infrastructure Services".
-     - - Cluster
+     - - Circuit
        - Chassis
+       - Cluster
        - Condition
        - Collector
        - Container
@@ -74,7 +75,8 @@ object tree. All top level objects have only one editable attribute – name.
        - Wireless Domain
    * - Collector
      - Object similar to container, but with data collection capabilities.
-     - - Cluster
+     - - Circuit
+       - Cluster
        - Chassis
        - Condition
        - Collector
@@ -89,7 +91,8 @@ object tree. All top level objects have only one editable attribute – name.
        can contain. With help of container objects you can build
        object's tree which represents logical hierarchy of IT services in your
        organization.
-     - - Cluster
+     - - Circuit
+       - Cluster
        - Chassis
        - Condition
        - Collector
@@ -101,8 +104,12 @@ object tree. All top level objects have only one editable attribute – name.
        - Wireless Domain
    * - Cluster
      - Pseudo-object defining any process: technological or logical that aggregates 
-       information from several separate nodes. See admin guide for more information on this.
+       information from several separate nodes. 
      - - Node
+   * - Circuit
+     - Reference of multiple interfaces will allow to use this object to represent different 
+       types of network services beyond  - multilink interfaces, links between sites, virtual circuits, etc.
+     - - Interface
    * - Rack
      - Object representing a rack. It has the same purpose as container, but
        allows to configure visual representation of equipment installed in a rack.

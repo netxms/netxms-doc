@@ -281,6 +281,31 @@ Server hardware
 Minimal requirements: Core 2 duo 1GHz, 1024MB RAM, 1GB disk space.
 
 
+Linux kernel tuning
+-------------------
+
+Important requirement on large systems might be a need to tune Linux network buffer size. 
+Default values may not be enough if system is sending many ICMP pings, for example. 
+The following kernel parameters should be changed:
+
+* net.core.rmem_default
+* net.core.wmem_default
+* net.core.rmem_max
+* net.core.wmem_max
+
+In our test lab value 1703936 seems to be working well (default was 212992). 
+
+Example:
+
+* sudo sysctl -w net.core.rmem_default=1703936
+* sudo sysctl -w net.core.wmem_default=1703936
+* sudo sysctl -w net.core.rmem_max=1703936
+* sudo sysctl -w net.core.wmem_max=1703936
+
+Kernel changes will not be preserved after reboot unless sysctl commands are applied in system 
+configuration file, typically located at /etc/sysctl.conf. Increase in kernel values would also 
+increase kernel memory space in use and may impact other applications.
+
 Database
 --------
 
@@ -288,12 +313,12 @@ Database
 
 Database engines supported by |product_name| server:
 
-   * PostgreSQL 9.5, 9.6, 10, 11, 12, 13, 14, 15, 16
-   * PostgreSQL with TimescaleDB 11, 12, 13, 14, 15, 16
+   * PostgreSQL 9.5, 9.6, 10, 11, 12, 13, 14, 15, 16, 17
+   * PostgreSQL with TimescaleDB 11, 12, 13, 14, 15, 16, 17
    * MySQL 5.6, 5.7, 8.0
    * MariaDB 10.1, 10.2, 10.3, 10.4
    * Oracle 12c, 18c, 19c
-   * Microsoft SQL Server 2012, 2014, 2016, 2017
+   * Microsoft SQL Server 2012, 2014, 2016, 2017, 2022
    * SQLite (only for test purposes)
 
 Postgres database tuning might be required depending on database size. 

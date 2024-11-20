@@ -423,13 +423,11 @@ polling process hook script is being executed.
      - DataCollection.InstancePollingInterval
      - Hook::InstancePoll
    * - Automatic Binding
-     - Checks and bind or unbind Containers, Templates and Context Dashboards to
-       nodes according to auto-bind script. 
+     - Checks and bind or unbind Containers, Templates and Context Dashboards to nodes according to auto-bind script. 
      - Objects.AutobindPollingInterval
      - 
    * - Network Discovery
-     - Searches for new nodes by polling information about neighbor IP addresses from known nodes.
-      Accessible from Configuration perspective.
+     - Searches for new nodes by polling information about neighbor IP addresses from known nodes. Accessible from Configuration perspective.
      - NetworkDiscovery.PassiveDiscovery.Interval
      - Hook::DiscoveryPoll
 

@@ -41,7 +41,7 @@ Desktop Management Client:
 
  1. Download the latest version from http://www.netxms.org/download. You will need
     Linux installer (named nxmc-VERSION-linux-gtk-x86.tar.gz or
-    nxmc-VERSION-linux-gtk-x64.tar.gz, for example nxmc-4.4.3-linux-gtk-x64.tar.gz).
+    nxmc-VERSION-linux-gtk-x64.tar.gz, for example nxmc-5.1.0-linux-gtk-x64.tar.gz).
 
  2. Extract and replace old management client with the new one.
 
@@ -53,7 +53,7 @@ Web Management Client:
 
   1. Download latest version of WAR file from Web Interface Binaries section 
      http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
-     nxmc-4.4.3.war).
+     nxmc-5.1.0.war).
 
   2. Replace old WAR file with the new one.
 
@@ -75,11 +75,11 @@ Server
   1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need source archive (named netxms-VERSION.tar.gz, for example netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be used as a substitution for an actual version number.
   2. Unpack the archive:
 
-    :command:`$ tar zxvf netxms-1.2.15.tar.gz`
+    :command:`$ tar zxvf netxms-5.1.0.tar.gz`
 
   3. Change directory to netxms-version and run configure script:
 
-    :command:`$ cd netxms-1.2.15`
+    :command:`$ cd netxms-5.1.0`
 
     :command:`$ sh ./configure --enable-release-build --with-server --with-mysql`
 
@@ -117,16 +117,16 @@ Agent
 
   1. Download the latest version from http://www.netxms.org/download, if you don't
      have it. You will need source archive (named netxms-VERSION.tar.gz, for example
-     netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be
+     netxms-5.1.0.tar.gz). Please note that in the following steps VERSION will be
      used as a substitution for an actual version number.
 
   2. Unpack the archive:
 
-    :command:`tar zxvf netxms-1.2.15.tar.gz`
+    :command:`tar zxvf netxms-5.1.0.tar.gz`
 
   3. Change directory to netxms-version and run configure script:
 
-    :command:`cd netxms-1.2.15`
+    :command:`cd netxms-5.1.0`
 
     :command:`sh ./configure --enable-release-build --with-agent`
 
@@ -153,7 +153,7 @@ Desktop Management Client:
 
  1. Download the latest version from http://www.netxms.org/download. You will need
     Linux installer(named nxmc-VERSION-linux-gtk-x86.tar.gz or
-    nxmc-VERSION-linux-gtk-x64.tar.gz, for example nxmc-4.4.3-linux-gtk-x64.tar.gz).
+    nxmc-VERSION-linux-gtk-x64.tar.gz, for example nxmc-5.1.0-linux-gtk-x64.tar.gz).
 
  2. Extract and replace old management client with the new one.
 
@@ -165,7 +165,7 @@ Web Management Client:
 
   1. Download latest version of WAR file from Web Interface Binaries section
      http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
-     nxmc-4.4.3.war).
+     nxmc-5.1.0.war).
 
   2. Replace old WAR file with the new one.
 
@@ -184,7 +184,7 @@ Upgrade
 Server
 ~~~~~~
 
-1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need Windows installer (named netxms-VERSION.exe, for example netxms-1.2.15.exe).
+1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need Windows installer (named netxms-VERSION.exe, for example netxms-5.1.0.exe).
 
 2. Stop |product_name| server.
 
@@ -200,7 +200,7 @@ Proceed to the next step only if database checker does not report any errors!
 
 .. code-block:: cfg
 
-  C:\Download> netxms-1.2.15.exe /SILENT
+  C:\Download> netxms-5.1.0.exe /SILENT
 
 5. Check whether |product_name| Server service is running again. If it's not, most likely you have to upgrade your database to newer version. To upgrade database, use nxdbmgr utility:
 
@@ -218,13 +218,13 @@ However, if you decide to upgrade agent manually, it can be done in just a few s
 
   1. Download the latest version from http://www.netxms.org/download, if you don't
      have it. You will need Windows Agent installer (named nxagent-VERSION.exe or
-     nxagent-VERSION-x64.exe, for example nxagent-4.4.3.exe).
+     nxagent-VERSION-x64.exe, for example nxagent-5.1.0.exe).
 
   2. Run |product_name| agent installer and follow the prompts. Normally, you will not need
      to change any settings on installation wizard dialog windows. Alternatively, you
      can run installer with /SILENT option to disable any prompts:
 
-      :command:`C:\Download> nxagent-4.4.3.exe /SILENT`
+      :command:`C:\Download> nxagent-5.1.0.exe /SILENT`
 
 Management Client
 ~~~~~~~~~~~~~~~~~
@@ -233,7 +233,7 @@ Desktop Management Client:
 
  1. Download the latest version from http://www.netxms.org/download. You will need
     Windows installer(named nxmc-VERSION-win32-x86.zip or
-    nxmc-VERSION-win32-x64.zip, for example nxmc-4.4.3-win32-x64.zip).
+    nxmc-VERSION-win32-x64.zip, for example nxmc-5.1.0-win32-x64.zip).
 
  2. Replace old old folder with content of the zip.
 
@@ -243,7 +243,7 @@ Web Management Client:
 
   1. Download latest version of WAR file from Web Interface Binaries section
      http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
-     nxmc-4.4.3.war).
+     nxmc-5.1.0.war).
 
   2. Replace old WAR file with the new one. Default path: ``INSTALLATION_DIR\\webapps``.
 
@@ -259,14 +259,14 @@ Generic upgrade using source tarball
 Server
 ------
 
-  1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need source archive (named netxms-VERSION.tar.gz, for example netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be used as a substitution for an actual version number.
+  1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need source archive (named netxms-VERSION.tar.gz, for example netxms-5.1.0.tar.gz). Please note that in the following steps VERSION will be used as a substitution for an actual version number.
   2. Unpack the archive:
 
-    :command:`$ tar zxvf netxms-1.2.15.tar.gz`
+    :command:`$ tar zxvf netxms-5.1.0.tar.gz`
 
   3. Change directory to netxms-version and run configure script:
 
-    :command:`$ cd netxms-1.2.15`
+    :command:`$ cd netxms-5.1.0`
 
     :command:`$ sh ./configure --enable-release-build --with-server --with-mysql`
 
@@ -304,16 +304,16 @@ Agent
 
   1. Download the latest version from http://www.netxms.org/download, if you don't
      have it. You will need source archive (named netxms-VERSION.tar.gz, for example
-     netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be
+     netxms-5.1.0.tar.gz). Please note that in the following steps VERSION will be
      used as a substitution for an actual version number.
 
   2. Unpack the archive:
 
-    :command:`tar zxvf netxms-1.2.15.tar.gz`
+    :command:`tar zxvf netxms-5.1.0.tar.gz`
 
   3. Change directory to netxms-version and run configure script:
 
-    :command:`cd netxms-1.2.15`
+    :command:`cd netxms-5.1.0`
 
     :command:`sh ./configure --enable-release-build --with-agent`
 

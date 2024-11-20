@@ -10,8 +10,15 @@ Major changes between releases
 5.1
 ---
 
-NXSL changes: node attribute 'ipAddr' is deprecated, newly added 'ipAddress'
-attribute should be used instead. 
+- New automatic map type "hybrid topology"
+- New object class "Circuit"
+- Added option to show physical links on L2 ad-hoc map
+- More accurate ad-hoc IP topology maps
+- Improved web UI login pages
+- Improved network map multi link spacing
+- NXSL changes: node attribute 'ipAddr' is deprecated, newly added 'ipAddress' attribute should be used instead. 
+- New NXSL function "CalculateDowntime"
+- New method "calculateDowntime" in NXSL class "NetObj"
 
 5.0
 ---
@@ -329,17 +336,16 @@ Database size and load is very hard to predict, because it is dependent on a num
 monitored nodes and collected metrics. If you plan to install database engine on
 the same machine as |product_name| server, increase your hardware requirements accordingly.
 
-Link to Excel file that allows roughly estimate the size that will be required for
-database: http://git.netxms.org/public/netxms.git/blob/HEAD:/doc/misc/database_sizing.xlsx
-
 
 Java
 ----
 
 Java Runtime Environment (JRE) is needed for Desktop Management Client (nxmc) and for Web Management Client. 
-Supported Java version are 11 and 15. 
+Supported Java version is 17 and higher. 
 
 Since version 3.8 Desktop Management Client with bundled JRE is provided for Windows. 
+
+WARNING: version 4.4 REQUIRE Java 17 for both web and rich client. Please make sure it’s installed and jetty / tomcat are configured to used it.
 
 
 Agent
@@ -495,7 +501,7 @@ Due to limitation of Eclipse platform used to build the Management Client, only 
 
  1. Make sure you have 64-bit Java version 17 installed you your system. 
  
- 2. Download the latest .jar file from http://www.netxms.org/download, for example nxmc-5.0.6-standalone.jar.
+ 2. Download the latest .jar file from http://www.netxms.org/download, for example nxmc-5.1.0-standalone.jar.
 
  3. Run .jar file using java, for example java -jar nxmc-xxx.jar .
 
@@ -515,7 +521,7 @@ run. Minimal supported versions: Jetty 10, Tomcat 9. Supported Java version is 1
 
   2. Download latest version of WAR file from Web Interface Binaries section
      http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
-     nxmc-5.0.6.war).
+     nxmc-5.1.0.war).
 
   3. Copy nxmc.war to webapps directory, in a few seconds it will be autodeployed and
      available at http://SERVER_IP:SERVER_PORT/nxmc/
@@ -659,7 +665,7 @@ Due to limitation of Eclipse platform used to build the Management Client, only 
 
  1. Make sure you have 64-bit Java version 17 installed you your system. 
  
- 2. Download the latest .jar file from http://www.netxms.org/download, for example nxmc-5.0.6-standalone.jar.
+ 2. Download the latest .jar file from http://www.netxms.org/download, for example nxmc-5.1.0-standalone.jar.
 
  3. Run .jar file using java, for example java -jar nxmc-xxx.jar .
 
@@ -745,11 +751,7 @@ Server
 
     **Microsoft SQL note**:
 
-    If you wish to use Windows authentication for database connectivity, use * (asterisk)
-    as a login name and leave the password field blank. If you specify asterisk as DBA
-    login, user with which you are logged in to Windows should have administrative rights
-    to the database server. If you use asterisk as DB login, you should run |product_name| Server
-    service as a user with appropriate rights to the database.
+    Please refer to Appendix for detailed Windows/MSSQL setup installation :ref:`instructions<windows_mssql_install>`
 
 
     **Oracle note**:

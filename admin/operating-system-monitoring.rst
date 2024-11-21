@@ -108,3 +108,160 @@ Create threshold that will create event in case if last 5 values are more than 9
 .. figure:: _images/os-metric-cpu-usage-example3.png
 
   Threshold
+
+
+.. _WMI-subagent:
+
+
+
+WMI
+---
+
+
+`Windows Management Instrumentation <https://en.wikipedia.org/wiki/Windows_Management_Instrumentation>`_ 
+subagent provides interface to Windows Driver Model and thus enables information and notification gathering and further manipulation for monitoring purpose.  
+
+Configuration example:
+
+.. code-block:: cfg
+
+   MasterServers = netxms.demo
+   SubAgent=wmi.nsm
+
+
+Provides access to WMI data via WMI class queries. In below example, DCI :guilabel:`New table ...` is created 
+with NetXMS Agent as Origin and WMI query as Metric
+
+
+
+
+.. figure:: _images/wmi_example.png
+
+
+
+
+Following parameters are available for this subagent
+
+
+
+.. list-table::
+   :widths: 60 100
+   :header-rows: 1
+   :class: longtable
+
+   * - Parameter
+     - Description
+
+
+    
+   * - ACPI.ThermalZone.CurrentTemp
+     - Current temperature in ACPI thermal zone. 
+    
+   * - ACPI.ThermalZone.CurrentTemp(*)
+     - Current temperature in ACPI thermal zone {instance}.
+
+   * - Hardware.NetworkAdapter.Availability(*)
+     - Availability. 
+
+   * - Hardware.NetworkAdapter.Description(*)
+     - Description.
+
+   * - Hardware.NetworkAdapter.InterfaceIndex(*)
+     - InterfaceIndex. 
+    
+   * - Hardware.NetworkAdapter.MACAddress(*)
+     - MACAddress.
+
+   * - Hardware.NetworkAdapter.Manufacturer(*)
+     - Manufacturer. 
+
+   * - Hardware.NetworkAdapter.Product(*)
+     - ProductName.
+   
+   * - Hardware.NetworkAdapter.Speed(*)
+     - Speed. 
+    
+   * - Hardware.NetworkAdapter.Type(*)
+     - AdapterType.
+
+   * - System.AntiSpywareProduct.Active
+     - Anti-spyware product active. 
+
+   * - System.AntiSpywareProduct.DisplayName
+     - Anti-spyware product display name.
+
+   * - System.AntiSpywareProduct.UpToDate
+     - Anti-spyware product up to date. 
+    
+   * - System.AntiVirusProduct.Active
+     - Anti-virus product active.
+
+   * - System.AntiVirusProduct.DisplayName
+     - Anti-virus product display name. 
+
+   * - System.AntiVirusProduct.UpToDate
+     - Anti-virus product up to date.
+
+   * - System.FirewallProduct.Active
+     - Firewall active. 
+    
+   * - System.FirewallProduct.DisplayName
+     - Firewall product display name.
+
+   * - System.FirewallProduct.UpToDate
+     - Firewall product up to date. 
+
+   * - WMI.Query(*)
+     - Generic WMI query.
+
+
+
+
+
+Following lists are available for this subagent:
+
+
+
+- ACPI.ThermalZones
+- Hardware.NetworkAdapters
+- WMI.Classes(*)
+- WMI.NameSpaces
+- WMI.Query(*)
+
+
+
+
+Below list of supported tables for this subagent:
+
+- Hardware.NetworkAdapters
+- WMI.Query(*)
+
+
+
+
+Some of the most commonly used WMI classes are listed below:
+
+Static
+
+* Computer System - Win32_ComputerSystem
+* Operating System - Win32_OperatingSystem
+* Processor Info - Win32_Processor
+* HDD - Win32_DiskDrive
+* Disk Partitions - Win32_DiskPartition
+* Logical Disks - Win32_LogicalDisk
+* Logical Disk to Partition - Win32_LogicalDiskToPartition
+* Memory - Win32_PhysicalMemory, Win32_PhysicalMemoryArray
+* Network - Win32_NetworkAdapter , Win32_NetworkAdapterConfiguration
+
+Performance Counters
+
+* Processor Utilization - Win32_PerfRawData_PerfOS_Processor
+* Memory Utilization - Win32_PerfRawData_PerfOS_Memory
+* Network Utilization - Win32_PerfRawData_Tcpip_NetworkInterface
+
+
+
+The result is a table with approprite WMI data.
+
+
+.. figure:: _images/wmi_table.png

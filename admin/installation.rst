@@ -10,15 +10,8 @@ Major changes between releases
 5.1
 ---
 
-- New automatic map type "hybrid topology"
-- New object class "Circuit"
-- Added option to show physical links on L2 ad-hoc map
-- More accurate ad-hoc IP topology maps
-- Improved web UI login pages
-- Improved network map multi link spacing
-- NXSL changes: node attribute 'ipAddr' is deprecated, newly added 'ipAddress' attribute should be used instead. 
-- New NXSL function "CalculateDowntime"
-- New method "calculateDowntime" in NXSL class "NetObj"
+NXSL changes: node attribute 'ipAddr' is deprecated, newly added 'ipAddress' attribute should be used instead. 
+
 
 5.0
 ---
@@ -169,7 +162,7 @@ NetXMS will not upgrade the script syntax to the 5.0 format.
 
 4.4
 ---
-Minimal JRE (Java Runtime Environment) version for management client is Java-17. 
+Minimal JRE (Java Runtime Environment) version for both web and management client is Java-17. 
 
 
 4.2
@@ -198,6 +191,7 @@ Several WEB API endpoints were renamed, e.g. *API_HOME*/summaryTable/adHoc becam
 3.8
 ---
 Minimal JRE (Java Runtime Environment) version for management client is Java-11. 
+Desktop Management Client with bundled JRE is provided for Windows.
 
 3.7
 ---
@@ -344,8 +338,6 @@ Java Runtime Environment (JRE) is needed for Desktop Management Client (nxmc) an
 Supported Java version is 17 and higher. 
 
 Since version 3.8 Desktop Management Client with bundled JRE is provided for Windows. 
-
-WARNING: version 4.4 REQUIRE Java 17 for both web and rich client. Please make sure it’s installed and jetty / tomcat are configured to used it.
 
 
 Agent
@@ -551,7 +543,7 @@ Complete repository file and signing key is available in each corresponding root
 Add repository
 ------------------------
 
-DNF provide simple way to add repository:
+DNF provide simple way to add repository ( please note - you may need to install `EPEL repository first <https://docs.fedoraproject.org/en-US/epel/>`_ ):
 
 .. code-block:: sh
 
@@ -1291,3 +1283,104 @@ Configuration file example:
   DBServer = //127.0.0.1/XE # instant client compatible connection string
   DBLogin = netxms
   DBPassword = PaSsWd
+
+
+.. _windows_mssql_install:
+
+How-to install NetXMS server on Windows Server with local Microsoft SQL Server Express
+--------------------------------------------------------------------------------------
+
+1. Login as adiministrator
+2. Install Microsoft SQL Server Express with defaut options.
+
+If enabling mixed authentication mode:
+
+
+3. Enable mixed authentication mode as per https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/change-server-authentication-mode Don't forget to restart SQL Server after changing authentication mode.
+4. Run NetXMS Server installer. When prompted for database information, use the following answers:
+  
+    - Server type: MS SQL
+    - Server name: localhost\SQLEXPRESS
+    - Database name: (any valid name, we use "netxms")
+    - Login name: (any valid account name, we use "netxms")
+    - Password: (any password complex enough to match OS password policy)
+    - Create database and database user: check
+    - DBA login name: *
+    - DBA password: (left empty)
+
+This assumes that currently logged in user has DBA access to SQL Server instance (normally should be the case if SQL Server was just installed by same user).
+Alternative approach is to enable "sa" user in SQL server and use sa login and password as DBA login name and password.
+
+Installer should create database, database user, assign user as database owner, and NetXMS Core service should start successfully.
+
+
+If mixed authentication is not an option:
+
+
+Currently installer does not support automatic database creation for Windows authentication mode, so there will be more manual steps.
+
+3. Login to SQL Server Management Studio
+4. Create new database with default owner (owner should be set to currently logged in administrator user)
+5. Run NetXMS Server installer. On "Select additional tasks" page uncheck "Start NetXMS Core service".
+6. When prompted for database information, use the following answers:
+ 
+    - Server type: MS SQL
+    - Server name: localhost\SQLEXPRESS
+    - Database name: (database name from step 4)
+    - Login name: *
+    - Password: (left empty)
+    - Create database and database user: uncheck
+
+7. After installation is complete, go to "Services", find "NetXMS Core" service, and set it to login as administrator user (same user used for installation)
+8. Start NetXMS Core service
+
+
+How-to install NetXMS server on Windows Server with remote Microsoft SQL Server Express
+---------------------------------------------------------------------------------------
+
+Assumptions:
+ * Both SQL Express Server machine and NetXMS Server machine are in the same domain
+ * TCP/IP is enabled in SQL Server network properties
+ * TCP/IP is configured to use fixed port
+ * Firewall rule is added to allow incoming connections on SQL Server TCP port (may need to add manually)
+ * Mixed authentication mode is already enabled on SQL Server (only for scenario 1 below)
+
+If using SQL account for NetXMS services is acceptable
+
+
+1. Login to NetXMS Server machine with domain account that has local administrator rights as well as sysadmin rights on SQL Server
+2. Install ODBC Driver for SQL Server
+3. Run NetXMS Server installer. When prompted for database information, use the following answers:
+  
+    - Server type: MS SQL
+    - Server name: SQL server domain computer name or fully qualified DNS name (if TCP port is not 1433, then use form server_name,port)
+    - Database name: (any valid name, we use "netxms")
+    - Login name: (any valid account name, we use "netxms")
+    - Password: (any password complex enough to match OS password policy)
+    - Create database and database user: check
+    - DBA login name: *
+    - DBA password: (left empty)
+
+Installer should create database, database user, assign user as database owner, and NetXMS Core service should start successfully.
+
+In this scenario server will use login and password on SQL server, so service can continue to run under Local System account, or you can change it to any domain account.
+
+If server has to use domain account for accessing database
+
+
+1. Install ODBC Driver for SQL Server  
+2. If not already done, create new login on SQL Server for domain user to be used by NetXMS Core service
+3. Create new database, assign login from step 2 as owner
+4. Login to NetXMS Server machine with same domain user
+5. Run NetXMS Server installer. On "Select additional tasks" page uncheck "Start NetXMS Core service".
+6. When prompted for database information, use the following answers:
+  
+    - Server type: MS SQL
+    - Server name: SQL server domain computer name or fully qualified DNS name (if TCP port is not 1433, then use form server_name,port)
+    - Database name: (database name from step 4)
+    - Login name: *
+    - Password: (left empty)
+    - Create database and database user: uncheck
+
+7. After installation is complete, go to "Services", find "NetXMS Core" service, and set it to login as administrator user (same user used for installation)
+8. Start NetXMS Core service

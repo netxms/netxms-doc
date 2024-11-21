@@ -516,8 +516,7 @@ Instance discovery
 |product_name| can create metrics names for :term:`Data Collection Item <DCI>`
 automatically. Instance discovery collects information about node instances like
 disk mountpoints, device list, etc. and automatically creates or removes
-:term:`DCIs <DCI>` with obtained data. Instance discovery is available from 
-Infrastructure and Network perspectives by right-clicking on object and Poll.
+:term:`DCIs <DCI>` with obtained data. To run instance discovery manually and check it's results select in nodes menu :guilabel:`Poll` --> :guilabel:`Instance discovery`
 
 
 Security

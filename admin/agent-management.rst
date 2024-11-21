@@ -763,7 +763,7 @@ Below is list of available |product_name| subagents:
   * :ref:`Windows event log syncronization (wineventsync) <windows_event_log_synchronization>`
   * WinNT (Automatically loaded on Windows systems)
   * Windows Performance (winperf)
-  * WMI
+  * :ref:`WMI <WMI-subagent>`
   * XEN
 
 
@@ -812,25 +812,6 @@ List of available java plugins:
   * Bind9
 
 
-.. _WMI-subagent:
-
-WMI subagent
--------------
-
-Configuration example:
-
-.. code-block:: cfg
-
-   MasterServers = netxms.demo
-   SubAgent=wmi.nsm
-
-Provides access to WMI data via WMI class queries. In below example, DCI :guilabel:`New table ...` is created 
-with NetXMS Agent as Origin and WMI query as Metric
-
-
-.. figure:: _images/wmi_example.png
-
-The result is a table with approprite WMI data.
 
 Load of subagent as separate process
 ------------------------------------

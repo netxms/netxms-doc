@@ -364,8 +364,7 @@ in :guilabel:`Automatic Bind Rules` tab of container properties.
 
 .. figure:: _images/automatic_bind_rules.png
 
-There can be defined if script should be used for automatic binding, if script
-should be used for node unbinding and can be written script it selves.
+Functionality would check and bind or unbind containers to nodes according to auto-bind script.
 
 This script will be executed each configuration poll of each node.
 
@@ -374,50 +373,43 @@ Circuit
 ---------
 
 Circuits can be created in Infrastructure Services tree. Existing node interfaces can be 
-added to containers by using Bind operation, and removed by using
-Unbind operation. This object will generate events when state of undertlying interface changes, 
+added to circuit by using Bind operation, and removed by using
+Unbind. This object will generate events when state of underlying interface changes, 
 and being an event source it will be able to have alarms on it. Reference of multiple 
-interfaces will allow to use this object to represent different types of network services 
-beyond  - multilink interfaces, links between sites, virtual circuits, etc. Circuits and interfaces inside
+interfaces will allow to use this object to represent different types of network services - multilink interfaces, links between sites, virtual circuits, etc. Circuits and interfaces inside
 them can be moved by :guilabel:`Move to another container` menu item or using
 drag&drop.
 
-Besides default property pages condition has also:
-   - :guilabel:`Automatic bind` about this functionality can be found
-     :ref:`there<automatic-bind>`
+Besides default property pages circuit has also:
+   - :guilabel:`Automatic bind` functionality is described in more details 
+     :ref:`here<automatic-bind>`
    - :guilabel:`Map Appearance` tab defines images that will be used to display
      this object on a :term:`Network Map` and drill-down object (object that will be
      opened when double click on this object on :term:`Network Map`).
-   - :guilabel:`Trusted Objects` is used to define object list that
-      have access to this object from the script.
+   - :guilabel:`Trusted Objects` is used to define object list that have access to this object from the script.
 
 Menu items:
 
 In case if
 it is required to add already existing interface to circuit use
 :guilabel:`Bind...` menu item. To remove nodeinterface from circuit, but do not delete
-it use :guilabel:`Unbind...` menu item. Option :guilabel:`Link to asset...` can link circuit to Asset group
+it use :guilabel:`Unbind...` menu item.
 
-Using :guilabel:`Manage`/:guilabel:`Unmanage` all nodes will be
-managed/unmanaged under circuit. Circuit can be deleted, but interfaces 
-will not get deleted since they have parent. 
+Using :guilabel:`Manage`/:guilabel:`Unmanage` all interfaces will be
+managed/unmanaged under circuit. 
 
 :guilabel:`Execute script`   will open :ref:`execute server script view
 <execute_server_script>`. Where an arbitrary script can be executed.
 
-:guilabel:`Logs` will open alarm/event/trap view options with all active alarms for all children
-of this circuit. 
+:guilabel:`Logs` will open alarm/event/trap view options with all active alarms for this circuit. 
 
 
 Automatic bind option
 
-For each circuit can be configured automatic binding rules. This can be done
-in :guilabel:`Automatic Bind Rules` tab of container properties.
+For each circuit one can configure automatic bind rules. It can be done
+in :guilabel:`Automatic Bind Rules` tab of circuit properties and it would check and bind or unbind circuit to interfaces according to auto-bind script.
 
-There can be defined if script should be used for automatic binding, if script
-should be used for node unbinding and can be written script it selves.
-
-This script will be executed each configuration poll of each node.
+Auto bind script will be executed while circuit auto bind is polled.
 
 
 Common object properties

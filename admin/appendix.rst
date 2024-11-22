@@ -2142,8 +2142,9 @@ Command line tools
 
 |product_name| provide some additional command line tools. Each tool serves its own purpose.
 
-DB Manager
-----------
+
+Database Manager
+----------------
 
 This is tool used to make manipulations with |product_name| database.
   ::
@@ -2156,18 +2157,26 @@ Valid commands are:
 .. list-table::
    :widths: 50 150
 
+   * - background-convert
+     - Convert collected data to TimescaleDB format in background
+   * - background-upgrade
+     - Run pending background upgrade procedures
    * - batch <file>
      - Run SQL batch file
    * - check
      - Check database for errors
+   * - check-data-tables
+     - Check database for missing data tables
+   * - convert
+     - Convert standard PostgreSQL schema to TimescaleDB schema
    * - export <file>
      - Export database to file
    * - get <name>
      - Get value of server configuration variable
    * - import <file>
      - Import database from file
-   * - init <file>
-     - Initialize database
+   * - init [<type>]
+     - Initialize database. If type is not provided it will be deduced from driver name.
    * - migrate <source>
      - Migrate database from given source
    * - reset-system-account
@@ -2184,57 +2193,188 @@ Valid commands are:
 
 Valid options are:
 
-+---------------+--------------------------------------------------------------------+
-| -c <config>   |Use alternate configuration file. Default is {search}               |
-+---------------+--------------------------------------------------------------------+
-| -d            |Check collected data (may take very long time).                     |
-+---------------+--------------------------------------------------------------------+
-| -D            |Migrate only collected data.                                        |
-+---------------+--------------------------------------------------------------------+
-| -f            |Force repair - do not ask for confirmation.                         |
-+---------------+--------------------------------------------------------------------+
-| -h            |Display help and exit.                                              |
-+---------------+--------------------------------------------------------------------+
-| -I            |MySQL only - specify TYPE=InnoDB for new tables.                    |
-+---------------+--------------------------------------------------------------------+
-| -M            |MySQL only - specify TYPE=MyISAM for new tables.                    |
-+---------------+--------------------------------------------------------------------+
-| -N            |Do not replace existing configuration value ("set" command only).   |
-+---------------+--------------------------------------------------------------------+
-| -q            |Quiet mode (don't show startup banner).                             |
-+---------------+--------------------------------------------------------------------+
-| -s            |Skip collected data during migration.                               |
-+---------------+--------------------------------------------------------------------+
-| -t            |Enable trace mode (show executed SQL queries).                      |
-+---------------+--------------------------------------------------------------------+
-| -v            |Display version and exit.                                           |
-+---------------+--------------------------------------------------------------------+
-| -X            |Ignore SQL errors when upgrading (USE WITH CAUTION!!!)              |
-+---------------+--------------------------------------------------------------------+
+.. list-table::
+   :widths: 50 150
+
+   * - -c <config> 
+     - Use alternate configuration file. Default is {search}
+   * - -C <dba>
+     - Create database and user before initialization using provided DBA credentials
+   * - -d
+     - Check collected data (may take very long time).
+   * - -D
+     - Migrate only collected data.
+   * - -e <table>
+     - Exclude specific table from export, import, or migration.
+   * - -E
+     - Fail check if fix required
+   * - -f
+     - Force repair - do not ask for confirmation.
+   * - -F <syntax> 
+     - Fallback database syntax to use if not set in metadata.
+   * - -h
+     - Display help and exit.
+   * - -I
+     - MySQL only - specify TYPE=InnoDB for new tables.
+   * - -L <log>
+     - Migrate only specific log.
+   * - -m
+     - Improved machine readability of output.
+   * - -M
+     - MySQL only - specify TYPE=MyISAM for new tables.
+   * - -N
+     - Do not replace existing configuration value ("set" command only).
+   * - -o
+     - Show output from SELECT statements in a batch.
+   * - -P
+     - Pause after error.
+   * - -q
+     - Quiet mode (don't show startup banner).
+   * - -s
+     - Skip collected data during export, import, conversion, or migration.
+   * - -S
+     - Skip collected data during export, import, or migration and do not clear or create data tables.
+   * - -t
+     - Enable trace mode (show executed SQL queries).
+   * - -T <recs> 
+     - Transaction size for migration.
+   * - -v
+     - Display version and exit.
+   * - -x
+     - Ignore collected data import/migration errors
+   * - -X
+     - Ignore SQL errors when upgrading (USE WITH CAUTION!!!)
+   * - -Y <table>
+     - Migrate only given table.
+   * - -Z <log>
+     - Exclude specific log from export, import, or migration.
+
 
 Database initialization
 ~~~~~~~~~~~~~~~~~~~~~~~
   ::
 
-   nxdbmgr init initialization.file
+   nxdbmgr init
 
-Is used to initialize first time database. Database and user should already exist.
-Credentials of connection are taken from server configuration file.
+Used to initialize the database for the first time. Database and user should
+already exist. Database name and credentials are taken from server configuration
+file.
+
+
+Check database for errors
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+It's recommended to check database for errors when performing server upgrade or
+after server process has crashed or was killed. Server process should be stopped
+when performing the check. To perform the check, execute the following command: 
+
+  ::
+
+   nxdbmgr check
+
+
+Unlocking database
+~~~~~~~~~~~~~~~~~~
+
+When |product_name| server process or nxdbmgr starts, it makes a record in the
+database meaning that it locked this database and no other server process should
+work with it. This prevents situations when due to incorrect configuration two
+server processes connect to same database, as this would corrupt data in the
+database. 
+
+When server process or nxdbmgr stops, it would remove the lock. However, if
+process was not able to stop correctly, the lock could stay in the database and
+manual unlocking using nxdbmgr might be needed. The procedure is the following:
+
+1) Make sure that server process is not running, e.g. on Linux you can check by
+   running:
+
+  ::
+
+   ps aux | grep netxmsd
+
+2) Unlock database by running:
+
+  ::
+
+   nxdbmgr unlock
 
 
 Database migration
 ~~~~~~~~~~~~~~~~~~
+
+nxdbmgr allows to migrate |product_name| database between different database
+management systems supported by |product_name| (e.g. from MySQL to Postgres).
+This also allows to migrate the database from one host to another.
+
+Migration is only possible when |product_name| server process is stopped. It is
+recommended to perform database check prior to migration with the help of
+``nxdbmgr check`` command.
+
+Connection parameters and credentials for DESTINATION database are taken from
+server configuration file (or from arbitrary configuration file specified with
+``-c`` option). 
+
+Connection parameters and credentials for SOURCE database are taken from same
+format configuration file that is provided as nxdbmgr parameter. 
+
+Destination database should be initialized prior to migration by running
+``nxdbmgr init``. 
+  
+To migrate the whole database:
+
   ::
 
-   nxdbmgr migrate old.configuration.file
+   nxdbmgr migrate netxmsd-source-db.conf
 
-Is used to migrate |product_name| database between different database management system from |product_name|
-supported list.
 
-While migration nxdbmgr should use new configuration file(with new DB credentials) and as
-a parameter should be given the old configuration file.
+Migration can also be performed as two-step process - on the first step only
+configuration data is transferred, then server is started on the new database
+and collected data and logs are transferred in the background. First step:
 
-In best practises of migration is to do database check with command "nxdbmgr check".
+  ::
+
+   nxdbmgr -s -Z all migrate netxmsd-source-db.conf
+
+After completion and starting server on the new database, run below two commands
+to transfer collected data and logs:
+
+  ::
+
+   nxdbmgr -D migrate netxmsd-source-db.conf
+   nxdbmgr -S -L all migrate netxmsd-old.conf
+
+
+In-place conversion from Postgres to Timescale
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+nxdbmgr allows to perform in-place conversion from standard PostgreSQL schema to
+TimescaleDB schema. This is irreversible operation. It's strongly recommended to
+have database backup prior to running this. Conversion is only possible when
+|product_name| server process is stopped.
+
+To convert the whole database:
+
+  ::
+
+   nxdbmgr convert
+
+
+Conversion can also be performed in two steps. First step requires server
+process to be stopped, log tables are converted during that step. Then server
+can be started and second step - conversion of tables with collected data can be
+performed. First step: 
+
+  ::
+
+   nxdbmgr -s convert
+
+After completion and starting server, run the second step:
+
+  ::
+
+   nxdbmgr background-convert
+
 
 
 nxaction

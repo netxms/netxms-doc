@@ -140,7 +140,7 @@ with NetXMS Agent as Origin and WMI query as Metric
 
 
 
-Following parameters are available for this subagent
+Following parameters are available for this subagent:
 
 
 
@@ -158,34 +158,34 @@ Following parameters are available for this subagent
      - Current temperature in ACPI thermal zone. 
     
    * - ACPI.ThermalZone.CurrentTemp(*)
-     - Current temperature in ACPI thermal zone {instance}.
+     - Current temperature in ACPI thermal zone {instance}. Argument is thermal zone name, one of those returned by list ACPI.ThermalZones (actually InstanceName from WMI class MSAcpi_ThermalZoneTemperature).
 
    * - Hardware.NetworkAdapter.Availability(*)
-     - Availability. 
+     - Availability. Argument is physical network adapter index, one of those returned by list Hardware.NetworkAdapters or column "INDEX" in table Hardware.NetworkAdapters.
 
    * - Hardware.NetworkAdapter.Description(*)
-     - Description.
+     - Description. Argument is physical network adapter index, one of those returned by list Hardware.NetworkAdapters or column "INDEX" in table Hardware.NetworkAdapters.
 
    * - Hardware.NetworkAdapter.InterfaceIndex(*)
-     - InterfaceIndex. 
+     - InterfaceIndex. Argument is physical network adapter index, one of those returned by list Hardware.NetworkAdapters or column "INDEX" in table Hardware.NetworkAdapters.
     
    * - Hardware.NetworkAdapter.MACAddress(*)
-     - MACAddress.
+     - MACAddress. Argument is physical network adapter index, one of those returned by list Hardware.NetworkAdapters or column "INDEX" in table Hardware.NetworkAdapters.
 
    * - Hardware.NetworkAdapter.Manufacturer(*)
-     - Manufacturer. 
+     - Manufacturer. Argument is physical network adapter index, one of those returned by list Hardware.NetworkAdapters or column "INDEX" in table Hardware.NetworkAdapters.
 
    * - Hardware.NetworkAdapter.Product(*)
-     - ProductName.
+     - ProductName. Argument is physical network adapter index, one of those returned by list Hardware.NetworkAdapters or column "INDEX" in table Hardware.NetworkAdapters.
    
    * - Hardware.NetworkAdapter.Speed(*)
-     - Speed. 
+     - Speed. Argument is physical network adapter index, one of those returned by list Hardware.NetworkAdapters or column "INDEX" in table Hardware.NetworkAdapters.
     
    * - Hardware.NetworkAdapter.Type(*)
-     - AdapterType.
+     - AdapterType. Argument is physical network adapter index, one of those returned by list Hardware.NetworkAdapters or column "INDEX" in table Hardware.NetworkAdapters.
 
    * - System.AntiSpywareProduct.Active
-     - Anti-spyware product active. 
+     - Anti-spyware product active.
 
    * - System.AntiSpywareProduct.DisplayName
      - Anti-spyware product display name.
@@ -212,7 +212,11 @@ Following parameters are available for this subagent
      - Firewall product up to date. 
 
    * - WMI.Query(*)
-     - Generic WMI query.
+     - Generic WMI query. Arguments are namespace, query, property. 
+       
+       For example:
+       
+       WMI.Query(root\cimv2, SELECT * FROM Win32_Process WHERE ProcessId=252, Caption)
 
 
 
@@ -224,9 +228,9 @@ Following lists are available for this subagent:
 
 - ACPI.ThermalZones
 - Hardware.NetworkAdapters
-- WMI.Classes(*)
+- WMI.Classes(*), argument is WMI namespace (for example root\cimv2). List of available namespaces can also be retrieved using agent list WMI.NameSpaces (output will not contain "root\")
 - WMI.NameSpaces
-- WMI.Query(*)
+- WMI.Query(*), arguments are namespace, query, property (for example: WMI.Query(root\cimv2, SELECT * FROM Win32_Process, Caption) - will return all process names)
 
 
 
@@ -234,7 +238,7 @@ Following lists are available for this subagent:
 Below list of supported tables for this subagent:
 
 - Hardware.NetworkAdapters
-- WMI.Query(*)
+- WMI.Query(*), arguments are namespace and query and it will return query output with column for each attribute (for example: WMI.Query(root\cimv2, SELECT * FROM Win32_Process) - all processes in the system)
 
 
 

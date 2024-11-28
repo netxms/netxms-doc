@@ -1207,6 +1207,7 @@ in the same directory as nxmc.properties, correct entry will be:
 How to configure NetXMS web client with jetty in Linux
 ------------------------------------------------------
 
+
 1. curl -O https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/12.0.13/jetty-home-12.0.13.tar.gz
 2. tar -xvf jetty-home-12.0.13.tar.gz -C /opt
 3. ln -s /opt/jetty-home-12.0.13 /opt/jetty-home-12
@@ -1218,7 +1219,8 @@ How to configure NetXMS web client with jetty in Linux
 keytool -genkeypair -alias jetty -keyalg RSA -keysize 2048 -keystore /opt/netxms-webui/etc/keystore.p12 -storetype PKCS12 -storepass password -keypass password -validity 3650 -dname "CN=netxms-webui, OU=netxms, O=netxms, L=netxms, ST=netxms, C=netxms"
 sed 's,# jetty.sslContext.keyStorePassword=,jetty.sslContext.keyStorePassword=password,' -i'' start.d/ssl.ini
 
-Adjust configurable values like path, user and password as per requirements.
+.. note::
+   Adjust configurable values like path, user and password as per requirements. Jetty user and group should be created or exist in order to use them in service file.
 
 8. Manual test run
 
@@ -1229,7 +1231,27 @@ java -Dnxmc.logfile=/opt/netxms-webui/logs/nxmc.log -jar /opt/jetty-home-12/star
 systemctl edit --force --full netxms-webui.service
 
 
-.. figure:: _images/systemctl_edit.png
+.. code-block:: cfg
+
+   [Unit]
+    Description=NetXMS WebUI
+    StartLimitIntervalSec=0
+
+   [Service]
+    Type=simple
+    WorkingDirectory=/opt/netxms-webui
+    Environment=JETTY_HOME=/opt/jetty-home-12
+    Environment=JETTY_BASE=/opt/netxms-webui
+    User=jetty
+    Group=jetty
+    ExecStart=java -Dnxmc.logfile=/opt/netxms-webui/logs/nxmc.log -jar /opt/jetty-home-12/start.jar
+    Restart=on-failure
+    RestartSec=30
+    TimeoutSec=900
+
+   [Install]
+    WantedBy=multi-user.target
+    EnableDefaultCounters = yes
 
 
 10. Enable netxms-web.service

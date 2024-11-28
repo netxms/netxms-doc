@@ -485,7 +485,7 @@ Metrics can be collected from multiple data sources:
        parameters for data collection. E.g. NET-SNMP provides information about
        storage this way. 
    * - Modbus
-     -
+     - Data is collected via Modbus-TCP industrial protocol. See :ref:`modbus` for more information.
    * - EtherNet/IP
      -
 

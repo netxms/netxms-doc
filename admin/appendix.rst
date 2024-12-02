@@ -2143,8 +2143,8 @@ Command line tools
 |product_name| provide some additional command line tools. Each tool serves its own purpose.
 
 
-Database Manager
-----------------
+Database Manager (nxdbmgr)
+--------------------------
 
 This is tool used to make manipulations with |product_name| database.
   ::

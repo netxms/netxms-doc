@@ -653,6 +653,9 @@ To implement custom deletion of DCI and Table DCI data built-in deletion of this
 data can be disabled by setting server configuration parameter
 ``Housekeeper.DisableCollectedDataCleanup``.
 
+
+.. _fanout-drivers:
+
 Fanout drivers
 ===============
 

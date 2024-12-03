@@ -552,6 +552,12 @@ Server configuration file (netxmsd.conf)
   * - Parameter
     - Description
     - Default Value
+  * - AuditLogKey
+    - 
+    - 
+  * - BackgroundLogWriter
+    - 
+    - 
   * - CodePage
     - Code page used by |product_name| server. Has no effect on Windows or if
       server was compiled without iconv support.
@@ -559,7 +565,10 @@ Server configuration file (netxmsd.conf)
   * - CreateCrashDumps
     - Control creation of server's crash dumps. Possible values: yes or no. Has
       effect only on Windows platforms.
-    - No
+    - no
+  * - CRL
+    - 
+    - 
   * - DailyLogFileSuffix
     - Log file name suffix used when ``LogRotationMode`` is set to 1 (daily),
       can contain `strftime(3C)
@@ -574,12 +583,13 @@ Server configuration file (netxmsd.conf)
       installed from .deb packages: :file:`/var/lib/netxms`. On Windows:
       :file:`'Installation folder'\\netxms\\var` where 'Installation folder' is
       the folder to which |product_name| server is installed.
+  * - DBCacheConfigurationTables
+    - Cache configuration tables to in-memory sqlite database to speed up server
+      startup
+    - yes
   * - DBDriver
     - Database driver to be used.
     - No default value
-  * - DBEncryptedPassword
-    - Hashed password, as produced by "nxencpass"
-    - none
   * - DBDriverOptions
     - Additional driver-specific parameters.
     - Empty string
@@ -593,20 +603,24 @@ Server configuration file (netxmsd.conf)
     - Database name (not used by ODBC driver).
     - netxms_db
   * - DBPassword
-    - Database user's password. When using INI configuration file remember to
-      enclose password in double qoutes ("password") if it contains # character.
+    - Database user's password. When using INI configuration file format,
+      remember to enclose password in double qoutes ("password") if it contains
+      ``#`` character.
     - Empty password
+  * - DBEncryptedPassword
+    - Hashed password, as produced by "nxencpass"
+    - none
   * - DBSchema
     - Schema name
     - not set
+  * - DBServer
+    - Database server (ODBC source name for ODBC driver).
+    - localhost
   * - DBSessionSetupSQLScript
     - Path to a plain text file containing a list of SQL commands which will be
       executed on every new database connection, including initial connection on
       server startup. 
     - Empty string
-  * - DBServer
-    - Database server (ODBC source name for ODBC driver).
-    - localhost
   * - DebugLevel
     - Set server debug logging level (0 - 9).  Value of 0 turns off debugging, 9
       enables very detailed logging.  Can also be set with command line ``-D
@@ -619,7 +633,10 @@ Server configuration file (netxmsd.conf)
       ``agent.tunnel.*:4``). To configure multiple log tags, you should use
       multiple DebugTags parameters or write them coma separated (like
       ``crypto.*:8,agent.tunnel.*:4``).
-    -
+    - Empty string
+  * - DefaultThreadStackSize
+    - 
+    - 
   * - DumpDirectory
     - Directory for storing crash dumps.
     - "/" or "C:\"
@@ -641,9 +658,9 @@ Server configuration file (netxmsd.conf)
       use password.
     - Empty string
   * - LibraryDirectory
-    - Defines location of library folder where drivers(ndd files) are stored.
+    - Defines location of library folder where drivers (ndd files) are stored.
       It's highly recommended not to use this parameter.
-    -
+    - Empty string
   * - ListenAddress
     - Interface address which should be used by server to listen for incoming
       connections. Use value 0.0.0.0 or * to use all available interfaces.
@@ -664,6 +681,9 @@ Server configuration file (netxmsd.conf)
         value defined by MaxLogSize parameter).
 
     - 2
+  * - MaxClientMessageSize
+    - 
+    - 
   * - MaxClientSessions
     - Maximum number of client sessions. 
     - 256
@@ -672,18 +692,21 @@ Server configuration file (netxmsd.conf)
       2
     - 16777216
   * - Module
-    - Additional server module to be loaded at server startup. To load multiple
-      modules, add additional Module parameters.
+    - Additional server module to be loaded at server startup. You can use more
+      then one ``Module`` parameters to load multiple modules.
     - No default value
   * - PeerNode
     - IP address of peer node in high availability setup. If there is lock in
       the database with this address indicated, server process will communicate
-      to agent and server on that address to check if server is not running and
-      will remove database lock.
+      to agent and server on that address to ensure the server is not running
+      prior to removing the database lock.
     - No default value
   * - PerfDataStorageDriver
-    -
-    -
+    - Name of fanout driver used to send collected data to an additional
+      database. Multiple such parameters can be specified in the configuration
+      file to specify multiple drivers. See :ref:`fanout-drivers` for more
+      information. 
+    - Empty string
   * - ProcessAffinityMask
     - Sets a processor affinity mask for the netxmsd process (Windows only). A
       process affinity mask is a bit vector in which each bit represents a
@@ -692,10 +715,6 @@ Server configuration file (netxmsd.conf)
       <http://msdn.microsoft.com/en-us/library/windows/desktop/ms686223%28v=vs.85%29.aspx>`_
       for more details.
     - 0xFFFFFFFF
-  * - StartupSQLScript
-    - Path to a plain text file containing a list of SQL commands which will be
-      executed on server startup. 
-    - Empty string
   * - ServerCertificate
     - Path to file of server certificate for agent tunnel connections. This
       certificate is used to issue agent certificates. ServerCertificate
@@ -709,6 +728,10 @@ Server configuration file (netxmsd.conf)
   * - ServerCertificatePassword
     - Password of server certificate. Can be omitted if certificate does not use
       password.
+    - Empty string
+  * - StartupSQLScript
+    - Path to a plain text file containing a list of SQL commands which will be
+      executed on server startup. 
     - Empty string
   * - TrustedCertificate
     - Certificate issued by certificate authority or self-signed CA certificate.
@@ -727,6 +750,9 @@ Server configuration file (netxmsd.conf)
     - Password of server tunnel certificate. Can be omitted if certificate does
       not use password.
     - Empty string
+  * - WriteLogAsJson
+    - Write server log in JSON format. 
+    - no
 
 .. note::
   All boolean parameters accept "Yes/No", "On/Off" and "True/False" values.
@@ -2143,8 +2169,8 @@ Command line tools
 |product_name| provide some additional command line tools. Each tool serves its own purpose.
 
 
-Database Manager
-----------------
+Database Manager (nxdbmgr)
+--------------------------
 
 This is tool used to make manipulations with |product_name| database.
   ::

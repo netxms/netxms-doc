@@ -17,9 +17,7 @@ gather information from the nodes according to :term:`DCI` configuration. You
 can control how many data collectors will run simultaneously, by changing server
 configuration parameter ``ThreadPool.DataCollector.MaxSize``.
 
-Node capabilities provide information about available sources for data collection in the :guilabel:`Overview`-> :guilabel:`Capabilities` section. Please also refer to 
-:guilabel:`Data Collection` tab view for last values from DCI collections. 
-The last values of DCIs for the node can be found on the :guilabel:`Data Collection` tab. Additionally, specific DCIs can be displayed in the :guilabel:`Overview`` -> :guilabel:`Last Values section` 
+Node capabilities provide information about available sources for data collection in the :guilabel:`Overview`-> :guilabel:`Capabilities` section.  The last values of DCIs for the node can be found on the :guilabel:`Data Collection` tab. Additionally, specific DCIs can be displayed in the :guilabel:`Overview`` -> :guilabel:`Last Values section` 
 or as a graph on the :guilabel:`Performance` tab. More details about DCI display configuration options can be found in the :ref:`Other options <dci-other-options-label>` and :ref:`Performance View <dci-performance-view>` chapters.
 
 All configured DCIs are checked for polling requirement every second. If DCI needs to be polled, appropriate polling request is placed into internal

@@ -1016,8 +1016,8 @@ combine them, as per your business requirements.
 Creating template
 -----------------
 
-To create a template, right-click on :guilabel:`Template` root or
-:guilabel:`Template` group object in :guilabel:`Template` perspective, and click
+To create a template, right-click on :guilabel:`Template Root` or
+:guilabel:`Template group` object in :guilabel:`Template` perspective, and click
 :menuselection:`Create --> Template`. Enter a name for a new template and click
 :guilabel:`OK`. 
 

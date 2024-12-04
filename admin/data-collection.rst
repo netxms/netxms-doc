@@ -863,7 +863,7 @@ Table DCIs
 Table metrics can collect data in bulk, effectively encapsulating multiple 
 values that can be collected simultaneously. 
 
-.. figure:: _images/dci_tab.png
+.. figure:: _images/dci_table.png
   
   Table example
 

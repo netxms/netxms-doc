@@ -317,7 +317,7 @@ Transformation script can be tested in the same view, by clicking :guilabel:`Tes
 and entering test input data.
 
 
-.. figure:: _images/dci_transf_page.png
+.. figure:: _images/dci_transformation_page.png
 
     DCI configuration transformation property page
 

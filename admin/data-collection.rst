@@ -155,7 +155,7 @@ Source node override
 ~~~~~~~~~~~~~~~~~~~~
 
 Source node of metrics collection. This can be used when other node provides
-information about current node. In this way, platform provides additional flexability of where 
+information about current node. In this way, platform provides additional flexibility of where 
 metrics collection is taking place.
 
 Other example of usage is virtual nodes (nodes with IP 0.0.0.0). In this case,

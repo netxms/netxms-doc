@@ -785,7 +785,6 @@ request.
 
     DCI configuration access control property page
 
-.. _dci-othe-options-label:
 
 
 SNMP

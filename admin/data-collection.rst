@@ -785,7 +785,7 @@ is able to change and see DCI configuration.  When list is not empty, then both
 access to node and access to DCI are check on DCI configuration or value
 request.
 
-.. figure:: _images/dci_access_contr_page.png
+.. figure:: _images/dci_access_control_page.png
 
     DCI configuration access control property page
 

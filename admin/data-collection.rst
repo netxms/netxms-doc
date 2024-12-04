@@ -385,7 +385,7 @@ Threshold Configuration
 
 When adding or modifying a threshold, you will see the following dialog:
 
-.. figure:: _images/threshold_conf_dia.png
+.. figure:: _images/threshold_configuration_dialog.png
 
 
 First, you have to select what value will be checked:

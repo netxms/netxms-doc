@@ -1067,6 +1067,8 @@ or :guilabel:`Network` perspective
 select one or more objects, right-click and select :guilabel:`Remove template...`. Pop-up window will appear 
 with all applied templates to objects. Select templates to be removed and click :guilabel:`OK`.
 
+If you select Unbind DCIs from template, all DCIs related to template will remain configured on a node, but association between the DCIs and template will be removed. Any further changes to the template will not be reflected in these DCIs. If you later reapply the template to the node, you will have two copies of each DCI - one standalone (remaining from unbind operation) and one related to template (from new apply operation). Selecting Remove DCIs from node will remove all DCIs associated with the template. After you click OK, node will be unbound from template.
+
 
 Macros in template items
 ------------------------

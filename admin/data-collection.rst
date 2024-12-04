@@ -764,7 +764,7 @@ This section provides configuration options for displaying DCI values as line ch
   Note: Not available for table metrics.
 
 
-.. figure:: _images/dci_perf_view_page.png
+.. figure:: _images/dci_performance_tab_page.png
 
     DCI configuration instance discovery property page
 

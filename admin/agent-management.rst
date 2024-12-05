@@ -68,7 +68,7 @@ agent or subagent configuration parameters.
 
 'key = value' format example:
 
-.. code-block:: cfg
+.. code-block:: sh
 
    [Core]
    MasterServers = 10.0.0.4
@@ -79,7 +79,7 @@ agent or subagent configuration parameters.
 
 Same example in XML format:
 
-.. code-block:: xml
+.. code-block:: sh
 
    <config>
       <Core>
@@ -332,7 +332,7 @@ It is possible to use the same parameters and format as in any |product_name| ag
 
 Example:
 
-.. code-block:: cfg
+.. code-block:: sh
 
   MasterServer=127.0.0.1
   SubAgent=netsvc.nsm
@@ -348,7 +348,7 @@ Example:
   [filemgr]
   RootFolder=/
 
-.. code-block:: xml
+.. code-block:: sh
 
   <config>
     <core>
@@ -450,7 +450,7 @@ ServerConnection parameter
 :term:`DNS` or server IP address. It's also possible to specify port number
 separated by colon, e.g.:
 
-.. code-block:: cfg
+.. code-block:: sh
 
     ServerConnection=monitoring.example.com
     ServerConnection=192.168.77.77:1234
@@ -462,7 +462,7 @@ ServerConnection section
 ``[ServerConnection]`` section is set in agentd.conf. This allows to
 specify additional parameters, e.g.:
 
-.. code-block:: cfg
+.. code-block:: sh
 
     [ServerConnection]
     Hostname=192.168.77.77
@@ -507,7 +507,7 @@ parameter to configure what access rights server has to this agent.
 Agent can validate certificate chain, when connecting to server. This is
 configured in agent configuration file, e.g.:
 
-.. code-block:: cfg
+.. code-block:: sh
 
     TrustedRootCertificate=/etc/cert/root_cert.crt
     TrustedRootCertificate=/etc/cert/root_certs
@@ -792,7 +792,7 @@ There are several configuration parameters that are supported by Java subagent. 
 
 Configuration example:
 
-.. code-block:: cfg
+.. code-block:: sh
 
    MasterServers = netxms.demo
    SubAgent=java.nsm
@@ -895,7 +895,7 @@ more then a few seconds because this may lead to performance issues due to
 poller threads spending too much time on timeouts.
 ``ExternalMetricProvider`` can be used to handle long-executing commands. 
 
-.. code-block:: cfg
+.. code-block:: sh
 
   # Example
 
@@ -913,14 +913,14 @@ specified in ``ExternalMetric``/``ExternalMetricShellExec`` which provides
 output of the command (first line only), the other is ``Name.ExitCode`` that
 provides exit code of the executed command. 
 
-.. code-block:: cfg
+.. code-block:: sh
 
   # Real example
   ExternalMetric = Test:echo test
   ExternalMetric = LineCount(*):cat $1 | wc -l
 
 
-.. code-block:: shell
+.. code-block:: sh
 
   > nxget localhost Test
   test
@@ -938,7 +938,7 @@ configuration can be provided, these will be available as $1, $2, $3..., $9
 variables. To accept parameters metric name should contain "(*)" symbols after
 name. Lines of the list are separated by new line character.
 
-.. code-block:: cfg
+.. code-block:: sh
 
   # Example
 
@@ -968,7 +968,7 @@ included in "Metric(...)".
 
 Example of the script:
 
-.. code-block:: shell
+.. code-block:: sh
 
   #!/bin/sh
   echo 'Metric1=Value1'
@@ -978,7 +978,7 @@ Example of the script:
 
 Example of agent configuration:
 
-.. code-block:: cfg
+.. code-block:: sh
 
   #Example
   ExternalMetricProvider=PATH_TO_PROVIDER_SCRIPT:EXECUTION_INTERVAL_IN_SECONDS
@@ -1064,7 +1064,7 @@ symbols after name.
          * counter32
          * counter64
 
-.. code-block:: cfg
+.. code-block:: sh
 
   # Example
 
@@ -1120,7 +1120,7 @@ After action is defined it can be used in the :ref:`object tools - agent action<
 :ref:`actions - action execution on remote node<action-remote-execute>`. Action should be defined in main section of
 agent configuration file.
 
-.. code-block:: cfg
+.. code-block:: sh
 
   # Example
   Action=Name:command

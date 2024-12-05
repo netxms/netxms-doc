@@ -930,7 +930,7 @@ Example:
 
 This command will add 3 lines at the end of generated config file:
 
-.. code-block:: cfg
+.. code-block:: sh
 
     ZoneUIN=15
     [FILEMGR]
@@ -1115,7 +1115,7 @@ Agent
 
      Minimal required configuration:
 
-     .. code-block:: cfg
+     .. code-block:: sh
 
        MasterServers = 172.16.1.1 # server's IP - agent will drop connections unless address is whitelisted here
        LogFile = /var/log/nxagentd
@@ -1159,7 +1159,7 @@ Configuration is check in next order:
 
   2. nxmc.properties properties file in class path of your application server. Should be created in ini format: NAME=VALUE. For example:
 
-    .. code-block:: cfg
+    .. code-block:: sh
 
       server = 127.0.0.1
 
@@ -1195,7 +1195,7 @@ application server's class path and file name must be given relative to class pa
 root with leading slash. For example, if custom image is in file logo.jpg located
 in the same directory as nxmc.properties, correct entry will be:
 
-.. code-block:: cfg
+.. code-block:: sh
 
   loginFormImage = /logo.jpg
 
@@ -1231,7 +1231,7 @@ java -Dnxmc.logfile=/opt/netxms-webui/logs/nxmc.log -jar /opt/jetty-home-12/star
 systemctl edit --force --full netxms-webui.service
 
 
-.. code-block:: cfg
+.. code-block:: sh
 
    [Unit]
     Description=NetXMS WebUI
@@ -1293,7 +1293,7 @@ If TimescaleDB extension is about to be used, it should be added to the newly cr
 
 Configuration file example:
 
-.. code-block:: cfg
+.. code-block:: sh
 
   DBDriver = pgsql.ddr
   DBServer = localhost
@@ -1313,7 +1313,7 @@ MySQL
 
 Configuration file example:
 
-.. code-block:: cfg
+.. code-block:: sh
 
   DBDriver = mysql.ddr
   DBServer = localhost
@@ -1324,7 +1324,7 @@ Configuration file example:
 Oracle
 ------
 
-.. code-block:: sql
+.. code-block:: sh
 
   -- USER SQL
   CREATE USER netxms IDENTIFIED BY PaSwD
@@ -1337,7 +1337,7 @@ Oracle
 
 Configuration file example:
 
-.. code-block:: cfg
+.. code-block:: sh
 
   DBDriver = oracle.ddr
   DBServer = //127.0.0.1/XE # instant client compatible connection string

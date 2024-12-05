@@ -127,7 +127,7 @@ Configuration example
 
 In example are defined 2 JMS connections: *name* and *serverName2*. 
 
-.. code-block:: cfg
+.. code-block:: sh
 
    MasterServers = netxms.demo
    SubAgent=java.nsm

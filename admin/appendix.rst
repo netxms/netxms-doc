@@ -2271,7 +2271,7 @@ Valid options are:
 
 Database initialization
 ~~~~~~~~~~~~~~~~~~~~~~~
-  .. code-block:: shell
+  .. code-block:: sh
 
    nxdbmgr init
 
@@ -2287,7 +2287,7 @@ It's recommended to check database for errors when performing server upgrade or
 after server process has crashed or was killed. Server process should be stopped
 when performing the check. To perform the check, execute the following command: 
 
-  .. code-block:: shell
+  .. code-block:: sh
 
    nxdbmgr check
 
@@ -2308,13 +2308,13 @@ manual unlocking using nxdbmgr might be needed. The procedure is the following:
 1) Make sure that server process is not running, e.g. on Linux you can check by
    running:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
    ps aux | grep netxmsd
 
 2) Unlock database by running:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
    nxdbmgr unlock
 
@@ -2342,7 +2342,7 @@ Destination database should be initialized prior to migration by running
   
 To migrate the whole database:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
    nxdbmgr migrate netxmsd-source-db.conf
 
@@ -2351,14 +2351,14 @@ Migration can also be performed as two-step process - on the first step only
 configuration data is transferred, then server is started on the new database
 and collected data and logs are transferred in the background. First step:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
    nxdbmgr -s -Z all migrate netxmsd-source-db.conf
 
 After completion and starting server on the new database, run below two commands
 to transfer collected data and logs:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
    nxdbmgr -D migrate netxmsd-source-db.conf
    nxdbmgr -S -L all migrate netxmsd-old.conf
@@ -2374,7 +2374,7 @@ have database backup prior to running this. Conversion is only possible when
 
 To convert the whole database:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
    nxdbmgr convert
 
@@ -2384,13 +2384,13 @@ process to be stopped, log tables are converted during that step. Then server
 can be started and second step - conversion of tables with collected data can be
 performed. First step: 
 
-  .. code-block:: shell
+  .. code-block:: sh
 
    nxdbmgr -s convert
 
 After completion and starting server, run the second step:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
    nxdbmgr background-convert
 
@@ -2401,7 +2401,7 @@ Database export and import
 nxdbmgr allows convenient way to export and import database. To ensure export data consistancy, NetXMS server and agent should be stopped. 
 Use -c switch, if alternative server configuration file is to be used.
 
-  .. code-block:: shell
+  .. code-block:: sh
     
    nxdbmgr export mysql_backup.exp -c /etc/netxmsd_mysql.conf
 
@@ -2409,14 +2409,14 @@ Use -c switch, if alternative server configuration file is to be used.
 It is possible to export setup configuration without data and logs and this can be achieved with -s and -Z switches.
 Use -e switch to exclude specific table from export.
 
-  .. code-block:: shell
+  .. code-block:: sh
     
      nxdbmgr -s -Z all export plsql_backup.exp
 
 For database import similar syntax and switches apply. One can export full database, but import only setup configuration or exclude any specific table.
 
 
-  .. code-block:: shell
+  .. code-block:: sh
     
      nxdbmgr -e tdata_237 import plsql_backup.exp
 
@@ -2473,7 +2473,7 @@ Example:
 
 1. Find available actions.
 
-  .. code-block:: shell
+  .. code-block:: sh
 
       nxget -l localhost Agent.ActionList
       Agent.Restart internal "CORE"
@@ -2489,7 +2489,7 @@ Example:
 
 2. Execute action.
 
-  .. code-block:: shell
+  .. code-block:: sh
   
     nxaction localhost System.Shutdown -e 3 -K /var/lib/netxms/.server_key -p 4700 -w 10 -W 30
 
@@ -2546,7 +2546,7 @@ Options:
 
 Example
 
-  .. code-block:: shell
+  .. code-block:: sh
 
      nxadm -u admin -p admin -i
 
@@ -2657,7 +2657,7 @@ Usage: nxaevent [OPTIONS] event_code [parameters]
 
 Send event to server via agent:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
      nxevent SYS_NODE_UP
 
@@ -2754,14 +2754,14 @@ Examples
 
 List alarms:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
      nxalarm -u admin -P adminpasswd localhost list
 
 
 Resolve alarm:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
      nxalarm -u admin -P adminpasswd localhost resolve 226875
 
@@ -2832,7 +2832,7 @@ Example
 
 List agent policies:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
       nxap -l 
     
@@ -2918,13 +2918,13 @@ Examples
 
 Push two values:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
       nxapush PushParam1=1 PushParam2=4
 
 Push values from file:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
       nxapush @file
 
@@ -3014,7 +3014,7 @@ Example
 
 Send event to server:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
      nxevent -u admin -P adminpassword localhost SYS_NODE_DOWN
 
@@ -3119,55 +3119,55 @@ Examples
 
 Get value of *Agent.Version* metric from agent at host 10.0.0.2:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
      nxget 10.0.0.2 Agent.Version
 
 Get list of supported parameters from agent at host 10.0.0.2:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
      nxget 10.0.0.2 -I
 
 Get list of supported lists from agent at host 10.0.0.2:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
      nxget 10.0.0.2 Agent.SupportedLists -l
 
 Get list of supported tables from agent at host 10.0.0.2:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
      nxget 10.0.0.2 Agent.SupportedTables -l
 
 Get value of *Agent.Uptime* and *System.Uptime* metrics in one request, with output in metric = value form:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
      nxget 10.0.0.2 -bn Agent.Uptime System.Uptime
 
 Get agent configuration file from agent at host 10.0.0.2:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
      nxget 10.0.0.2 -C
 
 Get value of *System.PlatformName* metric from agent at host 10.0.0.2, connecting via proxy agent at 172.16.1.1:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
      nxget 10.0.0.2 –X 172.16.1.1 System.PlatformName
 
 Get value of *Agent.AcceptedConnections* enum from agent at host 10.0.0.10, forcing use of encrypted connection:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
      nxget 10.0.0.10 -e 3 Agent.AcceptedConnections
 
 Check POP3 service at host 10.0.0.4 via agent at host 172.16.1.1:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
      nxget 10.0.0.4 -S secret –t 2 –r user:pass 172.16.1.1
 
@@ -3239,7 +3239,7 @@ Example
 
 Compile and compress mib file:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
        nxmibc -d /usr/share/netxms/mibs -o /var/lib/netxms/netxms.mib -z
 
@@ -3308,14 +3308,14 @@ Examples:
 
 Push two values to server 10.0.0.1 as user "sender" with password "passwd":
 
-  .. code-block:: shell
+  .. code-block:: sh
 
       nxpush -H 10.0.0.1 -u sender -P passwd 10:24=1 10:PushParam=4
 
   
 Push values from file to server 10.0.0.1 as user "guest" without password:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
       nxpush 10.0.0.1 @file
 
@@ -3368,7 +3368,7 @@ Example
 
 Convert script to NXSL version 5:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
        nxscript -5 file.nxsl
 
@@ -3420,7 +3420,7 @@ Example
 
 Get system description for given IP:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
        nxsnmpget -c public -v 2c 127.0.0.1 .1.3.6.1.2.1.1.1.0
 
@@ -3525,7 +3525,7 @@ Example
 
 Get system description for given IP:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
        nxsnmpwalk -c public -v 2c 127.0.0.1 .1.3.6.1.2.1.1.1.0
 
@@ -3602,7 +3602,7 @@ Example
 
 Upload file on agent:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
        nxupload localhost test_script.sh
 
@@ -3683,7 +3683,7 @@ Example
 
 Upload file on agent:
 
-  .. code-block:: shell
+  .. code-block:: sh
 
        nxupload localhost test_script.sh
      

@@ -190,7 +190,7 @@ Server
 
 3. Check database for possible inconsistencies:
 
-.. code-block:: cfg
+.. code-block:: sh
 
   C:\NetXMS\bin> nxdbmgr check
 
@@ -198,13 +198,13 @@ Proceed to the next step only if database checker does not report any errors!
 
 4. Run |product_name| installer and follow the prompts. Normally, you will not need to change any settings on installation wizard windows. Alternatively, you can run the installer with /SILENT option to disable any prompts:
 
-.. code-block:: cfg
+.. code-block:: sh
 
   C:\Download> netxms-5.1.0.exe /SILENT
 
 5. Check whether |product_name| Server service is running again. If it's not, most likely you have to upgrade your database to newer version. To upgrade database, use nxdbmgr utility:
 
-.. code-block:: cfg
+.. code-block:: sh
 
   C:\NetXMS\bin> nxdbmgr upgrade
 

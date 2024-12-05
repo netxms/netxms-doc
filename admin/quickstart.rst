@@ -44,7 +44,7 @@ Automatically generated configuration file can be found there:
 
 Configuration file for Windows should look like this:
 
-.. code-block:: cfg
+.. code-block:: sh
 
     #
     # Sample agent’s configuration file
@@ -60,7 +60,7 @@ After agent is installed on a UNIX/Linux system it is required to create/edit
 file :file:`/etc/nxagentd.conf`. This file should contain at least this
 information:
 
-.. code-block:: cfg
+.. code-block:: sh
 
     #
     # Sample agent’s configuration file
@@ -102,7 +102,7 @@ file: :file:`'installation directory'\\etc\\netxmsd.conf` (by default
 
 Example of sample Windows configuration for mysql:
 
-.. code-block:: cfg
+.. code-block:: sh
 
   #
   # Sample server configuration file
@@ -124,7 +124,7 @@ created/populated manually.
 
 Configuration file example for oracle database:
 
-.. code-block:: cfg
+.. code-block:: sh
 
   DBDriver = oracle.ddr
   DBServer = ServerIP/Hostname.DomainName #Here is service (full database name), not SID
@@ -187,7 +187,7 @@ Notification channels are configured on :menuselection:`Configuration -->
 Notification Channels`. Each channel has textual configuration, e.g. for SNMP
 driver configuration may look like this:
 
-.. code-block:: cfg
+.. code-block:: sh
 
   Server=smtp.example.com
   FromAddr=netxms@example.com

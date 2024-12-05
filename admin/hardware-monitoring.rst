@@ -23,7 +23,7 @@ Package lm_sensors should be installed and configured properly. Output of
 `sensors <http://www.lm-sensors.org/wiki/man/sensors>`_ command
 should produce meaningful output (see example below).
 
-.. code-block:: shell
+.. code-block:: sh
 
    alk@b08s02ur:~$ sensors
    w83627dhg-isa-0290
@@ -87,7 +87,7 @@ The following configuration parameters are supported:
 Configuration example
 ---------------------
 
-.. code-block:: cfg
+.. code-block:: sh
 
    MasterServers = netxms.demo
    SubAgent = lmsensors.nsm
@@ -101,7 +101,7 @@ Sample usage
 
 (based on output of "sensors" from Pre-requisites section)
 
-.. code-block:: cfg
+.. code-block:: sh
 
    alk@b08s02ur:~$ nxget netxms.demo 'LMSensors.Value(coretemp-isa-0001,Core 1)'
    38.000000
@@ -152,7 +152,7 @@ The following configuration parameters are supported:
 Configuration example
 ---------------------
 
-.. code-block:: cfg
+.. code-block:: sh
 
    MasterServers = netxms.demo
    SubAgent = DS18X20.nsm
@@ -213,7 +213,7 @@ The following configuration parameters are supported:
 Configuration example
 ---------------------
 
-.. code-block:: cfg
+.. code-block:: sh
 
    MasterServers = netxms.demo
    SubAgent = rpi.nsm
@@ -276,7 +276,7 @@ These are configuration sections and parameters for the MQTT subagent:
 Configuration example
 ---------------------
 
-.. code-block:: cfg
+.. code-block:: sh
 
 	SubAgent = mqtt.nsm
 
@@ -287,7 +287,7 @@ Configuration example
 Configuration example with metric and event configuration
 ---------------------------------------------------------
 
-.. code-block:: cfg
+.. code-block:: sh
 
 	SubAgent = mqtt.nsm
 

@@ -1200,6 +1200,66 @@ in the same directory as nxmc.properties, correct entry will be:
   loginFormImage = /logo.jpg
 
 
+
+.. _linux_jetty_install:
+
+
+How to configure NetXMS web client with jetty in Linux
+------------------------------------------------------
+
+
+1. curl -O https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/12.0.13/jetty-home-12.0.13.tar.gz
+2. tar -xvf jetty-home-12.0.13.tar.gz -C /opt
+3. ln -s /opt/jetty-home-12.0.13 /opt/jetty-home-12
+4. mkdir -p /opt/netxms-webui/{etc,logs} && cd /opt/netxms-webui
+5. java -jar /opt/jetty-home-12/start.jar --add-modules=ee8-deploy,gzip,http,http2,https,logging-logback,plus,server,ssl,work
+6. curl -o webapps/ROOT.war https://netxms.com/download/releases/5.0/nxmc-5.1.1.war
+7. Generate ssl key
+
+keytool -genkeypair -alias jetty -keyalg RSA -keysize 2048 -keystore /opt/netxms-webui/etc/keystore.p12 -storetype PKCS12 -storepass password -keypass password -validity 3650 -dname "CN=netxms-webui, OU=netxms, O=netxms, L=netxms, ST=netxms, C=netxms"
+sed 's,# jetty.sslContext.keyStorePassword=,jetty.sslContext.keyStorePassword=password,' -i'' start.d/ssl.ini
+
+.. note::
+   Adjust configurable values like path, user and password as per requirements. Jetty user and group should be created or exist in order to use them in service file.
+
+8. Manual test run
+
+java -Dnxmc.logfile=/opt/netxms-webui/logs/nxmc.log -jar /opt/jetty-home-12/start.jar
+
+9. Configure systemctl, run below and edit as per requirents
+
+systemctl edit --force --full netxms-webui.service
+
+
+.. code-block:: cfg
+
+   [Unit]
+    Description=NetXMS WebUI
+    StartLimitIntervalSec=0
+
+   [Service]
+    Type=simple
+    WorkingDirectory=/opt/netxms-webui
+    Environment=JETTY_HOME=/opt/jetty-home-12
+    Environment=JETTY_BASE=/opt/netxms-webui
+    User=jetty
+    Group=jetty
+    ExecStart=java -Dnxmc.logfile=/opt/netxms-webui/logs/nxmc.log -jar /opt/jetty-home-12/start.jar
+    Restart=on-failure
+    RestartSec=30
+    TimeoutSec=900
+
+   [Install]
+    WantedBy=multi-user.target
+    EnableDefaultCounters = yes
+
+
+10. Enable netxms-web.service
+
+systemctl enable --now netxms-web.service
+
+
+
 Default login credentials
 =========================
 
@@ -1384,3 +1444,5 @@ If server has to use domain account for accessing database
 
 7. After installation is complete, go to "Services", find "NetXMS Core" service, and set it to login as administrator user (same user used for installation)
 8. Start NetXMS Core service
+
+

@@ -15,27 +15,18 @@ Every node can have many data collection items configured (see
 set of threads dedicated to data collection, called `Data Collectors`, used to
 gather information from the nodes according to :term:`DCI` configuration. You
 can control how many data collectors will run simultaneously, by changing server
-configuration parameter ``NumberOfDataCollectors``.
+configuration parameter ``ThreadPool.DataCollector.MaxSize``.
 
-All configured DCIs are checked for polling requirement every second
-Main information about node(:guilabel:`Object Details`) can be supplemented with
-DCI information displayed as text(last value) on :guilabel:`Object Details`->
-:guilabel:`Overview` page or in graph way on :guilabel:`Object
-Details`->:guilabel:`Performance` tab.
+Node capabilities provide information about available sources for data collection in the :guilabel:`Overview`-> :guilabel:`Capabilities` section.  The last values of DCIs for the node can be found on the :guilabel:`Data Collection` tab. Additionally, specific DCIs can be displayed in the :guilabel:`Overview`` -> :guilabel:`Last Values section` 
+or as a graph on the :guilabel:`Performance` tab. More details about DCI display configuration options can be found in the :ref:`Other options <dci-other-options-label>` and :ref:`Performance View <dci-performance-view>` chapters.
 
-DCI representation in text way can be configured on
-:ref:`dci-othe-options-label`. Next will be described only graph DCI
-representation configuration on :guilabel:`Performance` tab of :guilabel:`Object
-Details`.
-
-Multiple DCIs can be grouped in one graph. To group them use the same group name
-in "Group" field. and
-if DCI needs to be polled, appropriate polling request is placed into internal
+All configured DCIs are checked for polling requirement every second. If DCI needs to be polled, appropriate polling request is placed into internal
 data polling queue. First available data collector will pick up the request and
 gather information from the node according to DCI configuration. If a new value
 was received successfully, it's being stored in the database, and thresholds
 are checked. After threshold checking, data collector is ready for processing
-new request. Processing of a newly received metric value is outlined on the
+new request. If DCI is unsuported it will be polled only every tenth poll, this is not configurable.
+Processing of a newly received metric value is outlined on the
 figure below.
 
 .. figure:: _images/dci_param_proc.png
@@ -46,13 +37,13 @@ It is also possibility to push data to server. If DCI source is set to
 :guilabel:`Push`, server just waits for new values instead of polling from
 a data source.
 
-By default DCI data is not collected for the time being while connection between
-server and agent is broken as poll request could not get till agent. There is
-special configuration that allows to collect data and store it on agent till
-connection with server is restored and collected data is pushed to the server.
-This option is available for metrics, table metrics and proxy SNMP metrics. Not
+By default, DCI data is not collected for the duration while connection between
+server and agent is broken as poll request would not get to agent. There is
+special configuration that allows data collection and storage on agent till
+connection with server is restored and collected data is pushed to the server thereafter.
+This option is available for metrics, table metrics and proxy SNMP metrics as well as
 implemented for proxy SNMP table metrics and DCIs with custom schedule. In case
-of this configuration agent stores DCI configuration locally and does all metric
+of this setup, agent stores DCI configuration locally and does all metric
 collection and dispatch on its own. DCI configuration is synchronized on
 connect, DCI configuration change or SNMP proxy server change. Information about
 configuration options can be found here: :ref:`offline-data-collection`.
@@ -63,15 +54,16 @@ DCI configuration
 =================
 
 Data collection for a node can be configured using management client. To open
-data collection configuration window, right-click on node object in
-:guilabel:`Object Browser` or on a :guilabel:`Network Map`, and click
-:guilabel:`Data Collection Configuration`. You will see the list of configured
-data collection items. From here, you can add new or change existing metrics to
-monitor. Right click on the item will open pop-up menu with all possible
-actions.
+data collection tab view, click on node object in
+:guilabel:`Infrastructure` or  :guilabel:`Network` perspective, and click
+:guilabel:`Data Collection` tab. You will see the list of configured
+data collection items. From here, since DCI configuration and Last values are combined, 
+one can see collected data and configure new or change existing metrics for monitoring. Right click on an item 
+and all possible configuration options will be available.
 
 Each DCI have multiple attributes which affects the way data is collected.
-Detailed information about each attribute is given below.
+Detailed information about each attribute is given below and can be accessed by selecting :guilabel:`Edit...`, 
+:guilabel:`New parameter...` or :guilabel:`New table...`.
 
 General
 -------
@@ -80,10 +72,10 @@ General
 
     DCI configuration general property page
 
-Description
-~~~~~~~~~~~
+Display name
+~~~~~~~~~~~~
 
-Description is a free-form text string describing DCI. It is not used by the
+Display name is a free form text string describing DCI. It is not used by the
 server and is intended for better information understanding by operators. If
 you use the :guilabel:`Select` button to choose a metric from the list,
 description field will be filled in automatically.
@@ -93,7 +85,7 @@ Metric
 ~~~~~~
 
 Name of the metric of interest, used for making a request to target node.
-For |product_name| agent and internal metrics it will be metric name, and for
+For |product_name| Agent and Internal metrics it will be metric name, and for
 SNMP agent it will be an SNMP OID. You can use the :guilabel:`Select` button
 for easier selection of required metric name.
 
@@ -146,35 +138,14 @@ via :ref:`nxapush-label` or :ref:`nxpush-label` command line tool) instead of
 being polled by the server based on the schedule. Values can also be pushed from
 a NXSL script launched on the server. 
 
-Possible table metric origins are:
-
-.. list-table::
-   :widths: 30 70
-   :header-rows: 1
-
-   * - Source
-     - Description
-   * - Internal
-     - Data generated inside |product_name| server process (server statistics, etc.)
-   * - |product_name| Agent
-     - Data is collected from |product_name| agent, which should be installed
-       on target node. Server collect data from agent based on schedule.
-   * - SNMP
-     - SNMP transport will be used. Server collect data based on schedule. 
-       More about SNMP table configuration can be found in :ref:`snmp-table`
-       chapter.
-   * - Script
-     - Value is generated by NXSL script. Script should be stored in
-       :guilabel:`Script Library`. Sctipt should return `Table class
-       <https://www.netxms.org/documentation/nxsl-latest/#class-table>`_.
+Possible table metric origins are Internal, |product_name| agent, SNMP, Script. Please refer to description in above table.
 
 
 Data Type
 ~~~~~~~~~
 
-Data type for the metric. Can be one of the following: :guilabel:`Integer`,
-:guilabel:`Unsigned Integer`, :guilabel:`64-bit Integer`, :guilabel:`64-bit
-Unsigned Integer`, :guilabel:`Float` (floating point number), or
+Data type for column. Can be one of the following: :guilabel:`Integer`,
+:guilabel:`Unsigned Integer`, :guilabel:`Integer 64-bit`, :guilabel:`Unsigned Integer 64-bit`, :guilabel:`Counter 32-bit`, :guilabel:`Counter 64-bit`, :guilabel:`Float` (floating point number), or
 :guilabel:`String`. Selected data type affects collected data processing - for
 example, you cannot use operations like ``less than`` or ``greater than`` on
 strings. If you select metric from the list using the :guilabel:`Select` button,
@@ -184,88 +155,77 @@ Source node override
 ~~~~~~~~~~~~~~~~~~~~
 
 Source node of metrics collection. This can be used when other node provides
-information about this node. In this way collected data can be collected and
-shown on right nodes.
+information about current node. In this way, platform provides additional flexibility of where 
+metrics collection is taking place.
 
-Other example of usage is virtual nodes (nodes with IP 0.0.0.0). In this case
-node state can be obtained from the DCI created on this node but collected
+Other example of usage is virtual nodes (nodes with IP 0.0.0.0). In this case,
+node state can be obtained from the DCI created on current node, but collected
 from the other one.
 
-Data is collected from the same node if no value set.
+Data is collected from the current node if no value is set.
 
-Polling
-~~~~~~~
+Collection schedule
+~~~~~~~~~~~~~~~~~~~
 
 Polling mode and interval describe schedule type and interval between consecutive
 polls, in seconds. However, collecting too many values for too long will lead to
 significant increase of your database size and possible performance degradation.
 
-Can be selected one of options:
+Following options can be selected:
 
     - :guilabel:`Server default interval` - default value will be taken from
-      :guilabel:`DefaultDCIPollingInterval` server configuration parameter.
+      :guilabel:`DataCollection.DefaultDCIPollingInterval` server configuration parameter.
     - :guilabel:`Custom interval` - Allows to enter a custom value. This field
-      support macro resolution, so e.g. you can use %{polling_interval:600}
-      macro that will take value of ``polling_interval`` custom attribute or 600
+      supports macro resolution, so e.g. you can use %{polling_interval:600}
+      macro that will take value of ``polling_interval`` custom attribute or 600,
       if such custom attribute is not present on the node. 
     - :guilabel:`Advanced scheduling` - schedules configured in
-      :guilabel:`Advanced Schedule` page will be used.
+      :guilabel:`Custom Schedule` page will be used.
 
 
-Storage
-~~~~~~~
+
+If you turn on :guilabel:`Advanced Schedule` flag, additional link to :guilabel:`Custom Schedule` will appear 
+and, once configured, server will use custom schedule for collecting
+DCI values instead of fixed intervals. Advanced schedule consists of one or more records;
+each representing desired data collection time in cron-style format.
+
+See :ref:`cron_format` for supported cron format options.
+
+For DCI Collection schedule it's possible to specify optional sixth (first from left ) cron field
+for resolution in seconds. It's not recommended to use seconds in custom
+schedules as your main data collection strategy though. Use seconds only
+if it is absolutely necessary.
+
+
+History retention period
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 This attribute specifies how long the collected data should be kept in
-database, in days. Minimum retention time is 1 day and maximum is not limited.
-However, keeping too many collected values for too long will lead to
+database, in days. Minimum retention time is 1 day and maximum has not limit.
+However, keeping too many collected values for too long may lead to
 significant increase of your database size and possible performance
 degradation.
 
-Possible options:
+Following options can be selected:
 
     - :guilabel:`Server default` - default value will be taken from
-      :guilabel:`DefaultDCIRetentionTime` server configuration parameter.
-    - :guilabel:`Custom` - Allows to enter a custom value. This field support
-      macro resolution, so e.g. you can use %{storage_period:30} macro that will
+      :guilabel:`DataCollection.DefaultDCIRetentionTime` server configuration parameter.
+    - :guilabel:`Custom` - Allows to enter a custom value. This field supports
+      macro resolution, so for example you can use %{storage_period:30} macro that will
       take value of ``storage_period`` custom attribute or 30 if such custom
       attribute is not present on the node. 
     - :guilabel:`Do not save collected data to database` - will not save
       collected data to database, but will store last value in memory
 
 Last option is used when it is required to show latest (every 1 second
-collected) data on Dashboard, but it is too much data to store in database. So 2
-DCI configurations are created. One to store historical data collected once per
+collected) data on Dashboard, however it would result in excessive data stored in database. So, 2
+DCI configurations are created - one to store historical data collected once per
 minute and the second one, that is not stored in database, but is collected
-every second and up to date displayed on dashboards.
+every second and displayed on dashboards in close to real time.
 
     - :guilabel:`Save only changed values` - if enabled, value is saved to the
       database only if it differs from last saved value. 
 
-Status
-~~~~~~
-
-:term:`DCI` status can be one of the following: :guilabel:`Active`,
-:guilabel:`Disabled`, :guilabel:`Not Supported`. Server will collect data only
-if the status is :guilabel:`Active`. If you wish to stop data collection
-without removing :term:`DCI` configuration and collected data, the
-:guilabel:`Disabled` status can be set manually. If requested metric is not
-supported by target node, the :guilabel:`Not Supported` status is set by the
-server.
-
-Advanced Schedule
------------------
-
-If you turn on this flag, |product_name| server will use custom schedule for collecting
-DCI values instead of fixed intervals. This schedule can be configured on the
-:guilabel:`Schedule` page. Advanced schedule consists of one or more records;
-each representing desired data collection time in cron-style format.
-
-See :ref:`cron_format` for supported cron format options.
-
-For DCI Collection schedule it's possible to specify optional sixth cron field
-for resolution in seconds. It's not recommended to use seconds in custom
-schedules as your main data collection strategy though. Use seconds only
-if it is absolutely necessary.
 
 Cluster
 -------
@@ -280,8 +240,8 @@ This section is available only for DCI's collected on cluster.
 Associate with cluster resource
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this field you can specify cluster resource associated with DCI. Data
-collection and processing will occur only if node you configured DCI for is
+In this field one can specify cluster resource associated with DCI. Data
+collection and processing will occur only if node, you configured DCI for, is
 current owner of this resource. This field is valid only for cluster member
 nodes.
 
@@ -290,8 +250,8 @@ nodes.
 Data aggregation
 ~~~~~~~~~~~~~~~~
 
-This section is responsible for cluster data aggregation way.
-:guilabel:`Aggregate values from cluster nodes` option means, that DCI from cluster
+This section specifies how cluster data aggregation is done.
+:guilabel:`Aggregate values from cluster nodes` option means that DCI from cluster
 will be collected on each node separately and aggregated on cluster using one of the
 aggregation options.
 
@@ -306,13 +266,15 @@ Data Transformations
 --------------------
 
 In simplest case, |product_name| server collects values of specified metrics and
-stores them in the database. However, you can also specify various
+stores them in database. However, you can also specify various
 transformations for original value. For example, you may be interested in a
 delta value, not in a raw value of some metric. Or, you may want to have
 metric's value converted from bytes to kilobytes. All transformations will
 take place after receiving new value and before threshold processing.
 
-Data transformation consists of two steps. On the first step, delta calculation
+Data type after transformation - drop down menu of required data type.
+
+Data transformation consists of two steps. In the first step, delta calculation
 is performed. You can choose four types of delta calculation:
 
 =================== ===========================================================
@@ -322,7 +284,7 @@ None                No delta calculation performed. This is the default
                     setting for newly created DCI.
 Simple              Resulting value will be calculated as a difference
                     between current raw value and previous raw value.
-                    By raw value is meant the metric's value
+                    By raw value it is meant the metric's value
                     originally received from host.
 Average per second  Resulting value will be calculated as a difference
                     between current raw value and previous raw value,
@@ -335,11 +297,11 @@ Average per minute  Resulting value will be calculated as a difference
 =================== ===========================================================
 
 
-On the second step, custom transformation script is executed (if presented). By
+In second step, custom transformation script is executed (if present). By
 default, newly created DCI does not have a transformation script. If
-transformation script is presented, the resulting value of the first step is
+transformation script is applied, the resulting value of the first step is
 passed to the transformation script as a parameter; and a result of script
-execution is a final DCI value. Transformation script gets original value as
+execution is the final DCI value. Transformation script gets original value as
 first argument (available via special variable ``$1``), and also has two
 predefined global variables: ``$node`` (reference to current node object), and
 ``$dci`` (reference to current DCI object).
@@ -347,7 +309,7 @@ predefined global variables: ``$node`` (reference to current node object), and
 In case of table DCIs, ``$1`` special variable is an object of type Table.
 
 For more information about |product_name|
-scripting language, please consult :ref:`scripting` chapter in this manual.
+scripting language, please refer to :ref:`scripting` chapter in this manual.
 
 Transformation script can be tested in the same view, by clicking :guilabel:`Test...`
 and entering test input data.
@@ -358,13 +320,17 @@ and entering test input data.
     DCI configuration transformation property page
 
 
+
+
+
+
 Thresholds
 ----------
 
-For every DCI you can define one or more thresholds. Each threshold there is a
+For every DCI you can define one or more thresholds. For each threshold there is a
 pair of condition and event - if condition becomes true, associated event is
-generated. To configure thresholds, open the data collection editor for node or
-template. You can add, modify and delete thresholds using buttons below the
+generated. To configure thresholds, open data collection :guilabel:`Edit...` mode for node or
+template DCI. You can add, modify and delete thresholds using buttons below the
 threshold list. If you need to change the threshold order, select one threshold
 and use arrow buttons located on the right to move the selected threshold up or down.
 
@@ -380,7 +346,7 @@ Threshold Processing
 
    Threshold processing algorithm
 
-As you can see from this flowchart, threshold order is very important. Let's
+As you can see from above flowchart, threshold order is very important. Let's
 consider the following example: you have DCI representing CPU utilization on
 the node, and you wish two different events to be generated - one when CPU
 utilization exceeds 50%, and another one when it exceeds 90%. What happens when
@@ -406,12 +372,12 @@ Value    Action
        take any actions.
 ====== ========================================================================
 
-Please note that second threshold actually is not working, because it's
+Please note that second threshold actually is not working, because it is
 masked by the first threshold. To achieve desired results, you should place
 threshold ``> 90`` first, and threshold ``> 50`` second.
 
 You can disable threshold ordering by checking :guilabel:`Always process all
-thresholds` checkbox. If it is marked, system will always process all
+thresholds` checkbox. If enabled, system will always process all
 thresholds.
 
 
@@ -426,48 +392,71 @@ When adding or modifying a threshold, you will see the following dialog:
 First, you have to select what value will be checked:
 
 ======================== ======================================================
-Last polled value        Last value will be used. If number of polls set to
+Last polled value        The last value will be used. If number of polls is set to
                          more then ``1``, then condition will evaluate to true
                          only if it's true for each individual value of
                          last ``N`` polls.
-Average value            An average value for last ``N`` polls will be used
-                         (you have to configure a desired number of polls).
-Mean deviation           A mean absolute deviation for last ``N`` polls will be
-                         used (you have to configure a desired number of
+Average value            Average value for last ``N`` polls will be used
+                         (you have to configure required number of polls).
+Mean deviation           Mean absolute deviation for last ``N`` polls will be
+                         used (you have to configure required number of
                          polls). Additional information on how mean absolute
-                         deviation calculated can be found `here
+                         deviation is calculated can be found `here
                          <http://en.wikipedia.org/wiki/Mean_deviation>`_.
-Diff with previous value A delta between last and previous values will be
-                         used. If DCI data type is string, system will use
-                         ``0``, if last and previous values match; and ``1``,
-                         if they don't.
+Diff with previous value Delta between the last and previous values will be
+                         used. If DCI data type is string and the last and previous values match, system will use
+                         ``0``, and if they don't - ``1``.
 Data collection error    An indicator of data collection error. Instead of
                          DCI's value, system will use ``0`` if data collection
                          was successful, and ``1`` if there was a data
                          collection error. You can use this type of
                          thresholds to catch situations when DCI's value
                          cannot be retrieved from agent.
+Sum of values            Sum DCI values for the number of samples specified 
+                         and will compare it with the value. 
+                         Side note - in THRESHOLD_REACHED there are two parameters - 
+                         one is last DCI value and the other is value calculated by 
+                         the threshold, and if number of samples is >1, then these 
+                         values can be different.
+Script                   This will enable script editor, so one can make a script 
+                         that makes a decision. If it returns true it means to 
+                         trigger the threshold, if false - rearm threshold. There 
+                         are some variables available inside the script, $dci, 
+                         $1 etc. Value input field (which is below Samples) can 
+                         be read from there, which can be convenient, as one 
+                         can still use this field to store some threshold value.
+Absolute deviation       Similar to mean deviation - will take number of datapoints 
+                         specified in Samples and calculate deviation from these.
+Anomaly                  If checkbox "Detect anomalies" is selected, server will 
+                         use `Isolation Forest <https://en.wikipedia.org/wiki/Isolation_forest>`_ algorithm to check if new value is 
+                         an outlier within two set of data points - all values 
+                         within 30 minutes of current time of the day for last 
+                         30 days, and all values within 30 minutes around 
+                         current time of the day on the same day of the week 
+                         for last 10 weeks. If new data point is classified as 
+                         outlier in both data sets, DCI will be marked as having 
+                         anomalous value. Using this setting may adversly affect your database performance. This is an experimental feature - use with caution.
 ======================== ======================================================
 
 Second, you have to select comparison function. Please note that not all
 functions can be used for all data types. Below is a compatibility table:
 
-================ ======= ======== ======= ===== ============== ===== ======
-Type/Function    Integer Unsigned Integer Int64 Unsigned Int64 Float String
-================ ======= ======== ======= ===== ============== ===== ======
-Less             X       X        X       X     X              X
-Less or equal    X       X        X       X     X              X
-Equal            X       X        X       X     X              X     X
-Greater or equal X       X        X       X     X              X
-Greater          X       X        X       X     X              X
-Not equal        X       X        X       X     X              X     X
-Like                                                                 X
-Not like                                                             X
-================ ======= ======== ======= ===== ============== ===== ======
+================ === ======== ======= ===== ========== ========= ===== ======
+Type/Function    Int Unsigned Counter Int64 Unsigned64 Counter64 Float String
+================ === ======== ======= ===== ========== ========= ===== ======
+Less             X   X        X       X     X          X         X
+Less or equal    X   X        X       X     X          X         X
+Equal            X   X        X       X     X          X         X      X
+Greater or equal X   X        X       X     X          X         X
+Greater          X   X        X       X     X          X         X
+Not equal        X   X        X       X     X          X         X      X 
+Like                                                                    X
+Not like                                                                X
+================ === ======== ======= ===== ========== ========= ===== ======
 
 Third, you have to set a value to check against. If you use ``like`` or ``not
-like`` functions, value is a pattern string where you can use meta characters:
-asterisk (``*``), which means "any number of any characters", and question mark
+like`` functions, value is a pattern string where you can use meta characters -
+asterisk (``*``), which means "any number of any characters", and/or question mark
 (``?``), which means "any character".
 
 Fourth, you have to select events to be generated when the condition becomes
@@ -487,17 +476,17 @@ Thresholds and Events
 You can choose any event to be generated when threshold becomes active or
 returns to inactive state. However, you should avoid using predefined system
 events (their names usually start with ``SYS_`` or ``SNMP_``). For example, you
-set event ``SYS_NODE_CRITICAL`` to be generated when CPU utilization exceeds
+may set event ``SYS_NODE_CRITICAL`` to be generated when CPU utilization exceeds
 80%. System will generate this event, but it will also generate the same event
-when node status will change to ::guilabel::`CRITICAL`. In your event
+when node status will change to :guilabel:`CRITICAL`. In your event
 processing configuration, you will be unable to determine actual reason for
 that event generation, and probably will get some unexpected results. If you
 need custom processing for specific threshold, you should create your own event
 first, and use this event in the threshold configuration. |product_name| has some
-preconfigured events that are intended to be used with thresholds. Their names
+preconfigured events that are intended to be used with thresholds. Such event names
 start with ``DC_``.
 
-The system will pass the following parameters to events generated as a
+System will pass the following parameters to events generated as a
 reaction to single-value DCI threshold violation:
 
 .. list-table::
@@ -546,7 +535,7 @@ reaction to single-value DCI threshold violation:
      - Threshold's textual definition
 
 
-Event parameters can be accessed by number of by name via macros to form event
+Event parameters can be accessed by number or by name via macros to form event
 message. For example, if you are creating a custom event that is intended to be
 generated when file system is low on free space, and wish to include file system
 name, actual free space, and threshold's value into event's message text, you
@@ -567,19 +556,19 @@ events:
      - Named parameter
      - Description
    * - 1
-     - 
+     - dciName
      - Table DCI name
    * - 2
-     - 
+     - dciDescription
      - Table DCI description
    * - 3
-     - 
+     - dciId
      - Table DCI ID
    * - 4
-     - 
+     - row
      - Table row
    * - 5
-     - 
+     - instance
      - Instance
 
 
@@ -640,19 +629,19 @@ events:
      - Named parameter
      - Description
    * - 1
-     - 
+     - dciName
      - Table DCI name
    * - 2
-     - 
+     - dciDescription
      - Table DCI description
    * - 3
-     - 
+     - dciId
      - Table DCI ID
    * - 4
-     - 
+     - row
      - Table row
    * - 5
-     - 
+     - instance 
      - Instance
 
 
@@ -669,11 +658,12 @@ attribute to file system mount point.
 Sometimes you may need to monitor multiple instances of some entity, with exact
 names and number of instances not known or different from node to node. Typical
 example is file systems or network interfaces. To automate creation of DCIs for
-each instance you can use instance discovery mechanism. First you have to
+each instance, you can use instance discovery mechanism. First you have to
 create "master" DCI. Create DCI as usual, but in places where normally you
 would put instance name, use the special macro {instance}. Then, go to
 :guilabel:`Instance Discovery` tab in DCI properties, and configure instance
 discovery method and optionally filter script.
+
 
 Instance discovery creates 2 macros for substitution:
 
@@ -716,7 +706,7 @@ The following instance discovery methods are available:
        instance names.
    * - Script
      - Script name
-     - Instance names are provided by script from script library. The script
+     - Instance names are provided by a script from script library. The script
        should return an array (with elements representing instance names) or a
        map (keys represent instance names and values represent user-readable
        description)
@@ -749,7 +739,7 @@ If binary value is returned, it has the following meaning:
 ``TRUE`` (to accept instance), ``FALSE`` (to reject instance).
 
 If an array is returned, then instance is counted as accepted. Only first element 
-of the array is obligatory, the rest elements are optional (but to include an 
+of the array is mandatory, the rest elements are optional (but to include an 
 element, all preceding elements should be included). Array structure:
 
 ======================== ==========================================================
@@ -762,27 +752,24 @@ NetObj                   Object connected with this :term:`DCI`
 ======================== ==========================================================
 
 
-Performance tab
----------------
+.. _dci-performance-view:
 
-Main information about node(:guilabel:`Object Details`) can be supplemented with
-DCI information displayed as text(last value) on :guilabel:`Object Details`->
-:guilabel:`Overview` page or in graph way on :guilabel:`Object
-Details`->:guilabel:`Performance` tab.
+Performance view
+----------------
 
-DCI representation in text way can be configured on
-:ref:`dci-othe-options-label`. Next will be described only graph DCI
-representation configuration on :guilabel:`Performance` tab of :guilabel:`Object
-Details`.
+This section provides configuration options for displaying DCI values as line charts on the :guilabel:`Performance tab`. Various options are available to visually represent the collected data; see :ref:`Data and Network visualization <visualisation>` for more details.
 
-Multiple DCIs can be grouped in one graph. To group them use the same group name
-in "Group" field.
+.. note::
+
+  Note: Not available for table metrics.
 
 
 .. figure:: _images/dci_performance_tab_page.png
 
     DCI configuration instance discovery property page
 
+
+Multiple DCIs can be grouped in one graph. To group them use the same group name in “Group” field.
 
 Access Control
 --------------
@@ -798,7 +785,22 @@ request.
 
     DCI configuration access control property page
 
-.. _dci-othe-options-label:
+
+
+SNMP
+----
+
+SNMP page provides additional options for SNMP data collection or processing. Like: how to interpret collected SNMP octet string or to use custom port or version for data collection.
+
+.. figure:: _images/dci_snmp_page.png
+
+
+Windows Performance Counters
+----------------------------
+
+.. figure:: _images/dci_wpc_page.png
+
+.. _dci-other-options-label:
 
 Other options
 -------------
@@ -808,7 +810,7 @@ Other available options:
     - Show last value in object tooltip - shows DCI last value on tooltip that
       is shown on network maps.
     - Show last value in object overview - shows DCI last value on
-      :guilabel:`Object Details`->\ :guilabel:`Overview` page.
+      :guilabel:`Overview`->\ :guilabel:`Last Values` page.
     - Use this DCI for node status calculation - Uses value returned by this DCI
       as a status, that participate in object status calculation. Such kind of
       DCI should return integer number from 0 till 4 representing object status.
@@ -824,8 +826,7 @@ Other available options:
 Comments
 --------
 
-This configuration part can be used for free for text comments. To make
-additional notes about DCI configuration or usage.
+This configuration page can be used freely for text comments to add additional notes about DCI configuration or usage. These comments are added to alarms created from threshold violation events. For example, they can be used to inform operators about problem-solving approaches. 
 
 
 .. _dci-push-parameters-label:
@@ -866,7 +867,8 @@ values that can be collected simultaneously.
 They're primarily used when it is necessary to gather bulk data, like data 
 sets that can be acquired together or for atomic collection. Atomic collection 
 is when you need to take a data snapshot that consists of multiple items 
-collected at the exact same time.
+collected at the exact same time. By right-click on string or non string value one can
+access history, and line chart builds are possible for non string values.
 
 There are distinct benefits to using table metrics. But they're not without 
 their disadvantages. As tables are not single values, they require more 
@@ -884,9 +886,9 @@ List DCIs
 
 Usually DCIs have scalar values. A list DCI is a special DCI which returns a
 list of values. List DCIs are mostly used by |product_name| internally (to get
-the list of network interfaces during the configuration poll, for example) but
+the list of network interfaces during the configuration poll, for example), but
 can also be utilized by user in some occasions. |product_name| Management
-Client does not support list DCIs directly but their names are used as input
+Client does not support list DCIs directly, but their names are used as input
 parameters for Instance Discovery methods. List DCI values can be also obtained
 with :command:`nxget` command line utility (e.g. for use in scripts).
 
@@ -898,18 +900,18 @@ Agent caching mode
 
 Agent caching mode allows metric data to be obtained for the time being while
 connection between server and agent have been broken. This option is available
-for metrics, table metrics and proxy SNMP metrics. Not implemented for proxy
-SNMP table metrics and DCIs with custom schedule. In the absence of connection
-to the server collected data is stored on agent, when connection is restored it
+for metrics, table metrics and proxy SNMP metrics as well as for proxy
+SNMP table metrics and DCIs with custom schedule. In absence of connection
+to the server, collected data is stored on agent and once connection is restored, data
 is sent to server. Detailed description can be found there:
 :ref:`how_data_collection`.
 
-Agent side cache is configurable globally, on node level, and on DCI level. By
-default it's off.
+Agent side cache is configurable globally, on node and DCI levels. Configuration can be changed separately 
+on each level. By default it's off.
 
 All collected data goes thought all transformations and thresholds only when it
-comes to server. To prevent generation of old events it can be set
-:guilabel:`OffileDataRelivanceTime` configuration variable to time period in
+comes to server. In order to prevent generation of old events, one can set
+:guilabel:`DataCollection.OfflineDataRelevanceTime` configuration variable to time period in
 seconds within which received offline data still relevant for threshold
 validation. By default it is set to 1 day.
 
@@ -930,17 +932,44 @@ It can be configured:
 
 .. _last-values:
 
-Last DCI values View
-====================
+Data Collection tab
+===================
 
-Last values view provides information about all data collected
+Data Collection tab provides information about all data collected
 on a node: DCI last value, last collection timestamp and threshold status.
 
 It is possible to check last values or raw last values in textual format or as a chart
 by right clicking on DCI and selecting corresponding display format.
 
 
-.. figure:: _images/last_values.png
+.. figure:: _images/dci_last_values.png
+
+
+Click on :guilabel:`Edit mode` to obtain more detaled view.
+
+
+.. figure:: _images/dci_last_values_edit.png
+
+
+
+
+ 
+Status
+------
+
+:term:`DCI` status can be one of the following: :guilabel:`Active`,
+:guilabel:`Disabled`, :guilabel:`Not Supported`. Server will collect data only
+if the status is :guilabel:`Active`. If you wish to stop data collection
+without removing :term:`DCI` configuration and collected data, the
+:guilabel:`Disabled` status can be set manually. If requested metric is not
+supported by target node, the :guilabel:`Not Supported` status is set by the
+server.
+
+
+
+.. figure:: _images/dci_disable.png
+
+
 
 .. _data-collection-templates:
 
@@ -954,9 +983,15 @@ Often you have a situation when you need to collect same metrics from
 different nodes. Such configuration making may easily fall into repeating one
 action many times. Things may became even worse when you need to change
 something in already configured DCIs on all nodes - for example, increase
-threshold for CPU utilization. To avoid these problems, you can use data
+threshold for CPU utilization. To avoid these problems, one can use data
 collection templates. Data collection template (or just template for short) is
-a special object, which can have configured DCIs similar to nodes.
+a special object, which can have DCIs configured and grouped for similar or logical 
+purposes and applied to relevant node or node group ( for example, Collector or Cluster in 
+:guilabel:`Infrastructure` perspective). Templates can be accessed from :guilabel:`Template` perspective.
+
+
+.. figure:: _images/dci_templates.png
+
 
 When you create template and configure DCIs for it, nothing happens - no data
 collection will occur. Then, you can apply this template to one or multiple
@@ -971,62 +1006,67 @@ all such DCIs or leave them, but remove relation to the template. If you delete
 template object itself, all DCIs created on nodes from this template will be
 deleted as well.
 
-Please note that you can apply an unlimited number of templates to a node - so
+Please note that you can apply unlimited number of templates to a node - so
 you can create individual templates for each group of metrics (for example,
 generic performance metrics, MySQL metrics, network counters, etc.) and
-combine them, as you need.
+combine them, as per your business requirements.
 
 
 Creating template
 -----------------
 
 To create a template, right-click on :guilabel:`Template Root` or
-:guilabel:`Template Group` object in the :guilabel:`Object Browser`, and click
+:guilabel:`Template group` object in :guilabel:`Template` perspective, and click
 :menuselection:`Create --> Template`. Enter a name for a new template and click
-:guilabel:`OK`.
+:guilabel:`OK`. 
 
 
 Configuring templates
 ---------------------
 
-To configure DCIs in the template, right-click on :guilabel:`Template` object
-in the :guilabel:`Object Browser`, and select :guilabel:`Data Collection` from
-the pop-up menu. Data collection editor window will open. Now you can configure
-DCIs in the same way as the node objects.
+To configure DCIs in the template, click on :guilabel:`Template` object
+in the :guilabel:`Template` perspective, then right-click in :guilabel:`Data Collection` tab view
+and select :guilabel:`New parameter...` or :guilabel:`New table...` for further data collection configuration. 
+You can configure DCIs in the same way as the node objects. Another way to apply configuration in 
+:guilabel:`Template` - create DCI in :guilabel:`Infrastructure` or :guilabel:`Network` perspective and convert it 
+to template item, as seen below.
+
+
+.. figure:: _images/dci_templates_convert.png
 
 
 Applying template to node
 -------------------------
 
 To apply a template to one or more nodes, right-click on template object in
-:guilabel:`Object Browser` and select :guilabel:`Apply` from pop-up menu. Node
-selection dialog will open. Select the nodes that you wish to apply template
+:guilabel:`Template` perspective and select :guilabel:`Apply to...`. Pop-up menu will appear 
+with objects in :guilabel:`Infrastructure` and :guilabel:`Network` perspectives 
+available for selection. Select objects that you wish to apply template
 to, and click :guilabel:`OK` (you can select multiple nodes in the list by
 holding :kbd:`Control` key). Please note that if data collection editor is open
 for any of the target nodes, either by you or another administrator, template
 applying will be delayed until data collection editor for that node will be
-closed.
+closed. 
+Another way to apply template to object - in :guilabel:`Infrastructure` or :guilabel:`Network` perspectives
+select one or more objects, right-click and select :guilabel:`Apply template...`
 
 
 Removing template from node
 ---------------------------
 
 To remove a link between template and node, right-click on :guilabel:`Template`
-object in the :guilabel:`Object Browser` and select :guilabel:`Unbind` from
-pop-up menu. Node selection dialog will open. Select one or more nodes you wish
-to unbind from template, and click :guilabel:`OK`. The system will ask you how
-to deal with DCIs configured on node and associated with template:
+object in :guilabel:`Template` perspective and select :guilabel:`Remove from...`. Pop-up menu will appear 
+with objects, which are having the template in question already applied. Select objects that you wish to remove template
+from, and click :guilabel:`OK`. 
 
-.. figure:: _images/remove_template.png
+.. figure:: _images/dci_remove_template.png
 
-If you select Unbind DCIs from template, all DCIs related to template will
-remain configured on a node, but association between the DCIs and template will
-be removed. Any further changes to the template will not be reflected in these
-DCIs. If you later reapply the template to the node, you will have two copies
-of each DCI - one standalone (remaining from unbind operation) and one related
-to template (from new apply operation). Selecting Remove DCIs from node will
-remove all DCIs associated with the template. After you click OK, node will be
-unbound from template.
+Another way to remove template from object - in :guilabel:`Infrastructure` 
+or :guilabel:`Network` perspective
+select one or more objects, right-click and select :guilabel:`Remove template...`. Pop-up window will appear 
+with all applied templates to objects. Select templates to be removed and click :guilabel:`OK`.
+
+If you select Unbind DCIs from template, all DCIs related to template will remain configured on a node, but association between the DCIs and template will be removed. Any further changes to the template will not be reflected in these DCIs. If you later reapply the template to the node, you will have two copies of each DCI - one standalone (remaining from unbind operation) and one related to template (from new apply operation). Selecting Remove DCIs from node will remove all DCIs associated with the template. After you click OK, node will be unbound from template.
 
 
 Macros in template items

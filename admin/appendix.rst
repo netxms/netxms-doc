@@ -1032,6 +1032,10 @@ Configuration`
       client).
     - 4701
     - Yes
+  * - Client.MinVersion
+    - The minimum client version allowed to connection to this server.
+    - 
+    - No
   * - Client.MinViewRefreshInterval
     - Minimal interval between view refresh in milliseconds (hint for client).
     - 300

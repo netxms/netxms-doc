@@ -216,13 +216,13 @@ Compiling MIBs
  - Use nxmibc binary to create a new compiled MIB file from all MIBs in directory.
    Add parameter -z for compressed output file.
 
-.. code-block:: shell
+.. code-block:: sh
 
   nxmibc -d /usr/share/netxms/mibs -o /var/lib/netxms/netxms.mib
 
 Parameters recognized by nxmibc:
 
-.. code-block:: shell
+.. code-block:: sh
 
   nxmibc [options] source1 ... sourceN
 

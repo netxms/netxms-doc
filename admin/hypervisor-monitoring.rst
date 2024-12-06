@@ -29,7 +29,7 @@ Configuration example
 In this example two hosts are defined: **localESX1** and **test**. **localESX1** connection details are described in section **vmgr:localESX1**
 and **test** connection details are described in section **vmgr:test**.
 
-.. code-block:: cfg
+.. code-block:: sh
 
    MasterServers = netxms.demo
    SubAgent = vmgr.nsm

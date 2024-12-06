@@ -40,7 +40,7 @@ File should have parameters in ini format: NAME=VALUE. The following parameters 
 
 Configuration example:
 
-   .. code-block:: cfg
+   .. code-block:: sh
 
         netxms.server.address=server.office.radensolutions.com
         netxms.server.port=44701
@@ -72,7 +72,7 @@ Request type: **POST**
 
 JSON data:
 
-.. code-block:: json
+.. code-block:: sh
 
     {"login":"admin","password":"netxms"}
 
@@ -91,7 +91,7 @@ Request type: **POST**
 
 JSON data:
 
-.. code-block:: json
+.. code-block:: sh
 
     {"login":"admin","password":"netxms"}
 
@@ -174,13 +174,13 @@ JSON data:
 
   Minimal JSON for node creation under "Infrastructure Services" object:
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {"objectType": 2, "name":"testNode", "parentId": 2, "primaryName":"10.5.0.12" }
 
   Minimal JSON for container creation under "Infrastructure Services" object:
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {"objectType": 5, "name":"New container", "parentId": 2}
 
@@ -190,7 +190,7 @@ Return data:
 
     New object ID.
 
-  .. code-block:: json
+  .. code-block:: sh
 
     { "id": 15130 }
 
@@ -211,7 +211,7 @@ JSON data:
 
   Json to update object's custom attributes (json should contain all custom attributes, attributes that are not part of JSON will be deleted):
 
-  .. code-block:: json
+  .. code-block:: sh
 
     {
       "customAttributes": {
@@ -1034,7 +1034,7 @@ JSON data:
 
   Bind object to object in URL:
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {"id": 15130}
 
@@ -1052,7 +1052,7 @@ JSON data:
 
   Bind object in URL to "Infrastructure service":
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {"id": 2}
 
@@ -1069,7 +1069,7 @@ JSON data:
 
   Unbind object from container in URL:
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {"id": 15130}
 
@@ -1087,7 +1087,7 @@ JSON data:
 
   Unbind object in URL from "Infrastructure service":
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {"id": 2}
 
@@ -1103,7 +1103,7 @@ Request type: **POST**
 
 JSON data:
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {"type": "status"}
 
@@ -1122,7 +1122,7 @@ Return data:
 
   Will return UUID of request, that should be used to get request output and request type.
 
-  .. code-block:: json
+  .. code-block:: sh
 
     { "id": 15130,
       "type": "status" }
@@ -1141,7 +1141,7 @@ Return data:
 
   Will return request output data.
 
-  .. code-block:: json
+  .. code-block:: sh
 
     { "streamId": 0,
       "completed": false,
@@ -1161,7 +1161,7 @@ JSON data:
 
   Move object specified in URL to "Default" zone:
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {"zoneUIN": 0}
 
@@ -1193,7 +1193,7 @@ JSON data:
 
   Create new script business service check:
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {
           "checkType": "SCRIPT",
@@ -1218,7 +1218,7 @@ JSON data:
 
   Update existing business service check to object check with object ID "166":
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {
           "checkType": "OBJECT",
@@ -1361,7 +1361,7 @@ JSON data:
 
   Create new DCI (name and description are obligatory fields):
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {
           "name": "Agent.Version",
@@ -1388,7 +1388,7 @@ JSON data:
   Update existing DCI setting custom polling interval and custom retention time
   (name and description are obligatory fields):
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {
           "name": "Agent.Version",
@@ -1496,7 +1496,7 @@ Request path: *API_HOME*/summary-table/ad-hoc
 
 POST request JSON
 
-.. code-block:: json
+.. code-block:: sh
 
     {
         "baseObject":"ContainerName",
@@ -1540,7 +1540,7 @@ Request path: *API_HOME*/objects/**{object-id}**/object-tools
 
 JSON data:
 
-  .. code-block:: json
+  .. code-block:: sh
 
     {
       "toolData":{
@@ -1604,7 +1604,7 @@ JSON data:
 
   JSON object should contain two fields: key and value.
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {"key": "a"}
       {"value": "10"}
@@ -1627,7 +1627,7 @@ JSON data:
 
   JSON object should contain one field: new value.
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {"value": "10"}
 
@@ -1666,7 +1666,7 @@ JSON data:
 
   To send value for one DCI JSON object should contain the following:
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {
         "nodeId" : 10,
@@ -1677,7 +1677,7 @@ JSON data:
 
   Or, alternatively using node and DCI names:
 
-  .. code-block:: json
+  .. code-block:: sh
 
       {
         "nodeName" : "Node name",
@@ -1688,7 +1688,7 @@ JSON data:
 
   To send value for several DCIs JSON object should contain an array:
 
-  .. code-block:: json
+  .. code-block:: sh
 
       [
         {

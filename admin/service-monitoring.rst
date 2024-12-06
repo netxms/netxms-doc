@@ -294,7 +294,7 @@ configuration file. The following configuration parameters are supported:
 
 Agent's configuration file example:
 
-.. code-block:: cfg
+.. code-block:: sh
 
    SubAgent = netsvc
    [netsvc]

@@ -920,7 +920,7 @@ Configuration
 -------------
 
 It can be configured:
-  - globally - set configuration parameter :guilabel:`DefaultAgentCacheMode` to
+  - globally - set configuration parameter :guilabel:`Agent.DefaultCacheMode` to
     :guilabel:`on` or :guilabel:`off`.
   - on node level - :guilabel:`Agent cache mode` can be changed to
     :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use global settings)

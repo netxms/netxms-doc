@@ -758,7 +758,7 @@ Configuration`
       respond to command within this time, command considered as failed.
     - 4000
     - Yes
-  * - DefaultAgentCacheMode
+  * - Agent.DefaultCacheMode
     - Default agent cache mode
     - Off
     - Yes

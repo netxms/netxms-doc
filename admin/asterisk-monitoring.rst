@@ -71,7 +71,7 @@ Configuration Examples
 
 Local system without SIP tests:
 
-.. code-block:: sh
+.. code-block:: ini
 
    MasterServers = netxms.demo
    SubAgent = asterisk.nsm
@@ -82,7 +82,7 @@ Local system without SIP tests:
 
 Local system with two SIP tests:
 
-.. code-block:: sh
+.. code-block:: ini
 
    MasterServers = netxms.demo
    SubAgent = asterisk.nsm
@@ -104,7 +104,7 @@ Local system with two SIP tests:
 
 Local system and remote system (named **Remote1**) on address 10.0.0.1 with one SIP test each:
 
-.. code-block:: sh
+.. code-block:: ini
 
    MasterServers = netxms.demo
    SubAgent = asterisk.nsm

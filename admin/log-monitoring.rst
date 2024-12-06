@@ -43,7 +43,7 @@ subagent. There are two options to define parser configuration:
 
 Example of agent configuration file:
 
-.. code-block:: sh
+.. code-block:: ini
 
    SubAgent = logwatch.nsm
 
@@ -69,7 +69,7 @@ Parser Definition File
 
 Parser definition file is an XML document with the following structure:
 
-.. code-block:: sh
+.. code-block:: xml
 
     <parser>
         <file>file name</file>
@@ -206,7 +206,7 @@ used in matching rules in form ``@{name}``.
 Example: you need to parse log file where each line starts with timestamp in
 format ``dd/mm/yy HH:MM:SS``. You can define the following macro:
 
-.. code-block:: sh
+.. code-block:: xml
 
     <macros>
         <macro name="timestamp">dd/mm/yy HH:MM:SS</macro>
@@ -282,7 +282,7 @@ expression should be matched to generate event.
 
 Some examples:
 
-.. code-block:: sh
+.. code-block:: xml
 
     <match>^Error: (.*)</match>
 
@@ -290,7 +290,7 @@ This regular expression will match any line starting with word ``Error:``, and
 everything after this word will be extracted from the log record for use with
 an event.
 
-.. code-block:: sh
+.. code-block:: xml
 
     <match repeatCount="3" repeatInterval="120" reset="false">[0-9]{3}</match>
 
@@ -300,7 +300,7 @@ matched 3 or more times in 2 minutes(120 seconds). Matched count won't be reset
 once mark is reached, so if expression is matched more than 3 times in 2
 minutes, event will be generated more than one time.
 
-.. code-block:: sh
+.. code-block:: xml
 
     <match invert="1">abc</match>
 
@@ -341,13 +341,13 @@ You can specify either single event ID or ID range (by using two numbers
 separated with minus sign). For example:
 
 
-.. code-block:: sh
+.. code-block:: xml
 
     <id>7</id>
 
 will match records with event ID equal 7, and
 
-.. code-block:: sh
+.. code-block:: xml
 
     <id>10-20</id>
 
@@ -365,13 +365,13 @@ meta characters.
 
 Some examples:
 
-.. code-block:: sh
+.. code-block:: xml
 
     <source>Tcpip</source>
 
 will match records with event source ``Tcpip`` (case-insensitive), and
 
-.. code-block:: sh
+.. code-block:: xml
 
     <source>X*</source>
 
@@ -411,13 +411,13 @@ level numerical values are the following:
 
 Some examples:
 
-.. code-block:: sh
+.. code-block:: xml
 
     <level>1</level>
 
 will match all records with severity level :guilabel:`Error`, and
 
-.. code-block:: sh
+.. code-block:: xml
 
     <level>6</level>
 
@@ -489,13 +489,13 @@ used:
 You can specify either single facility code or facility code range (by using
 two numbers separated by minus sign). For example:
 
-.. code-block:: sh
+.. code-block:: xml
 
    <facility>7</facility>
 
 will match records with facility code equal 7, and
 
-.. code-block:: sh
+.. code-block:: xml
 
    <facility>10-20</facility>
 
@@ -513,13 +513,13 @@ or pattern with ``*`` and ``?`` meta characters.
 
 Some examples:
 
-.. code-block:: sh
+.. code-block:: xml
 
     <tag>httpd</tag>
 
 will match records with tag "httpd" (case-insensitive), and
 
-.. code-block:: sh
+.. code-block:: xml
 
     <tag>X*</tag>
 
@@ -560,13 +560,13 @@ sum of appropriate codes. Severity level codes are following:
 
 Some examples:
 
-.. code-block:: sh
+.. code-block:: xml
 
     <severity>1</severity>
 
 will match all records with severity level :guilabel:`Emergency`, and
 
-.. code-block:: sh
+.. code-block:: xml
 
     <severity>6</severity>
 
@@ -603,7 +603,7 @@ event in case if context was set. Examples can be found further in
 
 It has the following format:
 
-.. code-block:: sh
+.. code-block:: xml
 
    <context action="action" reset="reset mode">context name</context>
 
@@ -647,7 +647,7 @@ supported cron format options.
 
 Example:
 
-.. code-block:: sh
+.. code-block:: xml
 
     <parser>
         <file>/var/log/messages</file>
@@ -671,7 +671,7 @@ Examples of Parser Definition File
 Generate event with name ``USR_APP_ERROR`` if line in the log file /var/log/messages
 contains word error:
 
-.. code-block:: sh
+.. code-block:: xml
 
     <parser>
         <file>/var/log/messages</file>
@@ -688,7 +688,7 @@ Generate event with name ``SYS_PROCESS_START_FAILED`` if line in the log file
 containing text ``process startup failed``; everything after word ``process:``
 will be sent as event's parameter:
 
-.. code-block:: sh
+.. code-block:: xml
 
     <parser>
         <file>C:\demo.log</file>
@@ -749,7 +749,7 @@ For Windows the following parameters are provided:
 
 Consider the following line is received via syslog, or added to a monitored file:
 
-.. code-block:: sh
+.. code-block:: 
 
     24.04.2015 12:22:15 1 5 system,error,critical login failure for user
     testUser from 11.2.33.41 via ssh
@@ -757,7 +757,7 @@ Consider the following line is received via syslog, or added to a monitored file
 We can extract username and login method from the syslog message, and pass it as
 parameters to an event with the following rule:
 
-.. code-block:: sh
+.. code-block:: xml
 
     <match>system,error,critical login failure for user (.*) from .* via
     (.*)</match> <event>10000</event>

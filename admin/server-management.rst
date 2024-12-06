@@ -18,7 +18,7 @@ Detailed list of parameters can be found there: :ref:`server_configuration_file`
 
 Configuration file example:
 
-.. code-block:: sh
+.. code-block:: ini
 
   #
   # Sample server configuration file
@@ -150,7 +150,7 @@ does not contain any information about file access right assignment.
         :command:`openssl genrsa -out server.key 2048`
     #. Create :file:`openssl.conf` file. Content of file (dn section should be changed accordingly):
 
-        .. code-block:: sh
+        .. code-block:: ini
 
             [req]
             distinguished_name = dn
@@ -174,7 +174,7 @@ does not contain any information about file access right assignment.
 
 Add newly created certificates to server configuration (netxmsd.conf file).
 
-.. code-block:: sh
+.. code-block:: ini
 
     TrustedCertificate = /opt/netxms/key/rootCA.crt
     ServerCertificate = /opt/netxms/key/server.crt
@@ -199,7 +199,7 @@ certificate, old certificates can be removed from server configuration file.
 
 Server configuration example if self-signed root CA was reissued:
 
-.. code-block:: sh
+.. code-block:: ini
 
     # ~~~ Old root certificate ~~~
     TrustedCertificate = /opt/netxms/key/old_rootCA.crt

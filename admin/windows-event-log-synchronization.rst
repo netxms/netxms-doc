@@ -27,7 +27,7 @@ two ways:
 Windows Event Log Synchronization subagent should be enabled in agent
 configuration:
 
-.. code-block:: sh
+.. code-block:: ini
 
    SubAgent=wineventsync.nsm
 
@@ -35,7 +35,7 @@ configuration:
 Logs that should be monitored (Application, Security, etc) are specified in
 ``WinEventSync`` section:
 
-.. code-block:: sh
+.. code-block:: ini
 
    [WinEventSync]
    EventLog=Application
@@ -60,7 +60,7 @@ Events except 200 and 202-300.
 To exclude all Event IDs, use ``ExcludeEvent=0-65535``, then you can use
 ``IncludeEvent`` to select only the IDs you need. 
 
-.. code-block:: sh
+.. code-block:: ini
 
    [WinEventSync/Security]
    IncludeEvent=4624-4625
@@ -74,7 +74,7 @@ given, all sources in that log will be synchronized. You can use
 ``ExcludeSource=*`` to exclude every source and speficy ``IncludeSource`` to
 override the exclude for specific sources. 
 
-.. code-block:: sh
+.. code-block:: ini
 
    [WinEventSync/System]
    IncludeSource=Microsoft-Windows-WindowsUpdateClient
@@ -115,19 +115,19 @@ values:
 
 Below examples will have same result of filtering only Warning and Error records:
 
-.. code-block:: sh
+.. code-block:: ini
 
    [WinEventSync/System]
    SeverityFilter = 0x012
 
 
-.. code-block:: sh
+.. code-block:: ini
 
    [WinEventSync/System]
    SeverityFilter = 18
 
 
-.. code-block:: sh
+.. code-block:: ini
 
    [WinEventSync/System]
    SeverityFilter = Warning,Error

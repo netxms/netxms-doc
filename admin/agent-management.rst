@@ -68,7 +68,7 @@ agent or subagent configuration parameters.
 
 'key = value' format example:
 
-.. code-block:: sh
+.. code-block:: ini
 
    [Core]
    MasterServers = 10.0.0.4
@@ -79,7 +79,7 @@ agent or subagent configuration parameters.
 
 Same example in XML format:
 
-.. code-block:: sh
+.. code-block:: xml
 
    <config>
       <Core>
@@ -287,16 +287,24 @@ are uploaded and updated on agent when template is manually or automatically app
 the node. Agent policies belong to templates, so they are applied to nodes to which a
 corresponding template is applied.
 
-To create policy, right click a template and select :menuselection:`Agent policies`. Click plus
-icon to create a new policy, give it a name, choose correct policy type and
-click :guilabel:`OK`. Existing policy can be modified by right-clicking it and
-selecting :menuselection:`Edit` from the menu or by double clicking on it.
-
 The following policy types are available:
   - Agent configuration policy
   - File delivery policy
   - Log parser policy
   - User support application policy
+
+To create policy, select a template and click :guilabel:`Agent policies` tab. Click plus
+icon to create a new policy, give it a name, choose correct policy type and
+click :guilabel:`OK`. Newly created policy will open for editing in a new tab. 
+For example, for File Delivery policy, right click 
+and :menuselection:`Add root directory...` option will prompt you to create directory. Then, right click on newly created directory and more 
+options, like :menuselection:`Add directory...`, :menuselection:`Add file...`, :menuselection:`Rename...`, :menuselection:`Permissions...` and :menuselection:`Delete...`
+will be avalable. 
+Existing policy can be modified by right clicking it and selecting :menuselection:`Edit` from the menu or by double clicking on it. Use :guilabel:`Save` button after configuration changes.
+
+
+.. figure:: _images/agent_policy_edit.png
+
 
 Policies are automatically deployed to nodes after creation/modification or
 when a template is applied to a node. When configuration policy is deleted or
@@ -332,7 +340,7 @@ It is possible to use the same parameters and format as in any |product_name| ag
 
 Example:
 
-.. code-block:: sh
+.. code-block:: ini
 
   MasterServer=127.0.0.1
   SubAgent=netsvc.nsm
@@ -348,7 +356,7 @@ Example:
   [filemgr]
   RootFolder=/
 
-.. code-block:: sh
+.. code-block:: xml
 
   <config>
     <core>
@@ -450,7 +458,7 @@ ServerConnection parameter
 :term:`DNS` or server IP address. It's also possible to specify port number
 separated by colon, e.g.:
 
-.. code-block:: sh
+.. code-block:: ini
 
     ServerConnection=monitoring.example.com
     ServerConnection=192.168.77.77:1234
@@ -462,7 +470,7 @@ ServerConnection section
 ``[ServerConnection]`` section is set in agentd.conf. This allows to
 specify additional parameters, e.g.:
 
-.. code-block:: sh
+.. code-block:: ini
 
     [ServerConnection]
     Hostname=192.168.77.77
@@ -507,7 +515,7 @@ parameter to configure what access rights server has to this agent.
 Agent can validate certificate chain, when connecting to server. This is
 configured in agent configuration file, e.g.:
 
-.. code-block:: sh
+.. code-block:: ini
 
     TrustedRootCertificate=/etc/cert/root_cert.crt
     TrustedRootCertificate=/etc/cert/root_certs
@@ -792,7 +800,7 @@ There are several configuration parameters that are supported by Java subagent. 
 
 Configuration example:
 
-.. code-block:: sh
+.. code-block:: ini
 
    MasterServers = netxms.demo
    SubAgent=java.nsm
@@ -895,7 +903,7 @@ more then a few seconds because this may lead to performance issues due to
 poller threads spending too much time on timeouts.
 ``ExternalMetricProvider`` can be used to handle long-executing commands. 
 
-.. code-block:: sh
+.. code-block:: ini
 
   # Example
 
@@ -913,7 +921,7 @@ specified in ``ExternalMetric``/``ExternalMetricShellExec`` which provides
 output of the command (first line only), the other is ``Name.ExitCode`` that
 provides exit code of the executed command. 
 
-.. code-block:: sh
+.. code-block:: ini
 
   # Real example
   ExternalMetric = Test:echo test
@@ -938,7 +946,7 @@ configuration can be provided, these will be available as $1, $2, $3..., $9
 variables. To accept parameters metric name should contain "(*)" symbols after
 name. Lines of the list are separated by new line character.
 
-.. code-block:: sh
+.. code-block:: ini
 
   # Example
 
@@ -978,7 +986,7 @@ Example of the script:
 
 Example of agent configuration:
 
-.. code-block:: sh
+.. code-block:: ini
 
   #Example
   ExternalMetricProvider=PATH_TO_PROVIDER_SCRIPT:EXECUTION_INTERVAL_IN_SECONDS
@@ -1064,7 +1072,7 @@ symbols after name.
          * counter32
          * counter64
 
-.. code-block:: sh
+.. code-block:: ini
 
   # Example
 
@@ -1120,7 +1128,7 @@ After action is defined it can be used in the :ref:`object tools - agent action<
 :ref:`actions - action execution on remote node<action-remote-execute>`. Action should be defined in main section of
 agent configuration file.
 
-.. code-block:: sh
+.. code-block:: ini
 
   # Example
   Action=Name:command

@@ -25,7 +25,7 @@ Configuration parameters:
    #. ``Interval`` - Check interval in seconds. This parameter should not be specified multiple times. 
       This parameter is optional and will be set to 6 hours by default.
 
-.. code-block:: sh
+.. code-block:: ini
 
   # Example
   [FileMonitor]

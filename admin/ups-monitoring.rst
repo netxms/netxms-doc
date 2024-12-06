@@ -21,14 +21,14 @@ subagent. Once you have your UPS attached to the host and |product_name| agent i
 you should configure UPS subagent. First, add the following line to agent's
 configuration file main section:
 
-.. code-block:: sh
+.. code-block:: ini
 
  SubAgent = ups.nsm
 
 Second, configure attached UPS devices. Create ``UPS`` section, and for each UPS
 device attached to the host add line in the following format:
 
-.. code-block:: sh
+.. code-block:: ini
 
  Device = id:port:protocol
 
@@ -52,7 +52,7 @@ number to select first available).
 Sample configuration section for two devices attached via serial ports, one is APC device
 (configured as device 0) and one is HP device (configured as device 1):
 
-.. code-block:: sh
+.. code-block:: ini
 
   # UPS subagent configuration section
   [UPS]

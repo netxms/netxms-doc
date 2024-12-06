@@ -36,7 +36,7 @@ An Oracle user with the role **select_catalog_role** assigned.
 
 Required rights can be assigned to user with the following query:
 
-.. code-block:: sh
+.. code-block:: sql
 
    grant select_catalog_role to user;
 
@@ -93,7 +93,7 @@ about the order in which database sections will be processed.
 
 Sample Oracle subagent configuration file in XML format:
 
-.. code-block:: sh
+.. code-block:: xml
 
    <config>
        <agent>
@@ -124,7 +124,7 @@ file in XML format.
 
 Sample Oracle subagent configuration file in INI format:
 
-.. code-block:: sh
+.. code-block:: ini
 
    [ORACLE]
    ID = DB1
@@ -358,7 +358,7 @@ Database definition supports the following parameters:
 
 Sample DB2 subagent configuration file in INI format:
 
-.. code-block:: sh
+.. code-block:: ini
 
    SubAgent          = db2.nsm
 
@@ -376,7 +376,7 @@ XML configuration allows the monitoring of several database instances.
 To be able to use the XML configuration file, you first need to specify the file
 to use in the DB2 section of the INI file. The syntax is as follows:
 
-.. code-block:: sh
+.. code-block:: ini
 
    SubAgent          = db2.nsm
 
@@ -401,7 +401,7 @@ to use in the DB2 section of the INI file. The syntax is as follows:
 
 The XML configuration file itself should look like this:
 
-.. code-block:: sh
+.. code-block:: xml
 
    <config>
        <db2sub>
@@ -982,7 +982,7 @@ Each database definition supports the following parameters:
 
 Configuration example in INI format:
 
-.. code-block:: sh
+.. code-block:: ini
 
     Subagent=informix.nsm
 
@@ -995,7 +995,7 @@ Configuration example in INI format:
 
 Configuration example in XML format:
 
-.. code-block:: sh
+.. code-block:: xml
 
    <config>
        <agent>
@@ -1125,7 +1125,7 @@ Each database definition supports the following parameters:
 
 Single database configuration example:
 
-.. code-block:: sh
+.. code-block:: ini
 
     Subagent=mysql.nsm
 
@@ -1138,7 +1138,7 @@ Single database configuration example:
 
 Multi database configuration example:
 
-.. code-block:: sh
+.. code-block:: ini
 
     Subagent=mysql.nsm
 
@@ -1322,7 +1322,7 @@ Starting from the PostgreSQL version 10, the user must have the the role
 **pg_monitor** assigned. Required role can be assigned to user with the
 following query:
 
-.. code-block:: sh
+.. code-block:: sql
 
     GRANT  pg_monitor TO user;
 
@@ -1387,7 +1387,7 @@ Each server definition supports the following parameters:
 
 Single server configuration example:
 
-.. code-block:: sh
+.. code-block:: ini
 
     Subagent=pgsql.nsm
 
@@ -1401,7 +1401,7 @@ Single server configuration example:
 
 Multi server configuration example:
 
-.. code-block:: sh
+.. code-block:: ini
 
     Subagent=pgsql.nsm
 

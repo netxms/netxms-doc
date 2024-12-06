@@ -135,7 +135,7 @@ following parameters are supported:
 Configuration Example
 ---------------------
 
-.. code-block:: sh
+.. code-block:: ini
 
    MasterServers = netxms.demo
    SubAgent = dbquery.nsm

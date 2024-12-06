@@ -407,7 +407,7 @@ Enable Crash Dump Generation
 
 When running on Windows server is capable of creating crash dumps. To enable crash dump generation, add the following options to netxmsd.conf file:
 
-.. code-block:: sh
+.. code-block:: ini
 
    CreateCrashDumps = yes
    DumpDirectory = path
@@ -504,7 +504,7 @@ Web Management Client
 For example, to connect web management console to server 10.0.0.2 as user guest with empty password and
 open dashboard called "SystemOverview", use URL
 
-.. code-block:: sh
+.. code-block:: ini
 
     http://server/nxmc?auto&server=10.0.0.2&login=guest&dashboard=SystemOverview
 
@@ -614,7 +614,7 @@ key=value format.
 
 Example:
 
-.. code-block:: sh
+.. code-block:: ini
 
    [LEEF]
    Server = 127.0.0.1
@@ -705,7 +705,7 @@ section.
 
 Configuration example:
 
-.. code-block:: sh
+.. code-block:: ini
 
    PerfDataStorageDriver=influxdb
 

@@ -15,21 +15,12 @@ Every node can have many data collection items configured (see
 set of threads dedicated to data collection, called `Data Collectors`, used to
 gather information from the nodes according to :term:`DCI` configuration. You
 can control how many data collectors will run simultaneously, by changing server
-==== BASE ====
-configuration parameter ``NumberOfDataCollectors``.
+configuration parameter ``ThreadPool.DataCollector.MaxSize``.
 
 Node capabilities provide information about available sources for data collection in the :guilabel:`Overview`-> :guilabel:`Capabilities` section.  The last values of DCIs for the node can be found on the :guilabel:`Data Collection` tab. Additionally, specific DCIs can be displayed in the :guilabel:`Overview`` -> :guilabel:`Last Values section` 
 or as a graph on the :guilabel:`Performance` tab. More details about DCI display configuration options can be found in the :ref:`Other options <dci-other-options-label>` and :ref:`Performance View <dci-performance-view>` chapters.
 
-DCI representation in text way can be configured on
-:ref:`dci-othe-options-label`. Next will be described only graph DCI
-representation configuration on :guilabel:`Performance` tab of :guilabel:`Object
-Details`.
-
-Multiple DCIs can be grouped in one graph. To group them use the same group name
-in "Group" field. and
-if DCI needs to be polled, appropriate polling request is placed into internal
-==== BASE ====
+All configured DCIs are checked for polling requirement every second. If DCI needs to be polled, appropriate polling request is placed into internal
 data polling queue. First available data collector will pick up the request and
 gather information from the node according to DCI configuration. If a new value
 was received successfully, it's being stored in the database, and thresholds
@@ -189,15 +180,25 @@ Following options can be selected:
       macro that will take value of ``polling_interval`` custom attribute or 600,
       if such custom attribute is not present on the node. 
     - :guilabel:`Advanced scheduling` - schedules configured in
-==== BASE ====
-      :guilabel:`Advanced Schedule` page will be used.
-==== BASE ====
+      :guilabel:`Custom Schedule` page will be used.
 
 
-==== BASE ====
-Storage
-~~~~~~~
-==== BASE ====
+
+If you turn on :guilabel:`Advanced Schedule` flag, additional link to :guilabel:`Custom Schedule` will appear 
+and, once configured, server will use custom schedule for collecting
+DCI values instead of fixed intervals. Advanced schedule consists of one or more records;
+each representing desired data collection time in cron-style format.
+
+See :ref:`cron_format` for supported cron format options.
+
+For DCI Collection schedule it's possible to specify optional sixth (first from left ) cron field
+for resolution in seconds. It's not recommended to use seconds in custom
+schedules as your main data collection strategy though. Use seconds only
+if it is absolutely necessary.
+
+
+History retention period
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 This attribute specifies how long the collected data should be kept in
 database, in days. Minimum retention time is 1 day and maximum has not limit.
@@ -751,17 +752,12 @@ NetObj                   Object connected with this :term:`DCI`
 ======================== ==========================================================
 
 
-==== BASE ====
-Performance tab
----------------
-==== BASE ====
+.. _dci-performance-view:
 
-==== BASE ====
-Main information about node(:guilabel:`Object Details`) can be supplemented with
-DCI information displayed as text(last value) on :guilabel:`Object Details`->
-:guilabel:`Overview` page or in graph way on :guilabel:`Object
-Details`->:guilabel:`Performance` tab.
-==== BASE ====
+Performance view
+----------------
+
+This section provides configuration options for displaying DCI values as line charts on the :guilabel:`Performance tab`. Various options are available to visually represent the collected data; see :ref:`Data and Network visualization <visualisation>` for more details.
 
 .. note::
 
@@ -789,22 +785,6 @@ request.
 
     DCI configuration access control property page
 
-
-
-SNMP
-----
-
-SNMP page provides additional options for SNMP data collection or processing. Like: how to interpret collected SNMP octet string or to use custom port or version for data collection.
-
-.. figure:: _images/dci_snmp_page.png
-
-
-Windows Performance Counters
-----------------------------
-
-.. figure:: _images/dci_wpc_page.png
-
-.. _dci-other-options-label:
 
 
 SNMP
@@ -940,7 +920,7 @@ Configuration
 -------------
 
 It can be configured:
-  - globally - set configuration parameter :guilabel:`DefaultAgentCacheMode` to
+  - globally - set configuration parameter :guilabel:`Agent.DefaultCacheMode` to
     :guilabel:`on` or :guilabel:`off`.
   - on node level - :guilabel:`Agent cache mode` can be changed to
     :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use global settings)
@@ -1075,13 +1055,11 @@ Removing template from node
 ---------------------------
 
 To remove a link between template and node, right-click on :guilabel:`Template`
-==== BASE ====
-object in the :guilabel:`Object Browser` and select :guilabel:`Unbind` from
-pop-up menu. Node selection dialog will open. Select one or more nodes you wish
-to unbind from template, and click :guilabel:`OK`. The system will ask you how
-to deal with DCIs configured on node and associated with template:
+object in :guilabel:`Template` perspective and select :guilabel:`Remove from...`. Pop-up menu will appear 
+with objects, which are having the template in question already applied. Select objects that you wish to remove template
+from, and click :guilabel:`OK`. 
 
-.. figure:: _images/remove_template.png
+.. figure:: _images/dci_remove_template.png
 
 Another way to remove template from object - in :guilabel:`Infrastructure` 
 or :guilabel:`Network` perspective

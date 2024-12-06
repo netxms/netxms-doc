@@ -87,7 +87,7 @@ The following configuration parameters are supported:
 Configuration example
 ---------------------
 
-.. code-block:: sh
+.. code-block:: ini
 
    MasterServers = netxms.demo
    SubAgent = lmsensors.nsm
@@ -152,7 +152,7 @@ The following configuration parameters are supported:
 Configuration example
 ---------------------
 
-.. code-block:: sh
+.. code-block:: ini
 
    MasterServers = netxms.demo
    SubAgent = DS18X20.nsm
@@ -213,7 +213,7 @@ The following configuration parameters are supported:
 Configuration example
 ---------------------
 
-.. code-block:: sh
+.. code-block:: ini
 
    MasterServers = netxms.demo
    SubAgent = rpi.nsm
@@ -276,7 +276,7 @@ These are configuration sections and parameters for the MQTT subagent:
 Configuration example
 ---------------------
 
-.. code-block:: sh
+.. code-block:: ini
 
 	SubAgent = mqtt.nsm
 
@@ -287,7 +287,7 @@ Configuration example
 Configuration example with metric and event configuration
 ---------------------------------------------------------
 
-.. code-block:: sh
+.. code-block:: ini
 
 	SubAgent = mqtt.nsm
 

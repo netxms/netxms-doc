@@ -585,12 +585,13 @@ Server configuration file (netxmsd.conf)
       installed from .deb packages: :file:`/var/lib/netxms`. On Windows:
       :file:`'Installation folder'\\netxms\\var` where 'Installation folder' is
       the folder to which |product_name| server is installed.
+  * - DBCacheConfigurationTables
+    - Cache configuration tables to in-memory sqlite database to speed up server
+      startup
+    - yes
   * - DBDriver
     - Database driver to be used.
     - No default value
-  * - DBEncryptedPassword
-    - Hashed password, as produced by "nxencpass"
-    - none
   * - DBDriverOptions
     - Additional driver-specific parameters.
     - Empty string
@@ -604,20 +605,24 @@ Server configuration file (netxmsd.conf)
     - Database name (not used by ODBC driver).
     - netxms_db
   * - DBPassword
-    - Database user's password. When using INI configuration file remember to
-      enclose password in double qoutes ("password") if it contains # character.
+    - Database user's password. When using INI configuration file format,
+      remember to enclose password in double qoutes ("password") if it contains
+      ``#`` character.
     - Empty password
+  * - DBEncryptedPassword
+    - Hashed password, as produced by "nxencpass"
+    - none
   * - DBSchema
     - Schema name
     - not set
+  * - DBServer
+    - Database server (ODBC source name for ODBC driver).
+    - localhost
   * - DBSessionSetupSQLScript
     - Path to a plain text file containing a list of SQL commands which will be
       executed on every new database connection, including initial connection on
       server startup. 
     - Empty string
-  * - DBServer
-    - Database server (ODBC source name for ODBC driver).
-    - localhost
   * - DebugLevel
     - Set server debug logging level (0 - 9).  Value of 0 turns off debugging, 9
       enables very detailed logging.  Can also be set with command line ``-D
@@ -656,9 +661,9 @@ Server configuration file (netxmsd.conf)
       use password.
     - Empty string
   * - LibraryDirectory
-    - Defines location of library folder where drivers(ndd files) are stored.
+    - Defines location of library folder where drivers (ndd files) are stored.
       It's highly recommended not to use this parameter.
-    -
+    - Empty string
   * - ListenAddress
     - Interface address which should be used by server to listen for incoming
       connections. Use value 0.0.0.0 or * to use all available interfaces.
@@ -691,18 +696,21 @@ Server configuration file (netxmsd.conf)
       2. This parameter supports (K, M, G, T suffixes).
     - 16M
   * - Module
-    - Additional server module to be loaded at server startup. To load multiple
-      modules, add additional Module parameters.
+    - Additional server module to be loaded at server startup. You can use more
+      then one ``Module`` parameters to load multiple modules.
     - No default value
   * - PeerNode
     - IP address of peer node in high availability setup. If there is lock in
       the database with this address indicated, server process will communicate
-      to agent and server on that address to check if server is not running and
-      will remove database lock.
+      to agent and server on that address to ensure the server is not running
+      prior to removing the database lock.
     - No default value
   * - PerfDataStorageDriver
-    -
-    -
+    - Name of fanout driver used to send collected data to an additional
+      database. Multiple such parameters can be specified in the configuration
+      file to specify multiple drivers. See :ref:`fanout-drivers` for more
+      information. 
+    - Empty string
   * - ProcessAffinityMask
     - Sets a processor affinity mask for the netxmsd process (Windows only). A
       process affinity mask is a bit vector in which each bit represents a
@@ -711,10 +719,6 @@ Server configuration file (netxmsd.conf)
       <http://msdn.microsoft.com/en-us/library/windows/desktop/ms686223%28v=vs.85%29.aspx>`_
       for more details.
     - 0xFFFFFFFF
-  * - StartupSQLScript
-    - Path to a plain text file containing a list of SQL commands which will be
-      executed on server startup. 
-    - Empty string
   * - ServerCertificate
     - Path to file of server certificate for agent tunnel connections. This
       certificate is used to issue agent certificates. ServerCertificate
@@ -728,6 +732,10 @@ Server configuration file (netxmsd.conf)
   * - ServerCertificatePassword
     - Password of server certificate. Can be omitted if certificate does not use
       password.
+    - Empty string
+  * - StartupSQLScript
+    - Path to a plain text file containing a list of SQL commands which will be
+      executed on server startup. 
     - Empty string
   * - TrustedCertificate
     - Certificate issued by certificate authority or self-signed CA certificate.
@@ -746,6 +754,10 @@ Server configuration file (netxmsd.conf)
     - Password of server tunnel certificate. Can be omitted if certificate does
       not use password.
     - Empty string
+  * - WriteLogAsJson
+    - Write server log in JSON format. 
+    - no
+
 
 .. note::
   All boolean parameters accept "Yes/No", "On/Off" and "True/False" values.
@@ -777,7 +789,7 @@ Configuration`
       respond to command within this time, command considered as failed.
     - 4000
     - Yes
-  * - DefaultAgentCacheMode
+  * - Agent.DefaultCacheMode
     - Default agent cache mode
     - Off
     - Yes
@@ -1025,6 +1037,10 @@ Configuration`
       client).
     - 4701
     - Yes
+  * - Client.MinVersion
+    - The minimum client version allowed to connection to this server.
+    - 
+    - No
   * - Client.MinViewRefreshInterval
     - Minimal interval between view refresh in milliseconds (hint for client).
     - 300
@@ -2166,9 +2182,9 @@ Database Manager
 ----------------
 
 This is tool used to make manipulations with |product_name| database.
-  .. code-block:: sh
 
-   Usage: nxdbmgr [<options>] <command>
+
+  Usage: ``nxdbmgr [<options>] <command>``
 
 
 Valid commands are:
@@ -2398,27 +2414,27 @@ After completion and starting server, run the second step:
 Database export and import
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-nxdbmgr allows convenient way to export and import database. To ensure export data consistancy, NetXMS server and agent should be stopped. 
-Use -c switch, if alternative server configuration file is to be used.
+nxdbmgr allows convenient way to export and import database. To ensure export data consistancy, NetXMS server should be stopped. 
+In large deployments export may take long time.
 
   .. code-block:: sh
     
-   nxdbmgr export mysql_backup.exp -c /etc/netxmsd_mysql.conf
+   nxdbmgr export mysql_backup.sql
 
 
-It is possible to export setup configuration without data and logs and this can be achieved with -s and -Z switches.
-Use -e switch to exclude specific table from export.
-
-  .. code-block:: sh
-    
-     nxdbmgr -s -Z all export plsql_backup.exp
-
-For database import similar syntax and switches apply. One can export full database, but import only setup configuration or exclude any specific table.
-
+It is possible to export configuration without collected DCI data and logs and this can be achieved with -s and -Z switches.
+Use -e switch to exclude specific tables from export.
 
   .. code-block:: sh
     
-     nxdbmgr -e tdata_237 import plsql_backup.exp
+     nxdbmgr -s -Z all -e hardware_inventory -e software_inventory export plsql_backup.sql
+
+For database import similar syntax and switches apply. One can export full database, but import only configuration or exclude any specific table.
+
+
+  .. code-block:: sh
+    
+     nxdbmgr -e tdata_237 import plsql_backup.sql
 
 
 nxaction
@@ -2427,7 +2443,7 @@ nxaction
 nxaction - command line tool used to execute preconfigured actions on NetXMS agent
 
 
-Usage: nxaction <host> [<options>] <action> [<action args>]
+Usage: ``nxaction <host> [<options>] <action> [<action args>]``
 
 Options:
 
@@ -2471,38 +2487,15 @@ Options:
 
 Example:
 
-1. Find available actions.
 
-  .. code-block:: sh
-
-      nxget -l localhost Agent.ActionList
-      Agent.Restart internal "CORE"
-      Agent.RotateLog internal "CORE"
-      Process.Terminate internal "CORE"
-      TFTP.Put internal "CORE"
-      System.HardRestart internal "Linux"
-      System.HardShutdown internal "Linux"
-      System.Restart internal "Linux"
-      System.Shutdown internal "Linux"
-      System.UninstallProduct internal "Linux"
-      SSH.Command internal "SSH"
-
-2. Execute action.
 
   .. code-block:: sh
   
-    nxaction localhost System.Shutdown -e 3 -K /var/lib/netxms/.server_key -p 4700 -w 10 -W 30
+    $ nxaction 127.0.0.1 Agent.Restart
+      Action executed successfully
 
-    Broadcast message from root@ubuntuvm (Wed 2024-12-04 03:50:51 UTC):
-
-    The system will power off now!
-
-
-    Broadcast message from root@ubuntuvm (Wed 2024-12-04 03:50:51 UTC):
-
-    The system will power off now!
-
-    Action executed successfully
+.. note:: 
+  you can use ``nxget -l 127.0.0.1 Agent.ActionList`` to query list of available actions from agent
 
 nxadm
 -----
@@ -2510,11 +2503,11 @@ Nxadm is used for server console access and script execution; provides built-in 
 
 Usage:  
 
-      *  nxadm [-u <login>] [-P|-p <password>] -c <command> 
-      *  nxadm [-u <login>] [-P|-p <password>] -i
-      *  nxadm [-u <login>] [-P|-p <password>] [-r] -s <script>
-      *  nxadm -P
-      *  nxadm -p <db password>
+      *  ``nxadm [-u <login>] [-P|-p <password>] -c <command>``
+      *  ``nxadm [-u <login>] [-P|-p <password>] -i``
+      *  ``nxadm [-u <login>] [-P|-p <password>] [-r] -s <script>``
+      *  ``nxadm -P``
+      *  ``nxadm -p <db password>``
 
 Options:
 
@@ -2548,7 +2541,7 @@ Example
 
   .. code-block:: sh
 
-     nxadm -u admin -p admin -i
+     $ nxadm -u admin -p admin -i
 
      NetXMS Server Remote Console V5.1.1 Ready
      Enter "help" for command list
@@ -2629,7 +2622,9 @@ nxaevent
 
 This tool can be used to push events to |product_name| server via local NetXMS agent.
 
-Usage: nxaevent [OPTIONS] event_code [parameters]
+Usage: 
+     * ``nxaevent [OPTIONS] event_code [parameters]``
+     * ``nxaevent [OPTIONS] -n event_code [name=parameter ...]``
 
 .. list-table::
    :widths: 30 70
@@ -2659,16 +2654,18 @@ Send event to server via agent:
 
   .. code-block:: sh
 
-     nxevent SYS_NODE_UP
+     nxaevent MY_APP_EVENT
+
+     nxaevent -n MY_APP_EVENT state=UP desc="Application started"
 
 
 
 nxalarm
 -------
 
-nxalarm is cli alarm management utility.
+nxalarm is command line alarm management utility.
 
-Usage: nxalarm [<options>] <server> <command> [<alarm_id>]
+Usage: ``nxalarm [<options>] <server> <command> [<alarm_id>]``
 
 Commands:
 
@@ -2756,14 +2753,14 @@ List alarms:
 
   .. code-block:: sh
 
-     nxalarm -u admin -P adminpasswd localhost list
+     nxalarm -u admin -P adminpasswd 127.0.0.1 list
 
 
 Resolve alarm:
 
   .. code-block:: sh
 
-     nxalarm -u admin -P adminpasswd localhost resolve 226875
+     nxalarm -u admin -P adminpasswd 127.0.0.1 resolve 226875
 
 
 
@@ -2774,8 +2771,8 @@ nxap - command line tool used to manage agent policies
 
 Usage: 
 
-    * nxap [<options>] -l <host>
-    * nxap [<options>] -u <guid> <host>
+    * ``nxap [<options>] -l <host>``
+    * ``nxap [<options>] -u <guid> <host>``
 
 Options:
 
@@ -2834,7 +2831,7 @@ List agent policies:
 
   .. code-block:: sh
 
-      nxap -l 
+      nxap 127.0.0.1 -l 
     
     
 
@@ -2844,7 +2841,7 @@ nxappget
 
 nxappget - command line tool for reading metrics from application agents
 
-Usage: nxappget agent_name metric_name
+Usage: ``nxappget agent_name metric_name``
 
 Options:
 
@@ -2877,8 +2874,8 @@ protocol to send data.
 
 Usage: 
 
-       * nxapush [OPTIONS] [@batch_file] [values]
-       * nxapush [OPTIONS] -
+       * ``nxapush [OPTIONS] [@batch_file] [values]``
+       * ``nxapush [OPTIONS] -``
 
 Options:
 
@@ -2908,9 +2905,9 @@ Options:
      - Display version information.
 
 .. note::
-    * Values should be given in format dci=value or (if statsite sink format is selected): dci|value|timestamp where dci can be specified by it's name
+    * Values should be given in format ``dci=value`` or (if statsite sink format is selected): ``dci|value|timestamp`` where dci can be specified by it's name
     * Name of batch file cannot contain character = (equality sign)
-    * Use - character in place of values to read from standard input
+    * Use ``-`` character in place of values to read from standard input
 
 
 Examples
@@ -2940,8 +2937,8 @@ configuration files as well as various places in the system, e.g. ssh passwords,
 notification channel passwords, etc.
 
 Usage:
-       nxencpasswd [<options>] <login> [<password>]
-       nxencpasswd [<options>] -a [<password>]
+      * ``nxencpasswd [<options>] <login> [<password>]``
+      * ``nxencpasswd [<options>] -a [<password>]``
 
 Options:
 
@@ -2964,11 +2961,13 @@ Options:
 
 
 nxevent
---------
+-------
 
-Nxevent is installed with NetXMS client distribution. Sends events to server directly.
+Nxevent is installed with NetXMS client distribution. Sends events to server using client protocol. On Linux is provided by netxms-client package.
 
-Usage: nxevent [<options>] <server> <event> [<param_1> [... <param_N>]]
+Usage: 
+      * ``nxevent [<options>] <server> <event> [<param_1> [... <param_N>]]``
+      * ``nxevent [<options>] -n <server> <event> [name=parameter [... name=parameter]]``
 
 Options:
 
@@ -3016,7 +3015,9 @@ Send event to server:
 
   .. code-block:: sh
 
-     nxevent -u admin -P adminpassword localhost SYS_NODE_DOWN
+     nxevent -u admin -P adminpassword 127.0.0.1 MY_APP_EVENT
+
+     nxevent -u admin -P adminpassword 127.0.0.1 MY_APP_EVENT state=UP desc="Application started"
 
 
 nxget
@@ -3024,11 +3025,10 @@ nxget
 
 This tool is intended to get values of :term:`Metric` from |product_name| agent.
 
-Usage: nxget <host> [<options>] [<parameter> [<parameter> ...]]
+Usage: ``nxget [<options>] <host> [<metric> [<metric> ...]]``
 
 Where *host* is the name or IP address of the host running |product_name| agent; and
-*parameter* is a metric, list or table name, depending on given options. By default,
-nxget will attempt to retrieve the value of only one given parameter, unless *-b* option is given.
+*metric* is a metric, list or table name, depending on given options. When metric is requested without explicitly specifying metric type (table or list), nxget attempts to get values trying types in the following order: singe-value metric, table, list.
 
 Valid options for nxget
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -3145,31 +3145,31 @@ Get value of *Agent.Uptime* and *System.Uptime* metrics in one request, with out
 
   .. code-block:: sh
 
-     nxget 10.0.0.2 -bn Agent.Uptime System.Uptime
+     nxget -bn 10.0.0.2 Agent.Uptime System.Uptime
 
 Get agent configuration file from agent at host 10.0.0.2:
 
   .. code-block:: sh
 
-     nxget 10.0.0.2 -C
+     nxget -C 10.0.0.2
 
 Get value of *System.PlatformName* metric from agent at host 10.0.0.2, connecting via proxy agent at 172.16.1.1:
 
   .. code-block:: sh
 
-     nxget 10.0.0.2 –X 172.16.1.1 System.PlatformName
+     nxget -X 172.16.1.1 10.0.0.2 System.PlatformName
 
 Get value of *Agent.AcceptedConnections* enum from agent at host 10.0.0.10, forcing use of encrypted connection:
 
   .. code-block:: sh
 
-     nxget 10.0.0.10 -e 3 Agent.AcceptedConnections
+     nxget -e 3 -l 10.0.0.10 Agent.AcceptedConnections
 
 Check POP3 service at host 10.0.0.4 via agent at host 172.16.1.1:
 
   .. code-block:: sh
 
-     nxget 10.0.0.4 -S secret –t 2 –r user:pass 172.16.1.1
+     nxget -S 10.0.0.4 -t 2 -r user:pass 172.16.1.1
 
 Useful lists for debugging purpose
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3199,9 +3199,9 @@ Useful lists for debugging purpose
 nxmibc
 ------
 
-nxmibc - cli tool for mib file management
+nxmibc - cli tool for mib file management. Adding MIB files should be performed using management client, see: :ref:`import-mib`. This tool should not be normally used.
 
-Usage: nxmibc [options] source1 ... sourceN
+Usage: ``nxmibc [options] source1 ... sourceN``
 
 Options:
 
@@ -3249,7 +3249,7 @@ Compile and compress mib file:
 
 nxpush
 ------
-nxpush is a tool command line tool used to push DCI values to NetXMS server.
+nxpush is a command line tool used to push DCI values to NetXMS server.
 
 There are different options how this tool can be used:
  - with help of this tool data collected with different monitoring system
@@ -3257,7 +3257,7 @@ There are different options how this tool can be used:
  - can be used on nodes where agent can not be installed(not the case for nxapush)
  - can be used on nodes behind NAT with no port forwarding option
 
-Usage: nxpush [OPTIONS] [server] [@batch_file] [values]
+Usage: ``nxpush [OPTIONS] [server] [@batch_file] [values]``
 
 Options:
 
@@ -3297,20 +3297,19 @@ Options:
 
 .. note::
   * Values should be given in the following format:
-    dci=value
-    where node and dci can be specified either by ID, object name, DNS name,
-    or IP address. If you wish to specify node by DNS name or IP address,
-    you should prefix it with @ character
+    ``dci=value``
+    where DCI can be specified by ID or name and node by ID, object name, DNS name, or IP address. If you wish to specify node by DNS name or IP address,
+    you should prefix it with ``@`` character
   * First parameter will be used as "host" if -H/--host is unset
   * Name of batch file cannot contain character = (equality sign)
 
 Examples:
 
-Push two values to server 10.0.0.1 as user "sender" with password "passwd":
+Push two values to server 10.0.0.1 as user "sender" with password "passwd". Values will be pushed to node with ID 104, first to DCI with ID 4567, second to DCI with metric "PushParam":
 
   .. code-block:: sh
 
-      nxpush -H 10.0.0.1 -u sender -P passwd 10:24=1 10:PushParam=4
+      nxpush -H 10.0.0.1 -u sender -P passwd 104:4567=1 104:PushParam=4
 
   
 Push values from file to server 10.0.0.1 as user "guest" without password:
@@ -3324,9 +3323,9 @@ Required server configurations are described there: :ref:`dci-push-parameters-la
 nxscript
 --------
 
-nxscript - cli utility for script management.
+nxscript - command line utility for script management.
 
-Usage: nxscript [options] script [arg1 [... argN]]
+Usage: ``nxscript [options] script [arg1 [... argN]]``
 
 Options:
 
@@ -3378,7 +3377,7 @@ nxsnmpget
 
 This tool can be used to get :term:`SNMP` :term:`Metric` from node.
 
-Usage: nxsnmpget [<options>] <host> <variables>
+Usage: ``nxsnmpget [<options>] <host> <variables>``
 
 Options:
 
@@ -3430,7 +3429,7 @@ nxsnmpset
 
 nxsnmpset - command line tool used to set parameters on SNMP agent
 
-Usage: nxsnmpset [<options>] <host> <variable>[@<type>] <value>
+Usage: ``nxsnmpset [<options>] <host> <variable>[@<type>] <value>``
 
 Options:
 
@@ -3486,7 +3485,7 @@ nxsnmpwalk
 
 nxsnmpwalk - command line tool used to retrieve parameters from SNMP agent
 
-Usage: nxsnmpwalk [<options>] <host> <start_oid>
+Usage: ``nxsnmpwalk [<options>] <host> <start_oid>``
 
 Options:
 
@@ -3527,14 +3526,14 @@ Get system description for given IP:
 
   .. code-block:: sh
 
-       nxsnmpwalk -c public -v 2c 127.0.0.1 .1.3.6.1.2.1.1.1.0
+       nxsnmpwalk -c public -v 2c 127.0.0.1 .1.3.6.1.2.1.1.1
 
 nxupload
 --------
 
 nxupload - command line tool used to upload files to NetXMS agent
 
-Usage: nxupload [<options>] <host> <file>
+Usage: ``nxupload [<options>] <host> <file>``
 
 Tool options:
 
@@ -3600,7 +3599,7 @@ Common options:
 
 Example 
 
-Upload file on agent:
+Upload file to agent's data directory:
 
   .. code-block:: sh
 
@@ -3611,7 +3610,7 @@ nxwsget
 
 nxwsget - command line tool used to query web services via NetXMS agent. Such agent needs to have :guilabel:`EnableWebServiceProxy=yes` in its configuration.
 
-Usage: nxwsget [<options>] <host> <URL> <path> [<path> ...]
+Usage: ``nxwsget [<options>] <host> <URL> <path> [<path> ...]``
 
 Options:
 
@@ -3681,11 +3680,10 @@ Options:
 
 Example 
 
-Upload file on agent:
 
   .. code-block:: sh
 
-       nxupload localhost test_script.sh
+       nxwsget 127.0.0.1 "http://api.open-notify.org/astros.json" .number
      
 .. _list-of-supported-metrics:
 

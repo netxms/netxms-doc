@@ -287,16 +287,25 @@ are uploaded and updated on agent when template is manually or automatically app
 the node. Agent policies belong to templates, so they are applied to nodes to which a
 corresponding template is applied.
 
-To create policy, right click a template and select :menuselection:`Agent policies`. Click plus
-icon to create a new policy, give it a name, choose correct policy type and
-click :guilabel:`OK`. Existing policy can be modified by right-clicking it and
-selecting :menuselection:`Edit` from the menu or by double clicking on it.
-
 The following policy types are available:
   - Agent configuration policy
   - File delivery policy
   - Log parser policy
   - User support application policy
+
+To create policy, right click a template and select :menuselection:`Agent policies`. Click plus
+icon to create a new policy, give it a name, choose correct policy type and
+click :guilabel:`OK`. Additional policy configuration options will be available in a new tab. 
+In :guilabel:`File Delivery` policy tab, for example, right click 
+and :guilabel:`Add root directory...` option will prompt you to create directory. Then, right click on newly created directory and more 
+options, like :guilabel:`Add directory...`, :guilabel:`Add file...`, :guilabel:`Rename...`, :guilabel:`Permissions...` and :guilabel:`Delete...`
+will be avalable. Existing policy can be modified by right clicking it and
+selecting :menuselection:`Edit` from the menu or by double clicking on it. Policy configuration settings in 
+additional new tab can also be edited according to presented options after right click. Use :guilabel:`Save` button after configuration changes.
+
+
+.. figure:: _images/agent_policy_edit.png
+
 
 Policies are automatically deployed to nodes after creation/modification or
 when a template is applied to a node. When configuration policy is deleted or

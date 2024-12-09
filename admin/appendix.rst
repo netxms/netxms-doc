@@ -553,11 +553,11 @@ Server configuration file (netxmsd.conf)
     - Description
     - Default Value
   * - AuditLogKey
-    - 
-    - 
+    - Key for audit log entry signing using :wikipedia:`HMAC <HMAC>`. 
+    - Empty string
   * - BackgroundLogWriter
-    - 
-    - 
+    - Enables separate thread that writes log in blocks. 
+    - no
   * - CodePage
     - Code page used by |product_name| server. Has no effect on Windows or if
       server was compiled without iconv support.
@@ -567,8 +567,10 @@ Server configuration file (netxmsd.conf)
       effect only on Windows platforms.
     - no
   * - CRL
-    - 
-    - 
+    - Certificate revocation list - path to local file or http/https url.
+      Supports and autodetects PEM and DER formats. Multiple such entries can be
+      present in the configuration file.
+    - No default value
   * - DailyLogFileSuffix
     - Log file name suffix used when ``LogRotationMode`` is set to 1 (daily),
       can contain `strftime(3C)
@@ -635,8 +637,9 @@ Server configuration file (netxmsd.conf)
       ``crypto.*:8,agent.tunnel.*:4``).
     - Empty string
   * - DefaultThreadStackSize
-    - 
-    - 
+    - Advanced feature, please contact support prior to changing. This parameter
+      supports (K, M, G, T suffixes).
+    - 1M
   * - DumpDirectory
     - Directory for storing crash dumps.
     - "/" or "C:\"
@@ -682,15 +685,16 @@ Server configuration file (netxmsd.conf)
 
     - 2
   * - MaxClientMessageSize
-    - 
-    - 
+    - Advanced feature, please contact support prior to changing. This parameter
+      supports (K, M, G, T suffixes).
+    - 4M
   * - MaxClientSessions
     - Maximum number of client sessions. 
     - 256
   * - MaxLogSize
     - Maximum log file size in bytes, used only if ``LogRotationMode`` is set to
-      2
-    - 16777216
+      2. This parameter supports (K, M, G, T suffixes).
+    - 16M
   * - Module
     - Additional server module to be loaded at server startup. You can use more
       then one ``Module`` parameters to load multiple modules.

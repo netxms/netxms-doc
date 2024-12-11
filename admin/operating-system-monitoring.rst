@@ -123,7 +123,7 @@ subagent provides interface to Windows Driver Model and thus enables information
 
 Configuration example:
 
-.. code-block:: cfg
+.. code-block:: ini
 
    MasterServers = netxms.demo
    SubAgent=wmi.nsm

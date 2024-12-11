@@ -393,7 +393,7 @@ configuration is necessary. For notification channel select driver name
 :guilabel:`Message` and in driver configuration the name of notification channel
 should be specified, e.g.:
 
-.. code-block:: cfg
+.. code-block:: ini
 
     ChannelName=NotificationChannelName
   

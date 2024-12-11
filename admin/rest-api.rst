@@ -40,7 +40,7 @@ File should have parameters in ini format: NAME=VALUE. The following parameters 
 
 Configuration example:
 
-   .. code-block:: cfg
+   .. code-block:: ini
 
         netxms.server.address=server.office.radensolutions.com
         netxms.server.port=44701

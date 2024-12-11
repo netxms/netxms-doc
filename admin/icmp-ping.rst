@@ -276,7 +276,7 @@ parameters are supported:
 
 Configuration example:
 
-.. code-block:: cfg
+.. code-block:: ini
 
    # This sample nxagentd.conf instructs agent to:
    #   1. load PING subagent

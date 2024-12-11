@@ -38,7 +38,7 @@ The following configuration parameters are supported:
 
 Agent's configuration file example:
 
-.. code-block:: cfg
+.. code-block:: ini
 
    MasterServers = netxms.demo
    SubAgent = filemgr.nsm

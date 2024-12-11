@@ -698,7 +698,7 @@ The following drivers are provided by default with |product_name| installation:
       
        Example:
 
-       .. code-block:: cfg
+       .. code-block:: ini
 
             [Rooms]
             RoomName=URL
@@ -750,7 +750,7 @@ The following drivers are provided by default with |product_name| installation:
        information about setting up the URL of incoming webhook available `there
        <https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-using#setting-up-a-custom-incoming-webhook>`_
 
-       .. code-block:: cfg
+       .. code-block:: ini
 
             #config example
             ThemeColor=FF6A00

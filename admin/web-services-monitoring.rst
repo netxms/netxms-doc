@@ -126,7 +126,7 @@ then to collect data.
 So we assume that configuration is already done and we have web service with 
 "WebService1" name, that returns next json:
 
-.. code-block:: json 
+.. code-block:: json
 
    [
       {
@@ -156,7 +156,7 @@ DCI will have next configuration:
      
      This will create array with names, each name will be takes as an instance:
 
-          .. code-block:: json 
+          .. code-block:: json
 
              ["Object1", "Object2", "Object3"]
 

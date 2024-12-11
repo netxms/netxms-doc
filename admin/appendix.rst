@@ -758,6 +758,7 @@ Server configuration file (netxmsd.conf)
     - Write server log in JSON format. 
     - no
 
+
 .. note::
   All boolean parameters accept "Yes/No", "On/Off" and "True/False" values.
 
@@ -788,7 +789,7 @@ Configuration`
       respond to command within this time, command considered as failed.
     - 4000
     - Yes
-  * - DefaultAgentCacheMode
+  * - Agent.DefaultCacheMode
     - Default agent cache mode
     - Off
     - Yes
@@ -2177,13 +2178,13 @@ Command line tools
 |product_name| provide some additional command line tools. Each tool serves its own purpose.
 
 
-Database Manager (nxdbmgr)
---------------------------
+Database Manager
+----------------
 
 This is tool used to make manipulations with |product_name| database.
-  ::
 
-   Usage: nxdbmgr [<options>] <command>
+
+  Usage: ``nxdbmgr [<options>] <command>``
 
 
 Valid commands are:
@@ -2286,7 +2287,7 @@ Valid options are:
 
 Database initialization
 ~~~~~~~~~~~~~~~~~~~~~~~
-  ::
+  .. code-block:: sh
 
    nxdbmgr init
 
@@ -2302,7 +2303,7 @@ It's recommended to check database for errors when performing server upgrade or
 after server process has crashed or was killed. Server process should be stopped
 when performing the check. To perform the check, execute the following command: 
 
-  ::
+  .. code-block:: sh
 
    nxdbmgr check
 
@@ -2323,13 +2324,13 @@ manual unlocking using nxdbmgr might be needed. The procedure is the following:
 1) Make sure that server process is not running, e.g. on Linux you can check by
    running:
 
-  ::
+  .. code-block:: sh
 
    ps aux | grep netxmsd
 
 2) Unlock database by running:
 
-  ::
+  .. code-block:: sh
 
    nxdbmgr unlock
 
@@ -2357,7 +2358,7 @@ Destination database should be initialized prior to migration by running
   
 To migrate the whole database:
 
-  ::
+  .. code-block:: sh
 
    nxdbmgr migrate netxmsd-source-db.conf
 
@@ -2366,14 +2367,14 @@ Migration can also be performed as two-step process - on the first step only
 configuration data is transferred, then server is started on the new database
 and collected data and logs are transferred in the background. First step:
 
-  ::
+  .. code-block:: sh
 
    nxdbmgr -s -Z all migrate netxmsd-source-db.conf
 
 After completion and starting server on the new database, run below two commands
 to transfer collected data and logs:
 
-  ::
+  .. code-block:: sh
 
    nxdbmgr -D migrate netxmsd-source-db.conf
    nxdbmgr -S -L all migrate netxmsd-old.conf
@@ -2389,7 +2390,7 @@ have database backup prior to running this. Conversion is only possible when
 
 To convert the whole database:
 
-  ::
+  .. code-block:: sh
 
    nxdbmgr convert
 
@@ -2399,35 +2400,465 @@ process to be stopped, log tables are converted during that step. Then server
 can be started and second step - conversion of tables with collected data can be
 performed. First step: 
 
-  ::
+  .. code-block:: sh
 
    nxdbmgr -s convert
 
 After completion and starting server, run the second step:
 
-  ::
+  .. code-block:: sh
 
    nxdbmgr background-convert
 
+
+Database export and import
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+nxdbmgr allows convenient way to export and import database. To ensure export data consistancy, NetXMS server should be stopped. 
+In large deployments export may take long time.
+
+  .. code-block:: sh
+    
+   nxdbmgr export mysql_backup.sql
+
+
+It is possible to export configuration without collected DCI data and logs and this can be achieved with -s and -Z switches.
+Use -e switch to exclude specific tables from export.
+
+  .. code-block:: sh
+    
+     nxdbmgr -s -Z all -e hardware_inventory -e software_inventory export plsql_backup.sql
+
+For database import similar syntax and switches apply. One can export full database, but import only configuration or exclude any specific table.
+
+
+  .. code-block:: sh
+    
+     nxdbmgr -e tdata_237 import plsql_backup.sql
 
 
 nxaction
 --------
 
+nxaction - command line tool used to execute preconfigured actions on NetXMS agent
+
+
+Usage: ``nxaction <host> [<options>] <action> [<action args>]``
+
+Options:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Source
+     - Description
+   * - -D level
+     - Set debug level (0..9 or off, default is off).
+   * - -e policy
+     - Set encryption policy. Possible values are:
+                    0 = Encryption disabled;
+                    1 = Encrypt connection only if agent requires encryption;
+                    2 = Encrypt connection if agent supports encryption;
+                    3 = Force encrypted connection;
+                    Default value is 1.
+   * - -h
+     - Display help and exit.
+   * - -K file
+     - Specify server's key file (default is /var/lib/netxms/.server_key).
+   * - -o
+     - Show action's output.
+   * - -O port
+     - Proxy agent's port number. Default is 4700.
+   * - -p port
+     - Agent's port number. Default is 4700.
+   * - -s secret
+     - Shared secret for agent authentication.
+   * - -S secret
+     - Shared secret for proxy agent authentication.
+   * - -v
+     - Display version and exit.
+   * - -w seconds
+     - Set command timeout (default is 5 seconds).
+   * - -W seconds
+     - Set connection timeout (default is 30 seconds).
+   * - -X addr
+     - Use proxy agent at given address.
+
+Example:
+
+
+
+  .. code-block:: sh
+  
+    $ nxaction 127.0.0.1 Agent.Restart
+      Action executed successfully
+
+.. note:: 
+  you can use ``nxget -l 127.0.0.1 Agent.ActionList`` to query list of available actions from agent
+
 nxadm
 -----
+Nxadm is used for server console access and script execution; provides built-in commands for server debugging.
+
+Usage:  
+
+      *  ``nxadm [-u <login>] [-P|-p <password>] -c <command>``
+      *  ``nxadm [-u <login>] [-P|-p <password>] -i``
+      *  ``nxadm [-u <login>] [-P|-p <password>] [-r] -s <script>``
+      *  ``nxadm -P``
+      *  ``nxadm -p <db password>``
+
+Options:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+   
+   * - Source
+     - Description
+   * - -c <command>
+     - Execute given command at server debug console and disconnect.
+   * - -i
+     - Connect to server debug console in interactive mode.
+   * - -h
+     - Display help and exit.
+   * - -p <password>
+     - Provide database password for server startup or user's password for console access.
+   * - -P
+     - Provide database password for server startup or user's password for console access (password read from terminal).
+   * - -r
+     - Use script's return value as exit code.
+   * - -s <script>
+     - Execute given NXSL script and disconnect.
+   * - -u name
+     - User name for authentication.
+   * - -v
+     - Display version and exit.
+
+
+Example
+
+  .. code-block:: sh
+
+     $ nxadm -u admin -p admin -i
+
+     NetXMS Server Remote Console V5.1.1 Ready
+     Enter "help" for command list
+
+     netxmsd: help
+     Valid commands are:
+     at +<sec> <script> [<params>]     - Schedule one time script execution task
+     at <schedule> <script> [<params>] - Schedule repeated script execution task
+     clear                             - Show list of valid component names for clearing
+     clear <component>                 - Clear internal data or queue for given component
+     dbcp reset                        - Reset database connection pool
+     debug [<level>|off]               - Set debug level (valid range is 0..9)
+     debug [<debug tag> <level>|off|default]
+                                       - Set debug level for a particular debug tag
+     debug sql [on|off]                - Turn SQL query trace on or off
+     down                              - Shutdown NetXMS server
+     exec <script> [<params>]          - Executes NXSL script from script library
+     exit                              - Exit from remote session
+     kill <session>                    - Kill client session
+     get <variable>                    - Get value of server configuration variable
+     help                              - Display this help
+     hkrun                             - Run housekeeper immediately
+     ldapsync                          - Synchronize ldap users with local user database
+     log <text>                        - Write given text to server log file
+     logmark                           - Write marker ******* MARK ******* to server log file
+     ping <address>                    - Send ICMP echo request to given IP address
+     poll <type> <node>                - Initiate node poll
+     raise <exception>                 - Raise exception
+     scan <range start> <range end> [proxy <id>|zone <uin>] [discovery]
+                                       - Manual active discovery scan for given range. Without 'discovery' parameter prints results only
+     set <variable> <value>            - Set value of server configuration variable
+     show arp <node>                   - Show ARP cache for node
+     show authtokens                   - Show user authentication tokens
+     show components <node>            - Show physical components of given node
+     show dbcp                         - Show active sessions in database connection pool
+     show dbstats                      - Show DB library statistics
+     show discovery ranges             - Show state of active network discovery by address range
+     show ep                           - Show event processing threads statistics
+     show fdb <node>                   - Show forwarding database for node
+     show flags                        - Show internal server flags
+     show heap details                 - Show detailed heap information
+     show heap summary                 - Show heap usage summary
+     show index <index>                - Show internal index
+     show modules                      - Show loaded server modules
+     show ndd                          - Show loaded network device drivers
+     show objects [<filter>]           - Dump network objects to screen
+     show pe                           - Show registered prediction engines
+     show pollers                      - Show poller threads state information
+     show queues                       - Show internal queues statistics
+     show routing-table <node>         - Show cached routing table for node
+     show sessions                     - Show active client sessions
+     show stats                        - Show global server statistics
+     show syncer                       - Show syncer statistics
+     show tasks                        - Show background tasks
+     show threads [<pool>]             - Show thread statistics
+     show topology <node>              - Collect and show link layer topology for node
+     show tunnels                      - Show active agent tunnels
+     show users                        - Show users
+     show version                      - Show NetXMS server version
+     show vlans <node>                 - Show cached VLAN information for node
+     show watchdog                     - Display watchdog information
+     tcpping <address> <port>          - TCP ping on given address and port
+     tp loadtest <pool> <tasks>        - Start test tasks in given thread pool
+     trace <node1> <node2>             - Show network path trace between two nodes
+     tunnel bind <tunnel> <node>       - Bind agent tunnel to node
+     tunnel unbind <node>              - Unbind agent tunnel from node
+
+     Almost all commands can be abbreviated to 2 or 3 characters
+
+     You can use the following shortcuts to execute command from history:
+     !!    - Execute last command
+     !<N>  - Execute Nth command from history
+     !-<N> - Execute Nth command back from last one
+
+
+nxaevent
+--------
+
+This tool can be used to push events to |product_name| server via local NetXMS agent.
+
+Usage: 
+     * ``nxaevent [OPTIONS] event_code [parameters]``
+     * ``nxaevent [OPTIONS] -n event_code [name=parameter ...]``
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+   
+   * - Source
+     - Description
+   * - -h, --help
+     - Display this help message.
+   * - -n, --named-parameters
+     - Parameters are provided in named format: name=value.
+   * - -o, --object <id>
+     - Send event on behalf of object with given id.
+   * - -q, --quiet
+     - Suppress all messages.
+   * - -t, --timestamp-unix <time>
+     - Specify timestamp for event as UNIX timestamp.
+   * - -T, --timestamp-text <time>
+     - Specify timestamp for event as YYYYMMDDhhmmss.
+   * - -v, --verbose 
+     - Enable verbose messages. Add twice for debug
+   * - -V, --version
+     - Display version information.
+
+
+Send event to server via agent:
+
+  .. code-block:: sh
+
+     nxaevent MY_APP_EVENT
+
+     nxaevent -n MY_APP_EVENT state=UP desc="Application started"
+
 
 
 nxalarm
 -------
 
+nxalarm is command line alarm management utility.
+
+Usage: ``nxalarm [<options>] <server> <command> [<alarm_id>]``
+
+Commands:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+   
+   * - Source
+     - Description
+   * -   ack <id> 
+     - Acknowledge alarm
+   * -   add-comment <id> <text>
+     - Add comment to alarm
+   * -   get-comments <id>
+     - Get comments of alarm
+   * -   list
+     -  List active alarms
+   * -   open <id>
+     -  Open helpdesk issue from alarm
+   * -   resolve <id>
+     - Resolve alarm
+   * -   terminate <id>          
+     - Terminate alarm
+
+Options:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+   
+   * - Source
+     - Description
+   * - -c
+     - Codepage (default is ISO8859-1)
+   * - -D
+     - Turn on debug mode.
+   * - -e
+     - Encrypt session (for compatibility only, session is always encrypted).
+   * - -h
+     - Display help and exit.
+   * - -o <format>
+     - Output format for list (see below).
+   * - -P <password>
+     - Specify user's password. Default is empty password.
+   * - -s
+     - Sticky acknowledge (only for "ack" command).
+   * - -S <minutes>
+     - Sticky acknowledge with timeout (only for "ack" command).
+   * - -u <user>
+     - Login to server as <user>. Default is "guest".
+   * - -v
+     - Display version and exit.
+   * - -w <seconds>
+     - Specify command timeout (default is 3 seconds).
+
+
+Output format string syntax:
+
+
+  *  %a - Primary IP address of source object
+  *  %A - Primary host name of source object
+  *  %c - Repeat count
+  *  %d - Related DCI ID
+  *  %e - Event code
+  *  %E - Event name
+  *  %h - Helpdesk state as number
+  *  %H - Helpdesk state as text
+  *  %i - Source object identifier
+  *  %I - Alarm identifier
+  *  %m - Message text
+  *  %n - Source object name
+  *  %s - Severity as number
+  *  %S - Severity as text
+  *  %x - Alarm state as number
+  *  %X - Alarm state as text
+  *  %% - Percent sign
+
+
+Default format is %I %S %H %m
+
+
+Examples 
+
+List alarms:
+
+  .. code-block:: sh
+
+     nxalarm -u admin -P adminpasswd 127.0.0.1 list
+
+
+Resolve alarm:
+
+  .. code-block:: sh
+
+     nxalarm -u admin -P adminpasswd 127.0.0.1 resolve 226875
+
+
+
 nxap
 ----
+
+nxap - command line tool used to manage agent policies
+
+Usage: 
+
+    * ``nxap [<options>] -l <host>``
+    * ``nxap [<options>] -u <guid> <host>``
+
+Options:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Source
+     - Description
+   * - -l
+     - List policies.
+   * - -u <guid>
+     - Uninstall policy.
+
+Common options:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Source
+     - Description
+   * - -D level
+     - Set debug level (0..9 or off, default is off).
+   * - -e policy
+     - Set encryption policy. Possible values are:
+                    0 = Encryption disabled;
+                    1 = Encrypt connection only if agent requires encryption;
+                    2 = Encrypt connection if agent supports encryption;
+                    3 = Force encrypted connection;
+                    Default value is 1.
+   * - -h
+     - Display help and exit.
+   * - -K file
+     - Specify server's key file (default is /var/lib/netxms/.server_key).
+   * - -O port
+     - Proxy agent's port number. Default is 4700.
+   * - -p port
+     - Agent's port number. Default is 4700.
+   * - -s secret
+     - Shared secret for agent authentication.
+   * - -S secret
+     - Shared secret for proxy agent authentication.
+   * - -v
+     - Display version and exit.
+   * - -w seconds
+     - Set command timeout (default is 5 seconds).
+   * - -W seconds
+     - Set connection timeout (default is 30 seconds).
+   * - -X addr
+     - Use proxy agent at given address.
+
+Example
+
+List agent policies:
+
+  .. code-block:: sh
+
+      nxap 127.0.0.1 -l 
+    
+    
 
 
 nxappget
 --------
 
+nxappget - command line tool for reading metrics from application agents
+
+Usage: ``nxappget agent_name metric_name``
+
+Options:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Source
+     - Description
+   * - -V, --version
+     - Display version information.
+   * - -h, --help
+     - Display this help message.
+   * - -v, --verbose
+     - Enable verbose messages. Add twice for debug
+   * - -q, --quiet
+     - Suppress all messages.
 
 .. _nxapush-label:
 
@@ -2441,8 +2872,59 @@ like nxpush. So after each server update nxpush tool also should be updated.
 In case of usage nxapush - only agent should be updated as this tool uses agent
 protocol to send data.
 
-nxdevcfg
---------
+Usage: 
+
+       * ``nxapush [OPTIONS] [@batch_file] [values]``
+       * ``nxapush [OPTIONS] -``
+
+Options:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Source
+     - Description
+   * - -h, --help
+     - Display this help message.
+   * - -l, --local-cache
+     - Push to agent's local cache.
+   * - -o, --object <id>
+     - Push data on behalf of object with given id.
+   * - -q, --quiet
+     - Suppress all messages.
+   * - -s, --statsite
+     - Use statsite sink format.
+   * - -t, --timestamp-unix <time>
+     - Specify timestamp for data as UNIX timestamp.
+   * - -T, --timestamp-text <time>
+     - Specify timestamp for data as YYYYMMDDhhmmss.
+   * - -v, --verbose
+     - Enable verbose messages. Add twice for debug
+   * - -V, --version
+     - Display version information.
+
+.. note::
+    * Values should be given in format ``dci=value`` or (if statsite sink format is selected): ``dci|value|timestamp`` where dci can be specified by it's name
+    * Name of batch file cannot contain character = (equality sign)
+    * Use ``-`` character in place of values to read from standard input
+
+
+Examples
+
+
+Push two values:
+
+  .. code-block:: sh
+
+      nxapush PushParam1=1 PushParam2=4
+
+Push values from file:
+
+  .. code-block:: sh
+
+      nxapush @file
+
 
 
 .. _nxencpasswd-tools-label:
@@ -2454,25 +2936,99 @@ This tool can be used to obfuscate passwords stored in server and agent
 configuration files as well as various places in the system, e.g. ssh passwords,
 notification channel passwords, etc.
 
+Usage:
+      * ``nxencpasswd [<options>] <login> [<password>]``
+      * ``nxencpasswd [<options>] -a [<password>]``
+
+Options:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+   
+   * - Source
+     - Description
+   * - -a
+     - Encrypt agent's secret.
+   * - -h
+     - Display help and exit.
+   * - -v
+     - Display version and exit.
+
+.. note::
+
+     If password is not provided it will be requested from terminal.    
+
+
 nxevent
 -------
 
-This tool can be used to push events to |product_name| server.
+Nxevent is installed with NetXMS client distribution. Sends events to server using client protocol. On Linux is provided by netxms-client package.
+
+Usage: 
+      * ``nxevent [<options>] <server> <event> [<param_1> [... <param_N>]]``
+      * ``nxevent [<options>] -n <server> <event> [name=parameter [... name=parameter]]``
+
+Options:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+   
+   * - Source
+     - Description
+   * - -c
+     - Codepage (default is ISO8859-1).
+   * - -C <count>
+     - Repeat event sending given number of times.
+   * - -d
+     - Turn on debug mode.
+   * - -e
+     - Encrypt session (for compatibility only, session is always encrypted).
+   * - -h
+     - Display help and exit.
+   * - -i <interval>
+     - Repeat event sending with given interval in milliseconds.
+   * - -n
+     - Parameters are provided in named format (name=value).
+   * - -o <id>
+     - Specify source object ID.
+   * - -P <password>
+     - Specify user's password. Default is empty password.
+   * - -S
+     - Skip protocol version check (use with care).
+   * - -T <tag>
+     - User tag to be associated with the message. Default is empty.
+   * - -u <user>
+     - Login to server as <user>. Default is "guest".
+   * - -v
+     - Display version and exit.
+   * - -w <seconds> 
+     - Specify command timeout (default is 3 seconds).
+
+
+Example
+
+
+
+Send event to server:
+
+  .. code-block:: sh
+
+     nxevent -u admin -P adminpassword 127.0.0.1 MY_APP_EVENT
+
+     nxevent -u admin -P adminpassword 127.0.0.1 MY_APP_EVENT state=UP desc="Application started"
+
 
 nxget
 -----
 
 This tool is intended to get values of :term:`Metric` from |product_name| agent.
 
-Syntax:
-
-.. code-block:: shell
-
-   nxget [options] host [metric [metric ...]]
+Usage: ``nxget [<options>] <host> [<metric> [<metric> ...]]``
 
 Where *host* is the name or IP address of the host running |product_name| agent; and
-*metric* is a metric, list or table name, depending on given options. By default,
-nxget will attempt to retrieve the value of only one given metric, unless *-b* option is given.
+*metric* is a metric, list or table name, depending on given options. When metric is requested without explicitly specifying metric type (table or list), nxget attempts to get values trying types in the following order: singe-value metric, table, list.
 
 Valid options for nxget
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -2484,11 +3040,6 @@ Valid options for nxget
 
   * - Option
     - Description
-  * - -a auth
-    - Authentication method. Valid methods are "none",
-                  "plain", "md5" and "sha1". Default is "none".
-  * - -A auth
-    - Authentication method for proxy agent.
   * - -b
     - Batch mode - get all parameters listed on command line.
   * - -C
@@ -2508,6 +3059,10 @@ Valid options for nxget
                   Default value is 1.
   * - -E file
     - Take screenshot. First parameter is file name, second (optional) is session name.
+  * - -f
+    - Do not try lists and tables if requested metric does not exist.
+  * - -F 
+    - Get information about given file set. Each parameter is separate file name.
   * - -h
     - Display help and exit.
   * - -i seconds
@@ -2521,6 +3076,8 @@ Valid options for nxget
     - Requested parameter is a list.
   * - -n
     - Show parameter's name in result.
+  * - -N addr
+    - Check state of network service at given address.
   * - -o proto
     - Protocol number to be used for service check.
   * - -O port
@@ -2528,20 +3085,22 @@ Valid options for nxget
   * - -p port
     - Agent's port number. Default is 4700.
   * - -P port
-    - Network service port (to be used with -S option).
+    - Network service port (to be used with -N option).
   * - -r string
     - Service check request string.
   * - -R string
     - Service check expected response string.
   * - -s secret
     - Shared secret for authentication.
-  * - -S addr
-    - Check state of network service at given address.
+  * - -S secret
+    - Shared secret for proxy agent authentication.
   * - -t type
     - Set type of service to be checked.
                   Possible types are    - custom, ssh, pop3, smtp, ftp, http, https, telnet.
   * - -T
     - Requested parameter is a table.
+  * - U
+    - Get list of active user sessions.
   * - -v
     - Display version and exit.
   * - -w seconds
@@ -2550,8 +3109,9 @@ Valid options for nxget
     - Set connection timeout (default is 30 seconds).
   * - -X addr
     - Use proxy agent at given address.
-  * - -Z secret
-    - Shared secret for proxy agent authentication.
+  * - -Y
+    - Read remote system time.
+  
 
 Examples
 ~~~~~~~~
@@ -2559,57 +3119,57 @@ Examples
 
 Get value of *Agent.Version* metric from agent at host 10.0.0.2:
 
-.. code-block:: shell
+  .. code-block:: sh
 
-   nxget 10.0.0.2 Agent.Version
+     nxget 10.0.0.2 Agent.Version
 
 Get list of supported parameters from agent at host 10.0.0.2:
 
-.. code-block:: shell
+  .. code-block:: sh
 
-   nxget 10.0.0.2 -I
+     nxget 10.0.0.2 -I
 
 Get list of supported lists from agent at host 10.0.0.2:
 
-.. code-block:: shell
+  .. code-block:: sh
 
-   nxget 10.0.0.2 Agent.SupportedLists -l
+     nxget 10.0.0.2 Agent.SupportedLists -l
 
 Get list of supported tables from agent at host 10.0.0.2:
 
-.. code-block:: shell
+  .. code-block:: sh
 
-   nxget 10.0.0.2 Agent.SupportedTables -l
+     nxget 10.0.0.2 Agent.SupportedTables -l
 
 Get value of *Agent.Uptime* and *System.Uptime* metrics in one request, with output in metric = value form:
 
-.. code-block:: shell
+  .. code-block:: sh
 
-   nxget –bn 10.0.0.2 Agent.Uptime System.Uptime
+     nxget -bn 10.0.0.2 Agent.Uptime System.Uptime
 
 Get agent configuration file from agent at host 10.0.0.2:
 
-.. code-block:: shell
+  .. code-block:: sh
 
-   nxget –C 10.0.0.2
+     nxget -C 10.0.0.2
 
 Get value of *System.PlatformName* metric from agent at host 10.0.0.2, connecting via proxy agent at 172.16.1.1:
 
-.. code-block:: shell
+  .. code-block:: sh
 
-   nxget –X 172.16.1.1 10.0.0.2 System.PlatformName
+     nxget -X 172.16.1.1 10.0.0.2 System.PlatformName
 
-Get value of *Agent.SupportedParameters* enum from agent at host 10.0.0.10, forcing use of encrypted connection:
+Get value of *Agent.AcceptedConnections* enum from agent at host 10.0.0.10, forcing use of encrypted connection:
 
-.. code-block:: shell
+  .. code-block:: sh
 
-   nxget –e 3 –l 10.0.0.10 Agent.SupportedParameters
+     nxget -e 3 -l 10.0.0.10 Agent.AcceptedConnections
 
 Check POP3 service at host 10.0.0.4 via agent at host 172.16.1.1:
 
-.. code-block:: shell
+  .. code-block:: sh
 
-   nxget –S 10.0.0.4 –t 2 –r user:pass 172.16.1.1
+     nxget -S 10.0.0.4 -t 2 -r user:pass 172.16.1.1
 
 Useful lists for debugging purpose
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2639,12 +3199,57 @@ Useful lists for debugging purpose
 nxmibc
 ------
 
+nxmibc - cli tool for mib file management. Adding MIB files should be performed using management client, see: :ref:`import-mib`. This tool should not be normally used.
+
+Usage: ``nxmibc [options] source1 ... sourceN``
+
+Options:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Option
+     - Description
+   * - -a
+     - Compile all input files (continue after file parsing errors)
+   * - -d <dir>
+     - Include all MIB files from given directory to compilation
+   * - -e <ext>
+     - Specify file extensions (default extension: "mib")
+   * - -m
+     - Produce machine-readable output
+   * - -o <file>
+     - Set output file name (default is netxms.mib)
+   * - -P
+     - Pause before exit
+   * - -r
+     - Scan sub-directories
+   * - -s
+     - Strip descriptions from MIB objects
+   * - -u
+     - Do not compress output file
+   * - -z
+     - Compress output file
+
+.. note::
+     compression is ON by default, so option -z effectively does nothing and left only for backward compatibility.
+
+Example
+
+Compile and compress mib file:
+
+  .. code-block:: sh
+
+       nxmibc -d /usr/share/netxms/mibs -o /var/lib/netxms/netxms.mib -z
+
+
 
 .. _nxpush-label:
 
 nxpush
 ------
-nxpush is a tool that allows to push DCI daca from command line.
+nxpush is a command line tool used to push DCI values to NetXMS server.
 
 There are different options how this tool can be used:
  - with help of this tool data collected with different monitoring system
@@ -2652,63 +3257,434 @@ There are different options how this tool can be used:
  - can be used on nodes where agent can not be installed(not the case for nxapush)
  - can be used on nodes behind NAT with no port forwarding option
 
-Usage: ./nxapush [OPTIONS] [@batch_file] [values]
+Usage: ``nxpush [OPTIONS] [server] [@batch_file] [values]``
 
 Options:
 
-+--------------+-----------------------------------------------+
-|-h            | Display this help message.                    |
-+--------------+-----------------------------------------------+
-|-o <id>       |Push data on behalf of object with given id.   |
-+--------------+-----------------------------------------------+
-|-q            |Suppress all messages.                         |
-+--------------+-----------------------------------------------+
-|-v            |Enable verbose messages. Add twice for debug   |
-+--------------+-----------------------------------------------+
-|-V            |Display version information.                   |
-+--------------+-----------------------------------------------+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
 
-Notes:
+   * - Option
+     - Description
+   * - -b, --batchsize <size> 
+     - Batch size (default is to send all data in one batch).
+   * - -c, --codepage <page>
+     - Codepage (default is ISO8859-1).
+   * - -e, --encrypt
+     - Encrypt session (for compatibility only, session is always encrypted).
+   * - -h, --help
+     - Display this help message.
+   * - -H, --host <host>
+     - Server address.
+   * - -P, --password <password>
+     - Specify user's password. Default is empty.
+   * - -q, --quiet
+     - Suppress all messages.
+   * - -S, --skip-version-check
+     - Skip protocol version check (use with care).
+   * - -t, --timestamp-unix <time>
+     - Specify timestamp for data as UNIX timestamp.
+   * - -T, --timestamp-text <time>
+     - Specify timestamp for data as YYYYMMDDhhmmss.
+   * - -u, --user <user>
+     - Login to server as user. Default is "guest".
+   * - -v, --verbose
+     - Enable verbose messages. Add twice for debug.
+   * - -V, --version
+     - Display version information.
+
+
+.. note::
   * Values should be given in the following format:
-    dci=value
-    where dci can be specified by it's name
+    ``dci=value``
+    where DCI can be specified by ID or name and node by ID, object name, DNS name, or IP address. If you wish to specify node by DNS name or IP address,
+    you should prefix it with ``@`` character
+  * First parameter will be used as "host" if -H/--host is unset
   * Name of batch file cannot contain character = (equality sign)
 
 Examples:
-  Push two values:
 
-  .. code-block:: shell
+Push two values to server 10.0.0.1 as user "sender" with password "passwd". Values will be pushed to node with ID 104, first to DCI with ID 4567, second to DCI with metric "PushParam":
 
-      nxapush PushParam1=1 PushParam2=4
+  .. code-block:: sh
 
-  Push values from file:
+      nxpush -H 10.0.0.1 -u sender -P passwd 104:4567=1 104:PushParam=4
 
-  .. code-block:: shell
+  
+Push values from file to server 10.0.0.1 as user "guest" without password:
 
-      nxapush @file
+  .. code-block:: sh
+
+      nxpush 10.0.0.1 @file
 
 Required server configurations are described there: :ref:`dci-push-parameters-label`
 
 nxscript
 --------
 
-nxsms
------
+nxscript - command line utility for script management.
+
+Usage: ``nxscript [options] script [arg1 [... argN]]``
+
+Options:
+
+
+.. list-table::
+  :widths: 15 50
+  :header-rows: 1
+
+  * - Option
+    - Description
+  * - -5
+    - Convert given script to NXSL version 5
+  * - -b
+    - Input is a binary file
+  * - -c
+    - Compile only
+  * - -C <count>
+    - Run script multiple times
+  * - -d
+    - Dump compiled script code
+  * - -e <name>
+    - Entry point
+  * - -E
+    - Show expression variables on exit
+  * - -m
+    - Show memory usage information
+  * - -M
+    - Show program metadata
+  * - -o <file>
+    - Write compiled script
+  * - -r
+    - Print script return value
+  * - -R
+    - Show list of required modules
+  * - -t
+    - Enable instruction trace
+
+Example
+
+Convert script to NXSL version 5:
+
+  .. code-block:: sh
+
+       nxscript -5 file.nxsl
+
 
 nxsnmpget
 ---------
 
 This tool can be used to get :term:`SNMP` :term:`Metric` from node.
 
+Usage: ``nxsnmpget [<options>] <host> <variables>``
+
+Options:
+
+.. list-table::
+  :widths: 15 50
+  :header-rows: 1
+
+  * - Option
+    - Description
+  * - -a <method>
+    - Authentication method for SNMP v3 USM. Valid methods are MD5, SHA1, SHA224, SHA256, SHA384, SHA512
+  * - -A <passwd>
+    - User's authentication password for SNMP v3 USM
+  * - -c <string>
+    - Community string. Default is "public"
+  * - -C <codepage>
+    - Codepage for remote system
+  * - -e <method>
+    - Encryption method for SNMP v3 USM. Valid methods are DES and AES
+  * - -E <passwd>
+    - User's encryption password for SNMP v3 USM
+  * - -h
+    - Display help and exit
+  * - -i <seconds>
+    - Repeat request with given interval in seconds
+  * - -p <port>
+    - Agent's port number. Default is 161
+  * - -u <user>
+    - User name for SNMP v3 USM
+  * - -v <version>
+    - SNMP version to use (valid values is 1, 2c, and 3)
+  * - -w <seconds>
+    - Request timeout (default is 3 seconds)
+  * - -x
+    - Show raw value in hex
+
+
+Example
+
+Get system description for given IP:
+
+  .. code-block:: sh
+
+       nxsnmpget -c public -v 2c 127.0.0.1 .1.3.6.1.2.1.1.1.0
+
+
 nxsnmpset
 ---------
+
+nxsnmpset - command line tool used to set parameters on SNMP agent
+
+Usage: ``nxsnmpset [<options>] <host> <variable>[@<type>] <value>``
+
+Options:
+
+.. list-table::
+  :widths: 15 50
+  :header-rows: 1
+
+  * - Option
+    - Description
+  * - -a <method>
+    - Authentication method for SNMP v3 USM. Valid methods are MD5, SHA1, SHA224, SHA256, SHA384, SHA512
+  * - -A <passwd>
+    - User's authentication password for SNMP v3 USM
+  * - -B
+    - Provided value is a base64 encoded raw value
+  * - -c <string>
+    - Community string. Default is "public"
+  * - -e <method>
+    - Encryption method for SNMP v3 USM. Valid methods are DES and AES
+  * - -E <passwd>
+    - User's encryption password for SNMP v3 USM
+  * - -h
+    - Display help and exit
+  * - -H
+    - Provided value is a raw value encoded as hexadecimal string
+  * - -p <port>
+    - Agent's port number. Default is 161
+  * - -t <type>
+    - Specify variable's data type. Default is octet string.
+  * - -u <user>
+    - User name for SNMP v3 USM
+  * - -v <version>
+    - SNMP version to use (valid values is 1, 2c, and 3)
+  * - -w <seconds>
+    - Request timeout (default is 3 seconds)
+
+
+.. note::
+      You can specify data type either as number or in symbolic form. Valid symbolic representations are following:
+         - INTEGER
+         - STRING
+         - OID
+         - IPADDR
+         - COUNTER32
+         - GAUGE32
+         - TIMETICKS
+         - COUNTER64
+         - UINT32
+
 
 nxsnmpwalk
 ----------
 
+nxsnmpwalk - command line tool used to retrieve parameters from SNMP agent
+
+Usage: ``nxsnmpwalk [<options>] <host> <start_oid>``
+
+Options:
+
+.. list-table::
+  :widths: 15 50
+  :header-rows: 1
+
+  * - Option
+    - Description
+  * - -a <method>
+    - Authentication method for SNMP v3 USM. Valid methods are MD5, SHA1, SHA224, SHA256, SHA384, SHA512
+  * - -A <passwd>
+    - User's authentication password for SNMP v3 USM
+  * - -c <string>
+    - Community string. Default is "public"
+  * - -C <codepage>
+    - Codepage for remote system
+  * - -e <method>
+    - Encryption method for SNMP v3 USM. Valid methods are DES and AES
+  * - -E <passwd>
+    - User's encryption password for SNMP v3 USM
+  * - -h
+    - Display help and exit
+  * - -n <name>
+    - SNMP v3 context name
+  * - -p <port>
+    - Agent's port number. Default is 161
+  * - -u <user>
+    - User name for SNMP v3 USM
+  * - -v <version>
+    - SNMP version to use (valid values is 1, 2c, and 3)
+  * - -w <seconds>
+    - Request timeout (default is 3 seconds)
+
+Example 
+
+Get system description for given IP:
+
+  .. code-block:: sh
+
+       nxsnmpwalk -c public -v 2c 127.0.0.1 .1.3.6.1.2.1.1.1
+
 nxupload
 --------
 
+nxupload - command line tool used to upload files to NetXMS agent
+
+Usage: ``nxupload [<options>] <host> <file>``
+
+Tool options:
+
+.. list-table::
+  :widths: 15 50
+  :header-rows: 1
+
+  * - Option
+    - Description
+  * - -C <options>
+    - Set package deployment options or command line (depending on package type)
+  * - -d <file>
+    - Fully qualified destination file name
+  * - -i
+    - Start installation of uploaded package.
+  * - -q
+    - Quiet mode.
+  * - -t <type>
+    - Set package type (default is "executable").
+  * - -u
+    - Start agent upgrade from uploaded package.
+  * - -z
+    - Compress data stream with LZ4.
+  * - -Z
+    - Compress data stream with DEFLATE.
+
+
+Common options:
+
+.. list-table::
+  :widths: 15 50
+  :header-rows: 1
+
+  * - Option
+    - Description
+  * - -D level
+    - Set debug level (0..9 or off, default is off).
+  * - -e policy
+    - Set encryption policy. Possible values are:
+                    0 = Encryption disabled;
+                    1 = Encrypt connection only if agent requires encryption;
+                    2 = Encrypt connection if agent supports encryption;
+                    3 = Force encrypted connection;
+                    Default value is 1.
+  * - -h
+    - Display help and exit.
+  * - -K file
+    - Specify server's key file (default is /var/lib/netxms/.server_key).
+  * - -O port
+    - Proxy agent's port number. Default is 4700.
+  * - -p port
+    - Agent's port number. Default is 4700.
+  * - -s secret
+    - Shared secret for agent authentication.
+  * - -S secret
+    - Shared secret for proxy agent authentication.
+  * - -v
+    - Display version and exit.
+  * - -w seconds
+    - Set command timeout (default is 5 seconds).
+  * - -W seconds
+    - Set connection timeout (default is 30 seconds).
+
+Example 
+
+Upload file to agent's data directory:
+
+  .. code-block:: sh
+
+       nxupload localhost test_script.sh
+
+nxwsget
+-------
+
+nxwsget - command line tool used to query web services via NetXMS agent. Such agent needs to have :guilabel:`EnableWebServiceProxy=yes` in its configuration.
+
+Usage: ``nxwsget [<options>] <host> <URL> <path> [<path> ...]``
+
+Options:
+
+.. list-table::
+  :widths: 15 50
+  :header-rows: 1
+
+  * - Option
+    - Description
+  * - -a auth
+    - HTTP authentication type. Valid methods are "none", "basic", "digest", "ntlm", "bearer", "any", or "anysafe". Default is "none".
+  * - -c
+    - Do not verify service certificate.
+  * - -C
+    - Do not verify certificate's name against host.
+  * - -d data
+    - Request data.
+  * - -D level
+    - Set debug level (default is 0).
+  * - -e policy
+    - Set encryption policy. Possible values are:
+
+                    0 = Encryption disabled;
+                    1 = Encrypt connection only if agent requires encryption;
+                    2 = Encrypt connection if agent supports encryption;
+                    3 = Force encrypted connection;
+
+                  Default value is 1.
+  * - -F
+    - Follow location header that the server sends as part of a 3xx response.
+  * - -h
+    - Display help and exit.
+  * - -H header
+    - HTTP header (can be used multiple times).
+  * - -i seconds
+    - Query service continuously with given interval.
+  * - -K file
+    - Specify server's key file (default is /var/lib/netxms/.server_key).
+  * - -l
+    - Requested parameter is a list.
+  * - -L login
+    - Web service login name.
+  * - -m method
+    - HTTP request method. Valid methods are GET, POST, PUT, PATCH, DELETE.
+  * - -O port
+    - Proxy agent's port number. Default is 4700.
+  * - -p port
+    - Agent's port number. Default is 4700.
+  * - -P passwod
+    - Web service password.
+  * - -r seconds
+    - Cache retention time.
+  * - -s secret
+    -  Shared secret for agent authentication.
+  * - -S secret
+    - Shared secret for proxy agent authentication.
+  * - -t
+    - Use text parsing.
+  * - -v
+    - version
+  * - -w seconds
+    - Set command timeout (default is 5 seconds).
+  * - -W seconds
+    - Set connection timeout (default is 30 seconds).
+  * - -X addr
+    - Use proxy agent at given address.
+
+Example 
+
+
+  .. code-block:: sh
+
+       nxwsget 127.0.0.1 "http://api.open-notify.org/astros.json" .number
+     
 .. _list-of-supported-metrics:
 
 List of supported metrics

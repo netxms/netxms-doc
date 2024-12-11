@@ -43,7 +43,7 @@ subagent. There are two options to define parser configuration:
 
 Example of agent configuration file:
 
-.. code-block:: cfg
+.. code-block:: ini
 
    SubAgent = logwatch.nsm
 
@@ -749,7 +749,7 @@ For Windows the following parameters are provided:
 
 Consider the following line is received via syslog, or added to a monitored file:
 
-.. code-block:: cfg
+.. code-block:: 
 
     24.04.2015 12:22:15 1 5 system,error,critical login failure for user
     testUser from 11.2.33.41 via ssh

@@ -1214,7 +1214,7 @@ How to configure NetXMS web client with jetty in Linux
 
       curl -O https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/12.0.13/jetty-home-12.0.13.tar.gz
 
-2. Prepare jetty installation.
+2. Jetty installation steps.
 
 .. code-block:: sh
 

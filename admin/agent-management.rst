@@ -293,6 +293,8 @@ The following policy types are available:
   - Log parser policy
   - User support application policy
 
+.. _agent-policy-file:
+
 To create policy, select a template and click :guilabel:`Agent policies` tab. Click plus
 icon to create a new policy, give it a name, choose correct policy type and
 click :guilabel:`OK`. Newly created policy will open for editing in a new tab. 
@@ -396,12 +398,12 @@ undeployed to node - no agent restart is required.
 File delivery policy
 --------------------
 
-File delivery policy is created to automatically upload files form server to agents.
+File delivery policy is created to automatically upload files from server to agents.
 
-First root folder or folders should be created - folders with the full path to place
-where uploaded file and folder structure should be placed. After folder
-structure is created files can be added to this structure. On policy apply folders will be
-created if possible and files will be uploaded.
+Firstly, :ref:`root folder<agent-policy-file>` or folders should be created - folders with the full path to location
+where uploadable file(s) and folder structure should be placed. After folder
+structure is created, files can be added to this structure. On policy apply folders will be
+created, if possible, and files will be uploaded.
 
 In file and folder names the following macros can be used:
 
@@ -418,6 +420,10 @@ Example:
   File delivery policy uses :ref:`File manager<agent_file_mngmnt>` to upload files
   so :guilabel:`filemgr` subagent should be loaded and root folders should be defined
   to provide write access to folders.
+
+  For Windows there is the following access rights conversion:
+  Read is translated to FILE_GENERIC_READ, write to FILE_GENERIC_WRITE and execute to FILE_GENERIC_EXECUTE.
+  :guilabel:`Other` are translated as Windows group *Everyone* access rights.
 
 
 User support application policy

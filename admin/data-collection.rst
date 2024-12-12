@@ -17,7 +17,7 @@ gather information from the nodes according to :term:`DCI` configuration. You
 can control how many data collectors will run simultaneously, by changing server
 configuration parameter ``ThreadPool.DataCollector.MaxSize``.
 
-Node capabilities provide information about available sources for data collection in the :guilabel:`Overview`-> :guilabel:`Capabilities` section.  The last values of DCIs for the node can be found on the :guilabel:`Data Collection` tab. Additionally, specific DCIs can be displayed in the :guilabel:`Overview`` -> :guilabel:`Last Values section` 
+Node capabilities provide information about available sources for data collection in the :guilabel:`Overview` -> :guilabel:`Capabilities` section.  The last values of DCIs for the node can be found on the :guilabel:`Data Collection` tab. Additionally, specific DCIs can be displayed in the :guilabel:`Overview` -> :guilabel:`Last Values section` 
 or as a graph on the :guilabel:`Performance` tab. More details about DCI display configuration options can be found in the :ref:`Other options <dci-other-options-label>` and :ref:`Performance View <dci-performance-view>` chapters.
 
 All configured DCIs are checked for polling requirement every second. If DCI needs to be polled, appropriate polling request is placed into internal
@@ -916,18 +916,24 @@ seconds within which received offline data still relevant for threshold
 validation. By default it is set to 1 day.
 
 
+.. _agent-catch-configuration:
+
 Configuration
 -------------
 
-It can be configured:
+Agent cache mode can be configured:
+
   - globally - set configuration parameter :guilabel:`Agent.DefaultCacheMode` to
-    :guilabel:`on` or :guilabel:`off`.
+    :guilabel:`on` or :guilabel:`off` in :guilabel:`Configuration` perspective -> :guilabel:`Server configuration`.
   - on node level - :guilabel:`Agent cache mode` can be changed to
-    :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use global settings)
-    in node properties on :guilabel:`Polling` page
+    :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use global settings). Right click on a node in :guilabel:`Infrastructure` perspective
+    and select :guilabel:`Properties` followed by :guilabel:`Polling` page.
   - on DCI level - :guilabel:`Agent cache mode` can be changed to
     :guilabel:`on`, :guilabel:`off` or :guilabel:`default` (use node level
-    settings) in DCI properties on :guilabel:`General` page
+    settings) in DCI properties on :guilabel:`Other Options` page.
+
+
+
 
 
 .. _last-values:
@@ -951,7 +957,47 @@ Click on :guilabel:`Edit mode` to obtain more detaled view.
 .. figure:: _images/dci_last_values_edit.png
 
 
+.. _create_agent_cache_table:
 
+
+DCI table creation example
+--------------------------
+
+
+Encapsulating earlier covered configuration options - in :guilabel:`Data Collection` tab view one can, for example, create DCI table with Agent cache mode enabled in the following way:
+
+1. Create new table by right click in :guilabel:`Data Collection` tab view followed by selecting :menuselection:`New table...`.
+
+2. Select :guilabel:`Origin` on :guilabel:`General` page as NetXMS Agent ( default option ) and table metrics from 
+   :menuselection:`Table Selection` pop-up view when clicking on :menuselection:`Metric` selector.
+
+.. figure:: _images/dci_table_agent_cache.png
+
+.. note::
+
+    Pop up view from :guilabel:`Metric` selector may be different for other sources in :guilabel:`Origin`. 
+    
+    Currently supported DCI table sources are:
+    
+    * Internal
+    * NetXMS Agent
+    * SNMP
+    * Script
+
+    Currently supported DCI table sources with agent cache enabled:
+
+    * NetXMS Agent
+    * SNMP
+
+    Currently supported DCI table sources with agent cache and proxy enabled:
+
+    * NetXMS Agent
+    * SNMP
+  
+
+
+
+3. Configure agent catching mode as per instructions :ref:`above <agent-catch-configuration>`.
 
  
 Status

@@ -10,6 +10,7 @@ Data collection
 How data collection works
 =========================
 
+
 Every node can have many data collection items configured (see
 :ref:`basic-concepts-dci` for detailed description). |product_name| server has a
 set of threads dedicated to data collection, called `Data Collectors`, used to

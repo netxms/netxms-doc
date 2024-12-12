@@ -74,7 +74,7 @@ Glossary
   Event Processing Policy
     List of rules which defines system reaction on :term:`events <Event>`.
     All events are matched against list of rules in Event Processing Policy, if
-    match is found – configured actions are executed.
+    match is found - configured actions are executed.
 
   Infrastructure services
     System :term:`container <Container>` which can be used by Administrator to

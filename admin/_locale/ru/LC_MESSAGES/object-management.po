@@ -34,7 +34,7 @@ msgstr ""
 
 # d3062a9b925547f8b93bcf61590bacda
 #: ../../object-management.rst:18
-msgid "Containers – bind/unbind"
+msgid "Containers - bind/unbind"
 msgstr ""
 
 # 459b92103c90469e994c887baa63e62c

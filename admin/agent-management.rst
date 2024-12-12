@@ -669,7 +669,7 @@ following:
      - X
      - 
      - 
-   * - File manager – all write operations, e.g. file or folder creation, deletion, etc. (also requires enabling file manager and specifying root folder in agent configuration file)
+   * - File manager - all write operations, e.g. file or folder creation, deletion, etc. (also requires enabling file manager and specifying root folder in agent configuration file)
      - X
      - 
      - 

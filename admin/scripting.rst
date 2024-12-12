@@ -16,10 +16,10 @@ In many parts of the system, fine tuning can be done by using |product_name| bui
 scripting language called NXSL (stands for |product_name| Scripting Language). NXSL was
 designed specifically to be used as embedded scripting language within |product_name|,
 and because of this has some specific features and limitations. Most notable is
-very limited access to data outside script boundaries – for example, from NXSL
+very limited access to data outside script boundaries - for example, from NXSL
 script you cannot access files on server, nor call external programs, nor even
 access data of the node object other than script is running for without
-explicit permission. NXSL is interpreted language – scripts first compiled into
+explicit permission. NXSL is interpreted language - scripts first compiled into
 internal representation (similar to byte code in Java), which is then executed
 inside NXSL Virtual Machine. Language syntax and available functions can be
 found in `NXSL documentation <https://www.netxms.org/documentation/nxsl-latest/>`_.

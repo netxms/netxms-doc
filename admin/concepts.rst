@@ -36,17 +36,17 @@ right on all objects that this :guilabel:`Container` contains.
 
 Every object has set of attributes; some of them exist for all objects (like
 :guilabel:`id` and :guilabel:`name` or :guilabel:`status`), while other depend
-on object class – for example, only :guilabel:`Node` objects have attribute
+on object class - for example, only :guilabel:`Node` objects have attribute
 :guilabel:`SNMP community string`. In addition to the above mentioned
 attributes, it's possible to define custom attributes. This can be done by user
 in the Management Client, from NXSL script or by external application via
 |product_name| API.
 
-|product_name| has seven top level objects – ``Entire Network``, ``Service
+|product_name| has seven top level objects - ``Entire Network``, ``Service
 Root`` (named "Infrastructure Services" after system installation), ``Template
 Root``, ``Asset Root``, ``Network Map Root``, ``Dashboard Root`` and ``Business
 Service Root``. These objects serve as an abstract root for an appropriate
-object tree. All top level objects have only one editable attribute – name.
+object tree. All top level objects have only one editable attribute - name.
 
 
 .. list-table::
@@ -135,7 +135,7 @@ object tree. All top level objects have only one editable attribute – name.
        can be configured as a part of a rack.
      - - Node
    * - Condition
-     - Object representing complicated condition – like "cpu on node1 is
+     - Object representing complicated condition - like "cpu on node1 is
        overloaded and node2 is down for more than 10 minutes". Conditions may
        represent more complicated status checks because each condition can have
        a script attached. Interval for evaluation of condition status is
@@ -497,7 +497,7 @@ Network discovery
 -----------------
 
 |product_name| can detect new devices and servers on the network and automatically
-create node objects for them. Two modes are available – passive and active.
+create node objects for them. Two modes are available - passive and active.
 
 In passive mode server will use only non-intrusive methods by querying ARP and
 routing tables from known nodes. Tables from the server running |product_name| are

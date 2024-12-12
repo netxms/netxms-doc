@@ -22,8 +22,8 @@ SMTP, FTP, HTTP, HTTPS, Telnet and Custom protocol type. For Custom protocol,
 user should define TCP port number and the system will be checking if it's
 possible to establish connection to that port. For the predefined standard
 services the system will also check whether an appropriate response is returned.
-In case of SMTP, the system will send a test mail, in case of POP3 – try to log
-in with a certain user, in case of HTTP – check whether the contents of a
+In case of SMTP, the system will send a test mail, in case of POP3 - try to log
+in with a certain user, in case of HTTP - check whether the contents of a
 desired web page correspond to a certain given template. As soon as the Network
 Service object is created, it will be automatically included into the status
 poll. Each time when the status poll for the particular node is carried out, all

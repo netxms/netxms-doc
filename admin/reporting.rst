@@ -29,7 +29,7 @@ User Interface
 
 All reporting-related operations are available in Management Client in a
 separate :guilabel:`Reporting` perspective. Perspective contains two main areas
-– list of available reports on the left and report details view on the right.
+- list of available reports on the left and report details view on the right.
 Details view show information about currently selected report.
 
 .. figure:: _images/reporting_perspective.png
@@ -166,8 +166,8 @@ Report definitions are .jar files prepared by Jaspersoft® Studio. During
 operation reporting server scans workspace/definitions directory for \*.jar
 files. Each file is unpacked into it's own folder based on jar name (e.g.
 "report1.jar" will be unpacked into "report1"). Each archive should contain at
-least one file – "main.jrxml", which is main report definition. It can also
-contain subreports, images – or anything else, supported by Jasper Reports. Any
+least one file - "main.jrxml", which is main report definition. It can also
+contain subreports, images - or anything else, supported by Jasper Reports. Any
 additional resources should be referenced using paths relative to root folder of
 unpacked report, which is set as additional parameter "SUBREPORT_DIR" (e.g.
 "$P{SUBREPORT_DIR}/logo.png").

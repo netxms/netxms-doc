@@ -218,7 +218,7 @@ msgstr "Политика обработки событий"
 msgid ""
 "List of rules which defines system reaction on :term:`events <Event>`. All "
 "events are matched against list of rules in Event Processing Policy, if "
-"match is found – configured actions are executed."
+"match is found - configured actions are executed."
 msgstr ""
 
 # 0ae9467189af43408c88a3e473abda72

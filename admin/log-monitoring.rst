@@ -59,7 +59,7 @@ Syslog Monitoring
 |product_name| has built-in syslog server, which can be used to receive logs
 from network devices and servers. It is also possible to parse incoming syslog
 messages in a way similar to Windows Event Log monitoring. To parse syslog
-messages, ``LOGWATCH`` subagent is not required – parsing is done by the server
+messages, ``LOGWATCH`` subagent is not required - parsing is done by the server
 itself. You only need to define monitoring rules in
 :menuselection:`Configuration --> Syslog Parser`
 
@@ -263,7 +263,7 @@ additional options:
 
 Inside the ``<rule>`` section there are the following additional tags:
 ``<match>``, ``<description>``, ``<event>``, and ``<context>``. Only
-``<match>`` section is mandatory – it specifies regular expression against
+``<match>`` section is mandatory - it specifies regular expression against
 which log record should be matched. All other tags are optional and define
 parser behavior if a record matches the regular expression.
 

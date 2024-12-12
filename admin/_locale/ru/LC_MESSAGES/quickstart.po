@@ -24,7 +24,7 @@ msgstr ""
 
 # 7bb3b91370a348fe8f0eee372a1928b2
 #: ../../quickstart.rst:8
-msgid "(clean system after install; setup minimal monitoring – CPU of FS)"
+msgid "(clean system after install; setup minimal monitoring - CPU of FS)"
 msgstr ""
 
 # 38474ccbd4204cb79cb2a2c4ea31a5db

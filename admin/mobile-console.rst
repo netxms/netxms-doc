@@ -154,7 +154,7 @@ MACaddress
 
 This section is used to list previously searched MAC addresses or to start a new
 search by scanning a barcode value (this feature needs the installation of Barcode
-Scanner from Zxing Team – freely available on the Google Play), by input it manually
+Scanner from Zxing Team - freely available on the Google Play), by input it manually
 or by getting it directly from a node via the “Find Switch port” command.
 
 

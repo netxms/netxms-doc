@@ -152,6 +152,78 @@ example, you cannot use operations like ``less than`` or ``greater than`` on
 strings. If you select metric from the list using the :guilabel:`Select` button,
 correct data type will be set automatically.
 
+
+Units
+~~~~~
+
+For user convenience collected DCI values can have the following units assigned:
+
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Unit
+     - Description
+   * - %
+     - Percent - symbol used to indicate a percentage, a number or ratio as a fraction of 100. For more details please check :wikipedia:`Wikipedia <Percent_sign>`
+   * - °C
+     - Degree in Celsius, unit of temperature. For more details please check :wikipedia:`Wikipedia <Celsius>`
+   * - °F
+     - Degree in Fahrenheit, unit of temperature. For more details please check :wikipedia:`Wikipedia <Fahrenheit>`
+   * - A
+     - Ampere, unit of electric current. For more details please check :wikipedia:`Wikipedia <Ampere>`
+   * - B (IEC)
+     - Bytes in IEC format. For more details on difference between IEC and SI please check :wikipedia:`Wikipedia <Kilobyte>`
+   * - b (IEC)
+     - Bits in IEC format. 
+   * - B (Metric)
+     - Bytes in SI format. 
+   * - b (Metric)
+     - Bits in SI format. 
+   * - B/s
+     - Bytes per second. For more details please check :wikipedia:`Wikipedia <Data-rate_units>`
+   * - b/s
+     - Bits per second. For more details please check :wikipedia:`Wikipedia <Data-rate_units>`
+   * - dBm
+     - Unit of power level expressed using a logarithmic decibel. For more details please check :wikipedia:`Wikipedia <DBm>`
+   * - Epoch time
+     - Unix time, measures time by the number of non-leap seconds that have elapsed since 00:00:00 UTC on 1 January 1970. For more details please check :wikipedia:`Wikipedia <Unix_time>`
+   * - Hz
+     - Hertz, the unit of frequency. For more details please check :wikipedia:`Wikipedia <Hertz>`
+   * - J
+     - Joule, unit of energy. For more details please check :wikipedia:`Wikipedia <Joule>`
+   * - lm
+     - Lumen, a measure of the perceived power of visible light emitted by a source. For more details please check :wikipedia:`Wikipedia <Lumen_(unit)>`
+   * - lx
+     - Lux, unit of illuminance or luminous flux per unit area. For more details please check :wikipedia:`Wikipedia <Lux>`
+   * - N
+     - Newton, unit of force. For more details please check :wikipedia:`Wikipedia <Newton_(unit)>`
+   * - Pa
+     - Pascal, unit of pressure. For more details please check :wikipedia:`Wikipedia <Pascal_(unit)>`
+   * - rpm
+     - Revolutions per minute. For more details please check :wikipedia:`Wikipedia <Revolutions_per_minute>`
+   * - s
+     - Second, unit of time. For more details please check :wikipedia:`Wikipedia <Second>`
+   * - T
+     - Tesla, unit of magnetic flux density. For more details please check :wikipedia:`Wikipedia <Tesla_(unit)>`
+   * - Uptime
+     - Measure of system reliability. For more details please check :wikipedia:`Wikipedia <Uptime>`
+   * - W
+     - Watt, unit of power or radiant flux. For more details please check :wikipedia:`Wikipedia <Watt>`
+   * - V
+     - Volt, electric potential between two points of a conducting wire. For more details please check :wikipedia:`Wikipedia <Volt>`
+   * - Ω
+     - Ohm, unit of electrical resistance. For more details please check :wikipedia:`Wikipedia <Ohm>`
+
+
+
+Use multipliers
+~~~~~~~~~~~~~~~
+
+This boolean setting gives convenience of displaying some measurements in more readable form. For example, if enabled, 1230000 becomes 1.23 M.
+
+
 Source node override
 ~~~~~~~~~~~~~~~~~~~~
 

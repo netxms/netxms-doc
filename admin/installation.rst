@@ -1208,27 +1208,50 @@ How to configure NetXMS web client with jetty in Linux
 ------------------------------------------------------
 
 
-1. curl -O https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/12.0.13/jetty-home-12.0.13.tar.gz
-2. tar -xvf jetty-home-12.0.13.tar.gz -C /opt
-3. ln -s /opt/jetty-home-12.0.13 /opt/jetty-home-12
-4. mkdir -p /opt/netxms-webui/{etc,logs} && cd /opt/netxms-webui
-5. java -jar /opt/jetty-home-12/start.jar --add-modules=ee8-deploy,gzip,http,http2,https,logging-logback,plus,server,ssl,work
-6. curl -o webapps/ROOT.war https://netxms.com/download/releases/5.0/nxmc-5.1.1.war
-7. Generate ssl key
+1. Get jetty to your local node.
 
-keytool -genkeypair -alias jetty -keyalg RSA -keysize 2048 -keystore /opt/netxms-webui/etc/keystore.p12 -storetype PKCS12 -storepass password -keypass password -validity 3650 -dname "CN=netxms-webui, OU=netxms, O=netxms, L=netxms, ST=netxms, C=netxms"
-sed 's,# jetty.sslContext.keyStorePassword=,jetty.sslContext.keyStorePassword=password,' -i'' start.d/ssl.ini
+.. code-block:: sh
+
+      curl -O https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/12.0.13/jetty-home-12.0.13.tar.gz
+
+2. Prepare jetty installation.
+
+.. code-block:: sh
+
+      tar -xvf jetty-home-12.0.13.tar.gz -C /opt
+
+      ln -s /opt/jetty-home-12.0.13 /opt/jetty-home-12
+
+      mkdir -p /opt/netxms-webui/{etc,logs} && cd /opt/netxms-webui
+
+      java -jar /opt/jetty-home-12/start.jar --add-modules=ee8-deploy,gzip,http,http2,https,logging-logback,plus,server,ssl,work
+      
+3. Get NetXMS .war file to your local node.
+
+.. code-block:: sh
+
+      curl -o webapps/ROOT.war https://netxms.com/download/releases/5.0/nxmc-5.1.1.war
+
+4. Generate ssl key
+
+.. code-block:: sh
+
+      keytool -genkeypair -alias jetty -keyalg RSA -keysize 2048 -keystore /opt/netxms-webui/etc/keystore.p12 -storetype PKCS12 -storepass password -keypass password -validity 3650 -dname "CN=netxms-webui, OU=netxms, O=netxms, L=netxms, ST=netxms, C=netxms" sed 's,# jetty.sslContext.keyStorePassword=,jetty.sslContext.keyStorePassword=password,' -i'' start.d/ssl.ini
 
 .. note::
    Adjust configurable values like path, user and password as per requirements. Jetty user and group should be created or exist in order to use them in service file.
 
-8. Manual test run
+5. Manual test run
 
-java -Dnxmc.logfile=/opt/netxms-webui/logs/nxmc.log -jar /opt/jetty-home-12/start.jar
+.. code-block:: sh
 
-9. Configure systemctl, run below and edit as per requirents
+      java -Dnxmc.logfile=/opt/netxms-webui/logs/nxmc.log -jar /opt/jetty-home-12/start.jar
 
-systemctl edit --force --full netxms-webui.service
+6. Configure systemctl, run below and edit as per requirents
+
+.. code-block:: sh
+
+      systemctl edit --force --full netxms-webui.service
 
 
 .. code-block:: ini
@@ -1254,9 +1277,11 @@ systemctl edit --force --full netxms-webui.service
     EnableDefaultCounters = yes
 
 
-10. Enable netxms-web.service
+7. Enable netxms-web.service
 
-systemctl enable --now netxms-web.service
+.. code-block:: sh
+
+     systemctl enable --now netxms-web.service
 
 
 

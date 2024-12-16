@@ -95,7 +95,9 @@ script library and afterwards saved or saved as. If this view is opened on a nod
 script is available ``$node`` variable with node object.
 
 .. note::
-   All parameters provided to script are accessible via $ARGS array.
+   
+   Custom attributes with name starting with $ can be set from NXSL and read from NXSL (or macro), but never sent to client and cannot be updated from client.
+
    
 .. figure:: _images/execute_server_script.png
 
@@ -117,11 +119,8 @@ Nxshell binary gets installed in $NETXMS_HOME directory, for example /usr/bin/nx
 As of version 5.1, nxshell launcher accepts command line -r or --properties= for providing path to 
 nxshell properties file.
 
-~# nxshell -h
-NetXMS Interactive Shell  Version 5.1.0-rc320
-Copyright (c) 2006-2024 Raden Solutions
 
-Usage: nxshell [OPTIONS] [script]
+Usage: ``nxshell [OPTIONS] [script]``
 
 Options:
   -C, --classpath <path>      Additional Java class path.
@@ -141,14 +140,18 @@ Options:
 
 There are two options of this jar usage:
 
-  1. it can be started as interactive shell;
+  1. it can be started as interactive shell:
 
-     :command:`java -jar nxshell-5.0.8.jar`
+    .. code-block:: sh
+
+     java -jar nxshell-5.0.8.jar
 
   2. it can be started with the script name as a first parameter. Then it will just
      execute this script and exit. Example:
 
-     :command:`java -jar nxshell-5.0.8.jar test.py`
+    .. code-block:: sh
+
+     java -jar nxshell-5.0.8.jar test.py
 
 When NxShell is started, it tries to get server IP, login and password from Java
 properties. In interactive mode, user will be asked for details, otherwise
@@ -156,7 +159,9 @@ default values will be used.
 
 Start as interactive shell, with IP and Login provided (password will be asked):
 
-:command:`java -Dnetxms.server=127.0.0.1 -Dnetxms.login=admin -jar nxshell-5.0.8.jar`
+    .. code-block:: sh
+
+      java -Dnetxms.server=127.0.0.1 -Dnetxms.login=admin -jar nxshell-5.0.8.jar
 
 Properties
 ~~~~~~~~~~

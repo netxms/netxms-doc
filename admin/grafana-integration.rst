@@ -15,7 +15,7 @@ The |product_name| Grafana datasource provides an alternative way of monitoring 
 Requirements
 ------------
 
-The following prerequisites need to be set-up first:
+The following prerequisites need to be installed first:
 
 A running instance of the |product_name| Server.
 A running instance of the |product_name| WebAPI.
@@ -63,7 +63,7 @@ Alarm Browser
 The data source provides the possibility to view currently active :ref:`alarms` on all nodes
 or on a per node basis. To do this, you need to add a new Table Panel to your Grafana dashboard
 and then edit the Metrics section of the panel settings. If the |product_name| data source is set as the
-default data source, it should have been added to the panel automatically, if not, select the name
+default data source, it should have been added to the panel automatically. If not, select the name
 of the installed |product_name| data source from the `Panel data source` list and press `Add query` to add
 the data source.`
 
@@ -91,11 +91,11 @@ The data source provides the possibility to visualize metrics collected from dat
 configured on nodes. This can be achieved by adding a Graph Panel to your Grafana dashboard,
 adding the |product_name| data source to it and selecting the `DCI` data type in the Metrics section
 of the graph panel settings. Once this is done, it is possible to select the `Target` node from
-the list of targets which will then provide a list of the configured DCI`s for the particular node
-in the `DCI` section. By default, the legend of the data provided by the DCI will be the DCI`s
-description as configured on the server, it is also possible to set a legend of your choice by
+the list of targets which will then provide a list of the configured DCIs for the particular node
+in the `DCI` section. By default, the legend of the data provided by the DCI will be the DCI
+description as configured on the server. It is also possible to set a legend of your choice by
 entering it in the `Legend` section.
 
 .. figure:: _images/grafana-dci-settings.png
 
-It is possible to view multiple DCI`s on the same graph by adding multiple data sources to it.
+It is possible to view multiple DCIs on the same graph by adding multiple data sources to it.

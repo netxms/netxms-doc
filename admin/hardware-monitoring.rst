@@ -9,18 +9,18 @@ Hardware(sensor) monitoring
     `lm-sensors <http://www.lm-sensors.org/wiki/Devices>`_ drivers on Linux.
   * DS18x20 - This subagent collects temperature data from ds18x20 sensors. Linux only.
   * RPI - This subagent is created for Raspberry Pi. It can collect data from DHT22
-    sensor and get status of any GPIO pin.
+    sensor and get the status of any GPIO pin.
 
 lm-sensors
 ==========
 
-This subagent can be used to read hardware status using lm_sensors package.
+This subagent can be used to read hardware status using the lm_sensors package.
 
 Pre-requisites
 --------------
 
-Package lm_sensors should be installed and configured properly. Output of
-`sensors <http://www.lm-sensors.org/wiki/man/sensors>`_ command
+The package lm_sensors should be installed and configured properly. The output of
+the `sensors <http://www.lm-sensors.org/wiki/man/sensors>`_ command
 should produce meaningful output (see example below).
 
 .. code-block:: sh
@@ -59,7 +59,7 @@ should produce meaningful output (see example below).
 Parameters
 ----------
 
-When loaded, lm_sensors subagent adds the following metrics:
+When loaded, the lm_sensors subagent adds the following metrics:
 
 +---------------------------------------+-----------------------------------------------------------------------------------------------------+
 | Metric                                | Description                                                                                         |
@@ -71,8 +71,8 @@ When loaded, lm_sensors subagent adds the following metrics:
 Configuration file
 ------------------
 
-All configuration parameters related to lm_sensors subagent should be placed into
-**\*LMSENSORS** section of agent's configuration file.
+All configuration parameters related to lthe m_sensors subagent should be placed into
+the **\*LMSENSORS** section of agent's configuration file.
 The following configuration parameters are supported:
 
 +----------------+---------+--------------------------------------------------------------------------+-------------------------------------------------------+
@@ -115,7 +115,7 @@ DS18x20
 =======
 
 This subagent collects temperature from DS18x20 sensor. Subagent available for Linux
-only. To use this subagent 1-Wire driver should be installed.
+only. To use this subagent the 1-Wire driver should be installed.
 
 Metrics
 -------
@@ -134,8 +134,8 @@ Metrics
 Configuration file
 ------------------
 
-All configuration parameters related to lm_sensors subagent should be placed into
-**\*DS18X20** section of agent's configuration file.
+All configuration parameters related to the lm_sensors subagent should be placed into
+the **\*DS18X20** section of the configuration file of the agent.
 The following configuration parameters are supported:
 
 .. list-table::
@@ -166,7 +166,7 @@ Configuration example
 RPI
 ===
 
-This subagent collects data from Raspberry Pi DHT22 sensor and status of GPIO pins.
+This subagent collects data from the Raspberry Pi DHT22 sensor as well as the status of GPIO pins.
 
 Metrics
 -------
@@ -180,7 +180,7 @@ Metrics
      - Meaning
    * - GPIO.PinState(pinNumber)
      - Integer
-     - State of pin with given number. This pin number should be enabled in agent
+     - State of pin with given number. This pin number should be enabled in the agent
        configuration file.
    * - Sensors.Humidity
      - Integer
@@ -192,8 +192,8 @@ Metrics
 Configuration file
 ------------------
 
-All configuration parameters related to lm_sensors subagent should be placed into
-**\*RPI** section of agent's configuration file.
+All configuration parameters related to the lm_sensors subagent should be placed into
+the **\*RPI** section of the configuration file of the agent.
 The following configuration parameters are supported:
 
 .. list-table::
@@ -207,7 +207,7 @@ The following configuration parameters are supported:
      - Boolean
      - Disables dht22 sensor if ``yes``. By default ``no``.
    * - EnabledPins
-     - Coma separated list of numbers
+     - Comma separated list of numbers
      - List of pins that are enabled for status check.
 
 Configuration example
@@ -229,22 +229,22 @@ MQTT
 ====
 
 This is a subagent that can be used to collect data from devices and sensors
-that use MQTT protocol for communication. The subagent can be used to connect to
+that use the MQTT protocol for communication. The subagent can be used to connect to
 existing MQTT brokers, listen to user specified topics, map posted data to metrics
 and generate events.
 
 There are two ways how to set up data collection for MQTT. 
 
-One approach is to specify MQTT topic - agent metric mapping in agent
+One approach is to specify an MQTT topic - agent metric mapping in agent
 configuration file. In this case DCIs are created with origin `NetXMS Agent`. 
 
-The other approach is to use `MQTT` origin in DCI properties. Metric has the
+The other approach is to use the `MQTT` origin in DCI properties. The metric has the
 following format `broker_name:mqtt_topic`, where `broker_name` is name specified
-in agent configuration file. Agent which performs MQTT data collection is
-selected automatically. If node is in a zone, zone proxy is used. If MQTT proxy
-is specified in node's properties, that would be used. With this approach there
-is no need to specify specify metrics in agent configuration file - when server
-requests mqtt topic for the first time, agent subscribes to that topic. 
+in the agent configuration file. The Agent which performs MQTT data collection is
+selected automatically. If the node is in a zone, the zone proxy is used. If a MQTT proxy
+is specified in the node properties, that will be used. With this approach there
+is no need to specify metrics in the agent configuration file - when the server
+requests mqtt topic for the first time, the agent subscribes to that topic. 
 
 Configuration file
 ------------------

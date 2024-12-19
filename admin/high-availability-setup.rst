@@ -49,15 +49,15 @@ Switchover procedure
 
 Switchover steps:
 
- #. Confirm which node is currency active
+ #. Confirm which node is currently active
 
-    #. Process “netxmsd” should be running only on active node (check with “ps” or “pgrep”)
-    #. Run “pg_replica_state” to get the current state of the database on this server. Active node will be marked as “Sender / Primary”.
+    #. The process “netxmsd” should be running only on active node (check with “ps” or “pgrep”)
+    #. Run “pg_replica_state” to get the current state of the database on this server. The active node will be marked as “Sender / Primary”.
 
  #. Stop netxmsd on active node:
 
     #. Run “systemctl stop netxmsd”
-    #. Make sure it's stopped (with “ps” or “pgrep”)
+    #. Make sure it is stopped (with “ps” or “pgrep”)
 
  #. Switch active database instance to standby (read-only) mode:
 
@@ -81,7 +81,7 @@ Switchover steps:
 
  #. Start netxmsd on another node
 
-Switchover procedure is identical when switching from PROD to DR and from DR to PROD.
+The switchover procedure is identical when switching from PROD to DR and from DR to PROD.
 
 Failover procedure
 ==================
@@ -92,15 +92,15 @@ Failover recovery
 =================
 
 Once a failed server (which was sender before the failover) is up and running, you need to
-switch it to the replica mode.
+switch it to replica mode.
 
  #. Stop PostgreSQL (“systemctl stop postgresql-14”) on the failed node
- #. Run “sudo -u postgres touch /u0fs1/pg-data/14/standby.signal” to switch it to the replica mode
- #. Unwind this DB instance to the state where it's in sync with the current sending server: 
+ #. Run “sudo -u postgres touch /u0fs1/pg-data/14/standby.signal” to switch it to replica mode
+ #. Unwind this DB instance to the state where it is in sync with the current sending server: 
 
     run `sudo -u postgres /usr/pgsql-14/bin/pg_rewind --target-pgdata=/u0fs1/pg-data/14 --source-server="host=ACTIVE_DB user=postgres password=PASSWORD"".`
     
     ACTIVE_DB should point to the current sender instance (netxms-prod or netxms-dr).
  #. Start PostgreSQL instance with “systemctl start postgresql-14”
- #. Check logs and make sure that database is started and it's in read only
+ #. Check logs and make sure that the database is started and it is in read only
     mode. Once recovery is completed, a switchover procedure might be performed

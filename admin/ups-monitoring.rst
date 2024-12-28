@@ -4,42 +4,42 @@
 UPS monitoring
 ==============
 
-There are two options to monitor UPS: first is through USB or serial connection with
-help of subagent and second one is through the network with help of SNMP.
+There are two options to monitor a UPS: the first is through a USB or serial connection with
+help of a subagent and the second one is through the network with help of SNMP.
 
-Subagent can be used for monitoring UPS (Uninterruptible Power Supply) attached
-to serial or USB port on computer where |product_name| agent is running. USB-attached devices
-currently supported only on Windows platform, serial is supported on all platforms.
+A subagent can be used for monitoring a UPS (Uninterruptible Power Supply) attached
+to a serial or USB port on a computer where the |product_name| agent is running. USB-attached devices
+are currently only supported on the Windows platform. Serial devices are supported on all platforms.
 One subagent can monitor multiple attached devices.
 
 
 USB or serial UPS monitoring
 ============================
 
-You can monitor UPS devices attached to the hosts via serial cable or USB via UPS
-subagent. Once you have your UPS attached to the host and |product_name| agent installed,
-you should configure UPS subagent. First, add the following line to agent's
+You can monitor UPS devices attached to the hosts via serial cable or USB via the UPS
+subagent. Once you have your UPS attached to the host and the |product_name| agent installed,
+you should configure the UPS subagent. First, add the following line to the agents
 configuration file main section:
 
 .. code-block:: ini
 
  SubAgent = ups.nsm
 
-Second, configure attached UPS devices. Create ``UPS`` section, and for each UPS
-device attached to the host add line in the following format:
+Second, configure the attached UPS devices. Create a ``UPS`` section and for each UPS
+device attached to the host add a line in the following format:
 
 .. code-block:: ini
 
  Device = id:port:protocol
 
-``id`` is an arbitrary but unique number in range 0 to 127, which is used to
+``id`` is an arbitrary but unique number in the range 0 to 127, which is used to
 distinguish multiple UPS devices in further requests.
 
-``device`` is either name of the serial port (e.g. `COM1:` or `/dev/ttyS0`) or
-serial number of the USB device (keyword `ANY` can be used instead of exact serial
-number to select first available).
+``device`` is either the name of the serial port (e.g. `COM1:` or `/dev/ttyS0`) or
+the serial number of the USB device. The keyword `ANY` can be used instead of an exact serial
+number to select the first available port.
 
-``protocol`` specify which communication protocol should be used. Supported protocols:
+``protocol`` specifies which communication protocol should be used. Supported protocols are:
 
 * APC
 * BCMXCP - Some of the HP/Compaq, PowerWare, etc.
@@ -49,8 +49,8 @@ number to select first available).
 * USB - HID UPS devices (currently Windows only)
 
 
-Sample configuration section for two devices attached via serial ports, one is APC device
-(configured as device 0) and one is HP device (configured as device 1):
+A sample configuration section for two devices attached via serial ports where one is an APC device
+(configured as device 0) and one is a HP device (configured as device 1):
 
 .. code-block:: ini
 
@@ -60,7 +60,7 @@ Sample configuration section for two devices attached via serial ports, one is A
   Device = 1:/dev/ttyS1:BCMXCP
 
 
-Once UPS subagent is configured, you can start to monitor UPS devices status via
+Once the UPS subagent is configured, you can start monitoring the UPS device status via
 metrics provided by it:
 
 .. list-table::
@@ -123,18 +123,18 @@ metrics provided by it:
 
 
 Please note that not all metrics are supported by all UPS devices. Many old or
-simple models will support only basic things like UPS.OnlineStatus metric. Most
+simple models will support only basic metrics like UPS.OnlineStatus. The most
 typical approach is to monitor UPS.OnlineStatus for going to 1 or 2, and then
 send notifications to administrators and shutdown affected hosts if needed. You
-can also monitor UPS.EstimatedRuntime metric for the same purposes if your
-devices support it.
+can also monitor the UPS.EstimatedRuntime metric for the same purpose, if your
+device supports it.
 
 SNMP UPS monitoring
 ===================
 
-Other option to monitor UPS is using SNMP. |product_name| already includes MIBs for some UPS,
-like APC UPS and standard UPS MIB.
-Description for possible OIDs and some additional information for APC UPS configuration
+Another option is to monitor the UPS using SNMP. |product_name| already includes MIBs for some UPSs,
+like APC UPS and the standard UPS MIB.
+The description for possible OIDs and some additional information for APC UPS configuration
 can be found on a
 `NetXMS wiki <https://wiki.netxms.org/wiki/UPS_Monitoring_(APC)_via_SNMP>`_.
 

@@ -7,34 +7,34 @@ Package management
 Introduction
 ============
 
-Package management functionality can upload and execute installers via
-|product_name| agent. This allows to perform centralized upgrade of
-|product_name| agent, install other software or upload and extract archive files
+The package management functionality can upload and execute installers via the
+|product_name| agent. This allows to perform centralized upgrade of the
+|product_name| agent, to install other software or upload and extract archive files
 onto target systems. 
 
-To access package management, open :guilabel:`Configuration` perspective and
-select :guilabel:`Packages`. Software packages are first uploaded to
+To access package management, open the :guilabel:`Configuration` perspective and
+select :guilabel:`Packages`. Software packages are first uploaded to the
 |product_name| server. In order to do this, select :guilabel:`Upload to server`
 and select a file. 
 
-For some types of packages additional dialog :guilabel:`Edit Package Metadata`
-is displayed, allowing to specify additional metadata for a package. Whenever
+For some types of packages, the additional dialog :guilabel:`Edit Package Metadata`
+is displayed. This allows to specify additional metadata for a package. Whenever
 possible, metadata information is filled in automatically based on information
-contained in file name. 
+contained in file name.
 
-You can open metadata editor by double-clicking on a package in the list. In
-metadata editor `Name`, `Version` and `Description` are just informative fields,
+You can open the metadata editor by double-clicking on a package in the list. In
+the metadata editor `Name`, `Version` and `Description` are just informative fields,
 they are not used in package processing. 
 
-`Platform` denotes for which platforms a package is applicable. Actual platform
+`Platform` denotes for which platforms a package is applicable. The actual platform
 of a node is compared to this field as string value using wildcard characters.
 Two wildcard characters are supported: ``*`` - represents zero, one or multiple
 characters. ``?`` - represents any single character. Setting `Platform` to ``*``
 would mean any platform. ``Linux*`` would mean both 32 and 64 bit Linuxes.
 
-`Type` defines package type. This defines how agent should process the package
-when installing it. Meaning of `Command` field depends on package type. See
-information in the below table. 
+`Type` defines package type. This defines how the agent should process the package
+when installing it. The meaning of the `Command` field depends on the package type. See
+information in the table below. 
 
 The following types of package files are supported by package management:
 
@@ -73,20 +73,20 @@ The following types of package files are supported by package management:
      - Deprecated type of metadata file for NetXMS Agent Package. 
    * - Compressed TAR Archive
      - .tgz, .tar.gz
-     - `Command` is optional. If specified, it defines path the archive should
-       be extracted to. 
+     - `Command` is optional. If specified, it defines the path the archive should
+       be extracted to.
    * - ZIP Archive
      - .zip
-     - `Command` is optional. If specified, it defines path the archive should
+     - `Command` is optional. If specified, it defines the path the archive should
        be extracted to. 
 
 
 To deploy a package, select one or several nodes from :guilabel:`Infrastructure
-services` or :guilabel:`Entire Network`. You can also select container(s) or
-subnet(s). Right-click on the selected item(s) and select :guilabel:`Deploy
+services` or :guilabel:`Entire Network`. You can also select containers or
+subnets. Right-click on the selected items and select :guilabel:`Deploy
 package...`. Select the package and click :guilabel:`OK`. 
 
-During package deployment process server will request platform name from agent
-and check if it matches `Platform` from package's metadata. Deployment process
-is shown in :guilabel:`Package deployment monitor` tab that is visible on all
-containers, subnets and nodes concerned. 
+During the package deployment process, the server will request the platform name from agent
+and check if it matches `Platform` from the package metadata. The deployment process
+is shown in the :guilabel:`Package deployment monitor` tab that is visible on all
+relevant containers, subnets and nodes. 

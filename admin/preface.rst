@@ -2,14 +2,14 @@
 Introduction
 ############
 
-This document covers installation, configuration, and use of |product_name|.
+This document covers the installation, configuration, and use of |product_name|.
 
 .. ifconfig:: release_type == 'oss'
 
    |product_name| is an enterprise grade multi-platform modular open source network management
    and monitoring system. It provides comprehensive event management,
    performance monitoring, alerting, reporting and graphing for all layers of
-   IT infrastructure — from network devices to business application layer.
+   IT infrastructure — from network devices to the business application layer.
    Having been designed with flexibility and scalability in mind, |product_name| features
    a wide range of supported platforms. It is licensed under the GNU General Public
    License version 2 as published by the Free Software Foundation.
@@ -19,12 +19,12 @@ This document covers installation, configuration, and use of |product_name|.
    |product_name| is an enterprise grade multi-platform modular network management
    and monitoring system. It provides comprehensive event management,
    performance monitoring, alerting, reporting and graphing for all layers of
-   IT infrastructure — from network devices to business application layer.
+   IT infrastructure — from network devices to the business application layer.
    Having been designed with flexibility and scalability in mind, |product_name| features
    a wide range of supported platforms.
 
 
-   This document only covers core platform, product-specific extensions are documented in corresponding manuals.
+   This document only covers the core platform. Product-specific extensions are documented in their corresponding manuals.
 
 
 .. ifconfig:: release_type == 'oss'
@@ -57,9 +57,9 @@ The following typographical conventions are used in this manual.
 +----------------------------------+------------------------------------------+
 | :kbd:`Control-M`                 | Keyboard shortcut                        |
 +----------------------------------+------------------------------------------+
-| :term:`DCI`                      | Term which could be found in glossary    |
+| :term:`DCI`                      | Term which can be found in the glossary  |
 +----------------------------------+------------------------------------------+
-| :menuselection:`&File --> &Exit` | Menu selection path, you must click on   |
+| :menuselection:`&File --> &Exit` | Menu selection path. You must click on   |
 |                                  | :guilabel:`File`, then :guilabel:`Exit`  |
 +----------------------------------+------------------------------------------+
 

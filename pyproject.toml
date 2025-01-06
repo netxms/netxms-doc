@@ -1,0 +1,12 @@
+[project]
+name = "netxms-doc"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "sphinx>=8.1.3",
+    "sphinx-autobuild>=2024.10.3",
+    "sphinx-intl>=2.3.1",
+    "sphinx-rtd-theme>=3.0.2",
+]

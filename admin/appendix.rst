@@ -2362,6 +2362,9 @@ To migrate the whole database:
 
    nxdbmgr migrate netxmsd-source-db.conf
 
+.. note::
+
+   You may need to use full path to .conf file
 
 Migration can also be performed as two-step process - on the first step only
 configuration data is transferred, then server is started on the new database

@@ -13,13 +13,17 @@ Upgrading server and agent
  1. It's recommended to check database for possible inconsistencies
     prior to the upgrade. To do this, stop the server and run command:
 
-    :command:`nxdbmgr check`
+    .. code-block:: sh
 
-    Proceed to the next step only if database checker does not report any errors!
+     nxdbmgr check
+
+  Proceed to the next step only if database checker does not report any errors!
 
  2. To update |product_name| server and agent packages run command:
 
-    :command:`apt-get update && apt-get upgrade`
+    .. code-block:: sh
+
+        apt-get update && apt-get upgrade
 
     During package upgrade database schema should be upgraded as well and 
     |product_name| server would start automatically. However, in some cases 
@@ -29,7 +33,9 @@ Upgrading server and agent
     version 41.07, but server is compiled for version 41.18``. To upgrade
     the database, run command:
 
-    :command:`nxdbmgr upgrade`
+    .. code-block:: sh
+
+      nxdbmgr upgrade
 
     Once database upgrade is complete, start the server. 
 
@@ -45,7 +51,9 @@ Desktop Management Client:
 
  2. Extract and replace old management client with the new one.
 
-    :command:`tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DIRECTORY`
+    .. code-block:: sh
+
+     tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DIRECTORY
 
  3. Run nxmc file from extracted catalog.
 
@@ -75,42 +83,49 @@ Server
   1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need source archive (named netxms-VERSION.tar.gz, for example netxms-1.2.15.tar.gz). Please note that in the following steps VERSION will be used as a substitution for an actual version number.
   2. Unpack the archive:
 
-    :command:`$ tar zxvf netxms-5.1.0.tar.gz`
+    .. code-block:: sh
 
-  3. Change directory to netxms-version and run configure script:
+     tar zxvf netxms-5.1.0.tar.gz
 
-    :command:`$ cd netxms-5.1.0`
+  3. Change directory to netxms-version and run configure script and make:
 
-    :command:`$ sh ./configure --enable-release-build --with-server --with-mysql`
+    .. code-block:: sh
 
-    Be sure to include all options that were used at installation time.
+     cd netxms-5.1.0
 
+     sh ./configure --enable-release-build --with-server --with-mysql
 
-  4. Run make:
+     make
 
-    :command:`$ make`
+  Be sure to include all configuration options that were used at installation time.
 
-  5. Stop |product_name| server.
+  4. Stop |product_name| server.
 
-  6. Stop |product_name| agent.
+  5. Stop |product_name| agent.
 
-  7. Check database for possible inconsistencies:
+  6. Check database for possible inconsistencies:
 
-    :command:`$ nxdbmgr check`
+    .. code-block:: sh
+    
+     nxdbmgr check
 
-    Proceed to the next step only if database checker does not report any errors!
+  Proceed to the next step only if database checker does not report any errors!
 
-  8. Run make install:
+  7. Run make install:
 
-    :command:`$ make install`
+    .. code-block:: sh
 
-  9. Upgrade database:
+     make install
 
-    :command:`$ nxdbmgr upgrade`
+  8. Upgrade database:
 
-  10. Start |product_name| agent.
+    .. code-block:: sh
+    
+     nxdbmgr upgrade
 
-  11. Start |product_name| server.
+  9. Start |product_name| agent.
+
+  10. Start |product_name| server.
 
 Agent
 ~~~~~
@@ -122,29 +137,35 @@ Agent
 
   2. Unpack the archive:
 
-    :command:`tar zxvf netxms-5.1.0.tar.gz`
+    .. code-block:: sh
 
-  3. Change directory to netxms-version and run configure script:
+     tar zxvf netxms-5.1.0.tar.gz
 
-    :command:`cd netxms-5.1.0`
+  3. Change directory to netxms-version and run configure script and make:
 
-    :command:`sh ./configure --enable-release-build --with-agent`
+    .. code-block:: sh
+    
+     cd netxms-5.1.0`
 
-    Be sure to include all options that were used at installation time.
+     sh ./configure --enable-release-build --with-agent
+     
+     make
 
-  4. Run make and make install:
+  Be sure to include all configuration options that were used at installation time.
 
-    :command:`make`
+  4. Stop |product_name| agent.
 
-  5. Stop |product_name| agent.
+  5. Run make install:
 
-  6. Run make install:
+    .. code-block:: sh
 
-    :command:`make install`
+     make install
 
-  7. Run agent:
+  6. Run agent:
 
-    :command:`$ /usr/local/bin/nxagentd -d`
+    .. code-block:: sh
+
+     /usr/local/bin/nxagentd -d
 
 Management Client
 ~~~~~~~~~~~~~~~~~
@@ -157,9 +178,17 @@ Desktop Management Client:
 
  2. Extract and replace old management client with the new one.
 
-    :command:`tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DIRECTORY`
+    .. code-block:: sh
+
+     tar zxvf nxmc-VERSION-linux-gtk-x86.tar.gz -C /DIRECTORY
 
  3. Run nxmc file from extracted catalog.
+
+    .. code-block:: sh
+     
+     cd /<path_to_nxmc>
+     
+     ./nxmc &
 
 Web Management Client:
 
@@ -184,31 +213,31 @@ Upgrade
 Server
 ~~~~~~
 
-1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need Windows installer (named netxms-VERSION.exe, for example netxms-5.1.0.exe).
+  1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need Windows installer (named netxms-VERSION.exe, for example netxms-5.1.0.exe).
 
-2. Stop |product_name| server.
+  2. Stop |product_name| server.
 
-3. Check database for possible inconsistencies:
+  3. Check database for possible inconsistencies:
 
-.. code-block:: sh
+    .. code-block:: sh
 
-  C:\NetXMS\bin> nxdbmgr check
+     C:\NetXMS\bin> nxdbmgr check
 
-Proceed to the next step only if database checker does not report any errors!
+  Proceed to the next step only if database checker does not report any errors!
 
-4. Run |product_name| installer and follow the prompts. Normally, you will not need to change any settings on installation wizard windows. Alternatively, you can run the installer with /SILENT option to disable any prompts:
+  4. Run |product_name| installer and follow the prompts. Normally, you will not need to change any settings on installation wizard windows. Alternatively, you can run the installer with /SILENT option to disable any prompts:
 
-.. code-block:: sh
+    .. code-block:: sh
 
-  C:\Download> netxms-5.1.0.exe /SILENT
+     C:\Download> netxms-5.1.0.exe /SILENT
 
-5. Check whether |product_name| Server service is running again. If it's not, most likely you have to upgrade your database to newer version. To upgrade database, use nxdbmgr utility:
+  5. Check whether |product_name| Server service is running again. If it's not, most likely you have to upgrade your database to newer version. To upgrade database, use nxdbmgr utility:
 
-.. code-block:: sh
+    .. code-block:: sh
 
-  C:\NetXMS\bin> nxdbmgr upgrade
+     C:\NetXMS\bin> nxdbmgr upgrade
 
-6. Start |product_name| server, if it is not already started.
+  6. Start |product_name| server, if it is not already started.
 
 Agent
 ~~~~~
@@ -217,33 +246,35 @@ We highly recommend using centralized agent upgrade feature for agent upgrades.
 However, if you decide to upgrade agent manually, it can be done in just a few steps:
 
   1. Download the latest version from http://www.netxms.org/download, if you don't
-     have it. You will need Windows Agent installer (named nxagent-VERSION.exe or
-     nxagent-VERSION-x64.exe, for example nxagent-5.1.0.exe).
+     have it. You will need Windows Agent installer ( named nxagent-VERSION.exe or
+     nxagent-VERSION-x64.exe, for example nxagent-5.1.0.exe ).
 
   2. Run |product_name| agent installer and follow the prompts. Normally, you will not need
      to change any settings on installation wizard dialog windows. Alternatively, you
      can run installer with /SILENT option to disable any prompts:
 
-      :command:`C:\Download> nxagent-5.1.0.exe /SILENT`
+    .. code-block:: sh
+    
+     C:\Download> nxagent-5.1.0.exe /SILENT
 
 Management Client
 ~~~~~~~~~~~~~~~~~
 
 Desktop Management Client:
 
- 1. Download the latest version from http://www.netxms.org/download. You will need
-    Windows installer(named nxmc-VERSION-win32-x86.zip or
-    nxmc-VERSION-win32-x64.zip, for example nxmc-5.1.0-win32-x64.zip).
+  1. Download the latest version from http://www.netxms.org/download. You will need
+     Windows installer ( named nxmc-VERSION-win32-x86.zip or
+     nxmc-VERSION-win32-x64.zip, for example nxmc-5.1.0-win32-x64.zip ).
 
- 2. Replace old old folder with content of the zip.
+  2. Replace old folder with content of the zip.
 
- 3. Run nxmc.exe file from extracted catalog.
+  3. Run nxmc.exe file from extracted catalog.
 
 Web Management Client:
 
   1. Download latest version of WAR file from Web Interface Binaries section
-     http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
-     nxmc-5.1.0.war).
+     http://www.netxms.org/download/ ( named nxmc-VERSION.war, for example
+     nxmc-5.1.0.war ).
 
   2. Replace old WAR file with the new one. Default path: ``INSTALLATION_DIR\\webapps``.
 
@@ -260,44 +291,53 @@ Server
 ------
 
   1. Download the latest version from http://www.netxms.org/download, if you don't have it. You will need source archive (named netxms-VERSION.tar.gz, for example netxms-5.1.0.tar.gz). Please note that in the following steps VERSION will be used as a substitution for an actual version number.
+  
   2. Unpack the archive:
 
-    :command:`$ tar zxvf netxms-5.1.0.tar.gz`
+    .. code-block:: sh
+    
+     tar zxvf netxms-5.1.0.tar.gz
 
-  3. Change directory to netxms-version and run configure script:
+  3. Change directory to netxms-version and run configure script and make:
 
-    :command:`$ cd netxms-5.1.0`
+    .. code-block:: sh
+    
+     cd netxms-5.1.0
 
-    :command:`$ sh ./configure --enable-release-build --with-server --with-mysql`
+     sh ./configure --enable-release-build --with-server --with-mysql
 
-    Be sure to include all options that were used at installation time.
+     make
+
+  Be sure to include all configuration options that were used at installation time.
 
 
-  4. Run make:
+  4. Stop |product_name| server.
 
-    :command:`$ make`
+  5. Stop |product_name| agent.
 
-  5. Stop |product_name| server.
+  6. Check database for possible inconsistencies:
 
-  6. Stop |product_name| agent.
-
-  7. Check database for possible inconsistencies:
-
-    :command:`$ nxdbmgr check`
+    .. code-block:: sh
+    
+     nxdbmgr check
 
     Proceed to the next step only if database checker does not report any errors!
 
-  8. Run make install:
+  7. Run make install:
 
-    :command:`$ make install`
+    .. code-block:: sh
+    
+     make install
 
-  9. Upgrade database:
+  8. Upgrade database:
 
-    :command:`$ nxdbmgr upgrade`
+    .. code-block:: sh
+    
+     nxdbmgr upgrade
 
-  10. Start |product_name| agent.
+  9. Start |product_name| agent.
 
-  11. Start |product_name| server.
+  10. Start |product_name| server.
 
 Agent
 -----
@@ -309,29 +349,35 @@ Agent
 
   2. Unpack the archive:
 
-    :command:`tar zxvf netxms-5.1.0.tar.gz`
+    .. code-block:: sh
 
-  3. Change directory to netxms-version and run configure script:
+     tar zxvf netxms-5.1.0.tar.gz
 
-    :command:`cd netxms-5.1.0`
+  3. Change directory to netxms-version and run configure script and make:
 
-    :command:`sh ./configure --enable-release-build --with-agent`
+    .. code-block:: sh
 
-    Be sure to include all options that were used at installation time.
+     cd netxms-5.1.0
 
-  4. Run make and make install:
+     sh ./configure --enable-release-build --with-agent
 
-    :command:`make`
+     make
 
-  5. Stop |product_name| agent.
+  Be sure to include all configuration options that were used at installation time.
 
-  6. Run make install:
+  4. Stop |product_name| agent.
 
-    :command:`make install`
+  5. Run make install:
 
-  7. Run agent:
+    .. code-block:: sh
+      
+     make install
 
-    :command:`$ /usr/local/bin/nxagentd -d`
+  6. Run agent:
+
+    .. code-block:: sh
+      
+     /usr/local/bin/nxagentd -d
 
 .. _agent-remote-update:
 

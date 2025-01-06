@@ -1208,28 +1208,49 @@ How to configure NetXMS web client with jetty in Linux
 ------------------------------------------------------
 
 
-1. curl -O https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/12.0.13/jetty-home-12.0.13.tar.gz
-2. tar -xvf jetty-home-12.0.13.tar.gz -C /opt
-3. ln -s /opt/jetty-home-12.0.13 /opt/jetty-home-12
-4. mkdir -p /opt/netxms-webui/{etc,logs} && cd /opt/netxms-webui
-5. java -jar /opt/jetty-home-12/start.jar --add-modules=ee8-deploy,gzip,http,http2,https,logging-logback,plus,server,ssl,work
-6. curl -o webapps/ROOT.war https://netxms.com/download/releases/5.0/nxmc-5.1.1.war
-7. Generate ssl key
+1. Download lateest Jetty (12.0.13 at the moment of writing).
 
-keytool -genkeypair -alias jetty -keyalg RSA -keysize 2048 -keystore /opt/netxms-webui/etc/keystore.p12 -storetype PKCS12 -storepass password -keypass password -validity 3650 -dname "CN=netxms-webui, OU=netxms, O=netxms, L=netxms, ST=netxms, C=netxms"
-sed 's,# jetty.sslContext.keyStorePassword=,jetty.sslContext.keyStorePassword=password,' -i'' start.d/ssl.ini
+.. code-block:: sh
 
-.. note::
-   Adjust configurable values like path, user and password as per requirements. Jetty user and group should be created or exist in order to use them in service file.
+      curl -O https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/12.0.13/jetty-home-12.0.13.tar.gz
 
-8. Manual test run
+2. Create directories and extract Jetty, then create initial configuration by running start.jar.
 
-java -Dnxmc.logfile=/opt/netxms-webui/logs/nxmc.log -jar /opt/jetty-home-12/start.jar
+.. code-block:: sh
 
-9. Configure systemctl, run below and edit as per requirents
+      tar -xvf jetty-home-12.0.13.tar.gz -C /opt
 
-systemctl edit --force --full netxms-webui.service
+      ln -s /opt/jetty-home-12.0.13 /opt/jetty-home-12
 
+      mkdir -p /opt/netxms-webui/{etc,logs} && cd /opt/netxms-webui
+
+      java -jar /opt/jetty-home-12/start.jar --add-modules=ee8-deploy,gzip,http,http2,https,logging-logback,plus,server,ssl,work
+
+3. Download war file (version 5.1.2 at the moment of writing) and place it in webapps directory.
+
+.. code-block:: sh
+
+      curl -o webapps/ROOT.war https://netxms.com/download/releases/5.1/nxmc-5.1.2.war
+
+4. Generate ssl key (for testing purposes) and adjust ssl.ini file. Reverse proxy with proper certificate should be used in production. Adjust DN, keyStorePassword and keyStorePath as per requirements.
+
+.. code-block:: sh
+
+      keytool -genkeypair -alias jetty -keyalg RSA -keysize 2048 -keystore /opt/netxms-webui/etc/keystore.p12 -storetype PKCS12 -storepass password -keypass password -validity 3650 -dname "CN=netxms-webui, OU=netxms, O=netxms, L=netxms, ST=netxms, C=netxms"
+
+      sed 's,# jetty.sslContext.keyStorePassword=,jetty.sslContext.keyStorePassword=password,' -i'' start.d/ssl.ini
+
+5. Run Jetty to verify configuration. Once verified, stop with Ctrl+C.
+
+.. code-block:: sh
+
+      java -Dnxmc.logfile=/opt/netxms-webui/logs/nxmc.log -jar /opt/jetty-home-12/start.jar
+
+6. Create systemd service file for Jetty (sample is bellow).
+
+.. code-block:: sh
+
+      systemctl edit --force --full netxms-webui.service
 
 .. code-block:: ini
 
@@ -1254,9 +1275,11 @@ systemctl edit --force --full netxms-webui.service
     EnableDefaultCounters = yes
 
 
-10. Enable netxms-web.service
+7. Enable netxms-web.service and start it.
 
-systemctl enable --now netxms-web.service
+.. code-block:: sh
+
+     systemctl enable --now netxms-web.service
 
 
 

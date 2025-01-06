@@ -10,6 +10,7 @@ Data collection
 How data collection works
 =========================
 
+
 Every node can have many data collection items configured (see
 :ref:`basic-concepts-dci` for detailed description). |product_name| server has a
 set of threads dedicated to data collection, called `Data Collectors`, used to
@@ -17,7 +18,7 @@ gather information from the nodes according to :term:`DCI` configuration. You
 can control how many data collectors will run simultaneously, by changing server
 configuration parameter ``ThreadPool.DataCollector.MaxSize``.
 
-Node capabilities provide information about available sources for data collection in the :guilabel:`Overview` -> :guilabel:`Capabilities` section.  The last values of DCIs for the node can be found on the :guilabel:`Data Collection` tab. Additionally, specific DCIs can be displayed in the :guilabel:`Overview` -> :guilabel:`Last Values section`
+Node capabilities provide information about available sources for data collection in the :guilabel:`Overview`-> :guilabel:`Capabilities` section.  The last values of DCIs for the node can be found on the :guilabel:`Data Collection` tab. Additionally, specific DCIs can be displayed in the :guilabel:`Overview`` -> :guilabel:`Last Values section`
 or as a graph on the :guilabel:`Performance` tab. More details about DCI display configuration options can be found in the :ref:`Other options <dci-other-options-label>` and :ref:`Performance View <dci-performance-view>` chapters.
 
 All configured DCIs are checked for polling requirement every second. If DCI needs to be polled, appropriate polling request is placed into internal
@@ -150,6 +151,83 @@ Data type for column. Can be one of the following: :guilabel:`Integer`,
 example, you cannot use operations like ``less than`` or ``greater than`` on
 strings. If you select metric from the list using the :guilabel:`Select` button,
 correct data type will be set automatically.
+
+
+Units
+~~~~~
+
+For user convenience collected DCI values can have the following predefined units assigned, but it is possible to enter any unit one requires.
+Most of the units are just displayed after the value, but some of them are special and affect how collected data is displayed:
+
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Unit
+     - Description
+   * - %
+     - Percent - symbol used to indicate a percentage, a number or ratio as a fraction of 100. For more details please check :wikipedia:`Wikipedia <Percent_sign>`
+   * - °C
+     - Degree in Celsius, unit of temperature. For more details please check :wikipedia:`Wikipedia <Celsius>`
+   * - °F
+     - Degree in Fahrenheit, unit of temperature. For more details please check :wikipedia:`Wikipedia <Fahrenheit>`
+   * - A
+     - Ampere, unit of electric current. For more details please check :wikipedia:`Wikipedia <Ampere>`
+   * - B (IEC)
+     - Bytes in IEC format. Please note that "(IEC)" part will be removed when value is displayed. For more details on difference between IEC and SI please check :wikipedia:`Wikipedia <Kilobyte>`
+   * - b (IEC)
+     - Bits in IEC format. Please note that "(IEC)" part will be removed when value is displayed.
+   * - B (Metric)
+     - Bytes in SI format. Please note that "(Metric)" part will be removed when value is displayed.
+   * - b (Metric)
+     - Bits in SI format. Please note that "(Metric)" part will be removed when value is displayed.
+   * - B/s
+     - Bytes per second. For more details please check :wikipedia:`Wikipedia <Data-rate_units>`
+   * - b/s
+     - Bits per second. For more details please check :wikipedia:`Wikipedia <Data-rate_units>`
+   * - dBm
+     - Unit of power level expressed using a logarithmic decibel. For more details please check :wikipedia:`Wikipedia <DBm>`
+   * - Epoch time
+     - Unix time, measures time by the number of non-leap seconds that have elapsed since 00:00:00 UTC on 1 January 1970. Converts collected into human readable timestamp. For more details please check :wikipedia:`Wikipedia <Unix_time>`
+   * - Hz
+     - Hertz, the unit of frequency. For more details please check :wikipedia:`Wikipedia <Hertz>`
+   * - J
+     - Joule, unit of energy. For more details please check :wikipedia:`Wikipedia <Joule>`
+   * - lm
+     - Lumen, a measure of the perceived power of visible light emitted by a source. For more details please check :wikipedia:`Wikipedia <Lumen_(unit)>`
+   * - lx
+     - Lux, unit of illuminance or luminous flux per unit area. For more details please check :wikipedia:`Wikipedia <Lux>`
+   * - N
+     - Newton, unit of force. For more details please check :wikipedia:`Wikipedia <Newton_(unit)>`
+   * - Pa
+     - Pascal, unit of pressure. For more details please check :wikipedia:`Wikipedia <Pascal_(unit)>`
+   * - rpm
+     - Revolutions per minute. For more details please check :wikipedia:`Wikipedia <Revolutions_per_minute>`
+   * - s
+     - Second, unit of time. For more details please check :wikipedia:`Wikipedia <Second>`
+   * - T
+     - Tesla, unit of magnetic flux density. For more details please check :wikipedia:`Wikipedia <Tesla_(unit)>`
+   * - Uptime
+     - Measure of system reliability. Converts number of seconds since uptime into human readable format. For more details please check :wikipedia:`Wikipedia <Uptime>`
+   * - W
+     - Watt, unit of power or radiant flux. For more details please check :wikipedia:`Wikipedia <Watt>`
+   * - V
+     - Volt, electric potential between two points of a conducting wire. For more details please check :wikipedia:`Wikipedia <Volt>`
+   * - Ω
+     - Ohm, unit of electrical resistance. For more details please check :wikipedia:`Wikipedia <Ohm>`
+
+
+
+Use multipliers
+~~~~~~~~~~~~~~~
+
+This boolean setting gives convenience of displaying some measurements in more readable form. For example, if enabled, 1230000 becomes 1.23 M.
+Please note - setting has no effect on units "%", "°C", "°F" and "dbm". Evrything with (IEC) will use binary multipliers both for calculation and to display value.
+This setting is taken into consideration only to display value; it is not converting value in the database. Selection here will be taken to format value when macro %<{format-specifier}name> with formatting is used.
+In Other options property page it is possible to set fixed multiplier degree. Again, it is used for display purposes only, however will be used when macro %<{format-specifier}name> is used.
+
+
 
 Source node override
 ~~~~~~~~~~~~~~~~~~~~

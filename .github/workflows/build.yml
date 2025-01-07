@@ -14,23 +14,35 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install System Dependencies
+      - name: Install LaTeX
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3-pip python3-virtualenv latexmk texlive-latex-extra
+          sudo apt-get install -y latexmk texlive-latex-extra
 
-      - name: Set up Python virtual environment
+      - name: Update TeX packages
         run: |
-          python3 -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
+          #sudo tlmgr update --all
+          echo disabled
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.5.15"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version"
+
+      - name: Install the project
+        run: uv sync
 
       - name: Build HTML
         run: |
-          source venv/bin/activate
+          source .venv/bin/activate
           make html SPHINXOPTS="-W"
 
       - name: Build PDF
         run: |
-          source venv/bin/activate
+          source .venv/bin/activate
           make pdf SPHINXOPTS="-W"

@@ -61,6 +61,7 @@ if 'CI' in os.environ:
     html_js_files = [('https://stats.raden.solutions/script.js', {'async': 'async', 'data-website-id':'e5a25886-8178-4d34-860f-f8cb9009a7e7'})]
 
 # -- Options for LaTeX output ---------------------------------------------
+latex_engine = 'xelatex'
 #    'figure_align': 'H', - to avoid image floating to next page if it does not fit
 latex_elements = {
     'papersize': 'a4paper',

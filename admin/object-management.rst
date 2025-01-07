@@ -439,7 +439,12 @@ select :menuselection:`Properties --> Custom Attributes tab`.
 
 .. figure:: _images/object_custom_attributes.png
 
+Custom attributes with name starting with $ can be set from NXSL and read from NXSL
+(or macro), but never sent to client and cannot be updated from client. They can be used when it is required to store some information about node that should not be modified by users or seen by them.
+
 .. _status-calculation:
+
+
 
 Status calculation
 ------------------

@@ -90,12 +90,10 @@ Execute Server Script
 ---------------------
 
 This view allows to execute arbitrary script. Script can be manually created just before execution,
-and afterwards saved, can be taken from the script library, can be used modified script from the
-script library and afterwards saved or saved as. If this view is opened on a node, then in the
-script is available ``$node`` variable with node object.
-
-.. note::
-   All parameters provided to script are accessible via $ARGS array.
+and saved afterwards, can be taken from the script library or modified script can be used from the
+script library and saved or saved as afterwards. If this view is opened on a node, then in the
+script ``$node`` variable is available with node object.
+All parameters provided to script, like $node, $object, $isCluster, $ARGV, etc, are accessible via $ARGS array. Please refer to `NXSL Guide <https://netxms.org/documentation/nxsl-latest/>`_ for more information.
    
 .. figure:: _images/execute_server_script.png
 
@@ -103,8 +101,8 @@ script is available ``$node`` variable with node object.
 NXShell
 =======
 
-NxShell is based on Jython and provide access to |product_name| Java API using interactive
-shell. NxShell binary comes with server distribution suite and can be run from shell or crontab. NxShell is also build as single jar file, which includes all required libraries.
+NXShell is based on Jython and provide access to |product_name| Java API using interactive
+shell. NXShell binary comes with server distribution suite and can be run from shell or crontab. NXShell is also build as single jar file, which includes all required libraries.
 
 Download: http://www.netxms.org/download/nxshell-VERSION.jar
 (example: http://www.netxms.org/download/nxshell-5.0.8.jar)
@@ -113,15 +111,12 @@ Download: http://www.netxms.org/download/nxshell-VERSION.jar
 Usage 
 -----
 
-Nxshell binary gets installed in $NETXMS_HOME directory, for example /usr/bin/nxshell.
+NXShell binary gets installed in $NETXMS_HOME directory, for example /usr/bin/nxshell.
 As of version 5.1, nxshell launcher accepts command line -r or --properties= for providing path to 
 nxshell properties file.
 
-~# nxshell -h
-NetXMS Interactive Shell  Version 5.1.0-rc320
-Copyright (c) 2006-2024 Raden Solutions
 
-Usage: nxshell [OPTIONS] [script]
+Usage: ``nxshell [OPTIONS] [script]``
 
 Options:
   -C, --classpath <path>      Additional Java class path.
@@ -141,22 +136,28 @@ Options:
 
 There are two options of this jar usage:
 
-  1. it can be started as interactive shell;
+  1. it can be started as interactive shell:
 
-     :command:`java -jar nxshell-5.0.8.jar`
+    .. code-block:: sh
+
+     java -jar nxshell-5.0.8.jar
 
   2. it can be started with the script name as a first parameter. Then it will just
      execute this script and exit. Example:
 
-     :command:`java -jar nxshell-5.0.8.jar test.py`
+    .. code-block:: sh
 
-When NxShell is started, it tries to get server IP, login and password from Java
+     java -jar nxshell-5.0.8.jar test.py
+
+When NXShell is started, it tries to get server IP, login and password from Java
 properties. In interactive mode, user will be asked for details, otherwise
 default values will be used.
 
 Start as interactive shell, with IP and Login provided (password will be asked):
 
-:command:`java -Dnetxms.server=127.0.0.1 -Dnetxms.login=admin -jar nxshell-5.0.8.jar`
+    .. code-block:: sh
+
+      java -Dnetxms.server=127.0.0.1 -Dnetxms.login=admin -jar nxshell-5.0.8.jar
 
 Properties
 ~~~~~~~~~~
@@ -180,7 +181,7 @@ Scripting
 For details on API please refer to javadoc at
 http://www.netxms.org/documentation/javadoc/latest/.
 
-NxShell provide user with already connected and synchronized session to simplify
+NXShell provide user with already connected and synchronized session to simplify
 scripting. Most required packages are imported as well to minimize typing.
 
 

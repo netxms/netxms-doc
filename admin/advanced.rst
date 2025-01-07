@@ -701,6 +701,11 @@ section.
       be dropped. Default: `4194304`.
   * - Token
     - Authentication token.
+  * - ValidateValues ( from 5.1.2 )
+    - If true, driver will validate values according to DCI data type, and drop invalid values (invalid numbers, out-of-range values). Default: false
+  * - CorrectValues
+    - If both ValidateValues and CorrectValues set to true, instead of dropping values that did not pass validation, correct values will be sent to InfluxDB instead. Unparsable numbers will be set to last parsable part (for example, 123abc will be sent as 123), out-of-range values will be sent as maximal or minimal possible value. Default: false
+
 
 
 Configuration example:

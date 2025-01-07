@@ -772,7 +772,8 @@ These parameters can be changed in :menuselection:`Configuration --> Server
 Configuration`
 
 .. list-table::
-  :widths: 20 25 8 4
+  :class: longtable
+  :widths: 1 25 8 4
   :header-rows: 1
 
   * - Parameter

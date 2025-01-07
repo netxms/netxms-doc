@@ -18,9 +18,11 @@ Components of the documentation are stored in the following directories:
 ### macOS
 
 ```shell
-brew cask install basictex
+brew install --cask basictex
 sudo tlmgr update --self
-sudo tlmgr install latexmk fncychap titlesec tabulary varwidth framed wrapfig capt-of needspace helvetic courier letltxmacro tex-gyre
+sudo tlmgr install latexmk capt-of ellipse fncychap framed needspace pict2e tabulary tex-gyre titlesec varwidth wrapfig
+
+#helvetic courier letltxmacro
 ```
 
 ### Ubuntu/Mint

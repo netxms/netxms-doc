@@ -23,7 +23,7 @@ extensions = [
 
 templates_path = ['../_templates']
 
-source_suffix = '.rst'
+source_suffix = {'.rst': 'restructuredtext'}
 master_doc = 'index'
 
 project_author = "Raden Solutions, SIA"

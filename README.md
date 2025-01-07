@@ -20,9 +20,7 @@ Components of the documentation are stored in the following directories:
 ```shell
 brew install --cask basictex
 sudo tlmgr update --self
-sudo tlmgr install latexmk capt-of ellipse fncychap framed needspace pict2e tabulary tex-gyre titlesec varwidth wrapfig
-
-#helvetic courier letltxmacro
+sudo tlmgr install latexmk capt-of ellipse fncychap framed needspace pict2e tabulary tex-gyre titlesec varwidth wrapfig gnu-freefont
 ```
 
 ### Ubuntu/Mint

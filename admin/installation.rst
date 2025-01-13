@@ -10,25 +10,25 @@ Major changes between releases
 5.1
 ---
 
-NXSL changes: node attribute 'ipAddr' is deprecated, newly added 'ipAddress' attribute should be used instead. 
+NXSL changes: node attribute 'ipAddr' is deprecated. The newly added 'ipAddress' attribute should be used instead.
 
 
 5.0
 ---
 
-Aditionally loaded mib files will not work. They should be uploaded again in
+Aditionally loaded MIB files will not work. They should be uploaded again in the
 :guilabel:`Configuration` --> :guilabel:`SNMP MIB files` configuration view.
-Starting form version 5.0, the MIB compilation file extension changed to ".mib"
-and the already compiled MIB file extension is ".cmib". The default MIB file
-location has changed to $HOME/share/netxms/mibs/, and user aditional MIB files
-should be loaded in :guilabel:`Configuration` --> :guilabel:`SNMP MIB files`. 
+Starting with version 5.0, the MIB compilation file extension changed to ".mib"
+and the already compiled MIB file extension is now ".cmib". The default MIB file
+location has changed to $HOME/share/netxms/mibs/ and user additional MIB files
+should be loaded in :guilabel:`Configuration` --> :guilabel:`SNMP MIB files`.
 
-Default format of SNMP OID changes to format without leading dot. Potentially
-can break some scripts that use SNMP OID strings compare. 
+The default format of SNMP OID changes to a format without leading dot. Potentially
+this can break some scripts that use SNMP OID string comparisons.
 
-NXSL syntax has changed. During upgrade existing scripts should get
-automatically converted. If you need to manually convert a script, this could be
-done via nxscript command line utility (``nxscript -5 script-file.nxsl``). NXSL
+The NXSL syntax has changed. During upgrade, existing scripts get
+converted automatically . If you need to manually convert a script, this could be
+done via the nxscript command line utility (``nxscript -5 script-file.nxsl``). NXSL
 syntax major changes:
 
 .. list-table::
@@ -38,19 +38,19 @@ syntax major changes:
    * - Description
      - Old example
      - New example
-   * - String concatination change from '.' to '..'
+   * - String concatenation changes from '.' to '..'
      - variable = "Text first part " . "text second part";
      - variable = "Text first part " .. "text second part";
    * - Dereference changed form '->' to '.'
      - equals = $node->getInterface($5) == variable->interfaceAttribute;
      - equals = $node.getInterface($5) == variable.interfaceAttribute;
-   * - Use '[]' to initialize array instead of '%()'
+   * - Use '[]' to initialize an array instead of '%()'
      - a = %(1,2,3);
      - a = [1,2,3];
    * - Use safe dereference '?.' instead of '@'
      - customAttributeValue = test@$node;
      - customAttributeValue = $node?.test;
-   * - Use 'import' keyword instead of 'use' for librarrie import
+   * - Use 'import' keyword instead of 'use' for library import
      - use ToolBox;
      - import ToolBox;
    * - Use 'function' keyword instead of 'sub' for function definition
@@ -58,10 +58,10 @@ syntax major changes:
      - function EnumerateNodes(obj, level)
 
 
-Class 'TIME' renamed as 'DateTime'. Created Math, Base64, Crypto, Net, and IO
-modules, and functions moved under them. Most used functions left as deprecated,
-but others were just renamed. Below table shows the full rename list
-(functions that were just renamed and do not have deprecated versions):
+Class 'TIME' is now renamed as 'DateTime'. Created Math, Base64, Crypto, Net, and IO
+modules, and functions moved under them. The most used functions are left as deprecated,
+but others were just renamed. The table below shows the full renamed list containing
+functions that were just renamed and do not have deprecated versions:
 
 
 .. list-table::
@@ -130,10 +130,10 @@ but others were just renamed. Below table shows the full rename list
      - function
    * - encode
      - Base64::Encode
-     - function     
+     - function
    * - CopyFile
      - IO::CopyFile
-     - function     
+     - function
    * - CreateDirectory
      - IO::CreateDirectory
      - function
@@ -154,7 +154,7 @@ but others were just renamed. Below table shows the full rename list
      - function
 
 Abort and other runtime errors in the script DCI will set DCI to an error state.
-(Before version 5.0, DCI changed its state to unsupported.)
+Before version 5.0, DCI changed state to unsupported.
 
 Importing the dashboard configuration exported from the previous version of
 NetXMS will not upgrade the script syntax to the 5.0 format.
@@ -162,87 +162,87 @@ NetXMS will not upgrade the script syntax to the 5.0 format.
 
 4.4
 ---
-Minimal JRE (Java Runtime Environment) version for both web and management client is Java-17. 
+The minimal JRE (Java Runtime Environment) version for both web and management client is now Java 17.
 
 
 4.2
 ---
 
-NXSL functions 'AgentExecuteAction' and 'AgentExecuteActionWithOutput' renamed to 'AgentExecuteCommand' and 
+The NXSL functions 'AgentExecuteAction' and 'AgentExecuteActionWithOutput' are renamed to 'AgentExecuteCommand' and
 'AgentExecuteCommandWithOutput'.
 
 4.1
 ---
 
-CreateDCI NXSL method changed. In new version last two parameter (polling interval and retention time) should 
-be set to null instead of 0 to have default value in DCI configuration. 
+The CreateDCI NXSL method changed. In the new version the last two parameters "polling interval" and "retention time" should
+be set to null instead of 0 to have a default value in the DCI configuration.
 
-NXSL decimal numbers written with leading zeros will NOT be interpreted as octal. 
+NXSL decimal numbers written with leading zeros will NOT be interpreted as octal.
 
 4.0
 ---
 
 Incompatible attributes in NXSL DCI class:
-instance now refers to instance value (as in {instance} macro), not instance name as before.
-Instance name can be accessed via attribute "instanceName".
+instance now refers to an instance value (as in {instance} macro), not instance name as before.
+The instance name can be accessed via the attribute "instanceName".
 
 Several WEB API endpoints were renamed, e.g. *API_HOME*/summaryTable/adHoc became *API_HOME*/summary-table/ad-hoc.
 
 3.8
 ---
-Minimal JRE (Java Runtime Environment) version for management client is Java-11. 
-Desktop Management Client with bundled JRE is provided for Windows.
+The minimal JRE (Java Runtime Environment) version for the management client is Java 11.
+A Desktop Management Client with bundled JRE is provided for Windows.
 
 3.7
 ---
-Introduced boolean type in NXSL. Comparisons like "func() == 1", where 'func' is a function that returns boolean type, will 
-always result as false as boolean value 'true' is not equal to 1. Might require fixes in some NXSL scripts. 
+Introduced boolean type in NXSL. Comparisons like "func() == 1", where 'func' is a function that returns a boolean type, will
+always result as false as the boolean value 'true' is not equal to 1. This might require fixes in some NXSL scripts.
 
-Regexp matching operation in NXSL returns array with capture groups or false as a result.
+Regexp matching operation in NXSL returns an array with capture groups or false as a result.
 
-Clusters now have configuration poll. If you have configuration poll hook script that is referring to ``$node`` object, this will 
-produce error message in server log each time a configuration poll runs on a cluster. Replace ``$node`` with ``$object`` or
-use condition ``if (classof($object) == "Node")`` or  ``if ($node != null)`` prior to accessing attributes or methods of ``$node``. 
+Clusters now have configuration poll. If you have a configuration poll hook script that is referring to the ``$node`` object, this will
+produce an error message in the server log each time a configuration poll runs on a cluster. Replace ``$node`` with ``$object`` or
+use the condition ``if (classof($object) == "Node")`` or  ``if ($node != null)`` prior to accessing attributes or methods of ``$node``.
 
 3.6
 ---
-In this version "Certificate manager" was removed from server. All CA certificates configuration should be manually moved 
-to "TrustedCertificate" configuration parameter in server configuration file. 
+In this version the "Certificate manager" was removed from server. All CA certificates configuration should be manually moved
+to the "TrustedCertificate" configuration parameter in the server configuration file.
 
 3.5
 ---
-External Metrics (ExternalMetric, etc...) expect UTF-8 encoding on Windows. Might need to adjust scripts called
-by external metrics if non-ASCII characters are returned. 
+External Metrics (ExternalMetric, etc...) expect UTF-8 encoding on Windows. It might be needed to adjust scripts called
+by external metrics if non-ASCII characters are returned.
 
 3.1
 ---
-Regexp matching operation in NXSL returns array with capture groups or NULL as result. NXSL objects and arrays in logical 
-expressions are evaluated to TRUE. Might be require some NXSL script adjustments. 
+Regexp matching operation in NXSL returns array with capture groups or NULL as result. NXSL objects and arrays in logical
+expressions are evaluated to TRUE. This might require some NXSL script adjustments.
 
 3.0
 ---
-Notification channels introduced as new functionality. SMS configuration automatically moved from server configuration to 
-notification channel depending on old driver with one of next names: AnySMS, DBTable, Dummy, GSM, Kannel, MyMobile, Nexmo, 
-NXAgent, Portech, Slack, SMSEagle, Text2Reach, WebSMS. No manual actions required. 
+Notification channels are introduced as new functionality. SMS configuration automatically moved from server configuration to
+notification channel depending on old driver with one of the next names: AnySMS, DBTable, Dummy, GSM, Kannel, MyMobile, Nexmo,
+NXAgent, Portech, Slack, SMSEagle, Text2Reach, WebSMS. No manual actions are required.
 
-Flags and dynamic flags moved to NetObject class. Separated node flags set by user and capability flags set by system to 
-flags and capabilities. Numeric values for flags, capabilities and dynamic flags were changed. Will affect only NXSL scripts 
-that checked those flags directly. 
+Flags and dynamic flags are moved to the NetObject class. Separated node flags set by user and capability flags set by system to
+flags and capabilities. Numeric values for flags, capabilities and dynamic flags were changed. This affects only NXSL scripts
+that checked those flags directly.
 
-32 bit version of management client is not available any more. 
+The 32 bit version of management client is not available any more.
 
-Agent always requires encryption unless RequireEncryption parameter explicitly set to off. Might be required to manually add 
-"RequireEncryption" configuration parameter where required to disable encryption. 
+The Agent always requires encryption unless the RequireEncryption parameter explicitly set to off. It might be required to manually add
+the "RequireEncryption" configuration parameter where required to disable encryption.
 
-Agent policies were merged with templates. Each policy was converted to template. No changes required. 
+Agent policies were merged with templates. Each policy was converted to a template. No changes required.
 
-Planing
-=======
+Planning
+========
 
 Operating system
 ----------------
 
-Both |product_name| server and agent works fine on most operating systems, including Windows, Linux, and commercial UNIXes.
+Both |product_name| server and agent work fine on most operating systems, including Windows, Linux, and commercial UNIXes.
 However, we test and officially support only some of them.
 
 Supported platforms for |product_name| server and agent:
@@ -261,7 +261,7 @@ Supported platforms for |product_name| server and agent:
    * Raspbian Buster
 
 
-Support for the following platforms provided only to customers with active support contract:
+Support for the following platforms is provided only to customers with an active support contract:
 
    * Debian 8 (Jessie)
    * Ubuntu 16.04 LTS (Xenial)
@@ -285,8 +285,8 @@ Minimal requirements: Core 2 duo 1GHz, 1024MB RAM, 1GB disk space.
 Linux kernel tuning
 -------------------
 
-Important requirement on large systems might be a need to tune Linux network buffer size. 
-Default values may not be enough if system is sending many ICMP pings, for example. 
+An important requirement on large systems might be the need to tune Linux network buffer size.
+Default values may not be enough if the system is sending many ICMP pings, for example.
 The following kernel parameters should be changed:
 
 * net.core.rmem_default
@@ -294,7 +294,7 @@ The following kernel parameters should be changed:
 * net.core.rmem_max
 * net.core.wmem_max
 
-In our test lab value 1703936 seems to be working well (default was 212992). 
+In our test lab, value 1703936 seems to be working well (default was 212992).
 
 Example:
 
@@ -303,9 +303,9 @@ Example:
 * sudo sysctl -w net.core.rmem_max=1703936
 * sudo sysctl -w net.core.wmem_max=1703936
 
-Kernel changes will not be preserved after reboot unless sysctl commands are applied in system 
-configuration file, typically located at /etc/sysctl.conf. Increase in kernel values would also 
-increase kernel memory space in use and may impact other applications.
+Kernel changes will not be preserved after reboot unless sysctl commands are applied in the system
+configuration file, which is typically located at /etc/sysctl.conf. Increasing these kernel values also
+increases kernel memory space in use and may impact other applications.
 
 Database
 --------
@@ -322,22 +322,22 @@ Database engines supported by |product_name| server:
    * Microsoft SQL Server 2012, 2014, 2016, 2017, 2022
    * SQLite (only for test purposes)
 
-Postgres database tuning might be required depending on database size. 
-Increase of ``shared_buffers`` might be needed, rough recommendation is 25% of available RAM. 
-Increase of ``max_locks_per_transaction`` is needed if using TimescaleDB, rough recommendation is 512. 
+PostgreSQL database tuning might be required depending on database size.
+Increasing ``shared_buffers`` might be needed. A rough recommendation is 25% of available RAM.
+Increasing ``max_locks_per_transaction`` is needed if using TimescaleDB. A rough recommendation is 512.
 
-Database size and load is very hard to predict, because it is dependent on a number of
-monitored nodes and collected metrics. If you plan to install database engine on
+Database size and load is very hard to predict, because it is depending on the number of
+monitored nodes and collected metrics. If you plan to install a database engine on
 the same machine as |product_name| server, increase your hardware requirements accordingly.
 
 
 Java
 ----
 
-Java Runtime Environment (JRE) is needed for Desktop Management Client (nxmc) and for Web Management Client. 
-Supported Java version is 17 and higher. 
+A Java Runtime Environment (JRE) is needed for the Desktop Management Client (nxmc) and for the Web Management Client.
+The Supported Java version is 17 and higher.
 
-Since version 3.8 Desktop Management Client with bundled JRE is provided for Windows. 
+Since version 3.8 the Desktop Management Client with a bundled JRE is provided for Windows.
 
 
 Agent
@@ -349,8 +349,8 @@ Agent resource usage is negligible and can be ignored.
 Installing from DEB repository
 ==============================
 
-We host public APT repository at http://packages.netxms.org/ for most deb-based distributions (Debian, Ubuntu, Mint, Raspbian, etc.).
-Packages are signed, and you'll need to install additional encryption key for signature verification.
+We host a public APT repository at http://packages.netxms.org/ for most deb-based distributions (Debian, Ubuntu, Mint, Raspbian, etc.).
+Packages are signed, and you'll need to install an additional encryption key for signature verification.
 
 Supported URLs (*CODENAME* should be replaced with output of `lsb_release -sc`):
 
@@ -362,15 +362,15 @@ Supported URLs (*CODENAME* should be replaced with output of `lsb_release -sc`):
 Add APT repository
 ------------------
 
-There are two options to add APT repository: by hand or using netxms-release
-package. Use of the release package is strongly encouraged because it allow
-easy change in repository configuration and encryption keys updated in the feature.
+There are two options to add an APT repository: by hand or by using the netxms-release
+package. Use of the release package is strongly encouraged because it allows
+easy change in repository configuration and encryption keys will be updated in the future.
 
 
-Using netxms-release package
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Using the netxms-release package
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Download and install netxms-release-latest.deb package, which contain source list file of the repository as well as signing key.
+Download and install the netxms-release-latest.deb package, which contain a source list file of the repository as well as a signing key.
 
 .. code-block:: sh
 
@@ -397,9 +397,9 @@ Installing packages
 Server
 ~~~~~~
 
-Server require two components to function - server itself (package "netxms-server") and at least one database abstraction layer driver 
-(multiple can be installed at the same time, e.g. for migration purposes). These database drivers are also used by agent for database 
-monitoring (performing queries to databases). 
+The server requires two components to function: the server itself (package "netxms-server") and at least one database abstraction layer driver
+(multiple can be installed at the same time, e.g. for migration purposes). These database drivers are also used by the agent for database
+monitoring (performing queries to databases).
 
 Provided driver packages:
 
@@ -409,7 +409,7 @@ Provided driver packages:
   * netxms-dbdrv-odbc - unixODBC driver (can be used with DB/2 and Microsoft SQL)
   * netxms-dbdrv-oracle - Oracle driver ( requires Oracle client installation )
 
-#. Instal required packages (adjust command to match your environment):
+#. Install required packages (adjust command to match your environment):
 
    .. code-block:: sh
 
@@ -437,15 +437,15 @@ Provided driver packages:
 
      systemctl enable netxms-server
 
-#. If database engine is running on the same system, add ordering dependency for
-   database into netxmsd systemd unit override file. This will ensure database
+#. If the database engine is running on the same system, add ordering dependency for
+   database in the netxmsd systemd unit override file. This will ensure database
    shutdown only after netxmsd process completion on system shutdown/restart. To
-   add the dependency e.g. for Postgres database, run:
+   add the dependency e.g. for the PostgreSQL database, run:
 
    .. code-block:: sh
 
      systemctl edit netxms-server
-   
+
    and add the following lines:
 
    .. code-block:: sh
@@ -454,7 +454,7 @@ Provided driver packages:
      After=network.target postgresql.service
 
    After editing run ``systemctl daemon-reload`` to reload systemd
-   configuration. 
+   configuration.
 
 .. note::
 
@@ -464,7 +464,7 @@ Provided driver packages:
 Agent
 ~~~~~
 
-Install core agent package ("netxms-agent") and optional subagent packages, if required:
+Install the core agent package ("netxms-agent") and optional subagent packages, if required:
 
 .. code-block:: sh
 
@@ -489,33 +489,33 @@ Management Client
 Desktop Management Client
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Due to limitation of Eclipse platform used to build the Management Client, only x64 build is provided.
+Due to a limitation of the Eclipse platform used to build the Management Client, only a x64 build is provided.
 
- 1. Make sure you have 64-bit Java version 17 installed you your system. 
- 
- 2. Download the latest .jar file from http://www.netxms.org/download, for example nxmc-5.1.0-standalone.jar.
+ 1. Make sure you have 64-bit Java version 17 installed you your system.
 
- 3. Run .jar file using java, for example java -jar nxmc-xxx.jar .
+ 2. Download the latest .jar file from http://www.netxms.org/download/, for example nxmc-5.1.0-standalone.jar.
+
+ 3. Run the .jar file using java, for example java -jar nxmc-xxx.jar .
 
 
-Desktop management client produces log file :file:`.nxmc/data/.metadata/.log` in
-home folder of currently logged user. Inspect this log file if you encounter
-errors when running the client. 
+The desktop management client produces a log file named :file:`.nxmc/data/.metadata/.log` in
+the home folder of the currently logged in user. Inspect this log file if you encounter
+errors when running the client.
 
 
 Web Management Client
 ^^^^^^^^^^^^^^^^^^^^^
 
-|product_name| web interface is java based and should be deployed into servlet container to
-run. Minimal supported versions: Jetty 10, Tomcat 9. Supported Java version is 17 or later. 
+The |product_name| web interface is java based and should be deployed into a servlet container to
+run. Minimal supported versions are: Jetty 10, Tomcat 9. The supported Java version is 17 or later.
 
-  1. Install one of servlet containers that support servlet-api version 4.
+  1. Install one of the servlet containers that support servlet-api version 4.
 
-  2. Download latest version of WAR file from Web Interface Binaries section
-     http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
-     nxmc-5.1.0.war).
+  2. Download the latest version of WAR file from the Web Interface Binaries section
+     https://www.netxms.org/download/ named nxmc-VERSION.war, for example
+     nxmc-5.1.0.war.
 
-  3. Copy nxmc.war to webapps directory, in a few seconds it will be autodeployed and
+  3. Copy nxmc.war to the webapps directory. In a few seconds it will be autodeployed and
      available at http://SERVER_IP:SERVER_PORT/nxmc/
 
      Tomcat default folder:  /var/lib/tomcat9/webapps
@@ -523,27 +523,27 @@ run. Minimal supported versions: Jetty 10, Tomcat 9. Supported Java version is 1
      Jetty default folder: $JETTY_HOME/webapps/
 
 
-Web management client produces log file. For Tomcat it's located at 
-:file:`/var/lib/tomcat9/work/Catalina/localhost/nxmc/eclipse/workspace/.metadata/.log.` 
-Inspect this log file if you encounter errors when running the web client. 
+The web management client produces a log file. For Tomcat it is located at
+:file:`/var/lib/tomcat9/work/Catalina/localhost/nxmc/eclipse/workspace/.metadata/.log.`
+Inspect this log file if you encounter errors when running the web client.
 
 
 Installing from RPM repository
 ==============================
 
 We provide RPM packages for RHEL and Fedora, both amd64 and aarch64.
-If you need build for another system, please contact us for support or check this section: :ref:`Installing from source <install_from_sources>`.
+If you need a build for another system, please contact us for support or check this section: :ref:`Installing from source <install_from_sources>`.
 
-RHEL repository is at https://packages.netxms.org/epel/.
+The RHEL repository is at https://packages.netxms.org/epel/.
 
-Fedora repository is at https://packages.netxms.org/fedora/.
+The Fedora repository is at https://packages.netxms.org/fedora/.
 
-Complete repository file and signing key is available in each corresponding root.
+A complete repository file and signing key is available in each corresponding root.
 
 Add repository
-------------------------
+--------------
 
-DNF provide simple way to add repository ( please note - you may need to install `EPEL repository first <https://docs.fedoraproject.org/en-US/epel/>`_ ):
+DNF provides a simple way to add a repository. Please note that you may need to install the EPEL repository first. `See details <https://docs.fedoraproject.org/en-US/epel/>`_ ):
 
 .. code-block:: sh
 
@@ -561,9 +561,9 @@ Installing packages
 Server
 ~~~~~~
 
-Server require two components to function - server itself (package "netxms-server") and at least one database abstraction layer driver 
-(multiple can be installed at the same time, e.g. for migration purposes). These database drivers are also used by agent for database 
-monitoring (performing queries to databases). 
+The server requires two components to function - the server itself (package "netxms-server") and at least one database abstraction layer driver
+(multiple can be installed at the same time, e.g. for migration purposes). These database drivers are also used by the agent for database
+monitoring (performing queries to databases).
 
 Provided driver packages:
 
@@ -581,7 +581,7 @@ Provided driver packages:
 
 #. Create user and database (:ref:`examples <db_creation>`).
 
-#. Modify server configuration file ("/etc/netxmsd.conf" to match your environment.
+#. Modify the server configuration file ("/etc/netxmsd.conf" to match your environment.
 
 #. Load database schema and default configuration:
 
@@ -601,15 +601,15 @@ Provided driver packages:
 
      systemctl enable netxms-server.service
 
-#. If database engine is running on the same system, add ordering dependency for
+#. If the database engine is running on the same system, add ordering dependency for
    database into netxmsd systemd unit override file. This will ensure database
    shutdown only after netxmsd process completion on system shutdown/restart. To
-   add the dependency e.g. for Postgres database, run:
+   add the dependency e.g. for the PostgreSQL database, run:
 
    .. code-block:: sh
 
      systemctl edit netxmsd
-   
+
    and add the following lines:
 
    .. code-block:: sh
@@ -617,8 +617,8 @@ Provided driver packages:
      [Unit]
      After=network.target postgresql.service
 
-   After editing run ``systemctl daemon-reload`` to reload systemd
-   configuration. 
+   After editing, run ``systemctl daemon-reload`` to reload systemd
+   configuration.
 
 .. note::
 
@@ -628,7 +628,7 @@ Provided driver packages:
 Agent
 ~~~~~
 
-Install core agent package ("netxms-agent") and optional subagent packages, if required:
+Install the core agent package ("netxms-agent") and optional subagent packages, if required:
 
 .. code-block:: sh
 
@@ -653,33 +653,33 @@ Management Client
 Desktop Management Client
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Due to limitation of Eclipse platform used to build the Management Client, only x64 build is provided.
+Due to a limitation of the Eclipse platform used to build the Management Client, only a x64 build is provided.
 
- 1. Make sure you have 64-bit Java version 17 installed you your system. 
- 
- 2. Download the latest .jar file from http://www.netxms.org/download, for example nxmc-5.1.0-standalone.jar.
+ 1. Make sure you have 64-bit Java version 17 installed you your system.
 
- 3. Run .jar file using java, for example java -jar nxmc-xxx.jar .
+ 2. Download the latest .jar file from https://www.netxms.org/download/, for example nxmc-5.1.0-standalone.jar.
+
+ 3. Run the .jar file using java, for example java -jar nxmc-xxx.jar .
 
 
-Desktop management client produces log file :file:`.nxmc/data/.metadata/.log` in
-home folder of currently logged user. Inspect this log file if you encounter
-errors when running the client. 
+The desktop management client produces a log file named :file:`.nxmc/data/.metadata/.log` in
+the home folder of the currently logged in user. Inspect this log file if you encounter
+errors when running the client.
 
 
 Web Management Client
 ^^^^^^^^^^^^^^^^^^^^^
 
-|product_name| web interface is java based and should be deployed into servlet container to
-run. Minimal supported versions: Jetty 10, Tomcat 9. Supported Java version is 17, but is found to be working with later versions, for example 21. 
+The |product_name| web interface is java based and should be deployed into a servlet container to
+run. Minimal supported versions are: Jetty 10, Tomcat 9. The supported Java version is 17, but is found to be working with later versions, for example 21.
 
-  1. Install one of servlet containers that support servlet-api version 4.
+  1. Install one of the servlet containers that support servlet-api version 4.
 
-  2. Download latest version of WAR file from Web Interface Binaries section
-     http://www.netxms.org/download/ (named nxmc-VERSION.war, for example
-     nxmc-5.0.6.war).
+  2. Download the latest version of WAR file from Web Interface Binaries section
+     https://www.netxms.org/download/ named nxmc-VERSION.war, for example
+     nxmc-5.0.6.war.
 
-  3. Copy nxmc.war to webapps directory, in a few seconds it will be autodeployed and
+  3. Copy nxmc.war to the webapps directory. In a few seconds it will be autodeployed and
      available at http://SERVER_IP:SERVER_PORT/nxmc/
 
      Tomcat default folder:  /var/lib/tomcat9/webapps
@@ -687,9 +687,9 @@ run. Minimal supported versions: Jetty 10, Tomcat 9. Supported Java version is 1
      Jetty default folder: $JETTY_HOME/webapps/
 
 
-Web management client produces log file. For Tomcat it's located at 
-:file:`/var/lib/tomcat9/work/Catalina/localhost/nxmc/eclipse/workspace/.metadata/.log.` 
-Inspect this log file if you encounter errors when running the web client. 
+The web management client produces a log file. For Tomcat it is located at
+:file:`/var/lib/tomcat9/work/Catalina/localhost/nxmc/eclipse/workspace/.metadata/.log.`
+Inspect this log file if you encounter errors when running the web client.
 
 Installing on Windows
 =====================
@@ -697,62 +697,62 @@ Installing on Windows
 Server
 ------
 
-  1. Download the latest version from http://www.netxms.org/download.
-     You will need Windows installer (named netxms-VERSION-x64.exe, e.g.
-     netxms-server-5.0.8-x64.exe). Please note that in
-     following steps VERSION will be used as a substitution for an actual version
+  1. Download the latest version from http://www.netxms.org/download/.
+     You will need Windows the installer named netxms-VERSION-x64.exe, e.g.
+     netxms-server-5.0.8-x64.exe. Please note that in
+     the following steps VERSION will be used as a substitution for an actual version
      number.
-  2. Run the installer package on your server machine. Installation wizard will be
-     shown. Follow the prompts until the Select Components window opens.
-  3. On the Select Components window, select |product_name| Server option and an appropriate
-     database client library. You do not have to install database client library
-     from |product_name| package, if it is already installed on the machine (however, it might 
-     be required to add folder where the client library is installed to system path). 
+  2. Run the installer package on your server. The installation wizard will be
+     displayed. Follow the prompts until the Select Components window opens.
+  3. On the Select Components window, select the |product_name| Server option and an appropriate
+     database client library. You do not have to install a database client library
+     from |product_name| package if it is already installed on the machine (however, it might
+     be required to add the folder where the client library is installed to system path).
 
     .. figure:: _images/win_netxms_setup_components.png
 
-  4. For a typical installation keep default settings on Select Additional Tasks window.
-     :guilabel:`Set hardened file system permissions` makes installation folder
-     accessible only to members of Administrators group and SYSTEM user.
+  4. For a typical installation, keep default settings in the Select Additional Tasks window.
+     :guilabel:`Set hardened file system permissions` makes the installation folder
+     accessible only to members of the Administrators group and the SYSTEM user.
 
     .. figure:: _images/win_netxms_setup_additional_tasks.png
 
 
-  
-   5. Database selection window will open:
+
+   5. The Database selection window will open:
 
     .. figure:: _images/win_server_config_step2.png
 
   * Select the desired database type. Enter the name of database server.
-  * In DBA login name and DBA password fields, enter database administrator’s login
-    name and password. You have to fill these fields only if you have chosen
+  * In the DBA login name and DBA password fields, enter the database administrator login
+    name and password. You have to fill these fields only if you have chosen the
     :guilabel:`Create database and database user before initialization` option.
-  * Enter the desired database name, database user name and password. 
+  * Enter the desired database name, database user name and password.
 
 
-    **MySQL note**:
+    **Note for MySQL**:
 
-    Bundled MySQL database drive does not support caching_sha2_password authentication 
-    which is default for MySQL starting from version 8. Either select 
-    Legacy Authentication Method when installing MySQL, or use database driver 
-    installed along with MySQL. 
-    Database driver gets installed when installing MySQL with Server-only option, however these
-    two folders should be included into system path: :file:`C:\\Program Files\\MySQL\\MySQL Server 8.0\\lib` 
-    :file:`C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin`. 
-
-
-    **Microsoft SQL note**:
-
-    Please refer to Appendix for detailed Windows/MSSQL setup installation :ref:`instructions<windows_mssql_install>`
+    The bundled MySQL database driver does not support caching_sha2_password authentication
+    which is the default for MySQL starting from version 8. Either select
+    Legacy Authentication Method when installing MySQL, or use the database driver
+    installed along with MySQL.
+    The database driver gets installed when installing MySQL with Server-only option, however these
+    two folders should be included into system path: :file:`C:\\Program Files\\MySQL\\MySQL Server 8.0\\lib`
+    :file:`C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin`.
 
 
-    **Oracle note**:
+    **Note for Microsoft SQL Server**:
 
-    We recommend to use native database driver (oracle.ddr).
+    Please refer to the Appendix for detailed Windows/MSSQL setup installation instructions :ref:`instructions<windows_mssql_install>`
 
-  6. On Ready to Install window, check whether everything is correct, then press the Install button.
 
-  7. After install, start Netxms client and connect with below listed credentials
+    **Note for Oracle**:
+
+    We recommend to use the native database driver (oracle.ddr).
+
+  6. On the Ready to Install window, check whether everything is correct, then press the Install button.
+
+  7. After installation, start the Netxms client and connect with the following credentials
 
 Server default credentials:
 
@@ -764,26 +764,25 @@ Password: netxms
 Agent
 -----
 
-  1. Download the latest version from http://www.netxms.org/download, if you don't
-     have it. You will need Windows Agent installer (named nxagent-VERSION.exe or
+  1. Download the latest version from http://www.netxms.org/download/. You will need Windows Agent installer (named nxagent-VERSION.exe or
      nxagent-VERSION-x64.exe, for example nxagent-5.0.8-x64.exe).
 
-  2. Run the installer package on target server. Installation wizard will be shown.
+  2. Run the installer package on the target server. The installation wizard will be displayed.
      Follow the prompts until the |product_name| Server window opens:
 
      .. figure:: _images/win_agent_config.png
 
 
-     Enter IP address or host name of your |product_name| server. You can specify multiple
+     Enter the IP address or host name of your |product_name| server. You can specify multiple
      management servers, separating them by commas. Press the Next button to continue.
 
 
-  3. Subagent selection window will open:
+  3. The subagent selection window will open:
 
      .. figure:: _images/win_agent_subagents.png
 
-     In this window, you can select which subagents you wish to load. Each subagent
-     extends agent's functionality, e.g.:
+     In this window you can select which subagents you wish to load. Each subagent
+     extends the agents functionality, e.g.:
 
 .. list-table::
    :header-rows: 1
@@ -792,26 +791,26 @@ Agent
    * - Subagent
      - Description
    * - filemgr.nsm
-     - Provides access to specified folders on monitored host from |product_name| Management Client File Manager.
-       Is also being used for distributing Agent Policy configuration files (see :ref:`agent-policies-label`.)
+     - Provides access to specified folders on the monitored host from the  |product_name| Management Client File Manager.
+       This is also used for distributing Agent Policy configuration files (see :ref:`agent-policies-label`.)
    * - logwatch
      - Allows monitoring log files and Windows Event Log and sending matched events to |product_name| server.
    * - ping.nsm
-     - Adds possibility to send ICMP pings from monitored host. Ping round-trip times can be collected by management server.
+     - Adds the possibility to send ICMP pings from the monitored host. Ping round-trip times can be collected by management server.
    * - netsvc.nsm, portcheck.nsm
-     - Adds possibility to check network services (like FTP or HTTP) from monitored host.
+     - Adds the possibility to check network services (like FTP or HTTP) from the monitored host.
    * - winperf.nsm
      - Provides access to Windows performance counters. This subagent is required if you need to collect CPU utilization from monitored host.
    * - wmi.nsm
      - Provides access to WMI data.
    * - ups.nsm
-     - Adds support for UPS monitoring. UPS can be attached to host via serial cable or USB.
+     - Adds support for UPS monitoring. The UPS can be attached to host via a serial cable or USB.
 
 
-For more information about subagents, please refer to :ref:`subagent_list`.
+For more information on subagents, please refer to :ref:`subagent_list`.
 
 
-  4. Follow the prompts to complete the installation.
+  1. Follow the prompts to complete the installation.
 
 
 Management Client
@@ -819,47 +818,47 @@ Management Client
 
 Desktop Management Client:
 
- 1. Download the latest version from http://www.netxms.org/download. 
-    Since version 3.8 there are three options - 
+ 1. Download the latest version from https://www.netxms.org/download/.
+    Since version 3.8 there are three options -
     archive (e.g. nxmc-5.0.8-win32-x64.zip), archive with bundled JRE (nxmc-5.0.8-win32-x64-bundled-jre.zip)
-    and installer, which also has JRE bundled (e.g. netxms-client-5.0.8-x64.exe). 
-    If using archive without JRE, make sure you have JRE version 11 or 15 installed. 
-    Due to limitation of Eclipse platform used to build the Management Client, only x64 build is currently provided. 
+    and installer, which also has JRE bundled (e.g. netxms-client-5.0.8-x64.exe).
+    If using the archive without JRE, make sure you have JRE version 11 or 15 installed.
+    Due to a limitation of the Eclipse platform used to build the Management Client, only an x64 build is currently provided.
 
- 2. If using archive version, extract zip in preferred directory. If using installer, launch it and follow the instructions. 
+ 2. If using the archive version, extract the zip in the preferred directory. If using the installer, launch it and follow the instructions.
 
- 3. Run nxmc file from extracted catalog (or launch from Windows Start Menu, if you used the installer). 
+ 3. Run the nxmc file from the extracted catalog, or launch from the Windows Start Menu, if you used the installer.
 
 Web Management Client:
 
-Windows have two options: one is to manually install .war file into servlet container and
-the second one is to use netxms-webui-VERSION-x64.exe installer. Installer will
-install Jetty and copy .war file into required folder. Below will be described
-installation via the installer:
+On the Windows platform there are two options: one is to manually install the .war file into a servlet container and
+the second one is to use the netxms-webui-VERSION-x64.exe installer. The installer will
+install Jetty and copy the .war file into required folder. Here the
+installation via the installer is described:
 
-  1. Download the latest version from http://www.netxms.org/download. You will need
+  1. Download the latest version from https://www.netxms.org/download. You will need
      Windows installer netxms-webui-VERSION-x64.exe (e.g.: netxms-webui-5.0.8-x64.exe).
-     Due to limitation of Eclipse platform used to build the Management Client,
-     only x64 build is currently provided.
+     Due to a limitation of the Eclipse platform used to build the Management Client,
+     only an x64 build is currently provided.
 
-  2. Run the installer package on your server machine. Installation wizard will be
-     shown. Follow the prompts. Installer allows to change installation path and port.
+  2. Run the installer package on your server. The Installation wizard will be
+     displayed. Follow the prompts. The installer allows to change the installation path and port.
 
-  3. After installation procedure is finished check that WEB GUI is available at
+  3. After the installation procedure is finished, check that the WEB GUI is available at
      http://SERVER_IP:SERVER_PORT/nxmc/
 
 
-Unattended installation of |product_name| Agent
------------------------------------------------
+Unattended installation of the |product_name| Agent
+---------------------------------------------------
 
-Windows Agent installer (named nxagent-VERSION.exe, for example nxagent-5.0.8-x64.exe),
+The Windows Agent installer, named nxagent-VERSION.exe, for example nxagent-5.0.8-x64.exe,
 has various command line options for unattended installation. Installation will ignore
-any configuration file options (/CONFIGENTRY, /NOSUBAGENT, /SERVER, /SUBAGENT, etc) if config
-file already exists or if /CENTRALCONFIG option is used. However, it's possible to 
-delete and recreate the configuration file with /FORCECREATECONFIG command line option. 
+any configuration file options (/CONFIGENTRY, /NOSUBAGENT, /SERVER, /SUBAGENT, etc) if a config
+file already exists or if the /CENTRALCONFIG option is used. However, it is possible to
+delete and recreate the configuration file using the /FORCECREATECONFIG command line option.
 
 
-The options are following:
+The options are the following:
 
 .. list-table::
    :header-rows: 1
@@ -868,13 +867,13 @@ The options are following:
    * - Option
      - Description
    * - /CENTRALCONFIG
-     - Enable read configuration from server on startup. See :ref:`agent_configuration_files_on_server` 
-       for more information. 
+     - Enable read configuration from server on startup. See :ref:`agent_configuration_files_on_server`
+       for more information.
    * - /CONFIGENTRY=value
-     - It can be used to add any parameter to configuration file during initial install. 
+     - It can be used to add any parameter to the configuration file during initial install.
        You can specify it multiple times to add multiple lines. Section names can be added as well.
    * - /CONFIGINCLUDEDIR=path
-     - Set folder containing additional configuration files 
+     - Set folder containing additional configuration files
        (will be set in configuration file as ``ConfigIncludeDir``).
    * - /DIR=path
      - Set installation directory (default is ``C:\NetXMS``).
@@ -883,26 +882,26 @@ The options are following:
        (will be set in configuration file as ``FileStore``).
    * - /FORCECREATECONFIG
      - Delete existing agent configuration file and recreate it. However, settings stored by installer
-       in Windows registry will be used, if not explicitly specified by command line parameters. See ``/IGNOREPREVIOUSDATA``.        
+       in Windows registry will be used, if not explicitly specified by command line parameters. See ``/IGNOREPREVIOUSDATA``.
    * - /IGNOREPREVIOUSDATA
-     - Ignore any settings from previous install that are not explicitly specified in current run. This is 
-       related to settings that can be changed when installer is run in GUI mode, e.g. list of selected sub-agents. 
-       These settings are stored in Windows registry. 
+     - Ignore any settings from previous install that are not explicitly specified in current run. This is
+       related to settings that can be changed when installer is run in GUI mode, e.g. list of selected sub-agents.
+       These settings are stored in Windows registry.
    * - /LOCALCONFIG
      - Use local configuration file (it is the default).
    * - /LOG
-     - Causes Setup to create a log file in the user's TEMP directory detailing file 
+     - Causes Setup to create a log file in the TEMP directory of the user detailing file
        installation and [Run] actions taken during the installation process.
    * - /LOG=filename
-     - Same as /LOG, except it allows to specify a fixed path/filename to use for the log file. 
-       If a file with the specified name already exists it will be overwritten. 
+     - Same as /LOG, except it allows to specify a fixed path/filename to use for the log file.
+       If a file with the specified name already exists it will be overwritten.
        If the file cannot be created, Setup will abort with an error message.
    * - /LOGFILE=filename
      - Set agent log file (will be set in configuration file as ``LogFile``).
    * - /MERGETASKS=”tasknames”
      - Comma-separated list of tasks for installation. If a task is specified with ! character
-       prior to it's name, it will be deselected. Possible values are ``fspermissions`` - set hardened file system permissions, 
-       ``sessionagent`` - Install session agent, ``useragent`` - Install user support application. 
+       prior to its name, it will be deselected. Possible values are ``fspermissions`` - set hardened file system permissions,
+       ``sessionagent`` - Install session agent, ``useragent`` - Install user support application.
        e.g. ``/MERGETASKS="!fspermissions,useragent"``
    * - /NOSUBAGENT=name
      - Disable subagent name
@@ -911,7 +910,7 @@ The options are following:
    * - /REINSTALLSERVICE
      - Reinstalls Windows service
    * - /SERVER=IP
-     - Set server IP address or host name (will be set in configuration file as ``MasterServers``).
+     - Set server IP address or host name (will be set in the configuration file as ``MasterServers``).
    * - /SILENT
      - Don't show installation wizard, only a progress bar
    * - /SUBAGENT=name
@@ -920,7 +919,7 @@ The options are following:
    * - /SUPPRESSMSGBOXES
      - Don't ask user anything. Only has an effect when combined with ``/SILENT`` and ``/VERYSILENT``.
    * - /TUNNEL
-     - Enable tunnel operation to IP address specified with ``/SERVER=``. 
+     - Enable tunnel operation to IP address specified with ``/SERVER=``.
    * - /VERYSILENT
      - Don't show anything
 
@@ -940,7 +939,7 @@ This command will add 3 lines at the end of generated config file:
 Unattended uninstallation of |product_name| Agent
 -------------------------------------------------
 
-Uninstaller application is named unins???.exe and located in agent folder (``C:\NetXMS`` by default). 
+The uninstaller application is named unins???.exe and is located in the agent folder (``C:\NetXMS`` by default).
 The following options are supported:
 
 .. list-table::
@@ -954,13 +953,13 @@ The following options are supported:
    * - /VERYSILENT
      - Don't show anything
    * - /LOG
-     - Causes to create a log file in the user's TEMP directory.
+     - Causes to create a log file in the TEMP directory of the user.
    * - /LOG=filename
-     - Same as /LOG, except it allows to specify a fixed path/filename to use for the log file. 
+     - Same as /LOG, except it allows to specify a fixed path/filename to use for the log file.
    * - /SUPPRESSMSGBOXES
      - Don't ask user anything. Only has an effect when combined with ``/SILENT`` and ``/VERYSILENT``.
    * - /NORESTART
-     - Instructs the uninstaller not to reboot even if it's necessary.
+     - Instructs the uninstaller not to reboot even if it would be necessary.
 
 Example:
 
@@ -974,16 +973,16 @@ Management Client
 -----------------
 
 To install Android management client download netxms-console-VERSION.apk (example:
-netxms-console-3.4.178.apk) file from http://www.netxms.org/download page. Check that
+netxms-console-3.4.178.apk) file from the http://www.netxms.org page. Check that
 installation of applications from unknown sources is allowed in security settings of
 your phone. Run this installer on required device.
 
-After agent is installed go to settings and in main menu, connection part set all
+After the agent is installed, go to settings and in the main menu, connection part, set all
 required connection credentials: server address, port, user name, password.
 
 .. note::
-  User that is used for connection should have :guilabel:`Login as mobile device`
-  user right.
+  The user configured for the connection should have the :guilabel:`Login as mobile device`
+  user permission.
 
 
 .. _install_from_sources:
@@ -994,23 +993,23 @@ Installing from sources
 Server
 ------
 
-  #. Download source archive (netxms-VERSION.tar.gz) from http://www.netxms.org/download/. *VERSION* is used in names instead of an actual version number.
+  #. Download the source archive (netxms-VERSION.tar.gz) from https://www.netxms.org/download/. *VERSION* is used in names instead of an actual version number.
   #. Unpack the archive:
 
         :command:`tar zxvf netxms-VERSION.tar.gz`
 
-  #. Since version 3.8 reporting server is being built along with the sources. This requires maven to be installed on the system. You need Oracle and MS SQL JDBC drivers in your local maven repository. 
+  #. Since version 3.8, the reporting server is being built along with the sources. This requires maven to be installed on the system. You need Oracle and MS SQL JDBC drivers in your local maven repository.
 
-        Oracle JDBC driver library can be obtained here: https://download.oracle.com/otn-pub/otn_software/jdbc/199/ojdbc8.jar
+        The Oracle JDBC driver library can be obtained here: https://oracle.com/otn-pub/otn_software/jdbc/199/ojdbc8.jar
 
-        Microsoft SQL JDBC driver library can be obtaine here: https://www.microsoft.com/en-us/download/details.aspx?id=54671 
-        You will need sqljdbc_4.2/enu/jre8/sqljdbc42.jar file from this archive. 
+        the Microsoft SQL JDBC driver library can be obtained from here: https://www.microsoft.com/en-us/details.aspx?id=54671
+        You will need sqljdbc_4.2/enu/jre8/sqljdbc42.jar file from this archive.
 
         To install these libraries:
         :command:`mvn install:install-file -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc4 -Dversion=4.2 -Dpackaging=jar -Dfile=sqljdbc42.jar`
         :command:`mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar -Dfile=ojdbc8.jar`
 
-  #. Change directory to netxms-VERSION and run configure script:
+  #. Change directory to netxms-VERSION and run the configure script:
 
         :command:`cd netxms-VERSION`
 
@@ -1073,12 +1072,12 @@ Server
 Agent
 -----
 
-  #. Download source archive (netxms-VERSION.tar.gz) from http://www.netxms.org/download/. *VERSION* is used in names instead of an actual version number.
+  #. Download the source archive (netxms-VERSION.tar.gz) from https://www.netxms.org/download/. *VERSION* is used in names instead of an actual version number.
   #. Unpack the archive:
 
         :command:`tar zxvf netxms-VERSION.tar.gz`
 
-  #. Change directory to netxms-VERSION and run configure script:
+  #. Change directory to netxms-VERSION and run the configure script:
 
         :command:`cd netxms-VERSION`
 
@@ -1095,7 +1094,7 @@ Agent
            * - ``--prefix=DIRECTORY``
              - Installation prefix, all files go to the specified directory
            * - ``--with-agent``
-             - Build monitoring agent. It is strongly recommended to install agent on a server box
+             - Build monitoring agent. It is strongly recommended to install the agent on a server
 
   #. Run build binaries and install them into /usr/local (unless changed with configure flag ``--prefix``)
 
@@ -1107,9 +1106,9 @@ Agent
 
         :command:`cp contrib/nxagentd.conf-dist /usr/local/etc/nxagentd.conf`
 
-        By default, agent load configuration file PREFIX/etc/netxmsd.conf (where PREFIX is installation prefix set by configure), unless different file is specified with command line switch "-c".
+        By default the agent load configuration file is PREFIX/etc/netxmsd.conf (where PREFIX is installation prefix set by configure), unless a different file is specified with the command line switch "-c".
 
-  #. Adjust agent configuration file if required.
+  #. Adjust the agent configuration file if required.
 
      Detailed information about each configuration parameter can be found in section :ref:`agent_configuration_file`.
 
@@ -1117,7 +1116,7 @@ Agent
 
      .. code-block:: ini
 
-       MasterServers = 172.16.1.1 # server's IP - agent will drop connections unless address is whitelisted here
+       MasterServers = 172.16.1.1 # server IP - agent will drop connections unless address is provided here
        LogFile = /var/log/nxagentd
 
   #. Run agent:
@@ -1140,10 +1139,10 @@ Adding additional compiler or linker flags
 WebUI additional configuration
 ==============================
 
-Installing web interface on remote system
------------------------------------------
+Installing the web interface on a remote system
+---------------====----------------------------
 
-There are few settings available for configuration in WebUI.
+There are a few settings available for configuration of the WebUI.
 
   * autoLoginOnReload - autologin on page reload in browser (default: true)
   * enableCompression - enable protocol compression between Web UI and server process (default: true)
@@ -1152,26 +1151,26 @@ There are few settings available for configuration in WebUI.
   * loginFormImageMargins - margins in px around custom login image (default: 10)
   * server - server DNS name or IP (default: 127.0.0.1)
 
-There are multiple ways to set connection configuration from WebUI to NetXMS server.
-Configuration is check in next order:
+There are multiple ways to set the connection configuration from WebUI to NetXMS server.
+Configuration is checked in this order:
 
   1. Using JNDI. Environment should be set like nxmc/NAME for example: nxmc/server
 
-  2. nxmc.properties properties file in class path of your application server. Should be created in ini format: NAME=VALUE. For example:
+  2. nxmc.properties properties file in the class path of your application server. This file should be created in ini format: NAME=VALUE. For example:
 
     .. code-block:: ini
 
       server = 127.0.0.1
 
-    Default locations: 
+    Default locations:
 
     **Jetty**
 
 
     **Tomcat**
 
-    Debian and Ubuntu default is /usr/share/tomcat9/lib. Other versions and Linux distribution
-    may have different location.
+    The default location of this file on Debian and Ubuntu is in /usr/share/tomcat9/lib. Other Linux distributions
+    may use a different location.
 
     **Oracle Weblogic**
 
@@ -1181,19 +1180,19 @@ Configuration is check in next order:
 
   4. Environment variable NXMC_NAME=VALUE. For example NXMC_server=127.0.0.1
 
-  5. If non of above configuration exists, Web UI tries to resolve "NETXMS_SERVER" DNS name for server connection.
+  5. If none of the above configurations exist, the Web UI tries to resolve the "NETXMS_SERVER" DNS name as server connection.
 
-  6. If none of above configuration exists, Web UI uses "127.0.0.1" as a server address. 
+  6. If none of above configurations exist, the Web UI uses "127.0.0.1" as a server address.
 
 
 Custom logo on login screen
 ---------------------------
 
-It is possible to change default logo on login screen to custom image by setting
-loginFormImage property in nxmc.properties file. Image file must be located within
-application server's class path and file name must be given relative to class path
-root with leading slash. For example, if custom image is in file logo.jpg located
-in the same directory as nxmc.properties, correct entry will be:
+It is possible to change the default logo on the login screen to a custom image by setting
+the loginFormImage property in nxmc.properties file. The image file must be located within
+the application server class path and the file name must be given relative to the class path
+root with a leading slash. For example, if the custom image is in a file logo.jpg located
+in the same directory as nxmc.properties, the correct entry will be:
 
 .. code-block:: ini
 
@@ -1204,17 +1203,17 @@ in the same directory as nxmc.properties, correct entry will be:
 .. _linux_jetty_install:
 
 
-How to configure NetXMS web client with jetty in Linux
-------------------------------------------------------
+How to configure the NetXMS web client with jetty in Linux
+----------------------------------------------------------
 
 
-1. Download lateest Jetty (12.0.13 at the moment of writing).
+1. Download the latest version of Jetty (12.0.13 at the moment of writing).
 
 .. code-block:: sh
 
       curl -O https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/12.0.13/jetty-home-12.0.13.tar.gz
 
-2. Create directories and extract Jetty, then create initial configuration by running start.jar.
+2. Create directories and extract Jetty, then create the initial configuration by running start.jar.
 
 .. code-block:: sh
 
@@ -1226,13 +1225,13 @@ How to configure NetXMS web client with jetty in Linux
 
       java -jar /opt/jetty-home-12/start.jar --add-modules=ee8-deploy,gzip,http,http2,https,logging-logback,plus,server,ssl,work
 
-3. Download war file (version 5.1.2 at the moment of writing) and place it in webapps directory.
+3. Download the war file (version 5.1.2 at the moment of writing) and place it in the webapps directory.
 
 .. code-block:: sh
 
-      curl -o webapps/ROOT.war https://netxms.com/download/releases/5.1/nxmc-5.1.2.war
+      curl -o webapps/ROOT.war https://netxms.com/releases/5.1/nxmc-5.1.2.war
 
-4. Generate ssl key (for testing purposes) and adjust ssl.ini file. Reverse proxy with proper certificate should be used in production. Adjust DN, keyStorePassword and keyStorePath as per requirements.
+4. Generate ssl key (for testing purposes) and adjust the ssl.ini file. A reverse proxy with proper certificate should be used in production. Adjust DN, keyStorePassword and keyStorePath as per requirements.
 
 .. code-block:: sh
 
@@ -1240,13 +1239,13 @@ How to configure NetXMS web client with jetty in Linux
 
       sed 's,# jetty.sslContext.keyStorePassword=,jetty.sslContext.keyStorePassword=password,' -i'' start.d/ssl.ini
 
-5. Run Jetty to verify configuration. Once verified, stop with Ctrl+C.
+5. Run Jetty to verify the configuration. Once verified, stop with Ctrl+C.
 
 .. code-block:: sh
 
       java -Dnxmc.logfile=/opt/netxms-webui/logs/nxmc.log -jar /opt/jetty-home-12/start.jar
 
-6. Create systemd service file for Jetty (sample is bellow).
+6. Create a systemd service file for Jetty (sample is bellow).
 
 .. code-block:: sh
 
@@ -1286,9 +1285,9 @@ How to configure NetXMS web client with jetty in Linux
 Default login credentials
 =========================
 
-Default login is "admin" with password "netxms". On first login, user will be requested to change it immediately.
+The default login is "admin" with password "netxms". On first login, the user will be prompted to change their password immediately.
 
-If required, password can be reset back to default using :ref:`nxdbmgr utility <password-reset>`.
+If required, the password can be reset back to default using :ref:`nxdbmgr utility <password-reset>`.
 
 .. _db_creation:
 
@@ -1296,7 +1295,7 @@ If required, password can be reset back to default using :ref:`nxdbmgr utility <
 Database creation examples
 ==========================
 
-This chapter provides some database creation SQL examples. Please consult relevant database documentation for initial install.
+This chapter provides some database creation SQL examples. Please consult the relevant database documentation for the initial install.
 
 PostgreSQL
 ----------
@@ -1306,7 +1305,7 @@ PostgreSQL
   createuser -P netxms
   createdb -O netxms netxms
 
-If TimescaleDB extension is about to be used, it should be added to the newly created database:
+If the TimescaleDB extension is to be used, it should be added to the newly created database:
 
 .. code-block:: sh
 
@@ -1390,7 +1389,7 @@ Configuration file example:
 
 .. _windows_mssql_install:
 
-How-to install NetXMS server on Windows Server with local Microsoft SQL Server Express
+How to install NetXMS server on Windows Server with local Microsoft SQL Server Express
 --------------------------------------------------------------------------------------
 
 1. Login as adiministrator
@@ -1401,7 +1400,7 @@ If enabling mixed authentication mode:
 
 3. Enable mixed authentication mode as per https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/change-server-authentication-mode Don't forget to restart SQL Server after changing authentication mode.
 4. Run NetXMS Server installer. When prompted for database information, use the following answers:
-  
+
     - Server type: MS SQL
     - Server name: localhost\SQLEXPRESS
     - Database name: (any valid name, we use "netxms")
@@ -1411,22 +1410,22 @@ If enabling mixed authentication mode:
     - DBA login name: *
     - DBA password: (left empty)
 
-This assumes that currently logged in user has DBA access to SQL Server instance (normally should be the case if SQL Server was just installed by same user).
-Alternative approach is to enable "sa" user in SQL server and use sa login and password as DBA login name and password.
+This assumes the currently logged in user has DBA access to the SQL Server instance. This should be the case if SQL Server was just installed by the same user.
+An alternative approach is to enable the "sa" user in SQL server and use sa login and password as DBA login name and password.
 
-Installer should create database, database user, assign user as database owner, and NetXMS Core service should start successfully.
+The installer should create database, database user, assignthe  user as database owner, and the NetXMS Core service should start successfully.
 
 
 If mixed authentication is not an option:
 
 
-Currently installer does not support automatic database creation for Windows authentication mode, so there will be more manual steps.
+Currently the installer does not support automatic database creation for Windows authentication mode, so there will be more manual steps.
 
 3. Login to SQL Server Management Studio
-4. Create new database with default owner (owner should be set to currently logged in administrator user)
-5. Run NetXMS Server installer. On "Select additional tasks" page uncheck "Start NetXMS Core service".
+4. Create a new database with the default owner (owner should be set to currently logged in administrator user)
+5. Run the NetXMS Server installer. On "Select additional tasks" page uncheck "Start NetXMS Core service".
 6. When prompted for database information, use the following answers:
- 
+
     - Server type: MS SQL
     - Server name: localhost\SQLEXPRESS
     - Database name: (database name from step 4)
@@ -1434,29 +1433,29 @@ Currently installer does not support automatic database creation for Windows aut
     - Password: (left empty)
     - Create database and database user: uncheck
 
-7. After installation is complete, go to "Services", find "NetXMS Core" service, and set it to login as administrator user (same user used for installation)
+7. After installation is complete, go to "Services", find the "NetXMS Core" service, and set it to login as administrator user (same user used for installation)
 8. Start NetXMS Core service
 
 
-How-to install NetXMS server on Windows Server with remote Microsoft SQL Server Express
+How to install NetXMS server on Windows Server with remote Microsoft SQL Server Express
 ---------------------------------------------------------------------------------------
 
 Assumptions:
- * Both SQL Express Server machine and NetXMS Server machine are in the same domain
+ * Both the SQL Express Server and the NetXMS Server are in the same domain
  * TCP/IP is enabled in SQL Server network properties
- * TCP/IP is configured to use fixed port
- * Firewall rule is added to allow incoming connections on SQL Server TCP port (may need to add manually)
+ * TCP/IP is configured to use a fixed port
+ * A firewall rule is added to allow incoming connections on the SQL Server TCP port (it may be needed to add this manually)
  * Mixed authentication mode is already enabled on SQL Server (only for scenario 1 below)
 
-If using SQL account for NetXMS services is acceptable
+If using a SQL account for NetXMS services is acceptable
 
 
-1. Login to NetXMS Server machine with domain account that has local administrator rights as well as sysadmin rights on SQL Server
+1. Log in to the NetXMS Server machine with a domain account that has local administrator rights as well as sysadmin rights on SQL Server
 2. Install ODBC Driver for SQL Server
-3. Run NetXMS Server installer. When prompted for database information, use the following answers:
-  
+3. Run the NetXMS Server installer. When prompted for database information, use the following answers:
+
     - Server type: MS SQL
-    - Server name: SQL server domain computer name or fully qualified DNS name (if TCP port is not 1433, then use form server_name,port)
+    - Server name: SQL server domain computer name or fully qualified DNS name (if the TCP port is not 1433, then use the form server_name,port)
     - Database name: (any valid name, we use "netxms")
     - Login name: (any valid account name, we use "netxms")
     - Password: (any password complex enough to match OS password policy)
@@ -1464,28 +1463,26 @@ If using SQL account for NetXMS services is acceptable
     - DBA login name: *
     - DBA password: (left empty)
 
-Installer should create database, database user, assign user as database owner, and NetXMS Core service should start successfully.
+The installer should create database, database user, assign user as database owner, and the NetXMS Core service should start successfully.
 
-In this scenario server will use login and password on SQL server, so service can continue to run under Local System account, or you can change it to any domain account.
+In this scenario the server will use login and password on SQL server, so the service can continue to run under Local System account, or you can change it to any domain account.
 
-If server has to use domain account for accessing database
+If the server has to use domain account for accessing the database
 
 
-1. Install ODBC Driver for SQL Server  
-2. If not already done, create new login on SQL Server for domain user to be used by NetXMS Core service
-3. Create new database, assign login from step 2 as owner
-4. Login to NetXMS Server machine with same domain user
-5. Run NetXMS Server installer. On "Select additional tasks" page uncheck "Start NetXMS Core service".
+1. Install ODBC Driver for SQL Server
+2. If not already done, create a new login on SQL Server for the domain user to be used by NetXMS Core service
+3. Create the new database, assign login from step 2 as owner
+4. Log in to the NetXMS Server machine with the same domain user
+5. Run the NetXMS Server installer. On "Select additional tasks" page, uncheck "Start NetXMS Core service".
 6. When prompted for database information, use the following answers:
-  
+
     - Server type: MS SQL
-    - Server name: SQL server domain computer name or fully qualified DNS name (if TCP port is not 1433, then use form server_name,port)
+    - Server name: SQL server domain computer name or fully qualified DNS name (if the TCP port is not 1433, then use the form server_name,port)
     - Database name: (database name from step 4)
     - Login name: *
     - Password: (left empty)
     - Create database and database user: uncheck
 
-7. After installation is complete, go to "Services", find "NetXMS Core" service, and set it to login as administrator user (same user used for installation)
-8. Start NetXMS Core service
-
-
+7. After installation is complete, go to "Services", find the "NetXMS Core" service, and set it to login as administrator user (same user used for installation)
+8. Start the NetXMS Core service

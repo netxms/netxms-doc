@@ -2,7 +2,7 @@
 JVM monitoring
 ==============
 
-|product_name| has Java plugin that allow to monitor JVM. This subagent is build using
+|product_name| has a Java plugin that allows to monitor the JVM. This subagent is build using
 JMX functionality. 
 
 Metrics
@@ -113,7 +113,7 @@ Lists
 Configuration
 =============
 
-It is required to define java subagent and it's configurations before JMX plugin configuration. More information about Java subagent and it's configuration can be found in :ref:`java-subagent` section. JMS has only one configuration parameter "Server". It is used to define JMX server connection string. 
+It is required to define the java subagent and its configuration before JMX plugin configuration. More information about the Java subagent and its configuration can be found in the :ref:`java-subagent` section. JMS has only one configuration parameter "Server". It is used to define the JMX server connection string. 
 
 JMS server connection string declaration options:
 
@@ -125,7 +125,7 @@ JMS server connection string declaration options:
 Configuration example
 ---------------------
 
-In example are defined 2 JMS connections: *name* and *serverName2*. 
+In this example there are 2 JMS connections defined: *name* and *serverName2*. 
 
 .. code-block:: ini
 
@@ -139,4 +139,5 @@ In example are defined 2 JMS connections: *name* and *serverName2*.
    [JMX]
    Server=name:login/password@localhost
    Server=serverName2:admin/pwd123@server1
+
    

@@ -6,14 +6,14 @@ Modbus
 
 .. versionadded:: 4.4
 
-|product_name| can collect data via Modbus-TCP protocol. Data collection is
-performed by |product_name| server or by |product_name| agents operating in
-proxy mode. 
+|product_name| can collect data via the Modbus-TCP protocol. Data collection is
+performed by the |product_name| server or by |product_name| agents operating in
+proxy mode.
 
-To enable agent operation as Modbus proxy, add ``EnableModbusProxy=yes`` to
-agent configuration file and restart the agent.
+To enable agent operation as a Modbus proxy, add ``EnableModbusProxy=yes`` to
+the agent configuration file and restart the agent.
 
-Metric for Modbus data collection items has special format denoting type of
+The metric for Modbus data collection items has a special format denoting the type of
 Modbus unit id, register type, register address and the way how obtained data
 should be interpreted:
 

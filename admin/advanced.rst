@@ -678,7 +678,7 @@ section.
   * - Bucket
     - Bucket name. 
   * - EnableUnsignedType
-    - Enable (true) or disable (false) unsigned data type. Default: `false`.
+    - Enable (true) or disable (false) unsigned data type. If disabled, values for DCIs with unsigned data types will be sent as signed type. Default: `false`.
   * - Database
     - Database name. Default value is `netxms`.
   * - Hostname

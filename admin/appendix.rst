@@ -5693,6 +5693,12 @@ Parameters:
 Page faults for process
 
 
+Process.RSS(*)
+~~~~~~~~~~~~~~~~
+
+Alias to Process.WkSet(*)
+
+
 Process.Syscalls(*)
 ~~~~~~~~~~~~~~~~~~~
 

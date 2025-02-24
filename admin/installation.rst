@@ -1139,9 +1139,6 @@ Adding additional compiler or linker flags
 WebUI additional configuration
 ==============================
 
-Installing the web interface on a remote system
----------------====----------------------------
-
 There are a few settings available for configuration of the WebUI.
 
   * autoLoginOnReload - autologin on page reload in browser (default: true)

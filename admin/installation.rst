@@ -7,10 +7,17 @@ Installation
 Major changes between releases
 ==============================
 
+5.1.4
+-----
+
+IP v4 addresses are now supported only in a.b.c.d format with decimal numbers
+
+
 5.1
 ---
 
-NXSL changes: node attribute 'ipAddr' is deprecated. The newly added 'ipAddress' attribute should be used instead.
+NXSL changes: node attribute 'ipAddr' is deprecated. The newly added 'ipAddress'
+attribute should be used instead.
 
 
 5.0

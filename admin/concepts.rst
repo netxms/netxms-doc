@@ -10,7 +10,7 @@ Architecture overview
 The system has three-tier architecture: the information is collected by
 monitoring agents (either our own high-performance agents or SNMP agents) and
 delivered to monitoring server for processing and storage. Network administrator
-can access collected data using cross-platform Destkop Management Client, Web
+can access collected data using cross-platform Desktop Management Client, Web
 Management Client or Management application for Android. Desktop and Web clients
 have almost the same functionality and the same user interface.
 

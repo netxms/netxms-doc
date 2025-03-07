@@ -50,7 +50,7 @@ Per-log configuration is specified in sections named according to log name, e.g.
 
 Filtering is done in two stages. First is pre-filter, which allows to
 independently filter by Event ID, Source and Severity level. Second stage -
-Filter ( .. versionadded:: 5.2 ) allows to define chain of rules to filter by
+Filter (added in version 5.2) allows to define chain of rules to filter by
 combinations of Event ID, Source and Severity level.
 
 Pre-filter
@@ -80,9 +80,6 @@ To exclude all Event IDs, use ``ExcludeEvent=0-65535``, then you can use
 
 Source
 ~~~~~~
-   * - 
-     - 
-     - 
 
 Filtering by Source is done using options ``IncludeSource`` and
 ``ExcludeSource``. By default, if no ``IncludeSource`` are ``ExcludeSource`` are
@@ -183,7 +180,7 @@ ID, Source and Severity level. Rules are specified using ``Filter`` option:
        single character.
    * - Id
      - No
-     - Event ID. Ranges are supported. ``*`` means any ID. 
+     - Event ID. Ranges are supported (e.g. ``4800-4803``). ``*`` means any ID. 
    * - Severity
      - No
      - Severity level. Bitmask or comma-separated severity level names are

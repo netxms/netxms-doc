@@ -43,12 +43,23 @@ Logs that should be monitored (Application, Security, etc) are specified in
    EventLog=System
 
 
-With above configuration all records in the specified logs will be synchronized. 
-It is possible to configure per-log settings to filter only part of records. 
+With above configuration all records in the specified logs will be synchronized.
+It is possible to configure per-log settings to filter only part of records.
 Per-log configuration is specified in sections named according to log name, e.g.
 ``WinEventSync/System``. 
 
-Filtering by Event IDs is done using parameters ``IncludeEvent`` and
+Filtering is done in two stages. First is pre-filter, which allows to
+independently filter by Event ID, Source and Severity level. Second stage -
+Filter ( .. versionadded:: 5.2 ) allows to define chain of rules to filter by
+combinations of Event ID, Source and Severity level.
+
+Pre-filter
+----------
+
+Event ID
+~~~~~~~~
+
+Filtering by Event IDs is done using options ``IncludeEvent`` and
 ``ExcludeEvent``. You can configure a range like 100-200. Comma separated lists
 are not supported, you can however add multiple Include/ExcludeEvent lines.
 
@@ -67,11 +78,16 @@ To exclude all Event IDs, use ``ExcludeEvent=0-65535``, then you can use
    IncludeEvent=4800-4803
    ExcludeEvent=0-65535
 
+Source
+~~~~~~
+   * - 
+     - 
+     - 
 
-Filtering by Source is done using parameters ``IncludeSource`` and
+Filtering by Source is done using options ``IncludeSource`` and
 ``ExcludeSource``. By default, if no ``IncludeSource`` are ``ExcludeSource`` are
 given, all sources in that log will be synchronized. You can use
-``ExcludeSource=*`` to exclude every source and speficy ``IncludeSource`` to
+``ExcludeSource=*`` to exclude every source and specify ``IncludeSource`` to
 override the exclude for specific sources. 
 
 .. code-block:: ini
@@ -80,8 +96,12 @@ override the exclude for specific sources.
    IncludeSource=Microsoft-Windows-WindowsUpdateClient
    ExcludeSource=*
 
+
+Severity level
+~~~~~~~~~~~~~~
+
 Filtering by severity level (also called :guilabel:`event type` in older Windows
-versions) is done using parameter ``SeverityFilter``. Each severity level has
+versions) is done using option ``SeverityFilter``. Each severity level has
 it's own numeric value, and to filter by multiple severity levels you should
 specify sum of appropriate values (bitmask). Or alternatively you can specify
 severity level names separated by commas. Below are level names and their
@@ -100,7 +120,7 @@ values:
    * - Warning
      - 0x002
      - 2
-   * - Information
+   * - Information (Info)
      - 0x004
      - 4
    * - AuditSuccess
@@ -131,6 +151,43 @@ Below examples will have same result of filtering only Warning and Error records
 
    [WinEventSync/System]
    SeverityFilter = Warning,Error
+
+
+Filter
+------
+
+  .. versionadded:: 5.2
+
+This stage allows to specify chain of rules to filter by combinations of Event
+ID, Source and Severity level. Rules are specified using ``Filter`` option:
+
+.. code-block:: ini
+
+   Filter = Action:Source:Id:Severity
+
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 10 70
+
+   * - Name
+     - Required
+     - Description
+   * - Action
+     - Yes
+     - Either ``accept`` or ``reject``
+   * - Source
+     - No
+     - Name of event source. Two wildcard characters are supported: ``*`` -
+       represents zero, one or multiple characters. ``?`` - represents any
+       single character.
+   * - Id
+     - No
+     - Event ID. Ranges are supported. ``*`` means any ID. 
+   * - Severity
+     - No
+     - Severity level. Bitmask or comma-separated severity level names are
+       supported in same way as in pre-filter. ``*`` means any severity level. 
 
 
 Agent log mesages related to windows event log synchronization are written with

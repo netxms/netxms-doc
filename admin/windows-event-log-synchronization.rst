@@ -49,7 +49,7 @@ Per-log configuration is specified in sections named according to log name, e.g.
 ``WinEventSync/System``. 
 
 Filtering is done in two stages. First is pre-filter, which allows to
-independently filter by Event ID, Source and Severity level. Second stage -
+independently filter events by Event ID, Source and Severity level. Second stage - 
 Filter (added in version 5.2) allows to define chain of rules to filter by
 combinations of Event ID, Source and Severity level.
 
@@ -117,7 +117,7 @@ values:
    * - Warning
      - 0x002
      - 2
-   * - Information (Info)
+   * - Information / Info
      - 0x004
      - 4
    * - AuditSuccess
@@ -156,7 +156,7 @@ Filter
   .. versionadded:: 5.2
 
 This stage allows to specify chain of rules to filter by combinations of Event
-ID, Source and Severity level. Rules are specified using ``Filter`` option:
+ID, Source and Severity level. Rules are specified using ``Filter`` option.
 
 .. code-block:: ini
 
@@ -186,6 +186,11 @@ ID, Source and Severity level. Rules are specified using ``Filter`` option:
      - Severity level. Bitmask or comma-separated severity level names are
        supported in same way as in pre-filter. ``*`` means any severity level. 
 
+
+If event matches specific rule, then it is accepted or rejected, depending on
+action set for this rule. Unmatched events proceed to subsequent rules. If event
+is not matched by any rule, it is accepted - it is recommended to have
+``Filter=reject`` as the last rule to avoid that. 
 
 Agent log mesages related to windows event log synchronization are written with
 tag ``winsyncevent``. For debugging you can add ``DebugTags=winsyncevent:6`` to

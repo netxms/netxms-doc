@@ -6872,6 +6872,18 @@ Parameters:
 Average number of write operations per second on specific device for last minute
 
 
+System.IsRestartPending
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: Integer
+
+Supported Platforms: Windows
+
+Indicator of pending system restart. Returns 1 when there are pending file 
+renaming or deletion operations that cannot be immediately completed by the 
+system because the files are currently in use. 
+
+
 System.IsVirtual
 ~~~~~~~~~~~~~~~~
 
@@ -6880,6 +6892,7 @@ Data type: Integer
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
 Virtual system indicator. Returns 1 if system is virtual, 0 if not.
+
 
 System.KStat(*)
 ~~~~~~~~~~~~~~~

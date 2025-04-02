@@ -58,10 +58,10 @@ The following types of package files are supported by package management:
        by agent. ``${file}`` macro will be replaced by actual file name.
    * - Windows Installer Package
      - .msi
-     - `Command` contains additional parameters passed to msiexec.exe
+     - `Command` contains additional parameters passed to Windows installer API
    * - Windows Installer Patch
      - .msp
-     - `Command` contains additional parameters passed to msiexec.exe
+     - `Command` contains additional parameters passed to Windows installer API
    * - Windows Update Package
      - .msu
      - `Command` contains additional parameters passed to wusa.exe

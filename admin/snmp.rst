@@ -14,6 +14,7 @@ To address this, |product_name| provides a concept of SNMP drivers. SNMP driver 
 If SNMP driver was not automatically detected, it's possible to set it manually by specifying driver name in custom attribute ``snmp.driver`` on a node. 
 
 Possible SNMP driver names are: 
+  - ARUBA-SW
   - AT
   - BAYSTACK
   - CAMBIUM-CNPILOT
@@ -27,12 +28,21 @@ Possible SNMP driver names are:
   - CISCO-WLC
   - DELL-PWC
   - DLINK
+  - EDGECORE-ESW
+  - ELTEX
   - ERS8000
+  - ETHERWAN
   - EXTREME
+  - FORTIGATE
   - H3C
+  - HIRSCHMANN-CLASSIC
+  - HIRSCHMANN-HIOS
+  - HPE-ILO
   - HPSW
+  - HUAWEI-SW
   - IGNITENET
   - JUNIPER
+  - MDS-ORBIT
   - MIKROTIK
   - MOXA-EDR
   - NET-SNMP
@@ -43,12 +53,16 @@ Possible SNMP driver names are:
   - PING3
   - PROCURVE
   - QTECH-OLT
+  - QTECH-SW
   - RITTAL
+  - RUGGEDCOM
   - SAF-INTEGRA-B
   - SYMBOL-WS
   - TB
-  - UBNT-EDGESW
+  - TELTONIKA
+  - TPLINK
   - UBNT-AIRMAX
+  - UBNT-EDGESW
   - WESTERSTRAND
 
 

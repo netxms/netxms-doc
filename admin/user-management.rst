@@ -222,7 +222,7 @@ Rules are checked in the following order, until a matching rule is found:
 
 #. If no matching rules found, UI element is disabled. 
 
-Default configuration had ``*`` inclusion rule for user ``Everyone`` and
+Default configuration has ``*`` inclusion rule for user ``Everyone`` and
 ``Admins`` groups, thus enabling all UI elements. Based on that exclusion rules
 can be added, or it's possible to remove ``*`` rule and configure specific set
 of inclusion and, if needed, exclusion rules. 

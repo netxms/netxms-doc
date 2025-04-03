@@ -193,6 +193,41 @@ will have access to view all generated alarms. Should it be required to configur
 for specific users or groups, please refer to :ref:`alarm-category-config`.
 
 
+UI Access Rules
+---------------
+
+UI access rules allow to hide specific UI elements from user. This does not
+securely blocks access - hiding is only implemented in |product_name| Management
+Client, so e.g. nxshell is not affected by UI access rules. 
+
+UI access rules are stored in textual format, one UI element per line. UI
+elements have ``category:name`` format, ``*`` GLOB wildcard can be used to match
+multiple elements. E.g. ``perspective:objects.maps`` refers to Maps perspective,
+``perspective:*`` refers to all perspectives, ``view:objects.fdb`` is FDB view
+(tab) on an object and ``*`` means all UI elements. 
+
+Adding UI element means that it should be included. Adding ``!`` prefix means
+exclusion. ``^`` prefix means priority inclusion. 
+
+Rules are checked in the following order, until a matching rule is found:
+
+#. Priority inclusion rules (rules with ``^`` prefix). If a rule is matched, UI
+   element is enabled. 
+
+#. Exclusion rules (rules with ``!`` prefix). If rule is matched, UI element is
+   disabled. 
+
+#. Inclusion rules (without any prefix). If a rule is matched, UI element is
+   enabled. 
+
+#. If no matching rules found, UI element is disabled. 
+
+Default configuration had ``*`` inclusion rule for user ``Everyone`` and
+``Admins`` groups, thus enabling all UI elements. Based on that exclusion rules
+can be added, or it's possible to remove ``*`` rule and configure specific set
+of inclusion and, if needed, exclusion rules. 
+
+
 User Authentication
 ===================
 

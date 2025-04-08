@@ -18,16 +18,23 @@ gather information from the nodes according to :term:`DCI` configuration. You
 can control how many data collectors will run simultaneously, by changing server
 configuration parameter ``ThreadPool.DataCollector.MaxSize``.
 
-Node capabilities provide information about available sources for data collection in the :guilabel:`Overview`-> :guilabel:`Capabilities` section.  The last values of DCIs for the node can be found on the :guilabel:`Data Collection` tab. Additionally, specific DCIs can be displayed in the :guilabel:`Overview`` -> :guilabel:`Last Values section`
-or as a graph on the :guilabel:`Performance` tab. More details about DCI display configuration options can be found in the :ref:`Other options <dci-other-options-label>` and :ref:`Performance View <dci-performance-view>` chapters.
+Node capabilities provide information about available sources for data
+collection in the :guilabel:`Overview`-> :guilabel:`Capabilities` section.  The
+last values of DCIs for the node can be found on the :guilabel:`Data Collection`
+tab. Additionally, specific DCIs can be displayed in the :guilabel:`Overview``
+-> :guilabel:`Last Values section` or as a graph on the :guilabel:`Performance`
+tab. More details about DCI display configuration options can be found in the
+:ref:`Other options <dci-other-options-label>` and :ref:`Performance View
+<dci-performance-view>` chapters.
 
-All configured DCIs are checked for polling requirement every second. If DCI needs to be polled, appropriate polling request is placed into internal
-data polling queue. First available data collector will pick up the request and
+All configured DCIs are checked for polling requirement every second. If DCI
+needs to be polled, appropriate polling request is placed into internal data
+polling queue. First available data collector will pick up the request and
 gather information from the node according to DCI configuration. If a new value
-was received successfully, it's being stored in the database, and thresholds
-are checked. After threshold checking, data collector is ready for processing
-new request. If DCI is unsuported it will be polled only every tenth poll, this is not configurable.
-Processing of a newly received metric value is outlined on the
+was received successfully, it's being stored in the database, and thresholds are
+checked. After threshold checking, data collector is ready for processing new
+request. If DCI is unsuported it will be polled only every tenth poll, this is
+not configurable. Processing of a newly received metric value is outlined on the
 figure below.
 
 .. figure:: _images/dci_param_proc.png
@@ -41,13 +48,13 @@ a data source.
 By default, DCI data is not collected for the duration while connection between
 server and agent is broken as poll request would not get to agent. There is
 special configuration that allows data collection and storage on agent till
-connection with server is restored and collected data is pushed to the server thereafter.
-This option is available for metrics, table metrics and proxy SNMP metrics as well as
-implemented for proxy SNMP table metrics and DCIs with custom schedule. In case
-of this setup, agent stores DCI configuration locally and does all metric
-collection and dispatch on its own. DCI configuration is synchronized on
-connect, DCI configuration change or SNMP proxy server change. Information about
-configuration options can be found here: :ref:`offline-data-collection`.
+connection with server is restored and collected data is pushed to the server
+thereafter. This option is available for metrics, table metrics and proxy SNMP
+metrics as well as implemented for proxy SNMP table metrics and DCIs with custom
+schedule. In case of this setup, agent stores DCI configuration locally and does
+all metric collection and dispatch on its own. DCI configuration is synchronized
+on connect, DCI configuration change or SNMP proxy server change. Information
+about configuration options can be found here: :ref:`offline-data-collection`.
 
 .. _dci-configuration:
 
@@ -55,16 +62,17 @@ DCI configuration
 =================
 
 Data collection for a node can be configured using management client. To open
-data collection tab view, click on node object in
-:guilabel:`Infrastructure` or  :guilabel:`Network` perspective, and click
-:guilabel:`Data Collection` tab. You will see the list of configured
-data collection items. From here, since DCI configuration and Last values are combined, 
-one can see collected data and configure new or change existing metrics for monitoring. Right click on an item 
+data collection tab view, click on node object in :guilabel:`Infrastructure` or
+:guilabel:`Network` perspective, and click :guilabel:`Data Collection` tab. You
+will see the list of configured data collection items. From here, since DCI
+configuration and Last values are combined, one can see collected data and
+configure new or change existing metrics for monitoring. Right click on an item
 and all possible configuration options will be available.
 
 Each DCI have multiple attributes which affects the way data is collected.
-Detailed information about each attribute is given below and can be accessed by selecting :guilabel:`Edit...`, 
-:guilabel:`New parameter...` or :guilabel:`New table...`.
+Detailed information about each attribute is given below and can be accessed by
+selecting :guilabel:`Edit...`, :guilabel:`New parameter...` or 
+:guilabel:`New table...`.
 
 General
 -------
@@ -139,25 +147,30 @@ via :ref:`nxapush-label` or :ref:`nxpush-label` command line tool) instead of
 being polled by the server based on the schedule. Values can also be pushed from
 a NXSL script launched on the server. 
 
-Possible table metric origins are Internal, |product_name| agent, SNMP, Script. Please refer to description in above table.
+Possible table metric origins are Internal, |product_name| agent, SNMP, Script.
+Please refer to description in above table.
 
 
 Data Type
 ~~~~~~~~~
 
 Data type for column. Can be one of the following: :guilabel:`Integer`,
-:guilabel:`Unsigned Integer`, :guilabel:`Integer 64-bit`, :guilabel:`Unsigned Integer 64-bit`, :guilabel:`Counter 32-bit`, :guilabel:`Counter 64-bit`, :guilabel:`Float` (floating point number), or
-:guilabel:`String`. Selected data type affects collected data processing - for
-example, you cannot use operations like ``less than`` or ``greater than`` on
-strings. If you select metric from the list using the :guilabel:`Select` button,
-correct data type will be set automatically.
+:guilabel:`Unsigned Integer`, :guilabel:`Integer 64-bit`, :guilabel:`Unsigned
+Integer 64-bit`, :guilabel:`Counter 32-bit`, :guilabel:`Counter 64-bit`,
+:guilabel:`Float` (floating point number), or :guilabel:`String`. Selected data
+type affects collected data processing - for example, you cannot use operations
+like ``less than`` or ``greater than`` on strings. If you select metric from the
+list using the :guilabel:`Select` button, correct data type will be set
+automatically.
 
 
 Units
 ~~~~~
 
-For user convenience collected DCI values can have the following predefined units assigned, but it is possible to enter any unit one requires.
-Most of the units are just displayed after the value, but some of them are special and affect how collected data is displayed:
+For user convenience collected DCI values can have the following predefined
+units assigned, but it is possible to enter any unit one requires. Most of the
+units are just displayed after the value, but some of them are special and
+affect how collected data is displayed:
 
 
 .. list-table::
@@ -187,7 +200,8 @@ Most of the units are just displayed after the value, but some of them are speci
    * - b/s
      - Bits per second. For more details please check :wikipedia:`Wikipedia <Data-rate_units>`
    * - dBm
-     - Unit of power level expressed using a logarithmic decibel. For more details please check :wikipedia:`Wikipedia <DBm>`
+     - Unit of power level expressed using a logarithmic decibel. For more
+       details please check :wikipedia:`Wikipedia <DBm>`
    * - Epoch time
      - Unix time, measures time by the number of non-leap seconds that have elapsed since 00:00:00 UTC on 1 January 1970. Converts collected into human readable timestamp. For more details please check :wikipedia:`Wikipedia <Unix_time>`
    * - Hz
@@ -218,23 +232,27 @@ Most of the units are just displayed after the value, but some of them are speci
      - Ohm, unit of electrical resistance. For more details please check :wikipedia:`Wikipedia <Ohm>`
 
 
-
 Use multipliers
 ~~~~~~~~~~~~~~~
 
-This boolean setting gives convenience of displaying some measurements in more readable form. For example, if enabled, 1230000 becomes 1.23 M.
-Please note - setting has no effect on units "%", "°C", "°F" and "dbm". Evrything with (IEC) will use binary multipliers both for calculation and to display value.
-This setting is taken into consideration only to display value; it is not converting value in the database. Selection here will be taken to format value when macro %<{format-specifier}name> with formatting is used.
-In Other options property page it is possible to set fixed multiplier degree. Again, it is used for display purposes only, however will be used when macro %<{format-specifier}name> is used.
-
+This boolean setting gives convenience of displaying some measurements in more
+readable form. For example, if enabled, 1230000 becomes 1.23 M. Please note -
+setting has no effect on units "%", "°C", "°F", "dBm" and "rpm". Everything with
+(IEC) will use binary multipliers both for calculation and to display value.
+This setting is taken into consideration only to display value; it is not
+converting value in the database. Selection here will be taken to format value
+when macro %<{format-specifier}name> with formatting is used. In Other options
+property page it is possible to set fixed multiplier degree. Again, it is used
+for display purposes only, however will be used when macro
+%<{format-specifier}name> is used.
 
 
 Source node override
 ~~~~~~~~~~~~~~~~~~~~
 
 Source node of metrics collection. This can be used when other node provides
-information about current node. In this way, platform provides additional flexibility of where 
-metrics collection is taking place.
+information about current node. In this way, platform provides additional
+flexibility of where metrics collection is taking place.
 
 Other example of usage is virtual nodes (nodes with IP 0.0.0.0). In this case,
 node state can be obtained from the DCI created on current node, but collected
@@ -252,7 +270,8 @@ significant increase of your database size and possible performance degradation.
 Following options can be selected:
 
     - :guilabel:`Server default interval` - default value will be taken from
-      :guilabel:`DataCollection.DefaultDCIPollingInterval` server configuration parameter.
+      :guilabel:`DataCollection.DefaultDCIPollingInterval` server configuration
+      parameter.
     - :guilabel:`Custom interval` - Allows to enter a custom value. This field
       supports macro resolution, so e.g. you can use %{polling_interval:600}
       macro that will take value of ``polling_interval`` custom attribute or 600,
@@ -262,17 +281,18 @@ Following options can be selected:
 
 
 
-If you turn on :guilabel:`Advanced Schedule` flag, additional link to :guilabel:`Custom Schedule` will appear 
-and, once configured, server will use custom schedule for collecting
-DCI values instead of fixed intervals. Advanced schedule consists of one or more records;
-each representing desired data collection time in cron-style format.
+If you turn on :guilabel:`Advanced Schedule` flag, additional link to
+:guilabel:`Custom Schedule` will appear and, once configured, server will use
+custom schedule for collecting DCI values instead of fixed intervals. Advanced
+schedule consists of one or more records; each representing desired data
+collection time in cron-style format.
 
 See :ref:`cron_format` for supported cron format options.
 
-For DCI Collection schedule it's possible to specify optional sixth (first from left ) cron field
-for resolution in seconds. It's not recommended to use seconds in custom
-schedules as your main data collection strategy though. Use seconds only
-if it is absolutely necessary.
+For DCI Collection schedule it's possible to specify optional sixth (first from
+left) cron field for resolution in seconds. It's not recommended to use seconds
+in custom schedules as your main data collection strategy though. Use seconds
+only if it is absolutely necessary.
 
 
 History retention period
@@ -287,19 +307,20 @@ degradation.
 Following options can be selected:
 
     - :guilabel:`Server default` - default value will be taken from
-      :guilabel:`DataCollection.DefaultDCIRetentionTime` server configuration parameter.
+      :guilabel:`DataCollection.DefaultDCIRetentionTime` server configuration
+      parameter.
     - :guilabel:`Custom` - Allows to enter a custom value. This field supports
-      macro resolution, so for example you can use %{storage_period:30} macro that will
-      take value of ``storage_period`` custom attribute or 30 if such custom
-      attribute is not present on the node. 
+      macro resolution, so for example you can use %{storage_period:30} macro
+      that will take value of ``storage_period`` custom attribute or 30 if such
+      custom attribute is not present on the node. 
     - :guilabel:`Do not save collected data to database` - will not save
       collected data to database, but will store last value in memory
 
 Last option is used when it is required to show latest (every 1 second
-collected) data on Dashboard, however it would result in excessive data stored in database. So, 2
-DCI configurations are created - one to store historical data collected once per
-minute and the second one, that is not stored in database, but is collected
-every second and displayed on dashboards in close to real time.
+collected) data on Dashboard, however it would result in excessive data stored
+in database. So, 2 DCI configurations are created - one to store historical data
+collected once per minute and the second one, that is not stored in database,
+but is collected every second and displayed on dashboards in close to real time.
 
     - :guilabel:`Save only changed values` - if enabled, value is saved to the
       database only if it differs from last saved value. 
@@ -398,19 +419,16 @@ and entering test input data.
     DCI configuration transformation property page
 
 
-
-
-
-
 Thresholds
 ----------
 
-For every DCI you can define one or more thresholds. For each threshold there is a
-pair of condition and event - if condition becomes true, associated event is
-generated. To configure thresholds, open data collection :guilabel:`Edit...` mode for node or
-template DCI. You can add, modify and delete thresholds using buttons below the
-threshold list. If you need to change the threshold order, select one threshold
-and use arrow buttons located on the right to move the selected threshold up or down.
+For every DCI you can define one or more thresholds. For each threshold there is
+a pair of condition and event - if condition becomes true, associated event is
+generated. To configure thresholds, open data collection :guilabel:`Edit...`
+mode for node or template DCI. You can add, modify and delete thresholds using
+buttons below the threshold list. If you need to change the threshold order,
+select one threshold and use arrow buttons located on the right to move the
+selected threshold up or down.
 
 
 .. figure:: _images/dci_threshold_page.png
@@ -536,6 +554,10 @@ Third, you have to set a value to check against. If you use ``like`` or ``not
 like`` functions, value is a pattern string where you can use meta characters -
 asterisk (``*``), which means "any number of any characters", and/or question mark
 (``?``), which means "any character".
+
+If you use numeric threshold value, the following multipliers are supported:
+``K``, ``M``, ``G``, ``T``, ``Ki``, ``Mi``, ``Gi``, ``Ti``. So, e.g. instead of
+value "1000000000" you can put "1G" into the :guilabel:`Value` field. 
 
 Fourth, you have to select events to be generated when the condition becomes
 true or returns to false. By default, system uses ``SYS_THRESHOLD_REACHED`` and

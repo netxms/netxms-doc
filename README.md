@@ -26,7 +26,7 @@ sudo tlmgr install latexmk capt-of ellipse fncychap framed needspace pict2e tabu
 ### Ubuntu/Mint
 
 ```shell
-apt install python3-pip python3-virtualenv latexmk texlive-latex-extra git
+apt install python3-pip python3-virtualenv latexmk texlive-latex-extra texlive-xetex xindy git
 ```
 
 ## Preparing the environment

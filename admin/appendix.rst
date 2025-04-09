@@ -773,7 +773,7 @@ Configuration`
 
 .. list-table::
   :class: longtable
-  :widths: 1 25 8 4
+  :widths: 10 25 8 4
   :header-rows: 1
 
   * - Parameter

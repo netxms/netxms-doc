@@ -1788,6 +1788,10 @@ Configuration`
     - RADIUS authentication method to be used (PAP, CHAP, MS-CHAPv1, MS-CHAPv2).
     - PAP
     - No
+  * - RADIUS.NASIdentifier
+    - Value for NAS-Identifier attribute in RADIUS request (will not be sent if empty)
+    - none
+    - No
   * - RADIUS.NumRetries
     - The number of retries for RADIUS authentication.
     - 5
@@ -1815,6 +1819,10 @@ Configuration`
   * - RADIUS.Server
     - Host name or IP address of primary RADIUS server.
     - none
+    - No
+  * - RADIUS.ServiceType
+    - Value for Service-Type attribute in RADIUS request. Value of 0 will exclude service type from request attributes. 
+    - 8
     - No
   * - RADIUS.Timeout
     - Timeout in seconds for requests to RADIUS server

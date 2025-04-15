@@ -315,28 +315,37 @@ server is controlled by the following server configuration variables:
    * - Variable
      - Description
      - Default value
-   * - RADIUSNumRetries
+   * - RADIUS.AuthMethod
+     - RADIUS authentication method to be used (PAP, CHAP, MS-CHAPv1, MS-CHAPv2).
+     - PAP
+   * - RADIUS.NASIdentifier
+     - Value for NAS-Identifier attribute in RADIUS request (will not be sent if empty)
+     - none
+   * - RADIUS.NumRetries
      - The number of retries for RADIUS authentication.
      - 5
-   * - RADIUSPort
+   * - RADIUS.Port
      - Port number used for connection to primary RADIUS server.
      - 1645
-   * - RADIUSSecondaryPort
+   * - RADIUS.SecondaryPort
      - Port number used for connection to secondary RADIUS server.
      - 1645
-   * - RADIUSSecondarySecret
+   * - RADIUS.SecondarySecret
      - Shared secret used for communication with secondary RADIUS server.
      - netxms
-   * - RADIUSSecondaryServer
+   * - RADIUS.SecondaryServer
      - Host name or IP address of secondary RADIUS server.
      - none
-   * - RADIUSSecret
+   * - RADIUS.Secret
      - Shared secret used for communication with primary RADIUS server.
      - netxms
-   * - RADIUSServer
+   * - RADIUS.Server
      - Host name or IP address of primary RADIUS server.
      - none
-   * - RADIUSTimeout
+   * - RADIUS.ServiceType
+     - Value for Service-Type attribute in RADIUS request. Value of 0 will exclude service type from request attributes. 
+     - 8
+   * - RADIUS.Timeout
      - Timeout in seconds for requests to RADIUS server
      - 3
 

@@ -1359,7 +1359,7 @@ Request path: *API_HOME*/objects/**{object-id}**/data-collection
 
 JSON data:
 
-  Create new DCI (name and description are obligatory fields):
+  Create new DCI (name, description and valueType are obligatory fields):
 
   .. code-block:: json
 
@@ -1370,9 +1370,15 @@ JSON data:
           "pollingInterval": "120",
           "pollingScheduleType": "1",
           "retentionType": "1",
-          "retentionTime": "60"
+          "retentionTime": "60",
+          "valueType" : "single"
       }
 
+.. note::
+
+  valueType should be one of the following:
+  * single
+  * table
 
 Update DCI
 ~~~~~~~~~~

@@ -505,68 +505,169 @@ When adding or modifying a threshold, you will see the following dialog:
 
 First, you have to select what value will be checked:
 
-======================== ======================================================
-Last polled value        The last value will be used. If number of polls is set to
-                         more then ``1``, then condition will evaluate to true
-                         only if it's true for each individual value of
-                         last ``N`` polls.
-Average value            Average value for last ``N`` polls will be used
-                         (you have to configure required number of polls).
-Mean deviation           Mean absolute deviation for last ``N`` polls will be
-                         used (you have to configure required number of
-                         polls). Additional information on how mean absolute
-                         deviation is calculated can be found `here
-                         <http://en.wikipedia.org/wiki/Mean_deviation>`_.
-Diff with previous value Delta between the last and previous values will be
-                         used. If DCI data type is string and the last and previous values match, system will use
-                         ``0``, and if they don't - ``1``.
-Data collection error    An indicator of data collection error. Instead of
-                         DCI's value, system will use ``0`` if data collection
-                         was successful, and ``1`` if there was a data
-                         collection error. You can use this type of
-                         thresholds to catch situations when DCI's value
-                         cannot be retrieved from agent.
-Sum of values            Sum DCI values for the number of samples specified 
-                         and will compare it with the value. 
-                         Side note - in THRESHOLD_REACHED there are two parameters - 
-                         one is last DCI value and the other is value calculated by 
-                         the threshold, and if number of samples is >1, then these 
-                         values can be different.
-Script                   This will enable script editor, so one can make a script 
-                         that makes a decision. If it returns true it means to 
-                         trigger the threshold, if false - rearm threshold. There 
-                         are some variables available inside the script, $dci, 
-                         $1 etc. Value input field (which is below Samples) can 
-                         be read from there, which can be convenient, as one 
-                         can still use this field to store some threshold value.
-Absolute deviation       Similar to mean deviation - will take number of datapoints 
-                         specified in Samples and calculate deviation from these.
-Anomaly                  If checkbox "Detect anomalies" is selected, server will 
-                         use `Isolation Forest <https://en.wikipedia.org/wiki/Isolation_forest>`_ algorithm to check if new value is 
-                         an outlier within two set of data points - all values 
-                         within 30 minutes of current time of the day for last 
-                         30 days, and all values within 30 minutes around 
-                         current time of the day on the same day of the week 
-                         for last 10 weeks. If new data point is classified as 
-                         outlier in both data sets, DCI will be marked as having 
-                         anomalous value. Using this setting may adversly affect your database performance. This is an experimental feature - use with caution.
-======================== ======================================================
 
-Second, you have to select comparison function. Please note that not all
+.. list-table:: 
+   :widths: 30 70
+   :header-rows: 0
+
+   * - Last polled value
+     - The last value will be used. If number of polls is set to more then
+       ``1``, then condition will evaluate to true only if it's true for each
+       individual value of last ``N`` polls.
+   * - Average value
+     - Average value for last ``N`` polls will be used (you have to configure
+       required number of polls).
+   * - Mean deviation
+     - Mean absolute deviation for last ``N`` polls will be used (you have to
+       configure required number of polls). Additional information on how mean
+       absolute deviation is calculated can be found `here
+       <http://en.wikipedia.org/wiki/Mean_deviation>`_.
+   * - Diff with previous value
+     - Delta between the last and previous values will be used. If DCI data type
+       is string and the last and previous values match, system will use ``0``,
+       and if they don't - ``1``.
+   * - Data collection error
+     - An indicator of data collection error. Instead of DCI's value, system
+       will use ``0`` if data collection was successful, and ``1`` if there was
+       a data collection error. You can use this type of thresholds to catch
+       situations when DCI's value cannot be retrieved from agent.
+   * - Sum of values
+     - Sum DCI values for the number of samples specified and will compare it
+       with the value. Side note - in THRESHOLD_REACHED there are two parameters
+       - one is last DCI value and the other is value calculated by the
+       threshold, and if number of samples is >1, then these values can be
+       different.
+   * - Script
+     - This will enable script editor, so one can make a script that makes a
+       decision. If it returns true it means to trigger the threshold, if false
+       - rearm threshold. There are some variables available inside the script,
+       $dci, $1 etc. Value input field (which is below Samples) can be read from
+       there, which can be convenient, as one can still use this field to store
+       some threshold value.
+   * - Absolute deviation
+     - Similar to mean deviation - will take number of datapoints specified in
+       Samples and calculate deviation from these.
+   * - Anomaly
+     - If checkbox "Detect anomalies" is selected, server will use `Isolation
+       Forest <https://en.wikipedia.org/wiki/Isolation_forest>`_ algorithm to
+       check if new value is an outlier within two set of data points - all
+       values within 30 minutes of current time of the day for last 30 days, and
+       all values within 30 minutes around current time of the day on the same
+       day of the week for last 10 weeks. If new data point is classified as
+       outlier in both data sets, DCI will be marked as having anomalous value.
+       Using this setting may adversely affect your database performance. This
+       is an experimental feature - use with caution.
+
+
+Second, you have to select comparison function. Please note that not all 
 functions can be used for all data types. Below is a compatibility table:
 
-================ === ======== ======= ===== ========== ========= ===== ======
-Type/Function    Int Unsigned Counter Int64 Unsigned64 Counter64 Float String
-================ === ======== ======= ===== ========== ========= ===== ======
-Less             X   X        X       X     X          X         X
-Less or equal    X   X        X       X     X          X         X
-Equal            X   X        X       X     X          X         X      X
-Greater or equal X   X        X       X     X          X         X
-Greater          X   X        X       X     X          X         X
-Not equal        X   X        X       X     X          X         X      X 
-Like                                                                    X
-Not like                                                                X
-================ === ======== ======= ===== ========== ========= ===== ======
+
+.. list-table:: 
+   :widths: 25 10 12 9 10 12 9 9 9
+   :header-rows: 1
+   :stub-columns: 1   
+
+   * - Type/Function
+     - Integer
+     - Unsigned Integer
+     - Counter 32-bit
+     - Integer 64-bit
+     - Unsigned Integer 64-bit
+     - Counter 64-bit
+     - Float
+     - String
+   * - Less
+     - X
+     - X
+     - X
+     - X
+     - X
+     - X
+     - X
+     - 
+   * - Less or equal
+     - X
+     - X
+     - X
+     - X
+     - X
+     - X
+     - X
+     - 
+   * - Equal
+     - X
+     - X
+     - X
+     - X
+     - X
+     - X
+     - X
+     - X
+   * - Greater or equal
+     - X
+     - X
+     - X
+     - X
+     - X
+     - X
+     - X
+     - 
+   * - Greater
+     - X
+     - X
+     - X
+     - X
+     - X
+     - X
+     - X
+     - 
+   * - Not equal
+     - X
+     - X
+     - X
+     - X
+     - X
+     - X
+     - X
+     - X
+   * - Like
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - X
+   * - Not like
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - X
+   * - Like (ignore case)
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - X
+   * - Not like (ignore case)
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - X
+
 
 Third, you have to set a value to check against. If you use ``like`` or ``not
 like`` functions, value is a pattern string where you can use meta characters -

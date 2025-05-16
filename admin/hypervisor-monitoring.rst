@@ -116,9 +116,9 @@ Tables
    * - VMGR.VMDisks(hostName,vmName)
      - VM Disks
    * - VMGR.VMController(hostName,vmName)
-     - VM Controllers
+     - VM Disk Controllers
    * - VMGR.VMInterface(hostName,vmName)
-     - VM Interfaces
+     - VM Network Interfaces
    * - VMGR.VMVideo(hostName,vmName)
      - VM Video adapter settings
    * - VMGR.Networks(hostName)

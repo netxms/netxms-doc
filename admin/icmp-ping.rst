@@ -20,22 +20,24 @@ node. The ICMP polling interval and statistic calculation period (expressed in
 number of polls), timeout and ICMP packet size are configured via server
 configuration parameters. See for more details :ref:`server_configuration_parameters`.
 
-ICMP requests are sent to the primary IP address of the node. Additional targets can be
-specified in the node properties. It is also possible to set interfaces of the node as
-targets by enabling :guilabel:`Collect ICMP response statistic for this
-interface` in the properties of the interface. Please note that enabling this for the interface that
-corresponds to the primary IP address will lead to pinging this address twice.
+ICMP requests are sent to the primary IP address of the node. Additional targets
+can be specified in the node properties. It is also possible to set interfaces
+of the node as targets by enabling :guilabel:`Collect ICMP response statistic
+for this interface` in the properties of the interface. Please note that
+enabling this for the interface that corresponds to the primary IP address will
+lead to pinging this address twice.
 
-ICMP polling is performed either from the server, from a zone proxy if zoning is used, or
-from a specific proxy when this is configured in the node properties. The proxying agent should
-have the ``ping.nsm`` subagent enabled.
+ICMP polling is performed either from the server, from a zone proxy if zoning is
+used, or from a specific proxy when this is configured in the node properties.
+The proxying agent should have the ``ping.nsm`` subagent enabled.
 
-The results of the ICMP response statistic collection for primary IP address are visible
-in :guilabel:`Object Details -> Overview` and are available as internal
+The results of the ICMP response statistic collection for primary IP address are
+visible in :guilabel:`Object Details -> Overview` and are available as internal
 metrics:
 
-* ICMP.ResponseTime.Average
+* ICMP.Jitter
 * ICMP.PacketLoss
+* ICMP.ResponseTime.Average
 * ICMP.ResponseTime.Last
 * ICMP.ResponseTime.Max
 * ICMP.ResponseTime.Min
@@ -43,8 +45,9 @@ metrics:
 The results of the ICMP response statistic collection for additional targets and
 interfaces are available as internal metrics:
 
-* ICMP.ResponseTime.Average(*)
+* ICMP.Jitter(*)
 * ICMP.PacketLoss(*)
+* ICMP.ResponseTime.Average(*)
 * ICMP.ResponseTime.Last(*)
 * ICMP.ResponseTime.Max(*)
 * ICMP.ResponseTime.Min(*)

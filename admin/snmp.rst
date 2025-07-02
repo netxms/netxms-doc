@@ -214,8 +214,8 @@ Manage User MIBs
 To add additional MIBs go to :guilabel:`Configuration` --> :guilabel:`SNMP MIB files`. 
 Upload mib files with extension **.mib** and hit compile button. MIB compilation log will 
 be visible in :guilabel:`Output` tab and warnings/errors will be added to 
-:guilabel:`Error Log` tab. Afret MIB files are succesfully compiled all opened clients  
-automatically dowload new version form server. 
+:guilabel:`Error Log` tab. After MIB files are succesfully compiled all opened clients  
+automatically dowload new version from server. 
 
 .. figure:: _images/SNMP_MIB_files.png
 

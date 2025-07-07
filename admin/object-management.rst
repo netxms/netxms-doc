@@ -439,14 +439,36 @@ select :menuselection:`Properties --> Custom Attributes tab`.
 
 .. figure:: _images/object_custom_attributes.png
 
-Custom attributes with name starting with ``$`` can be set from NXSL and read 
-from NXSL (or macro), but never sent to management client and cannot be updated 
-from management client. They can be used when it is required to store some 
-information about node that should not be modified by users or seen by them.
+Custom attributes with name starting with ``.`` are hidden, but can be seen and 
+updated from the Management client if :guilabel:`Show hidden custom attributes` is 
+enabled in Management client's properties. 
 
-Custom attributes with name starting with ``.`` are hidden, but can be seed and 
-updated from management client if :guilabel:`Show hidden custom attributes` is 
-enabled in it's properties. 
+Custom attributes with a name starting with ``$`` can be set from NXSL and read
+from NXSL (or ``%{name}`` macro), but are never sent to the Management client
+and cannot be updated from the Management client. They can be used when it is
+required to store some information about a node that should not be modified or
+seen by users. This also improves performance, as information that the value of
+a custom attribute has changes is not transferred to connected Management
+Clients. 
+
+There's also a number of system custom attributes that are accessible from NXSL
+or via the ``%{name}`` macro, but are never sent to the Management client. These
+can be used, for example, to invoke a SSH client using Object Tools to supply
+then node's SSH credentials to the command line. The following custom attributes
+are supported:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Custom attribute
+     - Description
+   * - ssh.login
+     - SSH login
+   * - ssh.password
+     - SSH password
+   * - ssh.port
+     - SSH port
 
 
 .. _status-calculation:

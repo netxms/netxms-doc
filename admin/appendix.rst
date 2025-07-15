@@ -109,19 +109,12 @@ Agent configuration file (nxagentd.conf)
      - Description
      - Default Value
    * - Action
-     - Define action, which can be later executed by management server.
-       Parameters to the action can be provided from the server. They can be
-       accessed as ``$1``, ``$2``... variables. On Windows platform system
-       process execution API's CreateProcess() is used to run the command, it
-       will search in PATH, but the command should be with file extension, e.g.
-       ``command.exe``. For more information please check :ref:`agent-actions`.
+     - Defines action, which can be later executed by management server. To add
+       multiple actions, multiple ``Action`` entries can be provided. See
+       :ref:`agent-actions` for more information.
      - No defaults
    * - ActionShellExec
-     - Same as Action, but on Windows platform agent will use shell to execute
-       command instead of normal process creation. There is no difference
-       between Action and ActionShellExec on UNIX platforms. Parameters to the
-       action can be provided from the server. They can be accessed as ``$1``,
-       ``$2``... variables. For more information please check :ref:`agent-actions`.
+     - Deprecated, does the same as ``Action``.
      - No defaults
    * - AppAgent
      - The registered name of application with built in subagent library that
@@ -298,11 +291,9 @@ Agent configuration file (nxagentd.conf)
        subagent configuration file.
      - No defaults
    * - ExternalMetric
-     - Adds metric handled by external command. To add multiple metrics, you
-       should use multiple ``ExternalMetric`` entries. On Windows platform
-       system process execution API's CreateProcess() is used to run the
-       command, it will search in PATH, but the command should be with file
-       extension, e.g. ``command.exe``.
+     - Adds metric handled by an external command. To add multiple metrics,
+       multiple ``ExternalMetric`` entries can be provided. See
+       :ref:`agent-external-parameter` for more information.
      - No defaults
    * - ExternalMetricProvider
      - Specifies external command and execution interval after semicolon (:).
@@ -315,11 +306,7 @@ Agent configuration file (nxagentd.conf)
        background-polled external table execution
      - 30000
    * - ExternalMetricShellExec
-     - ExternalMetricShellExec has same meaning as ExternalMetric with exception
-       that agent will use shell to execute specified command instead of system
-       process execution API. This difference presented only on Windows system,
-       on other systems ExternalMetric and ExternalMetricShellExec behaves
-       identically.
+     - Deprecated, does the same as ``ExternalMetric``. 
      - No defaults
    * - ExternalMetricTimeout
      - Timeout in milliseconds for external metrics. Value of

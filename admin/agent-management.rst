@@ -911,7 +911,7 @@ The shell form uses shell to execute the command.
 
 
 Server can provide parameters when requesting the metric. To enable parameter
-support, metric name should contain "(*)" symbols after its name:
+support, metric name should contain ``(*)`` symbols after its name:
 
    * ``ExternalMetric = metric(*):["executable", "$1", "$2", ...]`` (exec form)
    * ``ExternalMetric = metric(*):command $1 $2 ...`` (shell form)
@@ -1038,7 +1038,7 @@ should contain name of columns, subsequent lines contain table data.
 
 Server can provide parameters when requesting the metric, these are available as
 ``$1``, ``$2``, ``$3``... variables.  To enable parameter support, metric name
-should contain "(*)" symbols after its name.
+should contain ``(*)`` symbols after its name.
 
 External tables are configured as sections in agent configuration. Section name
 has the following format: ``[ExternalTable/MetricName]``. Section can contain

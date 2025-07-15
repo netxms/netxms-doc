@@ -864,15 +864,14 @@ Agent External Metrics
 ======================
 
 Other option to define new metric that can be collected from node is to use
-``ExternalMetric``/``ExternalMetricShellExec``, or ``ExternalList``, or
-``ExternalMetricProvider`` configuration parameters to define a command that
-will be executed on a node and it's output will be provided as a metric. This
-functionality provides flexibility to create your own metrics, lists or table
-metrics.
+``ExternalMetric``, ``ExternalList``, or ``ExternalMetricProvider``
+configuration parameters to define a command that will be executed on the node
+and it's output will be provided as metric's value. This functionality provides
+flexible way to create your own metrics, lists or table metrics.
 
-New metrics will be visible in the :guilabel:`Available metrics` list only after
-agent restart (agent reads its configuration files only once on start) and
-subsequent configuration poll, so to force it's appearance run
+New metric will be visible in the :guilabel:`Available metrics` list only after
+agent restart (agent reads it's configuration files only once on start) and
+subsequent configuration poll, so to force new metric appearance run
 :guilabel:`Configuration poll` manually after agent restart.
 
 .. note::
@@ -880,56 +879,73 @@ subsequent configuration poll, so to force it's appearance run
    On Windows platforms UTF-8 encoding should be returned in External Metrics. 
 
 
-ExternalMetric/ExternalMetricShellExec
---------------------------------------------
+ExternalMetric
+--------------
 
 ``ExternalMetric`` defines name of the metric and command that is executed
-synchronously when this metric is requested by the server. Parameters from DCI
-configuration can be provided, these will be available as $1, $2, $3..., $9
-variables. To accept parameters metric name should contain "(*)" symbols after
-name. Only first line of command output will be given as a result of execution
-(metric's value).
+synchronously when this metric is requested by the server. Only first line of
+command output will be given as a result of execution (metric's value). To add
+multiple metrics, you should use multiple ``ExternalMetric`` in agent
+configuration. This configuration parameter has two possible forms: 
 
-``ExternalMetricShellExec`` has same meaning as ``ExternalMetric`` and
-behaves identically on non-Windows systems. On Windows systems
-``ExternalMetric`` executes specified command using system process execution
-API's CreateProcess() function. It will search in PATH, but the command should
-be with file extension, e.g. ``command.exe``. ``ExternalMetricShellExec``
-will use shell to execute specified command on Windows.
+   * ``ExternalMetric = metric:["executable", "param1", "param2", ...]`` (exec form)
+   * ``ExternalMetric = metric:command param1 param2 ...`` (shell form)
 
-To add multiple metrics, you should use multiple
-``ExternalMetric``/``ExternalMetricShellExec`` entries.
+The exec form does not use shell, it launches the executable directly. On Linux
+full path to the executable should be provided.  On Windows the executable is
+launched using API's CreateProcess() function, it will search in PATH, but the
+executable should be with file extension, e.g. ``command.exe``. Both double
+quotes (``"``) or single quotes (``"``) can be used to enclose the executable
+and the parameters.
 
-As these commands are executed synchronously, long-executing commands may cause
-timeout. There are two timeouts - one on the agent side (controlled by
-``ExternalMetricTimeout`` in agent's configuration file) and generic timeout for
-all requests to agent (controlled by `AgentCommandTimeout` in server's
-configuration file). It's strongly not recommended to increase server timeout to
-more then a few seconds because this may lead to performance issues due to
-poller threads spending too much time on timeouts.
-``ExternalMetricProvider`` can be used to handle long-executing commands. 
+The shell form uses shell to execute the command. 
+
 
 .. code-block:: ini
 
   # Example
 
-  # Without DCI parameters
-  ExternalMetric=Name:command
-  ExternalMetricShellExec=Name:command
-
-  # With DCI parameters
-  ExternalMetric=Name(*):command $1 $2
-  ExternalMetricShellExec=Name(*):command $1 $2
+  ExternalMetric = MyUptime:uptime -p
+  ExternalMetric = MyText:echo This command was executed under $USER user
+  ExternalMetric = MyUptime2:["/usr/bin/uptime", "-p"]
 
 
-For each metric configured two agent metrics are provided - one is ``Name`` as
-specified in ``ExternalMetric``/``ExternalMetricShellExec`` which provides
-output of the command (first line only), the other is ``Name.ExitCode`` that
-provides exit code of the executed command. 
+Server can provide parameters when requesting the metric. To enable parameter
+support, metric name should contain "(*)" symbols after its name:
+
+   * ``ExternalMetric = metric(*):["executable", "$1", "$2", ...]`` (exec form)
+   * ``ExternalMetric = metric(*):command $1 $2 ...`` (shell form)
+
+Parameters are available as ``$1``, ``$2``, ``$3``... variables. Note that shell
+form with parameters is a security concern because shell will execute other
+commands provided in parameters, e.g. by providing ``$(some_command)``
+parameter. It's strongly recommended to use exec form when using parameters. 
+
 
 .. code-block:: ini
 
-  # Real example
+  # Example with metric parameters
+
+  ExternalMetric=My.Resolve(*):['/usr/bin/dig','+short', '$1', '@1.1.1.1']
+
+
+As external commands are executed synchronously, long-executing commands may
+cause timeout. There are two timeouts - one on the agent side (controlled by
+``ExternalMetricTimeout`` in agent's configuration file) and generic timeout for
+all requests to agent (controlled by `AgentCommandTimeout` in server's
+configuration file). It's strongly not recommended to increase server timeout to
+more then a few seconds because this may lead to performance issues due to
+poller threads spending too much time on timeouts. ``ExternalMetricProvider``
+can be used to handle long-executing commands. 
+
+For each metric configured two agent metrics are provided - one is ``Name`` as
+specified in ``ExternalMetric`` which provides output of the command (first line
+only), the other is ``Name.ExitCode`` that provides exit code of the executed
+command. 
+
+.. code-block:: ini
+
+  # Example
   ExternalMetric = Test:echo test
   ExternalMetric = LineCount(*):cat $1 | wc -l
 
@@ -947,20 +963,23 @@ ExternalList
 ------------
 
 ``ExternalList`` defines name of the list metric and command that is executed
-synchronously when this metric is requested by server. Parameters from DCI
-configuration can be provided, these will be available as $1, $2, $3..., $9
-variables. To accept parameters metric name should contain "(*)" symbols after
-name. Lines of the list are separated by new line character.
+synchronously when this metric is requested by server. Command should provide
+list items separated by new line character. 
+
+Configuration is similar to ``ExternalMetric``. Both exec form and shell form
+are supported, parameters can be provided along with the metric. 
+
 
 .. code-block:: ini
 
   # Example
 
-  # Without DCI parameters
+  # Without metric parameters
   ExternalList=Name:command
+  ExternalList=Name:["command"]
 
-  # With DCI parameters
-  ExternalList=Name(*):command $1 $2
+  # With metric parameters
+  ExternalList=Name(*):["command", "$1", "$2"]
 
 
 ExternalMetricProvider
@@ -969,7 +988,7 @@ ExternalMetricProvider
 ``ExternalMetricProvider`` defines command (script) and execution interval in
 seconds. Defined script will be executed regularly and agent will cache list of
 metrics along with their values. When server will request one of provided
-metrics, it's value will be read from the agent cache. Main purpose is to
+metrics, it's value will be read from the agent's cache. Main purpose is to
 provide data from long-running processes, or retrieve multiple values by running
 a command only once.
 
@@ -978,7 +997,7 @@ Timeout in milliseconds for command execution is defined by
 
 Script should print one or more "Metric=Value" pairs to standard output. Multiple
 pairs should be separated by new line. If metric takes a parameter, it should be
-included in "Metric(...)".
+included in brackets after metric's name: ``Metric(...)``.
 
 Example of the script:
 
@@ -1000,6 +1019,7 @@ Example of agent configuration:
   #Example (run /tmp/test.sh every 5 seconds)
   ExternalMetricProvider=/tmp/test.sh:5
 
+
 ExternalTable
 -------------
 
@@ -1013,11 +1033,16 @@ option is required.
 Timeout in milliseconds for background operation is defined by
 `ExternalMetricProviderTimeout` parameter in agent configuration file. 
 
-Each table line is separated with new line symbol. First line in returned text
-should contain name of columns, subsequent lines contain table data. Parameters
-from DCI configuration can be provided, these will be available like $1, $2,
-$3..., $9 variables. To accept parameters metric name should contain ``(*)``
-symbols after name.
+Each table line is separated with new line character. First line in returned text
+should contain name of columns, subsequent lines contain table data. 
+
+Server can provide parameters when requesting the metric, these are available as
+``$1``, ``$2``, ``$3``... variables.  To enable parameter support, metric name
+should contain "(*)" symbols after its name.
+
+External tables are configured as sections in agent configuration. Section name
+has the following format: ``[ExternalTable/MetricName]``. Section can contain
+the following configuration parameters: 
 
 
 .. list-table::
@@ -1029,8 +1054,8 @@ symbols after name.
      - Description
    * - Command
      - Yes
-     - Result of this command execution will be used as a value for table DCI.
-       First row is used as column names.
+     - Command that should be executed. Both exec form and shell form are
+       supported, see configuration of  ``ExternalMetric`` for more information. 
    * - Separator
      - No
      - Symbol that will be used as a separator for columns. If separator is not
@@ -1084,11 +1109,11 @@ symbols after name.
 
   # Simple example
   [ExternalTable/test]
-  Command = echo 'col1;col2;col3\na;b;c'
+  Command = echo -e 'col1;col2;col3\na;b;c'
   Separator = ;
 
-  # Without DCI parameters
-  [ExternalTable/dciName]
+  # Without metric parameters
+  [ExternalTable/MyTable]
   Command = command
   Separator = ;
   InstanceColumns = columnName,columnName2
@@ -1097,17 +1122,17 @@ symbols after name.
   ColumnType = columnName:string
   ColumnType = columnName3:string
 
-  # With DCI parameters
-  [ExternalTable/dciName(*)]
-  Command = cat /folder/with/my/files/$1
+  # With metric parameters
+  [ExternalTable/MyTable(*)]
+  Command = ["/usr/bin/cat", "/folder/with/my/files/$1"]
 
   
   # Old configuration format
-  ExternalTable=dciName::command
-  ExternalTable=dciName:instanceColumns=columnName;description=description;separator=|:command
-  ExternalTable=dciName(*):instanceColumns=columnName;description=description;separator=|:command $1 $2
+  ExternalTable=MyTable::command
+  ExternalTable=MyTable:instanceColumns=columnName;description=description;separator=|:command
+  ExternalTable=MyTable(*):instanceColumns=columnName;description=description;separator=|:command $1 $2
   #Old configuration format with background polling 
-  ExternalTable=dciName:instanceColumns=columnName;description=description;separator=|:command;backgroundPolling=yes;pollingInterval=60
+  ExternalTable=MyTable:instanceColumns=columnName;description=description;separator=|:command;backgroundPolling=yes;pollingInterval=60
      
     
 .. note::
@@ -1119,26 +1144,44 @@ Agent Actions
 =============
 
 For security reasons actions that can be executed on agent first are defined in
-agent configuration file and only then can be used by users. This excludes that an
-unauthorized user can access system data through an arbitrary entered command. Only
-users with access to the agent configuration file editing can define executed commands.
+agent configuration file and only then can be used by users. This excludes that
+an unauthorized user can access system data through an arbitrary entered
+command. Only users with access to the agent configuration file editing can
+define executed commands.
 
-There are 2 options to define action:
 
-   #. Action - usual action definition. On Windows platform system process execution API's CreateProcess() is used to run the command, it will search in PATH, but the command should be with file extension, e.g. ``command.exe``.
-   #. ActionShellExec - Same as Action, but on the Windows platform agent will use shell to execute command instead of normal process creation. There is no difference between Action and ActionShellExec on UNIX platforms.
 
-Both versions accept parameters that will be available like ``$1``, ``$2``, ``$3``..., ``$9`` variables.
+``Action`` configuration parameter defines name of the action and command that
+is executed. To add multiple action, you should use multiple ``Action`` in agent
+configuration. This configuration parameter has two possible forms: 
 
-After action is defined it can be used in the :ref:`object tools - agent action<object_tool-agent-command>` or in
-:ref:`actions - action execution on remote node<action-remote-execute>`. Action should be defined in main section of
-agent configuration file.
+   * ``Action = actionName:["executable", "param1", "param2", ...]`` (exec form)
+   * ``Action = actionName:command param1 param2 ...`` (shell form)
+
+The exec form does not use shell, it launches the executable directly. On Linux
+full path to the executable should be provided.  On Windows the executable is
+launched using API's CreateProcess() function, it will search in PATH, but the
+executable should be with file extension, e.g. ``command.exe``. Both double
+quotes (``"``) or single quotes (``"``) can be used to enclose the executable
+and the parameters.
+
+The shell form uses shell to execute the command. 
+
+Both forms accept parameters that will be available as ``$1``, ``$2``, ``$3``...
+variables.
+
+From the server side an action can be used in the :ref:`object tools - agent action<object_tool-agent-command>`, in
+:ref:`actions - action execution on remote node<action-remote-execute>` or from a NXSL script. 
+
+Action should be defined in core section of agent configuration file.
 
 .. code-block:: ini
 
-  # Example
-  Action=Name:command
-  Action=Name:command $1 $2
+  # Example without parameters
+  Action=name:command
   Action=cleanLogs:rm /opt/netxms/log/*
-  Action=ping:ping $1
-  ActionShellExec=listFiles:dir $1
+
+  # Example with parameters
+  Action=listFiles:dir $1
+  Action=a:['/usr/bin/ping', '$1', '-c 3']
+

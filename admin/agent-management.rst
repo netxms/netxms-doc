@@ -854,7 +854,7 @@ of node properties. To configure proxy node select node in object selector
 Agent configuration
 -------------------
 
-To enable |product_name| Agent proxy "EnableProxy" agent configuration parameter should
+To enable |product_name| Agent proxy ``EnableProxy`` agent configuration parameter should
 be set to :guilabel:`yes`.
 
 
@@ -932,7 +932,7 @@ parameter. It's strongly recommended to use exec form when using parameters.
 As external commands are executed synchronously, long-executing commands may
 cause timeout. There are two timeouts - one on the agent side (controlled by
 ``ExternalMetricTimeout`` in agent's configuration file) and generic timeout for
-all requests to agent (controlled by `AgentCommandTimeout` in server's
+all requests to agent (controlled by ``AgentCommandTimeout`` in server's
 configuration file). It's strongly not recommended to increase server timeout to
 more then a few seconds because this may lead to performance issues due to
 poller threads spending too much time on timeouts. ``ExternalMetricProvider``
@@ -993,7 +993,7 @@ provide data from long-running processes, or retrieve multiple values by running
 a command only once.
 
 Timeout in milliseconds for command execution is defined by
-`ExternalMetricProviderTimeout` parameter in agent configuration file. 
+``ExternalMetricProviderTimeout`` parameter in agent configuration file. 
 
 Script should print one or more "Metric=Value" pairs to standard output. Multiple
 pairs should be separated by new line. If metric takes a parameter, it should be
@@ -1031,7 +1031,7 @@ timeout. To collect table in the background "PollingInterval" configuration
 option is required.
 
 Timeout in milliseconds for background operation is defined by
-`ExternalMetricProviderTimeout` parameter in agent configuration file. 
+``ExternalMetricProviderTimeout`` parameter in agent configuration file. 
 
 Each table line is separated with new line character. First line in returned text
 should contain name of columns, subsequent lines contain table data. 

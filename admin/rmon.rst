@@ -4,13 +4,6 @@
 Using RMON Data in NetXMS
 #########################
 
-Introduction
-============
-
-|product_name| is a flexible and scalable network management and monitoring platform. It supports various protocols and standards for collecting monitoring data, including SNMP and RMON. RMON (Remote Monitoring) is an SNMP extension that offers advanced monitoring and statistical data for network devices, especially switches and routers.
-
-This document provides an overview of how RMON data can be used within |product_name|, including setup, configuration, and practical use cases.
-
 What Is RMON?
 =============
 
@@ -67,10 +60,147 @@ Reporting and Visualization
 Example: Monitoring Interface Utilization with RMON
 ====================================================
 
-1. **Add Parameter:** In Data Collection, add ``etherStatsOctets`` to monitor total bytes on an interface.
-2. **Graph Data:** View utilization over time in |product_name| graphs.
-3. **Alarm Configuration:** Set an alarm for "High Utilization" if octet count increases beyond a set threshold.
-4. **Report:** Generate a periodic report showing interface usage trends.
+This detailed example demonstrates how to set up RMON monitoring for interface utilization on a switch.
+
+Step 1: Device Discovery and RMON Capability Verification
+---------------------------------------------------------
+
+1. **Add the device to NetXMS:**
+   
+   - Navigate to :guilabel:`Object Browser` → :guilabel:`Infrastructure Services` → :guilabel:`Entire Network`
+   - Right-click and select :guilabel:`Create` → :guilabel:`Node`
+   - Enter the device IP address and SNMP community string
+   - Click :guilabel:`OK` to add the node
+
+2. **Verify RMON support:**
+   
+   - Right-click the new node and select :guilabel:`Manage` → :guilabel:`Manage node`
+   - Go to the :guilabel:`SNMP` tab and click :guilabel:`Walk` to browse available MIBs
+   - Look for RMON MIB objects under ``1.3.6.1.2.1.16`` (RMON-MIB)
+
+Step 2: Configure RMON Data Collection
+--------------------------------------
+
+1. **Access Data Collection Configuration:**
+   
+   - Right-click the node and select :guilabel:`Data Collection Configuration`
+   - Click :guilabel:`Add` → :guilabel:`Parameter`
+
+2. **Add etherStatsOctets parameter:**
+   
+   - **Parameter Name:** ``etherStatsOctets_1``
+   - **Description:** ``Total bytes on interface 1``
+   - **Data Type:** ``Counter64``
+   - **SNMP OID:** ``1.3.6.1.2.1.16.1.1.1.10.1`` (where .1 is the interface index)
+   - **Polling Interval:** ``60`` seconds
+   - **Retention Time:** ``90`` days
+   - Click :guilabel:`OK`
+
+3. **Add etherStatsPkts parameter:**
+   
+   - **Parameter Name:** ``etherStatsPkts_1``
+   - **Description:** ``Total packets on interface 1``
+   - **Data Type:** ``Counter64``
+   - **SNMP OID:** ``1.3.6.1.2.1.16.1.1.1.5.1``
+   - **Polling Interval:** ``60`` seconds
+   - **Retention Time:** ``90`` days
+   - Click :guilabel:`OK`
+
+4. **Add error counters:**
+   
+   - **etherStatsCRCAlignErrors:** ``1.3.6.1.2.1.16.1.1.1.6.1``
+   - **etherStatsUndersizePkts:** ``1.3.6.1.2.1.16.1.1.1.7.1``
+   - **etherStatsOversizePkts:** ``1.3.6.1.2.1.16.1.1.1.8.1``
+
+Step 3: Create Performance Graphs
+---------------------------------
+
+1. **Navigate to Performance Graphs:**
+   
+   - Right-click the node and select :guilabel:`Performance` → :guilabel:`Configure Graphs`
+   - Click :guilabel:`Add` to create a new graph
+
+2. **Configure Interface Utilization Graph:**
+   
+   - **Graph Name:** ``Interface 1 RMON Utilization``
+   - **Y-axis Label:** ``Bytes per second``
+   - **Time Period:** ``24 hours``
+   - Add data source:
+     
+     - **Parameter:** ``etherStatsOctets_1``
+     - **Color:** ``Blue``
+     - **Line Width:** ``2``
+     - **Calculation:** ``Rate`` (to convert counter to rate)
+
+Step 4: Configure Thresholds and Alarms
+---------------------------------------
+
+1. **Create Threshold:**
+   
+   - Go to :guilabel:`Data Collection Configuration`
+   - Select the ``etherStatsOctets_1`` parameter
+   - Click :guilabel:`Thresholds` tab
+   - Click :guilabel:`Add`
+
+2. **Configure High Utilization Threshold:**
+   
+   - **Function:** ``last()`` 
+   - **Operation:** ``>``
+   - **Value:** ``800000000`` (800 Mbps for gigabit interface at 80% utilization)
+   - **Event:** ``SYS_THRESHOLD_REACHED``
+   - **Repeat Interval:** ``300`` seconds
+   - Click :guilabel:`OK`
+
+3. **Set up Event Processing:**
+   
+   - Navigate to :guilabel:`Configuration` → :guilabel:`Event Processing Policy`
+   - Create a new rule for ``SYS_THRESHOLD_REACHED`` events
+   - Configure actions such as sending email notifications or SNMP traps
+
+Step 5: Create Dashboard Widget
+--------------------------------
+
+1. **Create Dashboard:**
+   
+   - Go to :guilabel:`Dashboards` and create a new dashboard
+   - Add a :guilabel:`Performance Chart` widget
+
+2. **Configure Widget:**
+   
+   - **Data Source:** Select the node and ``etherStatsOctets_1`` parameter
+   - **Chart Type:** ``Line Chart``
+   - **Time Range:** ``Last 24 hours``
+   - **Refresh Interval:** ``60`` seconds
+
+Step 6: Generate Reports
+-------------------------
+
+1. **Create Report Template:**
+   
+   - Navigate to :guilabel:`Reporting` → :guilabel:`Report Templates`
+   - Create a new template with RMON data for interface utilization trends
+
+2. **Schedule Regular Reports:**
+   
+   - Set up weekly or monthly reports showing:
+     
+     - Peak utilization times
+     - Average utilization
+     - Error rates and trends
+     - Capacity planning recommendations
+
+Expected Results
+-----------------
+
+After completing this configuration, you will have:
+
+- Real-time monitoring of interface utilization using RMON data
+- Historical trending and graphical visualization
+- Automated alerting when utilization exceeds thresholds
+- Regular reports for capacity planning and performance analysis
+- Dashboard widgets showing current network performance
+
+This setup provides comprehensive monitoring using RMON capabilities and enables proactive network management.
 
 Troubleshooting
 ===============
@@ -85,8 +215,3 @@ References
 - `NetXMS Documentation <https://netxms.org/documentation/>`_
 - `RFC 2819: RMON MIB <https://datatracker.ietf.org/doc/html/rfc2819>`_
 - Device-specific SNMP and RMON configuration guides
-
-Conclusion
-==========
-
-Leveraging RMON data in |product_name| enables deeper insights into network performance and reliability. By configuring |product_name| to collect, visualize, and act on RMON metrics, administrators can proactively detect issues and optimize network operations.

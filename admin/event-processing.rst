@@ -1126,11 +1126,12 @@ alarms, or actions. You may use the following macros to accomplish this:
    * - ``%Z``
      - Zone name of event source object.
    * - ``%[name]``
-     - Value returned by script. You should specify name of the script from
-       script library. It's possible to specify script entry point separating it
-       by ``/``, e.g. to call a function named ``calculate``:
-       ``%[name/calculate]``. Script parameters can be specified in brackets,
-       e.g.: ``%[name(123,"A textual parameter")]``
+     - Value returned by script library script named ``name`` (will call its
+       ``main()`` or implicit ``$main()`` function). Script parameters can be
+       specified in brackets, e.g.: ``%[name(123,"A textual parameter")]``. It's
+       possible to specify a script entry point by separating it with a ``.``,
+       e.g., to call a function named ``calculate``: ``%[name.calculate]``.
+       (Function name can also be separated by ``/``, but this is deprecated). 
    * - ``%{name}``
      - Value of custom attribute. Expansion is attempted in the following order:
 

@@ -799,11 +799,6 @@ Configuration`
       perform status, congiration, and other polls on the agent. 
     - 0
     - No
-  * - Agent.Upgrade.NumberOfThreads
-    - The number of threads used to perform agent upgrades (i.e. maximum number
-      of parallel upgrades).
-    - 10
-    - No
   * - Agent.Upgrade.WaitTime
     - Maximum wait time in seconds for agent restart after upgrade. If agent
       cannot be contacted after this time period, upgrade process is considered
@@ -813,8 +808,14 @@ Configuration`
   * - AgentPolicy.MaxFileSize
     - Maximum file size for exported files in agent policies. Files larger then
       this size will not be included when exporting configuration to .xml. 
-    - 16777215
-    - Yes
+    - 16777215 bytes
+    - No
+  * - AgentTunnels.BindByIPAddress
+    - Enable/disable agent tunnel binding by IP address. If enabled and agent
+      certificate is not provided, tunnel will be bound to node with IP address
+      matching tunnel source IP address.
+    - false
+    - No
   * - AgentTunnels.Certificates.ReissueInterval
     - Interval in days for newly issued agent certificates.
     - 30
@@ -999,6 +1000,11 @@ Configuration`
       page. Alarms that exceed this count will not be shown.
     - 4096
     - No
+  * - Client.BaseURL
+    - Base URL for forming direct access URLs. Macro {server-name} can be used
+      to insert name of the server where user is currently logged in.
+    - https://{server-name}
+    - No
   * - Client.DashboardDataExport.EnableInterpolation
     - Enable/disable data interpolation in dashboard data export.
     - true
@@ -1015,6 +1021,20 @@ Configuration`
     - Default long time display format for GUI.
     - HH:mm:ss
     - No
+  * - Client.DefaultLineChartPeriod
+    - Default period (in minutes) to display collected data for when opening ad-hoc line chart.
+    - 60 minutes
+    - No
+  * - Client.FirstPacketTimeout
+    - Timeout for receiving first packet from client after establishing TCP connection.
+    - 2000 milliseconds
+    - No
+  * - Client.InactivityTimeout
+    - User inactivity timeout in seconds. Client will disconnect if no user
+      activity detected within given time interval. Value of 0 disables
+      inactivity timeout.      
+    - 0
+    - No  
   * - Client.KeepAliveInterval
     - Interval in seconds between sending keep alive packets to connected
       clients.
@@ -1048,6 +1068,16 @@ Configuration`
       apply.
     - 1
     - No
+  * - Client.ObjectBrowser.ShowTargetsUnderTemplates
+    - If enabled, template target objects (nodes, access points, etc.) will be
+      shown under templates applied to those objects.
+    - false
+    - No
+  * - Client.ObjectOverview.ShowCommentsOnlyIfPresent
+    - If enabled, comments section in object overview will only be shown when
+      object comments are not empty.
+    - true
+    - No
   * - Client.TileServerURL
     - The base URL for the tile server used to draw maps.
     - http://tile.netxms.org/osm/
@@ -1068,7 +1098,7 @@ Configuration`
   * - DataCollection.InstancePollingInterval
     - Instance polling interval (in seconds).
     - 600
-    - Yes
+    - No
   * - DataCollection.InstanceRetentionTime
     - Default retention time (in days) for missing DCI instances.
     - 7
@@ -1082,6 +1112,14 @@ Configuration`
     - Enable/disable automatic termination of related alarms when data
       collection item is deleted.
     - true
+    - No
+  * - DataCollection.Scheduler.RequireConnectivity
+    - Skip data collection scheduling if communication channel is unavailable.
+      This way rarely collected DCIs will be scheduled right after connection
+      via corresponding communication channel (agent, SNMP, etc) is establised,
+      but without connection DCIs will keep displaying last collected value
+      instead of ``<< ERROR >>``. 
+    - false
     - No
   * - DataCollection.ScriptErrorReportInterval
     - Minimal interval (seconds) between reporting errors in data collection
@@ -1170,6 +1208,11 @@ Configuration`
     - Default notification channel for SMTP text formatted messages.
     - SMTP-Text
     - No
+  * - DowntimeLog.RetentionTime
+    - Retention time in days for the records in downtime log. All records older
+      than specified will be deleted by housekeeping process.
+    - 90 days
+    - No
   * - EnableISCListener
     - Enable/disable Inter-Server Communications Listener.
     - false
@@ -1255,11 +1298,11 @@ Configuration`
     - Size of ICMP packets (in bytes, excluding IP header size) used for status
       polls.
     - 46
-    - Yes
+    - No
   * - ICMP.PingTimeout
     - Timeout for ICMP ping used for status polls (in milliseconds).
     - 1500
-    - Yes
+    - No
   * - ICMP.PollingInterval
     - Interval between ICMP statistic collection polls (in seconds)
     - 60
@@ -1305,10 +1348,6 @@ Configuration`
     - Jira webhook listener port (0 to disable webhook).
     - 8008
     - Yes
-  * - JobRetryCount
-    - Maximum number of job execution retries. 
-    - 5
-    - No
   * - LDAP.ConnectionString
     - The LdapConnectionString configuration parameter may be a comma- or
       whitespace-separated list of URIs containing only the schema, the host,
@@ -1481,10 +1520,6 @@ Configuration`
     - Disable probing discovered addresses for SSH support.
     - false
     - No
-  * - NetworkDiscovery.EnableParallelProcessing
-    - Enable/disable parallel processing of discovered addresses.
-    - false
-    - No
   * - NetworkDiscovery.Filter.Flags
     - Discovery filter settings. **This setting is changed by Network Discovery
       Configuration GUI**
@@ -1554,6 +1589,10 @@ Configuration`
     - Enable/disable container auto binding for access points. 
     - false
     - No
+  * - Objects.AccessPoints.RetentionTime
+    - Retention time for disappeared access points.
+    - 72 hours
+    - No
   * - Objects.AccessPoints.TemplateAutoApply
     - Enable/disable template auto apply for access points. 
     - false
@@ -1578,10 +1617,18 @@ Configuration`
     - Enable/disable template auto apply for clusters.
     - false
     - No
+  * - Objects.Collectors.ContainerAutoBind
+    - Enable/disable container auto binding for collectors.
+    - false
+    - No
+  * - Objects.Collectors.TemplateAutoApply
+    - Enable/disable template auto apply for collectors.
+    - false
+    - No    
   * - Objects.Conditions.PollingInterval
     - Interval in seconds between polling (re-evaluating) of condition objects.
     - 60
-    - Yes
+    - No
   * - Objects.ConfigurationPollingInterval
     - Interval in seconds between configuration polls.
     - 3600
@@ -1596,6 +1643,10 @@ Configuration`
     - Enable/disable zoning support.
     - true
     - Yes
+  * - Objects.Interfaces.ClearPeerOnUnmanage
+    - If set to ``true``, interface peer will be cleared when interface is unmanaged
+    - false
+    - No
   * - Objects.Interfaces.DefaultExpectedState
     - Default expected state for new interface objects.
     - AUTO
@@ -1605,11 +1656,19 @@ Configuration`
       poll. 
     - true
     - No
+  * - Objects.Interfaces.IgnoreIfNotPresent
+    - If enabled, interfaces in "NOT PRESENT" state will be ignored when read from device.
+    - false
+    - No
   * - Objects.Interfaces.NamePattern
     - Custom name pattern for interface objects. This field supports macros.
       E.g. if set to ``%n%{suffix}``, interface name will be composed from
       original name and node's custom attribute ``suffix``.
     -
+    - No
+  * - Objects.Interfaces.PeerRetentionTime
+    - Retention time for interface peer information which is no longer confirmed by polls
+    - 30 days
     - No
   * - Objects.Interfaces.UseAliases
     - Control usage of interface aliases (or descriptions). Possible values are:
@@ -1624,6 +1683,10 @@ Configuration`
       configuration polling. See :ref:`snmp` for more information.
     - true
     - No
+  * - Objects.Maintenance.PredefinedPeriods
+    - Predefined object maintenance periods. Use m for minutes, h for hours and d for days.
+    - 1h,8h,1d
+    - No
   * - Objects.MobileDevices.ContainerAutoBind
     - Enable/disable container auto binding for mobile devices. 
     - false
@@ -1636,6 +1699,18 @@ Configuration`
     - Default background color for new network map objects (as RGB value).
     - 0xffffff
     - No
+  * - Objects.NetworkMaps.DefaultHeight
+    - Default network map height.
+    - 850 pixels
+    - No
+  * - Objects.NetworkMaps.DefaultWidth
+    - Default network map width.
+    - 1300 pixels
+    - No
+  * - Objects.NetworkMaps.UpdateInterval
+    - Interval in seconds between automatic map updates.
+    - 60 seconds
+    - No
   * - Objects.Nodes.CapabilityExpirationGracePeriod
     - Grace period (in seconds) for capability expiration after node recovered
       from unreachable state.
@@ -1646,10 +1721,19 @@ Configuration`
       expires if node is not responding for requests via appropriate protocol.
     - 604800
     - No
+  * - Objects.Nodes.ConfigurationPoll.AlwaysCheckSNMP
+    - Always check possible SNMP credentials during configuration poll, even if node is marked as unreachable via SNMP.
+    - true
+    - No
   * - Objects.Nodes.FallbackToLocalResolver
     - Enable/disable fallback to server''s local resolver if node address cannot
       be resolved via zone proxy.
     - false
+    - No
+  * - Objects.Nodes.ReadWinPerfCountersOnDemand
+    - If set to ``true``, list of supported Windows performance counters will be
+      read only when requested by client, otherwise at each configuration poll.
+    - true
     - No
   * - Objects.Nodes.ResolveDNSToIPOnStatusPoll
     - Enable/disable resolve DNS to IP on status poll.
@@ -1766,10 +1850,22 @@ Configuration`
       within. When enabled, empty subnets will be deleted by housekeeping
       process.
     - false
-    - Yes
+    - No
   * - Objects.SyncInterval
     - Interval in seconds between writing object changes to the database.
     - 60
+    - Yes
+  * - PackageDeployment.JobRetentionTime
+    - Retention time in days for completed package deployment jobs. All completed jobs older than specified will be deleted by housekeeping process
+    - 7 days
+    - No
+  * - PackageDeployment.LogRetentionTime
+    - Retention time in days for package deployment log. All records older than specified will be deleted by housekeeping process.
+    - 90 days
+    - No
+  * - PackageDeployment.MaxThreads
+    - Maximum number of threads used for package deployment
+    - 25 threads
     - Yes
   * - RADIUS.AuthMethod
     - RADIUS authentication method to be used (PAP, CHAP, MS-CHAPv1, MS-CHAPv2).
@@ -1819,6 +1915,10 @@ Configuration`
     - Enable/disable reporting server
     - false
     - Yes
+  * - ReportingServer.JDBC.Properties
+    - Additional properties for JDBC connector on reporting server.
+    - 
+    - No
   * - ReportingServer.Hostname
     - The hostname of the reporting server.
     - 127.0.0.1
@@ -1828,8 +1928,9 @@ Configuration`
     - 4710
     - Yes
   * - Scheduler.TaskRetentionTime
-    - Period (in seconds) after which non-recurring scheduled tasks (e.g.
-      Maintenance enter / Maintenance leave) are deleted.
+    - Retention time for completed non-recurrent scheduled tasks. Such tasks
+      will be deleted automatically after given number of seconds since
+      completion time.
     - 86400
     - No
   * - Server.AllowedCiphers
@@ -1934,6 +2035,44 @@ Configuration`
       access rights.
     - true
     - No
+  * - SNMP.Agent.AllowedVersions
+    - A bitmask for SNMP versions allowed by built-in SNMP agent (sum the values
+      to allow multiple versions at once): 1 = version 1, 2 = version 2c, 4 =
+      version 3).
+    - 7
+    - No
+  * - SNMP.Agent.CommunityString
+    - Community string for SNMPv1/v2 requests to built-in SNMP agent.
+    - public
+    - No
+  * - SNMP.Agent.Enable
+    - Enable/disable built-in SNMP agent.
+    - false
+    - Yes
+  * - SNMP.Agent.ListenerPort
+    - Port used by built-in SNMP agent.
+    - 161
+    - Yes
+  * - SNMP.Agent.V3.AuthenticationMethod
+    - Authentication method for SNMPv3 requests to built-in SNMP agent.
+    - None
+    - No
+  * - SNMP.Agent.V3.AuthenticationPassword
+    - Authentication password for SNMPv3 requests to built-in SNMP agent.
+    - 
+    - No
+  * - SNMP.Agent.V3.EncryptionMethod
+    - Encryption method for SNMPv3 requests to built-in SNMP agent.
+    - None
+    - No
+  * - SNMP.Agent.V3.EncryptionPassword
+    - Encryption password for SNMPv3 requests to built-in SNMP agent.
+    - 
+    - No
+  * - SNMP.Agent.V3.UserName
+    - User name for SNMPv3 requests to built-in SNMP agent.
+    - netxms
+    - No
   * - SNMP.Codepage
     - Default server SNMP codepage
     - 
@@ -1974,7 +2113,8 @@ Configuration`
     - false
     - No
   * - SNMP.TrapLogRetentionTime
-    - The time (in days) how long SNMP trap logs are retained.
+    - Retention time in days for logged SNMP traps. All SNMP trap records older
+      than specified will be deleted by housekeeping process.
     - 90
     - No
   * - SNMP.Traps.ProcessUnmanagedNodes
@@ -1995,6 +2135,10 @@ Configuration`
     - Search all zones to match trap/syslog source address to node. 
     - false
     - Yes
+  * - SNMP.Traps.UnmatchedTrapEvent
+    - Enable/disable generation of default event for unmatched SNMP traps.
+    - true
+    - No
   * - Syslog.AllowUnknownSources
     - Enable or disable processing of syslog messages from unknown sources. 
     - false
@@ -2027,6 +2171,10 @@ Configuration`
         - Hostname,then IP - hostname, then syslog message source IP address
     - IP,then hostname
     - Yes
+  * - Syslog.ParseUnknownSourceMessages
+    - Enable or disable parsing of syslog messages received from unknown sources.
+    - false
+    - No
   * - Syslog.RetentionTime
     - Retention time in days for stored syslog messages. All messages older than
       specified will be deleted by housekeeping process.
@@ -2069,6 +2217,14 @@ Configuration`
       number of threads up to this value. When load come back to normal, number
       of threads will be automatically decreased to base size.
     - 64
+    - Yes
+  * - ThreadPool.FileTransfer.BaseSize
+    - Base size for file transfer thread pool.
+    - 2
+    - Yes
+  * - ThreadPool.FileTransfer.MaxSize
+    - Maximum size for file transfer thread pool.
+    - 16
     - Yes
   * - ThreadPool.Main.BaseSize
     - This parameter represents base thread pool size for threads that perform
@@ -2129,6 +2285,10 @@ Configuration`
       result of previous request if it is newer than given interval.
     - 900
     - No
+  * - Topology.AdHocRequest.IncludePhysicalLinks
+    - If set to true, physical links will be added to ad-hoc L2 maps.
+    - false
+    - No
   * - Topology.DefaultDiscoveryRadius
     - Default number of hops from seed node to be added to topology map.
     - 5
@@ -2136,11 +2296,11 @@ Configuration`
   * - Topology.PollingInterval
     - Interval in seconds between topology polls.
     - 1800
-    - Yes
+    - No
   * - Topology.RoutingTableUpdateInterval
     - Interval in seconds between reading routing table from node.
     - 300
-    - Yes
+    - No
   * - UserAgent.DefaultMessageRetentionTime
     - Default user agent message retention time (in minutes).
     - 10800

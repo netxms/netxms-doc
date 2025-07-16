@@ -13,6 +13,7 @@ Administrator Guide
    agent-management
    server-management
    snmp
+   rmon
    user-management
    object-management
    network-discovery

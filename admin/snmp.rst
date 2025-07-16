@@ -7,13 +7,24 @@ SNMP
 SNMP Drivers
 ============
 
-Various SNMP devices might require special measures to get information, e.g. 
-some devices provide additional information for interfaces only under vendor OIDs, etc. 
-To address this, |product_name| provides a concept of SNMP drivers. SNMP driver is detected automatically. 
+Various SNMP devices might require special measures to get information, e.g.
+some devices provide additional information for interfaces only under vendor
+OIDs, etc. To address this, |product_name| provides a concept of SNMP drivers.
+Drivers have auto-detection mechanism, each driver can query additional OIDs to
+determine if it's fitting this device, best fitting driver is selected. 
 
-If SNMP driver was not automatically detected, it's possible to set it manually by specifying driver name in custom attribute ``snmp.driver`` on a node. 
+If specific driver is not detected automatically, `GENERIC` driver is used. In
+this case you can specify a name of specific driver in ``snmp.driver`` custom
+attribute on the node to force it's detection. 
 
-Possible SNMP driver names are: 
+You can globally blacklist specific SNMP drivers by providing comma-separated
+list of their names to ``NetworkDeviceDrivers.BlackList`` server's configuration
+variable. This will prevent incorrect auto-detection of some drivers on
+particular devices. 
+
+List of available drivers is logged to server's log file on server startup. At
+the moment of writing the following drivers were available:
+
   - ARUBA-SW
   - AT
   - BAYSTACK

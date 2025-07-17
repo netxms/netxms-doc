@@ -539,13 +539,28 @@ Executes provided command on server node. Check that user under which
 Execute command on remote node
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Executes provided command name defined in this nodes agent configuration file.
+Executes provided command name defined in this node's agent configuration file.
 To this command can be given parameters in format: ``commandName param1 param2
 param3...`` Check that user under which :file:`nxagentd` process run has
 permission to run this command.
 
-As the :guilabel:`Remote Host` can be used hostname or object name(int format:
-``@objectName``). Second option allows action execution on node behind proxy.
+Several formats are supported in :guilabel:`Remote Host` field. This field
+supports macros. 
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Format
+     - Description
+   * - ``hostname``
+     - Hostname or IP address of agent node. Use ``%a`` macro to get IP address
+       of event source node. 
+   * - ``@name``
+     - Name of the node. Allows to identify a node behind proxy. 
+   * - ``#id``
+     - Object ID of node. ``#%I`` can be used to get ID of event source node.
+       Allows to identify a node behind proxy. 
 
 
 Send notification

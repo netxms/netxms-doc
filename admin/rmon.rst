@@ -7,7 +7,8 @@ Using RMON Data in NetXMS
 What Is RMON?
 =============
 
-RMON (RFC 2819) defines a set of SNMP MIBs that allow network administrators to monitor statistics and events on network segments. RMON provides insight into traffic patterns, performance issues, and unusual activity. Key groups include:
+RMON (RFC 2819) and RMON2 (RFC 4502) defines a set of SNMP MIBs that allow network administrators to monitor statistics and events on network segments. 
+RMON provides insight into traffic patterns, performance issues, and unusual activity. Key groups include:
 
 - **Statistics:** Packet and byte counts, errors, and utilization.
 - **History:** Time-based historical data.
@@ -18,62 +19,58 @@ RMON (RFC 2819) defines a set of SNMP MIBs that allow network administrators to 
 Prerequisites
 =============
 
-- |product_name| server installed and running.
 - SNMP-enabled devices that support RMON (consult device documentation).
 - SNMP credentials configured in |product_name| for target devices.
 
 Configuring NetXMS to Collect RMON Data
 ========================================
 
-Discovering RMON-Capable Devices
----------------------------------
+1. Ensure your network device is configured to support SNMP and RMON OIDs.
+2. Add the device to |product_name| as a node and configure SNMP credentials.
+3. Use the MIB Browser to verify that RMON/RMON2 MIB tree returns data for the device. Base OID for RMON is `1.3.6.1.2.1.16` and for RMON2 extension is `1.3.6.1.2.1.16.9` and `1.3.6.1.2.1.16.10`.
+4. Add required :term:`DCI`\ s for RMON/RMON2 parameters.
 
-1. Ensure your network device is configured to support SNMP and RMON MIBs.
-2. Add the device to |product_name| as a node.
-3. During node polling, |product_name| will automatically discover supported SNMP MIBs, including RMON.
 
-Enabling RMON Data Collection
------------------------------
+How-To: Monitoring Interface Dropped packets with RMON
+=======================================================
 
-- **MIB Browsing:** Open the node in |product_name|, navigate to the :guilabel:`MIB Browser`, and search for RMON MIBs (e.g., ``RMON-MIB``, ``EtherStats``, ``History``).
-- **Data Collection:** Use the Data Collection Configuration to add parameters based on RMON OIDs, such as:
+In this example, we will monitor dropped packets on network interfaces whose expected state is UP. We will use the RMON to collect this data.
 
-  - ``1.3.6.1.2.1.16.1.1.1.1`` (etherStatsIndex)
-  - ``1.3.6.1.2.1.16.1.1.1.10`` (etherStatsOctets)
-  - ``1.3.6.1.2.1.16.2.1.1.2`` (historySampleIndex)
+To monitor dropped packets on all interfaces using RMON:
 
-- **Templates:** Create or modify data collection templates to include RMON parameters for consistent monitoring across similar devices.
+1. Create a new DCI for the device with next configuration:
 
-Setting Up Thresholds and Events
----------------------------------
+  General tab:
+    - DCI origin to SNMP 
+    - Set metric to `1.3.6.1.2.1.16.1.1.1.3.{instance}` (where `{instance}` will be expanded to the interface index by :guilabel:`Instance discovery` poll).
+    - Set data type to `Counter64` or `Counter32` depending on the expected range of values.
+    - Set the Display name to something like "Dropped Packets on {instance-name}".
+  Instance discovery Tab:
+    - Set the Instance discovery method to :guilabel:`Internal Table`
+    - Table name: `Network.Interfaces`
+    - Instance discovery filter:
 
-- Use |product_name| thresholds to trigger alarms or notifications when RMON parameters exceed defined values (e.g., high error rate, utilization spikes).
-- Define event processing rules to automate responses or escalate incidents.
+    .. code-block:: none
 
-Reporting and Visualization
-----------------------------
+      interfaceTypes = [6, 7, 22]; // 6 - ethernetCsmacd, 7 - iso88023Csmacd, 22 - propPointToPointSerial
 
-- RMON data appears in the node's :guilabel:`Graphs` and :guilabel:`Reports` sections.
-- Custom dashboards can display historical and real-time RMON statistics (errors, traffic, host conversations).
-- Use scheduled reports for trending and capacity planning.
+      interface = FindObject($1); //find interface by first column in Network.Interfaces table (interface object id)
+      if (interface == null) return false; // if interface not found, skip this instance
+      if (interface.isLoopback or interface.name == "lo") return false; // skip loopback interfaces
+      if (!(interface.ifType in interfaceTypes)) return false; // skip interfaces that are not in the specified types
+      if (interface.expectedState != InterfaceExpectedState::UP) return false; // skip interfaces that are not expected to be UP
 
-Example: Monitoring Interface Utilization with RMON
-====================================================
+      return [interface.ifIndex, interface.ifName, interface]; // return instance index, name and object for further processing
 
-1. **Add Parameter:** In Data Collection, add ``etherStatsOctets`` to monitor total bytes on an interface.
-2. **Graph Data:** View utilization over time in |product_name| graphs.
-3. **Alarm Configuration:** Set an alarm for "High Utilization" if octet count increases beyond a set threshold.
-4. **Report:** Generate a periodic report showing interface usage trends.
+2. Run an :guilabel:`Instance discovery` poll to create DCIs for all interfaces that match the filter.
 
-Troubleshooting
-===============
+.. note::
 
-- If RMON data is missing, verify SNMP configuration and device support.
-- Use the MIB browser to check for the presence of RMON MIBs.
-- Review |product_name| server logs for SNMP collection errors.
+    An optional threshold can be set on the DCI to trigger an event when dropped packets exceed a certain value.
+
 
 References
 ==========
 
 - `RFC 2819: RMON MIB <https://datatracker.ietf.org/doc/html/rfc2819>`_
-- Device-specific SNMP and RMON configuration guides
+- `RFC 4502: RMON2 MIB <https://datatracker.ietf.org/doc/html/rfc4502>`_

@@ -513,8 +513,10 @@ errors when running the client.
 Web Management Client
 ^^^^^^^^^^^^^^^^^^^^^
 
-The |product_name| web interface is java based and should be deployed into a servlet container to
-run. Minimal supported versions are: Jetty 10, Tomcat 9. The supported Java version is 17 or later.
+The |product_name| web interface is java based and should be deployed into a
+servlet container to run. Servlet container should support servlet-api version
+4. Supported versions are: Jetty 10, 11, 12, Tomcat 9. The supported Java
+version is 17 or later.
 
   1. Install one of the servlet containers that support servlet-api version 4.
 

@@ -14,15 +14,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install LaTeX
+      - name: Install LaTeX and FreeSerif font
         run: |
           sudo apt-get update
-          sudo apt-get install -y latexmk texlive-xetex texlive-latex-extra
-
-      - name: Install FreeSerif font
-        run: | 
-          sudo apt-get update
-          sudo apt-get install fonts-freefont-ttf
+          sudo apt-get install -y latexmk texlive-xetex texlive-latex-extra xindy fonts-freefont-otf
 
       - name: Update TeX packages
         run: |

@@ -804,13 +804,13 @@ Available metrics:
        records for a particular file. The *fileName* parameter is optional. If a parser 
        has multiple files and no *fileName* is specified, the number of processed records 
        will be returned for an arbitrary file.
-   * - LogWatch.Parser.MetricTimestamp(*name*, *[fileName]*)
-     - Parser *name* last metric timestamp — when a parser has more than one file, 
+   * - LogWatch.Parser.MetricTimestamp(*name*, *[fileName]*, *metricName*)
+     - Parser *name* last metric *metricName* timestamp — when a parser has more than one file, 
        the *fileName* parameter can be specified to retrieve the last metric timestamp for a 
        particular file. The *fileName* parameter is optional. If a parser has multiple files 
        and no *fileName* is specified, the timestamp will be returned for an arbitrary file.
-   * - LogWatch.Parser.MetricValue(*name*, *[fileName]*)
-     - Parser *name* last metric value — when a parser has more than one file, 
+   * - LogWatch.Parser.MetricValue(*name*, *[fileName]*, *metricName*)
+     - Parser *name* last metric *metricName* value — when a parser has more than one file, 
        the *fileName* parameter can be specified to retrieve the last metric value for a 
        particular file. The *fileName* parameter is optional. If a parser has multiple files 
        and no *fileName* is specified, the value will be returned for an arbitrary file.

@@ -2,54 +2,26 @@
 Administrator Guide
 ###################
 
-.. toctree::
-   :maxdepth: 1
+Welcome to the NetXMS Administrator Guide. This documentation is organized into logical sections to help you find the information you need quickly.
 
-   preface
-   concepts
-   installation
-   upgrade
-   quickstart
-   agent-management
-   server-management
-   snmp
-   rmon
-   user-management
-   object-management
-   network-discovery
-   data-collection
-   event-processing
-   visualisation
-   grafana-integration
-   operating-system-monitoring
-   file-system-monitoring
-   log-monitoring
-   windows-event-log-synchronization
-   ssh-monitoring
-   service-monitoring
-   web-services-monitoring
-   modbus
-   database-monitoring
-   application-monitoring
-   icmp-ping
-   hardware-monitoring
-   ups-monitoring
-   cluster-monitoring
-   jvm-monitoring
-   hypervisor-monitoring
-   asterisk-monitoring
-   topology
-   assets
-   sla
-   remote-file-management
-   package-manager
-   reporting
-   image-library
-   mobile-console
-   rest-api
-   advanced
-   schedule
-   scripting
-   high-availability-setup
-   appendix
-   glossary
+.. rubric:: Quick Navigation
+
+* **New to NetXMS?** Start with :ref:`getting-started`
+* **Installing NetXMS?** See :ref:`installation`
+* **Setting up monitoring?** Go to :ref:`core-configuration` and :ref:`monitoring`
+* **Need visualization?** Check :ref:`visualization`
+* **Advanced features?** Explore :ref:`advanced-features`
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents
+
+   getting-started/index
+   installation/index
+   core-configuration/index
+   data-collection/index
+   monitoring/index
+   visualization/index
+   automation/index
+   advanced-features/index
+   appendix/index

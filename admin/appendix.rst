@@ -5601,7 +5601,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression.
+  4. Optional parameter that accepts process's owner username regular expression. If not set it means "match any".
+  5. Optional parameter that accepts process's main window title regular expression.
      If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 GDI objects used by process
@@ -5651,7 +5652,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression.
+  4. Optional parameter that accepts process's owner username regular expression. If not set it means "match any".
+  5. Optional parameter that accepts process's main window title regular expression.
      If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 
@@ -5674,7 +5676,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression.
+  4. Optional parameter that accepts process's owner username regular expression. If not set it means "match any".
+  5. Optional parameter that accepts process's main window title regular expression.
      If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 
@@ -5697,7 +5700,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression.
+  4. Optional parameter that accepts process's owner username regular expression. If not set it means "match any".
+  5. Optional parameter that accepts process's main window title regular expression.
      If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 
@@ -5720,7 +5724,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression.
+  4. Optional parameter that accepts process's owner username regular expression. If not set it means "match any".
+  5. Optional parameter that accepts process's main window title regular expression.
      If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 
@@ -5743,7 +5748,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression.
+  4. Optional parameter that accepts process's owner username regular expression. If not set it means "match any".
+  5. Optional parameter that accepts process's main window title regular expression.
      If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 
@@ -5766,7 +5772,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression.
+  4. Optional parameter that accepts process's owner username regular expression. If not set it means "match any".
+  5. Optional parameter that accepts process's main window title regular expression.
      If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 
@@ -5873,7 +5880,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression.
+  4. Optional parameter that accepts process's owner username regular expression. If not set it means "match any".
+  5. Optional parameter that accepts process's main window title regular expression.
      If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 Number of system calls made by process
@@ -5924,7 +5932,8 @@ Parameters:
         - sum - sum of values for all processes named proc
   3. Optional parameter that accepts process's command line regular expression, that
      should match cmd argument. If not set it means "match any".
-  4. Optional parameter that accepts process's main window title regular expression.
+  4. Optional parameter that accepts process's owner username regular expression. If not set it means "match any".
+  5. Optional parameter that accepts process's main window title regular expression.
      If not set it means "match any". Process's window title can be checked only on Windows platform.
 
 USER objects used by process

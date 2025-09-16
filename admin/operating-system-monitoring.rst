@@ -216,7 +216,7 @@ Following parameters are available for this subagent:
        
        For example:
        
-       WMI.Query(root\cimv2, SELECT * FROM Win32_Process WHERE ProcessId=252, Caption)
+       WMI.Query(root\\cimv2, SELECT * FROM Win32_Process WHERE ProcessId=252, Caption)
 
 
 
@@ -228,14 +228,14 @@ Following lists are available for this subagent:
 
 - ACPI.ThermalZones
 - Hardware.NetworkAdapters
-- WMI.Classes(*), argument is WMI namespace (for example root\cimv2). List of available namespaces can also be retrieved using agent list WMI.NameSpaces (output will not contain "root\")
+- WMI.Classes(*), argument is WMI namespace (for example root\\cimv2). List of available namespaces can also be retrieved using agent list WMI.NameSpaces (output will not contain "root\")
 - WMI.NameSpaces
-- WMI.Query(*), arguments are namespace, query, property (for example: WMI.Query(root\cimv2, SELECT * FROM Win32_Process, Caption) - will return all process names)
+- WMI.Query(*), arguments are namespace, query, property (for example: WMI.Query(root\\cimv2, SELECT * FROM Win32_Process, Caption) - will return all process names)
 
 
 
 
-Below list of supported tables for this subagent:
+Following tables are available for this subagent:
 
 - Hardware.NetworkAdapters
 - WMI.Query(*), arguments are namespace and query and it will return query output with column for each attribute (for example: WMI.Query(root\cimv2, SELECT * FROM Win32_Process) - all processes in the system)

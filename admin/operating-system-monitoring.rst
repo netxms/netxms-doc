@@ -238,7 +238,7 @@ Following lists are available for this subagent:
 Following tables are available for this subagent:
 
 - Hardware.NetworkAdapters
-- WMI.Query(*), arguments are namespace and query and it will return query output with column for each attribute (for example: WMI.Query(root\cimv2, SELECT * FROM Win32_Process) - all processes in the system)
+- WMI.Query(*), arguments are namespace and query and it will return query output with column for each attribute (for example: WMI.Query(root\\cimv2, SELECT * FROM Win32_Process) - all processes in the system)
 
 
 

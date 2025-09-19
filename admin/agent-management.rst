@@ -983,7 +983,7 @@ are supported, parameters can be provided along with the metric.
 
 
 ExternalMetricProvider
---------------------------
+----------------------
 
 ``ExternalMetricProvider`` defines command (script) and execution interval in
 seconds. Defined script will be executed regularly and agent will cache list of
@@ -1018,6 +1018,132 @@ Example of agent configuration:
 
   #Example (run /tmp/test.sh every 5 seconds)
   ExternalMetricProvider=/tmp/test.sh:5
+
+
+ExternalDataProvider
+--------------------
+
+``ExternalDataProvider`` is used with external command (script) that produces
+JSON, XML or textual output. Command is regularly executed in the background,
+agent caches its output. Specific elements of the cached data can be accessed
+via agent metrics. 
+
+External data providers are configured as sections in agent configuration file.
+Configuration format can be seen in the following example: 
+
+.. code-block:: ini
+
+  [ExternalDataProvider/myAppInfo]
+  Command = echo '{ "version" : "1.2.5", "queues": {"in" : 10, "out" : 42 }}' 
+  Description = Information about my application
+  ForcePlainTextParser = false
+  PollingInterval = 600
+  Timeout = 1
+
+Above configuration add one agent metric - ``myAppInfo``. This metric accepts
+one parameter - path in JSON or XML document (or PCRE compliant regex with one
+capture group if text parsing is used). E.g. ``myAppInfo(.queues.out)`` metric
+will return value of 42. 
+
+Agent autodetects if output of the command is JSON or XML. ``jq`` is used to
+extract data from JSON, allowing to use complex queries, e.g.
+``myAppInfo(.queues | add)`` will return 52. ``XPath`` is used to extract data
+from XML. 
+
+We can define separate agent metrics for particular data elements by adding
+``.../Metrics`` section to agent configuration:
+
+.. code-block:: ini
+
+  [ExternalDataProvider/myAppInfo/Metrics]
+  myAppVersion = .version
+  myAppInboundQueue = .queues.in
+  myAppOutboundQueue = .queues.out
+  myAppOutboundQueue.description = Number of files in inbound queue
+  myAppOutboundQueue.dataType = int32 
+
+This way in addition to ``myAppInfo`` metric agent will provide
+``myAppVersion``, ``myAppInboundQueue`` and ``myAppOutboundQueue`` metrics.
+``myAppOutboundQueue`` metric will have description and data type set as well.
+
+
+Configuration parameter reference
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 10 60
+
+   * - Name
+     - Required
+     - Description
+   * - [ExternalDataProvider/*name*]
+     - Yes
+     - Section name, where ``name`` is name of the data provider. This name
+       will be used as metric name.
+   * - Command
+     - Yes
+     - This configuration parameter has two possible forms: 
+
+         * ``Command = ["executable", "param1", "param2", ...]`` (exec form)
+         * ``Command = command param1 param2 ...`` (shell form)
+
+       The exec form does not use shell, it launches the executable directly. On Linux
+       full path to the executable should be provided.  On Windows the executable is
+       launched using API's CreateProcess() function, it will search in PATH, but the
+       executable should be with file extension, e.g. ``command.exe``. Both double
+       quotes (``"``) or single quotes (``"``) can be used to enclose the executable
+       and the parameters.
+
+       The shell form uses shell to execute the command. 
+   * - Description
+     - No
+     - Textual description, agents provides it to the server in the list of
+       available metrics. 
+   * - ForcePlainTextParser
+     - No
+     - Use plain text parser even if output looks like JSON or XML.
+       Default value is false.
+   * - PollingInterval
+     - No
+     - Command execution interval in seconds. Default value is 60 seconds. 
+   * - Timeout
+     - No
+     - Timeout in milliseconds for command execution. Default value is defined
+       by ``ExternalMetricProviderTimeout`` agent configuration parameter. 
+
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 10 60
+
+   * - Name
+     - Required
+     - Description       
+   * - [ExternalDataProvider/*name*/Metrics]
+     - No
+     - Section for defining additional agent metrics. ``name`` is name of the data provider.       
+   * - *metricName*
+     - No
+     - ``metricName`` is name of the agent metric that will be added.
+       It should be unique among other agent metrics.
+   * - *metricName*.dataType
+     - No
+     - Metric data type. Possible values:
+
+         * int32
+         * uint32
+         * int64
+         * uint64
+         * string
+         * float
+         * counter32
+         * counter64
+
+       Default value is string. 
+   * - *metricName*.description
+     - No
+     - Textual description of the metric.
 
 
 ExternalTable

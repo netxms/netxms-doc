@@ -36,13 +36,15 @@ device attached to the host add a line in the following format:
 distinguish multiple UPS devices in further requests.
 
 ``device`` is either the name of the serial port (e.g. `COM1:` or `/dev/ttyS0`) or
-the serial number of the USB device. The keyword `ANY` can be used instead of an exact serial
-number to select the first available port.
+the serial number of the USB device. For the MEC0003 protocol, this field should contain
+the USB device instance ID (e.g. `186144F5`). The keyword `ANY` can be used instead of an exact
+serial number or instance ID to select the first available device.
 
 ``protocol`` specifies which communication protocol should be used. Supported protocols are:
 
 * APC
 * BCMXCP - Some of the HP/Compaq, PowerWare, etc.
+* MEC0003 - Off-brand USB UPS devices with VID 0x0001/PID 0x0000 (Windows only, uses Fry's Electronics MEC0003/megatec protocol)
 * MEGATEC
 * METASYS
 * MICRODOWELL
@@ -58,6 +60,16 @@ A sample configuration section for two devices attached via serial ports where o
   [UPS]
   Device = 0:/dev/ttyS0:APC
   Device = 1:/dev/ttyS1:BCMXCP
+
+For USB devices using the MEC0003 protocol on Windows, you can specify the instance ID to distinguish
+between multiple connected devices, or use the `ANY` keyword to match the first available device:
+
+.. code-block:: ini
+
+  # UPS subagent configuration section for MEC0003 devices
+  [UPS]
+  Device = 1:ANY:MEC0003
+  Device = 2:186144F5:MEC0003
 
 
 Once the UPS subagent is configured, you can start monitoring the UPS device status via

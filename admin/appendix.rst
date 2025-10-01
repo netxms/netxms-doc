@@ -472,6 +472,9 @@ Agent configuration file (nxagentd.conf)
        SubAgent parameters. Subagents will be loaded in the same order as they
        appear in configuration file.
      - No defaults
+   * - SyncTimeWithServer
+     - Syncronize time with server on Status poll.
+     - No
    * - SyslogListenPort
      - Listening port number for syslog proxy functionality.
      - 514

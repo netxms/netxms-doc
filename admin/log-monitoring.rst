@@ -122,8 +122,11 @@ In the ``<parser>`` tag you can specify the following options:
 
 In the ``<file>`` tag you should specify full path of log file to apply this
 parser to. To specify Windows Event Log, prepend it's name with asterisk
-(``*``), for example ``*System``. Multiple ``<file>`` tags can be used - in this
-case same rules will be applied to all files.
+(``*``), for example ``*System`` or
+``*Microsoft-Windows-TaskScheduler/Operational`` (check for Full Name in
+properties of a log in Windows Event Viewer for correct log name). Multiple
+``<file>`` tags can be used - in this case same rules will be applied to all
+files.
 
 In the ``<file>`` tag it's possible to use wildcards. Wildcards can be used in
 file name, not in directory names in the path. Two wildcard characters are

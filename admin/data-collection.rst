@@ -524,8 +524,8 @@ First, you have to select what value will be checked:
        <http://en.wikipedia.org/wiki/Mean_deviation>`_.
    * - Diff with previous value
      - Delta between the last and previous values will be used. If DCI data type
-       is string and the last and previous values match, system will use ``0``,
-       and if they don't - ``1``.
+       is string and the last and previous values match, system will use value
+       of ``0`` and value of ``1`` if they don't match. 
    * - Data collection error
      - An indicator of data collection error. Instead of DCI's value, system
        will use ``0`` if data collection was successful, and ``1`` if there was

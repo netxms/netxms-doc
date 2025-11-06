@@ -7481,6 +7481,26 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 Total number of processes in system
 
 
+System.Registry.Value(*)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+  .. versionadded:: 5.2.7
+
+DataType: String
+
+Supported Platforms: Windows
+
+Parameters:
+  1. Key. Should begin with HKEY_CLASSES_ROOT, HKEY_CURRENT_CONFIG,
+     HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE or HKEY_USERS
+  2. Value
+
+Returns data from Windows Registry for provided Key and Value. 
+
+Example: 
+``System.Registry.Value(HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion, ProductName)``
+
+
 System.ServiceState(*)
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -7834,6 +7854,44 @@ Data type: List of String
 Supported Platforms: Windows
 
 Running services' names
+
+
+System.Registry.Keys(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  .. versionadded:: 5.2.7
+
+DataType: List of String
+
+Supported Platforms: Windows
+
+Parameters:
+  1. Key. Should begin with HKEY_CLASSES_ROOT, HKEY_CURRENT_CONFIG,
+     HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE or HKEY_USERS
+
+Returns list of keys under provided Windows Registry Key
+
+Example: 
+``System.Registry.Value(HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion)``
+
+
+System.Registry.Values(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  .. versionadded:: 5.2.7
+
+DataType: List of String
+
+Supported Platforms: Windows
+
+Parameters:
+  1. Key. Should begin with HKEY_CLASSES_ROOT, HKEY_CURRENT_CONFIG,
+     HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE or HKEY_USERS
+
+Returns list of Values under provided Windows Registry Key
+
+Example: 
+``System.Registry.Value(HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion)``
 
 
 System.WindowStations

@@ -1196,6 +1196,13 @@ the following configuration parameters:
                 * \\t - tab
                 * \\u115 - unicode character number 115
            
+   * - MergeSeparators
+     - No
+     - Boolean option (``true`` or ``false``). When set to ``true``, consecutive
+       separator characters are treated as a single separator. Default is ``false``.
+
+       .. versionadded:: 5.2.7
+
    * - InstanceColumns
      - No
      - Comma separated instance column list. 
@@ -1247,6 +1254,7 @@ the following configuration parameters:
   PollingInterval = 60
   ColumnType = columnName:string
   ColumnType = columnName3:string
+  MergeSeparators = false
 
   # With metric parameters
   [ExternalTable/MyTable(*)]

@@ -935,6 +935,8 @@ The following drivers are provided by default with |product_name| installation:
        * AuthToken
        * DisableIPv4 - ``true`` to disable IPv4 usage
        * DisableIPv6 - ``true`` to disable IPv6 usage
+       * LongPolling - ``true`` to use long polling
+       * PollingInterval - interval between polling requests in seconds
        * ParseMode - Text formatting style: ``Markdown``, ``HTML`` or
          ``MarkdownV2``. See Telegram API documentation on formatting syntax:
          https://core.telegram.org/bots/api#formatting-options

@@ -1425,6 +1425,20 @@ as columns in the result set. Three variants for the syntax are available:
   3. Usual NXSL script that returns map with additional columns (where keys are
      column names and values are value for this column) or ``false``.
 
+In Object query object attributes are available just by using their names. E.g.
+instead of ``$object.type`` you can just use ``type``. 
+
+In addition the following constants are available in Object query for convenient
+checking of object type: ``ACCESSPOINT``, ``ASSET``, ``ASSETGROUP``,
+``ASSETROOT``, ``BUSINESSSERVICE``, ``BUSINESSSERVICEPROTOTYPE``,
+``BUSINESSSERVICEROOT``, ``CHASSIS``, ``CLUSTER``, ``COLLECTOR``, ``CONDITION``,
+``CONTAINER``, ``DASHBOARD``, ``DASHBOARDGROUP``, ``DASHBOARDROOT``,
+``DASHBOARDTEMPLATE``, ``INTERFACE``, ``MOBILEDEVICE``, ``NETWORK``,
+``NETWORKMAP``, ``NETWORKMAPGROUP``, ``NETWORKMAPROOT``, ``NETWORKSERVICE``,
+``NODE``, ``RACK``, ``SENSOR``, ``SERVICEROOT``, ``SUBNET``, ``TEMPLATE``,
+``TEMPLATEGROUP``, ``TEMPLATEROOT``, ``VPNCONNECTOR``, ``WIRELESSDOMAIN``,
+``ZONE``. 
+
 .. note::
 
    .. versionadded:: 6.0

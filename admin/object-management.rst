@@ -1383,3 +1383,131 @@ the list of them:
      - Action
      - Restart |product_name| agent on target node
      - |product_name| agent should be available
+
+Object Search
+=============
+
+:guilabel:`Find Object` from :guilabel:`Tools` perspective in the
+:term:`Management Client` provides two ways to search for objects: Filter and
+Query. 
+
+Object filter
+-------------
+
+.. figure:: _images/object_filter.png
+
+Object Filter is a search tool to locate specific objects using several criteria:
+
+  * Search string: Find objects by name, using normal text, a pattern (with *
+    and ? wildcards), or a regular expression.
+  * IP Range: Filter objects to show only those within a specific range of IP
+    addresses.
+  * Class filter: A checklist that lets you select which types of objects to
+    include in the search.
+
+After setting the filters, pressing the "Search" will perform the search and
+display the matching objects in the results table below.
+
+
+Object query
+------------
+
+Object query allows to search objects using NXSL script. Script is executed on
+each object and if it returns ``true`` object is included in the result set, if
+``false`` - not. Script can define additional variables that will be displayed
+as columns in the result set. Three variants for the syntax are available: 
+
+  1. Special syntax with ``with`` block for additional columns calculation. This
+     syntax allows to define metadata for the additional columns such as column
+     title, sorting, etc. 
+  2. Usual NXSL script that returns ``true`` or ``false`` and uses global
+     variables for additional columns.
+  3. Usual NXSL script that returns map with additional columns (where keys are
+     column names and values are value for this column) or ``false``.
+
+.. note::
+
+   .. versionadded:: 6.0
+   With any syntax variant it is possible to hide standard columns from the
+   result set by adding ``@meta(ignore_standard_attributes = true)`` at the
+   beginning of the script.
+
+
+Special syntax:
+
+.. code-block::
+
+  with
+    varName = { code or expression },
+    varName (optional metadata) = { code or expression }
+    /* Might be as many blocks as required.
+     * varName is a name of the variable where result of block of code will be 
+     * assigned. It can be used later in the code in expression or to be 
+     * displayed in the results table as additional column. Metadata is optional 
+     * and should be in parentheses right after varName, has parameter = value
+     * syntax, multiple parameters are separated by comma. 
+     * Possible metadata parameters are: 
+     *   name - column title
+     *   order - "asc"/"desc" - ordering of the column
+     *   visible - true/false - if column is visible in results table
+    */
+  expression
+  /* Short circuit evaluated expression. This expression is executed first and if
+   * it contains not yet calculated varName then variable is calculated and used 
+   * in expression. Expression that should result as true or false as a sign if
+   * this object should be displayed in table or not. No semicolon at the end.
+  */
+
+Example
+~~~~~~~
+
+This example will show how to filter nodes that only have alarms on them, are
+not in maintenance mode and show count of critical alarms on the node. Example
+shows two different options how to write the same script so only one of them
+should be used.
+
+Example with special syntax:
+
+.. code-block::
+
+  with
+      _haveAlarms (visible = false) = { $node->alarms->size > 0 },
+      _numberOfCriticalAlarms (name = "Number of critical alarms", order = "desc") = {
+          total = 0;
+          for (a : $node->alarms) {
+              if (a->severity >= 4) {
+                  total++;
+              }
+          }
+          return total;
+      }
+  type == NODE and !$node->isInMaintenanceMode and _haveAlarms
+
+When special syntax is used, calculation of variables in ``with`` happens only
+if the expression returns true (or while calculation the expression if that
+variable is used in the expression). Because of that we can use ``$node`` when
+calculating _haveAlarms and _numberOfCriticalAlarms in the above example,
+because we will not get into this part of code for objects which are not nodes
+(because our expression starts with ``type == NODE ``). 
+
+
+Example with global variables:
+
+.. code-block::
+  
+  if ($object.type != NODE)
+      return false;
+  
+  global _haveAlarms = $node.alarms.size > 0;
+  global _numberOfCriticalAlarms = 0;
+  for (a : $node.alarms) {
+      if (a.severity >= 4) {
+          _numberOfCriticalAlarms++;
+      }
+  }
+  return !$node.isInMaintenanceMode and _haveAlarms;
+
+With usual NXSL syntax all lines of the script are executed. That's why script
+starts with condition to check if an object is a node, otherwise we will
+encounter an error on non-node objects because ``$node`` variable is set only
+for node objects. 

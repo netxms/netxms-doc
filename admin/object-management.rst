@@ -1484,11 +1484,11 @@ Example with special syntax:
   type == NODE and !$node->isInMaintenanceMode and _haveAlarms
 
 When special syntax is used, calculation of variables in ``with`` happens only
-if the expression returns true (or while calculation the expression if that
-variable is used in the expression). Because of that we can use ``$node`` when
-calculating _haveAlarms and _numberOfCriticalAlarms in the above example,
-because we will not get into this part of code for objects which are not nodes
-(because our expression starts with ``type == NODE ``). 
+if the expression returns true (or while calculating the expression if that
+variable is used in the expression). Because of that we can use ``$node`` in
+_haveAlarms and _numberOfCriticalAlarms calculation in the above example, since
+we will not get into this part of code for objects which are not nodes because
+our expression starts with ``type == NODE``. 
 
 
 Example with global variables:

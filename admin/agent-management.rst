@@ -1023,6 +1023,8 @@ Example of agent configuration:
 ExternalDataProvider
 --------------------
 
+.. versionadded:: 5.2.0
+
 ``ExternalDataProvider`` is used with external command (script) that produces
 JSON, XML or textual output. Command is regularly executed in the background,
 agent caches its output. Specific elements of the cached data can be accessed

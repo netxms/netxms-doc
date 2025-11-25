@@ -5405,9 +5405,8 @@ Data type: Unsigned Integer 64-bit
 Supported Platforms: Linux, Windows
 
 Parameters:
-   1. Physical disk name. Run ``smartctl --scan`` (on Linux) or
-      ``C:\NetXMS\bin\smartctl.exe --scan`` (on Windows) to see list of
-      available disk names. 
+   1. Physical disk name. Use ``PhysicalDisk.Devices`` list or
+      ``PhysicalDisk.Devices`` table to find available disk names. 
 
 Capacity in bytes of provided hard disk.
 
@@ -5420,7 +5419,8 @@ Data type: String
 Supported Platforms: Linux, Windows
 
 Parameters:
-   1. Physical disk name
+   1. Physical disk name. Use ``PhysicalDisk.Devices`` list or
+      ``PhysicalDisk.Devices`` table to find available disk names. 
 
 Device type of provided hard disk.
 
@@ -5433,7 +5433,8 @@ Data type: String
 Supported Platforms: Linux, Windows
 
 Parameters:
-   1. Physical disk name
+   1. Physical disk name. Use ``PhysicalDisk.Devices`` list or
+      ``PhysicalDisk.Devices`` table to find available disk names. 
 
 Firmware version of provided hard disk.
 
@@ -5446,7 +5447,8 @@ Data type: String
 Supported Platforms: Linux, Windows
 
 Parameters:
-   1. Physical disk name
+   1. Physical disk name. Use ``PhysicalDisk.Devices`` list or
+      ``PhysicalDisk.Devices`` table to find available disk names. 
 
 Model of provided hard disk.
 
@@ -5459,7 +5461,8 @@ Data type: Unsigned integer
 Supported Platforms: Linux, Windows
 
 Parameters:
-   1. Physical disk name
+   1. Physical disk name. Use ``PhysicalDisk.Devices`` list or
+      ``PhysicalDisk.Devices`` table to find available disk names. 
 
 Number of power cycles of provided hard disk.
 
@@ -5472,7 +5475,8 @@ Data type: Unsigned integer
 Supported Platforms: Linux, Windows
 
 Parameters:
-   1. Physical disk name
+   1. Physical disk name. Use ``PhysicalDisk.Devices`` list or
+      ``PhysicalDisk.Devices`` table to find available disk names. 
 
 Power on time of provided hard disk.
 
@@ -5485,7 +5489,8 @@ Data type: String
 Supported Platforms: Linux, Windows
 
 Parameters:
-   1. Physical disk name
+   1. Physical disk name. Use ``PhysicalDisk.Devices`` list or
+      ``PhysicalDisk.Devices`` table to find available disk names. 
 
 Serial number of provided hard disk.
 
@@ -5498,7 +5503,8 @@ Data type: String
 Supported Platforms: Linxu, Windows
 
 Parameters:
-   1. Physical disk name
+   1. Physical disk name. Use ``PhysicalDisk.Devices`` list or
+      ``PhysicalDisk.Devices`` table to find available disk names. 
    2. SMART attribute name
 
 
@@ -5510,7 +5516,8 @@ Data type: Integer
 Supported Platforms: Linux, Windows
 
 Parameters:
-   1. Physical disk name
+   1. Physical disk name. Use ``PhysicalDisk.Devices`` list or
+      ``PhysicalDisk.Devices`` table to find available disk names. 
 
 Status of provided hard disk reported by SMART.
 
@@ -5523,7 +5530,8 @@ Data type: Integer
 Supported Platforms: Linux, Windows
 
 Parameters:
-   1. Physical disk name
+   1. Physical disk name. Use ``PhysicalDisk.Devices`` list or
+      ``PhysicalDisk.Devices`` table to find available disk names. 
 
 Temperature of provided hard disk.
 
@@ -7806,6 +7814,16 @@ Supported Platforms: Linux, Windows, FreeBSD
 IP routing table
 
 
+PhysicalDisk.Devices
+~~~~~~~~~~~~~~~~~~~~
+
+Data type: List of String
+
+Supported Platforms: Linux, Windows
+
+Currently available physical disk devices' names based on smartctl output
+
+
 System.ActiveUserSessions
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -8152,7 +8170,7 @@ Example output:
 
 
 Net.Wireguard.Peers
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 Supported Platforms: Linux, BSD, Mac OS X
 
@@ -8184,6 +8202,37 @@ Example output:
   | INTERFACE | PEER_PUBLIC_KEY                              | ENDPOINT                                       | ALLOWED_IPS    | HANDSHAKE_TIMESTAMP | RX   | TX   |
   | gw        | BWEY+dXnkkhl836PVpkDaAwImnFeCQogfZrnVz1Svmo= | [fd42:5c39:7438:816b:216:3eff:fed3:fd0a]:10687 | 192.168.1.2/32 | 1722296581          | 3676 | 1012 |
   | gw        | TN77lQm65yIJIKWGJyWwFSfa8QCuLYasap5m0x+/CBM= | 10.107.72.157:6802                             | 192.168.2.2/32 | 1722296582          | 3676 | 1012 |
+
+
+PhysicalDisk.Devices
+~~~~~~~~~~~~~~~~~~~~
+
+Supported Platforms: Linux, Windows
+
+.. list-table::
+   :widths: 10 10
+   :header-rows: 1
+
+   * - Column name
+     - Data type
+   * - NAME
+     - String
+   * - TYPE
+     - String
+   * - PROTOCOL
+     - String
+   * - MODEL_FAMILY
+     - String
+   * - MODEL_NAME
+     - String
+   * - SERIAL_NUMBER
+     - String
+   * - FIRMWARE_VERSION
+     - String
+   * - CAPACITY
+     - UInt64 
+
+Currently available physical disk devices based on smartctl output
 
 
 System.ActiveUserSessions

@@ -1030,43 +1030,97 @@ JSON, XML or textual output. Command is regularly executed in the background,
 agent caches its output. Specific elements of the cached data can be accessed
 via agent metrics. 
 
+
+Configuring ExternalDataProvider
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 External data providers are configured as sections in agent configuration file.
 Configuration format can be seen in the following example: 
 
 .. code-block:: ini
 
-  [ExternalDataProvider/myAppInfo]
+  [ExternalDataProvider/myApp]
   Command = echo '{ "version" : "1.2.5", "queues": {"in" : 10, "out" : 42 }}' 
   Description = Information about my application
   ForcePlainTextParser = false
   PollingInterval = 600
   Timeout = 1
 
-Above configuration add one agent metric - ``myAppInfo``. This metric accepts
+Above configuration add one agent metric - ``myApp``. This metric accepts
 one parameter - path in JSON or XML document (or PCRE compliant regex with one
-capture group if text parsing is used). E.g. ``myAppInfo(.queues.out)`` metric
+capture group if text parsing is used). E.g. ``myApp(.queues.out)`` metric
 will return value of 42. 
 
 Agent autodetects if output of the command is JSON or XML. ``jq`` is used to
 extract data from JSON, allowing to use complex queries, e.g.
-``myAppInfo(.queues | add)`` will return 52. ``XPath`` is used to extract data
+``myApp(.queues | add)`` will return 52. ``XPath`` is used to extract data
 from XML. 
+
+
+Additional metrics
+~~~~~~~~~~~~~~~~~~
 
 We can define separate agent metrics for particular data elements by adding
 ``.../Metrics`` section to agent configuration:
 
 .. code-block:: ini
 
-  [ExternalDataProvider/myAppInfo/Metrics]
-  myAppVersion = .version
-  myAppInboundQueue = .queues.in
-  myAppOutboundQueue = .queues.out
-  myAppOutboundQueue.description = Number of files in inbound queue
-  myAppOutboundQueue.dataType = int32 
+  [ExternalDataProvider/myApp/Metrics]
+  myApp.Version = .version
+  myApp.Queue.Inbound = .queues.in
+  myApp.Queue.Outbound = .queues.out
+  myApp.Queue.Outbound.description = Number of files in inbound queue
+  myApp.Queue.Outbound.dataType = int32 
 
-This way in addition to ``myAppInfo`` metric agent will provide
-``myAppVersion``, ``myAppInboundQueue`` and ``myAppOutboundQueue`` metrics.
-``myAppOutboundQueue`` metric will have description and data type set as well.
+This way in addition to ``myApp`` metric agent will provide ``myApp.Version``,
+``myApp.Queue.Inbound`` and ``myApp.Queue.Outbound`` metrics.
+``myApp.Queue.Outbound`` metric will have description and data type set as
+well. Dot-separated metric naming here is just an example, other naming
+conventions can be used as well.
+
+``.description`` and ``.dataType`` are special suffixes used to set metric
+description and data type respectively, so you can not have metric names ending
+with these suffixes.
+
+
+Additional metrics with parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Separate agent metrics can also accept parameters, e.g. ``myApp.Queue(*)``
+metric can be defined to access different queues by name (``(*)`` is actually
+optional - agent detects that metric accepts parameter by presence of ``$1``,
+``$2``, ... macros).
+
+.. note::
+   Support for metrics with parameters was added in version 6.0.
+
+
+.. code-block:: ini
+
+  [ExternalDataProvider/myApp/Metrics]
+  myApp.Queue(*) = .queues.$1
+  myApp.Queue(*).description = Number of files in given queue
+  myApp.Queue(*).dataType = int32
+
+
+List metrics
+~~~~~~~~~~~~
+
+We can also have list metrics by adding ``.../Lists`` section to agent
+configuration. There are multiple ways of what jq query can return:
+
+  * Array - all elements are returned as a list
+  * Newline-separated strings - each line is returned as a list item
+  * JSON Object - keys of the object are returned as a list
+
+Below are examples of each case:
+
+.. code-block:: ini
+
+  [ExternalDataProvider/myApp/Lists]
+  myApp.SupportedQueuesArray = .queues|keys
+  myApp.SupportedQueuesStrings = .queues|keys[]
+  myApp.SupportedQueuesKeys = .queues
 
 
 Configuration parameter reference
@@ -1094,7 +1148,7 @@ Configuration parameter reference
        full path to the executable should be provided.  On Windows the executable is
        launched using API's CreateProcess() function, it will search in PATH, but the
        executable should be with file extension, e.g. ``command.exe``. Both double
-       quotes (``"``) or single quotes (``"``) can be used to enclose the executable
+       quotes (``"``) or single quotes (``'``) can be used to enclose the executable
        and the parameters.
 
        The shell form uses shell to execute the command. 
@@ -1127,8 +1181,10 @@ Configuration parameter reference
      - Section for defining additional agent metrics. ``name`` is name of the data provider.       
    * - *metricName*
      - No
-     - ``metricName`` is name of the agent metric that will be added.
-       It should be unique among other agent metrics.
+     - ``metricName`` is name of the agent metric that will be added. It should
+       be unique among other agent metrics and should not end with
+       ``.description`` or ``.dataType``. Value of this parameter is jq or XPath
+       query or regular expression to extract data. 
    * - *metricName*.dataType
      - No
      - Metric data type. Possible values:
@@ -1146,6 +1202,23 @@ Configuration parameter reference
    * - *metricName*.description
      - No
      - Textual description of the metric.
+
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 10 60
+
+   * - Name
+     - Required
+     - Description       
+   * - [ExternalDataProvider/*name*/Lists]
+     - No
+     - Section for defining additional agent lists. ``name`` is name of the data provider.       
+   * - *listName*
+     - No
+     - ``listName`` is name of the agent list that will be added. It should be
+       unique among other agent lists. Value of this parameter is jq or XPath
+       query or regular expression to extract data. 
 
 
 ExternalTable

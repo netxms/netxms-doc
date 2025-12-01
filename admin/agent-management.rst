@@ -1298,8 +1298,9 @@ the following configuration parameters:
        collected synchronously (per request) if this parameter is omitted. 
    * - ColumnType
      - No
-     - Data type of the column. Is set in format columnName:dataTypeName. If
-       column does not have type int32 is used by default. 
+     - Data type of the column. Is set in format ``columnName:dataTypeName``. If
+       column does not have type ``int32`` is used by default (or
+       ``DefaultColumnDataType`` if it is set). 
 
        Possible options:
          * int32
@@ -1310,6 +1311,14 @@ the following configuration parameters:
          * float
          * counter32
          * counter64
+
+   * - DefaultColumnDataType
+     - No
+     - Default data type for columns that do not have an explicit type set via
+       ``ColumnType``. Accepts the same values as ``ColumnType``. Default value
+       is ``int32``. 
+       
+       .. versionadded:: 6.0
 
 .. code-block:: ini
 

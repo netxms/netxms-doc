@@ -5500,12 +5500,26 @@ PhysicalDisk.SmartAttr(*)
 
 Data type: String
 
-Supported Platforms: Linxu, Windows
+Supported Platforms: Linux, Windows
 
 Parameters:
    1. Physical disk name. Use ``PhysicalDisk.Devices`` list or
       ``PhysicalDisk.Devices`` table to find available disk names. 
    2. SMART attribute name
+
+Metric value is extracted from JSON output of ``smartctl --all --json <device>`` command executed by agent. Extraction logic is as follows:
+   
+   * Attempt provided attribute name as full path to JSON element.
+   * If not found, attempt to find object inside "ata_smart_attributes/table" with name equal provided attribute name; if found, return value of element "value".
+   * If not found, attempt to find element with given name inside nvme_smart_health_information_log; if found, return its value.
+
+Examples:
+
+   ``PhysicalDisk.SmartAttr(/dev/sda, /trim/supported)`` - returns whether TRIM is supported on sda disk
+
+   ``PhysicalDisk.SmartAttr(/dev/sda, Raw_Read_Error_Rate)`` - returns raw read error rate from ATA SMART attributes table for sda disk
+
+   ``PhysicalDisk.SmartAttr(/dev/nvme0, available_spare)`` - returns available spare from NVMe SMART health information log for nvme0 disk
 
 
 PhysicalDisk.SmartStatus(*)

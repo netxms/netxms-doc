@@ -1041,6 +1041,8 @@ Configuration format can be seen in the following example:
 
   [ExternalDataProvider/myApp]
   Command = echo '{ "version" : "1.2.5", "queues": {"in" : 10, "out" : 42 }}' 
+  # above is Linux command, on Windows use
+  # Command = echo { "version" : "1.2.5", "queues": {"in" : 10, "out" : 42 }}
   Description = Information about my application
   ForcePlainTextParser = false
   PollingInterval = 600

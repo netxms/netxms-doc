@@ -1442,6 +1442,7 @@ checking of object type: ``ACCESSPOINT``, ``ASSET``, ``ASSETGROUP``,
 .. note::
 
    .. versionadded:: 6.0
+    
    With any syntax variant it is possible to hide standard columns from the
    result set by adding ``@meta(ignore_standard_attributes = true)`` at the
    beginning of the script.

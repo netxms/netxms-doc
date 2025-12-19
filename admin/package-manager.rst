@@ -12,6 +12,14 @@ The package management functionality can upload and execute installers via the
 |product_name| agent, to install other software or upload and extract archive files
 onto target systems. 
 
+  .. warning::
+     Do not use this package management feature to upgrade |product_name| agent
+     installed via system package managers (e.g., apt, dnf, yum). Upgrading
+     an agent that is managed by the distribution package manager may conflict with
+     the system packaging tools, overwrite files tracked by the package system,
+     or leave packages in an inconsistent state. Use your distribution's package
+     manager to update the NetXMS agent on such systems.
+
 To access package management, open the :guilabel:`Configuration` perspective and
 select :guilabel:`Packages`. Software packages are first uploaded to the
 |product_name| server. In order to do this, select :guilabel:`Upload to server`

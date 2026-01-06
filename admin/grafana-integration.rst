@@ -124,7 +124,7 @@ Request info
 * **Data:**
 
   * Minimal JSON configuration is ``queryId`` - id of saved object query.
-  * Additionally, ``rootObjectId`` and user-provided query values can be configured.
+  * Additionally, ``rootObjectId`` and user-provided query values - ``inputFields`` can be configured.
   * Example JSON data:
 
 .. code-block:: json
@@ -132,7 +132,10 @@ Request info
       {
         "rootObjectId": 2,
         "queryId": 1,
-        "values": [ { "key": "value" }, { "key": "value" } ]
+        "inputFields": {
+          "fieldName": "value",
+          "anotherField": "anotherValue"
+        }
       }
 
 Example

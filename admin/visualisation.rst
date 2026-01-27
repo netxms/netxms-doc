@@ -7,257 +7,920 @@ Data and Network visualisation
 
 .. _network_map:
 
-Network maps
+Network Maps
 ============
 
-Network map objects can be found in "Object browser" under "Network Maps". There can be
-created and deleted maps and map groups. Maps can be organized in groups.
+Network maps provide graphical visualization of your network infrastructure,
+showing objects, their relationships, and current status. Maps can be created
+manually with custom layouts or generated automatically from topology data.
 
-.. figure:: _images/Network_maps_in_object_browser.png
+To access network maps:
+
+1. Switch to the :guilabel:`Maps` perspective using the perspective switcher
+   or menu :menuselection:`Window --> Open Perspective --> Maps`.
+
+2. In the :guilabel:`Object Browser` panel, expand :guilabel:`Network Maps`
+   to see all available maps and map groups.
+
+.. figure:: _images/network-maps/Network_maps_in_object_browser.png
+
+   Network maps in Object Browser
+
+
+Map Types Overview
+------------------
+
+|product_name| supports six types of network maps:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 60 20
+
+   * - Type
+     - Description
+     - Auto-updates
+   * - Custom
+     - User-defined map with manual object placement
+     - No
+   * - Layer 2 Topology
+     - Switching/bridging topology based on MAC tables
+     - Yes
+   * - IP Topology
+     - IP routing topology from routing tables
+     - Yes
+   * - Internal Communication
+     - Agent/proxy connections to management server
+     - Yes
+   * - OSPF Topology
+     - OSPF routing domain topology
+     - Yes
+   * - Hybrid Topology
+     - Combined L2/IP/OSPF in single map
+     - Yes
+
+
+.. _netmap-creating:
 
 Creating Maps
 -------------
 
-There are 3 types of map that can be created:
-   * Custom - will be created empty map.
-   * Layer 2 Topology - will create map(if possible) with layer 2 topology of selected object. Will be automatically updated on topology change.
-   * IP Topology - will create map with known IP Topology of selected object. (More about network topology can be found there :ref:`topology`) Will be automatically updated on topology change.
-   * Internal communication topology - map created based on internal communication between server and node (will show SNMP, ICMP, ).
+1. In Object Browser, right-click :guilabel:`Network Maps` or a map group.
 
-.. figure:: _images/network_map_l2.png
+2. Select :guilabel:`Create network map`.
 
-   Network map layer 2
+3. Enter a name and select the map type:
 
-Type of created map affects only on initial map setup.
+   - **Custom**: Empty map for manual creation
+   - **Layer 2 Topology**: Auto-generated from L2 switching data
+   - **IP Topology**: Auto-generated from routing tables
+   - **Internal Communication Topology**: Shows agent/proxy connections
+   - **OSPF Topology**: Shows OSPF routing relationships
+   - **Hybrid Topology**: Combines L2, IP, and OSPF data
 
-Edit Maps
----------
+4. For automatic topology maps, select the initial seed object in the dialog.
 
-.. figure:: _images/network_map_menu.png
+5. Optionally, select an existing map as a template in the :guilabel:`Template network map`
+   field. The template provides initial configuration for the new map including:
+
+   - Map settings (background, size, display mode)
+   - Link defaults (routing, color, width, style)
+   - Filter and link styling scripts
+   - Discovery radius
+   - Decoration elements (group boxes, images)
+   - Text box elements
+
+   Object elements and links are not copied from the template.
+
+.. figure:: _images/network-maps/create-map-dialog.png
+
+   Create Network Map dialog showing all map types
+
+.. figure:: _images/network-maps/l2-topology-seed-selection.png
+
+   Seed object selection for topology map
+
+6. Click :guilabel:`OK`.
+
+.. note::
+
+   :guilabel:`IP Topology` maps are recommended for getting started as they
+   work with standard routing information available on most devices.
+   :guilabel:`Layer 2 Topology` maps require specific protocol support (LLDP,
+   CDP, STP) which may not be available or enabled on all network equipment.
+
+
+Seed Objects and Discovery Radius
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For automatic topology maps, seed objects define the starting points for
+topology discovery. The first seed object is selected when creating the map.
+Additional seed objects can be added in map properties:
+
+1. Open map properties (right-click map > :guilabel:`Properties`).
+
+2. Go to the :guilabel:`Seed Nodes` page and click :guilabel:`Add` to add
+   more seed objects.
+
+.. figure:: _images/network-maps/networkmap-seed-nodes-propertypage.png
+
+   Map properties dialog - Seed Nodes page
+
+3. Go to the :guilabel:`Map Options` page to configure discovery radius:
+
+   - 0 = show seed and directly connected objects only
+   - Higher values = include objects further away
+
+.. figure:: _images/network-maps/map-properties-map-options.png
+
+   Map properties dialog - Map Options page
+
+4. Click :guilabel:`OK`.
+
+The map automatically populates with discovered topology and updates when
+the network changes.
+
+.. figure:: _images/network-maps/l2-topology-result.png
+
+   Generated L2 topology map showing discovered nodes and links
+
+
+.. _netmap-editing:
+
+Editing Maps
+------------
+
+.. figure:: _images/network-maps/network_map_menu.png
+
+   Map context menu
+
 
 Adding Objects
---------------
+~~~~~~~~~~~~~~
 
-Network map can be populated in 2 different ways: automatically and manually.
-Automatically are populated Layer 2, IP Topology and Internal communication topology.
-Object filer (in properties of the map) can be created for automatically populated
-maps to filter out unrequited nodes.
+Network maps can be populated automatically or manually. Layer 2, IP Topology,
+OSPF, Hybrid, and Internal Communication topology maps are populated automatically.
 
-Objects to map can be added in tow ways:
-   1. Just drag and drop object to map from object browser.
-   2. "Add object..." from menu.
+**To add objects manually:**
 
-To remove object from map:
-   * Select object, right click and select "Remove from map" option.
+- **Drag and drop**: Drag objects from Object Browser onto the map
+- **Menu**: Right-click on map > :guilabel:`Add object...` > select object
 
-Adding Links between Objects
-----------------------------
+To use drag and drop, the map editor must be accessible while viewing network
+objects. Either:
+
+- Pop out or pin the map editor window, then switch to :guilabel:`Network` or
+  :guilabel:`Infrastructure` perspective where objects are located, or
+- Use the :guilabel:`Add object...` menu option which works from any perspective
+
+.. figure:: _images/network-maps/drag-drop-object.png
+
+   Dragging a node from Object Browser onto a map
+
+**To remove objects:**
+
+- Select object, right-click > :guilabel:`Remove from map`
+
+.. figure:: _images/network-maps/map-with-nodes.png
+
+   Custom map with connected nodes
+
+
+Adding Links Between Objects
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Objects can be linked with a line.
 
+**To create links:**
 
-To link objects:
-   * Select two of objects with help of CTRL button and press "Link selected objects" button.
+1. Hold :kbd:`Ctrl` and click two objects to select them.
 
-.. figure:: _images/network_map_top_menu.png
+.. figure:: _images/network-maps/link-two-objects.png
 
-To remove the link:
-   * Select line, right click and select "Remove from map" option.
+   Two objects selected before linking
+
+2. Click :guilabel:`Link selected objects` in toolbar, or right-click >
+   :guilabel:`Link selected objects`.
+
+.. figure:: _images/network-maps/link-button-toolbar.png
+
+   Toolbar with Link selected objects button
+
+**To remove links:**
+
+- Select the link, right-click > :guilabel:`Remove from map`
 
 
-**Link properties:**
+Link Properties
+~~~~~~~~~~~~~~~
 
-Select link line, right click and select "Properties".
+Select a link, right-click and select :guilabel:`Properties` to configure:
+
+.. figure:: _images/network-maps/link-properties-dialog.png
+
+   Link properties dialog
+
+- **Link name**: Label displayed on the link
+- **Connector names**: Labels shown near each connected object
+- **Line color**:
+
+  - Default - uses map default color
+  - Based on object status - color reflects selected object(s) status
+  - Custom color - user-defined static color
+  - Script - determined by NXSL script
+  - Link utilization - based on interface bandwidth usage
+
+.. figure:: _images/network-maps/link-color-source.png
+
+   Link color source options
+
+- **Routing algorithm**:
+
+  - Map Default - uses map setting
+  - Direct - straight line
+  - Manhattan - grid-based with right angles
+  - Bend points - manual routing (double-click line to add points)
+
+.. figure:: _images/network-maps/link-routing-bendpoints.png
+
+   Link with manual bend points
+
+- **Label position**: Position of link name and DCI values (50 = middle)
+
+- **Data Source**: Configure DCI values to display on the link
+
+.. figure:: _images/network-maps/link-dci-datasource-config.png
+
+   Link data source configuration
+
+**Data Source Configuration:**
+
+For each data source, configure:
+
+- Data collection item
+- Name (label prefix)
+- Format string
+- For table DCIs: column and instance
+
+If format string is not provided, default formatting with multipliers and
+measurement units is used.
+
+Format string syntax follows Java Formatter specification. Example: ``Text: %.4f``
+
+Additional format specifiers in curly brackets after ``%``:
+
+- ``units`` or ``u`` - add measurement units from DCI properties
+- ``multipliers`` or ``m`` - display with SI multipliers (e.g., 1230000 becomes 1.23 M)
+- Combined: ``%{units,multipliers}f`` or ``%{u,m}f``
+
+.. figure:: _images/network-maps/link_dci_data.png
+
+   Example of DCI data displayed on a link
 
 
-The following properties can be configured:
-   * Link name
-   * Connector names (shown on the link line near each connected object)
-   * Line color
-      * Default - grey
-      * Based on object status - object(s) should be selected
-      * Custom color
-   * Routing algorithm
-      * Map Default - algorithm selected in map properties will be used
-      * Direct - straight line without bend points
-      * Manhattan - line with automatic bend points
-      * Bend points - bend point can be added manually with double click on the
-        line
-   * Label position - defines position of label containing link name and DCI
-     values on the link. 50 means middle of the link.
-   * Data Source (allows to configure DCI values and text near them that will be
-     displayed on a link).
-   * For each Data Source can be configured: Data collection item, name,
-     format string, in case of table DCI also column and instance. If format
-     string is not provided, default formatting including multipliers and
-     measurement units is used.
-
-     Java format string syntax is used, e.g. ``Text: %.4f``, syntax description
-     is available here:
-     http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax.
-
-     Additional format specifier can be provided in curly brackets after
-     ``%`` sign to display multipliers and measurement units, e.g.
-     ``%{units,multipliers}f``.
-
-     Format specifier is comma-separated list supporting the following options:
-
-       - ``units`` - add measurement units from DCI's properties. For
-         :guilabel:`Epoch` time and :guilabel:`Uptime` this will also convert
-         the value.
-       - ``u`` - same as ``units``
-       - ``multipliers`` - display values with multipliers (e.g. 1230000
-         becomes 1.23 M)
-       - ``m`` - same as ``multipliers``
-
-Example of DCI data displayed on a link:
-
-.. figure:: _images/link_dci_data.png
+.. _netmap-decorations:
 
 Decorations
 -----------
 
-Decorations like picture and group box can be added to maps.
-To add picture it should be previously be uploaded to "Image Library".
+Decorations like pictures and group boxes can be added to maps.
+
+.. figure:: _images/network-maps/network_map_decorations.png
+
+   Map decorations example
 
 
-When creating group box you should specify it's size, color and name.
+Group Boxes
+~~~~~~~~~~~
+
+Group boxes visually organize related objects.
+
+1. Right-click on the map canvas.
+
+2. Select :guilabel:`Add decoration` > :guilabel:`Group box`.
+
+3. Configure: title, color, and size.
+
+.. figure:: _images/network-maps/group-box-creation.png
+
+   Group box properties dialog
+
+4. Position behind objects you want to group.
 
 
-.. figure:: _images/network_map_decorations.png
+Images
+~~~~~~
 
+To add an image, first upload it to the :ref:`image-library`, then:
+
+1. Right-click on the map canvas.
+
+2. Select :guilabel:`Add decoration` > :guilabel:`Image`.
+
+3. Select the image from the library.
+
+
+.. _netmap-dci-container:
 
 DCI Container
 -------------
-DCI Container is part of decorations. It can be used to display separate dci values
-on a map.
 
-.. figure:: _images/dci_container_example.png
+DCI Container displays live DCI values on a map.
 
-**Container properties:**
+.. figure:: _images/network-maps/dci_container_example.png
 
-   * Background color
-   * Text color
-   * If border should be shown and it's color
-   * Data Source - there can be configured DCI values and text near them that will be displayed
-      * For each Data Source can be configured: Data collection item,  name,
-        format string (e.g. "Text: %.4f" or "Text: %*s"),  in case of table DCI also column and
-        instance
+   DCI Container example
 
-More examples:
+**To add a DCI Container:**
 
-.. figure:: _images/dci_container_example2.png
+1. Right-click on the map canvas.
 
+2. Select :guilabel:`Add DCI container`.
+
+3. Configure appearance:
+
+   - Background color
+   - Text color
+   - Border (optional) and border color
+
+4. Add data sources:
+
+   - Click :guilabel:`Add`
+   - Select node and DCI
+   - Configure name and format string (e.g., ``Text: %.4f`` or ``%{u,m}f``)
+   - For table DCIs: specify column and instance
+
+.. figure:: _images/network-maps/dci-container-on-map.png
+
+   DCI Container showing live metrics on map
+
+.. figure:: _images/network-maps/dci_container_example2.png
+
+   More DCI Container examples
+
+
+.. _netmap-dci-image:
 
 DCI Image
 ---------
-DCI Image is part of decorations. It can be used to display DCI status change in pictures.
+
+DCI Image displays different images based on DCI values, useful for conditional
+status indicators.
+
+**To add a DCI Image:**
+
+1. Right-click on the map canvas.
+
+2. Select :guilabel:`Add DCI image`.
+
+3. Configure:
+
+   - **Data source**: DCI to evaluate
+   - **Column/Instance**: For table DCIs only
+   - **Default image**: Shown when no rule matches
+
+4. Add rules (click :guilabel:`Add`):
+
+   - **Operation**: Comparison operator (>, <, =, etc.)
+   - **Value**: Threshold value
+   - **Image**: Image to display when rule matches
+   - **Comment**: Optional description
+
+.. figure:: _images/network-maps/dci-image-rules.png
+
+   DCI Image rules configuration
+
+**Important**: Rules are processed top to bottom. Order from most specific to
+least specific.
+
+**Example rule order for temperature:**
+
+.. code-block:: none
+
+   > 80  => critical.png    (checked first)
+   > 60  => warning.png     (checked second)
+   > 0   => normal.png      (checked third)
 
 
-**DCI image properties**
-   * Data source - DCI which data will be taken to process picture display rules
-   * Column - required only for table DCI
-   * Instance - required only for table DCI
-   * Default image - image that will be displayed if no rule is applicable on current value
-   * Rules
-      * For each rule can be configured: operation,  value,  comment and image that will be displayed if this rule is applicable
+.. _netmap-text-box:
 
-Hints:
+Text Box
+--------
 
-To use image it should be first uploaded to image library.
+Text boxes display static text with optional drill-down navigation.
+
+**To add a Text Box:**
+
+1. Right-click on the map canvas.
+
+2. Select :guilabel:`Add text box`.
+
+3. Configure:
+
+   - **Text**: Content to display
+   - **Font size**: Text size
+   - **Colors**: Text and background colors
+   - **Drill-down object**: Optional target for click navigation
+
+.. figure:: _images/network-maps/text-box-properties.png
+
+   Text Box properties dialog
+
+.. figure:: _images/network-maps/text-box-drilldown-config.png
+
+   Text Box drill-down object selection
 
 
-Rules are processed from up to down, so if you want to describe in rules
-something like:
+.. _netmap-layout:
 
-   * DCI > 3 => image1
-   * DCI > 2 => image2
-   * DCI > 4 => image3
+Layout and Display Options
+--------------------------
 
-They should go in this sequence:
-
-   * DCI > 4 => image3
-   * DCI > 3 => image1
-   * DCI > 2 => image2
+Layout and display options apply to objects, not decorations.
 
 
-Object Layout and display options
----------------------------------
-All object layout properties and display options are applicable only on objects,
-not on decorations.
+Map Size
+~~~~~~~~
+
+Map size defines the canvas dimensions for the network map. This is particularly
+important for automatically layouted maps, as the layout algorithm uses these
+dimensions to position objects.
+
+To configure map size:
+
+1. Open map properties (right-click map > :guilabel:`Properties`).
+
+2. Go to the :guilabel:`Map Options` page.
+
+3. Set :guilabel:`Width` and :guilabel:`Height` values in pixels.
+
+For automatic topology maps, larger dimensions provide more space for the layout
+algorithm to spread objects, resulting in less cluttered visualization.
 
 
 Grid
 ~~~~
-   * Align to grid - will move all objects to grids
-   * Snap to grid - all objects will be moved in grids and it will not be possible to place them not inside grid.
-   * Show grid - will show grid according to which objects are located.
 
-.. figure:: _images/network_map_top_menu.png
+- **Align to grid**: Move all objects to grid positions
+- **Snap to grid**: Constrain object movement to grid
+- **Show grid**: Display grid lines
 
+.. figure:: _images/network-maps/network_map_top_menu.png
 
-Layout
-~~~~~~
-Objects can be placed manually on a map or can be chosen one of automatic layouts:
-   * Spring
-   * Radial
-   * Horizontal tree
-   * Vertical tree
-   * Sparse vertical tree
+   Map toolbar
 
 
-If there is chosen automatic layout, then after each refresh object best matching place
-will be recalculated. So if new object is add - it is just required to refresh map to have
-correctly placed objects.
-
-
-If there is chosen manual layout, then after each object movement map should be saved,
-to save the new place of object.
-
-
-Display object as
+Layout Algorithms
 ~~~~~~~~~~~~~~~~~
 
-   * Show status background - will display background behind object image according to it's state.
-   * Show status icon - will display icon of object state near each object
-   * Show status frame - will display frame around object icon according to it's state
-   * Floor plan - will display nodes as adjustable rectangles. This can be used to display hardware placement on room plan.
+Objects can be positioned manually or using automatic layouts:
+
+- **Manual**: No automatic positioning (default for Custom maps)
+- **Spring**: Force-directed layout
+- **Radial**: Circular arrangement from center
+- **Horizontal tree**: Left-to-right hierarchy
+- **Vertical tree**: Top-to-bottom hierarchy
+- **Sparse vertical tree**: Vertical tree with more spacing
+
+.. figure:: _images/network-maps/layout-algorithms-menu.png
+
+   Layout algorithm selection menu
+
+With automatic layout, positions recalculate on each refresh. With manual
+layout, save the map after moving objects.
 
 
-Routing
-~~~~~~~
-Default routing type for whole map:
-   * Direct - objects are connected by links drawn to shortest route
-   * Manhattan - objects are connected by grid-based links
+Display Options
+~~~~~~~~~~~~~~~
+
+- **Show status background**: Colored background based on object status
+- **Show status icon**: Status icon overlay on objects
+- **Show status frame**: Colored frame around objects based on status
+- **Floor plan**: Objects as resizable rectangles for physical layout
+
+.. figure:: _images/network-maps/status-display-options.png
+
+   Display options menu with status settings
+
+.. figure:: _images/network-maps/map-with-status-icons.png
+
+   Map showing objects with status icons
+
+
+Object Display Mode
+~~~~~~~~~~~~~~~~~~~
+
+Objects can be displayed as:
+
+- Icons (default)
+- Small labels
+- Large labels
+- Status icon
+- Floor plan
+
+.. figure:: _images/network-maps/display-modes-comparison-icons.png
+
+   Display mode: Icons
+
+.. figure:: _images/network-maps/display-modes-comparison-small-labels.png
+
+   Display mode: Small Labels
+
+.. figure:: _images/network-maps/display-modes-comparison-large-labels.png
+
+   Display mode: Large Labels
+
+.. figure:: _images/network-maps/display-modes-comparison-status-icon.png
+
+   Display mode: Status Icon
+
+.. figure:: _images/network-maps/display-modes-comparison-floor-plan.png
+
+   Display mode: Floor Plan
+
+.. figure:: _images/network-maps/floor-plan-mode.png
+
+   Map in floor plan mode with resizable rectangles
+
+
+Default Link Routing
+~~~~~~~~~~~~~~~~~~~~
+
+- **Direct**: Straight lines
+- **Manhattan**: Grid-based with right angles
 
 
 Zoom
 ~~~~
-Map can be zoomed in and out with help of top menu buttons and
-to predefined percentage selected from menu.
+
+Map can be zoomed using toolbar buttons or selecting a percentage from the menu.
 
 
-Object display options
-~~~~~~~~~~~~~~~~~~~~~~
-Objects can be displayed in 3 ways:
-   * Icons
-   * Small labels
-   * Large labels
+.. _netmap-public-access:
 
+Public Access
+-------------
+
+When |product_name| WebUI is configured, network maps can be shared publicly
+via a direct URL without requiring authentication. This is useful for displaying
+maps on information screens or sharing with users who don't have system accounts.
+
+**To enable public access:**
+
+1. Right-click on a network map in Object Browser.
+
+2. Select :guilabel:`Enable public access...`
+
+3. A dialog appears with:
+
+   - **Access token**: Unique token for this map's public access
+   - **Direct access URL**: Full URL to access the map
+
+4. Copy the URL and share it as needed.
+
+The URL format is::
+
+   {BaseURL}/nxmc-light.app?auto&kiosk-mode=true&token={token}&map={mapId}
+
+The map will be displayed in kiosk mode without navigation elements, suitable
+for dashboards and information displays.
+
+.. note::
+
+   Public access requires WebUI to be properly configured with a base URL.
+   Each time you enable public access, a new token is generated.
+
+
+.. _netmap-background:
 
 Map Background
 --------------
-It can be set background for map:
-   * Colour
-   * Image - image should be uploaded to "Image Library" before.
-   * Geographic Map - place on map is chose with help of zoom and coordinates
+
+Background options:
+
+- **Color**: Solid background color
+- **Image**: Upload to :ref:`image-library` first, then select
+- **Geographic Map**: Specify latitude, longitude, and zoom level
+
+.. figure:: _images/network-maps/background-image-config.png
+
+   Image background selection from Image Library
+
+.. figure:: _images/network-maps/background-geomap-config.png
+
+   Geographic map background configuration
+
+Use backgrounds to show physical placement on floor plans or geographic locations.
+
+.. figure:: _images/network-maps/networkmap_geomap.png
+
+   Map with geographic background
 
 
-This can be used to show object physical please on map or on building plan.
+.. _netmap-filter-script:
 
-Examples:
+Object Filter Script
+--------------------
 
-.. figure:: _images/networkmap_geomap.png
+Filter scripts control which objects appear on automatic topology maps.
+
+1. Open map properties.
+
+2. Go to the :guilabel:`Filter` tab.
+
+.. figure:: _images/network-maps/map-properties-filter.png
+
+   Map properties - Filter script configuration
+
+3. Enter an NXSL script returning ``true`` (include) or ``false`` (exclude).
+
+4. Enable :guilabel:`Filter objects` option.
+
+**Context variables:**
+
+- ``$object`` or ``$node``: Object being evaluated
+- ``$map``: The NetworkMap object
+
+**Example - include only nodes:**
+
+.. code-block:: c
+
+   return $object.isNode;
+
+**Example - exclude nodes in maintenance:**
+
+.. code-block:: c
+
+   return !$node.isInMaintenanceMode;
+
+**Example - include only specific subnet:**
+
+.. code-block:: c
+
+   if ($node.ipAddr.inSubnet("10.1.0.0", 16))
+      return true;
+   return false;
+
+
+.. _netmap-link-styling-script:
+
+Link Styling Script
+-------------------
+
+Link styling scripts dynamically modify link appearance during map updates.
+
+1. Open map properties.
+
+2. Go to the :guilabel:`Link Styling Script` section.
+
+.. figure:: _images/network-maps/map-properties-link-styling.png
+
+   Map properties - Link styling script configuration
+
+3. Enter an NXSL script that modifies the ``$link`` object.
+
+**Example - set link width based on bandwidth:**
+
+.. code-block:: c
+
+   iface = $link.interface1;
+   if (iface != null) {
+      speed = iface.speed;
+      if (speed >= 10000000000)
+         $link.setWidth(4);  // 10G+
+      else if (speed >= 1000000000)
+         $link.setWidth(3);  // 1G
+      else
+         $link.setWidth(2);  // Below 1G
+   }
+
+**Example - add interface descriptions as connector names:**
+
+.. code-block:: c
+
+   if ($link.interface1 != null)
+      $link.setConnectorName1($link.interface1.description);
+   if ($link.interface2 != null)
+      $link.setConnectorName2($link.interface2.description);
+
+For complete NXSL reference including all available methods and attributes for
+``$link`` object, see `NetworkMapLink class <https://netxms.org/documentation/nxsl-latest/#class-networkmaplink>`_
+in the NXSL documentation.
+
+
+.. _netmap-reference:
+
+Reference Tables
+----------------
+
+
+Map Types
+~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 55 10 10
+
+   * - Type
+     - Description
+     - Auto-updates
+     - Seed Required
+   * - Custom
+     - User-defined manual map
+     - No
+     - No
+   * - Layer 2 Topology
+     - Switching/bridging topology
+     - Yes
+     - Yes
+   * - IP Topology
+     - IP routing topology
+     - Yes
+     - Yes
+   * - Internal Communication
+     - Agent/proxy connections
+     - Yes
+     - Yes (auto)
+   * - OSPF Topology
+     - OSPF routing topology
+     - Yes
+     - Yes
+   * - Hybrid Topology
+     - Combined L2/IP/OSPF
+     - Yes
+     - Yes
+
+.. figure:: _images/network-maps/ospf-topology-map.png
+
+   OSPF topology map showing router relationships
+
+.. figure:: _images/network-maps/hybrid-topology-map.png
+
+   Hybrid topology map combining L2/IP/OSPF
+
+
+Element Types
+~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Type
+     - Description
+   * - Object
+     - Managed |product_name| object (node, interface, etc.)
+   * - Decoration
+     - Group box or static image
+   * - DCI Container
+     - Live DCI value display
+   * - DCI Image
+     - Dynamic image based on DCI value
+   * - Text Box
+     - Text annotation with optional drill-down
+
+.. figure:: _images/network-maps/element-types-overview.png
+
+   All element types shown on one map
+
+
+Link Types
+~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 25 55
+
+   * - Type
+     - Visual
+     - Description
+   * - Normal
+     - Solid line
+     - Standard connection
+   * - VPN
+     - Dashed
+     - VPN tunnel
+   * - Multilink
+     - Double line
+     - Aggregated links (LAG)
+   * - Agent Tunnel
+     - Red indicator
+     - Agent tunnel connection
+   * - Agent Proxy
+     - Green indicator
+     - Agent proxy
+   * - SSH Proxy
+     - Cyan indicator
+     - SSH proxy
+   * - SNMP Proxy
+     - Yellow indicator
+     - SNMP proxy
+   * - ICMP Proxy
+     - Blue indicator
+     - ICMP proxy
+   * - Sensor Proxy
+     - Default color
+     - Sensor proxy
+   * - Zone Proxy
+     - Magenta indicator
+     - Zone proxy
+
+
+Link Color Sources
+~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Source
+     - Description
+   * - Default
+     - Uses map default color
+   * - Object Status
+     - Based on selected object(s) status
+   * - Custom Color
+     - User-defined static color
+   * - Script
+     - Determined by NXSL script
+   * - Link Utilization
+     - Based on interface utilization
+   * - Interface Status
+     - Based on interface operational status
+
+
+Layout Algorithms
+~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Algorithm
+     - Description
+   * - Manual
+     - User positions objects
+   * - Spring
+     - Force-directed layout
+   * - Radial
+     - Circular arrangement
+   * - Horizontal Tree
+     - Left-to-right tree
+   * - Vertical Tree
+     - Top-to-bottom tree
+   * - Sparse Vertical Tree
+     - Spread-out vertical tree
+
+
+Link Routing
+~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Algorithm
+     - Description
+   * - Default
+     - Uses map setting
+   * - Direct
+     - Straight line
+   * - Manhattan
+     - Grid-based with right angles
+   * - Bendpoints
+     - User-defined routing points
+
+
+Link Styles
+~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Style
+     - Description
+   * - Default
+     - System default (solid)
+   * - Solid
+     - Continuous line
+   * - Dash
+     - Dashed line
+   * - Dot
+     - Dotted line
+   * - Dash-Dot
+     - Alternating dash and dot
+   * - Dash-Dot-Dot
+     - Dash and two dots
+
+
+NXSL Classes Reference
+~~~~~~~~~~~~~~~~~~~~~~
+
+For scripting with network maps, refer to the NXSL documentation:
+
+- `NetworkMap class <https://netxms.org/documentation/nxsl-latest/#class-networkmap>`_ - Map object available as ``$map``
+- `NetworkMapLink class <https://netxms.org/documentation/nxsl-latest/#class-networkmaplink>`_ - Link object available as ``$link``
+
 
 Dashboards
 ==========

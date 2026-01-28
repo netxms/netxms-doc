@@ -40,9 +40,11 @@ Two wildcard characters are supported: ``*`` - represents zero, one or multiple
 characters. ``?`` - represents any single character. Setting `Platform` to ``*``
 would mean any platform. ``Linux*`` would mean both 32 and 64 bit Linuxes.
 
-`Type` defines package type. This defines how the agent should process the package
-when installing it. The meaning of the `Command` field depends on the package type. See
-information in the table below. 
+`Type` defines package type. This defines how the agent should process the
+package when installing it. The meaning of the `Command` field depends on the
+package type, see information in the table below. Putting ``@`` at the beginning
+of `Command` enables macro expansion (``@`` character is stripped from the
+command).
 
 The following types of package files are supported by package management:
 

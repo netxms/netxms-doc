@@ -502,6 +502,8 @@ When adding or modifying a threshold, you will see the following dialog:
 
 .. figure:: _images/threshold_configuration_dialog.png
 
+    Threshold configuration dialog
+
 
 First, you have to select what value will be checked:
 
@@ -1009,7 +1011,6 @@ request.
     DCI configuration access control property page
 
 
-
 SNMP
 ----
 
@@ -1019,11 +1020,26 @@ version for data collection.
 
 .. figure:: _images/dci_snmp_page.png
 
+    DCI configuration SNMP property page
+
 
 Windows Performance Counters
 ----------------------------
 
+This page provides additional options for Windows Performance Counters data
+collection.
+
+.. note::
+
+   Some Windows performance counters, such as
+   ``\Processor Information(_Total)\% Processor Utility``, require the
+   **Sample count** to be set to 2. This is because certain performance counters
+   need to be queried twice to calculate a delta value. 
+
 .. figure:: _images/dci_wpc_page.png
+
+    DCI configuration Windows Performance Counters property page
+
 
 .. _dci-other-options-label:
 
@@ -1032,16 +1048,29 @@ Other options
 
 Other available options:
 
-    - Show last value in object tooltip - shows DCI last value on tooltip that
-      is shown on network maps.
-    - Show last value in object overview - shows DCI last value on
-      :guilabel:`Overview`->\ :guilabel:`Last Values` page.
-    - Use this DCI for node status calculation - Uses value returned by this DCI
+
+    - `Show last value in object tooltips and large labels on maps` - last value
+      of this DCI is shown in tooltips and large labels on network maps. 
+    - `Show last value in object overview` - last value of this DCI is shown in
+      :guilabel:`Last Values` section of :guilabel:`Overview` tab. 
+    - `Use this DCI for node status calculation` - Uses value returned by this DCI
       as a status, that participate in object status calculation. Such kind of
       DCI should return integer number from 0 till 4 representing object status.
-    - Related object - object that is related to collected DCI. Related object
-      can be set by instance discovery filter script and accessed in NXSL from
-      DCI object. 
+    - `Hide in view mode` - hides DCI from Data Collection tab when it is in view
+      mode. Useful for DCIs that are used only for internal calculations. 
+    - `Agent cache mode` - override node level agent cache mode setting for
+      this DCI.
+    - `Multiplier degree` - set fixed multiplier degree for this DCI. This setting
+      is used for display purposes only, however will be used when macro
+      %<{format-specifier}name> is used.   
+    - `Related object` - object that is related to collected DCI, e.g. node's
+      network interface. Related object can be set by instance discovery filter
+      script and accessible in NXSL from DCI object. 
+    - `Interpretation` - allows to specify that DCI collects network traffic
+      value. Used by network maps to display traffic information.
+    - `Tag` -  free-form text string that can be used to tag DCIs. Allows to
+      filter DCIs in Data Collection tab, match DCIs to display on dashboards,
+      find DCIs from NXSL scripts, etc.
 
 
 .. figure:: _images/dci_other_opt_page.png
@@ -1163,25 +1192,32 @@ Agent cache mode can be configured:
     settings) in DCI properties on :guilabel:`Other Options` page.
 
 
-
-
-
 .. _last-values:
 
 Data Collection tab
 ===================
 
-Data Collection tab provides information about all data collected
-on a node: DCI last value, last collection timestamp and threshold status.
+Data Collection tab allows to view collected data and change configuration of
+DCIs. There are two modes - view and edit. In view mode the following
+information is displayed for each DCI: ID, display name, last value, last
+collection timestamp and threshold status.
 
-It is possible to check last values or raw last values in textual format or as a
-chart by right clicking on DCI and selecting corresponding display format.
+.. note::
 
+    In view mode, instance discovery prototypes are not displayed. Additionally,
+    disabled or unsupported DCIs may not be visible by default. Settings in the
+    context menu control whether these DCIs are displayed.
+
+Double-clicking a a DCI in view mode opens line chart for this DCI. Other types
+of charts and history of values is available from context menu of a DCI. 
 
 .. figure:: _images/dci_last_values.png
 
 
-Click on :guilabel:`Edit mode` to obtain more detaled view.
+Click on :guilabel:`Edit mode` to switch to edit mode. In this mode all DCIs
+configured on a node are displayed with detailed information including: ID,
+display name, origin, metric, units, data type, polling interval, retention
+time, tag, status, configured thresholds, template name, related object name. 
 
 
 .. figure:: _images/dci_last_values_edit.png
@@ -1232,7 +1268,7 @@ mode enabled in the following way:
 
 
 
-3. Configure agent catching mode as per instructions :ref:`above
+3. Configure agent caching mode as per instructions :ref:`above
    <agent-catch-configuration>`.
 
  

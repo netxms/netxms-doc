@@ -1020,6 +1020,8 @@ Example of agent configuration:
   ExternalMetricProvider=/tmp/test.sh:5
 
 
+.. _external-data-provider:
+
 ExternalDataProvider
 --------------------
 
@@ -1113,7 +1115,7 @@ configuration. There are multiple ways of what jq query can return:
 
   * Array - all elements are returned as a list
   * Newline-separated strings - each line is returned as a list item
-  * JSON Object - keys of the object are returned as a list
+  * JSON Object - keys of the object are returned as list items
 
 Below are examples of each case:
 

@@ -1296,7 +1296,7 @@ Predefined Object Tools
 the list of them:
 
 .. list-table::
-   :widths: 35 25 70 30
+   :widths: 70 20 60 30
    :header-rows: 1
 
    * - Name

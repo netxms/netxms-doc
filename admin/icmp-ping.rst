@@ -128,7 +128,7 @@ Single-value metrics
 
 .. list-table::
    :header-rows: 1
-   :widths: 36 64
+   :widths: 40 60
 
    * - Metric
      - Description
@@ -171,7 +171,7 @@ Tables
 
 .. list-table::
    :header-rows: 1
-   :widths: 36 64
+   :widths: 40 60
 
    * - Table
      - Description

@@ -77,7 +77,7 @@ metrics provided by it:
 
 .. list-table::
    :header-rows: 1
-   :widths: 50 30 200
+   :widths: 25 10 35
 
    * - Metric Name
      - Type

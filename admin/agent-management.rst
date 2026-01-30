@@ -1130,7 +1130,7 @@ Configuration parameter reference
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 10 60
+   :widths: 35 15 60
 
    * - Name
      - Required
@@ -1173,7 +1173,7 @@ Configuration parameter reference
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 10 60
+   :widths: 35 15 60
 
    * - Name
      - Required
@@ -1208,7 +1208,7 @@ Configuration parameter reference
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 10 60
+   :widths: 35 15 60
 
    * - Name
      - Required
@@ -1250,7 +1250,7 @@ the following configuration parameters:
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 10 70
+   :widths: 35 15 60
 
    * - Name
      - Required

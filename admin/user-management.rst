@@ -479,7 +479,7 @@ Server parameters controlling LDAP synchronization:
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 70 10
+   :widths: 35 50 20
 
    * - Variable
      - Description
@@ -610,7 +610,7 @@ Active Directory
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 70
+   :widths: 30 70
 
    * - Variable
      - Value
@@ -648,7 +648,7 @@ OpenLDAP
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 70
+   :widths: 30 70
 
    * - Variable
      - Value
@@ -708,7 +708,7 @@ server configuration variables:
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 60 20
+   :widths: 30 60 20
 
    * - Variable
      - Description

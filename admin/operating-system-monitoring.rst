@@ -145,7 +145,7 @@ Following parameters are available for this subagent:
 
 
 .. list-table::
-   :widths: 60 100
+   :widths: 80 100
    :header-rows: 1
    :class: longtable
 

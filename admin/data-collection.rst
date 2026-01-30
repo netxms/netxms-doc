@@ -566,7 +566,7 @@ functions can be used for all data types. Below is a compatibility table:
 
 
 .. list-table:: 
-   :widths: 25 10 12 9 10 12 9 9 9
+   :widths: 20 10 10 10 10 10 10 10 10
    :header-rows: 1
    :stub-columns: 1   
 
@@ -711,7 +711,7 @@ System will pass the following parameters to events generated as a
 reaction to single-value DCI threshold violation:
 
 .. list-table::
-   :widths: 10 20 60
+   :widths: 10 25 60
    :header-rows: 1
 
    * - Parameter number
@@ -770,7 +770,7 @@ For table threshold violation the following parameters are passed to generated
 events:
 
 .. list-table::
-   :widths: 10 20 60
+   :widths: 10 25 60
    :header-rows: 1
 
    * - Parameter number
@@ -797,7 +797,7 @@ For events generated on threshold's return to inactive state (default event is
 ``SYS_THRESHOLD_REARMED``), event parameter list is different:
 
 .. list-table::
-   :widths: 10 20 60
+   :widths: 10 25 60
    :header-rows: 1
 
    * - Parameter number
@@ -843,7 +843,7 @@ For table DCI threshold rearm the following parameters are passed to generated
 events:
 
 .. list-table::
-   :widths: 10 20 60
+   :widths: 10 25 60
    :header-rows: 1
 
    * - Parameter number
@@ -902,7 +902,7 @@ Instance Discovery Methods
 The following instance discovery methods are available:
 
 .. list-table::
-   :widths: 25 15 60
+   :widths: 25 20 55
    :header-rows: 1
 
    * - Method

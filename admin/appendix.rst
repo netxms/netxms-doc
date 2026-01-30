@@ -535,7 +535,7 @@ Server configuration file (netxmsd.conf)
 ========================================
 
 .. list-table::
-  :widths: 20 40 25
+  :widths: 21 35 24
   :header-rows: 1
   :class: longtable
 
@@ -763,7 +763,7 @@ Configuration`
 
 .. list-table::
   :class: longtable
-  :widths: 10 25 8 4
+  :widths: 20 25 10 6
   :header-rows: 1
 
   * - Parameter

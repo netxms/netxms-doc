@@ -54,7 +54,7 @@ Database definition supports the following parameters:
 
 
 .. list-table::
-   :widths: 20 70 20
+   :widths: 30 70 20
    :header-rows: 1
 
    * - Parameter
@@ -314,7 +314,7 @@ in the DB2 section of the INI configuration file. The details are below.
 Database definition supports the following parameters:
 
 .. list-table::
-   :widths: 20 20 70 20
+   :widths: 35 20 70 20
    :header-rows: 1
 
    * - Parameter
@@ -440,7 +440,7 @@ name of the metric that is being requested (e.g.,
 ``db2.metric.to.request`` from the database with the id **1** will be returned.
 
 .. list-table::
-   :widths: 40 20 20 70
+   :widths: 40 20 25 40
    :header-rows: 1
 
    * - Parameter
@@ -1031,7 +1031,7 @@ enclosed in brackets to the name of the metric that is being requested (e.g.,
 returned.
 
 .. list-table::
-   :widths: 40 20 20 70
+   :widths: 40 20 25 40
    :header-rows: 1
 
    * - Metric
@@ -1092,7 +1092,7 @@ no id provided ``<name>`` of the section will be used as a database id.
 Each database definition supports the following parameters:
 
 .. list-table::
-   :widths: 50 200 200
+   :widths: 20 40 30
    :header-rows: 1
 
    * - Parameter
@@ -1160,7 +1160,7 @@ Provided metrics
 ----------------
 
 .. list-table::
-   :widths: 50 100
+   :widths: 45 55
    :header-rows: 1
 
    * - Metric
@@ -1345,7 +1345,7 @@ same PostgreSQL server instance.
 Each server definition supports the following parameters:
 
 .. list-table::
-   :widths: 50 200 200
+   :widths: 20 40 20
    :header-rows: 1
 
    * - Parameter
@@ -1438,7 +1438,7 @@ PostgreSQL.AllDatabases list.
 Following table shows the database server metrics:
 
 .. list-table::
-   :widths: 50 20 100
+   :widths: 50 20 35
    :header-rows: 1
 
    * - 	Metric
@@ -1541,7 +1541,7 @@ Following table shows the database server metrics:
 Following table shows the database metrics:
 
 .. list-table::
-   :widths: 50 20 100
+   :widths: 50 20 35
    :header-rows: 1
 
    * - 	Metric

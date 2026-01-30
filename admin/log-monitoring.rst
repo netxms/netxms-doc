@@ -143,7 +143,7 @@ In file and folder names the following macros can be used:
 
 .. list-table::
    :header-rows: 1
-   :widths: 50 200 200
+   :widths: 30 50 20
 
    * - Option
      - Description
@@ -785,7 +785,7 @@ Available metrics:
 
 
 .. list-table::
-   :widths: 15 150
+   :widths: 50 50
    :header-rows: 1
 
    * - Metric Name
@@ -826,7 +826,7 @@ Available lists:
 
 
 .. list-table::
-   :widths: 15 150
+   :widths: 50 50
    :header-rows: 1
 
    * - List Name

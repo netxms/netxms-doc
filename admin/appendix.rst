@@ -7883,7 +7883,7 @@ System.Services
 
 Data type: List of String
 
-Supported Platforms: Windows
+Supported Platforms: Linux, Windows
 
 Running services' names
 
@@ -8373,7 +8373,7 @@ Running processes information
 
 System.Services
 ~~~~~~~~~~~~~~~
-Supported Platforms: Windows
+Supported Platforms: Linux, Windows
 
 .. list-table::
    :widths: 10 10

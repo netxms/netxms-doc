@@ -590,6 +590,24 @@ for dashboards and information displays.
    Each time you enable public access, a new token is generated.
 
 
+Delegated Access
+----------------
+
+Network maps can display objects that users don't have direct read access to,
+using the **Delegated read** access right. This is useful for creating
+overview maps for users who should see network visualization without having
+full access to browse the underlying nodes.
+
+Delegated read only allows viewing objects through the map interface. Users
+cannot browse these objects directly in Object Browser or access them outside
+the map context. 
+
+**Delegated read** can be set on specific objects, on containers or on root
+objects, e.g. on :guilabel:`Infrastructure Services`.
+
+.. versionadded:: 5.0
+
+
 .. _netmap-background:
 
 Map Background
@@ -1379,6 +1397,25 @@ a loop, follow these steps:
 .. figure:: _images/DashboardRotationConfig.png
 
    Sample configuration of two dashboards displayed in a loop for 40 seconds each.
+
+
+Delegated Access
+----------------
+
+Dashboards can display data from objects that users don't have direct read
+access to, using the **Delegated read** access right. This enables creating
+monitoring dashboards for users who should see specific visualizations without
+having full access to the underlying infrastructure.
+
+Delegated read only allows viewing object data through the dashboard. Users
+cannot browse these objects directly or access data outside the dashboard
+context.
+
+**Delegated read** can be set on specific objects, on containers or on root
+objects, e.g. on :guilabel:`Infrastructure Services`.
+
+.. versionadded:: 5.0
+
 
 Tutorials
 ---------

@@ -620,6 +620,12 @@ The following object access rights can be granted:
      - Modify object's properties (except access control).
    * - Create child objects
      - Create child objects (or bind existing) under this object.
+   * - Delegated read
+     - Allow viewing this object's information and DCI data when the object is
+       displayed on a network map or dashboard that the user has read access to.
+       This enables creating dashboards and maps for users who should see
+       visualizations but not have direct access to browse the underlying objects.
+       Requires the user to have Read access to the map or dashboard itself.
    * - Delete
      - Delete this object.
    * - Control
@@ -654,8 +660,7 @@ The following object access rights can be granted:
    * - Control maintenance mode
      - 
    * - Take screenshot
-     - Allow user to take screenshot of this node's screen (Windows only). 
-
+     - Allow user to take screenshot of this node's screen (Windows only).
 
 
 Object Details

@@ -240,108 +240,76 @@ Configuration example
 MQTT
 ====
 
-This is a subagent that can be used to collect data from devices and sensors
-that use the MQTT protocol for communication. The subagent can be used to
-connect to existing MQTT brokers, listen to user specified topics, map posted
-data to metrics and generate events.
+This subagent collects data from devices and sensors that use the MQTT protocol.
+It connects to MQTT brokers, subscribes to topics, and provides received data as
+agent metrics. It can also generate events when messages are received.
 
-There are three ways how to set up data collection for MQTT:
+There are three ways to set up MQTT data collection:
 
-1. **Topic to metric mapping** - specify MQTT topic to agent metric mapping in
-   agent configuration file using ``[MQTT/Brokers/broker_name/Metrics]``
-   section. In this case DCIs are created with origin ``NetXMS Agent``. This
-   approach is suitable when MQTT message payload is used directly as metric
-   value.
+1. **MQTT origin in DCI** - use ``MQTT`` origin in DCI properties with format
+   ``broker_name:mqtt_topic``. No agent configuration needed beyond broker
+   connection - agent subscribes to topics on first request. Use when message
+   payload is the metric value directly.
 
-2. **MQTT origin in DCI** - use the ``MQTT`` origin in DCI properties. The
-   metric has the following format ``broker_name:mqtt_topic``, where
-   ``broker_name`` is name specified in the agent configuration file. The agent
-   which performs MQTT data collection is selected automatically. If the node is
-   in a zone, the zone proxy is used. If a MQTT proxy is specified in the node
-   properties, that will be used. With this approach there is no need to specify
-   metrics in the agent configuration file - when the server requests MQTT topic
-   for the first time, the agent subscribes to that topic.
+   The agent which performs MQTT data collection is selected automatically. If
+   the node is in a zone, the zone proxy is used. If a MQTT proxy is specified
+   in the node properties, that will be used.         
 
-3. **Structured data extraction** - use extractors to parse JSON, XML or textual
-   data from MQTT topics. This approach is suitable when MQTT messages contain
-   structured data (JSON, XML) and you need to extract specific elements as
-   metrics. Extractors are configured using
-   ``[MQTT/Brokers/broker_name/Extractors/...]`` sections. See
-   :ref:`mqtt-structured-data` for details. 
+2. **Topic to metric mapping** - map MQTT topics to agent metrics in agent
+   configuration file. DCIs should be created with Agent origin. Use when
+   message payload is the metric value directly.
 
-Configuration file
-------------------
-
-These are configuration sections and parameters for the MQTT subagent:
-
-.. list-table::
-	:header-rows: 1
-	:widths: 45	25 20 20
-
-	* - Section
-	  - Parameters
-	  - Format
-	  - Description
-	* - [MQTT/Brokers/broker_name]
-	  - Hostname, Port, Login, Password
-	  - String
-	  - This section holds the data needed to connect to the MQTT broker
-	* - [MQTT/Brokers/broker_name/Events]
-	  - ``EVENT_NAME``
-	  - String
-	  - This section is optional and allows to specify event that would be generated when MQTT topic gets new value
-	* - [MQTT/Brokers/broker_name/Metrics]
-	  - ``Metric.Name``
-	  - Dot separated string
-	  - This section is optional and sets mapping of data posted to MQTT topics to agent metrics
-	* - [MQTT/Brokers/broker_name/Extractors/extractor_name]
-	  - Topic, Description, ForcePlainTextParser
-	  - String, Boolean
-	  - This section defines a structured data extractor. See :ref:`mqtt-structured-data`
-	* - [MQTT/Brokers/broker_name/Extractors/extractor_name/Metrics]
-	  - ``Metric.Name``
-	  - Dot separated string
-	  - Metrics extracted from structured data using jq/XPath queries
-	* - [MQTT/Brokers/broker_name/Extractors/extractor_name/Lists]
-	  - ``List.Name``
-	  - Dot separated string
-	  - Lists extracted from structured data using jq/XPath queries
+3. **Structured data extraction** - parse JSON, XML or text from MQTT messages
+   and extract specific elements as metrics. Use when messages contain
+   structured data.
 
 
-Configuration example
----------------------
+Basic configuration
+-------------------
+
+To use the MQTT subagent, load it and configure at least one broker connection:
 
 .. code-block:: ini
 
-  SubAgent = mqtt.nsm
+   SubAgent = mqtt.nsm
 
-  [MQTT/Brokers/Local]
-  Hostname = 10.10.10.3
+   [MQTT/Brokers/MyBroker]
+   Hostname = 10.10.10.3
+
+This minimal configuration connects to an MQTT broker. You can then create DCIs
+with ``MQTT`` origin using metric format ``MyBroker:topic/name`` to collect data
+from any topic.
 
 
-Configuration example with metric and event configuration
----------------------------------------------------------
+Topic to metric mapping
+-----------------------
+
+To map MQTT topics directly to agent metrics, add a ``Metrics`` section:
 
 .. code-block:: ini
 
-  SubAgent = mqtt.nsm
+   SubAgent = mqtt.nsm
 
-  [MQTT/Brokers/Office]
-  Hostname = mqtt.office.radensolutions.com
+   [MQTT/Brokers/Office]
+   Hostname = mqtt.office.example.com
 
-  [MQTT/Brokers/Office/Events]
-  MQTT_METERHUB_RAW_DATA = "cmnd/5C:CF:7F:25:79:D6/#"
+   [MQTT/Brokers/Office/Metrics]
+   MeterHub.Telemetry.RSSI = "tele/5C:CF:7F:25:79:D6/RSSI"
+   MeterHub.Telemetry.Time = "tele/5C:CF:7F:25:79:D6/TIME"
 
-  [MQTT/Brokers/Office/Metrics]
-  MeterHub.Telemetry.RSSI = "tele/5C:CF:7F:25:79:D6/RSSI"
-  MeterHub.Telemetry.Time = "tele/5C:CF:7F:25:79:D6/TIME"
+This creates two agent metrics: ``MeterHub.Telemetry.RSSI`` and
+``MeterHub.Telemetry.Time``. Each returns the last message payload received on
+its configured topic. Create DCIs with ``NetXMS Agent`` origin to collect these.
 
-This configuration will connect to an MQTT broker Office at the Hostname.
-Whenever data is published to the topic ``cmnd/5C:CF:7F:25:79:D6/#``, the event
-``MQTT_METERHUB_RAW_DATA`` will be triggered. It will also provide two metrics,
-``MeterHub.Telemetry.RSSI`` and ``MeterHub.Telemetry.Time`` which will report data
-received on the topics ``tele/5C:CF:7F:25:79:D6/RSSI`` and ``tele/5C:CF:7F:25:79:D6/TIME``
-respectively.
+To generate events when messages arrive, add an ``Events`` section:
+
+.. code-block:: ini
+
+   [MQTT/Brokers/Office/Events]
+   MQTT_METERHUB_RAW_DATA = "cmnd/5C:CF:7F:25:79:D6/#"
+
+Event ``MQTT_METERHUB_RAW_DATA`` will be generated whenever data is published to
+any topic matching the pattern. MQTT wildcards (``+``, ``#``) are supported.                     
 
 
 .. _mqtt-structured-data:
@@ -351,23 +319,15 @@ Structured data extraction
 
 .. versionadded:: 5.2.0
 
-Extractors allow parsing JSON, XML or textual data from MQTT topics. When a
-message is received on the configured topic, the agent caches and parses its
-content. Specific elements of the cached data can then be accessed via agent
-metrics. This is similar to :ref:`ExternalDataProvider
+Extractors parse JSON, XML or text from MQTT messages and provide specific
+elements as metrics. This is similar to :ref:`ExternalDataProvider
 <external-data-provider>` but for MQTT data sources.
 
-Agent autodetects if the message payload is JSON or XML. ``jq`` syntax is used
-to extract data from JSON, ``XPath`` is used for XML. If ``ForcePlainTextParser``
-is set to true, the payload is treated as plain text and PCRE regular expression
-with one capture group is used for extraction.
+The agent autodetects JSON and XML payloads. Use ``jq`` syntax for JSON queries,
+``XPath`` for XML. Set ``ForcePlainTextParser = true`` to use PCRE regex with
+one capture group for text extraction.
 
-
-Configuring extractors
-~~~~~~~~~~~~~~~~~~~~~~
-
-Extractors are configured as sections in agent configuration file. The section
-name format is ``[MQTT/Brokers/broker_name/Extractors/extractor_name]``.
+**Basic extractor setup:**
 
 .. code-block:: ini
 
@@ -379,20 +339,14 @@ name format is ``[MQTT/Brokers/broker_name/Extractors/extractor_name]``.
    [MQTT/Brokers/Office/Extractors/SensorData]
    Topic = sensors/temperature/room1
    Description = Temperature sensor data
-   ForcePlainTextParser = false
 
-Above configuration subscribes to the topic ``sensors/temperature/room1`` and
-creates a generic metric ``SensorData(*)``. This metric accepts one parameter -
-a path in JSON or XML document (or regex if text parsing is used). For example,
-if the topic receives JSON ``{"temperature": 23.5, "humidity": 45}``, the metric
-``SensorData(.temperature)`` will return ``23.5``.
+This subscribes to the topic and creates a generic metric ``SensorData(*)``.
+If the topic receives ``{"temperature": 23.5, "humidity": 45}``, then
+``SensorData(.temperature)`` returns ``23.5``.
 
+**Defining named metrics:**
 
-Defining metrics
-~~~~~~~~~~~~~~~~
-
-Additional named metrics can be defined for specific data elements by adding
-a ``Metrics`` subsection:
+Add a ``Metrics`` subsection to create metrics for specific data elements:
 
 .. code-block:: ini
 
@@ -401,117 +355,30 @@ a ``Metrics`` subsection:
    Room1.Temperature.description = Current temperature in Room 1
    Room1.Temperature.dataType = float
    Room1.Humidity = .humidity
-   Room1.Humidity.description = Current humidity in Room 1
    Room1.Humidity.dataType = int32
 
-This configuration adds ``Room1.Temperature`` and ``Room1.Humidity`` metrics
-that directly return the extracted values without requiring query parameters.
-
-``.description`` and ``.dataType`` are special suffixes used to set metric
-description and data type respectively, so metric names cannot end with these
-suffixes.
-
-Metrics can also accept parameters using ``$1``, ``$2``, etc. placeholders:
+Use ``.description`` and ``.dataType`` suffixes to set metric properties.
+Metrics can accept parameters using ``$1``, ``$2``, ... placeholders:
 
 .. code-block:: ini
 
-   [MQTT/Brokers/Office/Extractors/SensorData/Metrics]
    Room1.Sensor(*) = .sensors.$1
-   Room1.Sensor(*).description = Sensor value by name
-   Room1.Sensor(*).dataType = float
 
+**Defining list metrics:**
 
-Defining lists
-~~~~~~~~~~~~~~
-
-List metrics can be defined by adding a ``Lists`` subsection. The jq query can
-return:
-
-* Array - all elements are returned as list items
-* Newline-separated strings - each line is returned as a list item
-* JSON Object - keys of the object are returned as list items
-
-Below are examples of each case based on a topic that receives the following
-JSON:  ``{"temperature": 23.5, "humidity": 45}``
+Add a ``Lists`` subsection for list metrics. The query can return arrays,
+newline-separated strings, or JSON objects (returns keys):
 
 .. code-block:: ini
 
    [MQTT/Brokers/Office/Extractors/SensorData/Lists]
-   Room1.AvailableSensors = .|keys
-   Room1.AvailableSensors = .|keys[]
-   Room1.AvailableSensors = .
-
-
-Extractor configuration reference
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. list-table::
-   :header-rows: 1
-   :widths: 25 10 65
-
-   * - Parameter
-     - Required
-     - Description
-   * - [MQTT/Brokers/*broker*/Extractors/*name*]
-     - Yes
-     - Section name, where ``broker`` is the broker name and ``name`` is the
-       extractor name. The extractor name will be used as the base metric name.
-   * - Topic
-     - Yes
-     - MQTT topic to subscribe to.
-   * - Description
-     - No
-     - Textual description of the extractor.
-   * - ForcePlainTextParser
-     - No
-     - If set to ``true``, treat payload as plain text even if it looks like
-       JSON or XML. Default is ``false``.
-
-
-.. list-table::
-   :header-rows: 1
-   :widths: 25 10 65
-
-   * - Parameter
-     - Required
-     - Description
-   * - [MQTT/Brokers/*broker*/Extractors/*name*/Metrics]
-     - No
-     - Section for defining named metrics.
-   * - *metricName*
-     - No
-     - Metric name and extraction query. The query uses jq syntax for JSON,
-       XPath for XML, or regex for plain text.
-   * - *metricName*.dataType
-     - No
-     - Metric data type. Possible values: ``int32``, ``uint32``, ``int64``,
-       ``uint64``, ``string``, ``float``, ``counter32``, ``counter64``.
-       Default is ``string``.
-   * - *metricName*.description
-     - No
-     - Textual description of the metric.
-
-
-.. list-table::
-   :header-rows: 1
-   :widths: 25 10 65
-
-   * - Parameter
-     - Required
-     - Description
-   * - [MQTT/Brokers/*broker*/Extractors/*name*/Lists]
-     - No
-     - Section for defining list metrics.
-   * - *listName*
-     - No
-     - List name and extraction query.
-   * - *listName*.description
-     - No
-     - Textual description of the list.
+   Room1.AvailableSensorsFromArray = .|keys
+   Room1.AvailableSensorsFromStrings = .|keys[]
+   Room1.AvailableSensorsFromObjects = .
 
 
 Complete example
-~~~~~~~~~~~~~~~~
+----------------
 
 .. code-block:: ini
 
@@ -540,10 +407,8 @@ Complete example
 
    [MQTT/Brokers/IoT/Extractors/WeatherStation/Lists]
    Weather.AvailableReadings = .|keys
-   Weather.AvailableReadings.description = List of available weather readings
 
-With this configuration, if the topic ``weather/station1/data`` receives the
-following JSON message:
+If topic ``weather/station1/data`` receives:
 
 .. code-block:: json
 
@@ -554,12 +419,156 @@ following JSON message:
      "wind": {"speed": 12.3, "direction": "NW"}
    }
 
-The following metrics will be available:
+The following values will be available for the metrics:
 
+* ``WeatherStation(.temp)`` returns ``22.5`` (generic metric with query)
 * ``Weather.Temperature`` returns ``22.5``
 * ``Weather.Humidity`` returns ``65``
 * ``Weather.Pressure`` returns ``1013.25``
 * ``Weather.WindSpeed`` returns ``12.3``
 * ``Weather.WindDirection`` returns ``NW``
-* ``WeatherStation(.temp)`` returns ``22.5`` (generic metric)
-* ``Weather.AvailableReadings`` returns list: ``temp``, ``humidity``, ``pressure``, ``wind``
+* ``Weather.AvailableReadings`` returns list: ``temp``, ``humidity``,
+  ``pressure``, ``wind``
+
+
+Configuration reference
+-----------------------
+
+Broker connection
+~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 10 65
+
+   * - Parameter
+     - Required
+     - Description
+   * - [MQTT/Brokers/*name*]
+     - Yes
+     - Section name, where ``name`` is the broker name used in DCI metrics
+       and other configuration sections.
+   * - Hostname
+     - Yes
+     - MQTT broker hostname or IP address.
+   * - Port
+     - No
+     - MQTT broker port. Default is ``1883``.
+   * - Login
+     - No
+     - Username for MQTT broker authentication.
+   * - Password
+     - No
+     - Password for MQTT broker authentication.
+
+
+Events
+~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 10 65
+
+   * - Parameter
+     - Required
+     - Description
+   * - [MQTT/Brokers/*name*/Events]
+     - No
+     - Section for event configuration.
+   * - *EVENT_NAME*
+     - No
+     - Event name and MQTT topic pattern. Event is generated when a message
+       is received on matching topic. MQTT wildcards (``+``, ``#``) are
+       supported.
+
+
+Metrics (topic mapping)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 10 65
+
+   * - Parameter
+     - Required
+     - Description
+   * - [MQTT/Brokers/*name*/Metrics]
+     - No
+     - Section for direct topic-to-metric mapping.
+   * - *metricName*
+     - No
+     - Metric name and MQTT topic. Returns last received message payload.
+       MQTT wildcards are supported.
+
+
+Extractors
+~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 10 65
+
+   * - Parameter
+     - Required
+     - Description
+   * - [MQTT/Brokers/*broker*/Extractors/*name*]
+     - No
+     - Section name. ``name`` becomes the generic metric name (with ``(*)``).
+   * - Topic
+     - Yes
+     - MQTT topic to subscribe to.
+   * - Description
+     - No
+     - Textual description shown in metric list.
+   * - ForcePlainTextParser
+     - No
+     - If ``true``, parse payload as plain text using regex with one capture
+       group instead of JSON/XML. Default is ``false``.
+
+
+Extractor metrics
+~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 10 65
+
+   * - Parameter
+     - Required
+     - Description
+   * - [MQTT/Brokers/*broker*/Extractors/*name*/Metrics]
+     - No
+     - Section for named metrics extracted from structured data.
+   * - *metricName*
+     - No
+     - Metric name and extraction query (jq for JSON, XPath for XML, regex
+       for text). Use ``$1``, ``$2``, ... for parameterized metrics.
+   * - *metricName*.dataType
+     - No
+     - Data type: ``int32``, ``uint32``, ``int64``, ``uint64``, ``string``,
+       ``float``, ``counter32``, ``counter64``. Default is ``string``.
+   * - *metricName*.description
+     - No
+     - Textual description shown in metric list.
+
+
+Extractor lists
+~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 10 65
+
+   * - Parameter
+     - Required
+     - Description
+   * - [MQTT/Brokers/*broker*/Extractors/*name*/Lists]
+     - No
+     - Section for list metrics extracted from structured data.
+   * - *listName*
+     - No
+     - List name and extraction query. Query should return array, newline-
+       separated strings, or object (returns keys).
+   * - *listName*.description
+     - No
+     - Textual description shown in list browser.

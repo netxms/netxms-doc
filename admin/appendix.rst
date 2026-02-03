@@ -685,6 +685,14 @@ Server configuration file (netxmsd.conf)
     - Maximum log file size in bytes, used only if ``LogRotationMode`` is set to
       2. This parameter supports (K, M, G, T suffixes).
     - 16M
+  * - ManagementAgentAddress
+    - Specifies an alternate address for connecting to the agent on the local
+      management node. When set, the server uses this address instead of the
+      management node's primary IP address when communicating with its own agent.
+      This is useful when running the server and agent in Docker containers, where
+      the internal container IP may differ from the address where the agent is
+      accessible.
+    - Empty string
   * - Module
     - Additional server module to be loaded at server startup. You can use more
       then one ``Module`` parameters to load multiple modules.

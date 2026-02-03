@@ -7597,6 +7597,29 @@ Number of seconds since system boot
   On Windows this metric is provided by winperf subagent
 
 
+USB.ConnectedCount(*)
+~~~~~~~~~~~~~~~~~~~~~
+
+Data type: Int32
+
+Supported Platforms: Windows
+
+Parameters:
+   1. VID - Vendor ID in hexadecimal format (required)
+   2. PID - Product ID in hexadecimal format (optional)
+
+Number of connected USB devices matching specified Vendor ID (VID) and optionally
+Product ID (PID). VID must be specified. If PID is omitted, all devices with the
+given VID are counted.
+
+Example usage:
+
+.. code-block:: text
+
+   USB.ConnectedCount(046D)        # Count all Logitech devices (VID 046D)
+   USB.ConnectedCount(046D,C52B)   # Count Logitech Unifying Receivers
+
+
 X509.Certificate.ExpirationDate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

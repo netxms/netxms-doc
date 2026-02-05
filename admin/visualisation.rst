@@ -943,339 +943,849 @@ For scripting with network maps, refer to the NXSL documentation:
 Dashboards
 ==========
 
-Dashboards are defined by administrator and allow to combine any available
-visualization components with data from multiple sources in order to create
-high-level views to see network (or parts of it) health at a glance. For
-example, below is a dashboard showing traffic information from core router, as
-well as CPU usage from vital nodes:
+Dashboards combine visualization components with data from multiple sources to
+create high-level views for monitoring network health at a glance. Administrators
+create dashboards to display charts, status indicators, alarm lists, geographic
+maps, and other elements in a customizable grid layout.
 
-.. figure:: _images/DashboardExample.png
+.. figure:: _images/dashboards/dashboard-example.png
 
-There are two ways to access dashboards:
+   Example dashboard showing traffic information and CPU usage
 
-Open dashboard from Object Browser
+Accessing Dashboards
+--------------------
 
-- Open dashboard from :guilabel:`Object Browser`
-- Switch to :guilabel:`Dashboard` perspective and select dashboard with
-  left-click
+To access dashboards, switch to the :guilabel:`Dashboard` perspective and select
+the desired dashboard from the object tree on the left.
 
-Configuration
--------------
+.. _dashboards-creating:
 
-Dashboards is a special type of objects created in :guilabel:`Dashboards` tree.
-To create a new dashboard, right click on :guilabel:`Dashboards` root object or
-any other existing dashboard and select :guilabel:`Create dashboard`. To
-configure dashboard content, open object's properties and go to
-:guilabel:`Dashboard Elements:guilabel:` page. Here you can define number of
-columns and manage list of elements. Press :guilabel:`Add:guilabel:` to add new
-element. You will be prompted with element type selection dialog:
+Creating Dashboards
+-------------------
 
-.. figure:: _images/DashboardProperties.png
+Dashboards are objects created in the :guilabel:`Dashboards` container in the
+object tree. To create a new dashboard:
 
-When a new element is added, you can edit it by double-clicking on it's record in
-the elements list, or by pressing the :guilabel:`Edit` button. Each element have
-:guilabel:`Layout` property page which controls the element's layout inside the
-dashboard, and one or more element type specific pages to control element's
-appearance and displayed information. The following element types are
-available:
+1. Right-click on :guilabel:`Dashboards` root or any existing dashboard
+2. Select :guilabel:`Create dashboard`
+3. Enter a name for the dashboard
+4. Open the dashboard's properties to configure elements
 
-Label
-~~~~~
+Dashboard Properties
+~~~~~~~~~~~~~~~~~~~~
 
-Text label with configurable text and colors.
+To configure dashboard content, open the object's properties and navigate to
+:guilabel:`Dashboard Elements`. Here you can define the number of columns and
+manage the list of elements.
 
-.. figure:: _images/dashboard_labelW.png
+.. figure:: _images/dashboards/dashboard-properties.png
 
-Line Chart
-~~~~~~~~~~
+   Dashboard properties dialog
 
-Line chart.
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
 
-.. figure:: _images/dashboard_line_charW.png
+   * - Property
+     - Description
+   * - Number of columns
+     - Defines the grid width for element layout
+   * - Scrollable
+     - Enable vertical scrolling when content exceeds viewport height
 
-Bar Chart
-~~~~~~~~~
+Press :guilabel:`Add` to add a new element. You will be prompted with an element
+type selection menu.
 
-Bar chart.
+.. figure:: _images/dashboards/dashboard-element-type-selection.png
 
-.. figure:: _images/dashboard_bar_chart.png
+   Element type selection menu
 
-Pie Chart
-~~~~~~~~~
+When a new element is added, double-click on its record in the elements list or
+press :guilabel:`Edit` to configure it. Each element has a :guilabel:`Layout`
+property page controlling the element's position within the dashboard, plus one
+or more element-specific pages.
 
-Pie chart.
+.. _dashboard-templates:
 
-.. figure:: _images/dashboard_pie_chartW.png
+Dashboard Templates
+~~~~~~~~~~~~~~~~~~~
 
-Status Chart
-~~~~~~~~~~~~
+Dashboard templates allow you to create reusable dashboard designs that
+automatically generate dashboards for objects matching specified criteria.
 
-Bar chart which shows current status distribution for nodes under given root.
+To create a dashboard template:
 
-.. figure:: _images/dashboard_status_chartW.png
+1. Right-click on :guilabel:`Dashboards` and select :guilabel:`Create dashboard template`
+2. Configure elements as with regular dashboards
+3. Set up auto-bind filter to specify which objects should receive this dashboard
 
-Status Indicator
-~~~~~~~~~~~~~~~~
+When an object matches the auto-bind filter, a dashboard instance is automatically
+created and linked to that object. The name template field allows you to define
+how generated dashboard names are formatted using
+:ref:`macro substitution <object_tools_macro>` (e.g. ``%n`` for object name).
 
-Shows current status of selected object.
+.. _dashboard-autobind:
 
-.. figure:: _images/dashboard_status_indicatorW.png
+Dashboard Auto-Bind
+~~~~~~~~~~~~~~~~~~~
 
-Dashboard
-~~~~~~~~~
+Dashboards support automatic binding to objects using NXSL filter scripts. When
+enabled, dashboards will automatically bind to (and optionally unbind from)
+objects that match the filter criteria.
 
-Another dashboard object (or multiple objects) rendered
-as element of this dashboard.
+Configure auto-bind in dashboard properties:
 
-Network Map
-~~~~~~~~~~~
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
 
-:ref:`Network map<network_map>` object rendered as dashboard element.
+   * - Property
+     - Description
+   * - Enable auto-bind
+     - Automatically bind dashboard to matching objects
+   * - Enable auto-unbind
+     - Automatically unbind from objects that no longer match
+   * - Auto-bind filter
+     - NXSL script that returns ``true`` for objects to bind
 
-Custom Widget
-~~~~~~~~~~~~~
+Example auto-bind filter to bind to all Linux nodes:
 
-Custom widget provided by third party management client plugin. This options
-allows to add widget from third party loaded plugin.
+.. code-block:: c
 
-Get Map
-~~~~~~~
+   return $node->platformName ~= "Linux";
 
-Geographic map centered at given location.
+.. _context-dashboards:
 
-.. figure:: _images/dashbard_geo_mapW.png
-
-Alarm Viewer
-~~~~~~~~~~~~
-
-:ref:`List of alarms<alarms>` for given object subtree.
-
-.. figure:: _images/dashbard_alarm_viewerW.png
-
-Availability Chart
+Context Dashboards
 ~~~~~~~~~~~~~~~~~~
 
-Pie chart showing availability percentage for given business service
+Context dashboards are displayed as views within an object's context, rather than
+as standalone dashboards. This allows creating object-specific monitoring views
+that appear when viewing a particular node, container, or other object.
 
-.. figure:: _images/dashbard_availability_chartW.png
+To enable context dashboard mode, open the dashboard's properties and navigate to
+the :guilabel:`Object Context` property page:
 
-Gauge
-~~~~~
+.. figure:: _images/dashboards/config-context-object.png
 
-Gauge have 3 types of widgets
+   Object Context property page
 
-    - Dial is radial gauge with configurable maximum, minimum values. Scale can have fixed color or can be separated to  3 color configurable zones.
-    - Dar is linear gauge with configurable maximum, minimum values. Scale can have fixed color or can be separated to  3 color configurable zones. (Not yet implemented)
-    - Text is text gauge, that can be colored using fixed color, changed depending on 3 configurable color zones or colored using threshold color (severity).
+.. list-table::
+   :header-rows: 1
+   :widths: 35 65
 
-.. figure:: _images/dashboard_gauge_3typesW.png
+   * - Property
+     - Description
+   * - Show context selector in dashboard perspective
+     - Display object selector when dashboard is viewed in the Dashboard
+       perspective, allowing users to switch context object
+   * - Automatically show this dashboard in object context
+     - When enabled, dashboard will appear as a tab in bound objects' context
+       views
+   * - Display priority (1-65535, 0 for automatic)
+     - Controls tab ordering when multiple dashboards are shown in object
+       context. Lower values appear first. Set to 0 for automatic ordering.
 
-Web Page
-~~~~~~~~
+To associate a context dashboard with objects, use :ref:`auto-bind <dashboard-autobind>`
+to define which objects should display this dashboard.
 
-Web page at given URL rendered within dashboard.
+When a context dashboard is bound to an object, it appears in that object's view
+tabs alongside other context views.
 
-Bar Chart for Table DCI
-~~~~~~~~~~~~~~~~~~~~~~~
+.. _dashboard-elements:
 
-Bar chart built from data collected via single table DCI.
+Dashboard Elements
+------------------
 
-.. figure:: _images/dashboard_table_bar_chartW.png
+Dashboard elements are the building blocks of dashboards. There are 32 element
+types available, organized into functional categories.
 
-Pie Chart for Table DCI
-~~~~~~~~~~~~~~~~~~~~~~~
+Labels and Text
+~~~~~~~~~~~~~~~
 
-Pie chart built from data collected via single table DCI.
+Label
+^^^^^
 
-.. figure:: _images/dashboard_table_pie_chartW.png
+Text label with configurable text and colors. Supports multi-line text and basic
+formatting.
 
-Separator
-~~~~~~~~~
+.. figure:: _images/dashboards/element-label.png
 
-Separator, can be shown as line, box, or simply empty space.
+Charts
+~~~~~~
 
-.. figure:: _images/dashboard_separatorW.png
+Line Chart
+^^^^^^^^^^
 
-Table Value
-~~~~~~~~~~~
+Displays time-series data as line graphs with configurable time ranges. Supports
+up to 16 data sources per chart.
 
-This widget displays table with last values of Table DCI.
+.. figure:: _images/dashboards/element-line-chart.png
 
-Status Map
-~~~~~~~~~~
+Bar Chart
+^^^^^^^^^
 
-Status map has three views: Flat view, Group view and Radial view.
+Displays data as vertical or horizontal bars. Useful for comparing values across
+multiple data sources.
 
-Flat view and Group view display nodes as rectangles, using color to indicate
-their status. In Flat view nodes are displayed without grouping, whether in
-Group view nodes are grouped by containers.
+.. figure:: _images/dashboards/element-bar-chart.png
 
-.. figure:: _images/dashboard_status_mapW.png
+Pie Chart
+^^^^^^^^^
 
-Radial view displays containers and nodes as hierarchical colored radial layout.
+Shows proportional data distribution as pie segments.
 
-DCI Summary Table
-~~~~~~~~~~~~~~~~~
+.. figure:: _images/dashboards/element-pie-chart.png
 
-:ref:`DCI Summary Table<dci-summary-table-label>` widget provides summary DCI information
-about objects under container.
+Tube Chart
+^^^^^^^^^^
 
-.. figure:: _images/dashboard_summary_tableW.png
+.. deprecated::
+   This element type is deprecated. Use Bar Chart instead.
 
-Syslog Monitor
-~~~~~~~~~~~~~~
-Syslog monitor widget. Has additional option to set root object to filter objects what will be shown in monitor.
-One object or a container that contains required objects can be set as root object.
+Displays data as a tube/cylinder visualization. Included for backward
+compatibility with existing dashboards.
 
-.. figure:: _images/dashboard_syslog_monitor.png
+Scripted Charts
+~~~~~~~~~~~~~~~
 
-SNMP Trap Monitor
-~~~~~~~~~~~~~~~~~
-SNMP Trap monitor widget. Has additional option to set root object to filter objects what will be shown in monitor.
-One object or a container that contains required objects can be set as root object.
+Scripted charts use NXSL scripts to dynamically generate chart data rather than
+reading directly from DCIs. This allows complex data transformations and
+aggregations.
 
-.. figure:: _images/dashboard_snmp_trap_monitor.png
+Scripted Bar Chart
+^^^^^^^^^^^^^^^^^^
 
-Event monitor
-~~~~~~~~~~~~~
-Event monitor widget. Has additional option to set root object to filter objects what will be shown in monitor.
-One object or a container that contains required objects can be set as root object.
+Bar chart with script-defined data. The script runs in the context of a selected
+object and returns data for chart segments.
 
-.. figure:: _images/dashboard_event_monitor.png
+.. figure:: _images/dashboards/element-scripted-bar-chart.png
 
-Service component map
-~~~~~~~~~~~~~~~~~~~~~
-Map displays hierarchy of objects in :guilabel:`Infrastructure Service` starting from selected root object.
+**Configuration:**
 
-.. figure:: _images/dashboard_service_component_map.png
+- **Object**: Context object for script execution (or dashboard context if not set)
+- **Script**: NXSL script that returns a hash map with chart data
 
-Rack diagram
-~~~~~~~~~~~~
-Shows rack front, back or both views with object placement in it.
+The script must return a hash map where keys are segment labels and values are
+numeric values:
 
-.. figure:: _images/dashboard_rack_diagram.png
+.. code-block:: c
 
-Object tools
-~~~~~~~~~~~~
-Shows buttons with pre configured object tools, that are executed on click.
+   return %{"Segment A": 10, "Segment B": 17, "Segment C": 42};
 
-.. figure:: _images/dashboard_object_tools.png
-
-
-.. _dashboards-object-query:
-
-Object query
-~~~~~~~~~~~~
-Shows columns with filtered objects' information.
-
-Object query has 2 main configurations. :guilabel:`Query` that filterers objects
-and provide option to create additional information about object in columns and
-:guilabel:`Object Properties` that lists information that should be shown in
-table.
-
-**Query**
-
-Script is executed on each object and if it returns ``true`` object is included
-in the result set, if ``false`` - not. Script can define additional variables
-that will be displayed as columns in the result set. Three variants for the
-syntax are available: 
-
-  1. Special syntax with ``with`` block for additional columns calculation. This
-     syntax allows to define metadata for the additional columns such as column
-     title, sorting, etc. 
-  2. Usual NXSL script that returns ``true`` or ``false`` and uses global
-     variables for additional columns.
-  3. Usual NXSL script that returns map with additional columns (where keys are
-     column names and values are value for this column) or ``false``.
-
-
-Special syntax:
+Values can also be JSON strings with additional properties for custom display
+names and colors:
 
 .. code-block::
 
-  with
-    varName = { code or expression },
-    varName = { code or expression }
-    /* Might be as many blocks as required.
-     * varName is a name of the variable where result of a code will be assigned.
-     * It can be used later in the code in expression or to be displayed in table
-     * using the same name in the Object Properties part.
-    */
-  expression
-  /* Short circuit evaluated expression. This expression is executed first and if
-   * it contains not yet calculated varName then variable is calculated and used 
-   * in expression. Expression that should result as true or false as a sign if
-   * this object should be displayed in table or not. No semicolon at the end.
-  */
+   return %{
+      "key1": '{"name": "Display Name", "color": "#FF0000", "value": 42}',
+      "key2": '{"name": "Another", "color": "#00FF00", "value": 58}'
+   };
 
-This page provides option to configure columns that should be used for ordering,
-refresh interval and record limit. To order column write a comma-separated list
-of attribute named or varNames with ``-`` sign to order in descending order and
-with ``+`` sign to order in ascending order.
+.. figure:: _images/dashboards/config-scripted-chart.png
 
-**Object Properties**
+   Scripted chart configuration
 
-This property page is used to organize required columns and column order in table.
-Each column configuration consists of name of object's attribute or varName defined
-in Query page, display name used as a name for a column and data type of the column.
+Scripted Pie Chart
+^^^^^^^^^^^^^^^^^^
 
-**Example**
+Pie chart with script-defined data. Uses the same configuration and script format
+as the Scripted Bar Chart.
 
-This example will show how to filter nodes that only have alarms on them, are
-not in maintenance mode and show count of critical alarms on the node, order by
-critical alarm count the list and then by node name. Example shows two different
-options how to write the same script so only one of them should be used.
+.. figure:: _images/dashboards/element-scripted-pie-chart.png
 
-Configuration:
+Table-Based Charts
+~~~~~~~~~~~~~~~~~~
 
-.. figure:: _images/dashboard_object_query_query.png
+These charts visualize data from table DCIs (data collection items that return
+multiple rows).
 
-  Option 1. Query script with "with" syntax
+Bar Chart for Table DCI
+^^^^^^^^^^^^^^^^^^^^^^^
 
-.. figure:: _images/dashboard_object_query_query2.png
+Bar chart displaying data from a table DCI. Configure the column to use for
+labels and values.
 
-  Option 2. Query script  with usual NXSL script and global variables
+.. figure:: _images/dashboards/element-table-bar-chart.png
 
-.. figure:: _images/dashboard_object_query_object_properties.png
+Pie Chart for Table DCI
+^^^^^^^^^^^^^^^^^^^^^^^
 
-  Configuration of :guilabel:`Properties to display` will be the same for both scripts
+Pie chart displaying data from a table DCI.
 
-Result:
+.. figure:: _images/dashboards/element-table-pie-chart.png
 
-.. figure:: _images/dashboard_object_query.png
+Tube Chart for Table DCI
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-Port view
-~~~~~~~~~
-Shows ports schematic with each port status.
-One object or a container that contains required objects can be set as root object.
+Tube visualization of table DCI data. Deprecated but supported for backward
+compatibility.
 
-.. figure:: _images/dashboard_port_view.png
+Gauge Charts
+~~~~~~~~~~~~
 
+Gauges display single numeric values with configurable scales and color zones.
 
-Element Property Pages
-----------------------
+.. figure:: _images/dashboards/element-gauge.png
 
-Chart
-~~~~~
+   Gauge element types: Dial, Bar, Text, and Circular
 
-:guilabel:`Chart` page is available for all chart type elements: Bar Chart, Bar
-Chart for Table DCI, Dial Chart, Line Chart, Pie Chart, Pie Chart for Table
-DCI. It defines basic properties of a chart.
+**Gauge Types:**
 
-.. figure:: _images/ChartElementConfig.png
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Type
+     - Description
+   * - Dial
+     - Radial gauge with needle indicator. Classic speedometer-style display.
+   * - Bar
+     - Linear bar gauge (horizontal or vertical).
+   * - Text
+     - Numeric text display with optional color coding based on value ranges.
+   * - Circular
+     - Modern circular arc gauge with smooth gradient coloring.
+
+**Color Zones:**
+
+Gauges support color zones to visually indicate value ranges:
+
+- **Left Red Zone**: Minimum value to left red threshold (critical low)
+- **Left Yellow Zone**: Left red threshold to left yellow threshold (warning low)
+- **Normal Zone**: Between left and right yellow thresholds (normal)
+- **Right Yellow Zone**: Right yellow threshold to right red threshold (warning high)
+- **Right Red Zone**: Right red threshold to maximum value (critical high)
+
+**Color Modes:**
+
+- **Zone**: Color changes based on which zone the value falls into
+- **Custom**: Single custom color for the entire gauge
+- **Threshold**: Color based on DCI threshold severity
+
+.. figure:: _images/dashboards/config-gauge-zones.png
+
+   Gauge color zones configuration
+
+Status Elements
+~~~~~~~~~~~~~~~
+
+Status Chart
+^^^^^^^^^^^^
+
+Bar chart showing current status distribution for objects under a specified root
+object. Displays counts of objects in each status level (Normal, Warning, Minor,
+Major, Critical, etc.).
+
+.. figure:: _images/dashboards/element-status-chart.png
+
+Status Indicator
+^^^^^^^^^^^^^^^^
+
+Shows the current status of one or more objects as colored shapes. Supports
+multiple display modes and data sources.
+
+.. figure:: _images/dashboards/element-status-indicator.png
+
+**Element Types:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Type
+     - Description
+   * - Object
+     - Display status of a specific object
+   * - DCI
+     - Display status based on a specific DCI's threshold state
+   * - DCI Template
+     - Display status from DCIs matching a name/description pattern
+   * - Script
+     - Calculate status using an NXSL script
+
+**Shapes:**
+
+- Circle (default)
+- Rectangle
+- Rounded Rectangle
+
+**Label Position:**
+
+- None (no label)
+- Inside (label within the shape)
+- Outside (label below/beside the shape)
+
+**Script-Driven Mode:**
+
+When using script element type, a single NXSL script is configured at the widget
+level and provides status for all script-type elements. Each script-type element
+has a **tag** field that is used as a key to look up its status from the script
+result.
+
+The script must return a hash map where keys match element tags and values are
+integer status codes:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 15 85
+
+   * - Value
+     - Status
+   * - 0
+     - Normal
+   * - 1
+     - Warning
+   * - 2
+     - Minor
+   * - 3
+     - Major
+   * - 4
+     - Critical
+   * - 5
+     - Unknown
+
+Example script:
+
+.. code-block:: c
+
+   return %{"cpu": $object->status, "memory": 3, "disk": 0};
+
+In this example, elements with tags ``cpu``, ``memory``, and ``disk`` must be
+defined on the elements configuration page. If an element's tag is not present
+in the returned map, that element will be hidden.
+
+.. figure:: _images/dashboards/config-status-indicator-script-elements.png
+
+   Status indicator elements configuration with tags
+
+.. figure:: _images/dashboards/config-status-indicator-script.png
+
+   Script configuration
+
+.. figure:: _images/dashboards/config-status-indicator-script-result.png
+
+   Script-driven status indicator result
+
+Status Map
+^^^^^^^^^^
+
+Displays object hierarchy as a visual status map with three view modes.
+
+.. figure:: _images/dashboards/element-status-map.png
+
+**View Modes:**
+
+- **Flat**: All objects displayed as equal-sized rectangles without grouping
+- **Group**: Objects grouped by their containers
+- **Radial**: Hierarchical radial layout with parent in center
+
+Monitors
+~~~~~~~~
+
+Alarm Viewer
+^^^^^^^^^^^^
+
+Displays :ref:`active alarms <alarms>` for a specified object subtree.
+
+.. figure:: _images/dashboards/element-alarm-viewer.png
+
+**Filter Options:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Property
+     - Description
+   * - Root object
+     - Show alarms only for this object and its children
+   * - Severity filter
+     - Bitmask to show only specific severity levels
+   * - State filter
+     - Bitmask to show only specific states (outstanding, acknowledged, resolved)
+   * - Local sound
+     - Enable audio notification for new alarms in this widget
+
+.. figure:: _images/dashboards/config-alarm-filter.png
+
+   Alarm viewer filter configuration
+
+Syslog Monitor
+^^^^^^^^^^^^^^
+
+Real-time syslog message display for a specified object subtree.
+
+.. figure:: _images/dashboards/element-syslog-monitor.png
+
+Configure a root object to filter messages to only those from specific objects.
+
+SNMP Trap Monitor
+^^^^^^^^^^^^^^^^^
+
+Real-time SNMP trap display for a specified object subtree.
+
+.. figure:: _images/dashboards/element-snmp-trap-monitor.png
+
+Configure a root object to filter traps to only those from specific objects.
+
+Event Monitor
+^^^^^^^^^^^^^
+
+Real-time event display with filtering options.
+
+.. figure:: _images/dashboards/element-event-monitor.png
+
+**Configuration Options:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Property
+     - Description
+   * - Root object
+     - Show events only for this object and its children
+   * - Maximum events
+     - Limit number of displayed events (default: 100)
+   * - Time range
+     - Show events from the last N minutes (default: 60)
+   * - Event codes
+     - Comma-separated list of event codes to display (empty = all events)
+   * - Text filter
+     - Text string to filter displayed events by message content
+
+.. figure:: _images/dashboards/config-event-filter.png
+
+   Event monitor filter configuration
+
+File Monitor
+^^^^^^^^^^^^
+
+Displays the contents of a file from an agent-managed node, similar to ``tail -f``.
+Useful for monitoring log files in real-time.
+
+.. figure:: _images/dashboards/element-file-monitor.png
+
+**Configuration:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Property
+     - Description
+   * - Object
+     - Node with NetXMS agent where the file is located
+   * - File name
+     - Full path to the file on the monitored node
+   * - History limit
+     - Maximum number of lines to display (default: 1000)
+   * - Filter
+     - Regular expression to filter displayed lines
+   * - Syntax highlighter
+     - Syntax highlighting mode (if applicable)
+
+Data Display
+~~~~~~~~~~~~
+
+Table Value
+^^^^^^^^^^^
+
+Displays the last values from a table DCI as a formatted table.
+
+.. figure:: _images/dashboards/element-dci-table.png
+
+Availability Chart
+^^^^^^^^^^^^^^^^^^
+
+Pie chart showing availability percentage for a business service. Displays uptime
+vs. downtime ratio.
+
+.. figure:: _images/dashboards/element-availability-chart.png
+
+DCI Summary Table
+^^^^^^^^^^^^^^^^^
+
+Displays :ref:`DCI summary table <dci-summary-table-label>` information for
+objects under a container.
+
+.. figure:: _images/dashboards/element-dci-summary-table.png
+
+.. _dashboards-object-query:
+
+Object Query
+^^^^^^^^^^^^
+
+Displays filtered object information in a customizable table format. Uses NXSL
+queries to select objects and define computed columns.
+
+.. figure:: _images/dashboards/element-object-query.png
+
+Object query has two main configuration pages:
+
+**Query Configuration:**
+
+The query script is executed on each object. If it returns ``true``, the object
+is included in the result set. The script can define additional variables that
+become columns in the result table.
+
+Three syntax variants are available:
+
+1. **Special "with" syntax** for additional columns with metadata:
+
+.. code-block:: c
+
+   with
+     criticalCount = {
+       return GetDCIValue($object, FindDCIByDescription($object, "Critical Alarms"));
+     },
+     warningCount = {
+       return GetDCIValue($object, FindDCIByDescription($object, "Warning Alarms"));
+     }
+   $object->alarmCount > 0 && !$object->isInMaintenanceMode
+
+2. **NXSL script with global variables:**
+
+.. code-block:: c
+
+   if ($object->alarmCount == 0 || $object->isInMaintenanceMode)
+     return false;
+   global criticalCount = GetDCIValue($object, FindDCIByDescription($object, "Critical Alarms"));
+   global warningCount = GetDCIValue($object, FindDCIByDescription($object, "Warning Alarms"));
+   return true;
+
+3. **NXSL script returning a map:**
+
+.. code-block:: c
+
+   if ($object->alarmCount == 0)
+     return false;
+   return {
+     "criticalCount" => GetDCIValue($object, FindDCIByDescription($object, "Critical Alarms")),
+     "warningCount" => GetDCIValue($object, FindDCIByDescription($object, "Warning Alarms"))
+   };
+
+**Query Page Options:**
+
+- **Order by**: Comma-separated list of columns. Use ``+`` for ascending (default)
+  or ``-`` for descending (e.g., ``-criticalCount,+name``)
+- **Refresh interval**: How often to re-run the query
+- **Record limit**: Maximum number of objects to display
+
+**Object Properties Configuration:**
+
+Define which columns to display and their order:
+
+- **Attribute/Variable name**: Object attribute or variable name from query
+- **Display name**: Column header text
+- **Data type**: How to format and sort the column
+
+.. figure:: _images/dashboards/object-query-query.png
+
+   Query configuration example
+
+.. figure:: _images/dashboards/object-query-properties.png
+
+   Object properties configuration
+
+Embedded Content
+~~~~~~~~~~~~~~~~
+
+Dashboard
+^^^^^^^^^
+
+Embeds another dashboard object (or multiple dashboards) within the current
+dashboard. When multiple dashboards are added, they rotate automatically.
+
+.. figure:: _images/dashboards/element-embedded-dashboard.png
+
+Network Map
+^^^^^^^^^^^
+
+Renders a :ref:`network map <network_map>` object as a dashboard element.
+
+.. figure:: _images/dashboards/element-network-map.png
+
+Geo Map
+^^^^^^^
+
+Displays a geographic map centered at a specified location or showing object
+locations.
+
+.. figure:: _images/dashboards/element-geo-map.png
+
+Web Page
+^^^^^^^^
+
+Embeds a web page at a specified URL within the dashboard. Useful for integrating
+external monitoring tools or documentation.
+
+.. figure:: _images/dashboards/element-web-page.png
+
+Layout Elements
+~~~~~~~~~~~~~~~
+
+Separator
+^^^^^^^^^
+
+Visual separator for organizing dashboard layout. Can be displayed as a line,
+box, or empty space.
+
+.. figure:: _images/dashboards/element-separator.png
+
+**Separator Types:**
+
+- Line (horizontal or vertical)
+- Box (rectangular border)
+- Empty (invisible spacer)
+
+Interactive Elements
+~~~~~~~~~~~~~~~~~~~~
+
+Object Tools
+^^^^^^^^^^^^
+
+Displays buttons for executing pre-configured :ref:`object tools <object_tools>`.
+
+.. figure:: _images/dashboards/element-object-tools.png
+
+Port View
+^^^^^^^^^
+
+Shows a schematic representation of network device ports with status indication.
+
+.. figure:: _images/dashboards/element-port-view.png
+
+Rack Diagram
+^^^^^^^^^^^^
+
+Displays a rack visualization showing equipment placement.
+
+.. figure:: _images/dashboards/element-rack-diagram.png
+
+**View Options:**
+
+- Front view only
+- Back view only
+- Both views (side by side or combined)
+
+Service Components
+^^^^^^^^^^^^^^^^^^
+
+Displays the hierarchy of objects in an :guilabel:`Infrastructure Service`
+starting from a selected root object.
+
+.. figure:: _images/dashboards/element-service-components.png
+
+.. _dashboard-element-config:
+
+Element Configuration
+---------------------
+
+All dashboard elements share common configuration options plus element-specific
+settings.
+
+Title Configuration
+~~~~~~~~~~~~~~~~~~~
+
+Every element can have a customizable title displayed above the element content.
+
+.. figure:: _images/dashboards/config-title.png
+
+   Title configuration options
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Property
+     - Description
+   * - Title
+     - Text displayed above the element
+   * - Title foreground
+     - Text color for the title
+   * - Title background
+     - Background color for the title bar
+   * - Title font name
+     - Custom font family for the title
+   * - Title font size
+     - Size adjustment relative to default (positive or negative)
+
+Chart Configuration
+~~~~~~~~~~~~~~~~~~~
+
+Common settings for all chart elements (Line, Bar, Pie, Gauge, etc.).
+
+.. figure:: _images/dashboards/config-chart.png
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Property
+     - Description
+   * - Show legend
+     - Display chart legend
+   * - Extended legend
+     - Show additional statistics in legend (min, max, average)
+   * - Legend position
+     - Location of legend (Left, Right, Top, Bottom)
+   * - Translucent
+     - Enable semi-transparent rendering
+   * - Auto scale
+     - Automatically adjust Y-axis scale to fit data
+   * - Min Y scale
+     - Fixed minimum Y-axis value (when auto scale is disabled)
+   * - Max Y scale
+     - Fixed maximum Y-axis value (when auto scale is disabled)
+   * - Y axis label
+     - Label text for the Y-axis
+   * - Modify Y base
+     - Use minimum DCI value as Y-axis base instead of zero
+   * - Refresh rate
+     - How often to refresh chart data (seconds)
+
+Drill-Down Navigation
+~~~~~~~~~~~~~~~~~~~~~
+
+Several element types support drill-down navigation, allowing users to click on the
+element to navigate to another object (typically a dashboard with more detailed
+information).
+
+.. figure:: _images/dashboards/config-drilldown.png
+
+   Drill-down object selection
+
+**Supported element types:**
+
+- DCI-based charts (Line Chart, Bar Chart, Pie Chart, Gauge, Scripted Bar Chart, Scripted Pie Chart)
+- Table-based charts (Table Bar Chart, Table Pie Chart, Table Tube Chart)
+- Status Indicator (per-element drill-down)
+
+Configure drill-down in the element properties:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Property
+     - Description
+   * - Drill-down object
+     - Object to navigate to when element is clicked (usually a dashboard)
+
+When a drill-down object is configured, clicking on the element will open that
+object's view. For status indicators, each individual element can have its own
+drill-down target.
 
 Data Sources
 ~~~~~~~~~~~~
 
-:guilabel:`Data sources` page is available for all DCI based elements: Bar
-Chart, Dial Chart, Line Chart and Pie Chart. Here you can define
-what DCIs should be used as data sources for the chart. Up to 16 DCIs can be
-added to a single chart. You can configure multiple properties for each data
-source. To edit data source, either double click on appropriate item in the
-list, or press :guilabel:`Edit` button. Data source configuration dialog looks
-like following:
+For DCI-based charts, configure data sources to define which DCIs provide the
+chart data.
 
-.. figure:: _images/ChartDataSourceConfig.png
+.. figure:: _images/dashboards/config-data-source.png
 
 .. list-table::
    :header-rows: 1
@@ -1284,25 +1794,30 @@ like following:
    * - Property
      - Description
    * - Data collection item
-     - DCI object to be used.
+     - DCI to use as data source
    * - Display name
-     - Name for this data source to be used in chart's legend. If left empty,
-       DCI description will be used.
-   * - Colour
-     - Allows you to define specific color for this data source or let system
-       to pick one automatically.
+     - Legend label (uses DCI description if empty)
+   * - Color
+     - Line/bar color (automatic if not specified)
    * - Area chart
-     - This option is valid only for line charts and toggles data source
-       display as filled area instead of line.
+     - Display as filled area instead of line (line charts only)
    * - Show thresholds
-     - This option is valid only for line charts and toggles display of
-       configured thresholds.
+     - Display threshold lines on chart (line charts only)
 
+Up to 16 DCIs can be added to a single chart.
 
-Layout
-~~~~~~
+.. _dashboards-layout:
 
-.. figure:: _images/DashboardElementLayoutPage.png
+Dashboard Layout
+----------------
+
+Dashboard uses a grid concept for element positioning. Available space is divided
+into rows and columns, with each element occupying one or more cells.
+
+Layout Properties
+~~~~~~~~~~~~~~~~~
+
+.. figure:: _images/dashboards/config-layout.png
 
 .. list-table::
    :widths: 25 75
@@ -1310,50 +1825,22 @@ Layout
 
    * - Property
      - Description
-   * - Horizontal alignment
-     - Horizontal alignment for this element. Possible values are
-       :guilabel:`FILL`, :guilabel:`CENTER`, :guilabel:`LEFT`, and
-       :guilabel:`RIGHT`.
-   * - Vertical alignment
-     - Vertical alignment for this element. Possible values are
-       :guilabel:`FILL`, :guilabel:`CENTER`, :guilabel:`TOP`, and
-       :guilabel:`BOTTOM`.
    * - Horizontal span
-     - Specify how many grid cells this element will occupy horizontally.
+     - Number of grid cells this element occupies horizontally
    * - Vertical span
-     - Specify how many grid cells this element will occupy vertically.
+     - Number of grid cells this element occupies vertically
+   * - Horizontal alignment
+     - How element aligns within its cells (FILL, CENTER, LEFT, RIGHT)
+   * - Vertical alignment
+     - How element aligns within its cells (FILL, CENTER, TOP, BOTTOM)
    * - Width hint
-     - Hint for element's width in pixels. Default value of ``-1`` means that
-       layout manager will decide width for element.
+     - Suggested width in pixels (-1 for automatic)
    * - Height hint
-     - Hint for element's height in pixels. Default value of ``-1`` means that
-       layout manager will decide width for element.
+     - Suggested height in pixels (-1 for automatic)
+   * - Grab vertical space
+     - Whether element should expand to fill available vertical space
 
-See detailed information about layout in section :ref:`dashboards-layout`.
-
-Web Page
-~~~~~~~~
-
-:guilabel`Web Page` property page is available for web page type elements. Here
-you can define URL to be displayed and optional title. If title is not empty,
-it will be displayed above page content.
-
-
-.. _dashboards-layout:
-
-Understanding Element Layout
-----------------------------
-
-Dashboard uses grid concept to layout it's elements. Available space is divided
-into rows and columns, and each element occupies one or more cells. The number of
-columns is configured in dashboard object properties, and number of rows is
-calculated automatically based on number of columns, elements, and
-cells occupied by each element. Elements are laid out in columns from
-left to right, and a new row is created when there are no space left for next
-element on current row. Each element has horizontal and vertical alignment
-properties. Default for both is :guilabel:`FILL`. Possible alignment values are
-following:
-
+**Alignment Values:**
 
 .. list-table::
    :widths: 25 75
@@ -1362,42 +1849,75 @@ following:
    * - Value
      - Description
    * - FILL
-     - Make element to fill whole cell. Also causes to grab excess free space
-       available inside dashboard. If more than one element is trying to grab
-       the same space, then the excess space is shared evenly among the
-       grabbing elements.
+     - Element fills the entire cell and grabs excess space
    * - CENTER
-     - Center element within cell.
+     - Element centered within cell
    * - LEFT/TOP
-     - Align element to left/top of the cell.
+     - Element aligned to left/top edge of cell
    * - RIGHT/BOTTOM
-     - Align element to right/bottom of the cell.
+     - Element aligned to right/bottom edge of cell
 
+Grid Layout Example
+~~~~~~~~~~~~~~~~~~~
 
-.. figure:: _images/DashboardComplexLayoutConfig.png
+The number of columns is configured in dashboard properties. Rows are calculated
+automatically based on elements and their spans.
+
+.. figure:: _images/dashboards/config-complex-layout.png
 
    Complex layout configuration
 
-This configuration will be rendered into this layout:
+This configuration renders as:
 
-.. image:: _images/DashboardComplexLayoutExample.png
+.. figure:: _images/dashboards/config-complex-layout-result.png
+
+   Resulting dashboard layout
+
+Narrow Screen Mode
+~~~~~~~~~~~~~~~~~~
+
+Dashboards support responsive design for mobile devices and narrow screens.
+When the display width is below a threshold, the dashboard switches to narrow
+screen mode.
+
+**Layout Properties for Narrow Screen:**
+
+.. list-table::
+   :widths: 25 75
+   :header-rows: 1
+
+   * - Property
+     - Description
+   * - Show in narrow screen mode
+     - Whether to display this element on narrow screens
+   * - Narrow screen order
+     - Sort order for elements in narrow screen mode (0-255)
+   * - Narrow screen height hint
+     - Height hint specifically for narrow screen display
+
+In narrow screen mode, elements are displayed in a single column, sorted by their
+narrow screen order value. Elements with :guilabel:`Show in narrow screen mode`
+disabled are hidden entirely.
+
+This allows creating dashboards that work well on both desktop and mobile devices
+by hiding non-essential elements and reordering remaining elements for vertical
+display.
+
+.. _dashboards-rotation:
 
 Dashboard Rotation
 ------------------
 
-To create configuration when management client displays multiple dashboards one by one in
-a loop, follow these steps:
+To display multiple dashboards in a loop (useful for monitoring displays):
 
-- Create all dashboards you want to show
-- Create additional dashboard object, with single element of type
-  :guilabel:`Dashboard` inside
-- Add all dashboards you want to show to dashboard list of that element and set
-  desired time between changing dashboards.
+1. Create all dashboards you want to show
+2. Create a new dashboard with a single :guilabel:`Dashboard` element
+3. Add all target dashboards to that element's list
+4. Set the rotation interval (time each dashboard is displayed)
 
-.. figure:: _images/DashboardRotationConfig.png
+.. figure:: _images/dashboards/config-rotation.png
 
-   Sample configuration of two dashboards displayed in a loop for 40 seconds each.
-
+   Configuration for rotating two dashboards every 40 seconds
 
 Delegated Access
 ----------------
@@ -1417,10 +1937,138 @@ objects, e.g. on :guilabel:`Infrastructure Services`.
 .. versionadded:: 5.0
 
 
-Tutorials
+.. _dashboards-reference:
+
+Reference
 ---------
 
-Dashboard creation tutorial available on `Youtube <http://youtu.be/ZfJQiUIDHY4>`_
+Element Types
+~~~~~~~~~~~~~
+
+Complete list of all dashboard element types:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - Type
+     - Description
+   * - Label
+     - Text label with configurable formatting
+   * - Line Chart
+     - Time-series line graph
+   * - Bar Chart
+     - Vertical or horizontal bar chart
+   * - Pie Chart
+     - Proportional pie chart
+   * - Tube Chart
+     - Tube visualization (deprecated)
+   * - Status Chart
+     - Object status distribution chart
+   * - Status Indicator
+     - Object/DCI status display
+   * - Dashboard
+     - Embedded dashboard(s)
+   * - Network Map
+     - Embedded network map
+   * - Geo Map
+     - Geographic map view
+   * - Alarm Viewer
+     - Active alarm list
+   * - Availability Chart
+     - Service availability pie chart
+   * - Gauge
+     - Single-value gauge (dial, bar, text, circular)
+   * - Web Page
+     - Embedded web page
+   * - Table Bar Chart
+     - Bar chart from table DCI
+   * - Table Pie Chart
+     - Pie chart from table DCI
+   * - Table Tube Chart
+     - Tube chart from table DCI (deprecated)
+   * - Separator
+     - Visual separator element
+   * - Table Value
+     - Table DCI data display
+   * - Status Map
+     - Hierarchical status visualization
+   * - DCI Summary Table
+     - Summary table for container DCIs
+   * - Syslog Monitor
+     - Real-time syslog display
+   * - SNMP Trap Monitor
+     - Real-time trap display
+   * - Event Monitor
+     - Real-time event display
+   * - Service Components
+     - Infrastructure service hierarchy
+   * - Rack Diagram
+     - Rack equipment visualization
+   * - Object Tools
+     - Tool execution buttons
+   * - Object Query
+     - Custom object query table
+   * - Port View
+     - Network port status schematic
+   * - Scripted Bar Chart
+     - Script-generated bar chart
+   * - Scripted Pie Chart
+     - Script-generated pie chart
+   * - File Monitor
+     - Remote file content display
+
+Gauge Types
+~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Type
+     - Description
+   * - Dial
+     - Radial gauge with needle indicator (speedometer style)
+   * - Bar
+     - Linear bar gauge, horizontal or vertical
+   * - Text
+     - Numeric text display with optional color coding
+   * - Circular
+     - Modern circular arc gauge with gradient fill
+
+Status Indicator Shapes
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Shape
+     - Description
+   * - Circle
+     - Circular indicator (default)
+   * - Rectangle
+     - Square/rectangular indicator
+   * - Rounded Rectangle
+     - Rectangle with rounded corners
+
+Status Indicator Element Types
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Type
+     - Description
+   * - Object
+     - Status from object status
+   * - DCI
+     - Status from specific DCI threshold
+   * - DCI Template
+     - Status from DCIs matching pattern
+   * - Script
+     - Status from NXSL script execution
 
 Graphs
 ======

@@ -7,7 +7,7 @@ SSH monitoring
 SSH configuration
 -----------------
 
-|product_name| can execute commands via an SSH connection and save the output as DCI values.
+|product_name| can execute commands via an SSH exec channel and save the output as DCI values.
 
 SSH connections are always established via an agent. For this to work, the ``ssh.nsm`` subagent should be enabled in the agent config file.
 
@@ -52,3 +52,18 @@ An SSH key can be added in :menuselection:`Configuration ->SSH key configuration
 for the SSH connection.
 
 .. figure:: _images/ssh_key_configuration.png
+
+
+Interactive SSH sessions
+------------------------
+
+In addition to executing single commands via the SSH exec channel, |product_name| supports
+interactive SSH sessions. Interactive sessions use a PTY (pseudo-terminal) channel instead
+of the exec channel, which makes them suitable for network devices (Cisco IOS, Juniper, MikroTik, etc.)
+that do not support the exec channel and require an interactive shell with prompt detection
+and pagination handling.
+
+Interactive SSH sessions are available in NXSL via the ``openSSHSession`` method on the
+`Node <https://www.netxms.org/documentation/nxsl-latest/#class-node>`_ object.
+
+.. versionadded:: 6.0

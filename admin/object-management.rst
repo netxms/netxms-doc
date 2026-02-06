@@ -112,6 +112,18 @@ Node can be deleted from |product_name| by :guilabel:`Delete` menu item. Node is
 not deleted synchronously, but it is scheduled node deletion. While node
 deletion all data bout this node is also collected(like metrics).
 
+Instead of immediate deletion, a node can be decommissioned using the
+:guilabel:`Decommission...` menu item. Decommissioning sets the node to
+unmanaged state (which stops all polling and data collection) and schedules
+the node for automatic deletion by housekeeper after the specified expiration
+time. A decommissioned node cannot be set back to managed state. Optionally,
+IP addresses can be cleared from the node and all its interfaces during
+decommissioning. This requires the same access rights as deleting a node.
+Decommissioned nodes are shown in the object tree with a ``[Decommissioned]``
+label and grey text color.
+
+.. versionadded:: 6.0
+
 If zones are enabled, then zone can be changed using :guilabel:`Change zone...`
 item. :guilabel:`File manager` will open agent file manager view. By default
 this view will be empty, to configure it refer to :ref:`agent_file_mngmnt`

@@ -52,6 +52,9 @@ change this behavior by setting Stop Processing flag on a rule. If this flag is
 set for a rule and that rule is matched, subsequent rules (with higher rule
 number) will not be processed.
 
+Rules with empty filter (no events, no source objects, no severity filter, no
+time filter, and no filtering script) are ignored.
+
 :guilabel:`Event Processing Policy` rules are managed using :guilabel:`Event
 Processing Policy Editor` available in :guilabel:`Configuration --> Event
 Processing Policy`. 

@@ -946,6 +946,13 @@ The following instance discovery methods are available:
        values as instance names. If there are several instance columns in that
        table, a concatenation of values will be used, separated by ``~~~``
        (three tilda characters).
+   * - Push Data
+     - Regular expression
+     - Instances are created automatically when push data arrives with a DCI
+       name matching the given regular expression. The first capture group of
+       the regular expression is used as the instance name.
+
+       .. versionadded:: 6.0
 
 
 Instance Discovery Filter Script

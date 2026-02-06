@@ -1180,7 +1180,7 @@ Input fields
 ~~~~~~~~~~~~
 
 There is option to add input fields for object tool commands. This fields are
-defined on the :guilabel:`Input fields` view and added to command in ``%(name)``
+defined on the :guilabel:`Input fields` view and added to command in ``%(in:name)``
 format. More about formats can be found in :ref:`object_tools_macro` chapter.
 
 Input field can be one of this types:
@@ -1237,8 +1237,12 @@ expanded. The following macros are recognized:
      - Value of custom attribute. If such custom attribute does not exists on a
        particular node, default_value is taken. If custom attribute exists, but
        has empty value, this empty value is taken.
-   * - ``%(name)``
+   * - ``%(in:name)``
      - Value of input field.
+   * - ``%(nl)``
+     - Insert new line character.
+   * - ``%(tab)``
+     - Insert tab character.
    * - ``%<name>``
      - Parameter with given name.
    * - ``${local-address}``

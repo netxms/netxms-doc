@@ -1194,18 +1194,9 @@ alarms, or actions. You may use the following macros to accomplish this:
          - ``m`` - same as ``multipliers``
    * - ``%1`` - ``%99``
      - Event's parameter number 1 .. 99.
+   * - ``%(nl)``
+     - Insert new line character.
+   * - ``%(tab)``
+     - Insert tab character.
    * - ``%%``
      - Insert ``%`` character.
-
-If you need to insert special characters (like carriage return) you can use the
-following notations:
-
-+--------+--------------------------------+
-| Char   | Description                    |
-+========+================================+
-| ``\t`` | Tab Character (0x09)           |
-+--------+--------------------------------+
-| ``\n`` | New line, CR/LF character pair |
-+--------+--------------------------------+
-| ``\\`` | Backslash character            |
-+--------+--------------------------------+

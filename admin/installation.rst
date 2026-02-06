@@ -7,6 +7,16 @@ Installation
 Major changes between releases
 ==============================
 
+6.0.0
+-----
+
+Backslash no longer has special meaning in macro expansion, so does not need to
+be escaped. Input field macro `%(name)` has been repurposed into multi-purpose
+macro supporting the following: `%(nl)` - insert new line character; `%(tab)` -
+insert tab character; `%(in:name)` - insert input field 'name' value. During
+upgrade macros will be automatically converted. 
+
+
 5.1.4
 -----
 
@@ -514,11 +524,11 @@ Web Management Client
 ^^^^^^^^^^^^^^^^^^^^^
 
 The |product_name| web interface is java based and should be deployed into a
-servlet container to run. Servlet container should support servlet-api version
-4. Supported versions are: Jetty 11, 12, Tomcat 9. The supported Java
-version is 17 or later.
+servlet container to run. Servlet container should support Jakarta Servlet API
+(Jakarta EE 10). Supported versions are: Jetty 12 (with ee10 environment),
+Tomcat 10.1+. The supported Java version is 17 or later.
 
-  1. Install one of the servlet containers that support servlet-api version 4.
+  1. Install one of the servlet containers that support Jakarta Servlet API.
 
   2. Download the latest version of WAR file from the Web Interface Binaries section
      https://www.netxms.org/download/ named nxmc-VERSION.war, for example
@@ -527,13 +537,13 @@ version is 17 or later.
   3. Copy nxmc.war to the webapps directory. In a few seconds it will be autodeployed and
      available at http://SERVER_IP:SERVER_PORT/nxmc/
 
-     Tomcat default folder:  /var/lib/tomcat9/webapps
+     Tomcat default folder:  /var/lib/tomcat10/webapps
 
      Jetty default folder: $JETTY_HOME/webapps/
 
 
 The web management client produces a log file. For Tomcat it is located at
-:file:`/var/lib/tomcat9/work/Catalina/localhost/nxmc/eclipse/workspace/.metadata/.log.`
+:file:`/var/lib/tomcat10/work/Catalina/localhost/nxmc/eclipse/workspace/.metadata/.log.`
 Inspect this log file if you encounter errors when running the web client.
 
 
@@ -679,10 +689,13 @@ errors when running the client.
 Web Management Client
 ^^^^^^^^^^^^^^^^^^^^^
 
-The |product_name| web interface is java based and should be deployed into a servlet container to
-run. Minimal supported versions are: Jetty 11, Tomcat 9. The supported Java version is 17, but is found to be working with later versions, for example 21.
+The |product_name| web interface is java based and should be deployed into a
+servlet container to run. Servlet container should support Jakarta Servlet API
+(Jakarta EE 10). Minimal supported versions are: Jetty 12 (with ee10
+environment), Tomcat 10.1+. The supported Java version is 17 or later. 
 
-  1. Install one of the servlet containers that support servlet-api version 4.
+
+  1. Install one of the servlet containers that support Jakarta Servlet API.
 
   2. Download the latest version of WAR file from Web Interface Binaries section
      https://www.netxms.org/download/ named nxmc-VERSION.war, for example
@@ -691,13 +704,13 @@ run. Minimal supported versions are: Jetty 11, Tomcat 9. The supported Java vers
   3. Copy nxmc.war to the webapps directory. In a few seconds it will be autodeployed and
      available at http://SERVER_IP:SERVER_PORT/nxmc/
 
-     Tomcat default folder:  /var/lib/tomcat9/webapps
+     Tomcat default folder:  /var/lib/tomcat10/webapps
 
      Jetty default folder: $JETTY_HOME/webapps/
 
 
 The web management client produces a log file. For Tomcat it is located at
-:file:`/var/lib/tomcat9/work/Catalina/localhost/nxmc/eclipse/workspace/.metadata/.log.`
+:file:`/var/lib/tomcat10/work/Catalina/localhost/nxmc/eclipse/workspace/.metadata/.log.`
 Inspect this log file if you encounter errors when running the web client.
 
 Installing on Windows
@@ -827,34 +840,35 @@ Management Client
 
 Desktop Management Client:
 
- 1. Download the latest version from https://www.netxms.org/download/.
-    Since version 3.8 there are three options -
-    archive (e.g. nxmc-5.0.8-win32-x64.zip), archive with bundled JRE (nxmc-5.0.8-win32-x64-bundled-jre.zip)
-    and installer, which also has JRE bundled (e.g. netxms-client-5.0.8-x64.exe).
-    If using the archive without JRE, make sure you have JRE version 11 or 15 installed.
-    Due to a limitation of the Eclipse platform used to build the Management Client, only an x64 build is currently provided.
+ 1. Download the latest version of Management Client installer from
+    https://www.netxms.org/download/ (e.g. netxms-client-5.0.8-x64.exe). 
+    
+    Due to limitations of the Eclipse platform used to build the Management
+    Client, only an x64 build is provided.
 
- 2. If using the archive version, extract the zip in the preferred directory. If using the installer, launch it and follow the instructions.
+ 2. Launch the installer and follow the instructions.
 
- 3. Run the nxmc file from the extracted catalog, or launch from the Windows Start Menu, if you used the installer.
+ 3. Launch Management Client from the Windows Start Menu.
 
 Web Management Client:
 
-On the Windows platform there are two options: one is to manually install the .war file into a servlet container and
-the second one is to use the netxms-webui-VERSION-x64.exe installer. The installer will
-install Jetty and copy the .war file into required folder. Here the
-installation via the installer is described:
+On the Windows platform there are two options: one is to manually install the
+.war file into a servlet container and the second one is to use the
+netxms-webui-VERSION-x64.exe installer. The installer will install Jetty and
+copy the .war file into required folder. Here the installation via the installer
+is described:
 
   1. Download the latest version from https://www.netxms.org/download. You will need
      Windows installer netxms-webui-VERSION-x64.exe (e.g.: netxms-webui-5.0.8-x64.exe).
      Due to a limitation of the Eclipse platform used to build the Management Client,
-     only an x64 build is currently provided.
+     only an x64 build is provided.
 
   2. Run the installer package on your server. The Installation wizard will be
-     displayed. Follow the prompts. The installer allows to change the installation path and port.
+     displayed. Follow the prompts. The installer allows to change the
+     installation path and port.
 
-  3. After the installation procedure is finished, check that the WEB GUI is available at
-     http://SERVER_IP:SERVER_PORT/nxmc/
+  3. After the installation procedure is finished, check that the WEB GUI is
+     available at http://SERVER_IP:4788/nxmc
 
 
 Unattended installation of the |product_name| Agent
@@ -1175,7 +1189,7 @@ Configuration is checked in this order:
 
     **Tomcat**
 
-    The default location of this file on Debian and Ubuntu is in /usr/share/tomcat9/lib. Other Linux distributions
+    The default location of this file on Debian and Ubuntu is in /usr/share/tomcat10/lib. Other Linux distributions
     may use a different location.
 
     **Oracle Weblogic**
@@ -1229,7 +1243,7 @@ How to configure the NetXMS web client with jetty in Linux
 
       mkdir -p /opt/netxms-webui/{etc,logs} && cd /opt/netxms-webui
 
-      java -jar /opt/jetty-home-12/start.jar --add-modules=ee8-deploy,gzip,http,http2,https,logging-logback,plus,server,ssl,work
+      java -jar /opt/jetty-home-12/start.jar --add-modules=ee10-deploy,gzip,http,http2,https,logging-logback,plus,server,ssl,work
 
 3. Download the war file (version 5.1.2 at the moment of writing) and place it in the webapps directory.
 

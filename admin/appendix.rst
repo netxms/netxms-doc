@@ -25,7 +25,7 @@ Allowed values and special characters for each field are:
 +----------------------------+------------------------------+----------------------------+
 | month                      | 1 - 12                       | \* , - /                   |
 +----------------------------+------------------------------+----------------------------+
-| day of week                | 0 - 7 (0 and 7 is Sunday)    | \* , - / L                 |
+| day of week                | 0 - 7 (0 and 7 is Sunday)    | \* , - / L #               |
 +----------------------------+------------------------------+----------------------------+
 | seconds (for DCI           | 0 - 59 (0 - unlimited for %) | \* , - / %                 |
 | collection only, optional) |                              |                            |
@@ -48,6 +48,12 @@ inconsistent "short" period at the end of time-unit.
 ``L`` stands for "last". When used in the day-of-week field, it allows
 to specify constructs such as "the last Friday" ("5L") of a given month.
 In the day-of-month field, it specifies the last day of the month.
+
+``#`` is used in the day-of-week field to specify the Nth occurrence of a
+day of the week in a month. For example, ``5#3`` means "the third Friday
+of the month".
+
+.. versionadded:: 6.0
 
 The sixth field (but not others) supports additional stepping syntax with a
 percent sign (``%``), which means that the step in seconds calculated in

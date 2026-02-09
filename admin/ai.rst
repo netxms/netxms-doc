@@ -296,13 +296,12 @@ How to Use the Command-Line Client
 -----------------------------------
 
 |product_name| provides ``nxai``, a command-line interface for chatting with
-the AI assistant from a terminal.
-
-**Installation:**
+the AI assistant from a terminal. The tool is included in the |product_name|
+source tree under ``src/client/nxai`` and can be installed with ``pip``:
 
 .. code-block:: bash
 
-   pip install nxai
+   pip install /path/to/netxms/src/client/nxai
 
 **Basic usage:**
 
@@ -425,6 +424,30 @@ Available skills:
    * - Maintenance
      - Maintenance mode scheduling and management. Alert suppression
        during maintenance windows.
+   * - NXSL Scripting :sup:`EE`
+     - Compile, execute, and manage NXSL scripts. Includes script library
+       browsing and ad-hoc script execution.
+   * - Asset Management :sup:`EE`
+     - Track physical assets, manage properties, link assets to monitored
+       objects, and audit change history.
+   * - File Management :sup:`EE`
+     - Remote file operations on nodes with |product_name| agent: read,
+       write, delete, rename, and integrity verification.
+   * - Network Topology :sup:`EE`
+     - IP and MAC address location, network peer discovery, and route
+       tracing between nodes.
+   * - Scheduler Management :sup:`EE`
+     - Create and manage scheduled tasks for automated maintenance,
+       script execution, and discovery operations.
+   * - SSH Command Execution :sup:`EE`
+     - Secure remote command execution on servers and network devices with
+       intelligent command classification and approval workflow.
+
+.. note::
+
+   Skills marked with :sup:`EE` require the |product_name| Enterprise Edition.
+   They are provided by the ``aiext`` and ``aissh`` server modules which are
+   only loaded when a valid Enterprise Edition license is present.
 
 The AI assistant loads skills automatically based on the conversation context.
 You can also request a specific skill explicitly:
@@ -433,6 +456,180 @@ You can also request a specific skill explicitly:
 
    Load the log analysis skill and search syslog for authentication
    failures in the last 24 hours.
+
+
+.. _ai-enterprise-skills:
+
+Enterprise Skills
+-----------------
+
+The following skills are available exclusively in the |product_name| Enterprise
+Edition. They are loaded from the ``aiext`` and ``aissh`` server modules and
+require a valid Enterprise Edition license.
+
+
+.. _ai-skill-nxsl:
+
+NXSL Scripting
+~~~~~~~~~~~~~~
+
+The NXSL scripting skill allows the AI assistant to compile, execute, and manage
+NXSL (|product_name| Scripting Language) scripts. It supports both ad-hoc
+script execution and working with the server script library.
+
+The AI assistant can:
+
+- Compile NXSL scripts to check for syntax errors before execution.
+- Execute arbitrary NXSL scripts on the server.
+- Run existing scripts from the script library.
+- Browse and inspect scripts stored in the library.
+
+This skill is useful for automation, custom data processing, and extending
+|product_name| behavior through scripting. For example, you can ask the AI
+assistant to write and run a script that checks the status of all nodes in a
+container or computes a derived metric from multiple data sources.
+
+
+.. _ai-skill-asset-management:
+
+Asset Management
+~~~~~~~~~~~~~~~~
+
+The asset management skill provides the AI assistant with the ability to track
+physical assets, manage their properties, and link them to monitored objects.
+
+The AI assistant can:
+
+- List and search assets by name, serial number, MAC address, or any custom
+  property.
+- View complete asset details and individual property values.
+- Set, update, and delete asset properties with schema validation.
+- Link and unlink assets to monitored objects (nodes, sensors, access points,
+  mobile devices, chassis, and racks).
+- Inspect the asset attribute schema including data types, constraints, and
+  enumeration values.
+- Review the full change log for compliance auditing.
+
+When an asset is linked to a monitored object, properties marked for auto-fill
+(such as IP address, MAC address, vendor, and model) are automatically
+populated from the linked object.
+
+
+.. _ai-skill-file-management:
+
+File Management
+~~~~~~~~~~~~~~~
+
+The file management skill enables remote file operations on nodes that have the
+|product_name| agent installed.
+
+The AI assistant can:
+
+- List directory contents on remote nodes.
+- Read text files (up to 1 MB).
+- Write and overwrite text files (up to 1 MB).
+- Delete files and directories.
+- Create directories.
+- Get file metadata including MD5 and SHA256 checksums.
+- Rename files.
+
+All operations respect the agent's ``FileStore`` root folder configuration and
+enforce user access rights. Different permissions are required for each type of
+operation (for example, ``DOWNLOAD`` for reading and ``UPLOAD`` for writing).
+
+
+.. _ai-skill-network-topology:
+
+Network Topology
+~~~~~~~~~~~~~~~~
+
+The network topology skill provides IP and MAC address location, peer discovery,
+and route tracing capabilities.
+
+The AI assistant can:
+
+- Find which device owns a specific IP or MAC address and where it connects to
+  the network.
+- List all directly connected peers (neighbors) of a node.
+- Trace the full network path between any two nodes, showing every hop and
+  intermediate device.
+
+This skill is particularly useful for connectivity troubleshooting, network path
+analysis, and device location in large networks.
+
+
+.. _ai-skill-scheduler:
+
+Scheduler Management
+~~~~~~~~~~~~~~~~~~~~
+
+The scheduler management skill allows the AI assistant to create, modify, and
+monitor scheduled tasks.
+
+Supported task types include:
+
+- **Recurring tasks** using cron-style schedule expressions (e.g.,
+  ``0 2 * * *`` for daily at 2:00 AM).
+- **One-time tasks** with a specific execution time in ISO format, Unix
+  timestamp, or relative notation (e.g., ``+30m``).
+
+Common task handlers include:
+
+- ``Maintenance.Enter`` / ``Maintenance.Leave`` -- enter or leave maintenance
+  mode on a node.
+- ``Script.Execute`` -- run an NXSL script from the server library.
+- ``Execute.AIAgentTask`` -- execute an AI agent task with a natural-language
+  instruction.
+- ``Discovery.ActiveDiscovery`` -- trigger network discovery.
+- ``Poll.Configuration`` / ``Poll.Status`` -- force a configuration or status
+  poll on a node.
+
+
+.. _ai-skill-ssh:
+
+SSH Command Execution
+~~~~~~~~~~~~~~~~~~~~~
+
+The SSH skill provides secure remote command execution on servers and network
+devices monitored by |product_name|. It features an intelligent command
+classification system that categorizes every command before execution.
+
+**Command classification:**
+
+- **Read-only** -- diagnostic and information-gathering commands that execute
+  immediately without approval. This includes commands such as ``ps``, ``df``,
+  ``show interfaces``, ``display version``, and most other read-only operations.
+- **Write** -- commands that modify system configuration or state. These require
+  explicit user approval before execution. Examples include service restarts,
+  package management, file modifications, and configuration changes on network
+  devices.
+- **Dangerous** -- commands that could cause severe damage or data loss (e.g.,
+  ``rm -rf /``, ``shutdown``, ``factory-reset``). These are always blocked.
+
+Classification is platform-aware and applies device-specific patterns for Linux,
+Cisco IOS, Cisco NX-OS, Juniper JunOS, Huawei VRP, MikroTik RouterOS, and
+Extreme EXOS.
+
+**Execution modes:**
+
+- **Command channel mode** (default for Linux/Unix) -- uses the SSH exec channel
+  with full shell processing. Pipes, redirects, environment variables, and
+  command chaining all work correctly.
+- **Interactive mode** (automatic for network devices) -- handles vendor-specific
+  CLI interfaces with prompt detection, pagination control, and command echo
+  removal.
+
+**Approval workflow:**
+
+When a write command requires approval, the workflow depends on the session type:
+
+- In an **interactive chat** session, the AI assistant asks the user for
+  confirmation directly in the chat.
+- In a **background task**, the AI assistant creates an approval request that
+  the user reviews in the :guilabel:`AI Messages` panel.
+
+All SSH command executions are logged to an audit table with the timestamp, user,
+target node, command, classification, approval status, and result.
 
 
 .. _ai-function-calling:
@@ -657,232 +854,6 @@ Configuration examples
    Slots = default
 
 
-.. _ai-functions-reference:
-
-AI Functions Reference
-----------------------
-
-The following functions are available to the AI assistant for accessing |product_name|
-data and performing actions.
-
-
-Alarms and incidents
-~~~~~~~~~~~~~~~~~~~~
-
-.. list-table::
-   :header-rows: 1
-   :widths: 35 65
-
-   * - Function
-     - Description
-   * - ``alarm-list``
-     - Get a list of active alarms.
-   * - ``create-incident``
-     - Create a new incident.
-   * - ``create-incident-from-alarms``
-     - Create an incident and link specified alarms.
-   * - ``get-incident-details``
-     - Get full incident details including linked alarms.
-   * - ``get-incident-history``
-     - Retrieve historical incidents for pattern analysis.
-   * - ``get-incident-related-events``
-     - Get events related to an incident for timeline correlation.
-   * - ``get-incident-topology-context``
-     - Get network topology context for an incident.
-   * - ``get-open-incidents``
-     - List all currently open incidents.
-   * - ``add-incident-comment``
-     - Post an analytical comment to an incident.
-   * - ``assign-incident``
-     - Assign an incident to a user.
-   * - ``suggest-incident-assignee``
-     - Get a recommended assignee based on context.
-   * - ``link-alarm-to-incident``
-     - Link a single alarm to an incident.
-   * - ``link-alarms-to-incident``
-     - Link multiple alarms to an incident.
-
-
-Objects and topology
-~~~~~~~~~~~~~~~~~~~~
-
-.. list-table::
-   :header-rows: 1
-   :widths: 35 65
-
-   * - Function
-     - Description
-   * - ``find-objects``
-     - Search for objects by criteria.
-   * - ``get-object``
-     - Get detailed object information.
-   * - ``get-node-interfaces``
-     - List all interfaces on a node.
-   * - ``get-node-hardware-components``
-     - Get hardware inventory for a node.
-   * - ``get-node-software-packages``
-     - Get software inventory for a node.
-   * - ``get-node-ai-tools``
-     - Discover AI tools available on a node's agent.
-
-
-Data collection
-~~~~~~~~~~~~~~~
-
-.. list-table::
-   :header-rows: 1
-   :widths: 35 65
-
-   * - Function
-     - Description
-   * - ``get-metrics``
-     - List data collection items (DCIs) on a node.
-   * - ``get-historical-data``
-     - Retrieve historical metric data.
-   * - ``create-metric``
-     - Create a new DCI.
-   * - ``edit-metric``
-     - Modify an existing DCI.
-   * - ``delete-metric``
-     - Remove a DCI.
-   * - ``get-thresholds``
-     - Get threshold configuration for a DCI.
-   * - ``add-threshold``
-     - Create a new threshold.
-   * - ``delete-threshold``
-     - Remove a threshold.
-
-
-Logs
-~~~~
-
-.. list-table::
-   :header-rows: 1
-   :widths: 35 65
-
-   * - Function
-     - Description
-   * - ``search-syslog``
-     - Search syslog messages with filters.
-   * - ``search-windows-events``
-     - Search Windows event log entries.
-   * - ``search-snmp-traps``
-     - Search received SNMP traps.
-   * - ``search-events``
-     - Search |product_name| system events.
-   * - ``list-logs``
-     - List available log types.
-   * - ``get-log-schema``
-     - Get the schema of a log table.
-   * - ``get-log-statistics``
-     - Get log volume statistics and trends.
-   * - ``correlate-logs``
-     - Correlate events across multiple log sources.
-   * - ``analyze-log-patterns``
-     - Detect patterns, bursts, and recurring events.
-
-
-Event processing
-~~~~~~~~~~~~~~~~
-
-.. list-table::
-   :header-rows: 1
-   :widths: 35 65
-
-   * - Function
-     - Description
-   * - ``get-event-template``
-     - Get event template details.
-   * - ``create-event-template``
-     - Create a new event template.
-   * - ``modify-event-template``
-     - Edit an existing event template.
-   * - ``delete-event-template``
-     - Remove an event template.
-   * - ``get-event-processing-policy``
-     - Get the event processing policy configuration.
-   * - ``get-event-processing-actions``
-     - List configured actions.
-   * - ``get-event-processing-action``
-     - Get details of a specific action.
-
-
-Administration
-~~~~~~~~~~~~~~
-
-.. list-table::
-   :header-rows: 1
-   :widths: 35 65
-
-   * - Function
-     - Description
-   * - ``start-maintenance``
-     - Start maintenance mode for an object.
-   * - ``end-maintenance``
-     - End maintenance mode.
-   * - ``send-notification``
-     - Send a notification via configured channels.
-   * - ``clear-notification-queue``
-     - Clear the notification queue.
-
-
-SNMP and agent tools
-~~~~~~~~~~~~~~~~~~~~
-
-.. list-table::
-   :header-rows: 1
-   :widths: 35 65
-
-   * - Function
-     - Description
-   * - ``snmp-read``
-     - Perform an SNMP GET on a managed node.
-   * - ``snmp-walk``
-     - Perform an SNMP WALK on a managed node.
-   * - ``execute-agent-tool``
-     - Execute a tool on a |product_name| agent.
-
-
-AI task and message management
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. list-table::
-   :header-rows: 1
-   :widths: 35 65
-
-   * - Function
-     - Description
-   * - ``ai-task-list``
-     - List active AI background tasks.
-   * - ``register-ai-task``
-     - Create a new background task.
-   * - ``delete-ai-task``
-     - Delete a background task.
-   * - ``create-ai-message``
-     - Post an informational message to users.
-   * - ``create-approval-request``
-     - Post an approval request with a follow-up action.
-
-
-Object AI data storage
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. list-table::
-   :header-rows: 1
-   :widths: 35 65
-
-   * - Function
-     - Description
-   * - ``get-object-ai-data``
-     - Retrieve stored AI data for an object.
-   * - ``set-object-ai-data``
-     - Store AI-generated data on an object.
-   * - ``list-object-ai-data-keys``
-     - List stored data keys for an object.
-   * - ``remove-object-ai-data``
-     - Delete stored data from an object.
-
-
 .. _ai-nxai-reference:
 
 nxai Command-Line Reference
@@ -975,23 +946,30 @@ The following debug tags can be used for troubleshooting the AI subsystem:
    * - Tag
      - Description
    * - ``ai.assistant``
-     - General AI assistant operations.
-   * - ``ai.core``
-     - Core AI framework.
+     - General AI assistant operations (chat, function calls, incident
+       analysis).
    * - ``ai.provider``
-     - Provider base class (HTTP requests).
-   * - ``ai.provider.openai``
-     - OpenAI-specific provider operations.
-   * - ``ai.provider.ollama``
-     - Ollama-specific provider operations.
+     - LLM provider base class (HTTP requests, response parsing).
+   * - ``ai.prov.openai``
+     - OpenAI-compatible provider operations.
+   * - ``ai.prov.anthropic``
+     - Anthropic provider operations.
+   * - ``ai.prov.ollama``
+     - Ollama provider operations.
    * - ``ai.skills``
      - Skill loading and management.
    * - ``ai.tasks``
      - Background task scheduling and execution.
    * - ``ai.messages``
-     - AI message lifecycle management.
+     - AI message lifecycle and cleanup.
+   * - ``ai.anomaly``
+     - Anomaly detection profile generation.
+   * - ``ai.tools``
+     - AI assistant function handlers (data collection, logs, objects).
+   * - ``webapi.ai``
+     - Web API endpoints for AI chat sessions.
    * - ``llm.chat``
-     - Chat session operations.
+     - LLM chat message handling.
 
 Enable debug output by setting the appropriate debug level in the server
 configuration:

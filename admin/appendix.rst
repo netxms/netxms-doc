@@ -407,7 +407,7 @@ Agent configuration file (nxagentd.conf)
    * - OfflineDataExpirationTime
      - Applicable only if Agent Cache Mode is on. Defines the duration (in days)
        for how collected data will be stored in agent's database if there is no
-       connection to NetXMS server.
+       connection to |product_name| server.
      - 10
    * - PlatformSuffix
      - String to be added as suffix to the value of ``System.PlatformName``
@@ -996,7 +996,7 @@ Configuration`
     - 8443
     - No
   * - CAS.Service
-    - Service to validate (usually NetXMS web UI URL).
+    - Service to validate (usually |product_name| web UI URL).
     - https://127.0.0.1/nxmc
     - No
   * - CAS.TrustedCACert
@@ -1427,7 +1427,7 @@ Configuration`
     -
     - No
   * - LDAP.SyncInterval
-    - The synchronization interval (in minutes) between the NetXMS server and
+    - The synchronization interval (in minutes) between the |product_name| server and
       the LDAP server. If the parameter is set to 0, no synchronization will
       take place.
     - 0
@@ -1514,7 +1514,7 @@ Configuration`
     -
     - No
   * - NetworkDiscovery.DisableProtocolProbe.Agent
-    - Disable probing discovered addresses for NetXMS agent.
+    - Disable probing discovered addresses for |product_name| agent.
     - false
     - No
   * - NetworkDiscovery.DisableProtocolProbe.EtherNetIP
@@ -1734,7 +1734,7 @@ Configuration`
     - 3600
     - No
   * - Objects.Nodes.CapabilityExpirationTime
-    - Time (in seconds) before capability (NetXMS Agent, SNMP, EtherNet/IP, etc)
+    - Time (in seconds) before capability (|product_name| Agent, SNMP, EtherNet/IP, etc)
       expires if node is not responding for requests via appropriate protocol.
     - 604800
     - No
@@ -2107,7 +2107,7 @@ Configuration`
     - 1500
     - Yes
   * - SNMP.RetryCount
-    - Number of retries for SNMP requests sent by NetXMS server.
+    - Number of retries for SNMP requests sent by |product_name| server.
     - 3
     - Yes
   * - SNMP.Traps.AllowVarbindsConversion
@@ -2590,7 +2590,7 @@ After completion and starting server, run the second step:
 Database export and import
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-nxdbmgr allows convenient way to export and import database. To ensure export data consistancy, NetXMS server should be stopped. 
+nxdbmgr allows convenient way to export and import database. To ensure export data consistancy, |product_name| server should be stopped. 
 In large deployments export may take long time.
 
   .. code-block:: sh
@@ -2616,7 +2616,7 @@ For database import similar syntax and switches apply. One can export full datab
 nxaction
 --------
 
-nxaction - command line tool used to execute preconfigured actions on NetXMS agent
+nxaction - command line tool used to execute preconfigured actions on |product_name| agent
 
 
 Usage: ``nxaction <host> [<options>] <action> [<action args>]``
@@ -2719,7 +2719,7 @@ Example
 
      $ nxadm -u admin -p admin -i
 
-     NetXMS Server Remote Console V5.1.1 Ready
+     |product_name| Server Remote Console V5.1.1 Ready
      Enter "help" for command list
 
      netxmsd: help
@@ -2733,7 +2733,7 @@ Example
      debug [<debug tag> <level>|off|default]
                                        - Set debug level for a particular debug tag
      debug sql [on|off]                - Turn SQL query trace on or off
-     down                              - Shutdown NetXMS server
+     down                              - Shutdown |product_name| server
      exec <script> [<params>]          - Executes NXSL script from script library
      exit                              - Exit from remote session
      kill <session>                    - Kill client session
@@ -2776,7 +2776,7 @@ Example
      show topology <node>              - Collect and show link layer topology for node
      show tunnels                      - Show active agent tunnels
      show users                        - Show users
-     show version                      - Show NetXMS server version
+     show version                      - Show |product_name| server version
      show vlans <node>                 - Show cached VLAN information for node
      show watchdog                     - Display watchdog information
      tcpping <address> <port>          - TCP ping on given address and port
@@ -2796,7 +2796,7 @@ Example
 nxaevent
 --------
 
-This tool can be used to push events to |product_name| server via local NetXMS agent.
+This tool can be used to push events to |product_name| server via local |product_name| agent.
 
 Usage: 
      * ``nxaevent [OPTIONS] event_code [parameters]``
@@ -3139,7 +3139,7 @@ Options:
 nxevent
 -------
 
-Nxevent is installed with NetXMS client distribution. Sends events to server using client protocol. On Linux is provided by netxms-client package.
+Nxevent is installed with |product_name| client distribution. Sends events to server using client protocol. On Linux is provided by netxms-client package.
 
 Usage: 
       * ``nxevent [<options>] <server> <event> [<param_1> [... <param_N>]]``
@@ -3425,7 +3425,7 @@ Compile and compress mib file:
 
 nxpush
 ------
-nxpush is a command line tool used to push DCI values to NetXMS server.
+nxpush is a command line tool used to push DCI values to |product_name| server.
 
 There are different options how this tool can be used:
  - with help of this tool data collected with different monitoring system
@@ -3707,7 +3707,7 @@ Get system description for given IP:
 nxupload
 --------
 
-nxupload - command line tool used to upload files to NetXMS agent
+nxupload - command line tool used to upload files to |product_name| agent
 
 Usage: ``nxupload [<options>] <host> <file>``
 
@@ -3784,7 +3784,7 @@ Upload file to agent's data directory:
 nxwsget
 -------
 
-nxwsget - command line tool used to query web services via NetXMS agent. Such agent needs to have :guilabel:`EnableWebServiceProxy=yes` in its configuration.
+nxwsget - command line tool used to query web services via |product_name| agent. Such agent needs to have :guilabel:`EnableWebServiceProxy=yes` in its configuration.
 
 Usage: ``nxwsget [<options>] <host> <URL> <path> [<path> ...]``
 

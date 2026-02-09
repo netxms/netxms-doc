@@ -410,7 +410,7 @@ Available skills:
      - Root cause analysis, alarm correlation, incident history, topology
        context, and assignment recommendations.
    * - Log Analysis
-     - Search and correlate syslog, Windows events, SNMP traps, and NetXMS
+     - Search and correlate syslog, Windows events, SNMP traps, and |product_name|
        system events. Includes pattern detection and burst analysis.
    * - Data Collection
      - Metric creation, threshold management, historical data analysis.

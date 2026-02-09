@@ -1244,7 +1244,7 @@ mode enabled in the following way:
 1. Create new table by right click in :guilabel:`Data Collection` tab view
    followed by selecting :menuselection:`New table...`.
 
-2. Select :guilabel:`Origin` on :guilabel:`General` page as NetXMS Agent
+2. Select :guilabel:`Origin` on :guilabel:`General` page as |product_name| Agent
    (default option) and table metrics from :menuselection:`Table Selection`
    pop-up view when clicking on :menuselection:`Metric` selector.
 

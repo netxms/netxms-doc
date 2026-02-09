@@ -21,9 +21,9 @@ PostgreSQL data directory: /u0fs1/pg-data/14
 
 PostgreSQL port: 5432
 
-NetXMS installation prefix: /opt/netxms
+|product_name| installation prefix: /opt/netxms
 
-NetXMS system service names: netxmsd.service, nxagentd.service, nxreportd.service
+|product_name| system service names: netxmsd.service, nxagentd.service, nxreportd.service
 
 
 DR
@@ -39,9 +39,9 @@ PostgreSQL data directory: /u0fs1/pg-data/14
 
 PostgreSQL port: 5432
 
-NetXMS installation prefix: /opt/netxms
+|product_name| installation prefix: /opt/netxms
 
-NetXMS system service names: netxmsd.service, nxagentd.service, nxreportd.service
+|product_name| system service names: netxmsd.service, nxagentd.service, nxreportd.service
 
 
 Switchover procedure

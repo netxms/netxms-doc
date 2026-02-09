@@ -545,7 +545,7 @@ Audit log forwarding
 Syslog
 ------
 
-NetXMS allows to forward audit log to another syslog server to have all data in one place. 
+|product_name| allows to forward audit log to another syslog server to have all data in one place. 
 
 Next configuration parameters should be set in order to forward audit log to external syslog server:
 

@@ -174,7 +174,7 @@ Abort and other runtime errors in the script DCI will set DCI to an error state.
 Before version 5.0, DCI changed state to unsupported.
 
 Importing the dashboard configuration exported from the previous version of
-NetXMS will not upgrade the script syntax to the 5.0 format.
+|product_name| will not upgrade the script syntax to the 5.0 format.
 
 
 4.4
@@ -1171,7 +1171,7 @@ There are a few settings available for configuration of the WebUI.
   * loginFormImageMargins - margins in px around custom login image (default: 10)
   * server - server DNS name or IP (default: 127.0.0.1)
 
-There are multiple ways to set the connection configuration from WebUI to NetXMS server.
+There are multiple ways to set the connection configuration from WebUI to |product_name| server.
 Configuration is checked in this order:
 
   1. Using JNDI. Environment should be set like nxmc/NAME for example: nxmc/server
@@ -1223,8 +1223,8 @@ in the same directory as nxmc.properties, the correct entry will be:
 .. _linux_jetty_install:
 
 
-How to configure the NetXMS web client with jetty in Linux
-----------------------------------------------------------
+How to configure the |product_name| web client with jetty in Linux
+------------------------------------------------------------------
 
 
 1. Download the latest version of Jetty (12.0.13 at the moment of writing).
@@ -1274,7 +1274,7 @@ How to configure the NetXMS web client with jetty in Linux
 .. code-block:: ini
 
    [Unit]
-    Description=NetXMS WebUI
+    Description=|product_name| WebUI
     StartLimitIntervalSec=0
 
    [Service]
@@ -1409,8 +1409,8 @@ Configuration file example:
 
 .. _windows_mssql_install:
 
-How to install NetXMS server on Windows Server with local Microsoft SQL Server Express
---------------------------------------------------------------------------------------
+How to install |product_name| server on Windows Server with local Microsoft SQL Server Express
+----------------------------------------------------------------------------------------------
 
 1. Login as adiministrator
 2. Install Microsoft SQL Server Express with defaut options.

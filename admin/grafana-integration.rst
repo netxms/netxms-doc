@@ -55,7 +55,7 @@ and then configure a new data source for the |product_name| API.
 
 .. figure:: _images/grafana2.png
 
-   NetXMS data source configuration
+   |product_name| data source configuration
 
 API Endpoints Supported
 =======================

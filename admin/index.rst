@@ -19,6 +19,7 @@ Administrator Guide
    network-discovery
    data-collection
    event-processing
+   ai
    visualisation
    grafana-integration
    operating-system-monitoring

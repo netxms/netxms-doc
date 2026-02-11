@@ -26,7 +26,7 @@ have your first conversation.
 Prerequisites
 -------------
 
-- A running |product_name| server (version 5.2 or later).
+- A running |product_name| server (version 6.0 or later).
 - Access to at least one LLM provider: a cloud API (OpenAI, Anthropic) or a
   local Ollama instance.
 - An API key or token for the chosen provider (not required for Ollama with
@@ -186,9 +186,9 @@ Assign slots to providers using the ``Slots`` parameter (comma-separated list):
    Model = mistral
    Slots = fast
 
-The ``default`` slot is used when no specific slot is requested. At least one
-provider must be assigned to the ``default`` slot for the AI subsystem to
-initialize.
+At least one provider must be assigned to the ``default`` slot for the AI
+subsystem to initialize. See :ref:`ai-slot-reference` for the complete list of
+available slot names.
 
 You can optionally set the global default provider explicitly:
 
@@ -588,17 +588,6 @@ Supported task types include:
 - **One-time tasks** with a specific execution time in ISO format, Unix
   timestamp, or relative notation (e.g., ``+30m``).
 
-Common task handlers include:
-
-- ``Maintenance.Enter`` / ``Maintenance.Leave`` -- enter or leave maintenance
-  mode on a node.
-- ``Script.Execute`` -- run an NXSL script from the server library.
-- ``Execute.AIAgentTask`` -- execute an AI agent task with a natural-language
-  instruction.
-- ``Discovery.ActiveDiscovery`` -- trigger network discovery.
-- ``Poll.Configuration`` / ``Poll.Status`` -- force a configuration or status
-  poll on a node.
-
 
 .. _ai-skill-ssh:
 
@@ -655,28 +644,9 @@ Function Calling
 The AI assistant uses function calling to interact with the |product_name| server
 in real time. When it determines that it needs live data or wants to perform
 an action, it invokes one or more registered functions. The results are fed
-back to the LLM for interpretation.
-
-Functions are grouped by domain:
-
-- **Alarms and Incidents** -- list alarms, create/modify incidents, correlate
-  events, suggest assignees.
-- **Objects and Topology** -- find objects, get node details, query interfaces,
-  hardware and software inventory.
-- **Data Collection** -- create/edit/delete metrics, retrieve historical data,
-  manage thresholds.
-- **Logs** -- search syslog, Windows events, SNMP traps, and system events.
-  Perform pattern analysis and cross-source correlation.
-- **Event Processing** -- manage event templates, view processing policy,
-  configure actions.
-- **Administration** -- start/end maintenance mode, send notifications,
-  manage AI tasks.
-- **SNMP** -- direct SNMP GET and WALK operations on managed nodes.
-- **Agent Tools** -- discover and execute tools on |product_name| agents.
-
-In the management client, function calls appear as progress indicators in the
-chat, showing what data the AI assistant is accessing (e.g., "Getting alarm list",
-"Searching syslog").
+back to the LLM for interpretation. In the management client, function calls
+appear as progress indicators in the chat, showing what data the AI assistant
+is accessing (e.g., "Getting alarm list", "Searching syslog").
 
 
 .. _ai-approval-workflow:
@@ -701,26 +671,8 @@ and spawns a follow-up task if approved.
 Background Task Execution Model
 --------------------------------
 
-Background AI tasks follow a multi-iteration execution model:
-
-1. **First execution** -- the AI assistant receives the user-provided prompt and begins
-   work. It can call functions, load skills, and analyze data.
-
-2. **State preservation** -- At the end of each execution, the AI assistant returns a
-   JSON response with:
-
-   - ``completed`` -- whether the task is finished.
-   - ``next_execution_time`` -- delay in seconds before the next iteration.
-   - ``memento`` -- arbitrary data preserved for the next execution.
-   - ``explanation`` -- summary of what was accomplished.
-
-3. **Subsequent iterations** -- The task resumes with the preserved memento,
-   allowing it to track progress, compare current state with previous
-   findings, and build on earlier analysis.
-
-4. **Completion** -- The task either completes successfully or fails. Results
-   are logged in the execution log and can be communicated through AI
-   messages.
+Background AI tasks can run multiple iterations, preserving state between
+executions so the assistant can track progress and compare findings over time.
 
 
 Object AI Data
@@ -750,19 +702,11 @@ All AI configuration is placed in the ``netxmsd.conf`` file.
 Global settings
 ~~~~~~~~~~~~~~~
 
-.. list-table::
-   :header-rows: 1
-   :widths: 30 15 15 40
+The ``[AI]`` section supports the following parameter:
 
-   * - Parameter
-     - Type
-     - Default
-     - Description
-   * - ``[AI] DefaultProvider``
-     - String
-     - (auto)
-     - Name of the default provider. If not set, the first provider with
-       the ``default`` slot is used.
+``DefaultProvider``
+   Name of the default provider. If not set, the first provider with the
+   ``default`` slot is used automatically.
 
 
 Provider settings
@@ -823,6 +767,38 @@ Each provider is configured in a ``[AI/Provider/<name>]`` section.
      - ``default``
      - Comma-separated list of slots this provider serves (e.g.,
        ``default,interactive,analytical``).
+
+
+.. _ai-slot-reference:
+
+Provider slots
+~~~~~~~~~~~~~~
+
+Slots route different types of AI requests to appropriate providers. Assign
+one or more slots to each provider using the ``Slots`` parameter.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Slot
+     - Description
+   * - ``default``
+     - General-purpose slot used when no specific slot is requested. At least
+       one provider must be assigned to this slot for the AI subsystem to
+       initialize.
+   * - ``interactive``
+     - Used for interactive chat sessions with users.
+   * - ``background``
+     - Used for background AI task execution.
+   * - ``analytical``
+     - Used for deep analysis tasks such as incident investigation.
+   * - ``fast``
+     - Used for quick operations where low latency is preferred over
+       capability (e.g., prompt injection guard fallback).
+   * - ``guard``
+     - Used by the prompt injection guard. If not defined, the ``fast`` slot
+       is used as fallback.
 
 
 Configuration examples
@@ -983,13 +959,10 @@ The following debug tags can be used for troubleshooting the AI subsystem:
      - AI assistant function handlers (data collection, logs, objects).
    * - ``webapi.ai``
      - Web API endpoints for AI chat sessions.
-   * - ``llm.chat``
-     - LLM chat message handling.
 
-Enable debug output by setting the appropriate debug level in the server
-configuration:
+Enable debug output by adding the ``DebugTags`` parameter to the global section
+of ``netxmsd.conf`` (before any named section):
 
 .. code-block:: cfg
 
-   [Debug]
-   Tags = ai.*:6
+   DebugTags = ai.*:6

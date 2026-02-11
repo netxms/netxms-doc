@@ -1,0 +1,70 @@
+---
+kind: pipeline
+type: docker
+name: build-and-deploy
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
+
+steps:
+  - name: build
+    image: ghcr.io/netxms/netxms-doc-builder:latest
+    environment:
+      CI: "true"
+    commands:
+      - make clean
+      - make html
+      - make pdf
+
+  - name: deploy
+    image: alpine:3.23
+    environment:
+      SFTP_KEY:
+        from_secret: sftp_key
+      SFTP_HOST:
+        from_secret: sftp_host
+      SFTP_USER:
+        from_secret: sftp_user
+      SFTP_PORT:
+        from_secret: sftp_port
+    commands:
+      - apk add --no-cache lftp openssh-client
+      - mkdir -p ~/.ssh
+      - printf '%s\n' "$SFTP_KEY" > ~/.ssh/id_rsa
+      - chmod 600 ~/.ssh/id_rsa
+      - ssh-keyscan -p "$SFTP_PORT" "$SFTP_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+      - >-
+        lftp sftp://$SFTP_USER@$SFTP_HOST:$SFTP_PORT -e "
+        mirror -R --delete --verbose admin/_build/html/ adminguide/;
+        mirror -R --delete --verbose user/_build/html/ userguide/;
+        put -O . admin/_build/latex/netxms-admin.pdf;
+        put -O . user/_build/latex/netxms-user.pdf;
+        bye"
+
+  - name: notify
+    image: appleboy/drone-telegram
+    settings:
+      token:
+        from_secret: telegram_bot_token
+      to:
+        from_secret: telegram_channel_id
+      format: markdown
+      message: >
+        {{#success build.status}}
+        ✅ Docs [#{{build.number}}]({{build.link}}) succeeded.
+        {{else}}
+        ❌ Docs [#{{build.number}}]({{build.link}}) **FAILED**.
+        `{{commit.message}}` by {{commit.author}}
+        {{/success}}
+    when:
+      status:
+        - success
+        - failure
+---
+kind: signature
+hmac: 34e373bcf44c722931dc1ed0cbe2ed105b53bf92cfd062620f824aba9f4dcb0d
+
+...

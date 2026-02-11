@@ -1,5 +1,7 @@
+DOCKER_IMAGE ?= ghcr.io/netxms/netxms-doc-builder:latest
+
 all:
-	@echo Select target: html, pdf, man, clean
+	@echo Select target: html, pdf, man, clean, docker
 
 html:
 	make -C admin html
@@ -28,3 +30,12 @@ clean:
 	make -C developer clean
 	make -C manpages clean
 	make -C user clean
+
+docker:
+	docker build -f docker/Dockerfile -t $(DOCKER_IMAGE) .
+
+docker-push:
+	docker buildx build --platform linux/amd64,linux/arm64 \
+		-f docker/Dockerfile -t $(DOCKER_IMAGE) --push .
+
+.PHONY: all html pdf gettext man clean docker docker-push

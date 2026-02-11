@@ -52,6 +52,7 @@ steps:
       to:
         from_secret: telegram_channel_id
       format: markdown
+      disable_web_page_preview: true
       message: >
         {{#success build.status}}
         ✅ Docs [#{{build.number}}]({{build.link}}) succeeded.
@@ -65,6 +66,6 @@ steps:
         - failure
 ---
 kind: signature
-hmac: 8c7e0d1645fb0cdb8fc0b6f3b39474e2256c0b0b65de19e1187afa902801815e
+hmac: 674c07ab42d8aadaf9ddcbc0417bf3e99e7dc462402ef08f0d900cd0d578f72c
 
 ...

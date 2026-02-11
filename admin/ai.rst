@@ -31,6 +31,10 @@ Prerequisites
   local Ollama instance.
 - An API key or token for the chosen provider (not required for Ollama with
   default settings).
+- At least one server module that provides AI skills and functions. The
+  ``aitools`` module is included in the open-source edition. Load it by
+  adding ``Module=aitools`` to the ``netxmsd.conf`` (before any named
+  section).
 
 
 .. _ai-configure-provider:
@@ -42,6 +46,8 @@ Add a provider section to the server configuration file (``netxmsd.conf``).
 The example below configures an OpenAI-compatible provider:
 
 .. code-block:: cfg
+
+   Module=aitools
 
    [AI/Provider/openai]
    Type = openai
@@ -397,6 +403,15 @@ Skills
 Skills extend the AI assistant with domain-specific knowledge and capabilities. Each skill
 includes a detailed prompt with instructions and reference data, plus a set
 of functions for data access.
+
+.. note::
+
+   Skills and functions are provided by server modules. The ``aitools``
+   module, available in the open-source edition, provides the base set of
+   skills and functions listed below. Additional skills can be provided by
+   other modules, including enterprise and third-party ones. Load a module
+   by adding ``Module=<name>`` to the ``netxmsd.conf`` (before any named
+   section).
 
 Available skills:
 

@@ -1,10 +1,9 @@
 FROM debian:13
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-       python3-pip \
-       python3-venv \
-       python3.13-venv \
        latexmk \
        texlive-fonts-recommended \
        texlive-latex-extra \
@@ -15,9 +14,8 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt /tmp/requirements.txt
-RUN python3 -m venv /opt/venv \
-    && /opt/venv/bin/pip install --no-cache-dir -r /tmp/requirements.txt \
-    && rm /tmp/requirements.txt
+WORKDIR /build
+COPY pyproject.toml uv.lock ./
+RUN uv sync --locked --no-dev
 
-ENV PATH="/opt/venv/bin:$PATH"
+ENV PATH="/build/.venv/bin:$PATH"

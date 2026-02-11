@@ -90,7 +90,9 @@ by selecting :guilabel:`Set node object...` option in view menu or by opening
 .. figure:: _images/MIB_Explorer.png
 
 To run walk user should select line of tree from were will be requested all data.
-By walk will be requested all OID subtree of selected item.
+By walk will be requested all OID subtree of selected item. Walk can also be
+started by clicking the :guilabel:`Walk...` button next to the OID field in the
+object details panel.
 
 After walk is done it's results will shown in the table below.
 

@@ -1078,6 +1078,10 @@ Other available options:
     - `Tag` -  free-form text string that can be used to tag DCIs. Allows to
       filter DCIs in Data Collection tab, match DCIs to display on dashboards,
       find DCIs from NXSL scripts, etc.
+    - `Interpret unsupported state as collection error` - when enabled, a DCI that
+      enters unsupported state will be treated as a data collection error instead.
+      This is useful when you want threshold-based alerting on collection failures
+      for metrics that would otherwise silently go into unsupported state.
 
 
 .. figure:: _images/dci_other_opt_page.png

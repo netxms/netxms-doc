@@ -7,6 +7,15 @@ Installation
 Major changes between releases
 ==============================
 
+6.1.0
+-----
+
+Agent encryption is now restricted to AES-256 only. The ``EnabledCiphers`` agent
+configuration parameter has been removed. Server configuration parameter
+``Server.AllowedCiphers`` default value changed from 63 (all ciphers) to 1
+(AES-256 only).
+
+
 6.0.0
 -----
 

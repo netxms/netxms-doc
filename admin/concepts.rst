@@ -522,9 +522,10 @@ disk mountpoints, device list, etc. and automatically creates or removes
 Security
 ========
 
-All communications are encrypted using either AES-256, AES-128, or Blowfish and
-authenticated. As additional security measure, administrator can restrict list
-of allowed ciphers.
+All communications are encrypted and authenticated. Agent connections use
+AES-256 exclusively. Server supports multiple ciphers (AES-256, AES-128,
+Blowfish, IDEA, 3DES) and defaults to AES-256, but can be configured via
+``Server.AllowedCiphers`` parameter.
 
 Agent authenticate incoming connections using IP white list and optional
 preshared key.

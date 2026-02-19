@@ -214,24 +214,12 @@ Agent configuration file (nxagentd.conf)
        this adds **System.Execute** action (and also
        **System.ExecuteInAllSessions** on Windows). 
      - no
-   * - EnabledCiphers
-     - Controls what ciphers agent can use for connection encryption. A value
-       for this parameter is a cipher code. To enable more than one cipher, the
-       codes should be summed up.
+   * - .. deprecated:: 6.1
+          Removed. Agent only supports AES-256 encryption since version 6.1.
 
-       Possible cipher codes:
-
-       - 1  - "AES-256"
-       - 2  - "BLOWFISH-256"
-       - 4  - "IDEA"
-       - 8  - "3DES"
-       - 16 - "AES-128"
-       - 32 - "BLOWFISH-128"
-
-       Example (enable AES-256 and IDEA):
-
-       **EnabledCiphers = 5**
-     - 63
+       EnabledCiphers
+     -
+     -
    * - EnableControlConnector
      - Enables named pipe used by the agent to receive shutdown and delayed
        restart commands. A command is sent by another instance of agent,
@@ -420,8 +408,7 @@ Agent configuration file (nxagentd.conf)
    * - RequireEncryption
      - If set to yes, a host connected to an agent will be forced to use
        encryption, and if encryption is not supported by a remote host, the
-       connection will be dropped. If an agent was compiled without encryption
-       support, this parameter has no effect.
+       connection will be dropped.
      - no
    * - ServerConnection
      - IP address or host name of |product_name| server for tunnel agent
@@ -1960,7 +1947,7 @@ Configuration`
         - 8 - 3DES
         - 16 - AES128
         - 32 - Blowfish-128
-    - 63
+    - 1
     - Yes
   * - Server.Color
     - Identification color for this server. Used in status bar of management
@@ -4101,7 +4088,8 @@ Data type: String
 
 Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenBSD
 
-List of ciphers supported by agent
+List of ciphers supported by agent. Since version 6.1, the agent only supports
+AES-256.
 
 
 Agent.SyslogProxy.IsEnabled

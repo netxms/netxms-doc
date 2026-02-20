@@ -1140,8 +1140,9 @@ Shows proportional data distribution as pie segments.
 Tube Chart
 ^^^^^^^^^^
 
-.. deprecated::
-   This element type is deprecated. Use Bar Chart instead.
+.. deprecated:: 4.2
+
+   Use Bar Chart instead.
 
 Displays data as a tube/cylinder visualization. Included for backward
 compatibility with existing dashboards.

@@ -8,6 +8,7 @@ trigger:
     - master
   event:
     - push
+    - custom
 
 steps:
   - name: build
@@ -66,6 +67,6 @@ steps:
         - failure
 ---
 kind: signature
-hmac: 674c07ab42d8aadaf9ddcbc0417bf3e99e7dc462402ef08f0d900cd0d578f72c
+hmac: 5ae9fe4e2930ab851bec5d81a4a649aed0ad32b46fa98cbcf15a9feba92d70e7
 
 ...

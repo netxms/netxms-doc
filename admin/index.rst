@@ -40,6 +40,7 @@ Administrator Guide
    hypervisor-monitoring
    asterisk-monitoring
    topology
+   device-backup
    assets
    sla
    remote-file-management

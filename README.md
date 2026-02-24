@@ -6,9 +6,10 @@ NXSL (scripting) documentation sources are in the [separate repository](https://
 
 Components of the documentation are stored in the following directories:
 
-- concept/ - System concept, architecture, and terminology (partially outdated and moved to admin guide).
 - admin/ - In-depth administrator guide.
+- concept/ - System concept, architecture, and terminology (partially outdated and moved to admin guide).
 - developer/ - Describes development process and possible ways of extending NetXMS.
+- user/ - User guide covering basic concepts, management console, objects, and topology.
 - manpages/ - UNIX man pages.
 
 # Notes
@@ -33,26 +34,28 @@ apt install python3-pip python3-virtualenv latexmk texlive-latex-extra texlive-x
 
 ```shell
 git clone https://github.com/netxms/netxms-doc
-
-python3 -m venv sphinx # create virtualenv, do it once
-source sphinx/bin/activate # activate virtualenv
-pip3 install -r requirements.txt # install dependencies, do it once
+cd netxms-doc
+uv sync
 ```
 
 ## Building locally
 
 ```shell
-cd netxms-doc
-source sphinx/bin/activate # activate virtualenv
-make html pdf
+uv run make html pdf
 ```
 
 ## Automatic rebuild and reload
 
 ```shell
-cd netxms-doc
 cd admin
-sphinx-autobuild -b html . _build/html
+uv run sphinx-autobuild -b html . _build/html
+```
+
+## Building with Docker
+
+```shell
+make docker        # build the Docker image
+make docker-push   # build and push multi-arch image
 ```
 
 ## Building translated version:
@@ -68,8 +71,8 @@ make -e SPHINXOPTS="-D language=ru" html
 
 # Useful links
 
-http://sphinx-doc.org/markup/para.html
+https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
 
-http://sphinx-doc.org/markup/inline.html
+https://www.sphinx-doc.org/en/master/usage/restructuredtext/roles.html
 
-http://sphinx-doc.org/markup/
+https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html

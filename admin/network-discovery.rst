@@ -113,3 +113,25 @@ Address Filters
 In this section you can define address ranges for the automatically generated
 discovery filter. This list has no effect if discovery is off or the filter is not
 set to :guilabel:`Automatically generated script`.
+
+
+Topology Excluded Subnets
+-------------------------
+
+In this section you can define subnets that should be excluded from network
+topology processing. This is useful when multiple network devices share the same
+default IP addresses on certain interfaces (e.g. 192.168.1.1 on a default VLAN),
+which would otherwise cause legitimate nodes to be rejected as duplicates during
+discovery.
+
+When a subnet is added to this list, the following behavior changes apply:
+
+- During network discovery, IP addresses belonging to excluded subnets are not
+  checked for duplicates. This prevents new nodes from being discarded because
+  another node already has the same IP on an excluded interface.
+- Subnet objects are not created for excluded subnets.
+- Interfaces with IP addresses in excluded subnets are not bound to any subnet
+  object.
+
+Each entry in the list specifies a subnet (in CIDR notation). If zoning is used,
+you can also specify a zone. A zone value of 0 matches all zones.

@@ -19,7 +19,7 @@ exchange. Two implementations are available:
 
 * **Legacy Web API** — a standalone Java web application (.war file) deployed to
   a separate web server. This implementation will be deprecated in the future.
-  The API is documented using an `OpenAPI specification
+  The API is documented using an `OpenAPI specification (legacy)
   <https://github.com/netxms/netxms/blob/master/src/client/nxapisrv/openapi.yaml>`_.
 
 Information about Grafana configuration can be found :ref:`here <grafana-integration>`.

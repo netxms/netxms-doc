@@ -18,6 +18,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.ifconfig',
+    'sphinx_docbook.docbook_builder',
     'wikipedia',
 ]
 

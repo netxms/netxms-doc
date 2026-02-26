@@ -171,6 +171,11 @@ xml:
 	@echo
 	@echo "Build finished. The XML files are in $(BUILDDIR)/xml."
 
+docbook:
+	$(SPHINXBUILD) -b docbook $(ALLSPHINXOPTS) $(BUILDDIR)/docbook
+	@echo
+	@echo "Build finished. The DocBook files are in $(BUILDDIR)/docbook."
+
 pseudoxml:
 	$(SPHINXBUILD) -b pseudoxml $(ALLSPHINXOPTS) $(BUILDDIR)/pseudoxml
 	@echo

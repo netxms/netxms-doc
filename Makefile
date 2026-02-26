@@ -21,6 +21,9 @@ gettext:
 	make -C developer gettext
 	make -C user gettext
 
+docbook:
+	make -C admin docbook
+
 man:
 	make -C manpages man
 

@@ -114,6 +114,12 @@ Agent configuration file (nxagentd.conf)
    * - Parameter
      - Description
      - Default Value
+   * - AcceptedEnvironmentVariables
+     - Comma-separated list of patterns for environment variable names that the
+       agent will accept from the server. Wildcard characters ``*`` and ``?``
+       can be used. If set to ``none``, the agent will not accept any
+       environment variables from the server.
+     - NX_\*, NETXMS_\*
    * - Action
      - Defines action, which can be later executed by management server. To add
        multiple actions, multiple ``Action`` entries can be provided. See

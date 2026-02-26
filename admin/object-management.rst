@@ -481,6 +481,19 @@ are supported:
      - SSH password
    * - ssh.port
      - SSH port
+   * - AgentEnv:\ *variable_name*
+     - Sets environment variable *variable_name* on the agent. Synced on agent
+       connect and whenever the attribute is changed. Requires the agent to have
+       the variable name in its ``AcceptedEnvironmentVariables`` list. Only
+       works when the server has master or control access to the agent.
+
+For example, setting custom attribute ``AgentEnv:MY_VAR`` to ``some_value`` on
+a node will push the environment variable ``MY_VAR=some_value`` to the node's
+agent. Variables are synced on every agent connection and when attributes
+change. The agent's ``AcceptedEnvironmentVariables`` configuration parameter
+controls which variable names are accepted (defaults to ``NX_*`` and
+``NETXMS_*``). Removing the custom attribute removes the corresponding
+environment variable from the agent.
 
 
 .. _status-calculation:

@@ -806,7 +806,13 @@ Configuration`
     - No
   * - Agent.RestartWaitTime
     - Period of time (in seconds) after agent restart for which server will not
-      perform status, congiration, and other polls on the agent. 
+      perform status, congiration, and other polls on the agent.
+    - 0
+    - No
+  * - Agent.UploadBandwidthLimit
+    - Bandwidth limit for file uploads from server to agent, in KB/s. Set to 0
+      for unlimited. Can be overridden per node by setting the
+      ``SysConfig:Agent.UploadBandwidthLimit`` custom attribute.
     - 0
     - No
   * - Agent.Upgrade.WaitTime

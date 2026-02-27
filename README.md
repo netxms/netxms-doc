@@ -6,10 +6,10 @@ NXSL (scripting) documentation sources are in the [separate repository](https://
 
 Components of the documentation are stored in the following directories:
 
-- admin/ - In-depth administrator guide.
+- admin/ - In-depth [administrator guide](https://netxms.org/documentation/adminguide/).
 - concept/ - System concept, architecture, and terminology (partially outdated and moved to admin guide).
 - developer/ - Describes development process and possible ways of extending NetXMS.
-- user/ - User guide covering basic concepts, management console, objects, and topology.
+- user/ - [User guide](https://netxms.org/documentation/userguide/) covering basic concepts, management console, objects, and topology.
 - manpages/ - UNIX man pages.
 
 # Notes

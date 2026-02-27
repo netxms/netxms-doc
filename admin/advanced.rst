@@ -738,3 +738,231 @@ DCI will be ignored.
 If there is custom attribute on the node or on related object with name starting
 with `tag_`, it's name (excluding `tag_` part) and value will be used as tag.
 There can be several such custom attributes.
+
+
+.. _clickhouse-fanout-driver:
+
+ClickHouse
+----------
+
+.. versionadded:: 5.2
+
+To enable ClickHouse fanout driver, add ``PerfDataStorageDriver=clickhouse`` to
+:file:`netxmsd.conf` file. Driver configuration is specified in ``[ClickHouse]``
+section. The driver uses ClickHouse HTTP API to send data in RowBinary format.
+
+Connection parameters
+~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+  :widths: 10 10
+  :header-rows: 1
+
+  * - Name
+    - Description
+  * - Hostname
+    - ClickHouse server hostname or IP address. Default: ``localhost``.
+  * - Port
+    - ClickHouse HTTP API port. Default: ``8123``.
+  * - UseHTTPS
+    - Use HTTPS instead of HTTP for connection. Default: ``false``.
+  * - Database
+    - Target database name. Default: ``netxms``.
+  * - Table
+    - Target table name. Default: ``metrics``.
+  * - User
+    - ClickHouse username. Empty by default.
+  * - Password
+    - ClickHouse password. Empty by default.
+
+Queue parameters
+~~~~~~~~~~~~~~~~
+
+The driver distributes incoming metrics across multiple independent sender
+threads in a round-robin fashion (based on DCI ID). Each sender thread
+maintains its own queue and sends data to ClickHouse independently.
+
+.. list-table::
+  :widths: 10 10
+  :header-rows: 1
+
+  * - Name
+    - Description
+  * - Queues
+    - Number of parallel sender threads. Valid range: 1-32. Default: ``1``.
+  * - QueueFlushThreshold
+    - Number of messages to accumulate before flushing to ClickHouse.
+      Default: ``1000``.
+  * - MaxCacheWaitTime
+    - Maximum time in milliseconds before flushing partial queue.
+      Default: ``30000``.
+  * - QueueSizeLimit
+    - Maximum number of messages in a single queue. Messages exceeding this
+      limit are dropped. Default: ``10000``.
+
+Data processing parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+  :widths: 10 10
+  :header-rows: 1
+
+  * - Name
+    - Description
+  * - IgnoreStringMetrics
+    - If set to ``true``, metrics with string data type are not sent to
+      ClickHouse. Default: ``true``.
+  * - EnableUnsignedType
+    - Enable unsigned integer types for unsigned data. If disabled, unsigned
+      values are sent as signed. Default: ``true``.
+  * - ValidateValues
+    - If set to ``true``, driver will validate values according to DCI data
+      type, and drop invalid values (invalid numbers, out-of-range values).
+      Default: ``false``.
+  * - CorrectValues
+    - If both ValidateValues and CorrectValues are set to ``true``, instead of
+      dropping values that did not pass validation, corrected values will be
+      sent. Unparsable numbers will be set to last parsable part (for example,
+      ``123abc`` will be sent as ``123``), out-of-range values will be sent as
+      maximum or minimum possible value. Default: ``false``.
+  * - UseTemplateAttributes
+    - Extract tags and column values from template object custom attributes in
+      addition to host and related object attributes. Default: ``true``.
+
+Column configuration
+~~~~~~~~~~~~~~~~~~~~
+
+Column names in the target ClickHouse table can be customized. Setting a column
+name to ``none`` disables that column (except for the three mandatory columns:
+timestamp, host, and name).
+
+.. list-table::
+  :widths: 10 10 10
+  :header-rows: 1
+
+  * - Parameter
+    - ClickHouse type
+    - Default column name
+  * - Column.Timestamp
+    - DateTime
+    - ``timestamp``
+  * - Column.Host
+    - String
+    - ``host``
+  * - Column.Name
+    - String
+    - ``name``
+  * - Column.IntValue
+    - Int64
+    - ``ivalue``
+  * - Column.FloatValue
+    - Float64
+    - ``fvalue``
+  * - Column.Instance
+    - String
+    - ``instance``
+  * - Column.DataType
+    - String
+    - ``data_type``
+  * - Column.DataSource
+    - String
+    - ``data_source``
+  * - Column.DeltaType
+    - String
+    - ``delta_type``
+  * - Column.Tags
+    - Map(String, String)
+    - ``tags``
+
+User-defined columns can be added using ``Column.AdditionalData`` parameter.
+Each value specifies a column name and ClickHouse data type separated by a
+colon. Up to 16 additional columns can be defined. Supported data types are:
+Int8, Int16, Int32, Int64, UInt8, UInt16, UInt32, UInt64, Float32, Float64, and
+String.
+
+Configuration example
+~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: ini
+
+   PerfDataStorageDriver=clickhouse
+
+   [ClickHouse]
+   Hostname=clickhouse.example.com
+   Port=8123
+   Database=netxms
+   Table=metrics
+   User=netxms
+   Password=secret
+   Queues=4
+   QueueFlushThreshold=500
+   Column.AdditionalData=environment:String
+   Column.AdditionalData=region:String
+
+Example ClickHouse table:
+
+.. code-block:: sql
+
+   CREATE DATABASE IF NOT EXISTS netxms;
+
+   CREATE TABLE netxms.metrics
+   (
+       timestamp DateTime,
+       host String,
+       name String,
+       ivalue Int64,
+       fvalue Float64,
+       instance String,
+       data_type String,
+       data_source String,
+       delta_type String,
+       tags Map(String, String),
+       environment String,
+       region String
+   ) ENGINE = MergeTree()
+   ORDER BY (host, name, timestamp);
+
+Details of operation
+~~~~~~~~~~~~~~~~~~~~
+
+Metric name is taken from DCI's metric name, except for SNMP, Modbus, and
+internal "Dummy" DCIs where description is used instead.
+
+Empty DCI values and string values (when ``IgnoreStringMetrics`` is ``true``)
+are not sent.
+
+**Tags and custom columns from custom attributes**
+
+Tags and column values are extracted from custom attributes on the following
+objects (in order of precedence):
+
+1. Template object (if ``UseTemplateAttributes`` is ``true``)
+2. Host (node) object
+3. Related object (if specified in DCI)
+
+Custom attributes with names starting with ``tag:`` or ``tag_`` are added as
+tags (the prefix is stripped). Custom attributes with names starting with
+``column:`` populate the corresponding user-defined column.
+
+If a custom attribute named ``pds:ignore`` or ``ch:ignore`` (with any value)
+exists on any of these objects, the metric will not be sent.
+
+**Internal metrics**
+
+The driver provides the following internal metrics for monitoring via
+``PerfDataStorageDriver.clickhouse()`` parameter:
+
+.. list-table::
+  :widths: 10 10
+  :header-rows: 1
+
+  * - Metric
+    - Description
+  * - senders
+    - Number of active sender threads.
+  * - overflowQueues
+    - Number of queues currently at capacity.
+  * - messageDrops
+    - Total number of messages dropped due to full queues.
+  * - queueSize
+    - Total number of messages currently queued across all senders.

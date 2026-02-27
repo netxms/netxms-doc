@@ -8439,3 +8439,69 @@ Supported Platforms: Linux, Windows
 
 Running services information
 
+
+.. _server-internal-tables:
+
+Server internal tables
+----------------------
+
+Server internal tables can be used for data collection with ``Internal`` data
+source and as instance discovery sources (using the :guilabel:`Internal Table`
+discovery method).
+
+.. note::
+  Columns marked with * are instance columns (primary keys).
+
+
+Network.Interfaces
+~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 5.1.2
+
+List of interfaces on a node.
+
+.. list-table::
+   :widths: 10 10
+   :header-rows: 1
+
+   * - Column name
+     - Data type
+   * - ID *
+     - UInt32
+   * - Index
+     - UInt32
+   * - Name
+     - String
+   * - Description
+     - String
+   * - Alias
+     - String
+   * - Type
+     - UInt32
+   * - Speed
+     - UInt64
+   * - MTU
+     - UInt32
+   * - MAC address
+     - String
+   * - IP addresses
+     - String
+   * - Administrative state
+     - UInt32
+   * - Operational state
+     - UInt32
+   * - Inbound utilization
+     - Float
+   * - Outbound utilization
+     - Float
+   * - Bridge port
+     - UInt32
+   * - Location
+     - String
+   * - Peer interface ID
+     - UInt32
+   * - Peer node ID
+     - UInt32
+   * - Peer discovery protocol
+     - UInt32
+

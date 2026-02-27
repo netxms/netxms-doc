@@ -496,6 +496,101 @@ controls which variable names are accepted (defaults to ``NX_*`` and
 environment variable from the agent.
 
 
+.. _custom-attributes-behavior:
+
+Behavior-altering custom attributes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Certain custom attributes change how |product_name| server processes an object.
+
+**SNMP-related (node objects)**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - Custom attribute
+     - Description
+   * - snmp.testoid
+     - Custom OID used for testing SNMP availability during status and
+       configuration polls. Default OID is ``.1.3.6.1.2.1.1.2.0``
+       (sysObjectID). Useful for devices that do not support standard System or
+       Interfaces MIBs.
+   * - snmp.driver
+     - Force a specific SNMP device driver instead of relying on automatic
+       detection. Set the value to the driver name. See :ref:`snmp` for more
+       details.
+   * - snmp.ignore.ipAddressTable
+     - When set to ``true``, the newer ipAddressTable
+       (``.1.3.6.1.2.1.4.34.1.3``) is not read during interface discovery.
+   * - snmp.ignore.ipAddrTable
+     - When set to ``true``, the legacy ipAddrTable (``.1.3.6.1.2.1.4.20.1.1``)
+       is not read during interface discovery.
+
+**Polling interval overrides**
+
+Polling intervals configured globally via server configuration variables can be
+overridden per object using custom attributes named
+``SysConfig:<variable_name>``, where ``<variable_name>`` matches the server
+configuration variable name. The value is specified in seconds.
+
+See :ref:`concepts_polling` for the list of polling types and their
+configuration variables.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 30 30
+
+   * - Custom attribute
+     - Applies to
+     - Overrides
+   * - SysConfig:Objects.StatusPollingInterval
+     - All pollable objects
+     - Status polling interval
+   * - SysConfig:Objects.ConfigurationPollingInterval
+     - All pollable objects
+     - Configuration polling interval
+   * - SysConfig:Objects.AutobindPollingInterval
+     - Autobind targets
+     - Automatic binding poll interval
+   * - SysConfig:Objects.NetworkMaps.UpdateInterval
+     - Network maps
+     - Map update interval
+   * - SysConfig:DataCollection.InstancePollingInterval
+     - Data collection targets
+     - Instance discovery polling interval
+   * - SysConfig:NetworkDiscovery.PassiveDiscovery.Interval
+     - Nodes
+     - Passive network discovery interval
+   * - SysConfig:Topology.PollingInterval
+     - Nodes
+     - Topology polling interval
+   * - SysConfig:Topology.RoutingTable.UpdateInterval
+     - Nodes
+     - Routing table update interval
+   * - SysConfig:ICMP.PollingInterval
+     - Nodes
+     - ICMP polling interval
+
+**Other server configuration overrides**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Custom attribute
+     - Description
+   * - SysConfig:Topology.RoutingTable.MaxSize
+     - Maximum number of entries to read from the routing table. Default is
+       determined by server configuration variable
+       ``Topology.RoutingTable.MaxSize`` (4000).
+   * - SysConfig:Agent.UploadBandwidthLimit
+     - Per-node file upload bandwidth limit (bytes per second) to the agent.
+   * - SysConfig:DataCollection.Scheduler.RequireConnectivity
+     - Boolean. When set to ``true``, scheduled data collection items will only
+       be collected if the node is reachable.
+
+
 .. _status-calculation:
 
 Status calculation

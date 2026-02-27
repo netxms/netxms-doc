@@ -320,18 +320,25 @@ The following kernel parameters should be changed:
 * net.core.rmem_max
 * net.core.wmem_max
 
-In our test lab, value 1703936 seems to be working well (default was 212992).
-
-Example:
-
-* sudo sysctl -w net.core.rmem_default=1703936
-* sudo sysctl -w net.core.wmem_default=1703936
-* sudo sysctl -w net.core.rmem_max=1703936
-* sudo sysctl -w net.core.wmem_max=1703936
-
-Kernel changes will not be preserved after reboot unless sysctl commands are applied in the system
-configuration file, which is typically located at /etc/sysctl.conf. Increasing these kernel values also
+In our test lab, value 1703936 seems to be working well (default was 212992). Increasing these kernel values also
 increases kernel memory space in use and may impact other applications.
+
+To make the changes persistent across reboots, edit the ``/etc/sysctl.conf`` file.
+Add the following lines at the end of the file:
+
+.. code-block:: ini
+
+   # Increase network buffer size for NetXMS
+   net.core.rmem_default=1703936
+   net.core.wmem_default=1703936
+   net.core.rmem_max=1703936
+   net.core.wmem_max=1703936
+
+After saving the file, load the new settings by running:
+
+.. code-block:: sh
+
+   sudo sysctl -p
 
 Database
 --------

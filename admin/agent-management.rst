@@ -1352,6 +1352,7 @@ the following configuration parameters:
   # Old configuration format
   ExternalTable=MyTable::command
   ExternalTable=MyTable:instanceColumns=columnName;description=description;separator=|:command
+  ExternalTable=MyTable:instanceColumns=columnName;separator=\s;mergeSeparators=true:command
   ExternalTable=MyTable(*):instanceColumns=columnName;description=description;separator=|:command $1 $2
   #Old configuration format with background polling 
   ExternalTable=MyTable:instanceColumns=columnName;description=description;separator=|:command;backgroundPolling=yes;pollingInterval=60

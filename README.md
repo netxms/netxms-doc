@@ -16,6 +16,8 @@ Components of the documentation are stored in the following directories:
 
 ## Prerequisites
 
+To manage the Python environment and dependencies, you need to install [uv](https://docs.astral.sh/uv/getting-started/installation/).
+
 ### macOS
 
 ```shell

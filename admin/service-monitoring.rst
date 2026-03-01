@@ -82,14 +82,17 @@ agent:
 
          - *follow-location* - *true* - follow redirects which web server sends
            as part of an HTTP header in a 3xx response; *false* (default) - do
-           not follow redirects 
+           not follow redirects
+         - *resolve* - IP address to use instead of resolving the hostname from
+           URL via DNS. The hostname is still used for TLS certificate
+           verification. Works similarly to curl's ``--resolve`` option.
          - *timeout* - timeout in milliseconds
          - *verify-host* - *true* (default) - verify that host name from URL
            matches one from certificate (CURLOPT_SSL_VERIFYHOST = 2); *false* -
            do not verify that host name from URL match one from certificate
            (CURLOPT_SSL_VERIFYHOST = 0)
          - *verify-peer* - *true* (default) - verify peer certificate; *false* -
-           do not verify peer certificate. 
+           do not verify peer certificate.
 
    * - NetworkService.Status(\ *URL*\, [\ *named parameters*\])
      - Check status of network service and return numeric value denoting the
@@ -106,10 +109,13 @@ agent:
        *name = value* form. When parameter(s) are used, they should be used
        without [ ]. 
        
-       Optional parameter supported for all schemes:
+       Optional parameters supported for all schemes:
 
-         - *timeout* - timeout in milliseconds       
-       
+         - *resolve* - IP address to use instead of resolving the hostname from
+           URL via DNS. The hostname is still used for TLS certificate
+           verification. Works similarly to curl's ``--resolve`` option.
+         - *timeout* - timeout in milliseconds
+
        Parameters supported for *http* and *https* schemes (all parameters are
        optional):
 
@@ -236,7 +242,11 @@ Examples
 
 | ``NetworkService.Status(tcp://netxms.org:88, timeout=2000)``
 | Returns 2 (Timeout) as it was not possible to establish TCP connection to port
-  1.  Waits for 2 seconds according to *timeout* that we have specified. 
+  1.  Waits for 2 seconds according to *timeout* that we have specified.
+
+| ``NetworkService.Status(https://myhost.example.com, resolve=10.0.0.5)``
+| Connects to 10.0.0.5 instead of resolving myhost.example.com via DNS. The
+  hostname is still sent in TLS SNI and used for certificate verification.
 
 | ``NetworkService.ResponseTime(https://www.google.com)``
 | Returns time in milliseconds it took to fully retrieve the web page from the

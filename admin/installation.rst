@@ -477,7 +477,7 @@ Provided driver packages:
    .. code-block:: sh
 
      [Unit]
-     After=network.target postgresql.service
+     After=postgresql.service
 
    After editing run ``systemctl daemon-reload`` to reload systemd
    configuration.

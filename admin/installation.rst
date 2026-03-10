@@ -636,7 +636,7 @@ Provided driver packages:
 
    .. code-block:: sh
 
-     systemctl edit netxmsd
+     systemctl edit netxms-server
 
    and add the following lines:
 

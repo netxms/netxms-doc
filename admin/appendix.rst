@@ -5326,6 +5326,58 @@ Supported Platforms: Windows, Linux, Solaris, AIX, HP-UX, FreeBSD, NetBSD, OpenB
 Next hop for given destination address according to host's routing table
 
 
+.. _net-ip-stats-tcpconnections:
+
+Net.IP.Stats.TCPConnections
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: Integer
+
+Supported Platforms: Windows, Linux, Solaris, AIX, FreeBSD, NetBSD, OpenBSD, macOS
+
+.. versionadded:: 6.1
+
+Total number of TCP connections across all states and IP versions.
+
+
+Net.IP.Stats.TCPConnections(*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data type: Integer
+
+Supported Platforms: Windows, Linux, Solaris, AIX, FreeBSD, NetBSD, OpenBSD, macOS
+
+.. versionadded:: 6.1
+
+Named parameters (passed as ``key=value`` pairs separated by semicolons):
+
+.. list-table::
+   :widths: 20 80
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+   * - state
+     - TCP connection state to count. If omitted, connections in all states are
+       counted. Supported values: ``ESTABLISHED``, ``SYN_SENT``, ``SYN_RECV``,
+       ``FIN_WAIT1``, ``FIN_WAIT2``, ``TIME_WAIT``, ``CLOSE``, ``CLOSE_WAIT``,
+       ``LAST_ACK``, ``LISTEN``, ``CLOSING``.
+   * - version
+     - IP protocol version. Set to ``4`` for IPv4 only or ``6`` for IPv6 only.
+       If omitted, connections on both IPv4 and IPv6 are counted.
+
+Number of TCP connections matching the specified filter criteria.
+
+Examples:
+
+* ``Net.IP.Stats.TCPConnections(state=ESTABLISHED)`` — count of established TCP
+  connections across both IPv4 and IPv6.
+* ``Net.IP.Stats.TCPConnections(state=LISTEN;version=4)`` — count of listening
+  IPv4 TCP sockets.
+* ``Net.IP.Stats.TCPConnections(version=6)`` — total IPv6 TCP connections in any
+  state.
+
+
 Net.RemoteShareStatus(*)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -7883,6 +7935,19 @@ Data type: List of String
 Supported Platforms: Linux, Windows
 
 Currently active user sessions
+
+
+System.CPU.Instances
+~~~~~~~~~~~~~~~~~~~~
+
+Data type: List of String
+
+Supported Platforms: Windows, Linux, Solaris, AIX, FreeBSD, macOS
+
+.. versionadded:: 6.1
+
+List of available CPU instance indices. Can be used for instance discovery to
+create per-CPU data collection items.
 
 
 System.Desktops(*)

@@ -433,6 +433,30 @@ server and ``your-api-token`` with a valid API token.
 After updating the Oxidized configuration, restart the Oxidized service.
 
 
+SSH Key Authentication
+~~~~~~~~~~~~~~~~~~~~~~
+
+|product_name| passes username and password credentials to Oxidized through the
+HTTP source API. However, SSH private keys are not passed through the API for
+security reasons — exposing key material via a REST endpoint would be a security
+risk.
+
+SSH key authentication must be configured directly in the Oxidized configuration.
+Oxidized supports per-node key paths via the ``vars(:ssh_keys)`` mechanism. To
+configure a global SSH key for all nodes, add a ``vars`` section to the Oxidized
+configuration file:
+
+.. code-block:: yaml
+
+   vars:
+     ssh_keys: /path/to/private/key
+
+The key file must be readable by the Oxidized process. Oxidized will use the
+configured key for SSH authentication while still using the username from the
+|product_name| API. If key authentication fails, Oxidized falls back to password
+authentication.
+
+
 .. _oxidized-config-reference:
 
 Oxidized Configuration Reference

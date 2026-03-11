@@ -339,9 +339,11 @@ How It Works
    (``/api/oxidized/nodes``) that Oxidized uses as its HTTP source to retrieve
    the list of devices to back up.
 
-3. When the administrator registers a node for backup, |product_name| maps the
-   node's vendor to an Oxidized model name (see :ref:`oxidized-vendor-model-map`)
-   and stores the mapping as custom attributes on the node.
+3. When a node is registered for backup (via the
+   ``Hook::RegisterForConfigurationBackup`` script during configuration poll),
+   |product_name| resolves the Oxidized model name from the node's properties
+   (see :ref:`oxidized-model-resolution`) and stores the mapping as custom
+   attributes on the node.
 
 4. Oxidized periodically polls the ``/api/oxidized/nodes`` endpoint to get the
    current list of registered devices, then connects to each device on its
@@ -462,30 +464,129 @@ The following parameters are available in the ``<OXIDIZED>`` section of
    * - DefaultModel
      - No
      - (empty)
-     - Default Oxidized model to use when registering devices whose vendor
-       cannot be automatically mapped. If not set and no mapping is found,
+     - Default Oxidized model to use when no mapping is found through any of
+       the automatic resolution tiers. If not set and no mapping is found,
        device registration will fail.
 
-Custom vendor-to-model mappings can be added in a ``[OXIDIZED/VendorModelMap]``
-subsection to override the built-in defaults:
 
-.. code-block:: ini
+.. _oxidized-model-resolution:
 
-   [OXIDIZED]
-   BaseURL = http://oxidized-host:8888
+Model Resolution
+~~~~~~~~~~~~~~~~~
 
-   [OXIDIZED/VendorModelMap]
-   MyVendor = mymodel
-   AnotherVendor = custommodel
+When a device is registered for backup, |product_name| resolves the Oxidized
+model name using a multi-tier approach. The first tier that produces a match
+wins:
 
+1. **Custom attribute override** — if the ``oxidized.model`` custom attribute is
+   set on the node, its value is used directly. This allows per-node overrides
+   when automatic resolution produces an incorrect result.
 
-.. _oxidized-vendor-model-map:
+2. **NDD driver name** — the node's network device driver name is looked up in
+   the driver-to-model mapping table. The ``GENERIC`` driver is skipped because
+   it matches all SNMP devices and is not useful for model selection.
 
-Vendor-to-Model Mapping
-~~~~~~~~~~~~~~~~~~~~~~~~
+3. **sysDescr substring match** — the node's SNMP sysDescr string is checked
+   against a set of known patterns. This helps disambiguate devices that share
+   a driver but run different operating systems (e.g. Cisco IOS vs. IOS-XR vs.
+   ASA).
 
-When a device is registered for backup, |product_name| maps the node's vendor
-string to an Oxidized model name. The following mappings are built in:
+4. **Vendor name** — the node's vendor string is looked up in the vendor-to-model
+   mapping table.
+
+5. **Default model** — the ``DefaultModel`` configuration parameter is used as a
+   last resort.
+
+All lookups are case-insensitive.
+
+.. tip::
+
+   To override the model for a specific node, set the ``oxidized.model`` custom
+   attribute on the node to the desired Oxidized model name (e.g. ``ios``,
+   ``junos``, ``routeros``). This takes priority over all automatic resolution.
+
+Driver-to-Model Mappings
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 30
+
+   * - Driver Name
+     - Oxidized Model
+   * - CISCO-GENERIC / CATALYST-GENERIC / CATALYST-2900XL / CISCO-ESW
+     - ios
+   * - CISCO-NEXUS
+     - nxos
+   * - CISCO-SB
+     - ciscosmb
+   * - CISCO-WLC
+     - aireos
+   * - JUNIPER
+     - junos
+   * - NETSCREEN
+     - screenos
+   * - MIKROTIK
+     - routeros
+   * - HUAWEI-SW / OPTIX
+     - vrp
+   * - FORTIGATE
+     - fortios
+   * - ARUBA-SW
+     - aoscx
+   * - PROCURVE / HPSW
+     - procurve
+   * - H3C
+     - comware
+   * - EXTREME
+     - xos
+   * - DELL-PWC
+     - powerconnect
+   * - UBNT-AIRMAX
+     - airos
+   * - UBNT-EDGESW
+     - edgeswitch
+   * - HIRSCHMANN-HIOS / HIRSCHMANN-CLASSIC
+     - hirschmann
+   * - DLINK
+     - dlink
+   * - TPLINK
+     - tplink
+   * - ELTEX
+     - eltex
+   * - EDGECORE-ESW
+     - edgecos
+   * - TELTONIKA
+     - openwrt
+
+sysDescr Pattern Mappings
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+These patterns are matched as case-insensitive substrings within the node's
+SNMP sysDescr. They are useful for devices that use the ``GENERIC`` driver or
+a broad driver that covers multiple OS variants.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 50 30
+
+   * - sysDescr Pattern
+     - Oxidized Model
+   * - Adaptive Security Appliance
+     - asa
+   * - IOS-XR / IOS XR
+     - iosxr
+   * - NX-OS
+     - nxos
+   * - Dell EMC Networking OS10 / OS10 Enterprise
+     - os10
+   * - Force10 / FTOS
+     - ftos
+
+Vendor-to-Model Mappings
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Used as a fallback when neither the driver nor sysDescr produce a match.
 
 .. list-table::
    :header-rows: 1
@@ -526,13 +627,9 @@ string to an Oxidized model name. The following mappings are built in:
    * - Hirschmann
      - hirschmann
    * - Teltonika
-     - routeros
+     - openwrt
    * - Edgecore
      - edgecos
-
-Vendor matching is case-insensitive. Custom mappings defined in the
-``<VendorModelMap>`` configuration section take precedence over built-in
-defaults.
 
 
 Debugging

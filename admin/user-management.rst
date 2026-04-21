@@ -415,7 +415,7 @@ Central Authentication Service (CAS) single sign-on is supported in the web
 interface only.  The following server configuration parameters control CAS
 operation: CAS.AllowedProxies, CAS.Host, CAS.Port, CAS.Service,
 CAS.TrustedCACert, CAS.ValidateURL. See :ref:`server_configuration_parameters`
-for the expanation of the meaning of the mentioned parameters.
+for the explanation of the meaning of the mentioned parameters.
 
 Changes to these configuration variables become effective immediately and do
 not require a |product_name| server restart.

@@ -460,7 +460,7 @@ There are two options:
 ServerConnection parameter
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``ServerConnection`` parameter set in agentd.conf file to server
+``ServerConnection`` parameter set in nxagentd.conf file to server
 :term:`DNS` or server IP address. It's also possible to specify port number
 separated by colon, e.g.:
 
@@ -473,7 +473,7 @@ separated by colon, e.g.:
 ServerConnection section
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-``[ServerConnection]`` section is set in agentd.conf. This allows to
+``[ServerConnection]`` section is set in nxagentd.conf. This allows to
 specify additional parameters, e.g.:
 
 .. code-block:: ini

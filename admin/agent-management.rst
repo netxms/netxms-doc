@@ -515,7 +515,7 @@ sections in the config, in this case agent will establish tunnel connection to
 multiple servers.
 
 In addition to ``ServerConnection`` it's necessary to set
-``MasterServers``, ``ControlServers`` or ``Servers``
+``MasterServers``, ``ControlServers``, ``UpgradeServers`` or ``Servers``
 parameter to configure what access rights server has to this agent.
 
 Agent can validate certificate chain, when connecting to server. This is
@@ -619,12 +619,14 @@ Server access levels
 --------------------
 
 Depending on how server's IP address (or domain name) is added to in nxagentd.conf, it will
-have different access level. It is preferred to use MasterServers. There are 3 levels
+have different access level. It is preferred to use MasterServers. There are 4 levels
 of access for an agent:
 
    1. MasterServers - full access.
-   2. ControlServers - can read data and execute predefined actions and make screenshots
-   3. Servers - read only access. (Is default for tunneled agent connection if
+   2. ControlServers - can read data and execute predefined actions and make screenshots.
+   3. UpgradeServers (since version 6.2) - read-only access plus the ability to deliver
+      an agent installer package and trigger an agent upgrade.
+   4. Servers - read only access. (Is default for tunneled agent connection if
       other server level is not defined)
 
 In case if server IP is not listed in one of this parameters agent will not
@@ -636,69 +638,84 @@ following:
 
 
 .. list-table::
-   :widths: 70 10 10 10
+   :widths: 64 10 10 10 10
    :header-rows: 1
 
    * - Functionality
      - MasterServers
      - ControlServers
+     - UpgradeServers
      - Servers
    * - Read metrics, lists and table metrics
-     - X 
+     - X
+     - X
      - X
      - X
    * - Web service, modbus, SNMP trap, syslog, tftp proxy operation (also requires enabling specific proxy type in agent configuration file)
      - X
      - X
      - X
+     - X
    * - Execute actions defined in agent configuration files or configuration policies
      - X
      - X
-     - 
+     -
+     -
    * - Take screenshots
      - X
      - X
-     - 
+     -
+     -
    * - Edit agent main configuration file
      - X
-     - 
-     - 
-   * - Remote agent upgrade
+     -
+     -
+     -
+   * - Remote agent upgrade (agent-installer package)
      - X
-     - 
-     - 
-   * - Install software packages
+     -
      - X
-     - 
-     - 
+     -
+   * - Install software packages (non agent-installer)
+     - X
+     -
+     -
+     -
    * - Deploy/undeploy agent policies
      - X
-     - 
-     - 
+     -
+     -
+     -
    * - File manager – all write operations, e.g. file or folder creation, deletion, etc. (also requires enabling file manager and specifying root folder in agent configuration file)
      - X
-     - 
-     - 
+     -
+     -
+     -
    * - Sending notifications via user support application
      - X
-     - 
-     - 
+     -
+     -
+     -
    * - Running commands inside ` braces for File.* metrics and in log file monitoring
      - X
-     - 
-     - 
+     -
+     -
+     -
    * - Use of File.Content() metric
      - X
-     - 
-     - 
+     -
+     -
+     -
    * - SNMP.ScanAddressRange() and TCP.ScanAddressRange() lists (also requires EnableProxy = yes in agent configuration file)
      - X
-     - 
-     - 
+     -
+     -
+     -
    * - Agent, SNMP and TCP proxy operation (also requires enabling specific proxy type in agent configuration file)
      - X
-     - 
-     - 
+     -
+     -
+     -
 
 
 Shared secret

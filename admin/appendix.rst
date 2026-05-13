@@ -490,6 +490,17 @@ Agent configuration file (nxagentd.conf)
      - Interval (in seconds) between keepalive packets over tunnel agent
        connection.
      - 30
+   * - UpgradeServers
+     - List of management servers, which are allowed to deliver an agent
+       installer package and trigger an agent upgrade, but do not get the
+       broader master-server capabilities (file upload, arbitrary command
+       execution, configuration changes, policy deployment, software package
+       installation, etc.). Hosts listed in this parameter also have read
+       access to the agent. Both IP addresses and DNS names can be used.
+       Multiple servers can be specified in one line, separated by commas.
+       If this parameter is used more than once, servers listed in all
+       occurrences will have access to agent. Available since version 6.2.
+     - Empty list
    * - UserAgentExecutable
      - Name of User Support Application executable used by AutoStartUserAgent
        and UserAgentWatchdog parameters.

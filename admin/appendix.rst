@@ -231,6 +231,16 @@ Agent configuration file (nxagentd.conf)
        restart commands. A command is sent by another instance of agent,
        launched with -k or -K parameter. Used on Windows during upgrade process.
      - yes
+   * - EnableCertificateRevocationChecks
+     - Enable (yes) or disable (no) certificate revocation checks (CRL/OCSP)
+       during file signature verification. When enabled, Windows will contact
+       CRL distribution points or OCSP responders to verify that certificates
+       in the signing chain have not been revoked. This requires network access
+       to the CA's revocation endpoints and may introduce delays during
+       verification. Can also be controlled via registry key
+       ``HKLM\Software\NetXMS\EnableCertificateRevocationChecks`` (DWORD);
+       agent configuration takes precedence over registry. Windows only.
+     - no
    * - EnableProxy
      - Enable (yes) or disable (no) agent proxy functionality.
      - no
@@ -537,6 +547,49 @@ Agent configuration file (nxagentd.conf)
 
 .. note::
   All boolean parameters understand "Yes/No", "On/Off" and "True/False" values.
+
+
+.. _agent_registry_keys:
+
+Windows agent registry keys
+========================================
+
+On Windows, certain agent behaviors can be controlled via registry keys under
+``HKEY_LOCAL_MACHINE\Software\NetXMS``. These settings are only read on Windows
+and are ignored on other platforms.
+
+.. list-table::
+   :widths: 30 10 40
+   :header-rows: 1
+
+   * - Registry Value
+     - Type
+     - Description
+   * - Software\\NetXMS\\Agent\\ConfigFile
+     - REG_SZ
+     - Full path to the agent configuration file. Overrides the default
+       configuration file search order. Can also be specified via ``-c``
+       command line parameter, which takes precedence over the registry value.
+   * - Software\\NetXMS\\Agent\\ConfigIncludeDir
+     - REG_SZ
+     - Full path to the directory with additional configuration files.
+       Overrides the default search order for the additional configuration
+       file directory.
+   * - Software\\NetXMS\\DisableFileSignatureVerification
+     - REG_DWORD
+     - Set to 1 to disable digital signature verification of executable files
+       during agent upgrade and reload operations. When disabled, the agent
+       will allow execution of unsigned or incorrectly signed files. Not
+       recommended for production use.
+   * - Software\\NetXMS\\EnableCertificateRevocationChecks
+     - REG_DWORD
+     - Set to 1 to enable certificate revocation checks (CRL/OCSP) during
+       file signature verification. When enabled, Windows will contact CRL
+       distribution points or OCSP responders to verify that certificates in
+       the signing chain have not been revoked. This requires network access
+       to the CA's revocation endpoints and may introduce delays during
+       verification. The ``EnableCertificateRevocationChecks`` agent
+       configuration parameter takes precedence over this registry value.
 
 
 .. _server_configuration_file:

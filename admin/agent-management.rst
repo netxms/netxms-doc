@@ -748,6 +748,41 @@ configuration file, there is possibility to encrypt it. All passwords can
 be encrypted with help of :ref:`nxencpasswd-tools-label` command line tool and added
 in configuration file in encrypted way.
 
+File signature verification (Windows)
+-------------------------------------
+
+On Windows, the agent verifies digital signatures of executable files before
+running them during upgrade and reload operations. If signature verification
+fails, the agent will refuse to execute the file.
+
+Signature verification can be disabled entirely via registry key
+``HKLM\Software\NetXMS\DisableFileSignatureVerification`` (DWORD, set to 1 to
+disable). When disabled, the agent will skip signature checks and allow
+execution of unsigned or incorrectly signed files. This may be useful in
+test environments but is not recommended for production use.
+
+By default, certificate revocation checks are not performed during signature
+verification to avoid network delays and dependency on external CRL
+distribution points or OCSP responders. To enable certificate revocation
+checks (CRL/OCSP), set the ``EnableCertificateRevocationChecks`` agent
+configuration parameter to ``yes``:
+
+.. code-block:: ini
+
+   EnableCertificateRevocationChecks = yes
+
+When enabled, Windows will contact CRL distribution points or OCSP responders
+to verify that certificates in the signing chain have not been revoked. This
+requires network access to the CA's revocation endpoints and may introduce
+delays during verification.
+
+This setting can also be controlled via registry key
+``HKLM\Software\NetXMS\EnableCertificateRevocationChecks`` (DWORD, 1 to enable).
+Agent configuration takes precedence over the registry value.
+
+See :ref:`agent_registry_keys` for a complete list of Windows registry keys
+that affect agent operation.
+
 .. _subagent_list:
 
 Subagents

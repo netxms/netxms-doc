@@ -1363,8 +1363,6 @@ expanded. The following macros are recognized:
      - Insert new line character.
    * - ``%(tab)``
      - Insert tab character.
-   * - ``%<name>``
-     - Parameter with given name.
    * - ``${local-address}``
      - Local IP address for TCP tunnel 
    * - ``${local-port}``
@@ -1407,6 +1405,8 @@ are available:
          - 3 - :guilabel:`Terminated`
    * - ``%Y``
      - Alarm's id.
+   * - ``%<name>``
+     - Event's parameter with given name.
 
 :guilabel:`Internal object tool` is special case of object tools.
 Macro expansions not performed for :guilabel:`Internal object tools`.

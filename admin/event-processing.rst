@@ -880,6 +880,33 @@ The following drivers are provided by default with |product_name| installation:
        * Server (default: localhost)
        * TLSMode (NONE - No TLS (default), TLS - Enforced TLS, STARTTLS -
          Opportunistic TLS)
+       * VerifyPeer (no - do not verify server certificate, yes - verify
+         server certificate; default: yes). Applies only when TLS is used
+         (TLSMode is TLS or STARTTLS). Set to ``no`` to accept self-signed or
+         otherwise untrusted certificates. When enabled, both the certificate
+         chain and the host name are verified against the system's trusted CA
+         store. Added in version 6.0.0.
+
+       The following parameters configure OAuth2 authentication using the
+       XOAUTH2 SASL mechanism (client credentials flow), available since
+       version 6.2.0:
+
+       * AuthMethod (PLAIN - regular login/password authentication (default),
+         XOAUTH2 - OAuth2 bearer token authentication). Added in version 6.2.0.
+       * ClientId - OAuth2 client identifier. Required when AuthMethod is
+         XOAUTH2. Added in version 6.2.0.
+       * ClientSecret - OAuth2 client secret. Required when AuthMethod is
+         XOAUTH2. Passwords encrypted by :ref:`nxencpasswd-tools-label` are
+         supported. Added in version 6.2.0.
+       * TokenEndpoint - URL of the OAuth2 token endpoint. Required when
+         AuthMethod is XOAUTH2. Added in version 6.2.0.
+       * Scope (default: https://outlook.office365.com/.default) - OAuth2
+         scope requested for the access token. Added in version 6.2.0.
+
+       When AuthMethod is XOAUTH2, the Login parameter must contain the
+       mailbox address used as the SMTP user name, and ClientId, ClientSecret
+       and TokenEndpoint must be set. The server obtains an access token from
+       TokenEndpoint and reuses it until shortly before it expires.
 
    * - SNMPTrap
      - Driver to send notifications as SNMP traps. Driver configuration

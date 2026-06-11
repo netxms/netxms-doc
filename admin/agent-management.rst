@@ -706,7 +706,7 @@ following:
      -
      -
      -
-   * - SNMP.ScanAddressRange() and TCP.ScanAddressRange() lists (also requires EnableProxy = yes in agent configuration file)
+   * - SNMP.ScanAddressRange() and TCP.ScanAddressRange() lists (respectively require EnableSNMPProxy = yes / EnableTCPProxy = yes in agent configuration file)
      - X
      -
      -

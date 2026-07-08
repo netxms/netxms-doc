@@ -438,6 +438,45 @@ Common issues:
    override OIDs used for detection, set node's custom attribute
    ``snmp.testoid`` to any OID supported by device.
 
+Collecting a Thread Dump
+------------------------
+
+When the server (``netxmsd``) or agent (``nxagentd``) stops responding, consumes
+excessive CPU, or otherwise misbehaves, a thread dump showing the call stack of
+every thread is often the fastest way to diagnose the problem. On UNIX-like
+systems it is produced by the helper scripts `capture_netxmsd_threads.sh
+<https://github.com/netxms/netxms/blob/master/tools/capture_netxmsd_threads.sh>`_
+(server) and `capture_nxagentd_threads.sh
+<https://github.com/netxms/netxms/blob/master/tools/capture_nxagentd_threads.sh>`_
+(agent). Either ``gdb`` or ``dbx`` must be installed.
+
+.. note::
+
+   The ``netxms-dbg`` package must be installed on the system so that the
+   backtraces contain meaningful symbol information.
+
+Run the script as a user allowed to attach to the process (usually ``root``):
+
+.. code-block:: shell
+
+   ./capture_netxmsd_threads.sh
+
+The script attaches the debugger to the running process, writes the backtraces
+of all threads to a timestamped file in ``/tmp``, and detaches. The process is
+not stopped and keeps running. The output file name is printed on the screen:
+
+.. code-block:: text
+
+   Saving output to /tmp/netxmsd-threads.12345.20260708-142530
+
+Run the script three times in a row with a 20-30 second interval between runs,
+so that the support team can compare the dumps and tell which threads are stuck
+and which are progressing.
+
+The script aborts if the process is not found, if several matching processes are
+found, or if no debugger is available. When reporting a problem to
+|product_name| support, attach the generated files together with the log.
+
 Automatic actions on a new node
 ===============================
 

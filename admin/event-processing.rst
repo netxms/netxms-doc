@@ -633,6 +633,104 @@ alarms for that node - in that case node's status will change to severity of
 most critical alarm.
 
 
+.. _event-forwarders:
+
+Event forwarders
+----------------
+
+.. versionadded:: 7.0
+
+While notification channels deliver human-readable messages (SMS, e-mail, chat),
+:guilabel:`event forwarders` relay whole events to external systems in a
+machine-readable form. |product_name| uses a pluggable driver framework for this,
+so a single :guilabel:`Forward event` action can deliver events to another
+|product_name| server, to an :term:`SNMP` manager, or to an OpenTelemetry
+collector, depending on the driver selected.
+
+Configuration of event forwarders is done in :menuselection:`Configuration -->
+Event forwarders`. To create a forwarder, provide:
+
+* :guilabel:`Name` - unique forwarder name, used to reference it from event
+  processing policy actions.
+* :guilabel:`Description` - free text description.
+* :guilabel:`Driver` - one of the drivers listed below.
+* :guilabel:`Driver configuration` - driver parameters in JSON format,
+  e.g. ``{ "hostname": "collector.example.com", "port": 162 }``. Meaning of the
+  parameters is driver dependent and described separately for each driver.
+
+The forwarder list shows per-forwarder counters (number of forwarded events,
+failures, dropped events, queue length) as well as :guilabel:`Status` and
+:guilabel:`Error message` columns.
+
+An event forwarder is not triggered on its own - it is invoked by a
+:guilabel:`Forward event` action (see :ref:`forward_events`) that references the
+forwarder by name in its :guilabel:`Channel name` field. The action's
+:guilabel:`Recipient` field is passed to the driver (its meaning is
+driver-specific, see table below), while the :guilabel:`Message text` field is
+**not** used by event forwarders - the event itself is always sent in full.
+
+Drivers
+~~~~~~~
+
+The following event forwarder drivers are provided with |product_name|:
+
+.. list-table::
+   :widths: 20 80
+   :header-rows: 1
+
+   * - Driver
+     - Description
+   * - isc
+     - Forwards events to another |product_name| server over ISC (inter-server
+       communication on top of NXCP). The recipient is ignored - the target is
+       always the server specified in the configuration. Configuration
+       parameters:
+
+       * hostname - address of the destination server (required)
+
+       The destination server must have ``EnableISCListener`` and
+       ``ReceiveForwardedEvents`` enabled and matching event templates. See
+       :ref:`forward_events` for details and limitations.
+   * - snmptrap
+     - Sends events as :term:`SNMP` traps (or INFORM requests) with structured
+       varbinds carrying event code, name, id, severity, message, timestamp,
+       source object name and id, tags, and parameters. If the action
+       :guilabel:`Recipient` is set, it is used as the trap target host,
+       otherwise the ``hostname`` from configuration is used. Configuration
+       parameters:
+
+       * hostname - default trap target (used when recipient is empty)
+       * port (default: 162)
+       * version - SNMP version: 1, 2c or 3 (default: 2c)
+       * community - community string for SNMP v1/v2c (default: public)
+       * authMethod, privMethod, authName, authPassword, privPassword - SNMPv3
+         authentication and privacy settings
+       * useInformRequest - for SNMPv3, send INFORM request instead of trap
+         (default: false)
+       * trapId and per-field OID overrides (sourceNameFieldId,
+         sourceObjectIdFieldId, severityFieldId, messageFieldId,
+         timestampFieldId, eventCodeFieldId, eventNameFieldId, eventIdFieldId,
+         tagsFieldId, parametersFieldId) - override the default OIDs defined in
+         NETXMS-MIB
+   * - otlp
+     - Exports events as OpenTelemetry logs to an OTLP/HTTP collector. Events are
+       buffered and delivered asynchronously in batches. If the action
+       :guilabel:`Recipient` is set, it is attached to the exported record as the
+       ``netxms.recipient`` resource attribute (it does not define the target -
+       the target is the ``endpoint``). Configuration parameters:
+
+       * endpoint - OTLP/HTTP collector URL (required)
+       * serviceName - value for the ``service.name`` resource attribute
+       * verifyPeer - verify TLS peer certificate (default: true)
+       * authToken - bearer token added as ``Authorization`` header
+       * headers - object with additional custom HTTP headers
+       * batchSize - number of events per export batch
+       * flushInterval - maximum time (seconds) before a partial batch is sent
+       * timeout - HTTP request timeout in seconds
+       * queueSizeLimit - maximum number of buffered events before new events are
+         dropped
+
+
 .. _notification-channels:
 
 Notification channels
@@ -829,7 +927,9 @@ The following drivers are provided by default with |product_name| installation:
          specified will take default path.
 
    * - NXSL
-     - Built-in driver that executes an NXSL script for each notification, giving
+     - .. versionadded:: 7.0
+
+       Built-in driver that executes an NXSL script for each notification, giving
        full access to the server scripting environment. Unlike other drivers, the
        :guilabel:`Driver configuration` field does not contain configuraiton 
        parameters but the NXSL script source itself.

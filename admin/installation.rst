@@ -722,6 +722,69 @@ The web management client produces a log file. For Tomcat it is located at
 :file:`/var/lib/tomcat10/work/Catalina/localhost/nxmc/eclipse/workspace/.metadata/.log.`
 Inspect this log file if you encounter errors when running the web client.
 
+Installing from Flathub
+=======================
+
+The Desktop Management Client is also published on `Flathub
+<https://flathub.org/>`_ as a Flatpak application. Each release line has its own
+application ID of the form ``com.netxms.NetXMSClientXX``, where ``XX`` is the
+major and minor version — for example ``com.netxms.NetXMSClient62`` for 6.2.
+(The legacy 4.5 client used the unversioned ID ``com.netxms.NetXMSClient``;
+versioned IDs were introduced afterwards.) Different release lines can be
+installed side by side.
+
+Find the available versions and install the one you need:
+
+.. code-block:: sh
+
+  flatpak search netxms
+  flatpak install flathub com.netxms.NetXMSClient62
+
+Only the Desktop Management Client is distributed this way; the DEB, RPM and
+Windows builds are not affected by the sandbox restriction described below.
+
+
+.. _flatpak-sandbox:
+
+Host command object tools in the Flatpak sandbox
+------------------------------------------------
+
+A Flatpak build can run inside a restricted sandbox that prevents the client
+from executing commands on the machine it runs on. In that case :ref:`object
+tools<object_tools>` of type :guilabel:`Local Command` — including tools that
+open a terminal or SSH session on the machine the client runs on — are blocked.
+When you run such a tool, the client shows a :guilabel:`Host Command Execution
+Blocked` dialog with a ready-to-run unlock command (and a :guilabel:`Copy`
+button) and a link to this page.
+
+The restriction exists because these tools reach the host through
+``flatpak-spawn --host``, which requires the ``org.freedesktop.Flatpak``
+talk-name permission. Flathub does not accept manifests that request this
+permission, so an affected build ships without it and granting the permission is
+left to the user.
+
+To enable host command execution, copy the ``flatpak override`` command from the
+blocked-tool dialog and run it in a terminal on the host — the dialog already
+fills in the application ID of your installed client, so in most cases there is
+nothing to edit. Then restart the client. No other reconfiguration is needed:
+the override changes the sandbox's effective permissions, which the client reads
+on the next launch.
+
+If you need to build the command by hand, it has the following form, where
+``com.netxms.NetXMSClientXX`` is the application ID of your client (list
+installed IDs with ``flatpak list --app``):
+
+.. code-block:: sh
+
+  flatpak override --user --talk-name=org.freedesktop.Flatpak com.netxms.NetXMSClientXX
+
+.. warning::
+
+  Granting this permission lets the client run arbitrary commands on the host,
+  which breaks the isolation the Flatpak sandbox provides. Enable it only if you
+  actually use :guilabel:`Local Command` object tools (for example ones that
+  launch a terminal or SSH client on the host).
+
 Installing on Windows
 =====================
 

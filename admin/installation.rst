@@ -1067,17 +1067,12 @@ Install on Android
 Management Client
 -----------------
 
-To install Android management client download netxms-console-VERSION.apk (example:
-netxms-console-3.4.178.apk) file from the http://www.netxms.org page. Check that
-installation of applications from unknown sources is allowed in security settings of
-your phone. Run this installer on required device.
+The |product_name| mobile client for Android is available on Google Play:
 
-After the agent is installed, go to settings and in the main menu, connection part, set all
-required connection credentials: server address, port, user name, password.
+  https://play.google.com/store/apps/details?id=org.netxms.android
 
-.. note::
-  The user configured for the connection should have the :guilabel:`Login as mobile device`
-  user permission.
+The mobile client connects to the server through the built-in Web API. See
+:ref:`mobile-console` for requirements and connection instructions.
 
 
 .. _install_from_sources:

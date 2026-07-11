@@ -12,8 +12,8 @@ and uses a set of built-in functions to query live |product_name| data, execute
 actions, and provide context-aware recommendations.
 
 This chapter covers the configuration of LLM providers, the use of the AI assistant in
-the management client and command-line interface, background AI tasks, and
-the AI message system.
+the management client and command-line interface, background AI tasks, AI
+operators, and the AI message system.
 
 
 Getting Started
@@ -273,6 +273,96 @@ Tasks appear in the task manager with their current state: *Scheduled*,
 a summary of what the task accomplished or why it failed.
 
 
+.. _ai-operators-howto:
+
+How to Set Up an AI Operator
+-----------------------------
+
+AI operators are perpetual monitoring loops: the AI assistant periodically
+reviews the state of the monitored infrastructure, records notable findings
+as *observations*, and adapts its own focus and schedule between iterations.
+See :ref:`ai-operators-concept` for the execution model.
+
+Creating and managing operator instances requires the
+:guilabel:`Manage AI operators` system access right.
+
+1. Open the :guilabel:`Configuration` perspective.
+2. Navigate to :guilabel:`AI Operators`.
+3. Click :guilabel:`New operator...` and fill in the configuration:
+
+``Name``
+   Instance name.
+
+``Description``
+   Free-form description.
+
+``Scope filter``
+   Optional plain-text description of what the operator should pay attention
+   to (e.g. "core network equipment in the Berlin datacenter, ignore lab
+   nodes"). This directs the operator's attention but is not a security
+   boundary -- what the operator can actually see is limited by the object
+   access rights of the ``ai-operator`` user account.
+
+``Model slot``
+   Optional LLM provider slot for this instance. If empty, the ``background``
+   slot is used. See :ref:`ai-slot-reference`.
+
+``Minimum/maximum interval``
+   Bounds (in seconds) for the self-scheduled delay between iterations. The
+   operator picks the next execution time itself; the server clamps it into
+   this range.
+
+``Daily token budget``
+   Maximum number of LLM tokens the instance may consume per day (UTC);
+   0 means unlimited. When the budget is exhausted, iterations are skipped
+   until the next day.
+
+``Persona prompt``
+   Optional additional instructions appended to the operator system prompt
+   (e.g. reporting style, escalation policy, known quirks of the monitored
+   environment).
+
+``Observation retention``
+   Per-instance overrides for observation retention time and maximum record
+   count (0 = use server defaults, see :ref:`ai-operator-config-reference`).
+
+4. Check :guilabel:`Enabled` and click :guilabel:`OK`.
+
+The operator list shows each instance's state (*Disabled*, *Waiting*, or
+*Running*), current focus, token usage, and the explanation from the last
+iteration. Use the context menu to enable/disable instances or to reset
+accumulated state (memento, watch list, focus, and iteration counter) --
+useful when an operator has drifted into an unproductive line of analysis.
+
+**Reviewing observations:**
+
+Observations recorded by operators are available in several places:
+
+- :guilabel:`AI Operator Observations` in the :guilabel:`Logs` perspective and
+  as the :guilabel:`Observations` view in the :guilabel:`AI` perspective.
+- In the context menu of monitored objects (filtered to that object and its
+  children).
+- As the :guilabel:`AI observation monitor` dashboard element, which shows
+  recent observations filtered by operator instance, root object, and review
+  state.
+
+Double-click an observation to see its full text and supporting references.
+Use the context menu to mark observations as *acknowledged* (seen, being
+worked on) or *dismissed* (not relevant). Each recorded observation also
+generates a ``SYS_AI_OPERATOR_OBSERVATION`` event, so alarms and notifications
+can be driven from observations using regular event processing rules.
+
+Execution history (status, duration, token usage, and explanation for every
+iteration) is available in the :guilabel:`AI Operator Executions` log.
+
+**Widening or narrowing operator visibility:**
+
+Operators run under the built-in ``ai-operator`` user account, which is
+created with read access to the :guilabel:`Network` and
+:guilabel:`Infrastructure Services` trees. To change what operators can see,
+adjust object access rights for this account like for any other user.
+
+
 .. _ai-messages:
 
 How to Work with AI Messages
@@ -393,6 +483,11 @@ a memento mechanism.
 **AI Messages** are the output channel for background tasks. Tasks can post
 informational findings, alerts, or approval requests that users review in
 the management client.
+
+**AI Operators** are perpetual adaptive monitoring loops. Unlike background
+tasks, operators never complete: each iteration reviews the infrastructure,
+records notable findings as observations, and reschedules itself within
+configured bounds while carrying focus, watch list, and memory forward.
 
 
 .. _ai-skills:
@@ -687,6 +782,63 @@ performance baseline on each router object and compare against it in
 subsequent executions.
 
 
+.. _ai-operators-concept:
+
+AI Operators
+------------
+
+AI operators extend the background task model into perpetual adaptive
+monitoring loops. Where a background task works toward completion, an operator
+runs indefinitely: each iteration it reviews the current state of the
+monitored infrastructure, compares it with what it remembers from previous
+iterations, records notable findings, and decides for itself when to look
+again.
+
+**Iteration cycle.** On each iteration the operator receives its accumulated
+state and queries the server for an operational status digest (down nodes,
+active alarms, recent events, and detected DCI anomalies), typically using
+delta semantics -- "what changed since my last iteration". It can then drill
+down with the full set of AI assistant functions, record observations, and
+escalate through AI messages. At the end of the iteration it returns:
+
+- **Current focus** -- a short statement of what it is concentrating on.
+- **Watch list** -- entities it wants to re-check in subsequent iterations.
+- **Memento** -- free-form persistent memory carried to the next iteration
+  (baselines, known conditions, timestamps of previous findings).
+- **Next execution time** -- self-chosen delay, clamped by the server into the
+  configured minimum/maximum interval range.
+- **Explanation** -- a summary written to the execution log.
+
+This adaptive state makes the loop converge on what matters: a quiet
+infrastructure is checked at the maximum interval with a short memento, while
+an evolving incident pulls the operator into short intervals with a focused
+watch list.
+
+**Observations** are the operator's durable output stream -- notable findings
+(anomalies, degradations, recoveries, trends) with severity, related object,
+descriptive text, and supporting references to alarms, events, and metrics.
+Each observation generates a ``SYS_AI_OPERATOR_OBSERVATION`` event, allowing
+standard event processing (alarms, notifications, scripts) to be attached.
+Observations carry a review state (*new*, *acknowledged*, or *dismissed*)
+for triage and are subject to retention limits (by age and by record count
+per instance).
+
+**Budget and failure handling.** Each instance can be given a daily LLM token
+budget; when it is exhausted, iterations are skipped (and logged as skipped)
+until the next UTC day. A failed iteration is retried at the minimum interval
+with the previous memento intact; after a configurable number of consecutive
+failures the instance is disabled automatically and a
+``SYS_AI_OPERATOR_FAILURE`` event is generated.
+
+**Security model.** Operators run under the built-in ``ai-operator`` user
+account, which cannot log in interactively and is granted read access to the
+:guilabel:`Network` and :guilabel:`Infrastructure Services` trees out of the
+box. Object access rights of this account are the actual visibility boundary;
+the per-instance scope filter only directs the operator's attention within
+that boundary. Managing operator instances requires the
+:guilabel:`Manage AI operators` system access right.
+
+
 Reference
 =========
 
@@ -845,6 +997,48 @@ Configuration examples
    Slots = default
 
 
+.. _ai-operator-config-reference:
+
+AI Operator Server Configuration Variables
+-------------------------------------------
+
+Unlike LLM provider settings, AI operator settings are regular server
+configuration variables, changed at runtime in
+:menuselection:`Configuration --> Server Configuration`.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 10 50
+
+   * - Variable
+     - Default
+     - Description
+   * - ``AIOperator.Enabled``
+     - true
+     - Global kill switch for all AI operator instances.
+   * - ``AIOperator.MaxConsecutiveFailures``
+     - 3
+     - Number of consecutive failed iterations after which an operator
+       instance is automatically disabled.
+   * - ``AIOperatorObservations.RetentionTime``
+     - 90
+     - Default retention time (days) for observations. Can be overridden per
+       operator instance.
+   * - ``AIOperatorObservations.MaxRecordsPerInstance``
+     - 1000
+     - Default maximum number of retained observations per operator instance.
+       Can be overridden per operator instance.
+   * - ``AIOperatorExecutionLog.RetentionTime``
+     - 90
+     - Retention time (days) for AI operator execution log records.
+   * - ``ThreadPool.AIOperator.BaseSize``
+     - 4
+     - Base size of the AI operator thread pool (requires server restart).
+   * - ``ThreadPool.AIOperator.MaxSize``
+     - 16
+     - Maximum size of the AI operator thread pool (requires server restart).
+
+
 .. _ai-nxai-reference:
 
 nxai Command-Line Reference
@@ -951,6 +1145,8 @@ The following debug tags can be used for troubleshooting the AI subsystem:
      - Skill loading and management.
    * - ``ai.tasks``
      - Background task scheduling and execution.
+   * - ``ai.operator``
+     - AI operator instance scheduling, execution, and observation recording.
    * - ``ai.messages``
      - AI message lifecycle and cleanup.
    * - ``ai.anomaly``

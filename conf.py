@@ -27,10 +27,10 @@ source_suffix = {'.rst': 'restructuredtext'}
 master_doc = 'index'
 
 project_author = "Raden Solutions, SIA"
-copyright = '2025, ' + project_author
+copyright = '2026, ' + project_author
 
-version = '6.0'
-release = '6.0.0'
+version = '6.2'
+release = '6.2.1'
 
 exclude_patterns = ['build']
 

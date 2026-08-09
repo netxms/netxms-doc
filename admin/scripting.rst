@@ -52,6 +52,91 @@ List of places where NXSL scripting is used
   - Custom housekeeping scripts (see :ref:`custom-housekeeping-scripts`)
 
 
+.. _script-write-access-restrictions:
+
+Write access restrictions
+-------------------------
+
+.. versionadded:: 6.2
+
+Scripts that the server evaluates on its own — transformation, filter, predicate,
+and analysis scripts — run with a read-only security context and cannot change
+anything in the system. This is controlled by the server configuration parameter
+``Scripts.RestrictWriteAccess``, which is enabled by default both on new
+installations and after an upgrade from an earlier version.
+
+Such scripts are allowed to read object properties, alarms, agent data, and SNMP
+data. Every other operation is denied, including:
+
+  - object modification methods, such as ``setCustomAttribute()``,
+    ``deleteCustomAttribute()``, ``setComments()``, ``setAlias()``, ``rename()``,
+    ``manage()``, ``unmanage()``, ``enterMaintenance()``, ``leaveMaintenance()``,
+    ``bind()``, ``unbind()``, ``createNode()``, ``createContainer()``,
+    ``setGeoLocation()``, ``setExpectedState()``, and the ``enable*()`` family;
+  - active operations on nodes, such as ``executeAgentCommand()``,
+    ``executeSSHCommand()``, ``openSSHSession()``, ``wakeUp()``, and forced polls;
+  - functions that require system access rights, such as ``PostEvent()``,
+    ``PostEventEx()``, ``SendNotification()``, ``SendMail()``, ``SQLQuery()``,
+    ``GetConfigurationVariable()``, ``LoadEvent()``,
+    ``CreateUserAgentNotification()``, and ``CancelScheduledTasksByKey()``.
+
+.. warning::
+   A denied operation does not raise a script error. The call simply returns
+   ``false`` (or a null value, or the supplied default value in case of
+   ``GetConfigurationVariable()``), the script continues, and nothing is written
+   to the server log at default logging levels. The only trace is a message
+   produced by the debug tag ``nxsl.security`` at level 7. If a script that
+   worked before an upgrade to 6.2 silently stopped having any effect, this is
+   the first thing to check.
+
+The following scripts are restricted:
+
+  - DCI transformation script (both single-value and table DCIs)
+  - DCI scripted threshold
+  - DCI with :guilabel:`Script` origin
+  - ``script:`` macro in DCI text expansion and ``%[script]`` macro in object
+    text expansion
+  - Container, collector, template, and cluster auto-bind and auto-apply filter
+    scripts
+  - Condition status calculation script
+  - Business service scripted check
+  - Business service prototype instance discovery script and instance filter
+    script
+  - EPP filter script
+  - Root cause analysis script (both when an alarm is created by EPP and during
+    background re-evaluation)
+  - Asset attribute auto fill script
+  - Map object filter script, map link styling script, and map link color
+    provider script
+  - SNMP trap transformation script
+
+The following scripts are not restricted and can still modify objects even when
+``Scripts.RestrictWriteAccess`` is enabled:
+
+  - EPP action of type :guilabel:`Execute NXSL script`
+  - Hook scripts (script library entries named ``Hook::*``)
+  - Scripts executed by scheduled tasks
+  - Object tools of type :guilabel:`Server Script`
+  - Scripts executed manually from the :guilabel:`Execute Server Script` view or
+    from the server debug console
+  - DCI instance discovery filter script
+
+If a restricted script has to modify objects, the recommended approach is to move
+the modifying part into one of the unrestricted script types listed above — for
+example, have the DCI generate an event and perform the modification from an EPP
+:guilabel:`Execute NXSL script` action.
+
+Alternatively, the restriction can be turned off completely by setting
+``Scripts.RestrictWriteAccess`` to ``false`` in :menuselection:`Configuration -->
+Server Configuration`. The change takes effect immediately, without a server
+restart. Note that changing the value directly in the ``config`` database table
+bypasses the change notification and does require a server restart.
+
+.. note::
+   If the ``Scripts.RestrictWriteAccess`` row is missing from the configuration
+   altogether, the server treats the restriction as enabled.
+
+
 Scripting library
 -----------------
 

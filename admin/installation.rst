@@ -7,6 +7,20 @@ Installation
 Major changes between releases
 ==============================
 
+6.2.0
+-----
+
+Scripts that are evaluated automatically by the server (DCI transformation
+scripts, scripted thresholds, auto-bind filters, conditions, EPP filter and RCA
+scripts, and others) are now read-only and cannot modify objects, post events, or
+send notifications. This is controlled by the new server configuration parameter
+``Scripts.RestrictWriteAccess``, which is set to ``true`` both on new
+installations and during upgrade. Denied operations do not produce a script
+error — the call returns ``false`` and the script continues, so affected scripts
+stop having effect silently. See :ref:`script-write-access-restrictions` for the
+list of affected scripts and for the ways to keep the modifying logic working.
+
+
 6.1.0
 -----
 

@@ -2013,6 +2013,15 @@ Configuration`
       completion time.
     - 86400
     - No
+  * - Scripts.RestrictWriteAccess
+    - Restrict write access for scripts that are evaluated automatically by the
+      server (DCI transformation scripts, scripted thresholds, auto-bind filters,
+      conditions, EPP filter and RCA scripts, etc.). When enabled, such scripts
+      can only read data and cannot modify objects, post events, or send
+      notifications. See :ref:`script-write-access-restrictions` for the complete
+      list of affected scripts. ( from 6.2.0 )
+    - true
+    - No
   * - Server.AllowedCiphers
     - A bitmask for encryption algorithms allowed in the server (sum of the
       values to allow multiple algorithms at once):

@@ -844,6 +844,45 @@ The following drivers are provided by default with |product_name| installation:
        * host (default: 127.0.0.1)
        * port (default: 13001)
 
+   * - Matrix
+     - Notification channel driver for Matrix messenger. Recipient can be
+       specified either as a room ID (e.g. ``!abcdefg:example.org``) or a room
+       alias (e.g. ``#alerts:example.org``). Room aliases are automatically
+       resolved to room IDs and cached. Configuration parameters:
+
+       * ServerURL - Matrix homeserver base URL, e.g.
+         ``https://matrix.example.org`` (required)
+       * AccessToken - access token of the Matrix user that will send
+         notifications (required)
+       * HtmlFormatting - yes/no, send messages with HTML formatting
+         (default: no)
+       * AliasCacheTTL - room alias cache time in seconds (default: 3600)
+       * Proxy - proxy server host name or IP address
+       * ProxyPort - proxy server port
+       * ProxyType - proxy protocol: http, https, socks4, socks4a, socks5, or
+         socks5h (default: http)
+       * ProxyUser - login for proxy authentication
+       * ProxyPassword - password for proxy authentication
+
+       Optional configuration section "FallbackProxy" may define additional
+       proxy servers that will be tried in order if connection through the
+       primary proxy fails. Each proxy is defined as a subsection with
+       parameters Hostname, Port, Type, User, and Password; if Hostname is
+       omitted, subsection name is used as host name.
+
+       Example:
+
+       .. code-block:: ini
+
+            ServerURL = https://matrix.example.org
+            AccessToken = syt_bmV0eG1zX2V4YW1wbGU
+            HtmlFormatting = yes
+
+            [FallbackProxy/backup1]
+            Hostname = proxy.example.org
+            Port = 3128
+            Type = http
+
    * - Mattermost
      - Mattermost online chat service driver. Configuration parameters:
 
@@ -1175,6 +1214,63 @@ The following drivers are provided by default with |product_name| installation:
          https://www.twilio.com/docs/voice/twiml/say#voice)
        * UseTTS - true/false, enable or disable Text To Speech (default is
          false)
+
+   * - Webhook
+     - Generic driver that sends each notification as an HTTP request (POST,
+       PUT, or PATCH) with configurable URL, headers, and request body built
+       from a template file. Most REST/JSON notification gateways can be
+       integrated with this driver by configuration alone, without a
+       vendor-specific driver. Configuration parameters:
+
+       * URL - endpoint URL (required)
+       * Method - HTTP method: POST, PUT, or PATCH (default: POST)
+       * ContentType - value for the Content-Type header (default:
+         application/json)
+       * TemplateFile - path to request body template file; the file is
+         re-read on every send (required)
+       * VerifyPeer - yes/no, verify server's SSL/TLS certificate
+         (default: yes)
+       * Timeout - request timeout in seconds, valid range 1-300 (default: 10)
+       * SuccessHttpCodes - comma-separated list of HTTP response codes
+         treated as successful delivery (default: 200,201,202,204)
+       * RetryHttpCodes - comma-separated list of HTTP response codes that
+         cause delivery retry (default: 429,502,503,504)
+       * SuccessJsonPath - slash-separated path to an element in JSON response
+         that should be checked to confirm successful delivery (e.g.
+         ``/data/status``)
+       * SuccessValue - value expected at SuccessJsonPath (required if
+         SuccessJsonPath is set; if actual value differs, delivery is retried)
+
+       Optional configuration section "Headers" may contain additional HTTP
+       headers in name=value format (values are sent as-is, without macro
+       expansion).
+
+       Macros ``${recipient}``, ``${subject}``, and ``${body}`` are expanded
+       in the URL (percent-encoded) and in the body template (JSON-escaped).
+       Unknown macros are left as-is.
+
+       Example:
+
+       .. code-block:: ini
+
+            URL = https://api.example.com/v1/notify/${recipient}
+            Method = POST
+            TemplateFile = /etc/netxms/webhook-template.json
+            SuccessJsonPath = /status
+            SuccessValue = ok
+
+            [Headers]
+            Authorization = Bearer abc123
+
+       Template file example:
+
+       .. code-block:: json
+
+            {
+              "to": "${recipient}",
+              "title": "${subject}",
+              "text": "${body}"
+            }
 
    * - WebSMS
      - Driver for websms.ru service (`<https://websms.ru>`_). Configuration

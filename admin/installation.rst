@@ -7,6 +7,20 @@ Installation
 Major changes between releases
 ==============================
 
+7.0.0
+-----
+
+On Windows, each element of an exec-form command (``["app.exe", "arg1", "arg2"]``)
+is now passed to the executable as exactly one argument, as on other platforms.
+Previously the elements were joined with spaces and re-split by the started
+program. Configurations that packed several arguments into one element (for
+example ``["app.exe", "-a -b"]``) must split them into separate elements, and
+configurations that wrapped a value in extra quotes to keep it together on
+Windows (for example ``["reg.exe", "add", "HKLM\Software\Example", "/v", "Name", "/d", ""some text""]``)
+must drop the extra quotes, because they are now passed to the program as part
+of the argument.
+
+
 6.2.0
 -----
 

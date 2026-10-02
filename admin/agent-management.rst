@@ -943,12 +943,13 @@ configuration. This configuration parameter has two possible forms:
    * ``ExternalMetric = metric:["executable", "param1", "param2", ...]`` (exec form)
    * ``ExternalMetric = metric:command param1 param2 ...`` (shell form)
 
-The exec form does not use shell, it launches the executable directly. On Linux
-full path to the executable should be provided.  On Windows the executable is
-launched using API's CreateProcess() function, it will search in PATH, but the
-executable should be with file extension, e.g. ``command.exe``. Both double
-quotes (``"``) or single quotes (``"``) can be used to enclose the executable
-and the parameters.
+The exec form does not use shell, it launches the executable directly. Full
+path to the executable should be provided: it is resolved without a PATH search
+on any platform, and on Windows the file extension should be included, e.g.
+``command.exe``. Both double quotes (``"``) or single quotes (``'``) can be used
+to enclose the executable and the parameters. Each element is passed to the
+executable as exactly one argument, so a value containing spaces needs no extra
+quoting.
 
 The shell form uses shell to execute the command. 
 
@@ -971,7 +972,10 @@ support, metric name should contain ``(*)`` symbols after its name:
 Parameters are available as ``$1``, ``$2``, ``$3``... variables. Note that shell
 form with parameters is a security concern because shell will execute other
 commands provided in parameters, e.g. by providing ``$(some_command)``
-parameter. It's strongly recommended to use exec form when using parameters. 
+parameter. It's strongly recommended to use exec form when using parameters.
+Exec form does not give this protection when the executable is a ``.bat`` or
+``.cmd`` file on Windows: such files are run through ``cmd.exe``, which parses
+the command line by its own rules.
 
 
 .. code-block:: ini
@@ -1200,12 +1204,13 @@ Configuration parameter reference
          * ``Command = ["executable", "param1", "param2", ...]`` (exec form)
          * ``Command = command param1 param2 ...`` (shell form)
 
-       The exec form does not use shell, it launches the executable directly. On Linux
-       full path to the executable should be provided.  On Windows the executable is
-       launched using API's CreateProcess() function, it will search in PATH, but the
-       executable should be with file extension, e.g. ``command.exe``. Both double
-       quotes (``"``) or single quotes (``'``) can be used to enclose the executable
-       and the parameters.
+       The exec form does not use shell, it launches the executable directly. Full
+       path to the executable should be provided: it is resolved without a PATH search
+       on any platform, and on Windows the file extension should be included, e.g.
+       ``command.exe``. Both double quotes (``"``) or single quotes (``'``) can be used
+       to enclose the executable and the parameters. Each element is passed to the
+       executable as exactly one argument, so a value containing spaces needs no extra
+       quoting.
 
        The shell form uses shell to execute the command. 
    * - Description
@@ -1433,12 +1438,13 @@ configuration. This configuration parameter has two possible forms:
    * ``Action = actionName:["executable", "param1", "param2", ...]`` (exec form)
    * ``Action = actionName:command param1 param2 ...`` (shell form)
 
-The exec form does not use shell, it launches the executable directly. On Linux
-full path to the executable should be provided.  On Windows the executable is
-launched using API's CreateProcess() function, it will search in PATH, but the
-executable should be with file extension, e.g. ``command.exe``. Both double
-quotes (``"``) or single quotes (``"``) can be used to enclose the executable
-and the parameters.
+The exec form does not use shell, it launches the executable directly. Full
+path to the executable should be provided: it is resolved without a PATH search
+on any platform, and on Windows the file extension should be included, e.g.
+``command.exe``. Both double quotes (``"``) or single quotes (``'``) can be used
+to enclose the executable and the parameters. Each element is passed to the
+executable as exactly one argument, so a value containing spaces needs no extra
+quoting.
 
 The shell form uses shell to execute the command. 
 

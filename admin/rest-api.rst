@@ -9,18 +9,9 @@ Introduction
 
 The |product_name| Web API provides a REST-like interface for integrating
 external systems with the |product_name| server. API calls use JSON for data
-exchange. Two implementations are available:
-
-* **Built-in Web API** — embedded directly into the |product_name| server
-  process. This is the recommended API for new integrations, however it's still
-  work in progress and some endpoints might not yet be available. The API is
-  documented using an `OpenAPI specification
-  <https://github.com/netxms/netxms/blob/master/src/server/webapi/openapi.yaml>`_.
-
-* **Legacy Web API** — a standalone Java web application (.war file) deployed to
-  a separate web server. This implementation will be deprecated in the future.
-  The API is documented using an `OpenAPI specification (legacy)
-  <https://github.com/netxms/netxms/blob/master/src/client/nxapisrv/openapi.yaml>`_.
+exchange. The Web API is embedded directly into the |product_name| server
+process and is documented using an `OpenAPI specification
+<https://github.com/netxms/netxms/blob/master/src/server/webapi/openapi.yaml>`_.
 
 Information about Grafana configuration can be found :ref:`here <grafana-integration>`.
 
@@ -134,47 +125,3 @@ Example TLS configuration:
 
    When TLS is enabled, it is recommended to keep the HTTP listener bound to the loopback
    address (default) so that unencrypted traffic is not exposed on the network.
-
-
-Legacy Web API (WAR file)
-=========================
-
-Requirements
-------------
-
-* A running instance of the |product_name| server.
-* Access to a web server capable of deploying Java web applications (e.g. Apache Tomcat).
-
-Setup
------
-
-1. Download :file:`netxms-websvc-VERSION.war` (example: :file:`netxms-websvc-6.0.2.war`)
-   from http://www.netxms.org/download.
-2. Copy the downloaded .war file to your web server's deployment directory.
-
-By default, the localhost address is used to connect to the |product_name| server. To
-specify the server address or other parameters, create a :file:`nxapisrv.properties` file
-and place it in the property file location of your web server. The file uses INI format
-(``NAME=VALUE``). The following parameters are supported:
-
-.. list-table::
-   :widths: 40 65
-   :header-rows: 1
-
-   * - Parameter
-     - Description
-   * - netxms.server.address
-     - |product_name| server address
-   * - netxms.server.port
-     - |product_name| server port
-   * - netxms.server.enableCompression
-     - Enable protocol compression
-   * - session.timeout
-     - Session timeout
-
-Configuration example:
-
-.. code-block:: ini
-
-   netxms.server.address=server.office.example.com
-   netxms.server.port=44701

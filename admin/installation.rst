@@ -10,6 +10,28 @@ Major changes between releases
 7.0.0
 -----
 
+Package repositories are now separate for each major version and live under
+https://packages.netxms.org/7.x/. Existing APT and DNF configurations keep
+pointing at the 6.x repositories and will not offer 7.0 packages until the
+repository is switched:
+
+.. code-block:: sh
+
+   # Debian and Ubuntu
+   wget https://packages.netxms.org/netxms-release-latest.deb
+   sudo dpkg -i --force-confnew netxms-release-latest.deb
+   sudo apt-get update
+
+   # RHEL and compatible
+   sudo curl -o /etc/yum.repos.d/netxms.repo https://packages.netxms.org/7.x/epel/netxms.repo
+
+   # Fedora
+   sudo curl -o /etc/yum.repos.d/netxms.repo https://packages.netxms.org/7.x/fedora/netxms.repo
+
+Without ``--force-confnew``, :command:`dpkg` asks whether to keep the existing
+:file:`/etc/apt/sources.list.d/netxms.list`, and the default answer keeps the
+6.x repository.
+
 On Windows, each element of an exec-form command (``["app.exe", "arg1", "arg2"]``)
 is now passed to the executable as exactly one argument, as on other platforms.
 Previously the elements were joined with spaces and re-split by the started
@@ -301,25 +323,20 @@ However, we test and officially support only some of them.
 
 Supported platforms for |product_name| server and agent:
 
-   * Debian 10 (Buster), 11 (Bullseye), 12 (Bookworm)
-   * Ubuntu 18.04 LTS (Bionic), 20.04 LTS (Focal Fossa), 22.04 LTS (Jammy Jellyfish), 24.04 (Noble)
-   * Linux Mint 19.3 (Tricia), 20.3 (Una), 21.2 (Victoria)
-   * Linux Mint Debian Edition 4
-   * Devuan ASCII
-   * Red Hat Enterprise Linux 8, 9
-   * CentOS 8
+   * Debian (current releases)
+   * Ubuntu (current LTS releases)
+   * Linux Mint and Linux Mint Debian Edition based on the above
+   * Red Hat Enterprise Linux and compatible distributions (current major releases)
+   * Fedora (current releases)
    * Windows 11, Windows 10, Windows Server 2016, 2019, 2022
    * FreeBSD 12
    * ArchLinux (Latest)
    * AlpineLinux 3.8+
-   * Raspbian Buster
 
 
 Support for the following platforms is provided only to customers with an active support contract:
 
-   * Debian 8 (Jessie)
-   * Ubuntu 16.04 LTS (Xenial)
-   * Devuan Jessie
+   * Older Debian and Ubuntu releases
    * Red Hat Enterprise Linux 6, 7
    * CentOS 6, CentOS 7
    * FreeBSD 11, FreeBSD 11.3
@@ -403,14 +420,17 @@ Agent resource usage is negligible and can be ignored.
 Installing from DEB repository
 ==============================
 
-We host a public APT repository at http://packages.netxms.org/ for most deb-based distributions (Debian, Ubuntu, Mint, Raspbian, etc.).
+We host a public APT repository at https://packages.netxms.org/7.x/ for Debian and Ubuntu (including Linux Mint and LMDE).
+Each major version has its own repository, so upgrading to the next major version requires changing the repository URL.
 Packages are signed, and you'll need to install an additional encryption key for signature verification.
+
+Public packages are built for current Debian releases and current Ubuntu LTS releases only. Packages for older
+releases are available to customers with an active support contract.
 
 Supported URLs (*CODENAME* should be replaced with output of `lsb_release -sc`):
 
-  * Debian, LMDE - "deb http://packages.netxms.org/debian CODENAME main"
-  * Ubuntu, Mint - "deb http://packages.netxms.org/ubuntu CODENAME main"
-  * Raspbian - "deb http://packages.netxms.org/raspbian CODENAME main"
+  * Debian, LMDE - "deb https://packages.netxms.org/7.x/debian CODENAME main"
+  * Ubuntu, Mint - "deb https://packages.netxms.org/7.x/ubuntu CODENAME main"
 
 
 Add APT repository
@@ -428,7 +448,7 @@ Download and install the netxms-release-latest.deb package, which contain a sour
 
 .. code-block:: sh
 
-  wget http://packages.netxms.org/netxms-release-latest.deb
+  wget https://packages.netxms.org/netxms-release-latest.deb
   sudo dpkg -i netxms-release-latest.deb
   sudo apt-get update
 
@@ -440,7 +460,7 @@ Add the repository to your sources.list:
 
 .. code-block:: sh
 
-  echo "deb http://packages.netxms.org/$(lsb_release -si | tr A-Z a-z) $(lsb_release -sc | tr A-Z a-z) main" > /etc/apt/sources.list.d/netxms.list
+  echo "deb https://packages.netxms.org/7.x/$(lsb_release -si | tr A-Z a-z) $(lsb_release -sc | tr A-Z a-z) main" > /etc/apt/sources.list.d/netxms.list
   wget -q -O - https://packages.netxms.org/netxms-keyring.gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/netxms-keyring.gpg
   sudo apt-get update
 
@@ -590,9 +610,11 @@ Installing from RPM repository
 We provide RPM packages for RHEL and Fedora, both amd64 and aarch64.
 If you need a build for another system, please contact us for support or check this section: :ref:`Installing from source <install_from_sources>`.
 
-The RHEL repository is at https://packages.netxms.org/epel/.
+The RHEL repository is at https://packages.netxms.org/7.x/epel/.
 
-The Fedora repository is at https://packages.netxms.org/fedora/.
+The Fedora repository is at https://packages.netxms.org/7.x/fedora/.
+
+Each major version has its own repository, so upgrading to the next major version requires changing the repository URL.
 
 A complete repository file and signing key is available in each corresponding root.
 
@@ -604,9 +626,9 @@ DNF provides a simple way to add a repository. Please note that you may need to 
 .. code-block:: sh
 
    # RHEL and compatible
-   dnf config-manager --add-repo https://packages.netxms.org/epel/netxms.repo
+   dnf config-manager --add-repo https://packages.netxms.org/7.x/epel/netxms.repo
    # Fedora
-   dnf config-manager --add-repo https://packages.netxms.org/fedora/netxms.repo
+   dnf config-manager addrepo --from-repofile=https://packages.netxms.org/7.x/fedora/netxms.repo
 
 Once added, you can install any package with ``dnf install`` (e.g. ``dnf install netxms-agent``).
 

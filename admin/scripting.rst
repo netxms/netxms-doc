@@ -76,7 +76,7 @@ data. Every other operation is denied, including:
   - active operations on nodes, such as ``executeAgentCommand()``,
     ``executeSSHCommand()``, ``openSSHSession()``, ``wakeUp()``, and forced polls;
   - functions that require system access rights, such as ``PostEvent()``,
-    ``PostEventEx()``, ``SendNotification()``, ``SendMail()``, ``SQLQuery()``,
+    ``PostEventEx()``, ``SendNotification()``, ``SendMail()``,
     ``GetConfigurationVariable()``, ``LoadEvent()``,
     ``CreateUserAgentNotification()``, and ``CancelScheduledTasksByKey()``.
 
@@ -117,13 +117,14 @@ The following scripts are not restricted and can still modify objects even when
 
   - EPP action of type :guilabel:`Execute NXSL script`
   - Hook scripts (script library entries named ``Hook::*``)
-  - Scripts executed by scheduled tasks
+  - Scripts executed by scheduled tasks, limited by the access rights of the
+    task owner (see :ref:`script-user-security-context`)
   - Object tools of type :guilabel:`Server Script`, limited by the access rights
     of the user who runs the tool (see :ref:`script-user-security-context`)
   - Scripts executed manually from the :guilabel:`Execute Server Script` view,
     limited by the access rights of the user who runs the script (see
     :ref:`script-user-security-context`)
-  - Scripts executed from the server debug console
+  - Scripts executed with the ``exec`` command of the server debug console
   - DCI instance discovery filter script
 
 If a restricted script has to modify objects, the recommended approach is to move
@@ -153,14 +154,25 @@ the ``Scripts.RestrictWriteAccess`` setting. This applies to:
 
   - object tools of type :guilabel:`Server Script`;
   - scripts executed from the :guilabel:`Execute Server Script` view;
-  - dashboard scripted chart elements.
+  - dashboard scripted chart elements;
+  - scripts executed by scheduled tasks, with the security context of the task
+    owner. Tasks created by the server itself run as the built-in ``system``
+    user, which has all access rights;
+  - script library scripts that the AI assistant calls as tools, with the
+    security context of the user of the chat session.
+
+Library scripts called from such a script run in the same context.
+
+.. versionchanged:: 6.2.6
+   Scripts executed by scheduled tasks and AI assistant tool scripts run with a
+   user security context. In earlier versions they are not restricted.
 
 Such a script can access or modify an object only if the user has the access
 right that the operation requires on that object. For example,
 ``setCustomAttribute()`` requires the :guilabel:`Modify` access right on the
-object. Functions that require system access rights, such as ``SQLQuery()`` or
-``GetConfigurationVariable()``, are allowed only if the user has the
-corresponding system access right.
+object. Functions that require system access rights, such as
+``SendNotification()`` or ``GetConfigurationVariable()``, are allowed only if
+the user has the corresponding system access right.
 
 .. warning::
    A call denied by the user's security context behaves the same way as one

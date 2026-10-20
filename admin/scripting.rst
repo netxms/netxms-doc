@@ -87,7 +87,9 @@ data. Every other operation is denied, including:
    to the server log at default logging levels. The only trace is a message
    produced by the debug tag ``nxsl.security`` at level 7. If a script that
    worked before an upgrade to 6.2 silently stopped having any effect, this is
-   the first thing to check.
+   the first thing to check. Scripts started by a user are denied the same
+   silent way when the user lacks the required access rights, see
+   :ref:`script-user-security-context`.
 
 The following scripts are restricted:
 
@@ -116,9 +118,12 @@ The following scripts are not restricted and can still modify objects even when
   - EPP action of type :guilabel:`Execute NXSL script`
   - Hook scripts (script library entries named ``Hook::*``)
   - Scripts executed by scheduled tasks
-  - Object tools of type :guilabel:`Server Script`
-  - Scripts executed manually from the :guilabel:`Execute Server Script` view or
-    from the server debug console
+  - Object tools of type :guilabel:`Server Script`, limited by the access rights
+    of the user who runs the tool (see :ref:`script-user-security-context`)
+  - Scripts executed manually from the :guilabel:`Execute Server Script` view,
+    limited by the access rights of the user who runs the script (see
+    :ref:`script-user-security-context`)
+  - Scripts executed from the server debug console
   - DCI instance discovery filter script
 
 If a restricted script has to modify objects, the recommended approach is to move
@@ -135,6 +140,35 @@ bypasses the change notification and does require a server restart.
 .. note::
    If the ``Scripts.RestrictWriteAccess`` row is missing from the configuration
    altogether, the server treats the restriction as enabled.
+
+.. _script-user-security-context:
+
+Scripts started by a user
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 6.1
+
+Scripts started by a user run with that user's security context, regardless of
+the ``Scripts.RestrictWriteAccess`` setting. This applies to:
+
+  - object tools of type :guilabel:`Server Script`;
+  - scripts executed from the :guilabel:`Execute Server Script` view;
+  - dashboard scripted chart elements.
+
+Such a script can access or modify an object only if the user has the access
+right that the operation requires on that object. For example,
+``setCustomAttribute()`` requires the :guilabel:`Modify` access right on the
+object. Functions that require system access rights, such as ``SQLQuery()`` or
+``GetConfigurationVariable()``, are allowed only if the user has the
+corresponding system access right.
+
+.. warning::
+   A call denied by the user's security context behaves the same way as one
+   denied by the read-only context: it returns ``false`` (or a null value, or
+   the supplied default value in case of ``GetConfigurationVariable()``), no
+   script error is raised, and the script continues. Object access denials are
+   logged by the debug tag ``nxsl.security`` at level 4. Denials of system
+   access rights are not logged at all.
 
 
 Scripting library

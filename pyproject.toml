@@ -3,10 +3,10 @@ name = "netxms-doc"
 version = "1.1.0"
 description = "NetXMS Documentation"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.13"
 dependencies = [
-    "sphinx==8.2.3",
+    "sphinx==9.2.0",
     "sphinx-autobuild==2025.8.25",
-    "sphinx-intl==2.3.2",
+    "sphinx-intl==2.4.0",
     "sphinx-rtd-theme==3.1.0",
 ]

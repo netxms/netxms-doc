@@ -776,19 +776,15 @@ Installing from Flathub
 =======================
 
 The Desktop Management Client is also published on `Flathub
-<https://flathub.org/>`_ as a Flatpak application. Each release line has its own
-application ID of the form ``com.netxms.NetXMSClientXX``, where ``XX`` is the
-major and minor version — for example ``com.netxms.NetXMSClient62`` for 6.2.
-(The legacy 4.5 client used the unversioned ID ``com.netxms.NetXMSClient``;
-versioned IDs were introduced afterwards.) Different release lines can be
-installed side by side.
-
-Find the available versions and install the one you need:
+<https://flathub.org/>`_ as a Flatpak application with the ID
+``com.netxms.NetXMSClient``. It is a launcher that works with any server running
+version 5.0 or newer: on the first connection to a server it asks the server for
+its version, downloads the matching client from netxms.org and caches it, so one
+installation covers servers of different versions.
 
 .. code-block:: sh
 
-  flatpak search netxms
-  flatpak install flathub com.netxms.NetXMSClient62
+  flatpak install flathub com.netxms.NetXMSClient
 
 Only the Desktop Management Client is distributed this way; the DEB, RPM and
 Windows builds are not affected by the sandbox restriction described below.
@@ -820,13 +816,11 @@ nothing to edit. Then restart the client. No other reconfiguration is needed:
 the override changes the sandbox's effective permissions, which the client reads
 on the next launch.
 
-If you need to build the command by hand, it has the following form, where
-``com.netxms.NetXMSClientXX`` is the application ID of your client (list
-installed IDs with ``flatpak list --app``):
+If you need to build the command by hand, it has the following form:
 
 .. code-block:: sh
 
-  flatpak override --user --talk-name=org.freedesktop.Flatpak com.netxms.NetXMSClientXX
+  flatpak override --user --talk-name=org.freedesktop.Flatpak com.netxms.NetXMSClient
 
 .. warning::
 

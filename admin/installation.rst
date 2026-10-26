@@ -38,7 +38,7 @@ Previously the elements were joined with spaces and re-split by the started
 program. Configurations that packed several arguments into one element (for
 example ``["app.exe", "-a -b"]``) must split them into separate elements, and
 configurations that wrapped a value in extra quotes to keep it together on
-Windows (for example ``["reg.exe", "add", "HKLM\Software\Example", "/v", "Name", "/d", ""some text""]``)
+Windows (for example ``["reg.exe", "add", "HKLM\Software\Example", "/v", "Name", "/d", '"some text"']``)
 must drop the extra quotes, because they are now passed to the program as part
 of the argument.
 
